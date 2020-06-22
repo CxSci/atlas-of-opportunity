@@ -16,8 +16,8 @@ const Footer = () => {
     }
     return (
         <div className='footer' style = {footerStyle}>
-            <img style = {logoStyle} src={banksa} alt = {''}></img>
             <img style = {logoStyle} src={livingLab} alt = {''}></img>
+            <img style = {logoStyle} src={banksa} alt = {''}></img>
             <img style = {logoStyle} src={dspark} alt = {''}></img>
         </div>
     )
