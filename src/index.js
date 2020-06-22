@@ -8,30 +8,42 @@ import Toggle from './components/toggle'
 import Display from './components/display'
 import Legend from './components/legend'
 import StickyFooter from 'react-sticky-footer'
+import Footer from './Footer/Footer.js'
 
 class Application extends React.Component {
   render() {
+    const mapStyle = {
+      zIndex: 0,
+    };
+    const footerStyle = {
+      zIndex: 1,
+      position: 'absolute',
+      bottom: '0px'
+    }
     return (
-      <Provider store={store}>
-        <div>
+      <Provider store={store} >
+        <div style = {mapStyle}>
           <Map />
           <Toggle onChange={setActiveOption} />
           <Display />
           <Legend />
         </div>
+        <div style={footerStyle}>
                          <StickyFooter
             bottomThreshold={50}
             normalStyles={{
-            backgroundColor: "#999999",
-            padding: "2rem"
+            backgroundColor: "rgba(153, 153, 153, 0)",
+            padding: "0.5rem"
             }}
             stickyStyles={{
             backgroundColor: "rgba(255,255,255,.8)",
-            padding: "2rem"
+            padding: "2rem",
             }}
+            
         >
-            Add any footer markup here
+            <Footer />
         </StickyFooter>
+        </div>
       </Provider>
     );
   }
