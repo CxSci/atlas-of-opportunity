@@ -13,7 +13,7 @@ let Legend = class Legend extends React.Component {
 
     const renderLegendKeys = (stop, i) => {
       return (
-        <div key={i} className='txt-s'>
+        <div key={i} className='txt-m'>
           <span className='mr6 round-full w12 h12 inline-block align-middle' style={{ backgroundColor: stop[1] }} />
           <span>{`${stop[0].toLocaleString()}`}</span>
         </div>
@@ -21,9 +21,9 @@ let Legend = class Legend extends React.Component {
     }
 
     return (
-      <div className="bg-white absolute bottom left ml12 mb36 py12 px12 shadow-darken10 round z1 wmax180">
+      <div className="bg-white absolute bottom left ml24 mb36 py12 px12 shadow-darken10 round z1 wmax180">
         <div className='mb6'>
-          <h2 className="txt-bold txt-s block">Growth Potential</h2>
+          <h2 className="txt-bold txt-m block">Growth Potential</h2>
           <p className='txt-s color-gray'>{description}</p>
         </div>
         {stops.map(renderLegendKeys)}

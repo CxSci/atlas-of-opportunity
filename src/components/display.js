@@ -37,7 +37,7 @@ let Display = class Display extends React.Component {
             </div>
             <div className='mb6'>
               <h2 className="txt-bold txt-m block">Job Resilience</h2>
-              <p className='txt-s'>40.917</p>
+              <p className='txt-s'>3.377</p>
             </div>
             <div className='mb6'>
             <h2 className="txt-bold txt-m block">Business Growth Index</h2>

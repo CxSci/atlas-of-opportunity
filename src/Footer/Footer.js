@@ -9,9 +9,10 @@ const Footer = () => {
         flexDirection: 'row',
         width: '35%',
         float: 'right',
+        marginRight: '300px'
     };
     const logoStyle = {
-        width: '20%',
+        width: '25%',
         margin: 'auto',
     }
     return (
