@@ -20,13 +20,13 @@ let Display = class Display extends React.Component {
               <h2 className="txt-bold txt-l txt-uppercase block">The Parks</h2> 
             </div>
           </div>
-          <div className="py12 px12 bg-gray-faint">
+          <div className="py12 px12 bg-orange-faint">
             <div className='mb6'>
-              <h2 className="txt-bold txt-m color-gray block">Population</h2>
+              <h2 className="txt-bold txt-m color-orange block">Population</h2>
               <p className='txt-s'>18,866</p>
             </div>
             <div className='mb6'>
-              <h2 className="txt-bold txt-m color-gray block">Median Income</h2>
+              <h2 className="txt-bold txt-m color-orange block">Median Income</h2>
               <p className='txt-s'>$36,131</p>
             </div>
           </div>
@@ -44,9 +44,9 @@ let Display = class Display extends React.Component {
               <p className='txt-s'>0.2704</p>
             </div>
           </div>
-          <div className='py12 px12 bg-blue-light'>
+          <div className='py12 px12 bg-orange-light'>
             <div className='mb1'>
-            <h2 className="txt-bold txt-m txt-uppercase color-blue inline-block" >Show social bridges</h2>
+            <h2 className="txt-bold txt-m txt-uppercase color-red inline-block" >Show social bridges</h2>
             <div className="absolute right pr6 inline-block">
             <Icon link name='angle right'/>
             </div>
