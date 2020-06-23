@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl'
 import { connect } from 'react-redux'
 import SA_atlas from '../data/SA_dashboard.geojson'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicHljdzEwOSIsImEiOiJja2JmdWhpYTcwejNqMnFvNXVmb2puOWNkIn0.zseMY8O36O1QOESFeG4vFQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q'
 
 let Map = class Map extends React.Component {
   mapRef = React.createRef();
@@ -22,7 +22,7 @@ let Map = class Map extends React.Component {
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
-      style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw',
       center: [138.7, -34.9],
       zoom: 9
     });
@@ -42,6 +42,7 @@ let Map = class Map extends React.Component {
         source: 'countries'
       }, 'country-label-lg'); // ID metches `mapbox/streets-v9`
       */
+      
       this.map.addSource('sa2', {
         type: 'geojson',
         data: SA_atlas
@@ -61,8 +62,8 @@ let Map = class Map extends React.Component {
           ]*/
           {
             property: 'income_diversity',
-            stops: [[0.1024, '#FDEDC4'], [0.66, '#F09647'], [1.2168, '#DD4B27']]
-          },
+            stops: [[0.1024, '#fdedc4'], [0.66, '#f09647'], [1.2168, '#dd4b27']]
+            },
           'fill-opacity': [
             'case',
             ['boolean', ['feature-state', 'click'], false],
@@ -90,8 +91,8 @@ let Map = class Map extends React.Component {
             ['boolean', ['feature-state', 'highlight'], false],
             '#008000', 
             ['boolean', ['feature-state', 'hover'], false],
-            '#FEF4E1', 
-            '#FEF4E1'
+            '#fef4e1', 
+            '#fef4e1'
           ],
           'line-width': [
             'case',

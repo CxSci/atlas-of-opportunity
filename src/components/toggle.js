@@ -17,7 +17,7 @@ let Toggle = class Toggle extends React.Component {
       return (
         <label key={i} className="toggle-container">
           <input onChange={() => this.props.onChange(option)} checked={option.property === active.property} name="toggle" type="radio" />
-          <div className="toggle txt-l py3 toggle--active-white">Atlas of Opportunity</div>
+          <div className="toggle txt-m py3 toggle--active-white bg-orange">Atlas of Opportunity</div>
         </label>
       );
     }

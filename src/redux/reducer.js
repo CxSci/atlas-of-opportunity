@@ -6,9 +6,9 @@ const options = [{
   description: '',
   property: 'inequality',
   stops: [
-    [0, '#FDEDC4'],
-    [0.60, '#F09647'],
-    [1.20, '#DD4B27']
+    [0, '#fdedc4'],
+    [0.60, '#f09647'],
+    [1.20, '#dd4b27']
   ]
 }, /*{
   name: 'GDP',
