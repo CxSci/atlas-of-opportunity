@@ -7,3 +7,10 @@ export function setActiveOption(option) {
     option
   });
 }
+
+export function setSelect(payload) {
+  store.dispatch({
+    type: Constants.SET_SELECT,
+    payload: payload
+  });
+}

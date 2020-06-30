@@ -1,5 +1,5 @@
 import * as Constants from '../constants'
-import data from '../data/SA_atlas.geojson'
+import data from '../data/SA_dashboard.geojson'
 
 const options = [{
   name: 'Inequality',
@@ -27,10 +27,21 @@ const options = [{
   ]
 }*/]
 
+const select = {
+  sa2_name: '',
+  population: '',
+  income: '',
+  ggp: '', 
+  jr: '',
+  bgi: '',
+  isDefault: true
+}
+
 const initialState: State = {
   data,
   options,
-  active: options[0]
+  active: options[0],
+  select
 };
 
 function reducer(state = initialState, action) {
@@ -39,6 +50,10 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         active: action.option
       });
+    case Constants.SET_SELECT:
+      return Object.assign({}, state, {
+        select: action.payload
+      });    
     default:
       return state;
   }

@@ -1,1 +1,2 @@
 export const SET_ACTIVE_OPTION = 'SET_ACTIVE_OPTION';
+export const SET_SELECT = 'SET_SELECT';

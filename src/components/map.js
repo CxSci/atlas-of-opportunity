@@ -1,8 +1,8 @@
 import React from 'react'
+import { setSelect } from '../redux/action-creators'
 import PropTypes from 'prop-types'
 import mapboxgl from 'mapbox-gl'
 import { connect } from 'react-redux'
-import SA_atlas from '../data/SA_dashboard.geojson'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q'
 
@@ -12,12 +12,10 @@ let Map = class Map extends React.Component {
 
   static propTypes = {
     data: PropTypes.object.isRequired,
-    active: PropTypes.object.isRequired
-  };
+    active: PropTypes.object.isRequired,
+    select: PropTypes.object.isRequired,
 
-  componentDidUpdate() {
-    this.setFill();
-  }
+  };
 
   componentDidMount() {
     this.map = new mapboxgl.Map({
@@ -30,6 +28,7 @@ let Map = class Map extends React.Component {
     var hoveredSA2Id = null;
     var clickedSA2 = null;
     var clickedFeatures = []
+
     this.map.on('load', () => {
       /*this.map.addSource('countries', {
         type: 'geojson',
@@ -45,7 +44,7 @@ let Map = class Map extends React.Component {
       
       this.map.addSource('sa2', {
         type: 'geojson',
-        data: SA_atlas
+        data: this.props.data
       });
 
       this.map.addLayer({
@@ -178,6 +177,18 @@ let Map = class Map extends React.Component {
           click: true 
         });
 
+        const sa2_properties = {
+          sa2_name: clickedSA2.properties.SA2_NAME16,
+          population: toCommas(clickedSA2.properties.persons_num),
+          income: '$'+toCommas(clickedSA2.properties.median_aud),
+          ggp: clickedSA2.properties.income_diversity,
+          jr: clickedSA2.properties.bridge_diversity,
+          bgi: clickedSA2.properties.bsns_growth_rate,
+          isDefault: false
+        };
+
+        setSelect(sa2_properties);
+
         var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3]
 
         clickedFeatures = this.map.querySourceFeatures('sa2', {
@@ -213,8 +224,13 @@ let Map = class Map extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.data,
-    active: state.active
+    active: state.active,
+    select: state.select,
   };
+}
+
+function toCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 Map = connect(mapStateToProps)(Map);
