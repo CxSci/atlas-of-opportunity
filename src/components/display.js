@@ -55,14 +55,6 @@ let Display = class Display extends React.Component {
               <p className='txt-s'>{bgi}</p>
             </div>
           </div>
-          <div className='py12 px12 bg-orange-light'>
-            <div className='mb1'>
-            <h2 className="txt-bold txt-m txt-uppercase color-red inline-block" >Show social bridges</h2>
-            <div className="absolute right pr6 inline-block">
-            <Icon link name='angle right'/>
-            </div>
-            </div>
-          </div>
         </div>
         <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z1 wmax240">
           <div className="py12 px12">
