@@ -119,15 +119,16 @@ let Map = class Map extends React.Component {
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'sa2-fills', (e) => {
-        //console.log(hoveredSA2Id);
+        console.log(hoveredSA2Id);
         if (e.features.length > 0) {
-          if (hoveredSA2Id) {
+          if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
               { source: 'sa2', id: hoveredSA2Id },
               { hover: false }
             );
           }
           hoveredSA2Id = e.features[0].id;
+          console.log(hoveredSA2Id);
           this.map.setFeatureState(
             { source: 'sa2', id: hoveredSA2Id },
             { hover: true }
@@ -139,7 +140,7 @@ let Map = class Map extends React.Component {
       // previously hovered feature.
       
       this.map.on('mouseleave', 'sa2-fills', () => {
-        if (hoveredSA2Id) {
+        if (hoveredSA2Id !== null) {
           this.map.setFeatureState(
             { source: 'sa2', id: hoveredSA2Id },
             { hover: false }
@@ -160,7 +161,7 @@ let Map = class Map extends React.Component {
           });
         });
 
-        if (clickedSA2) {
+        if (clickedSA2 !== null) {
           this.map.setFeatureState({
             source: 'sa2',
             id: clickedSA2.id
