@@ -119,7 +119,6 @@ let Map = class Map extends React.Component {
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'sa2-fills', (e) => {
-        console.log(hoveredSA2Id);
         if (e.features.length > 0) {
           if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
@@ -128,7 +127,6 @@ let Map = class Map extends React.Component {
             );
           }
           hoveredSA2Id = e.features[0].id;
-          console.log(hoveredSA2Id);
           this.map.setFeatureState(
             { source: 'sa2', id: hoveredSA2Id },
             { hover: true }
@@ -171,6 +169,7 @@ let Map = class Map extends React.Component {
         }
         // Update based on newly selected region
         clickedSA2 = e.features[0]; //properties.name;
+        console.log(clickedSA2);
         this.map.setFeatureState({ 
           source: 'sa2', 
           id: clickedSA2.id
@@ -190,8 +189,7 @@ let Map = class Map extends React.Component {
 
         setSelect(sa2_properties);
 
-        var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3]
-
+        var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3].filter(x => x !== undefined);
         clickedFeatures = this.map.querySourceFeatures('sa2', {
           sourceLayer: 'original',
           filter: [
@@ -233,7 +231,7 @@ function mapStateToProps(state) {
 function toCommas(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+ 
 Map = connect(mapStateToProps)(Map);
 
 export default Map;
