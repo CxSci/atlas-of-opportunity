@@ -55,6 +55,29 @@ let Display = class Display extends React.Component {
               <p className='txt-s'>{bgi}</p>
             </div>
           </div>
+          <div id='options' className = 'pb12 px12 bg-orange-faint'>
+            <form>
+              <p className = 'pt6 txt-m txt-bold'>Change flow direction</p>
+              <div>
+                <label className="p12 txt-s block">
+                <input type="radio" name = 'flow' value="outflow" checked={true} />
+                Outflow
+                </label>
+              </div>
+              <div>
+                <label className="p12 txt-s block">
+                <input type="radio" name = 'flow' value="inflow" />
+                Inflow
+                </label>
+              </div>
+              <div>
+                <label className="p12 txt-s block">
+                <input type="radio" name = 'flow' value="bi-directional" />
+                Bi-directional
+                </label>
+              </div>
+            </form>
+          </div>
         </div>
         <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z1 wmax240">
           <div className="py12 px12">

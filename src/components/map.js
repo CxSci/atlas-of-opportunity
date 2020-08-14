@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import mapboxgl from 'mapbox-gl'
 import { connect } from 'react-redux'
 
+const turf = window.turf;
 mapboxgl.accessToken = 'pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q'
 
 let Map = class Map extends React.Component {
@@ -119,7 +120,6 @@ let Map = class Map extends React.Component {
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'sa2-fills', (e) => {
-        //console.log(hoveredSA2Id);
         if (e.features.length > 0) {
           if (hoveredSA2Id) {
             this.map.setFeatureState(
@@ -147,8 +147,23 @@ let Map = class Map extends React.Component {
         }
         hoveredSA2Id = null;
       });
-
+      
+      var hasClicked = false;
       this.map.on('click', 'sa2-fills', (e) => {
+
+        //remove the previous routes
+        if (hasClicked) {
+          this.map.removeLayer('route');
+          this.map.removeLayer('point');
+          this.map.removeLayer('point2')
+          this.map.removeSource('route');
+          this.map.removeSource('point');
+          this.map.removeSource('point2');
+        }
+        hasClicked = true;
+        var featureObj = new Object();
+        var destinationList = [];
+        var origin = [];
         // Reset regions
         clickedFeatures.forEach((f) => {
           // For each feature, update its 'click' state
@@ -170,12 +185,14 @@ let Map = class Map extends React.Component {
         }
         // Update based on newly selected region
         clickedSA2 = e.features[0]; //properties.name;
-        this.map.setFeatureState({ 
-          source: 'sa2', 
-          id: clickedSA2.id
-          },{
-          click: true 
-        });
+        // find the center point of the newly selected region
+        origin = turf.center(clickedSA2).geometry.coordinates;
+        // this.map.setFeatureState({ 
+        //   source: 'sa2', 
+        //   id: clickedSA2.id
+        //   },{
+        //   click: true 
+        // });
 
         const sa2_properties = {
           sa2_name: clickedSA2.properties.SA2_NAME16,
@@ -190,6 +207,7 @@ let Map = class Map extends React.Component {
         setSelect(sa2_properties);
 
         var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3]
+        console.log(bridges);
 
         clickedFeatures = this.map.querySourceFeatures('sa2', {
           sourceLayer: 'original',
@@ -197,16 +215,221 @@ let Map = class Map extends React.Component {
             'in', ['to-number', ['get', 'SA2_MAIN16']], ['literal', bridges]
           ]
         });
-
         clickedFeatures.forEach((f) => {
             // For each feature, update its 'highlight' state
-            this.map.setFeatureState({
-              source: 'sa2',
-              id: f.id
-              },{
-              highlight: true
-            });
-          });
+          // this.map.setFeatureState({
+          //   source: 'sa2',
+          //   id: f.id
+          //   },{
+          //   highlight: true
+          // });
+          if (f.properties.SA2_MAIN16 in featureObj) {}
+          else {
+            featureObj[f.properties.SA2_MAIN16] = f;
+          }
+        });
+        var featureList = [];
+        bridges.forEach((b) => {
+          featureList.push(featureObj[b])
+        });
+        featureList.forEach((ft)=>{
+          var destination = turf.center(ft).geometry.coordinates;
+          destinationList.push(destination);
+        });
+        var coordinateList = [];
+        destinationList.forEach((d)=>{
+          var pnt =  [origin, d];
+          coordinateList.push(pnt);
+        });
+        var routeList = [];
+        var routeList2 = [];
+        var pointList = [];
+        var pointList2 = [];
+        coordinateList.forEach((bridge)=>{
+          var bridgeStart = turf.point(bridge[0]);
+          var bridgeEnd = turf.point(bridge[1]);
+          var greatCircle = turf.greatCircle(bridgeStart, bridgeEnd, {'name': 'start to end', 'npoints': 500});
+          var greatCircle2 = turf.greatCircle(bridgeEnd, bridgeStart, {'name': 'start to end', 'npoints': 500});
+          routeList.push(greatCircle);
+          routeList2.push(greatCircle2);
+          var pointObj = {
+              'type': 'Feature',
+              'properties': {},
+              'geometry': {
+              'type': 'Point',
+              'coordinates': bridge[0]}
+          }
+          var pointObj2 = {
+              'type': 'Feature',
+              'properties': {},
+              'geometry': {
+              'type': 'Point',
+              'coordinates': bridge[1]}
+          }
+            pointList.push(pointObj);
+            pointList2.push(pointObj2);
+        });
+        //color the bridges according to the ranking
+        routeList[0].properties = {'color': '#01579B'};
+        routeList[1].properties = {'color': '#29B6F6'};
+        routeList[2].properties = {'color': '#B3E5FC'};
+
+        var route = {
+          'type': 'FeatureCollection',
+          'features': routeList,
+        };
+        var route2 = {
+          'type': 'FeatureCollection',
+          'features': routeList2,
+        }
+        var point = {
+          'type': 'FeatureCollection',
+          'features': pointList,
+        };
+        var point2 = {
+          'type': 'FeatureCollection',
+          'features': pointList2,
+        };
+
+        // var lineDistance = turf.length(route.features[0], {units: 'kilometers'});
+        // var lineDistance1 = turf.length(route.features[1], {units: 'kilometers'});
+        // var lineDistance2 = turf.length(route.features[2], {units: 'kilometers'});
+
+ 
+        // var arc = [];
+        // var arc1 = [];
+        // var arc2 = [];
+               
+        // // Number of steps to use in the arc and animation, more steps means
+        // // a smoother arc and animation, but too many steps will result in a
+        // // low frame rate
+        var steps = 1000;
+               
+        //     // Draw an arc between the `origin` & `destination` of the two points
+        // for (var i = 0; i < lineDistance; i += lineDistance / steps) {
+        //   var segment = turf.along(route.features[0], i, {units:'kilometers'});
+        //   arc.push(segment.geometry.coordinates);
+        // }
+        // for (var i = 0; i < lineDistance1; i += lineDistance1 / steps) {
+        //   var segment = turf.along(route.features[1], i, {units:'kilometers'});
+        //   arc1.push(segment.geometry.coordinates);
+        // }
+        // for (var i = 0; i < lineDistance2; i += lineDistance2 / steps) {
+        //   var segment = turf.along(route.features[2], i, {units:'kilometers'});
+        //   arc2.push(segment.geometry.coordinates);
+        // }
+
+        // // Update the route with calculated arc coordinates
+        // route.features[0].geometry.coordinates = arc;
+        // route.features[1].geometry.coordinates = arc1;
+        // route.features[2].geometry.coordinates = arc2;
+
+        // Used to increment the value of the point measurement against the route.
+        this.map.addSource('route', {
+          'type': 'geojson',
+          'data': route
+        });
+               
+        this.map.addSource('point', {
+          'type': 'geojson',
+          'data': point
+        });
+        this.map.addSource('point2', {
+          'type': 'geojson',
+          'data': point2
+        });
+            
+        this.map.addLayer({
+          'id': 'route',
+          'source': 'route',
+          'type': 'line',
+          'layout': {
+              'line-cap': 'round'
+          },
+          'paint': {
+            'line-width': 6,
+            'line-dasharray': [0, 2],
+            'line-color': ['get', 'color']
+          }
+        });
+        this.map.addLayer({
+          'id': 'point',
+          'source': 'point',
+          'type': 'symbol',
+          'layout': {
+            'icon-image': 'triangle-11',
+            'icon-rotate': ['get', 'bearing'],
+            'icon-rotation-alignment': 'map',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          },
+          "paint": {
+            "icon-color": "#00ff00",
+            "icon-halo-color": "#fff",
+            "icon-halo-width": 2
+          },
+        });
+        // this.map.addLayer({
+        //   'id': 'point2',
+        //   'source': 'point2',
+        //   'type': 'symbol',
+        //   'layout': {
+        //     'icon-image': 'triangle-11',
+        //     'icon-rotate': ['get', 'bearing'],
+        //     'icon-rotation-alignment': 'map',
+        //     'icon-allow-overlap': true,
+        //     'icon-ignore-placement': true
+        //   },
+        //   "paint": {
+        //     "icon-color": "#00ff00",
+        //     "icon-halo-color": "#fff",
+        //     "icon-halo-width": 2
+        //   },
+        // });
+        var that = this;
+        function animate(featureIdx, cntr, point, route, pointID) {
+          // Update point geometry to a new position based on counter denoting
+          // the index to access the arc.
+          if (cntr >= route.features[featureIdx].geometry.coordinates.length-1){
+            return;
+          }
+          point.features[featureIdx].geometry.coordinates = route.features[featureIdx].geometry.coordinates[cntr];
+      
+          point.features[featureIdx].properties.bearing = turf.bearing(
+            turf.point(route.features[featureIdx].geometry.coordinates[cntr >= steps ? cntr - 1 : cntr]),
+            turf.point(route.features[featureIdx].geometry.coordinates[cntr >= steps ? cntr : cntr + 1])
+          );  
+              
+          // Update the source with this new data.
+          that.map.getSource(pointID).setData(point);
+          if ((cntr+2)==500) {
+            cntr = 0;
+          }
+          // Request the next frame of animation so long the end has not been reached.
+          if (cntr < steps) {
+            requestAnimationFrame(function(){animate(featureIdx, cntr+1, point, route, pointID);});
+          }
+      
+        }
+        // point.features[0].geometry.coordinates = origin;
+        // this.map.getSource('point').setData(point);
+
+        // Reset the counter
+        var cntr0 = 0;
+        var cntr1 = 0;
+        var cntr2 = 0;
+        // var cntr3 = 0;
+        // var cntr4 = 0;
+        // var cntr5 = 0;
+        
+        // Restart the animation.
+        animate(0,cntr0, point, route, 'point');
+        animate(1,cntr1, point, route, 'point');
+        animate(2,cntr2, point, route, 'point'); 
+        // animate(0,cntr3, point2, route2, 'point2');
+        // animate(1,cntr4, point2, route2, 'point2');
+        // animate(2,cntr5, point2, route2, 'point2');
+
       });
 
 
