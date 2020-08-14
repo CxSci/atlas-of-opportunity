@@ -121,7 +121,7 @@ let Map = class Map extends React.Component {
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'sa2-fills', (e) => {
         if (e.features.length > 0) {
-          if (hoveredSA2Id) {
+          if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
               { source: 'sa2', id: hoveredSA2Id },
               { hover: false }
@@ -139,7 +139,7 @@ let Map = class Map extends React.Component {
       // previously hovered feature.
       
       this.map.on('mouseleave', 'sa2-fills', () => {
-        if (hoveredSA2Id) {
+        if (hoveredSA2Id !== null) {
           this.map.setFeatureState(
             { source: 'sa2', id: hoveredSA2Id },
             { hover: false }
@@ -175,7 +175,7 @@ let Map = class Map extends React.Component {
           });
         });
 
-        if (clickedSA2) {
+        if (clickedSA2 !== null) {
           this.map.setFeatureState({
             source: 'sa2',
             id: clickedSA2.id
@@ -187,12 +187,14 @@ let Map = class Map extends React.Component {
         clickedSA2 = e.features[0]; //properties.name;
         // find the center point of the newly selected region
         origin = turf.center(clickedSA2).geometry.coordinates;
-        // this.map.setFeatureState({ 
-        //   source: 'sa2', 
-        //   id: clickedSA2.id
-        //   },{
-        //   click: true 
-        // });
+        
+        console.log(clickedSA2);
+        this.map.setFeatureState({ 
+          source: 'sa2', 
+          id: clickedSA2.id
+          },{
+          click: true 
+        });
 
         const sa2_properties = {
           sa2_name: clickedSA2.properties.SA2_NAME16,
@@ -206,9 +208,7 @@ let Map = class Map extends React.Component {
 
         setSelect(sa2_properties);
 
-        var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3]
-        console.log(bridges);
-
+        var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3].filter(x => x !== undefined);
         clickedFeatures = this.map.querySourceFeatures('sa2', {
           sourceLayer: 'original',
           filter: [
@@ -455,7 +455,7 @@ function mapStateToProps(state) {
 function toCommas(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+ 
 Map = connect(mapStateToProps)(Map);
 
 export default Map;
