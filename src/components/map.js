@@ -150,15 +150,14 @@ let Map = class Map extends React.Component {
       
       var hasClicked = false;
       this.map.on('click', 'sa2-fills', (e) => {
-
         //remove the previous routes
         if (hasClicked) {
           this.map.removeLayer('route');
           this.map.removeLayer('point');
-          this.map.removeLayer('point2')
+          // this.map.removeLayer('point2')
           this.map.removeSource('route');
           this.map.removeSource('point');
-          this.map.removeSource('point2');
+          // this.map.removeSource('point2');
         }
         hasClicked = true;
         var featureObj = new Object();
@@ -209,49 +208,60 @@ let Map = class Map extends React.Component {
         setSelect(sa2_properties);
 
         var bridges = [clickedSA2.properties.bridge_rank1, clickedSA2.properties.bridge_rank2, clickedSA2.properties.bridge_rank3].filter(x => x !== undefined);
+        console.log(bridges);
         clickedFeatures = this.map.querySourceFeatures('sa2', {
           sourceLayer: 'original',
           filter: [
             'in', ['to-number', ['get', 'SA2_MAIN16']], ['literal', bridges]
           ]
         });
+
+        // get rid of the repeated features in the clickedFeatures array
         clickedFeatures.forEach((f) => {
-            // For each feature, update its 'highlight' state
-          // this.map.setFeatureState({
-          //   source: 'sa2',
-          //   id: f.id
-          //   },{
-          //   highlight: true
-          // });
+          // For each feature, update its 'highlight' state
+          this.map.setFeatureState({
+            source: 'sa2',
+            id: f.id
+            },{
+            highlight: true
+          });
           if (f.properties.SA2_MAIN16 in featureObj) {}
           else {
             featureObj[f.properties.SA2_MAIN16] = f;
           }
         });
+
+        // sort the clickedFeatures based on the ranking in bridges
         var featureList = [];
         bridges.forEach((b) => {
           featureList.push(featureObj[b])
         });
+
+        // create an array of center coordinates of each SA2 region
         featureList.forEach((ft)=>{
           var destination = turf.center(ft).geometry.coordinates;
           destinationList.push(destination);
         });
+        //create an array of coordinates corresponding to the bridges
         var coordinateList = [];
         destinationList.forEach((d)=>{
           var pnt =  [origin, d];
           coordinateList.push(pnt);
         });
+
         var routeList = [];
-        var routeList2 = [];
+        // var routeList2 = [];
         var pointList = [];
-        var pointList2 = [];
+        // var pointList2 = [];
+
+        // create point objects based on the coordinateList
         coordinateList.forEach((bridge)=>{
           var bridgeStart = turf.point(bridge[0]);
           var bridgeEnd = turf.point(bridge[1]);
           var greatCircle = turf.greatCircle(bridgeStart, bridgeEnd, {'name': 'start to end', 'npoints': 500});
-          var greatCircle2 = turf.greatCircle(bridgeEnd, bridgeStart, {'name': 'start to end', 'npoints': 500});
+          // var greatCircle2 = turf.greatCircle(bridgeEnd, bridgeStart, {'name': 'start to end', 'npoints': 500});
           routeList.push(greatCircle);
-          routeList2.push(greatCircle2);
+          // routeList2.push(greatCircle2);
           var pointObj = {
               'type': 'Feature',
               'properties': {},
@@ -259,86 +269,69 @@ let Map = class Map extends React.Component {
               'type': 'Point',
               'coordinates': bridge[0]}
           }
-          var pointObj2 = {
-              'type': 'Feature',
-              'properties': {},
-              'geometry': {
-              'type': 'Point',
-              'coordinates': bridge[1]}
-          }
+          // var pointObj2 = {
+          //     'type': 'Feature',
+          //     'properties': {},
+          //     'geometry': {
+          //     'type': 'Point',
+          //     'coordinates': bridge[1]}
+          // }
             pointList.push(pointObj);
-            pointList2.push(pointObj2);
+            // pointList2.push(pointObj2);
         });
         //color the bridges according to the ranking
-        routeList[0].properties = {'color': '#01579B'};
-        routeList[1].properties = {'color': '#29B6F6'};
-        routeList[2].properties = {'color': '#B3E5FC'};
+        if (routeList[0]) {
+          routeList[0].properties = {'color': '#01579B'};
+        }
+        // routeList[0].properties = {'color': '#01579B'};
+        if (routeList[1]) {
+          routeList[1].properties = {'color': '#29B6F6'};
+        }
+        if (routeList[2]) {
+          routeList[2].properties = {'color': '#B3E5FC'};
+        }
+        // routeList[1].properties = {'color': '#29B6F6'};
+        // routeList[2].properties = {'color': '#B3E5FC'};
 
         var route = {
           'type': 'FeatureCollection',
           'features': routeList,
         };
-        var route2 = {
-          'type': 'FeatureCollection',
-          'features': routeList2,
-        }
+        // var route2 = {
+        //   'type': 'FeatureCollection',
+        //   'features': routeList2,
+        // }
         var point = {
           'type': 'FeatureCollection',
           'features': pointList,
         };
-        var point2 = {
-          'type': 'FeatureCollection',
-          'features': pointList2,
-        };
-
-        // var lineDistance = turf.length(route.features[0], {units: 'kilometers'});
-        // var lineDistance1 = turf.length(route.features[1], {units: 'kilometers'});
-        // var lineDistance2 = turf.length(route.features[2], {units: 'kilometers'});
-
- 
-        // var arc = [];
-        // var arc1 = [];
-        // var arc2 = [];
+        // var point2 = {
+        //   'type': 'FeatureCollection',
+        //   'features': pointList2,
+        // };
                
         // // Number of steps to use in the arc and animation, more steps means
         // // a smoother arc and animation, but too many steps will result in a
         // // low frame rate
         var steps = 1000;
                
-        //     // Draw an arc between the `origin` & `destination` of the two points
-        // for (var i = 0; i < lineDistance; i += lineDistance / steps) {
-        //   var segment = turf.along(route.features[0], i, {units:'kilometers'});
-        //   arc.push(segment.geometry.coordinates);
-        // }
-        // for (var i = 0; i < lineDistance1; i += lineDistance1 / steps) {
-        //   var segment = turf.along(route.features[1], i, {units:'kilometers'});
-        //   arc1.push(segment.geometry.coordinates);
-        // }
-        // for (var i = 0; i < lineDistance2; i += lineDistance2 / steps) {
-        //   var segment = turf.along(route.features[2], i, {units:'kilometers'});
-        //   arc2.push(segment.geometry.coordinates);
-        // }
-
-        // // Update the route with calculated arc coordinates
-        // route.features[0].geometry.coordinates = arc;
-        // route.features[1].geometry.coordinates = arc1;
-        // route.features[2].geometry.coordinates = arc2;
-
-        // Used to increment the value of the point measurement against the route.
+        
+        // add route source to the map
         this.map.addSource('route', {
           'type': 'geojson',
           'data': route
         });
-               
+        // add point source to the map  
         this.map.addSource('point', {
           'type': 'geojson',
           'data': point
         });
-        this.map.addSource('point2', {
-          'type': 'geojson',
-          'data': point2
-        });
-            
+        // this.map.addSource('point2', {
+        //   'type': 'geojson',
+        //   'data': point2
+        // });
+        
+        // add route layer to the map
         this.map.addLayer({
           'id': 'route',
           'source': 'route',
@@ -352,6 +345,7 @@ let Map = class Map extends React.Component {
             'line-color': ['get', 'color']
           }
         });
+        // add point layer to the map
         this.map.addLayer({
           'id': 'point',
           'source': 'point',
@@ -387,6 +381,7 @@ let Map = class Map extends React.Component {
         //   },
         // });
         var that = this;
+
         function animate(featureIdx, cntr, point, route, pointID) {
           // Update point geometry to a new position based on counter denoting
           // the index to access the arc.
@@ -411,21 +406,30 @@ let Map = class Map extends React.Component {
           }
       
         }
-        // point.features[0].geometry.coordinates = origin;
-        // this.map.getSource('point').setData(point);
 
-        // Reset the counter
+        // Reset the counter used for outflow
         var cntr0 = 0;
         var cntr1 = 0;
         var cntr2 = 0;
+        // Reset the counter used for inflow
         // var cntr3 = 0;
         // var cntr4 = 0;
         // var cntr5 = 0;
         
-        // Restart the animation.
-        animate(0,cntr0, point, route, 'point');
-        animate(1,cntr1, point, route, 'point');
-        animate(2,cntr2, point, route, 'point'); 
+        // Restart the animation for outflow
+        if (bridges[0]) {
+          animate(0,cntr0, point, route, 'point');
+        }
+        if (bridges[1]) {
+          animate(1,cntr1, point, route, 'point');
+        }
+        // animate(1,cntr1, point, route, 'point');
+        if (bridges[2]) {
+          animate(2,cntr2, point, route, 'point'); 
+        }
+        // animate(2,cntr2, point, route, 'point'); 
+
+        // Restart the animation for inflow
         // animate(0,cntr3, point2, route2, 'point2');
         // animate(1,cntr4, point2, route2, 'point2');
         // animate(2,cntr5, point2, route2, 'point2');
