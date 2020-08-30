@@ -28,7 +28,7 @@ let Toggle = class Toggle extends React.Component {
     };
 
     return (
-      <div className="toggle-group absolute top left ml24 mt24 border border--2 border--white bg-white shadow-darken10 z1">
+      <div className="toggle-group top left border border--2 border--white bg-white  z1">
         {options.map(renderOptions)}
       </div>
     );

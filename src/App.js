@@ -1,57 +1,54 @@
-import React from "react";
-import { setActiveOption } from "./redux/action-creators";
-import Map from "./components/map";
-import Toggle from "./components/toggle";
-import Display from "./components/display";
-import Legend from "./components/legend";
-import Modal from "./components/modal";
-import StickyFooter from "react-sticky-footer";
-import Footer from "./Footer/Footer.js";
+import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const Application = class Application extends React.Component {
+import Map from "./components/map";
+import Display from "./components/display";
+import Legend from "./components/legend";
+import Modal from "./components/modal";
+import Header from "./components/header";
+import Contact from "./components/contact";
+import Project from "./components/project";
+import About from "./components/about";
+import Research from "./components/research";
+import Methods from "./components/methods";
+import Footer from "./components/footer.js";
+
+import { mapStyler, footerStyle } from "./styles/app.js";
+
+const Application = class Application extends Component {
   static propTypes = {
     modal: PropTypes.string.isRequired,
+    header: PropTypes.string.isRequired,
   };
 
   render() {
-    const { modal } = this.props;
-    const mapStyle = {
-      zIndex: 0,
-    };
-    const footerStyle = {
-      zIndex: 1,
-      position: "absolute",
-      bottom: "0px",
-    };
+    const { modal, header } = this.props;
+
     return (
       <React.Fragment>
-        <div style={mapStyle}>
+        <div style={mapStyler}>
           <Map />
+          {header === "methods" && <Methods />}
+          {header === "research" && <Research />}
+          {header === "project" && <Project />}
+          {header === "about" && <About />}
+          {header === "contact" && <Contact />}
           {modal ? (
             <Modal />
           ) : (
-            <div>
-              <Toggle onChange={setActiveOption} />
-              <Display />
-              <Legend />
-              <div style={footerStyle}>
-                <StickyFooter
-                  bottomThreshold={50}
-                  normalStyles={{
-                    backgroundColor: "rgba(153, 153, 153, 0)",
-                    padding: "0.5rem",
-                  }}
-                  stickyStyles={{
-                    backgroundColor: "rgba(255,255,255,.8)",
-                    padding: "2rem",
-                  }}
-                >
-                  <Footer />
-                </StickyFooter>
-              </div>
-            </div>
+            <Fragment>
+              <Header />
+              {header === "map" && (
+                <Fragment>
+                  <Display />
+                  <Legend />
+                  <div style={footerStyle}>
+                    <Footer />
+                  </div>
+                </Fragment>
+              )}
+            </Fragment>
           )}
         </div>
       </React.Fragment>
@@ -62,6 +59,7 @@ const Application = class Application extends React.Component {
 function mapStateToProps(state) {
   return {
     modal: state.modal,
+    header: state.header,
   };
 }
 

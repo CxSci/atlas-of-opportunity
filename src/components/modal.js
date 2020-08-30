@@ -6,9 +6,9 @@ let Modal = class Modal extends Component {
     const container = {
       width: "100%",
       height: "100%",
-      background: "rgba(0, 0, 0, 0.3)",
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
       position: "absolute",
-      zIndex: 2,
+      zIndex: 1,
     };
     const modalContent = {
       height: "100%",
@@ -21,7 +21,7 @@ let Modal = class Modal extends Component {
       width: "400px",
       height: "600px",
       backgroundColor: "#f79640",
-      borderRadius: "10px",
+      borderRadius: "8px",
       padding: "40px",
       display: "flex",
       flexDirection: "column",
@@ -34,7 +34,7 @@ let Modal = class Modal extends Component {
       color: "black",
       backgroundColor: "white",
       padding: "10px",
-      borderRadius: "5px",
+      borderRadius: "8px",
       fontWeight: "bold",
       ":hover": {
         backgroundColor: "green",

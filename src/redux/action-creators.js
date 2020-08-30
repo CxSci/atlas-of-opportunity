@@ -21,3 +21,10 @@ export function setModal() {
     payload: false,
   });
 }
+
+export function setHeaderOption(payload) {
+  store.dispatch({
+    type: "Header",
+    payload: payload,
+  });
+}
