@@ -1,16 +1,17 @@
-import * as Constants from '../constants'
-import data from '../data/SA_dashboard.geojson'
+import * as Constants from "../constants";
+import data from "../data/SA_dashboard.geojson";
 
-const options = [{
-  name: 'Inequality',
-  description: '',
-  property: 'inequality',
-  stops: [
-    [0, '#fdedc4'],
-    [0.60, '#f09647'],
-    [1.20, '#dd4b27']
-  ]
-}, /*{
+const options = [
+  {
+    name: "Inequality",
+    description: "",
+    property: "inequality",
+    stops: [
+      [0, "#fdedc4"],
+      [0.6, "#f09647"],
+      [1.2, "#dd4b27"],
+    ],
+  } /*{
   name: 'GDP',
   description: 'Estimate total GDP in millions of dollars',
   property: 'gdp_md_est',
@@ -25,35 +26,41 @@ const options = [{
     [5000000, '#9f43d7'],
     [10000000, '#6e40e6']
   ]
-}*/]
+}*/,
+];
 
 const select = {
-  sa2_name: '',
-  population: '',
-  income: '',
-  ggp: '', 
-  jr: '',
-  bgi: '',
-  isDefault: true
-}
+  sa2_name: "",
+  population: "",
+  income: "",
+  ggp: "",
+  jr: "",
+  bgi: "",
+  isDefault: true,
+};
 
 const initialState: State = {
   data,
   options,
   active: options[0],
-  select
+  select,
+  modal: true,
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
-        active: action.option
+        active: action.option,
       });
     case Constants.SET_SELECT:
       return Object.assign({}, state, {
-        select: action.payload
-      });    
+        select: action.payload,
+      });
+    case "Modal":
+      return Object.assign({}, state, {
+        modal: action.payload,
+      });
     default:
       return state;
   }
