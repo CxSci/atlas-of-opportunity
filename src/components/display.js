@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Icon } from "semantic-ui-react";
 
 let Display = class Display extends React.Component {
   static propTypes = {

@@ -2,65 +2,108 @@ import React, { Component } from "react";
 import Toggle from "./toggle";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { setActiveOption, setHeaderOption } from "../redux/action-creators";
-
-import {
-  container,
-  headerBox,
-  optionsBox,
-  options,
-  hover,
-} from "../styles/header";
 
 const Header = class Header extends Component {
   static propTypes = {
-    header: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
   };
 
   render() {
-    const { header } = this.props;
+    const { path } = this.props;
+
+    const container = {
+      width: "100%",
+      height: "60px",
+      background: "white",
+      position: "fixed",
+      zIndex: 1,
+      top: 0,
+    };
+    const headerBox = {
+      display: "flex",
+      margin: "0 20px",
+      alignItems: "center",
+      height: "100%",
+      justifyContent: "space-between",
+    };
+    const optionsBox = {
+      display: "flex",
+      height: "100%",
+      flexDirection: "row",
+    };
+    const options = {
+      display: "flex",
+      alignItems: "center",
+      margin: 0,
+      padding: "0 15px",
+      color: "black",
+      fontSize: "1.3rem",
+      fontWeight: "bold",
+      cursor: "pointer",
+      height: "100%",
+    };
+    const hover = {
+      display: "flex",
+      alignItems: "center",
+      fontSize: "1.3rem",
+      fontWeight: "bold",
+      margin: 0,
+      padding: "0 15px",
+      cursor: "pointer",
+      height: "100%",
+      color: "#f79640",
+      borderBottom: "#f79640 solid 5px",
+    };
 
     return (
       <div style={container}>
         <div style={headerBox}>
           <Toggle onChange={setActiveOption} />
           <div style={optionsBox}>
-            <h3
-              style={header === "map" ? hover : options}
-              onClick={() => setHeaderOption("map")}
+            <Link
+              to="/"
+              style={path === "/" ? hover : options}
+              onClick={() => setHeaderOption("/")}
             >
               Map
-            </h3>
-            <h3
-              style={header === "methods" ? hover : options}
-              onClick={() => setHeaderOption("methods")}
+            </Link>
+            <Link
+              to="/methods"
+              style={path === "/methods" ? hover : options}
+              onClick={() => setHeaderOption("/methods")}
             >
               Methods
-            </h3>
-            <h3
-              style={header === "research" ? hover : options}
-              onClick={() => setHeaderOption("research")}
+            </Link>
+            <Link
+              to="/research"
+              style={path === "/research" ? hover : options}
+              onClick={() => setHeaderOption("/research")}
             >
               Research
-            </h3>
-            <h3
-              style={header === "project" ? hover : options}
-              onClick={() => setHeaderOption("project")}
+            </Link>
+            <Link
+              to="/project"
+              style={path === "/project" ? hover : options}
+              onClick={() => setHeaderOption("/project")}
             >
               Project
-            </h3>
-            <h3
-              style={header === "about" ? hover : options}
-              onClick={() => setHeaderOption("about")}
+            </Link>
+            <Link
+              to="/about"
+              style={path === "/about" ? hover : options}
+              onClick={() => setHeaderOption("/about")}
             >
               About
-            </h3>
-            <h3
-              style={header === "contact" ? hover : options}
-              onClick={() => setHeaderOption("contact")}
+            </Link>
+            <Link
+              to="/contact"
+              style={path === "/contact" ? hover : options}
+              onClick={() => setHeaderOption("/contact")}
             >
               Contact Us
-            </h3>
+            </Link>
           </div>
         </div>
       </div>
@@ -70,7 +113,7 @@ const Header = class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    header: state.header,
+    path: state.path,
   };
 }
 

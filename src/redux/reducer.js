@@ -45,7 +45,7 @@ const initialState: State = {
   active: options[0],
   select,
   modal: true,
-  header: "map",
+  path: window.location.pathname,
 };
 
 function reducer(state = initialState, action) {
@@ -64,7 +64,7 @@ function reducer(state = initialState, action) {
       });
     case "Header":
       return Object.assign({}, state, {
-        header: action.payload,
+        path: action.payload,
       });
     default:
       return state;

@@ -1,66 +1,23 @@
-import React, { Fragment, Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 
-import Map from "./components/map";
-import Display from "./components/display";
-import Legend from "./components/legend";
-import Modal from "./components/modal";
+import { BrowserRouter } from "react-router-dom";
 import Header from "./components/header";
-import Contact from "./components/contact";
-import Project from "./components/project";
-import About from "./components/about";
-import Research from "./components/research";
-import Methods from "./components/methods";
-import Footer from "./components/footer.js";
+import Routes from "./routes/index";
 
-import { mapStyler, footerStyle } from "./styles/app.js";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
-const Application = class Application extends Component {
-  static propTypes = {
-    modal: PropTypes.string.isRequired,
-    header: PropTypes.string.isRequired,
-  };
-
+const App = class App extends Component {
   render() {
-    const { modal, header } = this.props;
-
     return (
-      <React.Fragment>
-        <div style={mapStyler}>
-          <Map />
-          {header === "methods" && <Methods />}
-          {header === "research" && <Research />}
-          {header === "project" && <Project />}
-          {header === "about" && <About />}
-          {header === "contact" && <Contact />}
-          {modal ? (
-            <Modal />
-          ) : (
-            <Fragment>
-              <Header />
-              {header === "map" && (
-                <Fragment>
-                  <Display />
-                  <Legend />
-                  <div style={footerStyle}>
-                    <Footer />
-                  </div>
-                </Fragment>
-              )}
-            </Fragment>
-          )}
-        </div>
-      </React.Fragment>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Header />
+          <Routes />
+        </Provider>
+      </BrowserRouter>
     );
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    modal: state.modal,
-    header: state.header,
-  };
-}
-
-export default connect(mapStateToProps)(Application);
+export default App;

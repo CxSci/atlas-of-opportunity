@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-const About = class About extends Component {
+const Container = class Container extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.string,
+  };
   render() {
+    const { title, children } = this.props;
     const container = {
       width: "100%",
       height: "100%",
@@ -13,17 +19,19 @@ const About = class About extends Component {
       marginLeft: "200px",
       marginTop: "120px",
     };
-    const title = {
+    const titleBox = {
       fontSize: "50px",
     };
+
     return (
       <div style={container}>
         <div style={content}>
-          <h3 style={title}>About</h3>
+          <h3 style={titleBox}>{title}</h3>
+          {children}
         </div>
       </div>
     );
   }
 };
 
-export default About;
+export default Container;
