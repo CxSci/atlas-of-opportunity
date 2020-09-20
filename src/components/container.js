@@ -16,11 +16,10 @@ const Container = class Container extends Component {
     };
     const content = {
       maxWidth: "750px",
-      marginLeft: "200px",
-      marginTop: "120px",
+      margin: "120px 200px",
     };
     const titleBox = {
-      fontSize: "50px",
+      fontSize: "40px",
     };
 
     return (

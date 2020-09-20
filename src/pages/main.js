@@ -1,19 +1,19 @@
 import React, { Fragment, Component } from "react";
-//import PropTypes from "prop-types";
-//import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import Map from "../components/map";
 import Display from "../components/display";
 import Legend from "../components/legend";
-//import Modal from "../components/modal";
+import Modal from "../components/modal";
 import Footer from "../components/footer.js";
 
 const Main = class Main extends Component {
-  /*static propTypes = {
+  static propTypes = {
     modal: PropTypes.string.isRequired,
-  };*/
+  };
   render() {
-    //const { modal } = this.props;
+    const { modal } = this.props;
 
     const mapStyler = {
       zindex: 0,
@@ -29,30 +29,28 @@ const Main = class Main extends Component {
     return (
       <div style={mapStyler}>
         <Map />
-        {/*{modal ? (
+        {modal ? (
           <Modal />
-        ) : (*/}
-        <Fragment>
+        ) : (
           <Fragment>
-            <Display />
-            <Legend />
-            <div style={footerStyle}>
-              <Footer />
-            </div>
+            <Fragment>
+              <Display />
+              <Legend />
+              <div style={footerStyle}>
+                <Footer />
+              </div>
+            </Fragment>
           </Fragment>
-        </Fragment>
-        {/*)}*/}
+        )}
       </div>
     );
   }
 };
 
-/*function mapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     modal: state.modal,
   };
-}*/
+}
 
-//Main = connect(mapStateToProps)(Main)
-
-export default Main;
+export default connect(mapStateToProps)(Main);

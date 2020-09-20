@@ -70,11 +70,11 @@ const Header = class Header extends Component {
               Map
             </Link>
             <Link
-              to="/methods"
-              style={path === "/methods" ? hover : options}
-              onClick={() => setHeaderOption("/methods")}
+              to="/about"
+              style={path === "/about" ? hover : options}
+              onClick={() => setHeaderOption("/about")}
             >
-              Methods
+              About
             </Link>
             <Link
               to="/research"
@@ -84,25 +84,18 @@ const Header = class Header extends Component {
               Research
             </Link>
             <Link
-              to="/project"
-              style={path === "/project" ? hover : options}
-              onClick={() => setHeaderOption("/project")}
-            >
-              Project
-            </Link>
-            <Link
-              to="/about"
-              style={path === "/about" ? hover : options}
-              onClick={() => setHeaderOption("/about")}
-            >
-              About
-            </Link>
-            <Link
               to="/contact"
               style={path === "/contact" ? hover : options}
               onClick={() => setHeaderOption("/contact")}
             >
-              Contact Us
+              Contact
+            </Link>
+            <Link
+              to="/faq"
+              style={path === "/faq" ? hover : options}
+              onClick={() => setHeaderOption("/faq")}
+            >
+              FAQ
             </Link>
           </div>
         </div>

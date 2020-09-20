@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/header";
@@ -8,11 +10,15 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
 const App = class App extends Component {
+  static propTypes = {
+    modal: PropTypes.string.isRequired,
+  };
   render() {
+    const { modal } = this.props;
     return (
       <BrowserRouter>
         <Provider store={store}>
-          <Header />
+          {!modal && <Header />}
           <Routes />
         </Provider>
       </BrowserRouter>
@@ -20,4 +26,10 @@ const App = class App extends Component {
   }
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    modal: state.modal,
+  };
+}
+
+export default connect(mapStateToProps)(App);

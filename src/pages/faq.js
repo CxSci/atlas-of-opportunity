@@ -5,7 +5,7 @@ import { setModal } from "../redux/action-creators";
 
 import Container from "../components/container";
 
-const Contact = class Contact extends Component {
+const FAQ = class FAQ extends Component {
   static propTypes = {
     modal: PropTypes.string.isRequired,
   };
@@ -17,7 +17,7 @@ const Contact = class Contact extends Component {
   }
 
   render() {
-    return <Container title="Contact"></Container>;
+    return <Container title="FAQ"></Container>;
   }
 };
 
@@ -27,4 +27,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Contact);
+export default connect(mapStateToProps)(FAQ);

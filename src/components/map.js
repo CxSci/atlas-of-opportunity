@@ -16,14 +16,15 @@ let Map = class Map extends React.Component {
     data: PropTypes.object.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
+    modal: PropTypes.bool,
   };
 
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
-      center: [138.7, -34.9],
-      zoom: 9,
+      center: this.props.modal ? [121, -26.5] : [138.5, -34.9],
+      zoom: this.props.modal ? 3.5 : 9,
     });
 
     var hoveredSA2Id = null;
@@ -475,6 +476,16 @@ let Map = class Map extends React.Component {
     });
   }
 
+  shouldComponentUpdate() {
+    if (this.props.modal === true) {
+      this.map.flyTo({
+        center: [138.7, -34.9],
+        zoom: 9,
+        speed: 0.8,
+      });
+    }
+  }
+
   render() {
     return <div ref={this.mapRef} className="absolute top right left bottom" />;
   }
@@ -485,6 +496,7 @@ function mapStateToProps(state) {
     data: state.data,
     active: state.active,
     select: state.select,
+    modal: state.modal,
   };
 }
 
