@@ -61,7 +61,7 @@ const About = class About extends Component {
           Further information on the MIT Big Data Living Lab can be found on
           <br />
           <a
-            href="https://dti.sa.gov.au/industry/big-data-living-lab"
+            href="https://dti.sa.gov.au/industry/big-data-living-lab" target="_blank"
             style={link}
           >
             https://dti.sa.gov.au/industry/big-data-living-lab
