@@ -7,6 +7,7 @@ import About from "../pages/about";
 import Research from "../pages/research";
 import Contact from "../pages/contact";
 import FAQ from "../pages/faq";
+import Methods from "../pages/methods";
 
 const Routes = class Routes extends Component {
   render() {
@@ -14,6 +15,7 @@ const Routes = class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/methods" component={Methods} />
         <Route exact path="/research" component={Research} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" component={FAQ} />

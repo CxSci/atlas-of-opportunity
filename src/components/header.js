@@ -77,6 +77,13 @@ const Header = class Header extends Component {
               About
             </Link>
             <Link
+              to="/methods"
+              style={path === "/methods" ? hover : options}
+              onClick={() => setHeaderOption("/methods")}
+            >
+              Methods
+            </Link>
+            <Link
               to="/research"
               style={path === "/research" ? hover : options}
               onClick={() => setHeaderOption("/research")}
