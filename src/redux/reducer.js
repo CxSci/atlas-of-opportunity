@@ -69,7 +69,7 @@ function reducer(state = initialState, action) {
       });
     case "DropDown":
       return Object.assign({}, state, {
-        path: action.payload,
+        dropdown: action.payload,
       });
     default:
       return state;

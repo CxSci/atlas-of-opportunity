@@ -55,7 +55,7 @@ let DropDown = class Display extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    dropdown: state.path,
+    dropdown: state.dropdown,
   };
 }
 

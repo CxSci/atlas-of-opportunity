@@ -61,9 +61,6 @@ const Header = class Header extends Component {
       padding: "10px 20px 10px 15px",
       fontSize: "18px",
     };
-    const hover = {
-      color: "green",
-    };
     const dropDownLink = {
       cursor: "pointer",
       color: "black",
