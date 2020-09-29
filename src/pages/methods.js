@@ -109,6 +109,7 @@ const Methods = class Methods extends Component {
           at “Plympton” area January 2018. Using the inequality measures before
           and after that particular month will inform how a park can change the segregation
           level which can be considered for future location allocations.
+        </p>
       </Container>
     );
   }
