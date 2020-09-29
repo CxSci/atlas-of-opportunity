@@ -39,24 +39,6 @@ const Methods = class Methods extends Component {
     };
     return (
       <Container title="Methods">
-        <h2>Data</h2>
-        <p style={content}>
-          We use data provided by two organizations, namely: Australian Bureau
-          of Statistics and Dspark, an analytics start-up from Optus Telecom.
-        </p>
-        <p style={content}>
-          <b>Australian Bureau of Statistics:</b> we use socio-demographic
-          information published at the SA2 level, such as individual and
-          household income levels, population size, and labor statistics,
-          published through AURIN.
-        </p>
-        <p style={content}>
-          <b>DSpark:</b> DSpark has provided Optus users mobility data during
-          six random months during the years 2018 and 2019. The data is
-          aggregated at SA2 level. It includes users inferred home SA2, and
-          their daily visits SA2 and the visits duration.
-        </p>
-        <br />
         <br />
         <MathJax.Context>
           <div>
@@ -68,7 +50,7 @@ const Methods = class Methods extends Component {
               income groups based on the median income of the neighborhood they
               live in. The visitors’ home location is inferred from the mobility
               data, and the income data is provided by Australian Bureau of
-              Statistics. The atlas measures how diverse the visitors of a
+              Statistics. The tool measures how diverse the visitors of a
               region are based on their income level. Our inequality metric for
               each region j is calculated based on the following formula, where{" "}
               <MathJax.Node inline>{" q_i,(i=1,2,3,4)"}</MathJax.Node>{" "}
@@ -108,8 +90,7 @@ const Methods = class Methods extends Component {
         <br />
         <h2>Discussion</h2>
         <p style={content}>
-          The primary results show that there is a noticeable degree of economic
-          segregation in South Australia. Figure 2, shows the histogram of the
+          Figure 2, shows the histogram of the
           inequality metric at SA2 level in South Australia.
         </p>
         <br />
@@ -118,9 +99,7 @@ const Methods = class Methods extends Component {
         <p style={content}>
           The bars at left side of figure 2, represent the areas with inequality
           dominated by lower income groups and the blue ones at right are
-          dominated by the higher income groups. It is ideal to have a
-          bell-shaped histogram instead of the current U-shaped histogram
-          (figure 2). There are different policies to discourage social
+          dominated by the higher income groups. There are different policies to discourage social
           segregation that is so stratified. One can be through locating the new
           facilities and amenities in those areas that could decrease the
           segregation by attracting the target income level groups. Data-driven
@@ -128,23 +107,8 @@ const Methods = class Methods extends Component {
           can help predict where amenities might be incentivized so as to reduce
           segregation. To illustrate, assume that the SA government built a park
           at “Plympton” area January 2018. Using the inequality measures before
-          and after that month will inform how a park can change the segregation
+          and after that particular month will inform how a park can change the segregation
           level which can be considered for future location allocations.
-        </p>
-        <p style={content}>
-          Finally, as future work, to better study the dynamics of economic
-          segregation at South Australia, we are planning to:{" "}
-        </p>
-        <ul>
-          <li>
-            - Extend the duration (more years) and resolution (SA1) of the
-            current Atlas
-          </li>
-          <li>
-            - Study the role of amenities (by type and location) in decreasing
-            the economic segregation levels in South Australia{" "}
-          </li>
-        </ul>
       </Container>
     );
   }
