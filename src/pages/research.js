@@ -207,7 +207,7 @@ const Research = class Research extends Component {
           to remain unemployed for long.
         </p>
         <p style={content}>
-          As illustrated in Figure XXX, cities with greater skill connectivity
+          As illustrated in Figure 7, cities with greater skill connectivity
           experienced lower unemployment rates during the 2008 Great Recession,
           had increasing wage bills, and workers of occupations with high degree
           of connectivity within a city’s job network enjoy higher wages than
@@ -217,7 +217,7 @@ const Research = class Research extends Component {
         </p>
         <img style={image} src={jobsIncreases} alt={""} />
         <p>
-          Figure XXX: More skills connectivity between jobs increases employment
+          Figure 7: More skills connectivity between jobs increases employment
           resilience
         </p>
         <p style={content}>
