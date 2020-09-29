@@ -44,7 +44,7 @@ const Methods = class Methods extends Component {
           <div>
             <h2>Measuring income inequality</h2>
             <p style={content}>
-              Our tool shows the level of economic inequality at SA2 regions of
+              This tool shows the level of economic inequality at SA2 regions of
               South Australia. Each SA2 has visitors from different
               socio-economic backgrounds. The visitors are divided into four
               income groups based on the median income of the neighborhood they
@@ -76,7 +76,7 @@ const Methods = class Methods extends Component {
         <br />
         <h2>The Atlas</h2>
         <p style={content}>
-          Figure 1 shows a screenshot of the Atlas tool for South Australia.
+          Figure 1 shows a screenshot of the tool for South Australia.
           Each polygon represents a SA2 region. Regions are colored in a range
           of Red-Yellow-Blue. The darker the colors Red and Blue, the higher
           segregation. Blue shows the regions where inequality happens because
@@ -85,7 +85,7 @@ const Methods = class Methods extends Component {
         </p>
         <br />
         <img style={image} src={adelaide} alt={""} />
-        <p>Figure 1. Screenshot of the Adelaide Atlas of Inequality</p>
+        <p>Figure 1. Screenshot of the Adelaide Economic Segregation Map</p>
         <br />
         <br />
         <h2>Discussion</h2>
@@ -95,7 +95,7 @@ const Methods = class Methods extends Component {
         </p>
         <br />
         <img style={image} src={segregation} alt={""} />
-        <p>Figure 1. Screenshot of the Adelaide Atlas of Inequality</p>
+        <p>Figure 1. Screenshot of the Adelaide Economic Segregation Map</p>
         <p style={content}>
           The bars at left side of figure 2, represent the areas with inequality
           dominated by lower income groups and the blue ones at right are
