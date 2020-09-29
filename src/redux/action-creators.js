@@ -28,3 +28,10 @@ export function setHeaderOption(payload) {
     payload: payload,
   });
 }
+
+export function setDropDown(payload) {
+  store.dispatch({
+    type: "DropDown",
+    payload: payload,
+  });
+}

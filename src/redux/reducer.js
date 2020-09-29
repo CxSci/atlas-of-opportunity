@@ -46,6 +46,7 @@ const initialState: State = {
   select,
   modal: true,
   path: window.location.pathname,
+  dropdown: "off",
 };
 
 function reducer(state = initialState, action) {
@@ -63,6 +64,10 @@ function reducer(state = initialState, action) {
         modal: action.payload,
       });
     case "Header":
+      return Object.assign({}, state, {
+        path: action.payload,
+      });
+    case "DropDown":
       return Object.assign({}, state, {
         path: action.payload,
       });
