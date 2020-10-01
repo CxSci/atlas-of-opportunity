@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Container = class Container extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.string,
+    children: PropTypes.array,
   };
   render() {
     const { title, children } = this.props;
