@@ -160,7 +160,7 @@ let Map = class Map extends React.Component {
           // this.map.removeSource('point2');
         }
         hasClicked = true;
-        var featureObj = new Object();
+        var featureObj = {};
         var destinationList = [];
         var origin = [];
         // Reset regions
@@ -397,7 +397,7 @@ let Map = class Map extends React.Component {
               
           // Update the source with this new data.
           that.map.getSource(pointID).setData(point);
-          if ((cntr+2)==500) {
+          if ((cntr+2) === 500) {
             cntr = 0;
           }
           // Request the next frame of animation so long the end has not been reached.
