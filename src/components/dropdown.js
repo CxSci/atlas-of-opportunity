@@ -7,7 +7,7 @@ let DropDown = class Display extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     titleSize: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.array,
     dropdown: PropTypes.string,
   };
 
