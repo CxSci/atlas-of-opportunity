@@ -158,13 +158,11 @@ let Map = class Map extends React.Component {
       
       this.map.on('click', 'sa2-fills', this.onMapClick);
     });
-    console.log("map mount: ", this.props.flowDirection);
   }
 
 
   componentDidUpdate(prevProps) {
     if (this.props.flowDirection !== prevProps.flowDirection) {
-      console.log("map update: ", this.props.flowDirection);
       this.redrawBridges();
     }
   }
@@ -237,6 +235,7 @@ let Map = class Map extends React.Component {
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
       bgi: clickedSA2.properties.bsns_growth_rate,
+      sa1_codes: clickedSA2.properties.SA1_7DIGITCODE_LIST,
       isDefault: false
     };
 

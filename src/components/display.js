@@ -22,11 +22,11 @@ let Display = class Display extends React.Component {
 
   render() {
     // const { name, description} = this.props.active;
-    const { sa2_name, population, income, ggp, jr, bgi, isDefault} = this.props.select;
+    const { sa2_name, population, income, ggp, jr, bgi, sa1_codes, isDefault} = this.props.select;
     const { flowDirection } = this.props;
     if (isDefault){
       return (
-        <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z1 wmax240">
+        <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z2 wmax240">
           <div className="py12 px12">
             <p className='txt-s'>Select a community to learn more about opportunity in that area.
             </p>
@@ -35,8 +35,8 @@ let Display = class Display extends React.Component {
         )
     }
     return (
-      <div>
-        <div className="bg-white absolute top right mr12 mt24 shadow-darken10 z1 w240">
+      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt24 pb36 mr12 z2">
+        <div style={{overflowY: 'auto'}} className="bg-white flex-child flex-child--grow mb24 shadow-darken10 w240">
           <div className="py12 px12">
             <div className='mb6'>
               <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2> 
@@ -65,10 +65,16 @@ let Display = class Display extends React.Component {
             <h2 className="txt-bold txt-m block">Business Growth Index</h2>
               <p className='txt-s'>{bgi}</p>
             </div>
+            <div className='mb6'>
+            <h2 className="txt-bold txt-m block">Included SA1 Regions</h2>
+              <p className='txt-s'>{sa1_codes}</p>
+            </div>
           </div>
-          <div id='options' className = 'pb12 px12 bg-orange-faint'>
+        </div>
+        <div className="bg-white flex-child flex-child--no-shrink shadow-darken10 w240">
+          <div id='options' className='pb12 px12 bg-orange-faint'>
             <form>
-              <p className = 'pt6 txt-m txt-bold'>Change flow direction</p>
+              <p className='pt6 txt-m txt-bold'>Change flow direction</p>
               <div>
                 <label className="p12 txt-s block">
                 <input
@@ -77,7 +83,7 @@ let Display = class Display extends React.Component {
                   value={Constants.FLOW_OUT}
                   checked={flowDirection === Constants.FLOW_OUT}
                   onChange={this.onFlowChange}/>
-                 Outflow
+                 &nbsp;Outflow
                 </label>
               </div>
               <div>
@@ -88,7 +94,7 @@ let Display = class Display extends React.Component {
                   value={Constants.FLOW_IN}
                   checked={flowDirection === Constants.FLOW_IN}
                   onChange={this.onFlowChange}/>
-                 Inflow
+                 &nbsp;Inflow
                 </label>
               </div>
               <div>
@@ -99,13 +105,11 @@ let Display = class Display extends React.Component {
                   value={Constants.FLOW_BI}
                   checked={flowDirection === Constants.FLOW_BI}
                   onChange={this.onFlowChange}/>
-                 Bi-directional
+                 &nbsp;Bi-directional
                 </label>
               </div>
             </form>
           </div>
-        </div>
-        <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z1 wmax240">
           <div className="py12 px12">
             <p className='txt-s'>Select a community to learn more about opportunity in that area.
             </p>

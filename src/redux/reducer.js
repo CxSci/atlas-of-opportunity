@@ -34,6 +34,7 @@ const select = {
   ggp: '', 
   jr: '',
   bgi: '',
+  sa1_codes: '',
   isDefault: true
 }
 
