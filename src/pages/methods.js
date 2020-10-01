@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setModal } from "../redux/action-creators";
 
-import adelaide from "../assets/adelaide.png";
-import segregation from "../assets/segregation.png";
+import flow from "../assets/flow.png";
 
 import Container from "../components/container";
 
@@ -39,77 +38,80 @@ const Methods = class Methods extends Component {
     };
     return (
       <Container title="Methods">
+        <p style={content}>
+          The understanding and modeling of human purchase behavior in city
+          environment can have important implications in the study of urban
+          economy and in the design and organization of cities. In the Atlas of
+          Opportunity, we study human behavior at the community level and argue
+          that people who live in different communities but work at close-by
+          locations could act as “social bridges” between the respective
+          communities and these bridges strongly influence community behavior.
+          More specifically, we have shown that the number of social bridges
+          between communities is a much stronger indicator of similarity in
+          community behavior than traditionally considered factors such as
+          income and socio-demographic variables.
+        </p>
         <br />
+        <img style={image} src={flow} alt={""} />
+        <p>
+          Fig. 1. Social bridges link behavior of different communities of city
+          residents. In this example, communities I and J have three social
+          bridges between them, which are formed by three pairs of
+          point-of-interest visitation having close-by work locations.{" "}
+        </p>
+        <br />
+        <p style={content}>
+          To study social bridges between different communities and how this
+          similarity is associated to physical proximity, we first need to
+          define such communities. In the country under investigation,
+          communities can naturally be defined as fine-scale administrative
+          neighborhoods within a city. These are neighborhoods of varying areas
+          from 0.05 square kilometers in the city center to 50 square kilometers
+          in the periphery of the city area, whose residents normally share to
+          some extent common socio-demographic characteristics. To compute these
+          social bridges we use census-like sources of aggregate behavior, which
+          contain no personally identifiable information. These aggregate
+          census-tract data are provided by government agencies,
+          telecommunications, and banking, similar to the manner in which these
+          organizations provide aggregate data for standard auditing and
+          regulatory purposes.
+        </p>
         <MathJax.Context>
           <div>
-            <h2>Measuring income inequality</h2>
             <p style={content}>
-              This tool shows the level of economic inequality at SA2 regions of
-              South Australia. Each SA2 has visitors from different
-              socio-economic backgrounds. The visitors are divided into four
-              income groups based on the median income of the neighborhood they
-              live in. The visitors’ home location is inferred from the mobility
-              data, and the income data is provided by Australian Bureau of
-              Statistics. The tool measures how diverse the visitors of a
-              region are based on their income level. Our inequality metric for
-              each region j is calculated based on the following formula, where{" "}
-              <MathJax.Node inline>{" q_i,(i=1,2,3,4)"}</MathJax.Node>{" "}
-              represents the income quartile and{" "}
-              <MathJax.Node inline>{"t_(q_(ij))"}</MathJax.Node> is the time
-              spent by income quartile i at region j.
+              Social bridges between each pair of communities I and J can be
+              defined in order to capture the chance of physical proximity
+              and/or social learning taking place between people from the
+              respective communities. Specifically, we define a social bridge
+              between a pair of communities I and J , for every pair of
+              individuals i and j that live respectively in I and J and have
+              work locations <MathJax.Node inline>{" L_i"}</MathJax.Node> and{" "}
+              <MathJax.Node inline>{" L_j "}</MathJax.Node> within a distance
+              threshold d. Therefore, the number of social bridges between I and
+              J is:
             </p>
             <div style={formula}>
-              <b>inequality</b>
+              <p style={{ margin: "7px 0 0 0" }}>bridge</p>
               <MathJax.Node inline>
-                {" j = sum_(i=1)^4 t_(q_(ij)) - 1/4 V"}
+                {"(I, J) = |{i, j}|, s.t.i in I, j in J, D(L_i, L_j) <= d,(1)"}
               </MathJax.Node>
             </div>
             <p style={content}>
-              After post-stratification and calculation of the inequality level
-              for each region, we normalize them to numbers [0,100], where a
-              score of 0 means that visitors are from all income groups equally,
-              and 100 represents the maximum inequality level, where visitors
-              are only from a single income group.
+              where <MathJax.Node inline>{" D(L_i, L_j)"}</MathJax.Node>{" "}
+              represents the distance between{" "}
+              <MathJax.Node inline>{" L_i "}</MathJax.Node> and{" "}
+              <MathJax.Node inline>{" L_j "}</MathJax.Node>. Since people
+              normally spend a considerable amount of time at work, it is our
+              assumption that individuals who work at near-by locations, defined
+              by a distance threshold d, would have a reasonable chance to
+              observe and interact with each other due to constant and repeated
+              exposure promoted by physical proximity. In detailed behavioral
+              studies, this turns out to be quite an accurate assumption. Note
+              that we may also use the so-called “third places” to define social
+              bridges instead of work locations.
             </p>
           </div>
         </MathJax.Context>
-        <br />
-        <h2>The Atlas</h2>
-        <p style={content}>
-          Figure 1 shows a screenshot of the tool for South Australia.
-          Each polygon represents a SA2 region. Regions are colored in a range
-          of Red-Yellow-Blue. The darker the colors Red and Blue, the higher
-          segregation. Blue shows the regions where inequality happens because
-          higher income (above median) people spend more time there and Red
-          shows the lower income (under median) domination on visits.
-        </p>
-        <br />
-        <img style={image} src={adelaide} alt={""} />
-        <p>Figure 1. Screenshot of the Adelaide Economic Segregation Map</p>
-        <br />
-        <br />
-        <h2>Discussion</h2>
-        <p style={content}>
-          Figure 2, shows the histogram of the
-          inequality metric at SA2 level in South Australia.
-        </p>
-        <br />
-        <img style={image} src={segregation} alt={""} />
-        <p>Figure 1. Screenshot of the Adelaide Economic Segregation Map</p>
-        <p style={content}>
-          The bars at left side of figure 2, represent the areas with inequality
-          dominated by lower income groups and the blue ones at right are
-          dominated by the higher income groups. There are different policies to discourage social
-          segregation that is so stratified. One can be through locating the new
-          facilities and amenities in those areas that could decrease the
-          segregation by attracting the target income level groups. Data-driven
-          maps like the one shown here could be used to construct models that
-          can help predict where amenities might be incentivized so as to reduce
-          segregation. To illustrate, assume that the SA government built a park
-          at “Plympton” area January 2018. Using the inequality measures before
-          and after that particular month will inform how a park can change the segregation
-          level which can be considered for future location allocations.
-        </p>
       </Container>
     );
   }
