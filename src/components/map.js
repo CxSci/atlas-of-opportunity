@@ -417,14 +417,17 @@ let Map = class Map extends React.Component {
       point.features[featureIdx].properties.bearing = turf.bearing(a, b);
           
       // Update the source with this new data.
-      that.map.getSource(pointID).setData(point);
-      if ((cntr+2) === 500) {
-        cntr = 0;
+      let source = that.map.getSource(pointID);
+      if (source !== undefined) {
+        that.map.getSource(pointID).setData(point);
+        if ((cntr+2) === 500) {
+          cntr = 0;
+        }
+        // Request the next frame of animation so long the end has not been reached.
+        if (cntr < steps) {
+          requestAnimationFrame(function(){animate(featureIdx, cntr+1, point, route, pointID);});
+        }
       }
-      // Request the next frame of animation so long the end has not been reached.
-      if (cntr < steps) {
-        requestAnimationFrame(function(){animate(featureIdx, cntr+1, point, route, pointID);});
-      }  
     }
 
     // Reset the counter used for in and outflow
