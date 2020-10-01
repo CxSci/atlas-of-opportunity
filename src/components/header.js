@@ -19,7 +19,7 @@ const Header = class Header extends Component {
       height: "60px",
       background: "white",
       position: "fixed",
-      zIndex: 1,
+      zIndex: 3, // 2 for detail pane, 1 for footer logos
       top: 0,
     };
     const headerBox = {

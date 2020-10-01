@@ -24,6 +24,7 @@ const Main = class Main extends Component {
       position: "absolute",
       bottom: "0px",
       width: "100%",
+      pointerEvents: "none",
     };
 
     return (
