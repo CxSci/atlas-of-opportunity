@@ -36,6 +36,7 @@ const select = {
   ggp: "",
   jr: "",
   bgi: "",
+  sa1_codes: "",
   isDefault: true,
 };
 
@@ -47,6 +48,7 @@ const initialState: State = {
   modal: true,
   path: window.location.pathname,
   dropdown: "off",
+  flowDirection: Constants.FLOW_BI,
 };
 
 function reducer(state = initialState, action) {
@@ -70,6 +72,11 @@ function reducer(state = initialState, action) {
     case "DropDown":
       return Object.assign({}, state, {
         dropdown: action.payload,
+        select: action.payload
+      });
+    case Constants.SET_FLOW_DIRECTION:
+      return Object.assign({}, state, {
+        flowDirection: action.direction
       });
     default:
       return state;
