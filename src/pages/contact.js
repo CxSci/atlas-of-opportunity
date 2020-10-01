@@ -7,7 +7,7 @@ import Container from "../components/container";
 
 const Contact = class Contact extends Component {
   static propTypes = {
-    modal: PropTypes.string.isRequired,
+    modal: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {

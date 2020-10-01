@@ -12,7 +12,7 @@ import Container from "../components/container";
 
 const Research = class Research extends Component {
   static propTypes = {
-    modal: PropTypes.string.isRequired,
+    modal: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {

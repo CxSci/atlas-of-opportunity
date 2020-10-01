@@ -11,7 +11,7 @@ import Container from "../components/container";
 
 const Methods = class Methods extends Component {
   static propTypes = {
-    modal: PropTypes.string.isRequired,
+    modal: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {

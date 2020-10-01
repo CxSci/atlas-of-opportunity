@@ -10,7 +10,7 @@ import Footer from "../components/footer.js";
 
 const Main = class Main extends Component {
   static propTypes = {
-    modal: PropTypes.string.isRequired,
+    modal: PropTypes.bool.isRequired,
   };
   render() {
     const { modal } = this.props;

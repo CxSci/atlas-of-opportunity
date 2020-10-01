@@ -11,7 +11,7 @@ import { store } from "./redux/store";
 
 const App = class App extends Component {
   static propTypes = {
-    modal: PropTypes.string.isRequired,
+    modal: PropTypes.bool.isRequired,
   };
   render() {
     const { modal } = this.props;
