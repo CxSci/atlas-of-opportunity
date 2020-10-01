@@ -487,6 +487,7 @@ let Map = class Map extends React.Component {
         speed: 0.8,
       });
     }
+    return true;
   }
 
   render() {
