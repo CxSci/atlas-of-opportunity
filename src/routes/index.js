@@ -8,12 +8,14 @@ import Research from "../pages/research";
 import Contact from "../pages/contact";
 import FAQ from "../pages/faq";
 import Methods from "../pages/methods";
+import Segregation from "../pages/segregation";
 
 const Routes = class Routes extends Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Main} />
+        <Route exact path="/segregation" component={Segregation} />
         <Route exact path="/about" component={About} />
         <Route exact path="/methods" component={Methods} />
         <Route exact path="/research" component={Research} />
