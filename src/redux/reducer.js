@@ -41,7 +41,8 @@ const initialState: State = {
   data,
   options,
   active: options[0],
-  select
+  select,
+  flowDirection: Constants.FLOW_BI,
 };
 
 function reducer(state = initialState, action) {
@@ -53,7 +54,11 @@ function reducer(state = initialState, action) {
     case Constants.SET_SELECT:
       return Object.assign({}, state, {
         select: action.payload
-      });    
+      });
+    case Constants.SET_FLOW_DIRECTION:
+      return Object.assign({}, state, {
+        flowDirection: action.direction
+      });
     default:
       return state;
   }

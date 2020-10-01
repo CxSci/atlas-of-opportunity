@@ -14,3 +14,10 @@ export function setSelect(payload) {
     payload: payload
   });
 }
+
+export function setFlowDirection(direction) {
+  store.dispatch({
+    type: Constants.SET_FLOW_DIRECTION,
+    direction: direction
+  });
+}

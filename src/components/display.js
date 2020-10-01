@@ -1,18 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+
+import * as Constants from '../constants'
+import { setFlowDirection } from '../redux/action-creators'
 
 let Display = class Display extends React.Component {
 
   static propTypes = {
     active: PropTypes.object.isRequired,
-    select: PropTypes.object.isRequired
+    select: PropTypes.object.isRequired,
+    flowDirection: PropTypes.string.isRequired,
   };
 
+  onFlowChange = (e) => {
+    let direction = e.target.value;
+    this.flowDirection = direction;
+    console.log(direction);
+    setFlowDirection(direction);
+  }
+
   render() {
-    const { name, description} = this.props.active;
+    // const { name, description} = this.props.active;
     const { sa2_name, population, income, ggp, jr, bgi, isDefault} = this.props.select;
+    const { flowDirection } = this.props;
     if (isDefault){
       return (
         <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z1 wmax240">
@@ -60,20 +71,35 @@ let Display = class Display extends React.Component {
               <p className = 'pt6 txt-m txt-bold'>Change flow direction</p>
               <div>
                 <label className="p12 txt-s block">
-                <input type="radio" name = 'flow' value="outflow" checked={true} />
-                Outflow
+                <input
+                  type="radio"
+                  name='flow'
+                  value={Constants.FLOW_OUT}
+                  checked={flowDirection === Constants.FLOW_OUT}
+                  onChange={this.onFlowChange}/>
+                 Outflow
                 </label>
               </div>
               <div>
                 <label className="p12 txt-s block">
-                <input type="radio" name = 'flow' value="inflow" />
-                Inflow
+                <input
+                  type="radio"
+                  name='flow'
+                  value={Constants.FLOW_IN}
+                  checked={flowDirection === Constants.FLOW_IN}
+                  onChange={this.onFlowChange}/>
+                 Inflow
                 </label>
               </div>
               <div>
                 <label className="p12 txt-s block">
-                <input type="radio" name = 'flow' value="bi-directional" />
-                Bi-directional
+                <input
+                  type="radio"
+                  name='flow'
+                  value={Constants.FLOW_BI}
+                  checked={flowDirection === Constants.FLOW_BI}
+                  onChange={this.onFlowChange}/>
+                 Bi-directional
                 </label>
               </div>
             </form>
@@ -94,6 +120,7 @@ function mapStateToProps(state) {
   return {
     active: state.active,
     select: state.select,
+    flowDirection: state.flowDirection,
   };
 }
 
