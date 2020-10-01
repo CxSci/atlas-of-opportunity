@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
+import SegregationMap from "../components/segregation";
 import Display from "../components/display";
 import Legend from "../components/legend";
 import Modal from "../components/modal";
@@ -11,9 +12,10 @@ import Footer from "../components/footer.js";
 const Main = class Main extends Component {
   static propTypes = {
     modal: PropTypes.bool.isRequired,
+    mapType: PropTypes.string.isRequired,
   };
   render() {
-    const { modal } = this.props;
+    const { modal, mapType } = this.props;
 
     const mapStyler = {
       zindex: 0,
@@ -27,9 +29,20 @@ const Main = class Main extends Component {
       pointerEvents: "none",
     };
 
+    const MapToShow = () => {
+      console.log("=Maptype:", mapType);
+      if (mapType === "growth") {
+        return <Map />;
+      } else if (mapType === "segregation") {
+        return <SegregationMap />;
+      } else {
+        return <Map />;
+      }
+    };
+
     return (
       <div style={mapStyler}>
-        <Map />
+        <MapToShow />
         {modal ? (
           <Modal />
         ) : (
@@ -51,6 +64,7 @@ const Main = class Main extends Component {
 function mapStateToProps(state) {
   return {
     modal: state.modal,
+    mapType: state.mapType,
   };
 }
 

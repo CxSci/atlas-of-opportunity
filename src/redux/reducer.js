@@ -46,6 +46,7 @@ const initialState: State = {
   active: options[0],
   select,
   modal: true,
+  mapType: "growth",
   path: window.location.pathname,
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
@@ -69,14 +70,21 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         path: action.payload,
       });
+    case "MapType":
+      return { ...state, mapType: action.payload };
+    case "Display":
+      console.log("Got display action");
+      return {
+        ...state,
+        select: { ...state.select, isDefault: action.payload },
+      };
     case "DropDown":
       return Object.assign({}, state, {
         dropdown: action.payload,
-        select: action.payload
       });
     case Constants.SET_FLOW_DIRECTION:
       return Object.assign({}, state, {
-        flowDirection: action.direction
+        flowDirection: action.direction,
       });
     default:
       return state;

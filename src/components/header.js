@@ -3,7 +3,11 @@ import Toggle from "./toggle";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { setActiveOption, setHeaderOption } from "../redux/action-creators";
+import {
+  setActiveOption,
+  setHeaderOption,
+  setMapType,
+} from "../redux/action-creators";
 import DropDown from "./dropdown";
 
 const Header = class Header extends Component {
@@ -76,7 +80,10 @@ const Header = class Header extends Component {
                 <Link
                   to="/"
                   style={dropDownLink}
-                  onClick={() => setHeaderOption("/")}
+                  onClick={() => {
+                    setHeaderOption("/");
+                    setMapType("growth");
+                  }}
                 >
                   Mobility Map
                 </Link>
@@ -91,7 +98,11 @@ const Header = class Header extends Component {
                 </Link>
               </li>
               <li style={dropDownOption}>
-                <Link to="/segregation" style={dropDownLink}>
+                <Link
+                  to="/"
+                  style={dropDownLink}
+                  onClick={() => setMapType("segregation")}
+                >
                   Economic Segregation
                 </Link>
               </li>
