@@ -243,8 +243,11 @@ let Map = class Map extends React.Component {
 
     const sa2_properties = {
       sa2_name: clickedSA2.properties.SA2_NAME16,
-      population: toCommas(clickedSA2.properties.persons_num),
-      income: "$" + toCommas(clickedSA2.properties.median_aud),
+      population: clickedSA2.properties.persons_num.toLocaleString(),
+      income: clickedSA2.properties.median_aud.toLocaleString(undefined, {
+        style: 'currency',
+        currency: 'AUS',
+      }),
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
       fq1: clickedSA2.properties.fq1,
@@ -522,10 +525,6 @@ function mapStateToProps(state) {
     modal: state.modal,
     flowDirection: state.flowDirection,
   };
-}
-
-function toCommas(value) {
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 Map = connect(mapStateToProps)(Map);
