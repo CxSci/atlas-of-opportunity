@@ -44,8 +44,8 @@ let Display = class Display extends React.Component {
       );
     }
     return (
-      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt120 pb36 mr12 z2">
-        <div style={{overflowY: "auto"}} className="bg-white flex-child flex-child--grow mb24 shadow-darken10 w240">
+      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt60 pb36 mr12 z2">
+        <div style={{overflowY: "auto"}} className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240">
           <div className="py12 px12">
             <div className="mb6">
               <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
