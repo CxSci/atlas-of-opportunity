@@ -136,13 +136,6 @@ const Header = class Header extends Component {
             >
               FAQ
             </Link>
-            <Link
-              to="/contact"
-              style={path === "/contact" ? clicked : options}
-              onClick={() => setHeaderOption("/contact")}
-            >
-              Contact
-            </Link>
           </div>
         </div>
       </div>
