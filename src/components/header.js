@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import Toggle from "./toggle";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  setActiveOption,
-  setHeaderOption,
-  setMapType,
-} from "../redux/action-creators";
+import { setHeaderOption, setMapType } from "../redux/action-creators";
 import DropDown from "./dropdown";
 
 const Header = class Header extends Component {
@@ -73,7 +68,12 @@ const Header = class Header extends Component {
     return (
       <div style={container}>
         <div style={headerBox}>
-          <Toggle onChange={setActiveOption} />
+          <div
+            className="toggle txt-m py3 toggle--active-white bg-orange"
+            style={{ color: "white" }}
+          >
+            Atlas of Opportunity
+          </div>
           <div style={optionsBox}>
             <DropDown title="Map" titleSize="1.3">
               <li style={dropDownOption}>

@@ -3,13 +3,23 @@ import data from "../data/SA_dashboard.geojson";
 
 const options = [
   {
-    name: "Inequality",
+    name: "Growth",
     description: "",
-    property: "inequality",
+    property: "income_diversity",
     stops: [
       [0, "#fdedc4"],
       [0.6, "#f09647"],
       [1.2, "#dd4b27"],
+    ],
+  },
+  {
+    name: "Inequality",
+    description: "Inequality in time spent",
+    property: "inequality",
+    stops: [
+      [0, "#fdedc4"],
+      [40, "#f09647"],
+      [60, "#dd4b27"],
     ],
   } /*{
   name: 'GDP',
@@ -71,7 +81,11 @@ function reducer(state = initialState, action) {
         path: action.payload,
       });
     case "MapType":
-      return { ...state, mapType: action.payload };
+      return {
+        ...state,
+        mapType: action.payload,
+        active: action.payload === "growth" ? options[0] : options[1],
+      };
     case "Display":
       console.log("Got display action");
       return {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
 
-import * as Constants from "../constants"
+import * as Constants from "../constants";
 
 const turf = window.turf;
 mapboxgl.accessToken =
@@ -19,7 +19,7 @@ let Map = class Map extends React.Component {
     this.state = {
       clickedSA2: null,
       clickedFeatures: [],
-    }
+    };
   }
 
   static propTypes = {
@@ -72,11 +72,7 @@ let Map = class Map extends React.Component {
           ]*/
           "fill-color": {
             property: "income_diversity",
-            stops: [
-              [0.1024, "#fdedc4"],
-              [0.66, "#f09647"],
-              [1.2168, "#dd4b27"],
-            ],
+            stops: this.props.active.stops,
           },
           "fill-opacity": [
             "case",
@@ -166,7 +162,6 @@ let Map = class Map extends React.Component {
     });
   }
 
-
   componentDidUpdate(prevProps) {
     if (this.props.flowDirection !== prevProps.flowDirection) {
       this.redrawBridges();
@@ -177,15 +172,18 @@ let Map = class Map extends React.Component {
     let prevSA2 = this.state.clickedSA2;
     let clickedSA2 = e.features[0]; //properties.name;
     // Ignore clicks on the active SA2.
-    if (!prevSA2 || clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16) {
+    if (
+      !prevSA2 ||
+      clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
+    ) {
       this.redrawBridges(e);
     }
-  }
+  };
 
   // Called when an SA2 is clicked and when the flow direction changes.
   redrawBridges = (e) => {
-    var clickedSA2 = this.state.clickedSA2;
     var clickedFeatures = this.state.clickedFeatures;
+    var clickedSA2 = this.state.clickedSA2;
 
     //remove the previous routes
     if (this.map.getLayer("route") !== undefined) {
@@ -202,21 +200,27 @@ let Map = class Map extends React.Component {
     // Reset regions
     clickedFeatures.forEach((f) => {
       // For each feature, update its 'click' state
-      this.map.setFeatureState({
+      this.map.setFeatureState(
+        {
           source: "sa2",
           id: f.id,
-        },{
+        },
+        {
           highlight: false,
-      });
+        }
+      );
     });
 
     if (clickedSA2 !== null) {
-      this.map.setFeatureState({
+      this.map.setFeatureState(
+        {
           source: "sa2",
           id: clickedSA2.id,
-        },{
+        },
+        {
           click: false,
-      });
+        }
+      );
     }
     // Reuse existing region if this call was due to a flow direction change.
     if (e) {
@@ -227,12 +231,15 @@ let Map = class Map extends React.Component {
     origin = turf.center(clickedSA2).geometry.coordinates;
 
     console.log(clickedSA2);
-    this.map.setFeatureState({ 
-        source: "sa2", 
+    this.map.setFeatureState(
+      {
+        source: "sa2",
         id: clickedSA2.id,
-      },{
+      },
+      {
         click: true,
-    });
+      }
+    );
 
     const sa2_properties = {
       sa2_name: clickedSA2.properties.SA2_NAME16,
@@ -240,6 +247,10 @@ let Map = class Map extends React.Component {
       income: "$" + toCommas(clickedSA2.properties.median_aud),
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
+      fq1: clickedSA2.properties.fq1,
+      fq2: clickedSA2.properties.fq2,
+      fq3: clickedSA2.properties.fq3,
+      fq4: clickedSA2.properties.fq4,
       bgi: clickedSA2.properties.bsns_growth_rate,
       sa1_codes: clickedSA2.properties.SA1_7DIGITCODE_LIST,
       isDefault: false,
@@ -272,25 +283,30 @@ let Map = class Map extends React.Component {
           clickedSA2.properties.inflow_r3,
         ];
     }
-    bridges = bridges.filter(x => x !== undefined);
+    bridges = bridges.filter((x) => x !== undefined);
 
     // Search map for SA2s matching the bridges.
     clickedFeatures = this.map.querySourceFeatures("sa2", {
       sourceLayer: "original",
       filter: [
-        "in", ["to-number", ["get", "SA2_MAIN16"]], ["literal", bridges]
-      ]
+        "in",
+        ["to-number", ["get", "SA2_MAIN16"]],
+        ["literal", bridges],
+      ],
     });
 
     // get rid of the repeated features in the clickedFeatures array
     clickedFeatures.forEach((f) => {
       // For each feature, update its 'highlight' state
-      this.map.setFeatureState({
+      this.map.setFeatureState(
+        {
           source: "sa2",
           id: f.id,
-        },{
+        },
+        {
           highlight: true,
-      });
+        }
+      );
       if (f.properties.SA2_MAIN16 in featureObj) {
       } else {
         featureObj[f.properties.SA2_MAIN16] = f;
@@ -298,8 +314,8 @@ let Map = class Map extends React.Component {
     });
 
     // Update component state now that our changes are ready.
-    this.setState({clickedSA2: clickedSA2});
-    this.setState({clickedFeatures: clickedFeatures});
+    this.setState({ clickedSA2: clickedSA2 });
+    this.setState({ clickedFeatures: clickedFeatures });
 
     // sort the clickedFeatures based on the ranking in bridges
     var featureList = [];
@@ -327,80 +343,80 @@ let Map = class Map extends React.Component {
       var bridgeStart = turf.point(bridge[0]);
       var bridgeEnd = turf.point(bridge[1]);
       var greatCircle = turf.greatCircle(bridgeStart, bridgeEnd, {
-        "name": "start to end",
-        "npoints": 500,
+        name: "start to end",
+        npoints: 500,
       });
       routeList.push(greatCircle);
       var pointObj = {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "Point",
-            "coordinates": bridge[0],
-          }
-      }
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Point",
+          coordinates: bridge[0],
+        },
+      };
       pointList.push(pointObj);
     });
     //color the bridges according to the ranking
     if (routeList[0]) {
-      routeList[0].properties = {"color": "#01579B"};
+      routeList[0].properties = { color: "#01579B" };
     }
     // routeList[0].properties = {"color": "#01579B"};
     if (routeList[1]) {
-      routeList[1].properties = {"color": "#29B6F6"};
+      routeList[1].properties = { color: "#29B6F6" };
     }
     if (routeList[2]) {
-      routeList[2].properties = {"color": "#B3E5FC"};
+      routeList[2].properties = { color: "#B3E5FC" };
     }
     // routeList[1].properties = {"color": "#29B6F6"};
     // routeList[2].properties = {"color": "#B3E5FC"};
 
     var route = {
-      "type": "FeatureCollection",
-      "features": routeList,
+      type: "FeatureCollection",
+      features: routeList,
     };
     var point = {
-      "type": "FeatureCollection",
-      "features": pointList,
+      type: "FeatureCollection",
+      features: pointList,
     };
 
     // add route source and layer to the map
     this.map.addSource("route", {
-      "type": "geojson",
-      "data": route,
+      type: "geojson",
+      data: route,
     });
     this.map.addLayer({
-      "id": "route",
-      "source": "route",
-      "type": "line",
-      "layout": {
-          "line-cap": "round",
+      id: "route",
+      source: "route",
+      type: "line",
+      layout: {
+        "line-cap": "round",
       },
-      "paint": {
+      paint: {
         "line-width": 6,
         "line-dasharray": [0, 2],
         "line-color": ["get", "color"],
-      }
+      },
     });
     // Don't show point for bi-directional flows.
     if (this.props.flowDirection !== Constants.FLOW_BI) {
-    // add point source and layer to the map  
+      // add point source and layer to the map
       this.map.addSource("point", {
-        "type": "geojson",
-        "data": point,
+        type: "geojson",
+        data: point,
       });
       this.map.addLayer({
-        "id": "point",
-        "source": "point",
-        "type": "symbol",
-        "layout": {
+        id: "point",
+        source: "point",
+        type: "symbol",
+        layout: {
           "icon-image": "triangle-11",
           "icon-rotate": ["get", "bearing"],
           "icon-rotation-alignment": "map",
           "icon-allow-overlap": true,
           "icon-ignore-placement": true,
         },
-        "paint": {
+        paint: {
           "icon-color": "#00ff00",
           "icon-halo-color": "#fff",
           "icon-halo-width": 2,
@@ -425,14 +441,19 @@ let Map = class Map extends React.Component {
         cntrIdx = route.features[featureIdx].geometry.coordinates.length - cntr;
       }
 
-      point.features[featureIdx].geometry.coordinates = route.features[featureIdx].geometry.coordinates[cntrIdx];
+      point.features[featureIdx].geometry.coordinates =
+        route.features[featureIdx].geometry.coordinates[cntrIdx];
 
-      let a = turf.point(route.features[featureIdx].geometry.coordinates[
-        cntr >= steps ? cntr - 1 : cntr
-      ]);
-      let b = turf.point(route.features[featureIdx].geometry.coordinates[
-        cntr >= steps ? cntr : cntr + 1
-      ]);
+      let a = turf.point(
+        route.features[featureIdx].geometry.coordinates[
+          cntr >= steps ? cntr - 1 : cntr
+        ]
+      );
+      let b = turf.point(
+        route.features[featureIdx].geometry.coordinates[
+          cntr >= steps ? cntr : cntr + 1
+        ]
+      );
 
       // Default is outflow. Flip coordinates for inflow.
       if (that.props.flowDirection === Constants.FLOW_IN) {
@@ -445,12 +466,12 @@ let Map = class Map extends React.Component {
       let source = that.map.getSource(pointID);
       if (source !== undefined) {
         that.map.getSource(pointID).setData(point);
-        if ((cntr + 2) === 500) {
+        if (cntr + 2 === 500) {
           cntr = 0;
         }
         // Request the next frame of animation so long the end has not been reached.
         if (cntr < steps) {
-          requestAnimationFrame(function() {
+          requestAnimationFrame(function () {
             animate(featureIdx, cntr + 1, point, route, pointID);
           });
         }
@@ -475,9 +496,7 @@ let Map = class Map extends React.Component {
         animate(2, cntr2, point, route, "point");
       }
     }
-
   };
-
 
   shouldComponentUpdate() {
     if (this.props.modal === true) {

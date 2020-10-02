@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
+import BarGraph from "./BarGraph";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -27,9 +28,13 @@ let Display = class Display extends React.Component {
       setDisplayDefault();
     }
   }
+  PanelContainer = (props) => (
+    <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt60 pb36 mr12 z2">
+      {props.children}
+    </div>
+  );
 
-  render() {
-    // const { name, description } = this.props.active;
+  renderGrowthDisplay() {
     const {
       sa2_name,
       population,
@@ -38,14 +43,8 @@ let Display = class Display extends React.Component {
       jr,
       bgi,
       sa1_codes,
-      isDefault,
     } = this.props.select;
-    const { flowDirection, mapType } = this.props;
-    const PanelContainer = (props) => (
-      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt60 pb36 mr12 z2">
-        {props.children}
-      </div>
-    );
+    const { flowDirection } = this.props;
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
@@ -137,7 +136,88 @@ let Display = class Display extends React.Component {
         </div>
       </div>
     );
+    return (
+      <this.PanelContainer>
+        <TopPanel />
+        <BottomPanel />
+      </this.PanelContainer>
+    );
+  }
 
+  renderSegregationDisplay() {
+    const {
+      sa2_name,
+      population,
+      income,
+      quartile,
+      ggp,
+      jr,
+      bgi,
+      sa1_codes,
+    } = this.props.select;
+    return (
+      <this.PanelContainer>
+        <div
+          style={{ overflowY: "auto" }}
+          className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
+        >
+          <div className="py12 px12">
+            <div className="mb6">
+              <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
+            </div>
+          </div>
+          <div className="py12 px12 bg-orange-faint">
+            <div className="mb6">
+              <h2 className="txt-bold txt-m color-orange block">Population</h2>
+              <p className="txt-s">{population}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m color-orange block">
+                Median Income
+              </h2>
+              <p className="txt-s">{income}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m color-orange block">
+                Income Quartile
+              </h2>
+              <p className="txt=s">{quartile}</p>
+            </div>
+          </div>
+          <div className="py12 px12 bg-black-faint">
+            <div className="mb6">
+              <h2 className="txt-bold txt-m color-black block">
+                Visitor time spent by quartile
+              </h2>
+              <BarGraph width={200} height={120} />;
+            </div>
+          </div>
+          <div className="py12 px12">
+            <div className="mb6">
+              <h2 className="txt-bold txt-m block">GDP Growth Potential</h2>
+              <p className="txt-s">{ggp}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m block">Job Resilience</h2>
+              <p className="txt-s">{jr}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m block">Business Growth Index</h2>
+              <p className="txt-s">{bgi}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m block">Included SA1 Regions</h2>
+              <p className="txt-s">{sa1_codes}</p>
+            </div>
+          </div>
+        </div>
+      </this.PanelContainer>
+    );
+  }
+
+  render() {
+    const { isDefault } = this.props.select; // const { name, description } = this.props.active;
+    const { mapType } = this.props;
     if (isDefault) {
       return (
         <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z2 wmax240">
@@ -152,18 +232,9 @@ let Display = class Display extends React.Component {
 
     if (mapType === "growth") {
       console.log("returning panelcontainer");
-      return (
-        <PanelContainer>
-          <TopPanel />
-          <BottomPanel />
-        </PanelContainer>
-      );
+      return this.renderGrowthDisplay();
     } else {
-      return (
-        <PanelContainer>
-          <TopPanel />
-        </PanelContainer>
-      );
+      return this.renderSegregationDisplay();
     }
   }
 };

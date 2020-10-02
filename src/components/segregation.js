@@ -55,12 +55,8 @@ let SegregationMap = class SegregationMap extends React.Component {
 
           ]*/
           "fill-color": {
-            property: "raw_inequality",
-            stops: [
-              [0.1024, "#fdedc4"],
-              [0.66, "#f09647"],
-              [1.2168, "#dd4b27"],
-            ],
+            property: "inequality",
+            stops: this.props.active.stops,
           },
           "fill-opacity": [
             "case",
@@ -160,13 +156,39 @@ let SegregationMap = class SegregationMap extends React.Component {
       !prevSA2 ||
       clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
     ) {
-      // redraw bridges
+      if (prevSA2 !== null) {
+        this.map.setFeatureState(
+          {
+            source: "sa2",
+            id: prevSA2.id,
+          },
+          {
+            click: false,
+          }
+        );
+      }
     }
+    this.map.setFeatureState(
+      {
+        source: "sa2",
+        id: clickedSA2.id,
+      },
+      {
+        click: true,
+      }
+    );
+    console.log("setting this state clickedSA2");
+    this.setState({ ...this.state, clickedSA2: clickedSA2 });
 
     let sa2_properties = {
       sa2_name: clickedSA2.properties.SA2_NAME16,
       population: toCommas(clickedSA2.properties.persons_num),
       income: "$" + toCommas(clickedSA2.properties.median_aud),
+      quartile: clickedSA2.properties.quartile,
+      fq1: clickedSA2.properties.fq1,
+      fq2: clickedSA2.properties.fq2,
+      fq3: clickedSA2.properties.fq3,
+      fq4: clickedSA2.properties.fq4,
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
       bgi: clickedSA2.properties.bsns_growth_rate,
