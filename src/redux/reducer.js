@@ -43,6 +43,7 @@ const select = {
   sa2_name: "",
   population: "",
   income: "",
+  inequality: "",
   ggp: "",
   jr: "",
   bgi: "",

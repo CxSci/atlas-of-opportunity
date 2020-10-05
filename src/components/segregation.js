@@ -177,7 +177,6 @@ let SegregationMap = class SegregationMap extends React.Component {
         click: true,
       }
     );
-    console.log("setting this state clickedSA2");
     this.setState({ ...this.state, clickedSA2: clickedSA2 });
 
     let sa2_properties = {
@@ -189,6 +188,7 @@ let SegregationMap = class SegregationMap extends React.Component {
       fq2: clickedSA2.properties.fq2,
       fq3: clickedSA2.properties.fq3,
       fq4: clickedSA2.properties.fq4,
+      inequality: clickedSA2.properties.inequality,
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
       bgi: clickedSA2.properties.bsns_growth_rate,
