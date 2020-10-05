@@ -67,6 +67,9 @@ const About = class About extends Component {
             https://dti.sa.gov.au/industry/big-data-living-lab
           </a>
         </div>
+        <p style={content}>
+          For questions and comments about the Atlas of Opportunity, please email <a href="mailto:opportunity@mit.edu">opportunity@mit.edu</a>.
+        </p>
         <div style={contentImage}>
           <img style={image} src={livingLab} alt={""} />
           <img style={image} src={banksa} alt={""} />
