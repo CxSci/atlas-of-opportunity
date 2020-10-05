@@ -22,6 +22,13 @@ export function setModal() {
   });
 }
 
+export function setDisplayDefault() {
+  store.dispatch({
+    type: "DisplayDefault",
+    payload: true,
+  });
+}
+
 export function setHeaderOption(payload) {
   store.dispatch({
     type: "Header",
@@ -36,9 +43,16 @@ export function setDropDown(payload) {
   });
 }
 
+export function setMapType(payload) {
+  store.dispatch({
+    type: "MapType",
+    payload: payload,
+  });
+}
+
 export function setFlowDirection(direction) {
   store.dispatch({
     type: Constants.SET_FLOW_DIRECTION,
-    direction: direction
+    direction: direction,
   });
 }

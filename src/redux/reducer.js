@@ -3,13 +3,23 @@ import data from "../data/SA_dashboard.geojson";
 
 const options = [
   {
-    name: "Inequality",
+    name: "Growth",
     description: "",
-    property: "inequality",
+    property: "income_diversity",
     stops: [
       [0, "#fdedc4"],
       [0.6, "#f09647"],
       [1.2, "#dd4b27"],
+    ],
+  },
+  {
+    name: "Inequality",
+    description: "Inequality in time spent",
+    property: "inequality",
+    stops: [
+      [0, "#fdedc4"],
+      [40, "#f09647"],
+      [60, "#dd4b27"],
     ],
   } /*{
   name: 'GDP',
@@ -46,6 +56,7 @@ const initialState: State = {
   active: options[0],
   select,
   modal: true,
+  mapType: "growth",
   path: window.location.pathname,
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
@@ -69,14 +80,25 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         path: action.payload,
       });
+    case "MapType":
+      return {
+        ...state,
+        mapType: action.payload,
+        active: action.payload === "growth" ? options[0] : options[1],
+      };
+    case "Display":
+      console.log("Got display action");
+      return {
+        ...state,
+        select: { ...state.select, isDefault: action.payload },
+      };
     case "DropDown":
       return Object.assign({}, state, {
         dropdown: action.payload,
-        select: action.payload
       });
     case Constants.SET_FLOW_DIRECTION:
       return Object.assign({}, state, {
-        flowDirection: action.direction
+        flowDirection: action.direction,
       });
     default:
       return state;
