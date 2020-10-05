@@ -194,7 +194,7 @@ let Display = class Display extends React.Component {
               <h2 className="txt-bold txt-m color-black block">
                 Visitor time spent by quartile
               </h2>
-              <BarGraph width={200} height={120} />;
+              <BarGraph width={200} height={120} />
             </div>
           </div>
           <div className="py12 px12">
