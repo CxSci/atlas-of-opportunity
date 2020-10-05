@@ -9,7 +9,7 @@ let BarGraph = class BarGraph extends React.Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
   };
 
   render() {
@@ -77,7 +77,6 @@ let BarGraph = class BarGraph extends React.Component {
 };
 
 function selectToBarGraphData(select) {
-  console.log("bar graph select:", select);
   if (!select) {
     return [];
   }
@@ -87,7 +86,6 @@ function selectToBarGraphData(select) {
       data = [...data, { x: key.replace("fq", "Q "), y: select[key] }];
     }
   });
-  console.log("data:", data);
   return data;
 }
 

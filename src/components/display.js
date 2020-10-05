@@ -15,10 +15,8 @@ let Display = class Display extends React.Component {
   };
 
   onFlowChange = (e) => {
-    console.log("Flow changed:", e);
     let direction = e.target.value;
     this.flowDirection = direction;
-    console.log(direction);
     setFlowDirection(direction);
   };
 
@@ -150,6 +148,7 @@ let Display = class Display extends React.Component {
       population,
       income,
       quartile,
+      inequality,
       ggp,
       jr,
       bgi,
@@ -182,6 +181,12 @@ let Display = class Display extends React.Component {
                 Income Quartile
               </h2>
               <p className="txt=s">{quartile}</p>
+            </div>
+            <div className="mb6">
+              <h2 className="txt-bold txt-m color-orange block">
+                Inequality (lower is better)
+              </h2>
+              <p className="txt=s">{Math.floor(inequality)}%</p>
             </div>
           </div>
           <div className="py12 px12 bg-black-faint">
@@ -231,7 +236,6 @@ let Display = class Display extends React.Component {
     }
 
     if (mapType === "growth") {
-      console.log("returning panelcontainer");
       return this.renderGrowthDisplay();
     } else {
       return this.renderSegregationDisplay();
