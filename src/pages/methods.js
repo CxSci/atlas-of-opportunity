@@ -54,9 +54,11 @@ const Methods = class Methods extends Component {
         <img style={image} src={flow} alt={""} />
         <p>
           Social bridges act as links between different communities. In this
-          example, communities I and J each have residents that visit the same
-          restaurant, grocery store, and local business near their work
-          locations, creating three social bridges between I and J.
+          example, communities <MathComponent display={false} tex={String.raw`I`} />{" "}
+          and <MathComponent display={false} tex={String.raw`J`} /> each have residents
+          that visit the same restaurant, grocery store, and local business near their
+          work locations, creating three social bridges between{" "}
+          <MathComponent display={false} tex={String.raw`I`} /> and <MathComponent display={false} tex={String.raw`J`} />.
         </p>
         <br />
         <p style={content}>
@@ -88,8 +90,9 @@ const Methods = class Methods extends Component {
             <MathComponent display={false} tex={String.raw`J`} /> and have work
             locations <MathComponent display={false} tex={String.raw`L_i`} />{" "}
             and <MathComponent display={false} tex={String.raw` L_j `} /> within
-            a distance threshold <MathComponent display={false} tex={String.raw`d`} />. Therefore, the number of social bridges
-            between <MathComponent display={false} tex={String.raw`I`} /> and{" "}
+            a distance threshold <MathComponent display={false} tex={String.raw`d`} />.
+            Therefore, the number of social bridges between
+            <MathComponent display={false} tex={String.raw`I`} /> and{" "}
             <MathComponent display={false} tex={String.raw`J`} /> is:
           </p>
           <div style={formula}>
