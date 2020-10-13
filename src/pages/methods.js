@@ -74,7 +74,7 @@ const Methods = class Methods extends Component {
         <div>
           <p style={content}>
             We define social bridges between each pair of communities{" "}
-            <MathComponent display={false} tex={String.raw`I`} /> and o
+            <MathComponent display={false} tex={String.raw`I`} /> and{" "}
             <MathComponent display={false} tex={String.raw`J`} /> to capture the
             chance of physical proximity and/or social learning taking place
             between them. Specifically, we define a social bridge between a pair
@@ -88,8 +88,9 @@ const Methods = class Methods extends Component {
             <MathComponent display={false} tex={String.raw`J`} /> and have work
             locations <MathComponent display={false} tex={String.raw`L_i`} />{" "}
             and <MathComponent display={false} tex={String.raw` L_j `} /> within
-            a distance threshold d. Therefore, the number of social bridges
-            between I and J is:
+            a distance threshold <MathComponent display={false} tex={String.raw`d`} />. Therefore, the number of social bridges
+            between <MathComponent display={false} tex={String.raw`I`} /> and{" "}
+            <MathComponent display={false} tex={String.raw`J`} /> is:
           </p>
           <div style={formula}>
             <p style={{ margin: "7px 0 0 0" }}>bridge</p>
