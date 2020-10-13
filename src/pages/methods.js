@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MathComponent } from 'mathjax-react'
+import { MathComponent } from "mathjax-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setModal } from "../redux/action-creators";
@@ -39,20 +39,57 @@ const Methods = class Methods extends Component {
     return (
       <Container title="Methods">
         <p style={content}>
-          The understanding and modeling of human purchase behavior in city environment can have important implications in the study of urban economy and in the design and organization of cities. In the Atlas of Opportunity, we study human behavior at the community level and argue that people who live in different communities but work at close-by locations could act as “social bridges” between the respective communities and these bridges strongly influence community behavior. More specifically, we have shown that the number of social bridges between communities is a much stronger indicator of similarity in community behavior than traditionally considered factors such as income and socio-demographic variables.
+          The Atlas of Opportunity showcases recent research finding that shared
+          workplaces between two neighborhoods can create what we call "social
+          bridges" between communities. We've found that people in communities
+          that are linked together by these bridges influence each other's
+          behavior. These bridges are more predictive of community similarity
+          and other indicators than traditional measures, like income and
+          socio-demographics. This important result suggests that understanding
+          behavior at aggregate scales that preserve individual privacy can help
+          cities and communities plan policy and design for the future more
+          effectively.
         </p>
         <br />
         <img style={image} src={flow} alt={""} />
         <p>
-          Fig. 1. Social bridges link behavior of different communities of city residents. In this example, communities I and J have three social bridges between them, which are formed by three pairs of point-of-interest visitation having close-by work locations.
+          Social bridges act as links between different communities. In this
+          example, communities I and J each have residents that visit the same
+          restaurant, grocery store, and local business near their work
+          locations, creating three social bridges between I and J.
         </p>
         <br />
         <p style={content}>
-          To study social bridges between different communities and how this similarity is associated to physical proximity, we first need to define such communities. In the country under investigation, communities can naturally be defined as fine-scale administrative neighborhoods within a city. These are neighborhoods of varying areas from 0.05 square kilometers in the city center to 50 square kilometers in the periphery of the city area, whose residents normally share to some extent common socio-demographic characteristics. To compute these social bridges we use census-like sources of aggregate behavior, which contain no personally identifiable information. These aggregate census-tract data are provided by government agencies, telecommunications, and banking, similar to the manner in which these organizations provide aggregate data for standard auditing and regulatory purposes.
+          We define communities as administrative areas, like census tracts or
+          other statistical areas. In some places, they can vary from as small
+          as 0.05 square kilometers in city centers to 50 square kilometers in
+          more rural areas. To calculate the number of social bridges between
+          two communities, we use census-like sources of aggregate behavior that
+          preserve individual privacy. These kinds of aggregate data are usually
+          provided by government agencies, telecom companies, or banks in
+          aggregate form for standard auditing or regulatory purposes. Here,
+          that data can be used to learn more about the future of communities
+          and plan better policy.
         </p>
         <div>
           <p style={content}>
-            Social bridges between each pair of communities <MathComponent display={false} tex={String.raw`I`}/> and <MathComponent display={false} tex={String.raw`J`}/> can be defined in order to capture the chance of physical proximity and/or social learning taking place between people from the respective communities. Specifically, we define a social bridge between a pair of communities <MathComponent display={false} tex={String.raw`I`}/> and <MathComponent display={false} tex={String.raw`J`}/> , for every pair of individuals <MathComponent display={false} tex={String.raw`i`}/> and <MathComponent display={false} tex={String.raw`j`}/> that live respectively in <MathComponent display={false} tex={String.raw`I`}/> and <MathComponent display={false} tex={String.raw`J`}/> and have work locations <MathComponent display={false} tex={String.raw`L_i`} /> and <MathComponent display={false} tex={String.raw` L_j `}/> within a distance threshold d. Therefore, the number of social bridges between I and J is:
+            We define social bridges between each pair of communities{" "}
+            <MathComponent display={false} tex={String.raw`I`} /> and o
+            <MathComponent display={false} tex={String.raw`J`} /> to capture the
+            chance of physical proximity and/or social learning taking place
+            between them. Specifically, we define a social bridge between a pair
+            of communities <MathComponent display={false} tex={String.raw`I`} />{" "}
+            and <MathComponent display={false} tex={String.raw`J`} /> , for
+            every pair of individuals{" "}
+            <MathComponent display={false} tex={String.raw`i`} /> and{" "}
+            <MathComponent display={false} tex={String.raw`j`} /> that live
+            respectively in{" "}
+            <MathComponent display={false} tex={String.raw`I`} /> and{" "}
+            <MathComponent display={false} tex={String.raw`J`} /> and have work
+            locations <MathComponent display={false} tex={String.raw`L_i`} />{" "}
+            and <MathComponent display={false} tex={String.raw` L_j `} /> within
+            a distance threshold d. Therefore, the number of social bridges
+            between I and J is:
           </p>
           <div style={formula}>
             <p style={{ margin: "7px 0 0 0" }}>bridge</p>
@@ -61,7 +98,27 @@ const Methods = class Methods extends Component {
             />
           </div>
           <p style={content}>
-            where <MathComponent display={false} tex={String.raw` D(L_i, L_j)`}/> represents the distance between <MathComponent display={false} tex={String.raw` L_i `}/> and <MathComponent display={false} tex={String.raw` L_j `}/>. Since people normally spend a considerable amount of time at work, it is our assumption that individuals who work at near-by locations, defined by a distance threshold <MathComponent display={false} tex={String.raw`d`}/>, would have a reasonable chance to observe and interact with each other due to constant and repeated exposure promoted by physical proximity. In detailed behavioral studies, this turns out to be quite an accurate assumption. Note that we may also use the so-called “third places” to define social bridges instead of work locations.
+            where{" "}
+            <MathComponent display={false} tex={String.raw` D(L_i, L_j)`} />{" "}
+            represents the distance between{" "}
+            <MathComponent display={false} tex={String.raw` L_i `} /> and{" "}
+            <MathComponent display={false} tex={String.raw` L_j `} />. This
+            statistic and models built from it rely on the assumption that
+            people who work near one another are more likely to interact or see
+            one another in daily life. We define two workplaces (in statistical
+            areas) as nearby if they are below a particular distance threshold{" "}
+            <MathComponent display={false} tex={String.raw`d`} />. In detailed
+            behavioral studies, this turns out to be reasonable -- people are
+            more likely to see or interact with one another through repeated,
+            constant peripheral contact. would have a reasonable chance to
+            observe and interact with each other due to constant and repeated
+            exposure promoted by physical proximity.{" "}
+          </p>
+          <p style={content}>
+            When we have access to neighborhood-level data that reveals which
+            points of interest (POIs) residents spend time at, we also define
+            social bridges by the "third places" people share, such as
+            restaurants and cafes.
           </p>
         </div>
       </Container>

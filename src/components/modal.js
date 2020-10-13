@@ -66,21 +66,14 @@ let Modal = class Modal extends Component {
               University of South Australia and The University of Adelaide.
             </p>
             <p style={content}>
-              <b>The Living Lab</b> is working to better understand social
-              interactions and economic behavior within the various communities
-              across South Australia in order to introduce new solutions to help
-              economic growth and to contribute to employment in South
-              Australia. This part of the project includes the design and
-              development of a dashboard for visualizing various types of
-              behavior and economic activity in South Australia. The basis of
-              this dashboard is founded on the lab’s previous studies which
-              support the notion that the diversity of interactions and social
-              bridges between neighborhoods accurately predict neighborhood
-              economic growth. This tool is used to assist the stakeholders in
-              South Australia in pinpointing focus areas for urban development
-              to drive greater diversity in human flow, or more interactions
-              between people of different socio-economic backgrounds, and
-              consequently more economic opportunities.
+              The <b> Living Lab</b> works to better understand how social
+              interaction and economic behavior impact future outcomes of
+              communities across South Australia. This map showcases recent
+              research revealing that understanding community movement patterns
+              is crucial for understanding economic growth and mobility. Places
+              with more diverse movement patterns are more likely to have higher
+              near-future economic growth. The goal of the Atlas is to make
+              these insights more accessible. Get started below!
             </p>
             <div style={contentButton}>
               <button style={button} onClick={() => setModal()}>

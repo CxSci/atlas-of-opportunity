@@ -54,6 +54,8 @@ const Research = class Research extends Component {
           unavailable to communities in all but the most general terms. Chapter
           7 addresses this problem in more detail.
         </p>
+        <h3>Publications</h3>
+
         <br />
         <h2>Economic Growth</h2>
         <p style={content}>
