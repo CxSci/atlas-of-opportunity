@@ -27,6 +27,18 @@ const Research = class Research extends Component {
       textAlign: "justify",
       marginBottom: "15px",
     };
+    const publicationList = {
+      marginBottom: "10px",
+    };
+    const pubItem = {
+      marginBottom: "10px",
+    };
+    const pubTitle = {
+      marginBottom: "0px",
+    };
+    const pubAuthors = {
+      marginBottom: "0px",
+    };
     const image = {
       width: "100%",
     };
@@ -54,6 +66,68 @@ const Research = class Research extends Component {
           unavailable to communities in all but the most general terms. Chapter
           7 addresses this problem in more detail.
         </p>
+        <h2>Publications</h2>
+        <ul style={publicationList}>
+          <li style={pubItem}>
+            <a href={"/papers/economic-outcomes-diversity.pdf"}>
+              <h3 style={pubTitle}>
+                Economic Outcomes Predicted by Diversity in Cities
+              </h3>
+            </a>
+            <p style={pubAuthors}>
+              Shi Kai Chong, Mohsen Bahrami, Hao Chen, Selim Balcisoy, Burcin
+              Bozkaya, and Alex Pentland.
+            </p>
+            <p>(2020). Forthcoming, EPJ Data Science.</p>
+          </li>
+          <li style={pubItem}>
+            <a href={"/papers/gravity-store-sales-prediction.pdf"}>
+              <h3 style={pubTitle}>Gravitational Forecast Reconciliation</h3>
+            </a>
+            <p style={pubAuthors}>
+              Carla F. Silveira Netto, Mohsen Bahrami, Vinicius Brei, Burcin
+              Bozkaya, Selim Balcisoy, and Alex Pentland.
+            </p>
+            <p> (2020). Under Review.</p>
+          </li>
+          <li style={pubItem}>
+            <a href={"/papers/looking-better-future-migrants.pdf"}>
+              <h3 style={pubTitle}>
+                Looking for a better future: modeling migrant mobility
+              </h3>
+            </a>
+            <p style={pubAuthors}>
+              Isabella Loaiza Saa, Matej Novak, Alfredo J. Morales, and Alex
+              Pentland
+            </p>
+            <p>(2020). Applied Network Science.</p>
+          </li>
+          <li style={pubItem}>
+            <a href={"/papers/idea-flow-economic-growth.pdf"}>
+              <h3 style={pubTitle}>
+                Diversity of Idea Flows and Economic Growth
+              </h3>
+            </a>
+            <p style={pubAuthors}>Alex Pentland</p>
+            <p>(2020). Journal of Social Computing.</p>
+          </li>
+          <li style={pubItem}>
+            <a href={"/papers/covid-nature-hb.pdf"}>
+              <h3 style={pubTitle}>
+                Modelling the impact of testing, contact tracing, and household
+                quarantine on second waves of COVID-19
+              </h3>
+            </a>
+            <p style={pubAuthors}>
+              Alberto Aleta, David Martin-Corral, Ana Pastora y Piontti, Marco
+              Ajelli, Maria Litvinova, Matteo Chinazzi, Natalie E. Dean, M.
+              Elizabeth Halloran, Ira M. Longini Jr, Stefano Merler, Alex
+              Pentland, Alessandro Vespignani, Esteban Moro, and Yamir Moreno.
+            </p>
+            <p>(2020). Nature Human Behavior</p>
+          </li>
+        </ul>
+
         <br />
         <h2>Economic Growth</h2>
         <p style={content}>
