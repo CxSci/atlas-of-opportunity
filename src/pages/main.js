@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as Constants from "../constants";
 import Map from "../components/map";
 import SegregationMap from "../components/segregation";
+import TransactionsMap from "../components/TransactionsMap";
 import Display from "../components/display";
 import Legend from "../components/legend";
 import Modal from "../components/modal";
@@ -35,8 +36,8 @@ const Main = class Main extends Component {
       switch (mapType) {
         case Constants.MAP_TYPE.SEGREGATION:
           return <SegregationMap />;
-        case Constants.MAP_TYPE.TRANSCATIONS:
-          return <Map />;
+        case Constants.MAP_TYPE.TRANSACTIONS:
+          return <TransactionsMap />;
         case Constants.MAP_TYPE.GROWTH:
         default:
           return <Map />;

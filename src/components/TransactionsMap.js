@@ -10,7 +10,7 @@ const turf = window.turf;
 mapboxgl.accessToken =
   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
-let Map = class Map extends React.Component {
+let TransactionsMap = class TransactionsMap extends React.Component {
   mapRef = React.createRef();
   map;
 
@@ -253,15 +253,16 @@ let Map = class Map extends React.Component {
     var keys = [];
     switch (this.props.flowDirection) {
       case Constants.FLOW_OUT:
-        keys = ["outflow_r1", "outflow_r2", "outflow_r3"];
+        keys = ["spent_r1", "spent_r2", "spent_r3"];
         break;
       case Constants.FLOW_BI:
-        keys = ["bridge_rank1", "bridge_rank2", "bridge_rank3"];
+        keys = ["exchanged_r1", "exchanged_r2", "exchanged_r3"];
         break;
       case Constants.FLOW_IN:
       default:
-        keys = ["inflow_r1", "inflow_r2", "inflow_r3"];
+        keys = ["gain_r1", "gain_r2", "gain_r3"];
     }
+    console.log("keys: ", keys);
     // Get bridges and ignore missing values
     let bridges = keys.map(x => clickedSA2.properties[x]).filter(x => x !== undefined);
 
@@ -504,6 +505,6 @@ function mapStateToProps(state) {
   };
 }
 
-Map = connect(mapStateToProps)(Map);
+TransactionsMap = connect(mapStateToProps)(TransactionsMap);
 
-export default Map;
+export default TransactionsMap;
