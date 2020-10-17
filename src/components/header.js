@@ -107,6 +107,7 @@ const Header = class Header extends Component {
                   to="/"
                   style={dropDownLink}
                   onClick={() => {
+                    setHeaderOption("/");
                     setMapType(Constants.MAP_TYPE.SEGREGATION);
                   }}
                 >
