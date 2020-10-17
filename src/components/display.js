@@ -235,10 +235,14 @@ let Display = class Display extends React.Component {
       );
     }
 
-    if (mapType === "growth") {
-      return this.renderGrowthDisplay();
-    } else {
-      return this.renderSegregationDisplay();
+    switch (mapType) {
+      case Constants.MAP_TYPE.SEGREGATION:
+        return this.renderSegregationDisplay();
+      case Constants.MAP_TYPE.TRANSCATIONS:
+        return this.renderGrowthDisplay();
+      case Constants.MAP_TYPE.GROWTH:
+      default:
+        return this.renderGrowthDisplay();
     }
   }
 };

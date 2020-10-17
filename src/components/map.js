@@ -71,7 +71,7 @@ let Map = class Map extends React.Component {
 
           ]*/
           "fill-color": {
-            property: "income_diversity",
+            property: this.props.active.property,
             stops: this.props.active.stops,
           },
           "fill-opacity": [
