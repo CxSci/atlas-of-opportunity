@@ -13,6 +13,11 @@ options[Constants.MAP_TYPE.GROWTH] = {
     [0.6, "#f09647"],
     [1.2, "#dd4b27"],
   ],
+  bridgeKeys: {
+    inflow: ["inflow_r1", "inflow_r2", "inflow_r3"],
+    outflow: ["outflow_r1", "outflow_r2", "outflow_r3"],
+    bidirectional: ["bridge_rank1", "bridge_rank2", "bridge_rank3"],
+  },
 };
 
 options[Constants.MAP_TYPE.TRANSACTIONS] = {
@@ -21,10 +26,15 @@ options[Constants.MAP_TYPE.TRANSACTIONS] = {
   property: "income_diversity",
   legendName: "Growth Potential",
   stops: [
-    [0, "#fdedc4"],
-    [0.6, "#f09647"],
-    [1.2, "#dd4b27"],
+    [0, "#cce7ff"],
+    [0.6, "#47a1f0"],
+    [1.2, "#2e90e6"],
   ],
+  bridgeKeys: {
+    inflow: ["gain_r1", "gain_r2", "gain_r3"],
+    outflow: ["spent_r1", "spent_r2", "spent_r3"],
+    bidirectional: ["exchanged_r1", "exchanged_r2", "exchanged_r3"],
+  },
 };
 
 options[Constants.MAP_TYPE.SEGREGATION] = {

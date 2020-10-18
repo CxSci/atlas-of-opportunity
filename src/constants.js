@@ -10,4 +10,4 @@ export const MAP_TYPE = {
 
 export const FLOW_IN = "inflow";
 export const FLOW_OUT = "outflow";
-export const FLOW_BI = "bi-directional";
+export const FLOW_BI = "bidirectional";

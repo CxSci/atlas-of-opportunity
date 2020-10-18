@@ -250,18 +250,9 @@ let Map = class Map extends React.Component {
     setSelect(sa2_properties);
 
     // Show the bridges for the selected flow direction {in, out, bi-directional}.
-    var keys = [];
-    switch (this.props.flowDirection) {
-      case Constants.FLOW_OUT:
-        keys = ["outflow_r1", "outflow_r2", "outflow_r3"];
-        break;
-      case Constants.FLOW_BI:
-        keys = ["bridge_rank1", "bridge_rank2", "bridge_rank3"];
-        break;
-      case Constants.FLOW_IN:
-      default:
-        keys = ["inflow_r1", "inflow_r2", "inflow_r3"];
-    }
+    // flowDirection should be one of "inflow", "outflow", or "bidirectional"
+    // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
+    let keys = this.props.active.bridgeKeys[this.props.flowDirection];
     // Get bridges and ignore missing values
     let bridges = keys.map(x => clickedSA2.properties[x]).filter(x => x !== undefined);
 
