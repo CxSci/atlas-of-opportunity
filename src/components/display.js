@@ -42,15 +42,20 @@ let Display = class Display extends React.Component {
       bgi,
       sa1_codes,
     } = this.props.select;
-    const { flowDirection } = this.props;
+    const { flowDirection, mapType } = this.props;
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
         className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
       >
         <div className="py12 px12">
-          <div className="mb6">
+          <div className="">
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
+          </div>
+        </div>
+        <div className="py12 px12">
+          <div className="mb6">
+            <h3>{(mapType === "growth") ? "Pattern of Mobility" : "Pattern of Spending"}</h3>
           </div>
         </div>
         <div className="py12 px12 bg-orange-faint">
@@ -161,8 +166,13 @@ let Display = class Display extends React.Component {
           className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
         >
           <div className="py12 px12">
-            <div className="mb6">
+            <div className="">
               <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
+            </div>
+          </div>
+          <div className="py12 px12">
+            <div className="mb6">
+              <h3>Economic Inequality</h3>
             </div>
           </div>
           <div className="py12 px12 bg-orange-faint">
@@ -235,10 +245,14 @@ let Display = class Display extends React.Component {
       );
     }
 
-    if (mapType === "growth") {
-      return this.renderGrowthDisplay();
-    } else {
-      return this.renderSegregationDisplay();
+    switch (mapType) {
+      case Constants.MAP_TYPE.SEGREGATION:
+        return this.renderSegregationDisplay();
+      // Use the same detail pane for transactions and growth layers.
+      case Constants.MAP_TYPE.TRANSCATIONS:
+      case Constants.MAP_TYPE.GROWTH:
+      default:
+        return this.renderGrowthDisplay();
     }
   }
 };

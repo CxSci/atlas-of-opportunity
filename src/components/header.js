@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
+import * as Constants from "../constants";
 import { setHeaderOption, setMapType } from "../redux/action-creators";
 import DropDown from "./dropdown";
 
@@ -82,7 +84,7 @@ const Header = class Header extends Component {
                   style={dropDownLink}
                   onClick={() => {
                     setHeaderOption("/");
-                    setMapType("growth");
+                    setMapType(Constants.MAP_TYPE.GROWTH);
                   }}
                 >
                   Mobility Map
@@ -92,7 +94,10 @@ const Header = class Header extends Component {
                 <Link
                   to="/"
                   style={dropDownLink}
-                  onClick={() => setHeaderOption("/")}
+                  onClick={() => {
+                    setHeaderOption("/");
+                    setMapType(Constants.MAP_TYPE.TRANSACTIONS);
+                  }}
                 >
                   Financial Interactions
                 </Link>
@@ -101,7 +106,10 @@ const Header = class Header extends Component {
                 <Link
                   to="/"
                   style={dropDownLink}
-                  onClick={() => setMapType("segregation")}
+                  onClick={() => {
+                    setHeaderOption("/");
+                    setMapType(Constants.MAP_TYPE.SEGREGATION);
+                  }}
                 >
                   Economic Segregation
                 </Link>

@@ -23,8 +23,7 @@ let Legend = class Legend extends React.Component {
       );
     };
 
-    let legendName =
-      this.props.mapType === "growth" ? "Growth Potential" : "Inequality Index";
+    let legendName = this.props.active.legendName;
     return (
       <div className="bg-white absolute bottom left ml24 mb36 py12 px12 shadow-darken10 round z1 wmax180">
         <div className="mb6">

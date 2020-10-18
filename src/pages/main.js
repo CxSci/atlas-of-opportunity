@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import * as Constants from "../constants";
 import Map from "../components/map";
 import SegregationMap from "../components/segregation";
 import Display from "../components/display";
@@ -31,12 +32,13 @@ const Main = class Main extends Component {
 
     const MapToShow = () => {
       console.log("=Maptype:", mapType);
-      if (mapType === "growth") {
-        return <Map />;
-      } else if (mapType === "segregation") {
-        return <SegregationMap />;
-      } else {
-        return <Map />;
+      switch (mapType) {
+        case Constants.MAP_TYPE.SEGREGATION:
+          return <SegregationMap />;
+        case Constants.MAP_TYPE.TRANSACTIONS:
+        case Constants.MAP_TYPE.GROWTH:
+        default:
+          return <Map />;
       }
     };
 

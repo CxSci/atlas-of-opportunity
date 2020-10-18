@@ -41,18 +41,6 @@ let Map = class Map extends React.Component {
     var hoveredSA2Id = null;
 
     this.map.on("load", () => {
-      /*this.map.addSource('countries', {
-        type: 'geojson',
-        data: this.props.data
-      });
-
-      this.map.addLayer({
-        id: 'countries',
-        type: 'fill',
-        source: 'countries'
-      }, 'country-label-lg'); // ID metches `mapbox/streets-v9`
-      */
-
       this.map.addSource("sa2", {
         type: "geojson",
         data: this.props.data,
@@ -71,7 +59,7 @@ let Map = class Map extends React.Component {
 
           ]*/
           "fill-color": {
-            property: "income_diversity",
+            property: this.props.active.property,
             stops: this.props.active.stops,
           },
           "fill-opacity": [
@@ -262,31 +250,11 @@ let Map = class Map extends React.Component {
     setSelect(sa2_properties);
 
     // Show the bridges for the selected flow direction {in, out, bi-directional}.
-    var bridges;
-    switch (this.props.flowDirection) {
-      case Constants.FLOW_OUT:
-        bridges = [
-          clickedSA2.properties.outflow_r1,
-          clickedSA2.properties.outflow_r2,
-          clickedSA2.properties.outflow_r3,
-        ];
-        break;
-      case Constants.FLOW_BI:
-        bridges = [
-          clickedSA2.properties.bridge_rank1,
-          clickedSA2.properties.bridge_rank2,
-          clickedSA2.properties.bridge_rank3,
-        ];
-        break;
-      case Constants.FLOW_IN:
-      default:
-        bridges = [
-          clickedSA2.properties.inflow_r1,
-          clickedSA2.properties.inflow_r2,
-          clickedSA2.properties.inflow_r3,
-        ];
-    }
-    bridges = bridges.filter((x) => x !== undefined);
+    // flowDirection should be one of "inflow", "outflow", or "bidirectional"
+    // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
+    let keys = this.props.active.bridgeKeys[this.props.flowDirection];
+    // Get bridges and ignore missing values
+    let bridges = keys.map(x => clickedSA2.properties[x]).filter(x => x !== undefined);
 
     // Search map for SA2s matching the bridges.
     clickedFeatures = this.map.querySourceFeatures("sa2", {

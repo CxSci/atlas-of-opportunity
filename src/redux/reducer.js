@@ -1,27 +1,56 @@
 import * as Constants from "../constants";
 import data from "../data/SA_dashboard.geojson";
 
-const options = [
-  {
-    name: "Growth",
-    description: "",
-    property: "income_diversity",
-    stops: [
-      [0, "#fdedc4"],
-      [0.6, "#f09647"],
-      [1.2, "#dd4b27"],
-    ],
+const options = {};
+
+options[Constants.MAP_TYPE.GROWTH] = {
+  name: "Growth",
+  description: "",
+  property: "income_diversity",
+  legendName: "Growth Potential",
+  stops: [
+    [0, "#fdedc4"],
+    [0.6, "#f09647"],
+    [1.2, "#dd4b27"],
+  ],
+  bridgeKeys: {
+    inflow: ["inflow_r1", "inflow_r2", "inflow_r3"],
+    outflow: ["outflow_r1", "outflow_r2", "outflow_r3"],
+    bidirectional: ["bridge_rank1", "bridge_rank2", "bridge_rank3"],
   },
+};
+
+options[Constants.MAP_TYPE.TRANSACTIONS] = {
+  name: "transactions",
+  description: "",
+  property: "income_diversity",
+  legendName: "Growth Potential",
+  stops: [
+    [0, "#cce7ff"],
+    [0.6, "#47a1f0"],
+    [1.2, "#2e90e6"],
+  ],
+  bridgeKeys: {
+    inflow: ["gain_r1", "gain_r2", "gain_r3"],
+    outflow: ["spent_r1", "spent_r2", "spent_r3"],
+    bidirectional: ["exchanged_r1", "exchanged_r2", "exchanged_r3"],
+  },
+};
+
+options[Constants.MAP_TYPE.SEGREGATION] = {
+  name: "Inequality",
+  description: "Inequality in time spent",
+  property: "inequality",
+  legendName: "Inequality Index",
+  stops: [
+    [0, "#fdedc4"],
+    [40, "#f09647"],
+    [60, "#dd4b27"],
+  ],
+};
+
+/*
   {
-    name: "Inequality",
-    description: "Inequality in time spent",
-    property: "inequality",
-    stops: [
-      [0, "#fdedc4"],
-      [40, "#f09647"],
-      [60, "#dd4b27"],
-    ],
-  } /*{
   name: 'GDP',
   description: 'Estimate total GDP in millions of dollars',
   property: 'gdp_md_est',
@@ -36,8 +65,9 @@ const options = [
     [5000000, '#9f43d7'],
     [10000000, '#6e40e6']
   ]
-}*/,
+},
 ];
+*/
 
 const select = {
   sa2_name: "",
@@ -54,10 +84,10 @@ const select = {
 const initialState: State = {
   data,
   options,
-  active: options[0],
+  active: options[Constants.MAP_TYPE.GROWTH],
   select,
   modal: true,
-  mapType: "growth",
+  mapType: Constants.MAP_TYPE.GROWTH,
   path: window.location.pathname,
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
@@ -85,7 +115,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         mapType: action.payload,
-        active: action.payload === "growth" ? options[0] : options[1],
+        active: options[action.payload],
       };
     case "Display":
       console.log("Got display action");

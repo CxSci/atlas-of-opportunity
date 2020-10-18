@@ -55,7 +55,7 @@ let SegregationMap = class SegregationMap extends React.Component {
 
           ]*/
           "fill-color": {
-            property: "inequality",
+            property: this.props.active.property,
             stops: this.props.active.stops,
           },
           "fill-opacity": [
