@@ -233,8 +233,8 @@ let Map = class Map extends React.Component {
       sa2_name: clickedSA2.properties.SA2_NAME16,
       population: clickedSA2.properties.persons_num.toLocaleString(),
       income: clickedSA2.properties.median_aud.toLocaleString(undefined, {
-        style: 'currency',
-        currency: 'AUS',
+        style: "currency",
+        currency: "AUS",
       }),
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
@@ -254,7 +254,9 @@ let Map = class Map extends React.Component {
     // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
     let keys = this.props.active.bridgeKeys[this.props.flowDirection];
     // Get bridges and ignore missing values
-    let bridges = keys.map(x => clickedSA2.properties[x]).filter(x => x !== undefined);
+    let bridges = keys
+      .map((x) => clickedSA2.properties[x])
+      .filter((x) => x !== undefined);
 
     // Search map for SA2s matching the bridges.
     clickedFeatures = this.map.querySourceFeatures("sa2", {
