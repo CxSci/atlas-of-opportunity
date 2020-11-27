@@ -3,6 +3,8 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 import * as Constants from "../constants";
 
@@ -12,6 +14,7 @@ mapboxgl.accessToken =
 
 let Map = class Map extends React.Component {
   mapRef = React.createRef();
+  geocoder;
   map;
 
   constructor(props) {
@@ -36,6 +39,23 @@ let Map = class Map extends React.Component {
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
       center: this.props.modal ? [121, -26.5] : [138.5, -34.9],
       zoom: this.props.modal ? 3.5 : 9,
+    });
+
+    this.geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      types: "neighborhood, locality, address",
+      countries: "au",
+      bbox: [128.979500521469, -38.140346399969, 141.002957, -25.9963750760608],
+      marker: null,
+      flyTo: {
+        bearing: 0,
+        speed: 1.2,
+        curve: 1,
+        easing: function (t) {
+          return t;
+        },
+      },
+      mapboxgl: mapboxgl,
     });
 
     var hoveredSA2Id = null;
@@ -479,11 +499,25 @@ let Map = class Map extends React.Component {
         speed: 0.8,
       });
     }
-    return true;
+    if (document.getElementById("geocoder")) {
+      document
+        .getElementById("geocoder")
+        .appendChild(this.geocoder.onAdd(this.map));
+    }
   }
 
   render() {
-    return <div ref={this.mapRef} className="absolute top right left bottom" />;
+    // Style components
+    const search = {
+      marginTop: "90px",
+      marginLeft: "24px",
+    };
+    return (
+      <div>
+        <div ref={this.mapRef} className="absolute top right left bottom" />
+        {this.props.modal ? null : <div id="geocoder" style={search}></div>}
+      </div>
+    );
   }
 };
 

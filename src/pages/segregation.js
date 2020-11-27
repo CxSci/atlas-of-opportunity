@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import * as Constants from "../constants";
 import SegregationMap from "../components/segregation";
-import SegregationTest from "../components/segregationTest";
 import Display from "../components/display";
 import Legend from "../components/legend";
 import Modal from "../components/modal";
@@ -31,7 +30,7 @@ const Segregation = class Segregation extends Component {
 
     return (
       <div style={mapStyler}>
-        <SegregationTest />
+        <SegregationMap />
         {modal ? (
           <Modal />
         ) : (
