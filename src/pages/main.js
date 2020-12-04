@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import * as Constants from "../constants";
 import Map from "../components/map";
-import MapTest from "../components/mapTest";
 import SegregationMap from "../components/segregation";
 import Display from "../components/display";
 import Legend from "../components/legend";
@@ -39,13 +38,13 @@ const Main = class Main extends Component {
         case Constants.MAP_TYPE.TRANSACTIONS:
         case Constants.MAP_TYPE.GROWTH:
         default:
-          return <MapTest />;
+          return <Map />;
       }
     };
 
     return (
       <div style={mapStyler}>
-        <MapTest />
+        <MapToShow />
         {modal ? (
           <Modal />
         ) : (

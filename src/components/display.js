@@ -15,6 +15,7 @@ let Display = class Display extends React.Component {
   };
 
   onFlowChange = (e) => {
+    console.log("Leo");
     let direction = e.target.value;
     this.flowDirection = direction;
     setFlowDirection(direction);
@@ -55,7 +56,11 @@ let Display = class Display extends React.Component {
         </div>
         <div className="py12 px12">
           <div className="mb6">
-            <h3>{(mapType === "growth") ? "Pattern of Mobility" : "Pattern of Spending"}</h3>
+            <h3>
+              {mapType === "growth"
+                ? "Pattern of Mobility"
+                : "Pattern of Spending"}
+            </h3>
           </div>
         </div>
         <div className="py12 px12 bg-orange-faint">
