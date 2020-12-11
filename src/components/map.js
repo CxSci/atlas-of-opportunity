@@ -3,8 +3,11 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
+import "../css/map.css";
 
 import * as Constants from "../constants";
 
@@ -16,6 +19,14 @@ let Map = class Map extends React.Component {
   mapRef = React.createRef();
   geocoder;
   map;
+  popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+  clickedPopup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
 
   constructor(props) {
     super(props);
@@ -151,14 +162,24 @@ let Map = class Map extends React.Component {
 
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
+      // name of sa2-fills appear over the region
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
+          var coordinates = turf.center(e.features[0]).geometry.coordinates;
+          var regionName = e.features[0].properties.SA2_NAME16;
+
+          this.popup
+            .setLngLat(coordinates)
+            .setHTML("<h5>" + regionName + "</h5>")
+            .addTo(this.map);
+
           if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
               { source: "sa2", id: hoveredSA2Id },
               { hover: false }
             );
           }
+
           hoveredSA2Id = e.features[0].id;
           this.map.setFeatureState(
             { source: "sa2", id: hoveredSA2Id },
@@ -177,7 +198,10 @@ let Map = class Map extends React.Component {
             { hover: false }
           );
         }
+
         hoveredSA2Id = null;
+
+        this.popup.remove();
       });
 
       this.geocoder.on("result", this.onMapSearch);
@@ -203,6 +227,15 @@ let Map = class Map extends React.Component {
     let prevSA2 = this.state.clickedSA2;
     let clickedSA2 = e.features[0]; //properties.name;
     // Ignore clicks on the active SA2.
+
+    var coordinates = turf.center(clickedSA2).geometry.coordinates;
+    var regionName = clickedSA2.properties.SA2_NAME16;
+
+    this.clickedPopup
+      .setLngLat(coordinates)
+      .setHTML("<h5>" + regionName + "</h5>")
+      .addTo(this.map);
+
     if (
       !prevSA2 ||
       clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
