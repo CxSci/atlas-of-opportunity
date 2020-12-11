@@ -15,7 +15,6 @@ let Display = class Display extends React.Component {
   };
 
   onFlowChange = (e) => {
-    console.log("Leo");
     let direction = e.target.value;
     this.flowDirection = direction;
     setFlowDirection(direction);
