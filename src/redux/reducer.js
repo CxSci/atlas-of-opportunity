@@ -117,7 +117,7 @@ function reducer(state = initialState, action) {
         mapType: action.payload,
         active: options[action.payload],
       };
-    case "Display":
+    case "DisplayDefault":
       console.log("Got display action");
       return {
         ...state,

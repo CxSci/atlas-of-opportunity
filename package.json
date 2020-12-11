@@ -5,6 +5,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@turf/great-circle": "^5.1.5",
     "@turf/turf": "^5.1.6",
     "@visx/axis": "^1.0.0",

@@ -36,7 +36,7 @@ const Segregation = class Segregation extends Component {
         ) : (
           <Fragment>
             <Fragment>
-              <Display mapType={ Constants.MAP_TYPE.SEGREGATION } />
+              <Display mapType={Constants.MAP_TYPE.SEGREGATION} />
               <Legend />
               <div style={footerStyle}>
                 <Footer />

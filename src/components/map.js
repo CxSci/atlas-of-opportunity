@@ -3,6 +3,8 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 import * as Constants from "../constants";
 
@@ -12,6 +14,7 @@ mapboxgl.accessToken =
 
 let Map = class Map extends React.Component {
   mapRef = React.createRef();
+  geocoder;
   map;
 
   constructor(props) {
@@ -34,9 +37,40 @@ let Map = class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
-      center: this.props.modal ? [121, -26.5] : [138.5, -34.9],
-      zoom: this.props.modal ? 3.5 : 9,
+      center: [121, -26.5],
+      zoom: 3.5,
     });
+
+    this.geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      types: "neighborhood, locality, address",
+      countries: "au",
+      marker: null,
+      zoom: 11,
+      flyTo: {
+        maxZoom: 11,
+        speed: 1.2,
+        curve: 1,
+        easing: function (t) {
+          return t;
+        },
+      },
+      mapboxgl: mapboxgl,
+    });
+
+    if (this.props.modal === false) {
+      this.map.flyTo({
+        center: [138.7, -34.9],
+        zoom: 9,
+        speed: 0.8,
+      });
+    }
+
+    if (document.getElementById("geocoder")) {
+      document
+        .getElementById("geocoder")
+        .appendChild(this.geocoder.onAdd(this.map));
+    }
 
     var hoveredSA2Id = null;
 
@@ -146,9 +180,18 @@ let Map = class Map extends React.Component {
         hoveredSA2Id = null;
       });
 
+      this.geocoder.on("result", this.onMapSearch);
+
       this.map.on("click", "sa2-fills", this.onMapClick);
     });
   }
+
+  onMapSearch = (e) => {
+    this.map.fire("click", {
+      latlng: e.result.center,
+      point: this.map.project(e.result.center),
+    });
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.flowDirection !== prevProps.flowDirection) {
@@ -233,8 +276,8 @@ let Map = class Map extends React.Component {
       sa2_name: clickedSA2.properties.SA2_NAME16,
       population: clickedSA2.properties.persons_num.toLocaleString(),
       income: clickedSA2.properties.median_aud.toLocaleString(undefined, {
-        style: 'currency',
-        currency: 'AUS',
+        style: "currency",
+        currency: "AUS",
       }),
       ggp: clickedSA2.properties.income_diversity,
       jr: clickedSA2.properties.bridge_diversity,
@@ -254,7 +297,9 @@ let Map = class Map extends React.Component {
     // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
     let keys = this.props.active.bridgeKeys[this.props.flowDirection];
     // Get bridges and ignore missing values
-    let bridges = keys.map(x => clickedSA2.properties[x]).filter(x => x !== undefined);
+    let bridges = keys
+      .map((x) => clickedSA2.properties[x])
+      .filter((x) => x !== undefined);
 
     // Search map for SA2s matching the bridges.
     clickedFeatures = this.map.querySourceFeatures("sa2", {
@@ -469,19 +514,19 @@ let Map = class Map extends React.Component {
     }
   };
 
-  shouldComponentUpdate() {
-    if (this.props.modal === true) {
-      this.map.flyTo({
-        center: [138.7, -34.9],
-        zoom: 9,
-        speed: 0.8,
-      });
-    }
-    return true;
-  }
-
   render() {
-    return <div ref={this.mapRef} className="absolute top right left bottom" />;
+    // Style components
+    const search = {
+      paddingTop: "90px",
+      paddingLeft: "24px",
+    };
+
+    return (
+      <div>
+        <div ref={this.mapRef} className="absolute top right left bottom" />
+        {this.props.modal ? null : <div id="geocoder" style={search}></div>}
+      </div>
+    );
   }
 };
 

@@ -3,12 +3,15 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
 let SegregationMap = class SegregationMap extends React.Component {
   mapRef = React.createRef();
+  geocoder;
   map;
 
   constructor(props) {
@@ -30,8 +33,25 @@ let SegregationMap = class SegregationMap extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
-      center: this.props.modal ? [121, -26.5] : [138.5, -34.9],
-      zoom: this.props.modal ? 3.5 : 9,
+      center: [121, -26.5],
+      zoom: 3.5,
+    });
+
+    this.geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      types: "neighborhood, locality, address",
+      countries: "au",
+      marker: null,
+      zoom: 11,
+      flyTo: {
+        maxZoom: 11,
+        speed: 1.2,
+        curve: 1,
+        easing: function (t) {
+          return t;
+        },
+      },
+      mapboxgl: mapboxgl,
     });
 
     var hoveredSA2Id = null;
@@ -52,7 +72,6 @@ let SegregationMap = class SegregationMap extends React.Component {
           /*['case',
           ['boolean', ['feature-state', 'click'], false],
           '#696969',
-
           ]*/
           "fill-color": {
             property: this.props.active.property,
@@ -142,11 +161,27 @@ let SegregationMap = class SegregationMap extends React.Component {
         hoveredSA2Id = null;
       });
 
+      this.geocoder.on("result", this.onMapSearch);
+
       this.map.on("click", "sa2-fills", this.onMapClick);
     });
   }
 
-  componentDidUpdate(prevProps) {}
+  onMapSearch = (e) => {
+    this.map.fire("click", {
+      latlng: e.result.center,
+      point: this.map.project(e.result.center),
+    });
+  };
+
+  componentDidUpdate() {
+    const geocoderId = document.getElementById("geocoder");
+    if (geocoderId) {
+      if (geocoderId.querySelector(".mapboxgl-ctrl-geocoder") == null) {
+        geocoderId.appendChild(this.geocoder.onAdd(this.map));
+      }
+    }
+  }
 
   onMapClick = (e) => {
     let prevSA2 = this.state.clickedSA2;
@@ -214,7 +249,18 @@ let SegregationMap = class SegregationMap extends React.Component {
   }
 
   render() {
-    return <div ref={this.mapRef} className="absolute top right left bottom" />;
+    // Style components
+    const search = {
+      paddingTop: "90px",
+      paddingLeft: "24px",
+    };
+
+    return (
+      <div>
+        <div ref={this.mapRef} className="absolute top right left bottom" />
+        {this.props.modal ? null : <div id="geocoder" style={search}></div>}
+      </div>
+    );
   }
 };
 
