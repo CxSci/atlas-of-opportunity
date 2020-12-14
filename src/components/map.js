@@ -3,8 +3,11 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
+import "../css/map.css";
 
 import * as Constants from "../constants";
 
@@ -16,6 +19,26 @@ let Map = class Map extends React.Component {
   mapRef = React.createRef();
   geocoder;
   map;
+  hoveredPopup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+  clickedPopup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+  cntr0Popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+  cntr1Popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+  cntr2Popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
 
   constructor(props) {
     super(props);
@@ -151,14 +174,24 @@ let Map = class Map extends React.Component {
 
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
+      // name of sa2-fills appear over the region
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
+          var coordinates = turf.center(e.features[0]).geometry.coordinates;
+          var regionName = e.features[0].properties.SA2_NAME16;
+
+          this.hoveredPopup
+            .setLngLat(coordinates)
+            .setHTML("<h5>" + regionName + "</h5>")
+            .addTo(this.map);
+
           if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
               { source: "sa2", id: hoveredSA2Id },
               { hover: false }
             );
           }
+
           hoveredSA2Id = e.features[0].id;
           this.map.setFeatureState(
             { source: "sa2", id: hoveredSA2Id },
@@ -177,7 +210,11 @@ let Map = class Map extends React.Component {
             { hover: false }
           );
         }
+
         hoveredSA2Id = null;
+
+        // Remove hovered popup
+        this.hoveredPopup.remove();
       });
 
       this.geocoder.on("result", this.onMapSearch);
@@ -203,6 +240,7 @@ let Map = class Map extends React.Component {
     let prevSA2 = this.state.clickedSA2;
     let clickedSA2 = e.features[0]; //properties.name;
     // Ignore clicks on the active SA2.
+
     if (
       !prevSA2 ||
       clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
@@ -216,6 +254,12 @@ let Map = class Map extends React.Component {
     var clickedFeatures = this.state.clickedFeatures;
     var clickedSA2 = this.state.clickedSA2;
 
+    // Remove popup
+    this.clickedPopup.remove();
+    this.cntr0Popup.remove();
+    this.cntr1Popup.remove();
+    this.cntr2Popup.remove();
+
     //remove the previous routes
     if (this.map.getLayer("route") !== undefined) {
       this.map.removeLayer("route");
@@ -228,6 +272,8 @@ let Map = class Map extends React.Component {
     var featureObj = {};
     var destinationList = [];
     var origin = [];
+    var regionName;
+
     // Reset regions
     clickedFeatures.forEach((f) => {
       // For each feature, update its 'click' state
@@ -260,8 +306,14 @@ let Map = class Map extends React.Component {
     }
     // find the center point of the newly selected region
     origin = turf.center(clickedSA2).geometry.coordinates;
+    regionName = clickedSA2.properties.SA2_NAME16;
 
-    console.log(clickedSA2);
+    // Set name of clicked region over it
+    this.clickedPopup
+      .setLngLat(origin)
+      .setHTML("<h5>" + regionName + "</h5>")
+      .addTo(this.map);
+
     this.map.setFeatureState(
       {
         source: "sa2",
@@ -340,9 +392,31 @@ let Map = class Map extends React.Component {
     });
 
     // create an array of center coordinates of each SA2 region
-    featureList.forEach((ft) => {
+    featureList.forEach((ft, i) => {
       var destination = turf.center(ft).geometry.coordinates;
+      var regionName = ft.properties.SA2_NAME16;
       destinationList.push(destination);
+
+      // Set name of related regions over them
+      switch (i) {
+        case 1:
+          this.cntr1Popup
+            .setLngLat(destination)
+            .setHTML("<h5>" + regionName + "</h5>")
+            .addTo(this.map);
+          break;
+        case 2:
+          this.cntr2Popup
+            .setLngLat(destination)
+            .setHTML("<h5>" + regionName + "</h5>")
+            .addTo(this.map);
+          break;
+        default:
+          this.cntr0Popup
+            .setLngLat(destination)
+            .setHTML("<h5>" + regionName + "</h5>")
+            .addTo(this.map);
+      }
     });
     //create an array of coordinates corresponding to the bridges
     var coordinateList = [];
