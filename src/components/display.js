@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactTooltip from 'react-tooltip';
-import { Link} from 'react-router-dom';
 
 
 import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
-import { Divider } from "semantic-ui-react";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -79,7 +77,6 @@ let Display = class Display extends React.Component {
         <div className="py12 px12">
           <div className="mb6">
             <h2 className="txt-bold txt-m block" data-tip data-for = "GDPTip">GDP Growth Potential
-            {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'                      '}`} ? </Link>  */}
             </h2>
             <ReactTooltip id = "GDPTip" > 
             <b> GDP Growth Potential </b> <br />
@@ -95,7 +92,6 @@ let Display = class Display extends React.Component {
           </div>
           <div className="mb6">
           <h2 className="txt-bold txt-m block" data-tip data-for = "jobTip">Job Resilience
-            {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'                               '}`} ? </Link>  */}
             </h2>  
             <ReactTooltip id = "jobTip" > 
             <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
@@ -106,7 +102,6 @@ let Display = class Display extends React.Component {
           <div className="mb6">
           <h2 data-tip className="txt-bold txt-m block" data-for = "bgiTip">
               Business Growth Index 
-              {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'          '}`} ? </Link>  */}
             </h2>
             <ReactTooltip id = "bgiTip" > 
             <b> Business Growth Index </b> <br />
@@ -165,11 +160,6 @@ let Display = class Display extends React.Component {
             </div>
           </form>
         </div >
-        {/* <div className="py12 px12">
-          <p className="txt-s">
-            Select a community to learn more about opportunity in that area.
-          </p>
-        </div> */}
       </div>
     );
     return (

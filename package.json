@@ -24,6 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^1.0.10",
     "react-sticky-footer": "0.1.0-rc3",
+    "react-tooltip":"0.0.1",
     "redux": "^4.0.5",
     "semantic-ui-react": "^0.88.2",
     "yarn": "^1.22.4"
