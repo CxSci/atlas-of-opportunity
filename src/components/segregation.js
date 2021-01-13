@@ -278,7 +278,7 @@ let SegregationMap = class SegregationMap extends React.Component {
     // Style components
     const search = {
       paddingTop: "90px",
-      paddingLeft: "24px",
+      paddingLeft: "75vw",
     };
 
     return (

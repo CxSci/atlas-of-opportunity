@@ -7,7 +7,6 @@ import SegregationMap from "../components/segregation";
 import Display from "../components/display";
 import Legend from "../components/legend";
 import Modal from "../components/modal";
-import Footer from "../components/footer.js";
 
 const Segregation = class Segregation extends Component {
   static propTypes = {
@@ -38,9 +37,6 @@ const Segregation = class Segregation extends Component {
             <Fragment>
               <Display mapType={Constants.MAP_TYPE.SEGREGATION} />
               <Legend />
-              <div style={footerStyle}>
-                <Footer />
-              </div>
             </Fragment>
           </Fragment>
         )}

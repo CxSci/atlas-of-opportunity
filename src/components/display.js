@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactTooltip from 'react-tooltip';
 
+import Collapsible from 'react-collapsible';
 
 import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
+import { Header } from "semantic-ui-react";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -29,12 +31,13 @@ let Display = class Display extends React.Component {
     }
   }
   PanelContainer = (props) => (
-    <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top right w240 h-full pt60 pb36 mr12 z2">
+    <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
       {props.children}
     </div>
   );
 
   renderGrowthDisplay() {
+
     const {
       sa2_name,
       population,
@@ -44,7 +47,12 @@ let Display = class Display extends React.Component {
       bgi,
       sa1_codes,
     } = this.props.select;
+
+    const MenuHeader = "py12 px12 txt-bold txt-l"; 
+    const ColHeader = "txt-m block";
+    const ColBody = "txt-s txt-normal color-black";
     const { flowDirection, mapType } = this.props;
+
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
@@ -64,19 +72,25 @@ let Display = class Display extends React.Component {
             </h3>
           </div>
         </div>
-        <div className="py12 px12 bg-orange-faint">
+
+        <div className= {MenuHeader} style = {{"background-color": "orange", color: "white"}}>
+        <Collapsible className="txt-bold txt-l color-white block" trigger = 'Demographic Summary'>
           <div className="mb6">
-            <h2 className="txt-bold txt-m color-orange block">Population</h2>
-            <p className="txt-s">{population}</p>
+          <hr />
+            <h2 className={ColHeader} style = {{"color": "white"}}>Population</h2>
+            <p className={ColBody}>{population}</p>
+            <h2 className={ColHeader} style = {{"color": "white"}}>Median Income</h2>
+            <p className={ColBody}>{income}</p>
           </div>
-          <div className="mb6">
-            <h2 className="txt-bold txt-m color-orange block">Median Income</h2>
-            <p className="txt-s">{income}</p>
-          </div>
+          </Collapsible>
         </div>
-        <div className="py12 px12">
+        
+          
+        <div className={MenuHeader} style = {{"background-color": "#D3D3D3", color: "black"}}>
+        <Collapsible className="txt-bold txt-l color-black block" trigger = "Growth Summary">
           <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "GDPTip">GDP Growth Potential
+            <hr/>
+            <h2 className={ColHeader} data-tip data-for = "GDPTip">GDP Growth Potential
             </h2>
             <ReactTooltip id = "GDPTip" > 
             <b> GDP Growth Potential </b> <br />
@@ -88,31 +102,33 @@ let Display = class Display extends React.Component {
             <br />  alternative metrics are sometimes used.
             </ReactTooltip>
 
-          <p className="txt-s">{ggp}</p>
+          <p className={ColBody}>{ggp}</p>
           </div>
           <div className="mb6">
-          <h2 className="txt-bold txt-m block" data-tip data-for = "jobTip">Job Resilience
+          <h2 className= {ColHeader} data-tip data-for = "jobTip">Job Resilience
             </h2>  
             <ReactTooltip id = "jobTip" > 
             <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
             and,by extension, adapt to what the market demands. 
             </ReactTooltip>
-            <p className="txt-s">{jr}</p>
+            <p className={ColBody}>{jr}</p>
           </div>
           <div className="mb6">
-          <h2 data-tip className="txt-bold txt-m block" data-for = "bgiTip">
+          <h2 data-tip className={ColHeader} data-for = "bgiTip">
               Business Growth Index 
             </h2>
             <ReactTooltip id = "bgiTip" > 
             <b> Business Growth Index </b> <br />
           The growth rate is the measure of a company’s increase <br />
           in revenue and potential to expand over a set period.
-            </ReactTooltip>            <p className="txt-s">{bgi}</p>
+            </ReactTooltip>            
+            <p className= {ColBody}>{bgi}</p>
           </div>
           <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "SATip"> Included SA1 Regions</h2>
-            <p className="txt-s">{sa1_codes}</p>
+            <h2 className={ColHeader} data-tip data-for = "SATip"> Included SA1 Regions</h2>
+            <p className={ColBody}>{sa1_codes}</p>
           </div>
+          </Collapsible>
         </div>
       </div>
     );
@@ -171,6 +187,10 @@ let Display = class Display extends React.Component {
   }
 
   renderSegregationDisplay() {
+    const MenuHeader = "py12 px12 txt-bold txt-l"; 
+    const ColHeader = "txt-m block";
+    const ColBody = "txt-s txt-normal color-black";
+    const wBody = "txt-s txt-normal color-white";
     const {
       sa2_name,
       population,
@@ -198,76 +218,82 @@ let Display = class Display extends React.Component {
               <h3>Economic Inequality</h3>
             </div>
           </div>
-          <div className="py12 px12 bg-orange-faint">
+
+          <div className= {MenuHeader} style = {{"background-color": "orange", color: "white"}}> 
+          <Collapsible trigger = "Demographic Summary">
             <div className="mb6">
-              <h2 className="txt-bold txt-m color-orange block">Population</h2>
-              <p className="txt-s">{population}</p>
+              <hr />
+              <h2 className={ColHeader}>Population</h2>
+              <p className={ColBody}>{population}</p>
             </div>
             <div className="mb6">
-              <h2 className="txt-bold txt-m color-orange block">
-                Median Income
-              </h2>
-              <p className="txt-s">{income}</p>
+              <h2 className={ColHeader}>Median Income</h2>
+              <p className={ColBody}> AUS {income}</p>
             </div>
-            <div className="mb6">
-              <h2 className="txt-bold txt-m color-orange block">
-                Income Quartile
-              </h2>
-              <p className="txt=s">{quartile}</p>
-            </div>
-            <div className="mb6">
-              <h2 className="txt-bold txt-m color-orange block">
-                Inequality (lower is better)
-              </h2>
-              <p className="txt=s">{Math.floor(inequality)}%</p>
-            </div>
+          </Collapsible>
           </div>
-          <div className="py12 px12 bg-black-faint">
+
+          <div className= {MenuHeader} style = {{"background-color": "green", color: "white"}}> 
+          <Collapsible trigger = "Economic Summary">
             <div className="mb6">
-              <h2 className="txt-bold txt-m color-black block">
+            <hr/>
+              <h2 className={ColHeader}>Income Quartile</h2>
+              <p className={wBody}>{quartile}</p>
+            </div>
+            <div className="mb6">
+              <h2 className={ColHeader}> Inequality (lower is better)</h2>
+              <p className={wBody} >{Math.floor(inequality)}%</p>
+            </div>
+           
+            <div className="mb6">
+              <h2 className={ColHeader}>
                 Visitor time spent by quartile
               </h2>
               <BarGraph width={200} height={120} />
             </div>
+            </Collapsible>
           </div>
-          <div className="py12 px12">
-            <div className="mb6">
-              <h2 className="txt-bold txt-m block" data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
-              <p className="txt-s">{ggp}</p>
-              <ReactTooltip id = "GDPTip"> 
-              <b> GDP Growth Potential </b> <br />
-            Economic growth is an increase in the production <br />of 
-             economic goods and services,compared from <br /> one period of  
-             time to another...Traditionally, aggregate <br /> 
-             economic growth is measured in terms of gross national <br /> 
-            product (GNP) or gross domestic product (GDP), although
-            <br />  alternative metrics are sometimes used.</ReactTooltip>
-            </div>
-            <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "jobTip">Job Resilience
-            {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'                               '}`} ? </Link>  */}
-            </h2>  
-            <ReactTooltip id = "jobTip" > 
-            <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
-            and,by extension, adapt to what the market demands. 
-            </ReactTooltip>            <p className="txt-s">{jr}</p>
-            </div>
-            <div className="mb6">
-            <h2 data-tip className="txt-bold txt-m block" data-for = "bgiTip">
-              Business Growth Index 
-              {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'          '}`} ? </Link>  */}
-            </h2>
-            <ReactTooltip id = "bgiTip" > 
-            <b> Business Growth Index </b> <br />
-          The growth rate is the measure of a company’s increase <br />
-          in revenue and potential to expand over a set period.
-            </ReactTooltip>              <p className="txt-s">{bgi}</p>
-            </div>
-            <div className="mb6">
-              <h2 className="txt-bold txt-m block" data-tip data-for = "SATip">Included SA1 Regions</h2>
-              <ReactTooltip id = "SATip"> SATip? </ReactTooltip>
-              <p className="txt-s">{sa1_codes}</p>
-            </div>
+         
+          <div className= {MenuHeader} style = {{"background-color": "#D3D3D3", color: "black"}}> 
+          <Collapsible trigger = "Growth Summary">
+              <div className="mb6">
+                <hr />
+                <h2 className={ColHeader} data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
+                <p className= {ColBody}>{ggp}</p>
+                  <ReactTooltip id = "GDPTip"> 
+                  <b> GDP Growth Potential </b> <br />
+                Economic growth is an increase in the production <br />of 
+                economic goods and services,compared from <br /> one period of  
+                time to another...Traditionally, aggregate <br /> 
+                economic growth is measured in terms of gross national <br /> 
+                product (GNP) or gross domestic product (GDP), although
+                <br />  alternative metrics are sometimes used.
+                </ReactTooltip>
+              </div>
+              <div className="mb6">
+              <h2 className={ColHeader} data-tip data-for = "jobTip">Job Resilience</h2>  
+                <ReactTooltip id = "jobTip" > 
+                <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
+                and,by extension, adapt to what the market demands. 
+                </ReactTooltip>            
+              <p className={ColBody}>{jr}</p>
+              </div>
+              <div className="mb6">
+              <h2 data-tip className={ColHeader} data-for = "bgiTip">
+                Business Growth Index 
+              </h2>
+                <ReactTooltip id = "bgiTip" > 
+                <b> Business Growth Index </b> <br />
+              The growth rate is the measure of a company’s increase <br />
+              in revenue and potential to expand over a set period.
+                </ReactTooltip>              
+              <p className={ColBody}>{bgi}</p>
+              </div>
+              <div className="mb6">
+                <h2 className={ColHeader} data-tip data-for = "SATip">Included SA1 Regions</h2>
+                <p className={ColBody}>{sa1_codes}</p>
+              </div>
+            </Collapsible>
           </div>
         </div>
       </this.PanelContainer>

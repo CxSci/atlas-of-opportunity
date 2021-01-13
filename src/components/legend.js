@@ -25,6 +25,8 @@ let Legend = class Legend extends React.Component {
 
     let legendName = this.props.active.legendName;
     return (
+      
+      // <div className="bg-white absolute bottom right px80 py80 shadow-darken10 round z1 wmax180">
       <div className="bg-white absolute bottom left ml24 mb36 py12 px12 shadow-darken10 round z1 wmax180">
         <div className="mb6">
           <h2 className="txt-bold txt-m block">{legendName}</h2>

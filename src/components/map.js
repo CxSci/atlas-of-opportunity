@@ -22,7 +22,6 @@ let Map = class Map extends React.Component {
   hoveredPopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
-    // maxWidth: "200px",
   });
   clickedPopup = new mapboxgl.Popup({
     closeButton: false,
@@ -173,6 +172,7 @@ let Map = class Map extends React.Component {
         },
       });
 
+
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
@@ -187,11 +187,7 @@ let Map = class Map extends React.Component {
           })
           this.hoveredPopup
             .setLngLat(coordinates)
-            .setHTML("<h5>" + regionName +
-            "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
-            "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
-            "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
-            "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" )
+            .setHTML(`<h5>${regionName}</h5> <p> <b> Population: </b> ${e.features[0].properties.persons_num}<br /> <b> Median Income (AUS): </b>${medIncome}<br / > <b> GDP Growth Potential: </b>${e.features[0].properties.income_diversity}<br / > <b> Job Resiliance: </b>${e.features[0].properties.bridge_diversity}</p>` )
             .addTo(this.map);
 
           if (hoveredSA2Id !== null) {
@@ -601,13 +597,14 @@ let Map = class Map extends React.Component {
     // Style components
     const search = {
       paddingTop: "90px",
-      paddingLeft: "24px",
+      paddingLeft: '75vw',
     };
 
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
         {this.props.modal ? null : <div id="geocoder" style={search}></div>}
+
       </div>
     );
   }
