@@ -22,6 +22,7 @@ let Map = class Map extends React.Component {
   hoveredPopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    // maxWidth: "200px",
   });
   clickedPopup = new mapboxgl.Popup({
     closeButton: false,
@@ -175,14 +176,22 @@ let Map = class Map extends React.Component {
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
+
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
           var coordinates = turf.center(e.features[0]).geometry.coordinates;
           var regionName = e.features[0].properties.SA2_NAME16;
-
+          var medIncome = e.features[0].properties.median_aud.toLocaleString(undefined, {
+            style: "currency",
+            currency: "AUS",
+          })
           this.hoveredPopup
             .setLngLat(coordinates)
-            .setHTML("<h5>" + regionName + "</h5>")
+            .setHTML("<h5>" + regionName +
+            "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
+            "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
+            "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
+            "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" )
             .addTo(this.map);
 
           if (hoveredSA2Id !== null) {

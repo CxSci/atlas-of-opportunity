@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
+const turf = window.turf;
+
 mapboxgl.accessToken =
   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
@@ -13,6 +15,10 @@ let SegregationMap = class SegregationMap extends React.Component {
   mapRef = React.createRef();
   geocoder;
   map;
+  hoveredPopup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
 
   constructor(props) {
     super(props);
@@ -53,7 +59,13 @@ let SegregationMap = class SegregationMap extends React.Component {
       },
       mapboxgl: mapboxgl,
     });
-
+    if (this.props.modal === false) {
+      this.map.flyTo({
+        center: [138.7, -34.9],
+        zoom: 9,
+        speed: 0.8,
+      });
+    }
     var hoveredSA2Id = null;
 
     this.map.on("load", () => {
@@ -133,6 +145,20 @@ let SegregationMap = class SegregationMap extends React.Component {
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on("mousemove", "sa2-fills", (e) => {
+        var coordinates = turf.center(e.features[0]).geometry.coordinates;
+        var regionName = e.features[0].properties.SA2_NAME16;
+        var medIncome = e.features[0].properties.median_aud.toLocaleString(undefined, {
+          style: "currency",
+          currency: "AUS",
+        })
+        this.hoveredPopup
+          .setLngLat(coordinates)
+          .setHTML("<h5>" + regionName +
+          "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
+          "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
+          "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
+          "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" ).addTo(this.map);
+
         if (e.features.length > 0) {
           if (hoveredSA2Id !== null) {
             this.map.setFeatureState(
