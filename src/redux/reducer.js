@@ -91,6 +91,7 @@ const initialState: State = {
   path: window.location.pathname,
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
+  searchBarInfo: [121, -26.5],
 };
 
 function reducer(state = initialState, action) {
@@ -130,6 +131,10 @@ function reducer(state = initialState, action) {
     case Constants.SET_FLOW_DIRECTION:
       return Object.assign({}, state, {
         flowDirection: action.direction,
+      });
+    case Constants.SET_SEARCH_BAR_INFO:
+      return Object.assign({}, state, {
+        searchBarInfo: action.payload,
       });
     default:
       return state;

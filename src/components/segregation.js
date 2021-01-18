@@ -3,8 +3,6 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 const turf = window.turf;
 
@@ -33,6 +31,7 @@ let SegregationMap = class SegregationMap extends React.Component {
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     modal: PropTypes.bool,
+    searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
   componentDidMount() {
@@ -43,22 +42,6 @@ let SegregationMap = class SegregationMap extends React.Component {
       zoom: 3.5,
     });
 
-    this.geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      types: "neighborhood, locality, address",
-      countries: "au",
-      marker: null,
-      zoom: 11,
-      flyTo: {
-        maxZoom: 11,
-        speed: 1.2,
-        curve: 1,
-        easing: function (t) {
-          return t;
-        },
-      },
-      mapboxgl: mapboxgl,
-    });
     if (this.props.modal === false) {
       this.map.flyTo({
         center: [138.7, -34.9],
@@ -147,17 +130,29 @@ let SegregationMap = class SegregationMap extends React.Component {
       this.map.on("mousemove", "sa2-fills", (e) => {
         var coordinates = turf.center(e.features[0]).geometry.coordinates;
         var regionName = e.features[0].properties.SA2_NAME16;
-        var medIncome = e.features[0].properties.median_aud.toLocaleString(undefined, {
-          style: "currency",
-          currency: "AUS",
-        })
+        var medIncome = e.features[0].properties.median_aud.toLocaleString(
+          undefined,
+          {
+            style: "currency",
+            currency: "AUS",
+          }
+        );
         this.hoveredPopup
           .setLngLat(coordinates)
-          .setHTML("<h5>" + regionName +
-          "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
-          "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
-          "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
-          "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" ).addTo(this.map);
+          .setHTML(
+            "<h5>" +
+              regionName +
+              "</h5> <p> <b> Population: </b> " +
+              e.features[0].properties.persons_num +
+              "<br /> <b> Median Income (AUS): </b>" +
+              medIncome +
+              "<br / > <b> GDP Growth Potential: </b>" +
+              e.features[0].properties.income_diversity +
+              "<br / > <b> Job Resiliance: </b>" +
+              e.features[0].properties.bridge_diversity +
+              "</p>"
+          )
+          .addTo(this.map);
 
         if (e.features.length > 0) {
           if (hoveredSA2Id !== null) {
@@ -187,27 +182,31 @@ let SegregationMap = class SegregationMap extends React.Component {
         hoveredSA2Id = null;
       });
 
-      this.geocoder.on("result", this.onMapSearch);
-
       this.map.on("click", "sa2-fills", this.onMapClick);
     });
   }
 
-  onMapSearch = (e) => {
-    this.map.fire("click", {
-      latlng: e.result.center,
-      point: this.map.project(e.result.center),
-    });
-  };
-
-  componentDidUpdate() {
-    const geocoderId = document.getElementById("geocoder");
-    if (geocoderId) {
-      if (geocoderId.querySelector(".mapboxgl-ctrl-geocoder") == null) {
-        geocoderId.appendChild(this.geocoder.onAdd(this.map));
-      }
+  componentDidUpdate(prevProps) {
+    if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
+      this.onMapSearch(this.props.searchBarInfo);
     }
   }
+
+  onMapSearch = (e) => {
+    this.map.fire("click", {
+      latlng: e,
+      point: this.map.project(e),
+    });
+    this.map.flyTo({
+      center: e,
+      zoom: 11,
+      speed: 1.2,
+      curve: 1,
+      easing: function (t) {
+        return t;
+      },
+    });
+  };
 
   onMapClick = (e) => {
     let prevSA2 = this.state.clickedSA2;
@@ -275,16 +274,9 @@ let SegregationMap = class SegregationMap extends React.Component {
   }
 
   render() {
-    // Style components
-    const search = {
-      paddingTop: "90px",
-      paddingLeft: "24px",
-    };
-
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
-        {this.props.modal ? null : <div id="geocoder" style={search}></div>}
       </div>
     );
   }
@@ -297,6 +289,7 @@ function mapStateToProps(state) {
     select: state.select,
     modal: state.modal,
     flowDirection: state.flowDirection,
+    searchBarInfo: state.searchBarInfo,
   };
 }
 
