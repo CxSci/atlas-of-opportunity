@@ -5,6 +5,9 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@turf/great-circle": "^5.1.5",
     "@turf/turf": "^5.1.6",
@@ -18,7 +21,6 @@
     "mathjax-react": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-collapsible": "^2.8.1",
     "react-dom": "^16.9.0",
     "react-radio-buttons": "^1.2.2",
     "react-redux": "^7.2.0",

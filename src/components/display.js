@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactTooltip from 'react-tooltip';
 
-import Collapsible from 'react-collapsible';
-
 import * as Constants from "../constants";
+import Collapsible from "./collapsible";
+
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
-import { Header } from "semantic-ui-react";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -48,20 +47,15 @@ let Display = class Display extends React.Component {
       sa1_codes,
     } = this.props.select;
 
-    const MenuHeader = "py12 px12 txt-bold txt-l"; 
-    const ColHeader = "txt-m block";
-    const ColBody = "txt-s txt-normal color-black";
     const { flowDirection, mapType } = this.props;
 
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
+        className="bg-white flex-child flex-child--grow mt30 mb24 ml30 shadow-darken10 w240"
       >
-        <div className="py12 px12">
-          <div className="">
+        <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-          </div>
         </div>
         <div className="py12 px12">
           <div className="mb6">
@@ -73,25 +67,15 @@ let Display = class Display extends React.Component {
           </div>
         </div>
 
-        <div className= {MenuHeader} style = {{"background-color": "orange", color: "white"}}>
-        <Collapsible className="txt-bold txt-l color-white block" trigger = 'Demographic Summary'>
-          <div className="mb6">
-          <hr />
-            <h2 className={ColHeader} style = {{"color": "white"}}>Population</h2>
-            <p className={ColBody}>{population}</p>
-            <h2 className={ColHeader} style = {{"color": "white"}}>Median Income</h2>
-            <p className={ColBody}>{income}</p>
-          </div>
+        <Collapsible trigger = 'Demographic Summary'>
+            <h2>Population</h2>
+            <p>{population}</p>
+            <h2 >Median Income</h2>
+            <p>{income}</p>
           </Collapsible>
-        </div>
-        
-          
-        <div className={MenuHeader} style = {{"background-color": "#D3D3D3", color: "black"}}>
-        <Collapsible className="txt-bold txt-l color-black block" trigger = "Growth Summary">
-          <div className="mb6">
-            <hr/>
-            <h2 className={ColHeader} data-tip data-for = "GDPTip">GDP Growth Potential
-            </h2>
+
+        <Collapsible trigger = "Growth Summary ">
+            <h2 data-tip data-for = "GDPTip">GDP Growth Potential</h2>
             <ReactTooltip id = "GDPTip" > 
             <b> GDP Growth Potential </b> <br />
             Economic growth is an increase in the production <br />of 
@@ -101,20 +85,14 @@ let Display = class Display extends React.Component {
             product (GNP) or gross domestic product (GDP), although
             <br />  alternative metrics are sometimes used.
             </ReactTooltip>
-
-          <p className={ColBody}>{ggp}</p>
-          </div>
-          <div className="mb6">
-          <h2 className= {ColHeader} data-tip data-for = "jobTip">Job Resilience
-            </h2>  
+          <p>{ggp}</p>
+            <h2 data-tip data-for = "jobTip">Job Resilience</h2>  
             <ReactTooltip id = "jobTip" > 
             <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
             and,by extension, adapt to what the market demands. 
             </ReactTooltip>
-            <p className={ColBody}>{jr}</p>
-          </div>
-          <div className="mb6">
-          <h2 data-tip className={ColHeader} data-for = "bgiTip">
+            <p>{jr}</p>
+          <h2 data-tip data-for = "bgiTip">
               Business Growth Index 
             </h2>
             <ReactTooltip id = "bgiTip" > 
@@ -122,19 +100,15 @@ let Display = class Display extends React.Component {
           The growth rate is the measure of a company’s increase <br />
           in revenue and potential to expand over a set period.
             </ReactTooltip>            
-            <p className= {ColBody}>{bgi}</p>
-          </div>
-          <div className="mb6">
-            <h2 className={ColHeader} data-tip data-for = "SATip"> Included SA1 Regions</h2>
-            <p className={ColBody}>{sa1_codes}</p>
-          </div>
+            <p>{bgi}</p>
+            <h2 data-tip data-for = "SATip"> Included SA1 Regions</h2>
+            <p>{sa1_codes}</p>
           </Collapsible>
-        </div>
       </div>
     );
 
     const BottomPanel = () => (
-      <div className="bg-white flex-child flex-child--no-shrink shadow-darken10 w240">
+      <div className="bg-white flex-child flex-child--no-shrink ml30 shadow-darken10 w240"> 
         <div id="options" className="pb12 px12 bg-orange-faint">
           <form>
             <p className="pt6 txt-m txt-bold">Change flow direction</p>
@@ -187,10 +161,6 @@ let Display = class Display extends React.Component {
   }
 
   renderSegregationDisplay() {
-    const MenuHeader = "py12 px12 txt-bold txt-l"; 
-    const ColHeader = "txt-m block";
-    const ColBody = "txt-s txt-normal color-black";
-    const wBody = "txt-s txt-normal color-white";
     const {
       sa2_name,
       population,
@@ -208,10 +178,8 @@ let Display = class Display extends React.Component {
           style={{ overflowY: "auto" }}
           className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
         >
-          <div className="py12 px12">
-            <div className="">
+          <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
               <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-            </div>
           </div>
           <div className="py12 px12">
             <div className="mb6">
@@ -219,47 +187,26 @@ let Display = class Display extends React.Component {
             </div>
           </div>
 
-          <div className= {MenuHeader} style = {{"background-color": "orange", color: "white"}}> 
           <Collapsible trigger = "Demographic Summary">
-            <div className="mb6">
-              <hr />
-              <h2 className={ColHeader}>Population</h2>
-              <p className={ColBody}>{population}</p>
-            </div>
-            <div className="mb6">
-              <h2 className={ColHeader}>Median Income</h2>
-              <p className={ColBody}> AUS {income}</p>
-            </div>
+             <h2 >Population</h2>
+              <p >{population}</p>
+              <h2 >Median Income</h2>
+              <p> AUS {income}</p>
           </Collapsible>
-          </div>
-
-          <div className= {MenuHeader} style = {{"background-color": "green", color: "white"}}> 
+          
           <Collapsible trigger = "Economic Summary">
-            <div className="mb6">
-            <hr/>
-              <h2 className={ColHeader}>Income Quartile</h2>
-              <p className={wBody}>{quartile}</p>
-            </div>
-            <div className="mb6">
-              <h2 className={ColHeader}> Inequality (lower is better)</h2>
-              <p className={wBody} >{Math.floor(inequality)}%</p>
-            </div>
-           
-            <div className="mb6">
-              <h2 className={ColHeader}>
-                Visitor time spent by quartile
-              </h2>
+              <h2 >Income Quartile</h2>
+              <p>{quartile}</p>
+              <h2> Inequality (lower is better)</h2>
+              <p>{Math.floor(inequality)}%</p>
+              <h2 >Visitor time spent by quartile</h2>\<div>
               <BarGraph width={200} height={120} />
-            </div>
+              </div>
             </Collapsible>
-          </div>
          
-          <div className= {MenuHeader} style = {{"background-color": "#D3D3D3", color: "black"}}> 
           <Collapsible trigger = "Growth Summary">
-              <div className="mb6">
-                <hr />
-                <h2 className={ColHeader} data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
-                <p className= {ColBody}>{ggp}</p>
+                <h2 data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
+                <p >{ggp}</p>
                   <ReactTooltip id = "GDPTip"> 
                   <b> GDP Growth Potential </b> <br />
                 Economic growth is an increase in the production <br />of 
@@ -269,17 +216,13 @@ let Display = class Display extends React.Component {
                 product (GNP) or gross domestic product (GDP), although
                 <br />  alternative metrics are sometimes used.
                 </ReactTooltip>
-              </div>
-              <div className="mb6">
-              <h2 className={ColHeader} data-tip data-for = "jobTip">Job Resilience</h2>  
+              <h2 data-tip data-for = "jobTip">Job Resilience</h2>  
                 <ReactTooltip id = "jobTip" > 
                 <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
                 and,by extension, adapt to what the market demands. 
                 </ReactTooltip>            
-              <p className={ColBody}>{jr}</p>
-              </div>
-              <div className="mb6">
-              <h2 data-tip className={ColHeader} data-for = "bgiTip">
+              <p >{jr}</p>
+              <h2 data-tip data-for = "bgiTip">
                 Business Growth Index 
               </h2>
                 <ReactTooltip id = "bgiTip" > 
@@ -287,14 +230,10 @@ let Display = class Display extends React.Component {
               The growth rate is the measure of a company’s increase <br />
               in revenue and potential to expand over a set period.
                 </ReactTooltip>              
-              <p className={ColBody}>{bgi}</p>
-              </div>
-              <div className="mb6">
-                <h2 className={ColHeader} data-tip data-for = "SATip">Included SA1 Regions</h2>
-                <p className={ColBody}>{sa1_codes}</p>
-              </div>
+              <p >{bgi}</p>
+                <h2 data-tip data-for = "SATip">Included SA1 Regions</h2>
+                <p>{sa1_codes}</p>
             </Collapsible>
-          </div>
         </div>
       </this.PanelContainer>
     );
@@ -305,7 +244,7 @@ let Display = class Display extends React.Component {
     const { mapType } = this.props;
     if (isDefault) {
       return (
-        <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z2 wmax240">
+        <div className="bg-white absolute bottom left ml36 mb36 shadow-darken10 z2 wmax240">
           <div className="py12 px12">
             <p className="txt-s">
               Select a community to learn more about opportunity in that area.

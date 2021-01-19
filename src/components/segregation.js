@@ -157,7 +157,7 @@ let SegregationMap = class SegregationMap extends React.Component {
           "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
           "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
           "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
-          "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" )          .addTo(this.map);
+          "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" ).addTo(this.map);
 
         if (e.features.length > 0) {
           if (hoveredSA2Id !== null) {

@@ -42,6 +42,7 @@ const Main = class Main extends Component {
           <Fragment>
             <Fragment>
               <Display />
+              <Legend />
             </Fragment>
           </Fragment>
         )}

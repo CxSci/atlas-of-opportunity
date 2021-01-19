@@ -18,15 +18,7 @@ const Segregation = class Segregation extends Component {
     const mapStyler = {
       zindex: 0,
     };
-
-    const footerStyle = {
-      zindex: 1,
-      position: "absolute",
-      bottom: "0px",
-      width: "100%",
-      pointerEvents: "none",
-    };
-
+    
     return (
       <div style={mapStyler}>
         <SegregationMap />
