@@ -63,7 +63,9 @@ let Map = class Map extends React.Component {
       zoom: 3.5,
     });
 
-    var controls = new mapboxgl.NavigationControl();
+    var controls = new mapboxgl.NavigationControl({
+      showCompass: false,
+    });
 
     if (this.props.modal === false) {
       this.map.addControl(controls, "top-left");
