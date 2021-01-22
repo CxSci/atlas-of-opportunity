@@ -119,7 +119,6 @@ function reducer(state = initialState, action) {
         active: options[action.payload],
       };
     case "DisplayDefault":
-      console.log("Got display action");
       return {
         ...state,
         select: { ...state.select, isDefault: action.payload },

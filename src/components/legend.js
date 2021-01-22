@@ -13,7 +13,6 @@ let Legend = class Legend extends React.Component {
 
   render() {
     const { description, stops } = this.props.active;
-    console.log("active:", this.props.active);
 
     const mapType = [
       {
@@ -33,14 +32,51 @@ let Legend = class Legend extends React.Component {
       },
     ];
 
-    const renderLegendKeys = (stop, i) => {
+    const renderLegendKeys = (stops) => {
       return (
-        <div key={i} className="txt-m">
+        <div className="txt-m">
           <span
-            className="mr6 round-full w12 h12 inline-block align-middle"
-            style={{ backgroundColor: stop[1] }}
-          />
-          <span>{`${stop[0].toLocaleString()}`}</span>
+            className="h24 inline-block align-middle"
+            style={{
+              background: `linear-gradient(90deg, ${stops.map(
+                (stop) => stop[1]
+              )})`,
+              width: "196px",
+              borderRadius: "2px",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              {stops.map((stop, i) => {
+                if (i !== 0 && i !== stops.length - 1) {
+                  return (
+                    <span
+                      key={i}
+                      style={{
+                        borderLeft: "2px solid white",
+                        height: "24px",
+                        borderStyle: "dotted",
+                      }}
+                    />
+                  );
+                } else {
+                  return (
+                    <span
+                      key={i}
+                      style={{
+                        borderLeft: "2px solid transparent",
+                        height: "24px",
+                      }}
+                    />
+                  );
+                }
+              })}
+            </div>
+          </span>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {stops.map((stop, i) => (
+              <p key={i}> {stop[0].toLocaleString()} </p>
+            ))}
+          </div>
         </div>
       );
     };
@@ -65,7 +101,7 @@ let Legend = class Legend extends React.Component {
           <h2 className="txt-bold txt-m block">{legendName}</h2>
           <p className="txt-s color-gray">{description}</p>
         </div>
-        {stops.map(renderLegendKeys)}
+        {renderLegendKeys(stops)}
       </div>
     );
   }
