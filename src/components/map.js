@@ -63,7 +63,10 @@ let Map = class Map extends React.Component {
       zoom: 3.5,
     });
 
+    var controls = new mapboxgl.NavigationControl();
+
     if (this.props.modal === false) {
+      this.map.addControl(controls, "top-left");
       this.map.flyTo({
         center: [138.7, -34.9],
         zoom: 9,
