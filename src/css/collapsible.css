@@ -15,17 +15,16 @@ h2 {
       line-height: 20px; }
       .Collapsible__contentInner p:last-child {
         margin-bottom: 0; }
-  
+
   .Collapsible__trigger {
     display: block;
     font-weight: 900;
     font-size: 18px;
-    text-decoration: none;
+    color: white;
     position: relative;
     border: solid white;
     border-width: 0 0 2px 0;
     padding: 10px;
-    background: #f79640;
 }
     .Collapsible__trigger:after {
     content: "\f007";        
@@ -38,17 +37,5 @@ h2 {
       transform: rotateZ(180deg); }
     .Collapsible__trigger.is-disabled {
       opacity: 0.5;
-      background-color: grey; }
+    }
   
-  .CustomTriggerCSS {
-    background-color: lightcoral;
-    transition: background-color 200ms ease; }
-  
-  .CustomTriggerCSS--open {
-    background-color: darkslateblue; }
-  
-  .Collapsible__custom-sibling {
-    padding: 5px;
-    font-size: 12px;
-    background-color: #CBB700;
-    color: black; }

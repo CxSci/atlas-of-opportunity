@@ -74,7 +74,7 @@ let Display = class Display extends React.Component {
             <p>{income}</p>
           </Collapsible>
 
-        <Collapsible trigger = "Growth Summary ">
+        <Collapsible trigger = "Growth Summary " >
             <h2 data-tip data-for = "GDPTip">GDP Growth Potential</h2>
             <ReactTooltip id = "GDPTip" > 
             <b> GDP Growth Potential </b> <br />
@@ -187,14 +187,14 @@ let Display = class Display extends React.Component {
             </div>
           </div>
 
-          <Collapsible trigger = "Demographic Summary">
+          <Collapsible trigger = "Demographic Summary" >
              <h2 >Population</h2>
               <p >{population}</p>
               <h2 >Median Income</h2>
               <p> AUS {income}</p>
           </Collapsible>
           
-          <Collapsible trigger = "Economic Summary">
+          <Collapsible trigger = "Economic Summary" >
               <h2 >Income Quartile</h2>
               <p>{quartile}</p>
               <h2> Inequality (lower is better)</h2>
@@ -204,7 +204,7 @@ let Display = class Display extends React.Component {
               </div>
             </Collapsible>
          
-          <Collapsible trigger = "Growth Summary">
+          <Collapsible trigger = "Growth Summary" >
                 <h2 data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
                 <p >{ggp}</p>
                   <ReactTooltip id = "GDPTip"> 

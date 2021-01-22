@@ -27,7 +27,7 @@ const Methods = class Methods extends Component {
     };
     const formula = {
       width: "100%",
-      fontSize: "25px",
+      fontSize: 'calc(10px + 1vw)',
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -37,7 +37,7 @@ const Methods = class Methods extends Component {
       width: "100%",
     };
     return (
-      <Container title="Methods">
+      <Container title="Methods" >
         <p style={content}>
           The Atlas of Opportunity showcases recent research finding that shared
           workplaces between two neighborhoods can create what we call "social

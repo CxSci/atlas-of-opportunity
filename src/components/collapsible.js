@@ -1,10 +1,14 @@
 import React from "react";
 import "../css/collapsible.css";
 
-let Collapsible = class Collapsible extends React.Component {
+const Collapsible = class Collapsible extends React.Component {
+  // static propTypes = {
+  //       bgcolor: PropTypes.string,
+  // }
     constructor(props) {
+
       super(props)
-  
+      
       // Bind class methods
       this.handleTriggerClick = this.handleTriggerClick.bind(this);
       this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
@@ -134,6 +138,7 @@ let Collapsible = class Collapsible extends React.Component {
     }
   
     render() {
+      const {bgcolor} = this.props;
       var dropdownStyle = {
         height: this.state.height,
         WebkitTransition: this.state.transition,
@@ -144,7 +149,7 @@ let Collapsible = class Collapsible extends React.Component {
   
       var openClass = this.state.isClosed ? 'is-closed' : 'is-open';
       var disabledClass = this.props.triggerDisabled ? 'is-disabled' : '';
-  
+      
       //If user wants different text when tray is open
       var trigger = (this.state.isClosed === false) && (this.props.triggerWhenOpen !== undefined)
                     ? this.props.triggerWhenOpen
@@ -168,13 +173,16 @@ let Collapsible = class Collapsible extends React.Component {
       }`;
       const outerClassString = `${this.props.classParentString}__contentOuter ${this.props.contentOuterClassName}`;
       const innerClassString = `${this.props.classParentString}__contentInner ${this.props.contentInnerClassName}`;
-  
+     
+     
+      // const this.props.triggerStyle.background = '#f9f9f9'
+
       return(
         <div className={parentClassString.trim()}>
           <TriggerElement
             className={triggerClassString.trim()}
             onClick={this.handleTriggerClick}
-            style={this.props.triggerStyle && this.props.triggerStyle}
+            style = {this.props.triggerStyle}
             onKeyPress={(event) => {
               const { key } = event;
                 if (key === ' ' || key === 'Enter') {
@@ -217,7 +225,7 @@ let Collapsible = class Collapsible extends React.Component {
     lazyRender: false,
     overflowWhenOpen: 'hidden',
     openedClassName: '',
-    triggerStyle: null,
+    triggerStyle: {background : '	#f79640'},
     triggerClassName: '',
     triggerOpenedClassName: '',
     contentOuterClassName: '',
