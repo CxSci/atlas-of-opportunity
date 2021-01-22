@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ReactTooltip from 'react-tooltip';
-
+import ReactTooltip from "react-tooltip";
 
 import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
+import SearchBar from "./searchbar";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -48,7 +48,7 @@ let Display = class Display extends React.Component {
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
+        className="bg-white flex-child flex-child--grow mt24 mb24 shadow-darken10 w240"
       >
         <div className="py12 px12">
           <div className="">
@@ -76,41 +76,48 @@ let Display = class Display extends React.Component {
         </div>
         <div className="py12 px12">
           <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "GDPTip">GDP Growth Potential
+            <h2 className="txt-bold txt-m block" data-tip data-for="GDPTip">
+              GDP Growth Potential
             </h2>
-            <ReactTooltip id = "GDPTip" > 
-            <b> GDP Growth Potential </b> <br />
-            Economic growth is an increase in the production <br />of 
-             economic goods and services,compared from <br /> one period of  
-             time to another...Traditionally, aggregate <br /> 
-             economic growth is measured in terms of gross national <br /> 
-            product (GNP) or gross domestic product (GDP), although
-            <br />  alternative metrics are sometimes used.
+            <ReactTooltip id="GDPTip">
+              <b> GDP Growth Potential </b> <br />
+              Economic growth is an increase in the production <br />
+              of economic goods and services,compared from <br /> one period of
+              time to another...Traditionally, aggregate <br />
+              economic growth is measured in terms of gross national <br />
+              product (GNP) or gross domestic product (GDP), although
+              <br /> alternative metrics are sometimes used.
             </ReactTooltip>
 
-          <p className="txt-s">{ggp}</p>
+            <p className="txt-s">{ggp}</p>
           </div>
           <div className="mb6">
-          <h2 className="txt-bold txt-m block" data-tip data-for = "jobTip">Job Resilience
-            </h2>  
-            <ReactTooltip id = "jobTip" > 
-            <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
-            and,by extension, adapt to what the market demands. 
+            <h2 className="txt-bold txt-m block" data-tip data-for="jobTip">
+              Job Resilience
+            </h2>
+            <ReactTooltip id="jobTip">
+              <b> Job Resilience </b> <br />
+              The ability to adjust to career change as it happens <br />
+              and,by extension, adapt to what the market demands.
             </ReactTooltip>
             <p className="txt-s">{jr}</p>
           </div>
           <div className="mb6">
-          <h2 data-tip className="txt-bold txt-m block" data-for = "bgiTip">
-              Business Growth Index 
+            <h2 data-tip className="txt-bold txt-m block" data-for="bgiTip">
+              Business Growth Index
             </h2>
-            <ReactTooltip id = "bgiTip" > 
-            <b> Business Growth Index </b> <br />
-          The growth rate is the measure of a company’s increase <br />
-          in revenue and potential to expand over a set period.
-            </ReactTooltip>            <p className="txt-s">{bgi}</p>
+            <ReactTooltip id="bgiTip">
+              <b> Business Growth Index </b> <br />
+              The growth rate is the measure of a company’s increase <br />
+              in revenue and potential to expand over a set period.
+            </ReactTooltip>{" "}
+            <p className="txt-s">{bgi}</p>
           </div>
           <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "SATip"> Included SA1 Regions</h2>
+            <h2 className="txt-bold txt-m block" data-tip data-for="SATip">
+              {" "}
+              Included SA1 Regions
+            </h2>
             <p className="txt-s">{sa1_codes}</p>
           </div>
         </div>
@@ -154,16 +161,17 @@ let Display = class Display extends React.Component {
                   value={Constants.FLOW_BI}
                   checked={flowDirection === Constants.FLOW_BI}
                   onChange={this.onFlowChange}
-                  />
+                />
                 &nbsp;Bi-directional
               </label>
             </div>
           </form>
-        </div >
+        </div>
       </div>
     );
     return (
       <this.PanelContainer>
+        <SearchBar />
         <TopPanel />
         <BottomPanel />
       </this.PanelContainer>
@@ -184,6 +192,7 @@ let Display = class Display extends React.Component {
     } = this.props.select;
     return (
       <this.PanelContainer>
+        <SearchBar />
         <div
           style={{ overflowY: "auto" }}
           className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
@@ -232,40 +241,49 @@ let Display = class Display extends React.Component {
           </div>
           <div className="py12 px12">
             <div className="mb6">
-              <h2 className="txt-bold txt-m block" data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
+              <h2 className="txt-bold txt-m block" data-tip data-for="GDPTip">
+                GDP Growth Potential
+              </h2>
               <p className="txt-s">{ggp}</p>
-              <ReactTooltip id = "GDPTip"> 
-              <b> GDP Growth Potential </b> <br />
-            Economic growth is an increase in the production <br />of 
-             economic goods and services,compared from <br /> one period of  
-             time to another...Traditionally, aggregate <br /> 
-             economic growth is measured in terms of gross national <br /> 
-            product (GNP) or gross domestic product (GDP), although
-            <br />  alternative metrics are sometimes used.</ReactTooltip>
+              <ReactTooltip id="GDPTip">
+                <b> GDP Growth Potential </b> <br />
+                Economic growth is an increase in the production <br />
+                of economic goods and services,compared from <br /> one period
+                of time to another...Traditionally, aggregate <br />
+                economic growth is measured in terms of gross national <br />
+                product (GNP) or gross domestic product (GDP), although
+                <br /> alternative metrics are sometimes used.
+              </ReactTooltip>
             </div>
             <div className="mb6">
-            <h2 className="txt-bold txt-m block" data-tip data-for = "jobTip">Job Resilience
-            {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'                               '}`} ? </Link>  */}
-            </h2>  
-            <ReactTooltip id = "jobTip" > 
-            <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
-            and,by extension, adapt to what the market demands. 
-            </ReactTooltip>            <p className="txt-s">{jr}</p>
+              <h2 className="txt-bold txt-m block" data-tip data-for="jobTip">
+                Job Resilience
+                {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'                               '}`} ? </Link>  */}
+              </h2>
+              <ReactTooltip id="jobTip">
+                <b> Job Resilience </b> <br />
+                The ability to adjust to career change as it happens <br />
+                and,by extension, adapt to what the market demands.
+              </ReactTooltip>{" "}
+              <p className="txt-s">{jr}</p>
             </div>
             <div className="mb6">
-            <h2 data-tip className="txt-bold txt-m block" data-for = "bgiTip">
-              Business Growth Index 
-              {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'          '}`} ? </Link>  */}
-            </h2>
-            <ReactTooltip id = "bgiTip" > 
-            <b> Business Growth Index </b> <br />
-          The growth rate is the measure of a company’s increase <br />
-          in revenue and potential to expand over a set period.
-            </ReactTooltip>              <p className="txt-s">{bgi}</p>
+              <h2 data-tip className="txt-bold txt-m block" data-for="bgiTip">
+                Business Growth Index
+                {/* <Link  to = '/Research' style = {{ whiteSpace: "pre" }}>{`${'          '}`} ? </Link>  */}
+              </h2>
+              <ReactTooltip id="bgiTip">
+                <b> Business Growth Index </b> <br />
+                The growth rate is the measure of a company’s increase <br />
+                in revenue and potential to expand over a set period.
+              </ReactTooltip>{" "}
+              <p className="txt-s">{bgi}</p>
             </div>
             <div className="mb6">
-              <h2 className="txt-bold txt-m block" data-tip data-for = "SATip">Included SA1 Regions</h2>
-              <ReactTooltip id = "SATip"> SATip? </ReactTooltip>
+              <h2 className="txt-bold txt-m block" data-tip data-for="SATip">
+                Included SA1 Regions
+              </h2>
+              <ReactTooltip id="SATip"> SATip? </ReactTooltip>
               <p className="txt-s">{sa1_codes}</p>
             </div>
           </div>
@@ -279,11 +297,16 @@ let Display = class Display extends React.Component {
     const { mapType } = this.props;
     if (isDefault) {
       return (
-        <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z2 wmax240">
-          <div className="py12 px12">
-            <p className="txt-s">
-              Select a community to learn more about opportunity in that area.
-            </p>
+        <div className="wmax240">
+          <div className="absolute top right mr12 mt60 wmax240">
+            <SearchBar />
+          </div>
+          <div className="bg-white absolute bottom right mr12 mb36 shadow-darken10 z2 wmax240">
+            <div className="py12 px12">
+              <p className="txt-s">
+                Select a community to learn more about opportunity in that area.
+              </p>
+            </div>
           </div>
         </div>
       );

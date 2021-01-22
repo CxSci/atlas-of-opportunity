@@ -56,3 +56,10 @@ export function setFlowDirection(direction) {
     direction: direction,
   });
 }
+
+export function setSearchBarInfo(payload) {
+  store.dispatch({
+    type: Constants.SET_SEARCH_BAR_INFO,
+    payload: payload,
+  });
+}
