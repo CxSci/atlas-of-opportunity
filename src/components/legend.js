@@ -91,7 +91,6 @@ let Legend = class Legend extends React.Component {
         <div className="mt6 mb12">
           <Dropdown
             defaultValue={mapType[0].value}
-            search
             selection
             options={mapType}
             onChange={mapTypeEvent}
