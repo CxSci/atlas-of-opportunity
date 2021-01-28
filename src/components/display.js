@@ -52,7 +52,7 @@ let Display = class Display extends React.Component {
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className="bg-white flex-child flex-child--grow mt30 mb24 ml30 shadow-darken10 w240"
+        className="bg-white flex-child flex-child--grow mt30 mb24 ml24 shadow-darken10 w240"
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
@@ -144,12 +144,12 @@ let Display = class Display extends React.Component {
                   value={Constants.FLOW_BI}
                   checked={flowDirection === Constants.FLOW_BI}
                   onChange={this.onFlowChange}
-                  />
+                />
                 &nbsp;Bi-directional
               </label>
             </div>
           </form>
-        </div >
+        </div>
       </div>
     );
     return (
@@ -176,7 +176,7 @@ let Display = class Display extends React.Component {
       <this.PanelContainer>
         <div
           style={{ overflowY: "auto" }}
-          className="bg-white flex-child flex-child--grow mt30 mb24 shadow-darken10 w240"
+          className="bg-white flex-child flex-child--grow mt30 mb24 ml24 shadow-darken10 w240"
         >
           <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
               <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
@@ -244,11 +244,13 @@ let Display = class Display extends React.Component {
     const { mapType } = this.props;
     if (isDefault) {
       return (
-        <div className="bg-white absolute bottom left ml36 mb36 shadow-darken10 z2 wmax240">
-          <div className="py12 px12">
-            <p className="txt-s">
-              Select a community to learn more about opportunity in that area.
-            </p>
+        <div className="wmax240">
+          <div className="bg-white absolute bottom left ml36 mb36 shadow-darken10 z2 wmax240">
+            <div className="py12 px12">
+              <p className="txt-s">
+                Select a community to learn more about opportunity in that area.
+              </p>
+            </div>
           </div>
         </div>
       );

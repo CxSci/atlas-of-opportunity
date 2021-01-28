@@ -16,7 +16,7 @@ let Legend = class Legend extends React.Component {
         <div key={i} className="txt-m">
           <span
             className="mr6 round-full w12 h12 inline-block align-middle"
-            style={{ backgroundColor: stop[1] }}
+            style={{ backgroundColor: stop[1]}}
           />
           <span>{`${stop[0].toLocaleString()}`}</span>
         </div>
@@ -25,7 +25,8 @@ let Legend = class Legend extends React.Component {
 
     let legendName = this.props.active.legendName;
     return (
-       <div className="bg-white absolute bottom right mr36 mb36 py12 px12 shadow-darken10 round z1 wmax180">
+       <div className="bg-white py12 px12 shadow-darken10 round z1" 
+       style = {{position: "absolute", bottom: '24px', right: '70px'}}>
         <div className="mb6">
           <h2 className="txt-bold txt-m block">{legendName}</h2>
           <p className="txt-s color-gray">{description}</p>

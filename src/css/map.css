@@ -15,3 +15,8 @@
 .mapboxgl-popup-tip {
   display: none;
 }
+
+.mapboxgl-ctrl-top-left {
+  margin-top: 80px;
+  margin-left: 14px;
+}
