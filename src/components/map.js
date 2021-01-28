@@ -10,6 +10,7 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "../css/map.css";
 
 import * as Constants from "../constants";
+import { round } from "@turf/turf";
 
 const turf = window.turf;
 mapboxgl.accessToken =
@@ -596,8 +597,9 @@ let Map = class Map extends React.Component {
   render() {
     // Style components
     const search = {
-      paddingTop: "90px",
-      paddingLeft: '75vw',
+      position: 'absolute',
+      top: "90px",
+      right: '24px',
     };
 
     return (

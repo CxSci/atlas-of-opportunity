@@ -2,9 +2,6 @@ import React from "react";
 import "../css/collapsible.css";
 
 const Collapsible = class Collapsible extends React.Component {
-  // static propTypes = {
-  //       bgcolor: PropTypes.string,
-  // }
     constructor(props) {
 
       super(props)
@@ -138,7 +135,6 @@ const Collapsible = class Collapsible extends React.Component {
     }
   
     render() {
-      const {bgcolor} = this.props;
       var dropdownStyle = {
         height: this.state.height,
         WebkitTransition: this.state.transition,
