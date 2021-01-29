@@ -13,8 +13,6 @@ let BarGraph = class BarGraph extends React.Component {
   };
 
   render() {
-    const green = "#f79640";
-    const black = "#3a3a26";
     const { width, height, data } = this.props;
     const margin = { top: 20, bottom: 20, left: 20, right: 0 };
 
@@ -53,7 +51,7 @@ let BarGraph = class BarGraph extends React.Component {
               key={xPoint(d)}
               y={yMax - barHeight}
               height={barHeight}
-              fill={green}
+              fill={"black"}
               width={xScale.bandwidth()}
               rx={4}
             />
@@ -62,11 +60,11 @@ let BarGraph = class BarGraph extends React.Component {
         <AxisBottom
           top={yMax + margin.top}
           scale={xScale}
-          stroke={black}
-          tickStroke={black}
+          stroke={'black'}
+          tickStroke={'black'}
           hideAxisLine
           tickLabelProps={() => ({
-            fill: black,
+            fill: 'black',
             fontSize: 11,
             textAnchor: "middle",
           })}

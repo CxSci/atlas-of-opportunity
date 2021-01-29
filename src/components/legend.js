@@ -74,7 +74,7 @@ let Legend = class Legend extends React.Component {
           </span>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {stops.map((stop, i) => (
-              <p key={i}> {stop[0].toLocaleString()} </p>
+              <span key={i}> {stop[0].toLocaleString()} </span>
             ))}
           </div>
         </div>
@@ -87,7 +87,7 @@ let Legend = class Legend extends React.Component {
 
     let legendName = this.props.active.legendName;
     return (
-      <div className="bg-white absolute bottom left ml24 mb36 py12 px12 shadow-darken10 round z1 wmax220">
+      <div className="bg-white absolute bottom right mr60 mb36 py12 px12 shadow-darken10 round z1 wmax220">
         <div className="mt6 mb12">
           <Dropdown
             defaultValue={mapType[0].value}

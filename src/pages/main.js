@@ -8,7 +8,6 @@ import SegregationMap from "../components/segregation";
 import Display from "../components/display";
 import Legend from "../components/legend";
 import Modal from "../components/modal";
-import Footer from "../components/footer.js";
 
 const Main = class Main extends Component {
   static propTypes = {
@@ -20,14 +19,6 @@ const Main = class Main extends Component {
 
     const mapStyler = {
       zindex: 0,
-    };
-
-    const footerStyle = {
-      zindex: 1,
-      position: "absolute",
-      bottom: "0px",
-      width: "100%",
-      pointerEvents: "none",
     };
 
     const MapToShow = () => {
@@ -51,9 +42,6 @@ const Main = class Main extends Component {
             <Fragment>
               <Display />
               <Legend />
-              <div style={footerStyle}>
-                <Footer />
-              </div>
             </Fragment>
           </Fragment>
         )}

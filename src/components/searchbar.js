@@ -35,8 +35,9 @@ let SearchBar = class SearchBar extends React.Component {
   render() {
     // Style components
     const search = {
-      // paddingTop: "90px",
-      // paddingLeft: "24px",
+      position: 'absolute',
+      top: "100px",
+      right: "24px",
     };
 
     return (

@@ -15,8 +15,7 @@ const Container = class Container extends Component {
       backgroundColor: "#f9f9f9",
     };
     const content = {
-      maxWidth: "750px",
-      margin: "120px 200px",
+      margin: '15vh 15vw'
     };
     const titleBox = {
       fontSize: "40px",
