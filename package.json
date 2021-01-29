@@ -5,6 +5,9 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@turf/great-circle": "^5.1.5",
     "@turf/turf": "^5.1.6",

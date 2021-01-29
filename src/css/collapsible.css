@@ -1,0 +1,41 @@
+
+h2 {
+    font-weight: 800;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+    
+  .Collapsible__contentInner {
+    padding: 10px;
+    border: 1px solid white;
+    border-top: 0; }
+    .Collapsible__contentInner p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 20px; }
+      .Collapsible__contentInner p:last-child {
+        margin-bottom: 0; }
+
+  .Collapsible__trigger {
+    display: block;
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+    position: relative;
+    border: solid white;
+    border-width: 0 0 2px 0;
+    padding: 10px;
+}
+    .Collapsible__trigger:after {
+    content: "\f007";        
+    font-family: 'Font Awesome\ 5 Free';      
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: transform 300ms; }
+    .Collapsible__trigger.is-open:after {
+      transform: rotateZ(180deg); }
+    .Collapsible__trigger.is-disabled {
+      opacity: 0.5;
+    }
+  

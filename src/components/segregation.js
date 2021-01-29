@@ -3,7 +3,7 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-
+import SearchBar from "./searchbar";
 const turf = window.turf;
 
 mapboxgl.accessToken =
@@ -41,6 +41,22 @@ let SegregationMap = class SegregationMap extends React.Component {
       center: [121, -26.5],
       zoom: 3.5,
     });
+
+
+      // zoom buttons
+      var controls = new mapboxgl.NavigationControl({
+        showCompass: false,
+      });
+  
+      if (this.props.modal === false) {
+        this.map.addControl(controls, "bottom-right");
+        this.map.flyTo({
+          center: [138.7, -34.9],
+          zoom: 9,
+          speed: 0.8,
+        });
+      }
+  
 
     if (this.props.modal === false) {
       this.map.flyTo({
@@ -139,20 +155,11 @@ let SegregationMap = class SegregationMap extends React.Component {
         );
         this.hoveredPopup
           .setLngLat(coordinates)
-          .setHTML(
-            "<h5>" +
-              regionName +
-              "</h5> <p> <b> Population: </b> " +
-              e.features[0].properties.persons_num +
-              "<br /> <b> Median Income (AUS): </b>" +
-              medIncome +
-              "<br / > <b> GDP Growth Potential: </b>" +
-              e.features[0].properties.income_diversity +
-              "<br / > <b> Job Resiliance: </b>" +
-              e.features[0].properties.bridge_diversity +
-              "</p>"
-          )
-          .addTo(this.map);
+          .setHTML("<h5>" + regionName +
+          "</h5> <p> <b> Population: </b> " + e.features[0].properties.persons_num + 
+          "<br /> <b> Median Income (AUS): </b>" + medIncome+ 
+          "<br / > <b> GDP Growth Potential: </b>" + e.features[0].properties.income_diversity+
+          "<br / > <b> Job Resiliance: </b>" + e.features[0].properties.bridge_diversity +"</p>" ).addTo(this.map);
 
         if (e.features.length > 0) {
           if (hoveredSA2Id !== null) {
@@ -277,6 +284,7 @@ let SegregationMap = class SegregationMap extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
+        <SearchBar/>
       </div>
     );
   }

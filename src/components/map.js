@@ -3,6 +3,7 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+import SearchBar from "./searchbar";
 
 import "../css/map.css";
 
@@ -19,7 +20,6 @@ let Map = class Map extends React.Component {
   hoveredPopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
-    // maxWidth: "200px",
   });
   clickedPopup = new mapboxgl.Popup({
     closeButton: false,
@@ -63,12 +63,14 @@ let Map = class Map extends React.Component {
       zoom: 3.5,
     });
 
+
+    // zoom buttons
     var controls = new mapboxgl.NavigationControl({
       showCompass: false,
     });
 
     if (this.props.modal === false) {
-      this.map.addControl(controls, "top-left");
+      this.map.addControl(controls, "bottom-right");
       this.map.flyTo({
         center: [138.7, -34.9],
         zoom: 9,
@@ -152,6 +154,7 @@ let Map = class Map extends React.Component {
           ],
         },
       });
+
 
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
@@ -601,6 +604,7 @@ let Map = class Map extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
+        {this.props.modal ? null : <div>  <SearchBar/> </div>}
       </div>
     );
   }
