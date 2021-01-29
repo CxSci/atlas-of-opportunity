@@ -22,7 +22,6 @@ const Main = class Main extends Component {
     };
 
     const MapToShow = () => {
-      console.log("=Maptype:", mapType);
       switch (mapType) {
         case Constants.MAP_TYPE.SEGREGATION:
           return <SegregationMap />;

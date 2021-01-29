@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import * as Constants from "../constants";
-import { setHeaderOption, setMapType } from "../redux/action-creators";
-import DropDown from "./dropdown";
+import { setHeaderOption } from "../redux/action-creators";
 
 const Header = class Header extends Component {
   static propTypes = {
@@ -58,14 +56,6 @@ const Header = class Header extends Component {
       color: "#f79640",
       borderBottom: "#f79640 solid 5px",
     };
-    const dropDownOption = {
-      padding: "10px 20px 10px 15px",
-      fontSize: "18px",
-    };
-    const dropDownLink = {
-      cursor: "pointer",
-      color: "black",
-    };
 
     return (
       <div style={container}>
@@ -77,45 +67,13 @@ const Header = class Header extends Component {
             Atlas of Opportunity
           </div>
           <div style={optionsBox}>
-            <DropDown title="Map" titleSize="1.3">
-              <li style={dropDownOption}>
-                <Link
-                  to="/"
-                  style={dropDownLink}
-                  onClick={() => {
-                    setHeaderOption("/");
-                    setMapType(Constants.MAP_TYPE.GROWTH);
-                  }}
-                >
-                  Mobility Map
-                </Link>
-              </li>
-              <li style={dropDownOption}>
-                <Link
-                  to="/"
-                  style={dropDownLink}
-                  onClick={() => {
-                    setHeaderOption("/");
-                    setMapType(Constants.MAP_TYPE.TRANSACTIONS);
-                  }}
-                >
-                  Financial Interactions
-                </Link>
-              </li>
-              <li style={dropDownOption}>
-                <Link
-                  to="/"
-                  style={dropDownLink}
-                  onClick={() => {
-                    setHeaderOption("/");
-                    setMapType(Constants.MAP_TYPE.SEGREGATION);
-                  }}
-                >
-                  Economic Segregation
-                </Link>
-              </li>
-            </DropDown>
-
+            <Link
+              to="/"
+              style={path === "/" ? clicked : options}
+              onClick={() => setHeaderOption("/")}
+            >
+              Map
+            </Link>
             <Link
               to="/methods"
               style={path === "/methods" ? clicked : options}
