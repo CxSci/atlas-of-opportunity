@@ -245,13 +245,6 @@ let Display = class Display extends React.Component {
     if (isDefault) {
       return (
         <div className="wmax240">
-          <div className="bg-white absolute bottom left ml36 mb36 shadow-darken10 z2 wmax240">
-            <div className="py12 px12">
-              <p className="txt-s">
-                Select a community to learn more about opportunity in that area.
-              </p>
-            </div>
-          </div>
         </div>
       );
     }
