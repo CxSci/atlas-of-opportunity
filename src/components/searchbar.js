@@ -41,9 +41,7 @@ let SearchBar = class SearchBar extends React.Component {
     };
 
     return (
-      <div className="mt30">
         <div id="geocoder" style={search}></div>
-      </div>
     );
   }
 };
