@@ -63,21 +63,6 @@ let Map = class Map extends React.Component {
       zoom: 3.5,
     });
 
-
-    // zoom buttons
-    var controls = new mapboxgl.NavigationControl({
-      showCompass: false,
-    });
-
-    if (this.props.modal === false) {
-      this.map.addControl(controls, "bottom-right");
-      this.map.flyTo({
-        center: [138.7, -34.9],
-        zoom: 9,
-        speed: 0.8,
-      });
-    }
-
     var hoveredSA2Id = null;
 
     this.map.on("load", () => {
@@ -155,7 +140,6 @@ let Map = class Map extends React.Component {
         },
       });
 
-
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
@@ -228,8 +212,32 @@ let Map = class Map extends React.Component {
     if (this.props.flowDirection !== prevProps.flowDirection) {
       this.redrawBridges();
     }
+
     if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
       this.onMapSearch(this.props.searchBarInfo);
+    }
+
+    if (this.props.modal !== prevProps.modal) {
+      // zoom buttons
+      var controls = new mapboxgl.NavigationControl({
+        showCompass: false,
+      });
+      this.map.addControl(controls, "bottom-right");
+
+      this.map.flyTo({
+        center: [138.7, -34.9],
+        zoom: 9,
+        speed: 0.8,
+      });
+    }
+
+    if (this.props.active.name !== prevProps.active.name) {
+      let fillColor = {
+        property: this.props.active.property,
+        stops: this.props.active.stops,
+      };
+
+      this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
     }
   }
 
@@ -356,246 +364,253 @@ let Map = class Map extends React.Component {
 
     setSelect(sa2_properties);
 
-    // Show the bridges for the selected flow direction {in, out, bi-directional}.
-    // flowDirection should be one of "inflow", "outflow", or "bidirectional"
-    // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
-    let keys = this.props.active.bridgeKeys[this.props.flowDirection];
-    // Get bridges and ignore missing values
-    let bridges = keys
-      .map((x) => clickedSA2.properties[x])
-      .filter((x) => x !== undefined);
-
-    // Search map for SA2s matching the bridges.
-    clickedFeatures = this.map.querySourceFeatures("sa2", {
-      sourceLayer: "original",
-      filter: [
-        "in",
-        ["to-number", ["get", "SA2_MAIN16"]],
-        ["literal", bridges],
-      ],
-    });
-
-    // get rid of the repeated features in the clickedFeatures array
-    clickedFeatures.forEach((f) => {
-      // For each feature, update its 'highlight' state
-      this.map.setFeatureState(
-        {
-          source: "sa2",
-          id: f.id,
-        },
-        {
-          highlight: true,
-        }
-      );
-      if (f.properties.SA2_MAIN16 in featureObj) {
-      } else {
-        featureObj[f.properties.SA2_MAIN16] = f;
-      }
-    });
-
-    // Update component state now that our changes are ready.
     this.setState({ clickedSA2: clickedSA2 });
-    this.setState({ clickedFeatures: clickedFeatures });
 
-    // sort the clickedFeatures based on the ranking in bridges
-    var featureList = [];
-    bridges.forEach((b) => {
-      featureList.push(featureObj[b]);
-    });
+    if (this.props.active.name !== "Inequality") {
+      // Show the bridges for the selected flow direction {in, out, bi-directional}.
+      // flowDirection should be one of "inflow", "outflow", or "bidirectional"
+      // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
+      let keys = this.props.active.bridgeKeys[this.props.flowDirection];
+      // Get bridges and ignore missing values
+      let bridges = keys
+        .map((x) => clickedSA2.properties[x])
+        .filter((x) => x !== undefined);
 
-    // create an array of center coordinates of each SA2 region
-    featureList.forEach((ft, i) => {
-      var destination = turf.center(ft).geometry.coordinates;
-      var regionName = ft.properties.SA2_NAME16;
-      destinationList.push(destination);
-
-      // Set name of related regions over them
-      switch (i) {
-        case 1:
-          this.cntr1Popup
-            .setLngLat(destination)
-            .setHTML("<h5>" + regionName + "</h5>")
-            .addTo(this.map);
-          break;
-        case 2:
-          this.cntr2Popup
-            .setLngLat(destination)
-            .setHTML("<h5>" + regionName + "</h5>")
-            .addTo(this.map);
-          break;
-        default:
-          this.cntr0Popup
-            .setLngLat(destination)
-            .setHTML("<h5>" + regionName + "</h5>")
-            .addTo(this.map);
-      }
-    });
-    //create an array of coordinates corresponding to the bridges
-    var coordinateList = [];
-    destinationList.forEach((d) => {
-      var pnt = [origin, d];
-      coordinateList.push(pnt);
-    });
-
-    var routeList = [];
-    var pointList = [];
-
-    // create point objects based on the coordinateList
-    coordinateList.forEach((bridge) => {
-      var bridgeStart = turf.point(bridge[0]);
-      var bridgeEnd = turf.point(bridge[1]);
-      var greatCircle = turf.greatCircle(bridgeStart, bridgeEnd, {
-        name: "start to end",
-        npoints: 500,
+      // Search map for SA2s matching the bridges.
+      clickedFeatures = this.map.querySourceFeatures("sa2", {
+        sourceLayer: "original",
+        filter: [
+          "in",
+          ["to-number", ["get", "SA2_MAIN16"]],
+          ["literal", bridges],
+        ],
       });
-      routeList.push(greatCircle);
-      var pointObj = {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Point",
-          coordinates: bridge[0],
-        },
+
+      // get rid of the repeated features in the clickedFeatures array
+      clickedFeatures.forEach((f) => {
+        // For each feature, update its 'highlight' state
+        this.map.setFeatureState(
+          {
+            source: "sa2",
+            id: f.id,
+          },
+          {
+            highlight: true,
+          }
+        );
+        if (f.properties.SA2_MAIN16 in featureObj) {
+        } else {
+          featureObj[f.properties.SA2_MAIN16] = f;
+        }
+      });
+
+      // Update component state now that our changes are ready.
+      this.setState({ clickedFeatures: clickedFeatures });
+
+      // sort the clickedFeatures based on the ranking in bridges
+      var featureList = [];
+      bridges.forEach((b) => {
+        featureList.push(featureObj[b]);
+      });
+
+      // create an array of center coordinates of each SA2 region
+      featureList.forEach((ft, i) => {
+        var destination = turf.center(ft).geometry.coordinates;
+        var regionName = ft.properties.SA2_NAME16;
+        destinationList.push(destination);
+
+        // Set name of related regions over them
+        switch (i) {
+          case 1:
+            this.cntr1Popup
+              .setLngLat(destination)
+              .setHTML("<h5>" + regionName + "</h5>")
+              .addTo(this.map);
+            break;
+          case 2:
+            this.cntr2Popup
+              .setLngLat(destination)
+              .setHTML("<h5>" + regionName + "</h5>")
+              .addTo(this.map);
+            break;
+          default:
+            this.cntr0Popup
+              .setLngLat(destination)
+              .setHTML("<h5>" + regionName + "</h5>")
+              .addTo(this.map);
+        }
+      });
+      //create an array of coordinates corresponding to the bridges
+      var coordinateList = [];
+      destinationList.forEach((d) => {
+        var pnt = [origin, d];
+        coordinateList.push(pnt);
+      });
+
+      var routeList = [];
+      var pointList = [];
+
+      // create point objects based on the coordinateList
+      coordinateList.forEach((bridge) => {
+        var bridgeStart = turf.point(bridge[0]);
+        var bridgeEnd = turf.point(bridge[1]);
+        var greatCircle = turf.greatCircle(bridgeStart, bridgeEnd, {
+          name: "start to end",
+          npoints: 500,
+        });
+        routeList.push(greatCircle);
+        var pointObj = {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "Point",
+            coordinates: bridge[0],
+          },
+        };
+        pointList.push(pointObj);
+      });
+      //color the bridges according to the ranking
+      if (routeList[0]) {
+        routeList[0].properties = { color: "#01579B" };
+      }
+      // routeList[0].properties = {"color": "#01579B"};
+      if (routeList[1]) {
+        routeList[1].properties = { color: "#29B6F6" };
+      }
+      if (routeList[2]) {
+        routeList[2].properties = { color: "#B3E5FC" };
+      }
+      // routeList[1].properties = {"color": "#29B6F6"};
+      // routeList[2].properties = {"color": "#B3E5FC"};
+
+      var route = {
+        type: "FeatureCollection",
+        features: routeList,
       };
-      pointList.push(pointObj);
-    });
-    //color the bridges according to the ranking
-    if (routeList[0]) {
-      routeList[0].properties = { color: "#01579B" };
-    }
-    // routeList[0].properties = {"color": "#01579B"};
-    if (routeList[1]) {
-      routeList[1].properties = { color: "#29B6F6" };
-    }
-    if (routeList[2]) {
-      routeList[2].properties = { color: "#B3E5FC" };
-    }
-    // routeList[1].properties = {"color": "#29B6F6"};
-    // routeList[2].properties = {"color": "#B3E5FC"};
+      var point = {
+        type: "FeatureCollection",
+        features: pointList,
+      };
 
-    var route = {
-      type: "FeatureCollection",
-      features: routeList,
-    };
-    var point = {
-      type: "FeatureCollection",
-      features: pointList,
-    };
-
-    // add route source and layer to the map
-    this.map.addSource("route", {
-      type: "geojson",
-      data: route,
-    });
-    this.map.addLayer({
-      id: "route",
-      source: "route",
-      type: "line",
-      layout: {
-        "line-cap": "round",
-      },
-      paint: {
-        "line-width": 6,
-        "line-dasharray": [0, 2],
-        "line-color": ["get", "color"],
-      },
-    });
-    // Don't show point for bi-directional flows.
-    if (this.props.flowDirection !== Constants.FLOW_BI) {
-      // add point source and layer to the map
-      this.map.addSource("point", {
+      // add route source and layer to the map
+      this.map.addSource("route", {
         type: "geojson",
-        data: point,
+        data: route,
       });
       this.map.addLayer({
-        id: "point",
-        source: "point",
-        type: "symbol",
+        id: "route",
+        source: "route",
+        type: "line",
         layout: {
-          "icon-image": "triangle-11",
-          "icon-rotate": ["get", "bearing"],
-          "icon-rotation-alignment": "map",
-          "icon-allow-overlap": true,
-          "icon-ignore-placement": true,
+          "line-cap": "round",
         },
         paint: {
-          "icon-color": "#00ff00",
-          "icon-halo-color": "#fff",
-          "icon-halo-width": 2,
+          "line-width": 6,
+          "line-dasharray": [0, 2],
+          "line-color": ["get", "color"],
         },
       });
-    }
-
-    // Number of steps to use in the arc and animation, more steps means
-    // a smoother arc and animation, but too many steps will result in a
-    // low frame rate
-    let steps = 1000;
-    var that = this;
-
-    function animate(featureIdx, cntr, point, route, pointID) {
-      // Update point geometry to a new position based on counter denoting
-      // the index to access the arc.
-      if (cntr >= route.features[featureIdx].geometry.coordinates.length - 1) {
-        return;
-      }
-      var cntrIdx = cntr;
-      if (that.props.flowDirection === Constants.FLOW_IN) {
-        cntrIdx = route.features[featureIdx].geometry.coordinates.length - cntr;
-      }
-
-      point.features[featureIdx].geometry.coordinates =
-        route.features[featureIdx].geometry.coordinates[cntrIdx];
-
-      let a = turf.point(
-        route.features[featureIdx].geometry.coordinates[
-          cntr >= steps ? cntr - 1 : cntr
-        ]
-      );
-      let b = turf.point(
-        route.features[featureIdx].geometry.coordinates[
-          cntr >= steps ? cntr : cntr + 1
-        ]
-      );
-
-      // Default is outflow. Flip coordinates for inflow.
-      if (that.props.flowDirection === Constants.FLOW_IN) {
-        [a, b] = [b, a];
+      // Don't show point for bi-directional flows.
+      if (this.props.flowDirection !== Constants.FLOW_BI) {
+        // add point source and layer to the map
+        this.map.addSource("point", {
+          type: "geojson",
+          data: point,
+        });
+        this.map.addLayer({
+          id: "point",
+          source: "point",
+          type: "symbol",
+          layout: {
+            "icon-image": "triangle-11",
+            "icon-rotate": ["get", "bearing"],
+            "icon-rotation-alignment": "map",
+            "icon-allow-overlap": true,
+            "icon-ignore-placement": true,
+          },
+          paint: {
+            "icon-color": "#00ff00",
+            "icon-halo-color": "#fff",
+            "icon-halo-width": 2,
+          },
+        });
       }
 
-      point.features[featureIdx].properties.bearing = turf.bearing(a, b);
+      // Number of steps to use in the arc and animation, more steps means
+      // a smoother arc and animation, but too many steps will result in a
+      // low frame rate
+      let steps = 1000;
+      var that = this;
 
-      // Update the source with this new data.
-      let source = that.map.getSource(pointID);
-      if (source !== undefined) {
-        that.map.getSource(pointID).setData(point);
-        if (cntr + 2 === 500) {
-          cntr = 0;
+      function animate(featureIdx, cntr, point, route, pointID) {
+        // Update point geometry to a new position based on counter denoting
+        // the index to access the arc.
+        if (
+          cntr >=
+          route.features[featureIdx].geometry.coordinates.length - 1
+        ) {
+          return;
         }
-        // Request the next frame of animation so long the end has not been reached.
-        if (cntr < steps) {
-          requestAnimationFrame(function () {
-            animate(featureIdx, cntr + 1, point, route, pointID);
-          });
+        var cntrIdx = cntr;
+        if (that.props.flowDirection === Constants.FLOW_IN) {
+          cntrIdx =
+            route.features[featureIdx].geometry.coordinates.length - cntr;
+        }
+
+        point.features[featureIdx].geometry.coordinates =
+          route.features[featureIdx].geometry.coordinates[cntrIdx];
+
+        let a = turf.point(
+          route.features[featureIdx].geometry.coordinates[
+            cntr >= steps ? cntr - 1 : cntr
+          ]
+        );
+        let b = turf.point(
+          route.features[featureIdx].geometry.coordinates[
+            cntr >= steps ? cntr : cntr + 1
+          ]
+        );
+
+        // Default is outflow. Flip coordinates for inflow.
+        if (that.props.flowDirection === Constants.FLOW_IN) {
+          [a, b] = [b, a];
+        }
+
+        point.features[featureIdx].properties.bearing = turf.bearing(a, b);
+
+        // Update the source with this new data.
+        let source = that.map.getSource(pointID);
+        if (source !== undefined) {
+          that.map.getSource(pointID).setData(point);
+          if (cntr + 2 === 500) {
+            cntr = 0;
+          }
+          // Request the next frame of animation so long the end has not been reached.
+          if (cntr < steps) {
+            requestAnimationFrame(function () {
+              animate(featureIdx, cntr + 1, point, route, pointID);
+            });
+          }
         }
       }
-    }
 
-    // Reset the counter used for in and outflow
-    var cntr0 = 0;
-    var cntr1 = 0;
-    var cntr2 = 0;
+      // Reset the counter used for in and outflow
+      var cntr0 = 0;
+      var cntr1 = 0;
+      var cntr2 = 0;
 
-    // Skip animation for bidirectional flow.
-    if (this.props.flowDirection !== Constants.FLOW_BI) {
-      // Start the animation for in or outflow
-      if (bridges[0]) {
-        animate(0, cntr0, point, route, "point");
-      }
-      if (bridges[1]) {
-        animate(1, cntr1, point, route, "point");
-      }
-      if (bridges[2]) {
-        animate(2, cntr2, point, route, "point");
+      // Skip animation for bidirectional flow.
+      if (this.props.flowDirection !== Constants.FLOW_BI) {
+        // Start the animation for in or outflow
+        if (bridges[0]) {
+          animate(0, cntr0, point, route, "point");
+        }
+        if (bridges[1]) {
+          animate(1, cntr1, point, route, "point");
+        }
+        if (bridges[2]) {
+          animate(2, cntr2, point, route, "point");
+        }
       }
     }
   };
@@ -604,7 +619,12 @@ let Map = class Map extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
-        {this.props.modal ? null : <div>  <SearchBar/> </div>}
+        {this.props.modal ? null : (
+          <div>
+            {" "}
+            <SearchBar />{" "}
+          </div>
+        )}
       </div>
     );
   }
