@@ -12,8 +12,17 @@ const Header = class Header extends Component {
     path: PropTypes.string.isRequired,
   };
 
+  state = {
+    showDropDown: false,
+  };
+
+  toggleDropDown = () => {
+    this.setState(prevState => ({ showDropDown: !prevState.showDropDown }));
+  };
+
   render() {
     const { path } = this.props;
+    const { showDropDown } = this.state;
 
     const container = {
       width: "100%",
@@ -60,12 +69,12 @@ const Header = class Header extends Component {
         <div style={headerBox}>
           <div> South Australian Opportunities </div>
           <div class="dropdown-menu">
-            <button class="menu-icon">
+            <button class="menu-icon" onClick={this.toggleDropDown}>
               <div class="menu-icon-bar"></div>
               <div class="menu-icon-bar"></div>
               <div class="menu-icon-bar"></div>
             </button>
-            <div class="dropdown-content">
+            <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
               <Link
                 to="/"
                 style={path === "/" ? clicked : options}

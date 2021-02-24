@@ -15,7 +15,7 @@
     z-index: 3;
 }
 
-.dropdown-menu:hover .dropdown-content{
+.show {
     display: flex;
 }
 
