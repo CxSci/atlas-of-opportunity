@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
 
+import "../css/header.css";
+
 const Header = class Header extends Component {
   static propTypes = {
     path: PropTypes.string.isRequired,
@@ -15,8 +17,9 @@ const Header = class Header extends Component {
 
     const container = {
       width: "100%",
-      height: "60px",
+      height: "50px",
       background: "white",
+      opacity: "0.5",
       position: "fixed",
       zIndex: 3, // 2 for detail pane, 1 for footer logos
       top: 0,
@@ -26,12 +29,7 @@ const Header = class Header extends Component {
       margin: "0 20px",
       alignItems: "center",
       height: "100%",
-      justifyContent: "space-between",
-    };
-    const optionsBox = {
-      display: "flex",
-      height: "100%",
-      flexDirection: "row",
+      justifyContent: "flex-end",
     };
     const options = {
       display: "flex",
@@ -60,48 +58,50 @@ const Header = class Header extends Component {
     return (
       <div style={container}>
         <div style={headerBox}>
-          <div
-            className="toggle txt-m py3 toggle--active-white bg-orange"
-            style={{ color: "white" }}
-          >
-            Atlas of Opportunity
-          </div>
-          <div style={optionsBox}>
-            <Link
-              to="/"
-              style={path === "/" ? clicked : options}
-              onClick={() => setHeaderOption("/")}
-            >
-              Map
-            </Link>
-            <Link
-              to="/methods"
-              style={path === "/methods" ? clicked : options}
-              onClick={() => setHeaderOption("/methods")}
-            >
-              Methods
-            </Link>
-            <Link
-              to="/research"
-              style={path === "/research" ? clicked : options}
-              onClick={() => setHeaderOption("/research")}
-            >
-              Research
-            </Link>
-            <Link
-              to="/about"
-              style={path === "/about" ? clicked : options}
-              onClick={() => setHeaderOption("/about")}
-            >
-              About
-            </Link>
-            <Link
-              to="/faq"
-              style={path === "/faq" ? clicked : options}
-              onClick={() => setHeaderOption("/faq")}
-            >
-              FAQ
-            </Link>
+          <div> South Australian Opportunities </div>
+          <div class="dropdown-menu">
+            <button class="menu-icon">
+              <div class="menu-icon-bar"></div>
+              <div class="menu-icon-bar"></div>
+              <div class="menu-icon-bar"></div>
+            </button>
+            <div class="dropdown-content">
+              <Link
+                to="/"
+                style={path === "/" ? clicked : options}
+                onClick={() => setHeaderOption("/")}
+              >
+                Map
+              </Link>
+              <Link
+                to="/methods"
+                style={path === "/methods" ? clicked : options}
+                onClick={() => setHeaderOption("/methods")}
+              >
+                Methods
+              </Link>
+              <Link
+                to="/research"
+                style={path === "/research" ? clicked : options}
+                onClick={() => setHeaderOption("/research")}
+              >
+                Research
+              </Link>
+              <Link
+                to="/about"
+                style={path === "/about" ? clicked : options}
+                onClick={() => setHeaderOption("/about")}
+              >
+                About
+              </Link>
+              <Link
+                to="/faq"
+                style={path === "/faq" ? clicked : options}
+                onClick={() => setHeaderOption("/faq")}
+              >
+                FAQ
+              </Link>
+            </div>
           </div>
         </div>
       </div>
