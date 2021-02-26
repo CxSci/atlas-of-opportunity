@@ -69,18 +69,18 @@ let Display = class Display extends React.Component {
         </div>
 
         <Collapsible trigger = "Demographic Summary" >
-             <h2 >Population</h2>
-              <p >{population}</p>
-              <h2 >Median Income</h2>
-              <p> AUS {income}</p>
+             <h2>Population</h2>
+              <p>{population}</p>
+              <h2>Median Income</h2>
+              <p>{income}</p>
           </Collapsible>
           
           <Collapsible trigger = "Economic Summary" >
-              <h2 >Income Quartile</h2>
+              <h2>Income Quartile</h2>
               <p>{quartile}</p>
               <h2> Inequality (lower is better)</h2>
               <p>{Math.floor(inequality)}%</p>
-              <h2 >Visitor time spent by quartile</h2>\<div>
+              <h2>Visitor time spent by quartile</h2><div>
               <BarGraph width={200} height={120} />
               </div>
             </Collapsible>
