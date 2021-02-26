@@ -35,12 +35,13 @@ let Display = class Display extends React.Component {
     </div>
   );
 
-  renderGrowthDisplay() {
-
+  renderDisplay() {
     const {
       sa2_name,
       population,
       income,
+      quartile,
+      inequality,
       ggp,
       jr,
       bgi,
@@ -60,19 +61,29 @@ let Display = class Display extends React.Component {
         <div className="py12 px12">
           <div className="mb6">
             <h3>
-              {mapType === "growth"
-                ? "Pattern of Mobility"
-                : "Pattern of Spending"}
+            {mapType === "growth"? "Pattern of Mobility"
+            : mapType === "segregation"? "Economic Inequality"
+            :"Pattern of Spending"}
             </h3>
           </div>
         </div>
 
-        <Collapsible trigger = 'Demographic Summary'>
-            <h2>Population</h2>
-            <p>{population}</p>
-            <h2 >Median Income</h2>
-            <p>{income}</p>
+        <Collapsible trigger = "Demographic Summary" >
+             <h2>Population</h2>
+              <p>{population}</p>
+              <h2>Median Income</h2>
+              <p>{income}</p>
           </Collapsible>
+          
+          <Collapsible trigger = "Economic Summary" >
+              <h2>Income Quartile</h2>
+              <p>{quartile}</p>
+              <h2> Inequality (lower is better)</h2>
+              <p>{Math.floor(inequality)}%</p>
+              <h2>Visitor time spent by quartile</h2><div>
+              <BarGraph width={200} height={120} />
+              </div>
+            </Collapsible>
 
         <Collapsible trigger = "Growth Summary " >
             <h2 data-tip data-for = "GDPTip">GDP Growth Potential</h2>
@@ -160,85 +171,6 @@ let Display = class Display extends React.Component {
     );
   }
 
-  renderSegregationDisplay() {
-    const {
-      sa2_name,
-      population,
-      income,
-      quartile,
-      inequality,
-      ggp,
-      jr,
-      bgi,
-      sa1_codes,
-    } = this.props.select;
-    return (
-      <this.PanelContainer>
-        <div
-          style={{ overflowY: "auto" }}
-          className="bg-white flex-child flex-child--grow mt30 mb24 ml24 shadow-darken10 w240"
-        >
-          <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
-              <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-          </div>
-          <div className="py12 px12">
-            <div className="mb6">
-              <h3>Economic Inequality</h3>
-            </div>
-          </div>
-
-          <Collapsible trigger = "Demographic Summary" >
-             <h2 >Population</h2>
-              <p >{population}</p>
-              <h2 >Median Income</h2>
-              <p> AUS {income}</p>
-          </Collapsible>
-          
-          <Collapsible trigger = "Economic Summary" >
-              <h2 >Income Quartile</h2>
-              <p>{quartile}</p>
-              <h2> Inequality (lower is better)</h2>
-              <p>{Math.floor(inequality)}%</p>
-              <h2 >Visitor time spent by quartile</h2>\<div>
-              <BarGraph width={200} height={120} />
-              </div>
-            </Collapsible>
-         
-          <Collapsible trigger = "Growth Summary" >
-                <h2 data-tip data-for = 'GDPTip'>GDP Growth Potential</h2>
-                <p >{ggp}</p>
-                  <ReactTooltip id = "GDPTip"> 
-                  <b> GDP Growth Potential </b> <br />
-                Economic growth is an increase in the production <br />of 
-                economic goods and services,compared from <br /> one period of  
-                time to another...Traditionally, aggregate <br /> 
-                economic growth is measured in terms of gross national <br /> 
-                product (GNP) or gross domestic product (GDP), although
-                <br />  alternative metrics are sometimes used.
-                </ReactTooltip>
-              <h2 data-tip data-for = "jobTip">Job Resilience</h2>  
-                <ReactTooltip id = "jobTip" > 
-                <b> Job Resilience </b> <br />The ability to adjust to career change as it happens <br />
-                and,by extension, adapt to what the market demands. 
-                </ReactTooltip>            
-              <p >{jr}</p>
-              <h2 data-tip data-for = "bgiTip">
-                Business Growth Index 
-              </h2>
-                <ReactTooltip id = "bgiTip" > 
-                <b> Business Growth Index </b> <br />
-              The growth rate is the measure of a company’s increase <br />
-              in revenue and potential to expand over a set period.
-                </ReactTooltip>              
-              <p >{bgi}</p>
-                <h2 data-tip data-for = "SATip">Included SA1 Regions</h2>
-                <p>{sa1_codes}</p>
-            </Collapsible>
-        </div>
-      </this.PanelContainer>
-    );
-  }
-
   render() {
     const { isDefault } = this.props.select; // const { name, description } = this.props.active;
     const { mapType } = this.props;
@@ -251,12 +183,10 @@ let Display = class Display extends React.Component {
 
     switch (mapType) {
       case Constants.MAP_TYPE.SEGREGATION:
-        return this.renderSegregationDisplay();
-      // Use the same detail pane for transactions and growth layers.
       case Constants.MAP_TYPE.TRANSCATIONS:
       case Constants.MAP_TYPE.GROWTH:
       default:
-        return this.renderGrowthDisplay();
+        return this.renderDisplay();
     }
   }
 };
