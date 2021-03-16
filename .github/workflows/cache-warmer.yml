@@ -16,9 +16,9 @@
 # isn't connected to any tags.
 
 on:
-  # push:
-  #   branches:
-  #     - master
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 name: Keep workflow caches warm
