@@ -2,7 +2,7 @@ Some of the workflow actions need a task-definition.json to talk to AWS ECS. Tha
 
 ```sh
 aws ecs describe-task-definition \
-   --task-definition test-task-1 \
+   --task-definition opportunity-prod-task \
    --query taskDefinition | \
    node removeKeys.js > task-definition.json
 ```
