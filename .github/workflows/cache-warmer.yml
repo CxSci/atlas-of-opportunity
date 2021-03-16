@@ -1,0 +1,128 @@
+# Per:
+#   https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
+#   https://github.com/actions/cache/issues/231#issuecomment-605299793
+#   https://github.com/actions/cache/issues/149#issuecomment-573933774
+#
+# actions/cache@v2 doesn't share caches between branches, but it does share
+# with child branches. That means workflows run on pull requests, and tags
+# never share their cache with each other but can all use caches from the
+# master branch. So, this workflow runs on pushes to the master branch, making
+# sure there's a parent branch for pull requests and tags to get their cache
+# from.
+
+# This workflow also does a dry run of updating the AWS ECS task definition to
+# to validate that will work, though it does so with temporary Docker images
+# tagged by git SHA instead of git tag like deploy.yml, since this workflow
+# isn't connected to any tags.
+
+on:
+  # push:
+  #   branches:
+  #     - master
+  workflow_dispatch:
+
+name: Keep workflow caches warm
+
+env:
+  AWS_REGION: us-east-1
+  ECS_SERVICE: opportunity-prod-service
+  ECS_CLUSTER: opportunity-prod-cluster
+  ECS_TASK_DEFINITION: .github/workflows/.aws/task-definition.json
+  NGINX_ECR_REPOSITORY: opportunity-prod/nginx
+  DASHBOARD_ECR_REPOSITORY: opportunity-prod/dashboard
+
+
+jobs:
+  warmer:
+    name: Warm caches
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+
+      # 1. Setup
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Set up derived vars
+        id: vars
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        # Creates image tags like:
+        #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/nginx:f4455f62fba95ae5c529f0186b6eb861c87ed5b4
+        #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/dashboard:f4455f62fba95ae5c529f0186b6eb861c87ed5b4
+        run: |
+          NGINX_ROOT=$ECR_REGISTRY/$NGINX_ECR_REPOSITORY
+          DASHBOARD_ROOT=$ECR_REGISTRY/$DASHBOARD_ECR_REPOSITORY
+          echo "::set-output name=NGINX_SHA_IMAGE::$NGINX_ROOT:${{ github.sha }}"
+          echo "::set-output name=DASHBOARD_SHA_IMAGE::$DASHBOARD_ROOT:${{ github.sha }}"
+
+      # 2. Build
+
+      # 2a. NGINX
+      - name: Build and tag -- but don't push -- nginx Docker image to Amazon ECR
+        id: nginx-build-image
+        uses: docker/build-push-action@v2
+        with:
+          context: nginx
+          push: false
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: nginx-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: nginx
+          image: ${{ steps.vars.outputs.NGINX_SHA_IMAGE }}
+
+      # 2b. Dashboard
+      - name: Build and tag -- but don't push -- dashboard Docker image to Amazon ECR
+        id: dashboard-build-image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: dashboard-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.nginx-task-def.outputs.task-definition }}
+          container-name: dashboard
+          image: ${{ steps.vars.outputs.DASHBOARD_SHA_IMAGE }}
+
+      # 3. Cleanup
+
+      # For avoiding a runaway cache size bug
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: Move Docker cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
