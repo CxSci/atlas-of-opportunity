@@ -35,13 +35,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Get tag name
-        id: vars
-        run: |
-          TAG=${GITHUB_REF/refs\/tags\//}
-          echo "::set-output name=TAG::${GITHUB_REF/refs\/tags\//}"
-          echo "$TAG"
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -64,7 +57,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Set up derived vars
+      - name: Derive tag name and set vars
         id: vars
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -74,10 +67,13 @@ jobs:
         #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/dashboard:f4455f62fba95ae5c529f0186b6eb861c87ed5b4
         #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/dashboard:v0.0.1
         run: |
-          echo "::set-output name=NGINX_SHA_IMAGE::$ECR_REGISTRY/$NGINX_ECR_REPOSITORY:${{ github.sha }}"
-          echo "::set-output name=NGINX_TAG_IMAGE::$ECR_REGISTRY/$NGINX_ECR_REPOSITORY:${{ steps.vars.outputs.TAG }}"
-          echo "::set-output name=DASHBOARD_SHA_IMAGE::$ECR_REGISTRY/$DASHBOARD_ECR_REPOSITORY:${{ github.sha }}"
-          echo "::set-output name=DASHBOARD_TAG_IMAGE::$ECR_REGISTRY/$DASHBOARD_ECR_REPOSITORY:${{ steps.vars.outputs.TAG }}"
+          TAG=${GITHUB_REF/refs\/tags\//}
+          NGINX_ROOT=$ECR_REGISTRY/$NGINX_ECR_REPOSITORY
+          DASHBOARD_ROOT=$ECR_REGISTRY/$DASHBOARD_ECR_REPOSITORY
+          echo "::set-output name=NGINX_SHA_IMAGE::$NGINX_ROOT:${{ github.sha }}"
+          echo "::set-output name=NGINX_TAG_IMAGE::$NGINX_ROOT:$TAG"
+          echo "::set-output name=DASHBOARD_SHA_IMAGE::$DASHBOARD_ROOT:${{ github.sha }}"
+          echo "::set-output name=DASHBOARD_TAG_IMAGE::$DASHBOARD_ROOT:$TAG"
 
       # 2. Build
 
