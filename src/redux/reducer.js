@@ -86,7 +86,6 @@ const initialState: State = {
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
   select,
-  modal: true,
   mapType: Constants.MAP_TYPE.GROWTH,
   path: window.location.pathname,
   dropdown: "off",
@@ -103,10 +102,6 @@ function reducer(state = initialState, action) {
     case Constants.SET_SELECT:
       return Object.assign({}, state, {
         select: action.payload,
-      });
-    case "Modal":
-      return Object.assign({}, state, {
-        modal: action.payload,
       });
     case "Header":
       return Object.assign({}, state, {

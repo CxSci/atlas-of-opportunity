@@ -25,16 +25,26 @@ const Header = class Header extends Component {
 
     const headerBox = {
       display: "flex",
-      margin: "0 20px",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      justifyContent: "space-between",
+      alignContent: "center",
       alignItems: "center",
-      height: "100%",
-      justifyContent: "flex-end",
     };
  
     return (
-      <div class="container">
-        <div style={headerBox}>
-          <div class="navbar-title"> South Australian Opportunities </div>
+      <div class="container" style={headerBox}>
+        {/* TODO: make header background color translucent white while in comparison mode */}
+        <div class="navbarLeft">
+          {/* TODO: put conditional sidebar toggle control here */}
+        </div>
+        <div class="navbarCenter">
+          {/* TODO: put conditional comparison controls here */}
+        </div>
+        <div class="navbarRight">
+          {/* TODO: refactor hamburger menu into its own React component */}
+          {/* TODO: make menu's color dark while in comparison mode
+                    and when viewing static pages */}
           <div class="dropdown-menu">
             <button class="menu-icon" onClick={this.toggleDropDown}>
               <div class="menu-icon-bar"></div>

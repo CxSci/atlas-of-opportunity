@@ -50,7 +50,6 @@ let Map = class Map extends React.Component {
     // data: PropTypes.object.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
-    modal: PropTypes.bool,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
@@ -59,9 +58,18 @@ let Map = class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
-      center: [121, -26.5],
-      zoom: 3.5,
+      bounds: [
+        [129, -38],
+        [141, -26]
+      ],
+      fitBoundsOptions: { padding: 70 },
     });
+
+    // zoom buttons
+    var controls = new mapboxgl.NavigationControl({
+      showCompass: false,
+    });
+    this.map.addControl(controls, "bottom-right");
 
     var hoveredSA2Id = null;
 
@@ -69,6 +77,7 @@ let Map = class Map extends React.Component {
       this.map.addSource("sa2", {
         type: "geojson",
         data: this.props.data,
+        promoteId: "SA2_MAIN16",
       });
 
       this.map.addLayer({
@@ -179,7 +188,7 @@ let Map = class Map extends React.Component {
             );
           }
 
-          hoveredSA2Id = e.features[0].id;
+          hoveredSA2Id = e.features[0].properties.SA2_MAIN16;
           this.map.setFeatureState(
             { source: "sa2", id: hoveredSA2Id },
             { hover: true }
@@ -215,20 +224,6 @@ let Map = class Map extends React.Component {
 
     if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
       this.onMapSearch(this.props.searchBarInfo);
-    }
-
-    if (this.props.modal !== prevProps.modal) {
-      // zoom buttons
-      var controls = new mapboxgl.NavigationControl({
-        showCompass: false,
-      });
-      this.map.addControl(controls, "bottom-right");
-
-      this.map.flyTo({
-        center: [138.7, -34.9],
-        zoom: 9,
-        speed: 0.8,
-      });
     }
 
     if (this.props.active.name !== prevProps.active.name) {
@@ -621,12 +616,10 @@ let Map = class Map extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
-        {this.props.modal ? null : (
-          <div>
-            {" "}
-            <SearchBar />{" "}
-          </div>
-        )}
+        <div>
+          {" "}
+          <SearchBar />{" "}
+        </div>
       </div>
     );
   }
@@ -637,7 +630,6 @@ function mapStateToProps(state) {
     data: state.data,
     active: state.active,
     select: state.select,
-    modal: state.modal,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
   };

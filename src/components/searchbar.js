@@ -35,9 +35,9 @@ let SearchBar = class SearchBar extends React.Component {
   render() {
     // Style components
     const search = {
-      position: 'absolute',
-      top: "100px",
-      right: "24px",
+      position: "absolute",
+      top: "12px",
+      left: "12px",
     };
 
     return (
@@ -51,7 +51,6 @@ function searchbarStateToProps(state) {
     data: state.data,
     active: state.active,
     select: state.select,
-    modal: state.modal,
     flowDirection: state.flowDirection,
   };
 }
