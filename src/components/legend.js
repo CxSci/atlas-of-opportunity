@@ -14,21 +14,18 @@ let Legend = class Legend extends React.Component {
   render() {
     const { description, stops } = this.props.active;
 
-    const mapType = [
+    const mapTypes = [
       {
-        key: Constants.MAP_TYPE.GROWTH,
         value: Constants.MAP_TYPE.GROWTH,
-        text: "Mobility Map",
+        text: "Mobility - GDP Growth Potential",
       },
       {
-        key: Constants.MAP_TYPE.SEGREGATION,
         value: Constants.MAP_TYPE.SEGREGATION,
-        text: "Economic Segregation",
+        text: "Economic Segregation - Inequality Index",
       },
       {
-        key: Constants.MAP_TYPE.TRANSACTIONS,
         value: Constants.MAP_TYPE.TRANSACTIONS,
-        text: "Financial Interactions",
+        text: "Financial Interactions - Growth Potential",
       },
     ];
 
@@ -41,7 +38,7 @@ let Legend = class Legend extends React.Component {
               background: `linear-gradient(90deg, ${stops.map(
                 (stop) => stop[1]
               )})`,
-              width: "196px",
+              width: "100%",
               borderRadius: "2px",
             }}
           >
@@ -85,19 +82,17 @@ let Legend = class Legend extends React.Component {
       setMapType(value);
     };
 
-    let legendName = this.props.active.legendName;
     return (
-      <div className="bg-white absolute bottom right mr60 mb36 py12 px12 shadow-darken10 round z1 wmax220">
+      <div className="bg-white absolute bottom left ml12 mb36 py12 px12 shadow-darken10 round z1 wmax220">
         <div className="mt6 mb12">
           <Dropdown
-            defaultValue={mapType[0].value}
+            defaultValue={mapTypes[0].value}
             selection
-            options={mapType}
+            options={mapTypes}
             onChange={mapTypeEvent}
           />
         </div>
         <div className="mb6">
-          <h2 className="txt-bold txt-m block">{legendName}</h2>
           <p className="txt-s color-gray">{description}</p>
         </div>
         {renderLegendKeys(stops)}
