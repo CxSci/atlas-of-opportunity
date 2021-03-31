@@ -74,6 +74,7 @@ let Map = class Map extends React.Component {
       this.map.addSource("sa2", {
         type: "geojson",
         data: this.props.data,
+        promoteId: "SA2_MAIN16",
       });
 
       this.map.addLayer({
@@ -184,7 +185,7 @@ let Map = class Map extends React.Component {
             );
           }
 
-          hoveredSA2Id = e.features[0].id;
+          hoveredSA2Id = e.features[0].properties.SA2_MAIN16;
           this.map.setFeatureState(
             { source: "sa2", id: hoveredSA2Id },
             { hover: true }
