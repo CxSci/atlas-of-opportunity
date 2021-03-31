@@ -50,7 +50,6 @@ let Map = class Map extends React.Component {
     // data: PropTypes.object.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
-    modal: PropTypes.bool,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
@@ -62,6 +61,12 @@ let Map = class Map extends React.Component {
       center: [121, -26.5],
       zoom: 3.5,
     });
+
+    // zoom buttons
+    var controls = new mapboxgl.NavigationControl({
+      showCompass: false,
+    });
+    this.map.addControl(controls, "bottom-right");
 
     var hoveredSA2Id = null;
 
@@ -215,20 +220,6 @@ let Map = class Map extends React.Component {
 
     if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
       this.onMapSearch(this.props.searchBarInfo);
-    }
-
-    if (this.props.modal !== prevProps.modal) {
-      // zoom buttons
-      var controls = new mapboxgl.NavigationControl({
-        showCompass: false,
-      });
-      this.map.addControl(controls, "bottom-right");
-
-      this.map.flyTo({
-        center: [138.7, -34.9],
-        zoom: 9,
-        speed: 0.8,
-      });
     }
 
     if (this.props.active.name !== prevProps.active.name) {
@@ -621,12 +612,10 @@ let Map = class Map extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
-        {this.props.modal ? null : (
-          <div>
-            {" "}
-            <SearchBar />{" "}
-          </div>
-        )}
+        <div>
+          {" "}
+          <SearchBar />{" "}
+        </div>
       </div>
     );
   }
@@ -637,7 +626,6 @@ function mapStateToProps(state) {
     data: state.data,
     active: state.active,
     select: state.select,
-    modal: state.modal,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
   };

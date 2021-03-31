@@ -51,7 +51,6 @@ function searchbarStateToProps(state) {
     data: state.data,
     active: state.active,
     select: state.select,
-    modal: state.modal,
     flowDirection: state.flowDirection,
   };
 }
