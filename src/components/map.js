@@ -58,8 +58,11 @@ let Map = class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
       style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
-      center: [121, -26.5],
-      zoom: 3.5,
+      bounds: [
+        [129, -38],
+        [141, -26]
+      ],
+      fitBoundsOptions: { padding: 70 },
     });
 
     // zoom buttons
