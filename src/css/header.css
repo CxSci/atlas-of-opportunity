@@ -1,10 +1,11 @@
 .container {
     width: 100%;
-    height: 50px;
-    background-color:rgb(255, 255, 255,0.5);
+    height: 60px;
     position: fixed;
     z-index: 3; /* 2 for detail pane, 1 for footer logos */
     top: 0;
+    pointer-events: none;
+    /* children need to opt into mouse events with pointer-events: auto */
 }
 
 .navbar-title {
@@ -39,6 +40,7 @@
     font-size: 1.3rem;
     cursor: pointer;
     height: 100%;
+    pointer-events: auto;
 }
 
 .dropdown-content a:hover, .dropdown-content a:active {
@@ -50,10 +52,16 @@
     display: flex;
 }
 
+.menu-icon {
+    padding: 3px 5px;
+    pointer-events: auto;
+}
+
 .menu-icon-bar {
-    width: 35px;
-    height: 5px;
-    background-color: black;
-    margin: 6px 0;
-    border-radius: 5px;
+    width: 22px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
 }
