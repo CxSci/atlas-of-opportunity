@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
 import SearchBar from "./searchbar";
+import * as turf from "@turf/turf";
 
 import "../css/map.css";
 
 import * as Constants from "../constants";
 
-const turf = window.turf;
 mapboxgl.accessToken =
   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
