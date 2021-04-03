@@ -16,12 +16,13 @@
 # isn't connected to any tags.
 
 on:
+  pull_request: {}
   push:
     branches:
       - master
   workflow_dispatch:
 
-name: Keep workflow caches warm
+name: Deploy (dry run)
 
 env:
   AWS_REGION: us-east-1
@@ -34,7 +35,7 @@ env:
 
 jobs:
   warmer:
-    name: Warm caches
+    name: Dry run
     runs-on: ubuntu-latest
 
     steps:
