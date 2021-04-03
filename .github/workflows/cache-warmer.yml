@@ -36,7 +36,6 @@ jobs:
   warmer:
     name: Warm caches
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
 
