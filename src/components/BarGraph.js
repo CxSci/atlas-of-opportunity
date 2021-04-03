@@ -43,7 +43,7 @@ let BarGraph = class BarGraph extends React.Component {
     const yPoint = compose(yScale, y);
     return (
       <svg width={width} height={height}>
-        {data.map((d, i) => {
+        {data.map((d) => {
           const barHeight = yMax - yPoint(d);
           return (
             <Bar

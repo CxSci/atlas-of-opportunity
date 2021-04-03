@@ -47,7 +47,7 @@ let Map = class Map extends React.Component {
   }
 
   static propTypes = {
-    // data: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
@@ -395,8 +395,7 @@ let Map = class Map extends React.Component {
             highlight: true,
           }
         );
-        if (f.properties.SA2_MAIN16 in featureObj) {
-        } else {
+        if (!(f.properties.SA2_MAIN16 in featureObj)) {
           featureObj[f.properties.SA2_MAIN16] = f;
         }
       });
@@ -539,7 +538,7 @@ let Map = class Map extends React.Component {
       let steps = 1000;
       var that = this;
 
-      function animate(featureIdx, cntr, point, route, pointID) {
+      const animate = function animate(featureIdx, cntr, point, route, pointID) {
         // Update point geometry to a new position based on counter denoting
         // the index to access the arc.
         if (
