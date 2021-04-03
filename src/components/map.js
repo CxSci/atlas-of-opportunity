@@ -47,7 +47,7 @@ let Map = class Map extends React.Component {
   }
 
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
@@ -369,9 +369,11 @@ let Map = class Map extends React.Component {
       // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
       let keys = this.props.active.bridgeKeys[this.props.flowDirection];
       // Get bridges and ignore missing values
-      let bridges = keys
+      // Note that somewhere along the way, Mapbox GL turns GeoJSON properties
+      // like {"foo": null} into {"foo": "null"}.
+      const bridges = keys
         .map((x) => clickedSA2.properties[x])
-        .filter((x) => x !== undefined);
+        .filter((x) => x !== undefined && x !== "null")
 
       // Search map for SA2s matching the bridges.
       clickedFeatures = this.map.querySourceFeatures("sa2", {
