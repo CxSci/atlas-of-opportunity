@@ -19,6 +19,7 @@ const App = class App extends Component {
       </BrowserRouter>
     );
   }
+import "./css/App.css"
 };
 
 export default connect()(App);
