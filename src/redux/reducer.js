@@ -81,7 +81,7 @@ const select = {
   isDefault: true,
 };
 
-const initialState: State = {
+const initialState = {
   data,
   options,
   active: options[Constants.MAP_TYPE.GROWTH],

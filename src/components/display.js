@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactTooltip from 'react-tooltip';
+import Collapsible from "react-collapsible";
 
 import * as Constants from "../constants";
-import Collapsible from "./collapsible";
-
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
+import "../css/collapsible.css";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -29,11 +29,6 @@ let Display = class Display extends React.Component {
       setDisplayDefault();
     }
   }
-  PanelContainer = (props) => (
-    <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
-      {props.children}
-    </div>
-  );
 
   renderDisplay() {
     const {
@@ -49,6 +44,12 @@ let Display = class Display extends React.Component {
     } = this.props.select;
 
     const { flowDirection, mapType } = this.props;
+
+    const PanelContainer = (props) => (
+      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
+        {props.children}
+      </div>
+    );
 
     const TopPanel = () => (
       <div
@@ -164,10 +165,10 @@ let Display = class Display extends React.Component {
       </div>
     );
     return (
-      <this.PanelContainer>
+      <PanelContainer>
         <TopPanel />
         <BottomPanel />
-      </this.PanelContainer>
+      </PanelContainer>
     );
   }
 

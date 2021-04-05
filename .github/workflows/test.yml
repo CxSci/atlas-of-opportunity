@@ -1,0 +1,35 @@
+# Note that this workflow only creates annotations for the first 10 errors.
+# GitHub Actions are limited to 10 errors and 10 warnings per step and 50 per
+# job and run. See https://github.community/t/annotation-limitation/17998/2.
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+name: Test
+
+jobs:
+  warmer:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node_modules-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+
+      - run: npm install
+      - run: npm run lint

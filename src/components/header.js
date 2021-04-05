@@ -33,23 +33,23 @@ const Header = class Header extends Component {
     };
  
     return (
-      <div class="container" style={headerBox}>
+      <div className="container" style={headerBox}>
         {/* TODO: make header background color translucent white while in comparison mode */}
-        <div class="navbarLeft">
+        <div className="navbarLeft">
           {/* TODO: put conditional sidebar toggle control here */}
         </div>
-        <div class="navbarCenter">
+        <div className="navbarCenter">
           {/* TODO: put conditional comparison controls here */}
         </div>
-        <div class="navbarRight">
+        <div className="navbarRight">
           {/* TODO: refactor hamburger menu into its own React component */}
           {/* TODO: make menu's color dark while in comparison mode
                     and when viewing static pages */}
-          <div class="dropdown-menu">
-            <button class="menu-icon" onClick={this.toggleDropDown}>
-              <div class="menu-icon-bar"></div>
-              <div class="menu-icon-bar"></div>
-              <div class="menu-icon-bar"></div>
+          <div className="dropdown-menu">
+            <button className="menu-icon" onClick={this.toggleDropDown}>
+              <div className="menu-icon-bar"></div>
+              <div className="menu-icon-bar"></div>
+              <div className="menu-icon-bar"></div>
             </button>
             <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
               <Link

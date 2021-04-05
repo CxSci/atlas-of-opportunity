@@ -40,9 +40,9 @@ const Methods = class Methods extends Component {
       <Container title="Methods" >
         <p style={content}>
           The Atlas of Opportunity showcases recent research finding that shared
-          workplaces between two neighborhoods can create what we call "social
-          bridges" between communities. We've found that people in communities
-          that are linked together by these bridges influence each other's
+          workplaces between two neighborhoods can create what we call &quot;social
+          bridges&quot; between communities. We&apos;ve found that people in communities
+          that are linked together by these bridges influence each other&apos;s
           behavior. These bridges are more predictive of community similarity
           and other indicators than traditional measures, like income and
           socio-demographics. This important result suggests that understanding
@@ -121,7 +121,7 @@ const Methods = class Methods extends Component {
           <p style={content}>
             When we have access to neighborhood-level data that reveals which
             points of interest (POIs) residents spend time at, we also define
-            social bridges by the "third places" people share, such as
+            social bridges by the &quot;third places&quot; people share, such as
             restaurants and cafes.
           </p>
         </div>
