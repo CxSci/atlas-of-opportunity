@@ -45,6 +45,8 @@ const Header = class Header extends Component {
           {/* TODO: refactor hamburger menu into its own React component */}
           {/* TODO: make menu's color dark while in comparison mode
                     and when viewing static pages */}
+          {/* TODO: convert to use a similar downshift/popper setup as
+                    the dropdownSelect */}
           <div className="dropdown-menu">
             <button className="menu-icon" onClick={this.toggleDropDown}>
               <div className="menu-icon-bar"></div>
