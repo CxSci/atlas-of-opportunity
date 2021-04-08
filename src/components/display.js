@@ -54,7 +54,7 @@ let Display = class Display extends React.Component {
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className="bg-white flex-child flex-child--grow mt30 mb24 ml24 shadow-darken10 w240"
+        className="bg-white flex-child flex-child--grow shadow-darken10 w240"
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>

@@ -14,9 +14,9 @@ const Main = class Main extends Component {
     return (
       <div style={mapStyler}>
         <Map />
+        <Display />
         <Fragment>
           <Fragment>
-            <Display />
             <Legend />
           </Fragment>
         </Fragment>
