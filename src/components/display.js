@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import Collapsible from "react-collapsible";
 
 import * as Constants from "../constants";
-import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
+import { setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
 import SearchBar from "./searchbar";
 import "../css/collapsible.css";
@@ -16,7 +16,6 @@ let Display = class Display extends React.Component {
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
-    flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
@@ -26,12 +25,6 @@ let Display = class Display extends React.Component {
 
   toggleSidebar = () => {
     this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
-  };
-
-  onFlowChange = (e) => {
-    let direction = e.target.value;
-    this.flowDirection = direction;
-    setFlowDirection(direction);
   };
 
   componentDidUpdate(prevProps) {
@@ -56,16 +49,16 @@ let Display = class Display extends React.Component {
       sa1_codes,
     } = this.props.select;
 
-    const { flowDirection, mapType } = this.props;
+    const { mapType } = this.props;
 
     const PanelContainer = (props) => (
-      <div className="sidebar-container flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
+      <div className={`panel-container absolute top left h-full mr12 z2`}>
         {props.children}
       </div>
     );
 
     const SidebarButton = () => (
-      <div className={`toggleButton`} onClick={this.toggleSidebar}>
+      <div className={`toggleButton ${sidebarState}`} onClick={this.toggleSidebar}>
         <i className={`arrow right ${sidebarState=="open"? "collapse" : "expand"}`}></i>
       </div>
     )
@@ -73,7 +66,7 @@ let Display = class Display extends React.Component {
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className={`sidebar ${sidebarState} bg-white flex-child flex-child--grow shadow-darken10 w300`}
+        className={`sidebar bg-white flex-child flex-child--grow shadow-darken10 w300`}
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
@@ -138,57 +131,13 @@ let Display = class Display extends React.Component {
       </div>
     );
 
-    const BottomPanel = () => (
-      <div className="bg-white flex-child flex-child--no-shrink ml30 shadow-darken10 w240"> 
-        <div id="options" className="pb12 px12 bg-orange-faint">
-          <form>
-            <p className="pt6 txt-m txt-bold">Change flow direction</p>
-            <div>
-              <label className="p12 txt-s block">
-                <input
-                  type="radio"
-                  name="flow"
-                  value={Constants.FLOW_OUT}
-                  checked={flowDirection === Constants.FLOW_OUT}
-                  onChange={this.onFlowChange}
-                />
-                &nbsp;Outflow
-              </label>
-            </div>
-            <div>
-              <label className="p12 txt-s block">
-                <input
-                  type="radio"
-                  name="flow"
-                  value={Constants.FLOW_IN}
-                  checked={flowDirection === Constants.FLOW_IN}
-                  onChange={this.onFlowChange}
-                />
-                &nbsp;Inflow
-              </label>
-            </div>
-            <div>
-              <label className="p12 txt-s block">
-                <input
-                  type="radio"
-                  name="flow"
-                  value={Constants.FLOW_BI}
-                  checked={flowDirection === Constants.FLOW_BI}
-                  onChange={this.onFlowChange}
-                />
-                &nbsp;Bi-directional
-              </label>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
     return (
       <PanelContainer>
-        <SearchBar/>
         <SidebarButton/>
-        <TopPanel />
-        <BottomPanel />
+        <div className={`sidebar-container  ${sidebarState} `}>
+          <SearchBar/>
+          <TopPanel />
+        </div>
       </PanelContainer>
     );
   }
@@ -217,7 +166,6 @@ function mapStateToProps(state) {
   return {
     active: state.active,
     select: state.select,
-    flowDirection: state.flowDirection,
     mapType: state.mapType,
     searchBarInfo: state.searchBarInfo,
   };

@@ -1,11 +1,17 @@
-.sidebar {
-    z-index: 5;
-    transition: transform linear 0.8s;
-    height: 100%;
+.panel-container {
+    display: flex;
+    flex-direction: column;
 }
 
-.sidebar.closed {
+.sidebar-container {
+    transition: transform linear 0.8s;
+    height: 100%;
+    background-color: white;
+}
+
+.closed {
     transform: translateX(-100%);    
+    left: 20px !important;
 }
 
 .toggleButton {
@@ -14,9 +20,13 @@
     cursor: pointer;
     width: 20px;
     height: 40px;
+    position: absolute;
+    top: 5px;
+    left: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .arrow {
