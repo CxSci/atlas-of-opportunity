@@ -5,11 +5,12 @@ import ReactTooltip from 'react-tooltip';
 import Collapsible from "react-collapsible";
 
 import * as Constants from "../constants";
-import { setDisplayDefault } from "../redux/action-creators";
+// import { setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
 import SearchBar from "./searchbar";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
+import { setSideBar } from "../redux/action-creators";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -17,26 +18,25 @@ let Display = class Display extends React.Component {
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    sidebarOpen: PropTypes.bool.isRequired,
   };
 
-  state = {
-    showSidebar: true,
-  };
-
+  
   toggleSidebar = () => {
-    this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
+    console.log(this.props.sidebarOpen);
+    setSideBar(!this.props.sidebarOpen);
   };
 
-  componentDidUpdate(prevProps) {
+  // componentDidUpdate(prevProps) {
     // return display to default settings if we've changed map types
-    if (this.props.mapType !== prevProps.mapType) {
-      setDisplayDefault();
-    }
-  }
+    // if (this.props.mapType !== prevProps.mapType) {
+    //   setDisplayDefault();
+    // }
+  // }
 
   renderDisplay() {
-    let sidebarState = this.state.showSidebar ? 'open' : 'closed';
-     
+    let sidebarState = this.props.sidebarOpen ? 'open' : 'closed';
+    
     const {
       sa2_name,
       population,
@@ -52,7 +52,7 @@ let Display = class Display extends React.Component {
     const { mapType } = this.props;
 
     const PanelContainer = (props) => (
-      <div className={`panel-container absolute top left h-full mr12 z2`}>
+      <div className={`panel-container absolute top left h-full mr12 `}>
         {props.children}
       </div>
     );
@@ -168,6 +168,7 @@ function mapStateToProps(state) {
     select: state.select,
     mapType: state.mapType,
     searchBarInfo: state.searchBarInfo,
+    sidebarOpen: state.sidebarOpen
   };
 }
 

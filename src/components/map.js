@@ -51,7 +51,7 @@ let Map = class Map extends React.Component {
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
-    // searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
   componentDidMount() {
@@ -222,9 +222,9 @@ let Map = class Map extends React.Component {
       this.redrawBridges();
     }
 
-    // if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
-    //   this.onMapSearch(this.props.searchBarInfo);
-    // }
+    if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
+      this.onMapSearch(this.props.searchBarInfo);
+    }
 
     if (this.props.active.name !== prevProps.active.name) {
       let fillColor = {
@@ -617,9 +617,8 @@ let Map = class Map extends React.Component {
     return (
       <div>
         <div ref={this.mapRef} className="absolute top right left bottom" />
-        <div>
-          {" "}
-          {/* <SearchBar />{" "} */}
+        <div className="mapOnlySearchBar"> 
+          {/* <SearchBar /> */}
         </div>
       </div>
     );
@@ -632,7 +631,7 @@ function mapStateToProps(state) {
     active: state.active,
     select: state.select,
     flowDirection: state.flowDirection,
-    // searchBarInfo: state.searchBarInfo,
+    searchBarInfo: state.searchBarInfo,
   };
 }
 
