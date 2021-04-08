@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
+    "@popperjs/core": "^2.9.2",
     "@turf/turf": "^5.1.6",
     "@visx/axis": "^1.7.0",
     "@visx/group": "^1.7.0",
