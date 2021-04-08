@@ -8,6 +8,7 @@ import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
 import "../css/collapsible.css";
+import "../css/sidebar.css";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -15,6 +16,14 @@ let Display = class Display extends React.Component {
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     flowDirection: PropTypes.string.isRequired,
+  };
+
+  state = {
+    showSidebar: true,
+  };
+
+  toggleSidebar = () => {
+    this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
   };
 
   onFlowChange = (e) => {
@@ -31,6 +40,8 @@ let Display = class Display extends React.Component {
   }
 
   renderDisplay() {
+    let sidebarState = this.state.showSidebar ? 'open' : 'closed';
+     
     const {
       sa2_name,
       population,
@@ -46,15 +57,21 @@ let Display = class Display extends React.Component {
     const { flowDirection, mapType } = this.props;
 
     const PanelContainer = (props) => (
-      <div className="flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
+      <div className="sidebar-container flex-parent flex-parent--column flex-parent--space-between-main absolute top left w240 h-full pt60 pb36 mr12 z2">
         {props.children}
       </div>
     );
 
+    const SidebarButton = () => (
+      <div className={`toggleButton`} onClick={this.toggleSidebar}>
+        <i className={`arrow right ${sidebarState=="open"? "collapse" : "expand"}`}></i>
+      </div>
+    )
+
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className="bg-white flex-child flex-child--grow shadow-darken10 w240"
+        className={`sidebar ${sidebarState} bg-white flex-child flex-child--grow shadow-darken10 w300`}
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
@@ -166,6 +183,7 @@ let Display = class Display extends React.Component {
     );
     return (
       <PanelContainer>
+        <SidebarButton/>
         <TopPanel />
         <BottomPanel />
       </PanelContainer>
