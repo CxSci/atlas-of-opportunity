@@ -7,6 +7,7 @@ import Collapsible from "react-collapsible";
 import * as Constants from "../constants";
 import { setFlowDirection, setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
+import SearchBar from "./searchbar";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 
@@ -16,6 +17,7 @@ let Display = class Display extends React.Component {
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     flowDirection: PropTypes.string.isRequired,
+    searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
   state = {
@@ -183,6 +185,7 @@ let Display = class Display extends React.Component {
     );
     return (
       <PanelContainer>
+        <SearchBar/>
         <SidebarButton/>
         <TopPanel />
         <BottomPanel />
@@ -216,6 +219,7 @@ function mapStateToProps(state) {
     select: state.select,
     flowDirection: state.flowDirection,
     mapType: state.mapType,
+    searchBarInfo: state.searchBarInfo,
   };
 }
 

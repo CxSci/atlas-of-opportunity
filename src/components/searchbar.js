@@ -41,7 +41,7 @@ let SearchBar = class SearchBar extends React.Component {
     };
 
     return (
-        <div id="geocoder" style={search}></div>
+        <div id="geocoder" className="searchBar" style={search}></div>
     );
   }
 };

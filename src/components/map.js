@@ -3,7 +3,7 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import SearchBar from "./searchbar";
+// import SearchBar from "./searchbar";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -51,7 +51,7 @@ let Map = class Map extends React.Component {
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
-    searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    // searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
   componentDidMount() {
@@ -222,9 +222,9 @@ let Map = class Map extends React.Component {
       this.redrawBridges();
     }
 
-    if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
-      this.onMapSearch(this.props.searchBarInfo);
-    }
+    // if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
+    //   this.onMapSearch(this.props.searchBarInfo);
+    // }
 
     if (this.props.active.name !== prevProps.active.name) {
       let fillColor = {
@@ -619,7 +619,7 @@ let Map = class Map extends React.Component {
         <div ref={this.mapRef} className="absolute top right left bottom" />
         <div>
           {" "}
-          <SearchBar />{" "}
+          {/* <SearchBar />{" "} */}
         </div>
       </div>
     );
@@ -632,7 +632,7 @@ function mapStateToProps(state) {
     active: state.active,
     select: state.select,
     flowDirection: state.flowDirection,
-    searchBarInfo: state.searchBarInfo,
+    // searchBarInfo: state.searchBarInfo,
   };
 }
 
