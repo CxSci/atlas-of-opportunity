@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Dropdown } from "semantic-ui-react";
+
 import * as Constants from "../constants";
 import { setMapType } from "../redux/action-creators";
+import DropdownSelect from "./dropdown.js"
 
 import "../css/legend.css";
 
@@ -32,67 +33,65 @@ let Legend = class Legend extends React.Component {
       },
     ];
 
-    const renderLegendKeys = (stops) => {
-      return (
-        <div className="txt-m">
-          <span
-            className="h24 inline-block align-middle"
-            style={{
-              background: `linear-gradient(90deg, ${stops.map(
-                (stop) => stop[1]
-              )})`,
-              width: "100%",
-              borderRadius: "2px",
-            }}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              {stops.map((stop, i) => {
-                if (i !== 0 && i !== stops.length - 1) {
-                  return (
-                    <span
-                      key={i}
-                      style={{
-                        borderLeft: "2px solid white",
-                        height: "24px",
-                        borderStyle: "dotted",
-                      }}
-                    />
-                  );
-                } else {
-                  return (
-                    <span
-                      key={i}
-                      style={{
-                        borderLeft: "2px solid transparent",
-                        height: "24px",
-                      }}
-                    />
-                  );
-                }
-              })}
-            </div>
-          </span>
+    const renderLegendKeys = (stops) => (
+      <div className="txt-m">
+        <span
+          className="h24 inline-block align-middle"
+          style={{
+            background: `linear-gradient(90deg, ${stops.map(
+              (stop) => stop[1]
+            )})`,
+            width: "100%",
+            borderRadius: "2px",
+          }}
+        >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {stops.map((stop, i) => (
-              <span key={i}> {stop[0].toLocaleString()} </span>
-            ))}
+            {stops.map((stop, i) => {
+              if (i !== 0 && i !== stops.length - 1) {
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      borderLeft: "2px solid white",
+                      height: "24px",
+                      borderStyle: "dotted",
+                    }}
+                  />
+                );
+              } else {
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      borderLeft: "2px solid transparent",
+                      height: "24px",
+                    }}
+                  />
+                );
+              }
+            })}
           </div>
+        </span>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {stops.map((stop, i) => (
+            <span key={i}> {stop[0].toLocaleString()} </span>
+          ))}
         </div>
-      );
-    };
+      </div>
+    );
 
-    const mapTypeEvent = (e, { value }) => {
-      setMapType(value);
+    const mapTypeEvent = (value) => {
+      const mapType = mapTypes.find((t) => t.text === value)
+      setMapType(mapType.value);
     };
 
     return (
-      <div className={`legend ${this.props.sidebarOpen ? "resize" : ""} bg-white absolute bottom left mb36 shadow-darken10 round z1 wmax220`}>
+      <div className={`legend ${this.props.sidebarOpen ? "resize" : ""} bg-white absolute bottom left mb36 shadow-darken10 round z1 w300`}>
         <div className="mt6 mb12">
-          <Dropdown
-            defaultValue={mapTypes[0].value}
-            selection
-            options={mapTypes}
-            onChange={mapTypeEvent}
+          <DropdownSelect
+            items={mapTypes.map((t) => t.text)}
+            initialSelectedItem={mapTypes[0].text}
+            handleSelectionChanged={mapTypeEvent}
           />
         </div>
         <div className="mb6">

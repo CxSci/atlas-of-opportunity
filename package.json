@@ -9,24 +9,26 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
+    "@popperjs/core": "^2.9.2",
     "@turf/turf": "^5.1.6",
     "@visx/axis": "^1.7.0",
     "@visx/group": "^1.7.0",
     "@visx/mock-data": "^1.7.0",
     "@visx/scale": "^1.7.0",
     "@visx/shape": "^1.7.0",
+    "downshift": "^6.1.2",
     "mapbox-gl": "^1.13.1",
     "mathjax-react": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-collapsible": "^2.8.3",
     "react-dom": "^16.9.0",
+    "react-popper": "^2.2.5",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-tooltip": "^4.2.17",
-    "redux": "^4.0.5",
-    "semantic-ui-react": "^2.0.3"
+    "redux": "^4.0.5"
   },
   "eslintConfig": {
     "extends": [

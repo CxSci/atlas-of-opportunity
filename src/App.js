@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { BrowserRouter } from "react-router-dom";
@@ -8,17 +8,17 @@ import Routes from "./routes/index";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
-const App = class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Provider store={store}>
-          <Header />
-          <Routes />
-        </Provider>
-      </BrowserRouter>
-    );
-  }
+import "./css/App.css"
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <Header />
+        <Routes />
+      </Provider>
+    </BrowserRouter>
+  );
 };
 
 export default connect()(App);
