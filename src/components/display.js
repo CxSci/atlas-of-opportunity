@@ -23,7 +23,6 @@ let Display = class Display extends React.Component {
 
   
   toggleSidebar = () => {
-    console.log(this.props.sidebarOpen);
     setSideBar(!this.props.sidebarOpen);
   };
 
@@ -136,7 +135,8 @@ let Display = class Display extends React.Component {
         <SidebarButton/>
         <div className={`sidebar-container  ${sidebarState} `}>
           <SearchBar/>
-          <TopPanel />
+          <div className="sidebar-content"><TopPanel /></div>
+          
         </div>
       </PanelContainer>
     );

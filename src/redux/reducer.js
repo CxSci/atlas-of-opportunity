@@ -91,7 +91,7 @@ const initialState = {
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
   searchBarInfo: [121, -26.5],
-  sidebarOpen: true,
+  sidebarOpen: false,
 };
 
 function reducer(state = initialState, action) {

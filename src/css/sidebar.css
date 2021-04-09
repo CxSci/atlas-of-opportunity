@@ -1,6 +1,7 @@
 .panel-container {
     display: flex;
     flex-direction: column;
+    width: 280px;
 }
 
 .sidebar-container {
@@ -8,6 +9,11 @@
     height: 100%;
     background-color: white;
     z-index: 2;
+}
+
+.sidebar-content {
+    overflow-y: auto;
+    height: calc( 100% - 52px );
 }
 
 .closed {
@@ -23,7 +29,7 @@
     height: 40px;
     position: absolute;
     top: 5px;
-    left: 300px;
+    left: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,6 +41,7 @@
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
+    margin: auto;
 }
   
 .expand {

@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
@@ -10,16 +10,18 @@ const Main = class Main extends Component {
     const mapStyler = {
       zindex: 0,
     };
+    const screenFlexStyle = {
+      display: "flex",
+      flexDirection: 'row',
+    };
 
     return (
       <div style={mapStyler}>
-        <Map />
-        <Display />
-        <Fragment>
-          <Fragment>
-            <Legend />
-          </Fragment>
-        </Fragment>
+        <div style={screenFlexStyle}>
+          <Map />
+          <Display />
+        </div>
+        <Legend />
       </div>
     );
   }

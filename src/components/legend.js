@@ -5,10 +5,13 @@ import { Dropdown } from "semantic-ui-react";
 import * as Constants from "../constants";
 import { setMapType } from "../redux/action-creators";
 
+import "../css/legend.css";
+
 let Legend = class Legend extends React.Component {
   static propTypes = {
     active: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired,
+    sidebarOpen: PropTypes.bool.isRequired,
   };
 
   render() {
@@ -83,7 +86,7 @@ let Legend = class Legend extends React.Component {
     };
 
     return (
-      <div className="bg-white absolute bottom left ml12 mb36 py12 px12 shadow-darken10 round z1 wmax220">
+      <div className={`legend ${this.props.sidebarOpen ? "resize" : ""} bg-white absolute bottom left mb36 shadow-darken10 round z1 wmax220`}>
         <div className="mt6 mb12">
           <Dropdown
             defaultValue={mapTypes[0].value}
@@ -105,6 +108,7 @@ function mapStateToProps(state) {
   return {
     active: state.active,
     mapType: state.mapType,
+    sidebarOpen: state.sidebarOpen,
   };
 }
 

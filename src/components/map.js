@@ -616,7 +616,7 @@ let Map = class Map extends React.Component {
   render() {
     return (
       <div>
-        <div ref={this.mapRef} className="absolute top right left bottom" />
+        <div ref={this.mapRef} className="map absolute top right bottom" />
         <div className="mapOnlySearchBar"> 
           {/* <SearchBar /> */}
         </div>
