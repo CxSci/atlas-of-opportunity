@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { useSelect } from "downshift"
 import { usePopper } from "react-popper"
 
+import { sameWidthModifier } from "../utils/popper-modifiers"
+
 const buttonStyle = {
   border: "1px solid #999",
   borderRadius: "5px",
@@ -65,34 +67,13 @@ ChevronIcon.propTypes = {
 
 function DropdownSelect({ items, initialSelectedItem, handleSelectionChanged }) {
   // Set up popper-js
-
-  // A modifier for popper-js to make the popup menu the same width as its
-  // source element. Copied from
-  // https://github.com/popperjs/popper-core/issues/794#issuecomment-640747771.
-  const popperModifiers = useMemo(
-    () => [
-      {
-        name: "sameWidth",
-        enabled: true,
-        phase: "beforeWrite",
-        requires: ["computeStyles"],
-        fn: ({ state }) => {
-          state.styles.popper.width = `${state.rects.reference.width}px`;
-        },
-        effect: ({ state }) => {
-          state.elements.popper.style.width = `${
-            state.elements.reference.offsetWidth
-          }px`
-        }
-      }
-    ],
-    []
-  )
-
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles, attributes, update } = usePopper(referenceElement, popperElement, {
-    modifiers: popperModifiers,
+    // Set the popper's width to match the button
+    modifiers: useMemo(
+      () => [sameWidthModifier], []
+    ),
     placement: "top-start"
   })
 
