@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
+import SearchField from "./search-field";
 
 import "../css/header.css";
 
@@ -31,12 +32,13 @@ const Header = class Header extends Component {
       alignContent: "center",
       alignItems: "center",
     };
- 
+
     return (
       <div className="container" style={headerBox}>
         {/* TODO: make header background color translucent white while in comparison mode */}
         <div className="navbarLeft">
           {/* TODO: put conditional sidebar toggle control here */}
+          <SearchField />
         </div>
         <div className="navbarCenter">
           {/* TODO: put conditional comparison controls here */}
