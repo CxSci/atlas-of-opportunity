@@ -9,13 +9,13 @@ import { sameWidthModifier } from "../utils/popper-modifiers"
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
 import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
 
-// import mapboxgl from "mapbox-gl";
-// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-// import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import MapboxClient from "@mapbox/mapbox-sdk"
+import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
 
-// mapboxgl.accessToken =
-//   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
+const accessToken =
+  "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
+// TODO: Lift all of this styling into a separate file.
 const containerStyle = {
   marginLeft: "10px",
   width: '305px',
@@ -70,8 +70,50 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
+const geocodingClient = () => {
+  const client = MapboxClient({
+    accessToken: accessToken
+  })
+  const geocoder = MapboxGeocoder(client)
+  return geocoder
+}
+
+const forwardGeocode = (geocoder, query, callback) => {
+  const config = {
+    query: query,
+    // mode: "mapbox.places",
+    countries: ["AU"],
+    // proximity: coordinates,
+    types: [
+      "postcode", "district", "place", "locality"//, "neighborhood", "address"
+    ],
+    // Restrict search to South Australia
+    bbox: [
+      129.001337, -38.062603,
+      141.002956, -25.996146
+    ],
+    limit: 5,
+  }
+  geocoder.forwardGeocode(config).send()
+    .then(response => {
+      if ("features" in response.body) {
+        console.log(response.body)
+        const features = response.body.features.map((f) => {
+          return {
+            primary: f.text,
+            secondary: f.place_name,
+            coordinates: f.center,
+            relevance: f.relevance,
+          }
+        })
+        callback(features)
+      }
+    })
+}
+
 // TODO: replace this with a prop on SearchField
-const items = [{primary: "Adelaide", secondary: "Adelaide, SA, Australia"}, {primary: "North Adelaide", secondary: "North Adelaide, SA, Australia"}, {primary: "Adelaide Hills", secondary: "Adelaide Hills, SA, Australia"}, {primary: "Aldgate - Stirling", secondary: "Aldgate - Stirling, SA, Australia"}, {primary: "Hahndorf - Echunga", secondary: "Hahndorf - Echunga, SA, Australia"}, {primary: "Lobethal - Woodside", secondary: "Lobethal - Woodside, SA, Australia"}, {primary: "Mount Barker", secondary: "Mount Barker, SA, Australia"}, {primary: "Mount Barker Region", secondary: "Mount Barker Region, SA, Australia"}, {primary: "Nairne", secondary: "Nairne, SA, Australia"}, {primary: "Uraidla - Summertown", secondary: "Uraidla - Summertown, SA, Australia"}, {primary: "Burnside - Wattle Park", secondary: "Burnside - Wattle Park, SA, Australia"}, {primary: "Glenside - Beaumont", secondary: "Glenside - Beaumont, SA, Australia"}, {primary: "Toorak Gardens", secondary: "Toorak Gardens, SA, Australia"}, {primary: "Athelstone", secondary: "Athelstone, SA, Australia"}, {primary: "Paradise - Newton", secondary: "Paradise - Newton, SA, Australia"}, {primary: "Rostrevor - Magill", secondary: "Rostrevor - Magill, SA, Australia"}, {primary: "Norwood (SA)", secondary: "Norwood (SA), SA, Australia"}, {primary: "Payneham - Felixstow", secondary: "Payneham - Felixstow, SA, Australia"}, {primary: "St Peters - Marden", secondary: "St Peters - Marden, SA, Australia"}, {primary: "Nailsworth - Broadview", secondary: "Nailsworth - Broadview, SA, Australia"}, {primary: "Prospect", secondary: "Prospect, SA, Australia"}, {primary: "Walkerville", secondary: "Walkerville, SA, Australia"}, {primary: "Goodwood - Millswood", secondary: "Goodwood - Millswood, SA, Australia"}, {primary: "Unley - Parkside", secondary: "Unley - Parkside, SA, Australia"}, {primary: "Gawler - North", secondary: "Gawler - North, SA, Australia"}, {primary: "Gawler - South", secondary: "Gawler - South, SA, Australia"}, {primary: "Lewiston - Two Wells", secondary: "Lewiston - Two Wells, SA, Australia"}, {primary: "Craigmore - Blakeview", secondary: "Craigmore - Blakeview, SA, Australia"}, {primary: "Davoren Park", secondary: "Davoren Park, SA, Australia"}, {primary: "Elizabeth", secondary: "Elizabeth, SA, Australia"}, {primary: "Elizabeth East", secondary: "Elizabeth East, SA, Australia"}, {primary: "Munno Para West - Angle Vale", secondary: "Munno Para West - Angle Vale, SA, Australia"}, {primary: "One Tree Hill", secondary: "One Tree Hill, SA, Australia"}, {primary: "Smithfield - Elizabeth North", secondary: "Smithfield - Elizabeth North, SA, Australia"}, {primary: "Virginia - Waterloo Corner", secondary: "Virginia - Waterloo Corner, SA, Australia"}, {primary: "Enfield - Blair Athol", secondary: "Enfield - Blair Athol, SA, Australia"}, {primary: "Northgate - Oakden - Gilles Plains", secondary: "Northgate - Oakden - Gilles Plains, SA, Australia"}, {primary: "Windsor Gardens", secondary: "Windsor Gardens, SA, Australia"}, {primary: "Dry Creek - North", secondary: "Dry Creek - North, SA, Australia"}, {primary: "Ingle Farm", secondary: "Ingle Farm, SA, Australia"}, {primary: "Para Hills", secondary: "Para Hills, SA, Australia"}, {primary: "Parafield", secondary: "Parafield, SA, Australia"}, {primary: "Parafield Gardens", secondary: "Parafield Gardens, SA, Australia"}, {primary: "Paralowie", secondary: "Paralowie, SA, Australia"}, {primary: "Salisbury", secondary: "Salisbury, SA, Australia"}, {primary: "Salisbury East", secondary: "Salisbury East, SA, Australia"}, {primary: "Salisbury North", secondary: "Salisbury North, SA, Australia"}, {primary: "Mawson Lakes - Globe Derby Park", secondary: "Mawson Lakes - Globe Derby Park, SA, Australia"}, {primary: "Pooraka - Cavan", secondary: "Pooraka - Cavan, SA, Australia"}, {primary: "Golden Grove", secondary: "Golden Grove, SA, Australia"}, {primary: "Greenwith", secondary: "Greenwith, SA, Australia"}, {primary: "Highbury - Dernancourt", secondary: "Highbury - Dernancourt, SA, Australia"}, {primary: "Hope Valley - Modbury", secondary: "Hope Valley - Modbury, SA, Australia"}, {primary: "Modbury Heights", secondary: "Modbury Heights, SA, Australia"}, {primary: "Redwood Park", secondary: "Redwood Park, SA, Australia"}, {primary: "St Agnes - Ridgehaven", secondary: "St Agnes - Ridgehaven, SA, Australia"}, {primary: "Brighton (SA)", secondary: "Brighton (SA), SA, Australia"}, {primary: "Glenelg (SA)", secondary: "Glenelg (SA), SA, Australia"}, {primary: "Edwardstown", secondary: "Edwardstown, SA, Australia"}, {primary: "Hallett Cove", secondary: "Hallett Cove, SA, Australia"}, {primary: "Marino - Seaview Downs", secondary: "Marino - Seaview Downs, SA, Australia"}, {primary: "Mitchell Park", secondary: "Mitchell Park, SA, Australia"}, {primary: "Morphettville", secondary: "Morphettville, SA, Australia"}, {primary: "Sheidow Park - Trott Park", secondary: "Sheidow Park - Trott Park, SA, Australia"}, {primary: "Warradale", secondary: "Warradale, SA, Australia"}, {primary: "Belair", secondary: "Belair, SA, Australia"}, {primary: "Bellevue Heights", secondary: "Bellevue Heights, SA, Australia"}, {primary: "Blackwood", secondary: "Blackwood, SA, Australia"}, {primary: "Colonel Light Gardens", secondary: "Colonel Light Gardens, SA, Australia"}, {primary: "Mitcham (SA)", secondary: "Mitcham (SA), SA, Australia"}, {primary: "Panorama", secondary: "Panorama, SA, Australia"}, {primary: "Aberfoyle Park", secondary: "Aberfoyle Park, SA, Australia"}, {primary: "Aldinga", secondary: "Aldinga, SA, Australia"}, {primary: "Christie Downs", secondary: "Christie Downs, SA, Australia"}, {primary: "Christies Beach", secondary: "Christies Beach, SA, Australia"}, {primary: "Clarendon", secondary: "Clarendon, SA, Australia"}, {primary: "Coromandel Valley", secondary: "Coromandel Valley, SA, Australia"}, {primary: "Flagstaff Hill", secondary: "Flagstaff Hill, SA, Australia"}, {primary: "Hackham - Onkaparinga Hills", secondary: "Hackham - Onkaparinga Hills, SA, Australia"}, {primary: "Hackham West - Huntfield Heights", secondary: "Hackham West - Huntfield Heights, SA, Australia"}, {primary: "Happy Valley", secondary: "Happy Valley, SA, Australia"}, {primary: "Happy Valley Reservoir", secondary: "Happy Valley Reservoir, SA, Australia"}, {primary: "Lonsdale", secondary: "Lonsdale, SA, Australia"}, {primary: "McLaren Vale", secondary: "McLaren Vale, SA, Australia"}, {primary: "Morphett Vale - East", secondary: "Morphett Vale - East, SA, Australia"}, {primary: "Morphett Vale - West", secondary: "Morphett Vale - West, SA, Australia"}, {primary: "Reynella", secondary: "Reynella, SA, Australia"}, {primary: "Seaford (SA)", secondary: "Seaford (SA), SA, Australia"}, {primary: "Willunga", secondary: "Willunga, SA, Australia"}, {primary: "Woodcroft", secondary: "Woodcroft, SA, Australia"}, {primary: "Beverley", secondary: "Beverley, SA, Australia"}, {primary: "Flinders Park", secondary: "Flinders Park, SA, Australia"}, {primary: "Henley Beach", secondary: "Henley Beach, SA, Australia"}, {primary: "Hindmarsh - Brompton", secondary: "Hindmarsh - Brompton, SA, Australia"}, {primary: "Royal Park - Hendon - Albert Park", secondary: "Royal Park - Hendon - Albert Park, SA, Australia"}, {primary: "Seaton - Grange", secondary: "Seaton - Grange, SA, Australia"}, {primary: "West Lakes", secondary: "West Lakes, SA, Australia"}, {primary: "Woodville - Cheltenham", secondary: "Woodville - Cheltenham, SA, Australia"}, {primary: "Dry Creek - South", secondary: "Dry Creek - South, SA, Australia"}, {primary: "Largs Bay - Semaphore", secondary: "Largs Bay - Semaphore, SA, Australia"}, {primary: "North Haven", secondary: "North Haven, SA, Australia"}, {primary: "Port Adelaide", secondary: "Port Adelaide, SA, Australia"}, {primary: "The Parks", secondary: "The Parks, SA, Australia"}, {primary: "Torrens Island", secondary: "Torrens Island, SA, Australia"}, {primary: "Adelaide Airport", secondary: "Adelaide Airport, SA, Australia"}, {primary: "Fulham", secondary: "Fulham, SA, Australia"}, {primary: "Lockleys", secondary: "Lockleys, SA, Australia"}, {primary: "Plympton", secondary: "Plympton, SA, Australia"}, {primary: "Richmond (SA)", secondary: "Richmond (SA), SA, Australia"}, {primary: "West Beach", secondary: "West Beach, SA, Australia"}, {primary: "Barossa - Angaston", secondary: "Barossa - Angaston, SA, Australia"}, {primary: "Light", secondary: "Light, SA, Australia"}, {primary: "Lyndoch", secondary: "Lyndoch, SA, Australia"}, {primary: "Mallala", secondary: "Mallala, SA, Australia"}, {primary: "Nuriootpa", secondary: "Nuriootpa, SA, Australia"}, {primary: "Tanunda", secondary: "Tanunda, SA, Australia"}, {primary: "Clare", secondary: "Clare, SA, Australia"}, {primary: "Gilbert Valley", secondary: "Gilbert Valley, SA, Australia"}, {primary: "Goyder", secondary: "Goyder, SA, Australia"}, {primary: "Wakefield - Barunga West", secondary: "Wakefield - Barunga West, SA, Australia"}, {primary: "Jamestown", secondary: "Jamestown, SA, Australia"}, {primary: "Peterborough - Mount Remarkable", secondary: "Peterborough - Mount Remarkable, SA, Australia"}, {primary: "Port Pirie", secondary: "Port Pirie, SA, Australia"}, {primary: "Port Pirie Region", secondary: "Port Pirie Region, SA, Australia"}, {primary: "Kadina", secondary: "Kadina, SA, Australia"}, {primary: "Moonta", secondary: "Moonta, SA, Australia"}, {primary: "Wallaroo", secondary: "Wallaroo, SA, Australia"}, {primary: "Yorke Peninsula - North", secondary: "Yorke Peninsula - North, SA, Australia"}, {primary: "Yorke Peninsula - South", secondary: "Yorke Peninsula - South, SA, Australia"}, {primary: "Ceduna", secondary: "Ceduna, SA, Australia"}, {primary: "Eyre Peninsula", secondary: "Eyre Peninsula, SA, Australia"}, {primary: "Kimba - Cleve - Franklin Harbour", secondary: "Kimba - Cleve - Franklin Harbour, SA, Australia"}, {primary: "Le Hunte - Elliston", secondary: "Le Hunte - Elliston, SA, Australia"}, {primary: "Port Lincoln", secondary: "Port Lincoln, SA, Australia"}, {primary: "West Coast (SA)", secondary: "West Coast (SA), SA, Australia"}, {primary: "Western", secondary: "Western, SA, Australia"}, {primary: "Whyalla", secondary: "Whyalla, SA, Australia"}, {primary: "Whyalla - North", secondary: "Whyalla - North, SA, Australia"}, {primary: "APY Lands", secondary: "APY Lands, SA, Australia"}, {primary: "Coober Pedy", secondary: "Coober Pedy, SA, Australia"}, {primary: "Quorn - Lake Gilles", secondary: "Quorn - Lake Gilles, SA, Australia"}, {primary: "Outback", secondary: "Outback, SA, Australia"}, {primary: "Port Augusta", secondary: "Port Augusta, SA, Australia"}, {primary: "Roxby Downs", secondary: "Roxby Downs, SA, Australia"}, {primary: "Goolwa - Port Elliot", secondary: "Goolwa - Port Elliot, SA, Australia"}, {primary: "Kangaroo Island", secondary: "Kangaroo Island, SA, Australia"}, {primary: "Strathalbyn", secondary: "Strathalbyn, SA, Australia"}, {primary: "Strathalbyn Region", secondary: "Strathalbyn Region, SA, Australia"}, {primary: "Victor Harbor", secondary: "Victor Harbor, SA, Australia"}, {primary: "Yankalilla", secondary: "Yankalilla, SA, Australia"}, {primary: "Grant", secondary: "Grant, SA, Australia"}, {primary: "Kingston - Robe", secondary: "Kingston - Robe, SA, Australia"}, {primary: "Millicent", secondary: "Millicent, SA, Australia"}, {primary: "Naracoorte", secondary: "Naracoorte, SA, Australia"}, {primary: "Naracoorte Region", secondary: "Naracoorte Region, SA, Australia"}, {primary: "Penola", secondary: "Penola, SA, Australia"}, {primary: "Tatiara", secondary: "Tatiara, SA, Australia"}, {primary: "Wattle Range", secondary: "Wattle Range, SA, Australia"}, {primary: "Mount Gambier - East", secondary: "Mount Gambier - East, SA, Australia"}, {primary: "Mount Gambier - West", secondary: "Mount Gambier - West, SA, Australia"}, {primary: "Barmera", secondary: "Barmera, SA, Australia"}, {primary: "Berri", secondary: "Berri, SA, Australia"}, {primary: "Karoonda - Lameroo", secondary: "Karoonda - Lameroo, SA, Australia"}, {primary: "Loxton", secondary: "Loxton, SA, Australia"}, {primary: "Loxton Region", secondary: "Loxton Region, SA, Australia"}, {primary: "Mannum", secondary: "Mannum, SA, Australia"}, {primary: "Murray Bridge", secondary: "Murray Bridge, SA, Australia"}, {primary: "Murray Bridge Region", secondary: "Murray Bridge Region, SA, Australia"}, {primary: "Renmark", secondary: "Renmark, SA, Australia"}, {primary: "Renmark Region", secondary: "Renmark Region, SA, Australia"}, {primary: "The Coorong", secondary: "The Coorong, SA, Australia"}, {primary: "Waikerie", secondary: "Waikerie, SA, Australia"}, {primary: "Migratory - Offshore - Shipping (SA)", secondary: "Migratory - Offshore - Shipping (SA), SA, Australia"}, {primary: "No usual address (SA)", secondary: "No usual address (SA), SA, Australia"} ]
+let items = [{primary: "Adelaide"}, {primary: "North Adelaide"}, {primary: "Adelaide Hills"}, {primary: "Aldgate - Stirling"}, {primary: "Hahndorf - Echunga"}, {primary: "Lobethal - Woodside"}, {primary: "Mount Barker"}, {primary: "Mount Barker Region"}, {primary: "Nairne"}, {primary: "Uraidla - Summertown"}, {primary: "Burnside - Wattle Park"}, {primary: "Glenside - Beaumont"}, {primary: "Toorak Gardens"}, {primary: "Athelstone"}, {primary: "Paradise - Newton"}, {primary: "Rostrevor - Magill"}, {primary: "Norwood (SA)"}, {primary: "Payneham - Felixstow"}, {primary: "St Peters - Marden"}, {primary: "Nailsworth - Broadview"}, {primary: "Prospect"}, {primary: "Walkerville"}, {primary: "Goodwood - Millswood"}, {primary: "Unley - Parkside"}, {primary: "Gawler - North"}, {primary: "Gawler - South"}, {primary: "Lewiston - Two Wells"}, {primary: "Craigmore - Blakeview"}, {primary: "Davoren Park"}, {primary: "Elizabeth"}, {primary: "Elizabeth East"}, {primary: "Munno Para West - Angle Vale"}, {primary: "One Tree Hill"}, {primary: "Smithfield - Elizabeth North"}, {primary: "Virginia - Waterloo Corner"}, {primary: "Enfield - Blair Athol"}, {primary: "Northgate - Oakden - Gilles Plains"}, {primary: "Windsor Gardens"}, {primary: "Dry Creek - North"}, {primary: "Ingle Farm"}, {primary: "Para Hills"}, {primary: "Parafield"}, {primary: "Parafield Gardens"}, {primary: "Paralowie"}, {primary: "Salisbury"}, {primary: "Salisbury East"}, {primary: "Salisbury North"}, {primary: "Mawson Lakes - Globe Derby Park"}, {primary: "Pooraka - Cavan"}, {primary: "Golden Grove"}, {primary: "Greenwith"}, {primary: "Highbury - Dernancourt"}, {primary: "Hope Valley - Modbury"}, {primary: "Modbury Heights"}, {primary: "Redwood Park"}, {primary: "St Agnes - Ridgehaven"}, {primary: "Brighton (SA)"}, {primary: "Glenelg (SA)"}, {primary: "Edwardstown"}, {primary: "Hallett Cove"}, {primary: "Marino - Seaview Downs"}, {primary: "Mitchell Park"}, {primary: "Morphettville"}, {primary: "Sheidow Park - Trott Park"}, {primary: "Warradale"}, {primary: "Belair"}, {primary: "Bellevue Heights"}, {primary: "Blackwood"}, {primary: "Colonel Light Gardens"}, {primary: "Mitcham (SA)"}, {primary: "Panorama"}, {primary: "Aberfoyle Park"}, {primary: "Aldinga"}, {primary: "Christie Downs"}, {primary: "Christies Beach"}, {primary: "Clarendon"}, {primary: "Coromandel Valley"}, {primary: "Flagstaff Hill"}, {primary: "Hackham - Onkaparinga Hills"}, {primary: "Hackham West - Huntfield Heights"}, {primary: "Happy Valley"}, {primary: "Happy Valley Reservoir"}, {primary: "Lonsdale"}, {primary: "McLaren Vale"}, {primary: "Morphett Vale - East"}, {primary: "Morphett Vale - West"}, {primary: "Reynella"}, {primary: "Seaford (SA)"}, {primary: "Willunga"}, {primary: "Woodcroft"}, {primary: "Beverley"}, {primary: "Flinders Park"}, {primary: "Henley Beach"}, {primary: "Hindmarsh - Brompton"}, {primary: "Royal Park - Hendon - Albert Park"}, {primary: "Seaton - Grange"}, {primary: "West Lakes"}, {primary: "Woodville - Cheltenham"}, {primary: "Dry Creek - South"}, {primary: "Largs Bay - Semaphore"}, {primary: "North Haven"}, {primary: "Port Adelaide"}, {primary: "The Parks"}, {primary: "Torrens Island"}, {primary: "Adelaide Airport"}, {primary: "Fulham"}, {primary: "Lockleys"}, {primary: "Plympton"}, {primary: "Richmond (SA)"}, {primary: "West Beach"}, {primary: "Barossa - Angaston"}, {primary: "Light"}, {primary: "Lyndoch"}, {primary: "Mallala"}, {primary: "Nuriootpa"}, {primary: "Tanunda"}, {primary: "Clare"}, {primary: "Gilbert Valley"}, {primary: "Goyder"}, {primary: "Wakefield - Barunga West"}, {primary: "Jamestown"}, {primary: "Peterborough - Mount Remarkable"}, {primary: "Port Pirie"}, {primary: "Port Pirie Region"}, {primary: "Kadina"}, {primary: "Moonta"}, {primary: "Wallaroo"}, {primary: "Yorke Peninsula - North"}, {primary: "Yorke Peninsula - South"}, {primary: "Ceduna"}, {primary: "Eyre Peninsula"}, {primary: "Kimba - Cleve - Franklin Harbour"}, {primary: "Le Hunte - Elliston"}, {primary: "Port Lincoln"}, {primary: "West Coast (SA)"}, {primary: "Western"}, {primary: "Whyalla"}, {primary: "Whyalla - North"}, {primary: "APY Lands"}, {primary: "Coober Pedy"}, {primary: "Quorn - Lake Gilles"}, {primary: "Outback"}, {primary: "Port Augusta"}, {primary: "Roxby Downs"}, {primary: "Goolwa - Port Elliot"}, {primary: "Kangaroo Island"}, {primary: "Strathalbyn"}, {primary: "Strathalbyn Region"}, {primary: "Victor Harbor"}, {primary: "Yankalilla"}, {primary: "Grant"}, {primary: "Kingston - Robe"}, {primary: "Millicent"}, {primary: "Naracoorte"}, {primary: "Naracoorte Region"}, {primary: "Penola"}, {primary: "Tatiara"}, {primary: "Wattle Range"}, {primary: "Mount Gambier - East"}, {primary: "Mount Gambier - West"}, {primary: "Barmera"}, {primary: "Berri"}, {primary: "Karoonda - Lameroo"}, {primary: "Loxton"}, {primary: "Loxton Region"}, {primary: "Mannum"}, {primary: "Murray Bridge"}, {primary: "Murray Bridge Region"}, {primary: "Renmark"}, {primary: "Renmark Region"}, {primary: "The Coorong"}, {primary: "Waikerie"}]
+items = items.sort((a, b) => a.primary.localeCompare(b.primary))
 
 function SearchField() {
   // Set up popper-js
@@ -85,6 +127,7 @@ function SearchField() {
     placement: "bottom-start"
   })
 
+  // Set up downshift-js combobox / autocomplete
   // Default to showing all of the available options
   const [inputItems, setInputItems] = useState(items)
   const itemToString = item => (item ? item.primary : '')
@@ -104,15 +147,34 @@ function SearchField() {
   } = useCombobox({
     items: inputItems,
     itemToString,
-    onSelectedItemChange: ({ selectedItem }) => {
-      console.log(selectedItem)
-    },
+    // onSelectedItemChange: ({ selectedItem }) => {
+    //   console.log(selectedItem)
+    // },
     onInputValueChange: ({ inputValue }) => {
-      setInputItems(items.filter(
-        item => item.secondary.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
-      ))
+      if (inputValue === '') {
+        setInputItems(items)
+      } else {
+        forwardGeocode(geocoder, inputValue, (features) => {
+          setInputItems([
+            // Limit local items to ones containing the query
+            ...items.filter(item => item.primary.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1),
+            ...features]
+            .sort((a, b) => (
+              // First, local items get priority
+              (a.coordinates ?? []).length - (b.coordinates ?? []).length
+              // Then, what Mapbox considers the best match
+              || (b.relevance ?? 1.0) - (a.relevance ?? 1.0)
+              // Finally, alphabetically by matching item
+              || a.primary.localeCompare(b.primary))
+            )
+          )
+        })
+      }
     }
   })
+
+  // Set up geocoder
+  const [geocoder] = useState(geocodingClient())
 
   return (
     <div className="searchContainer" ref={setReferenceElement} style={containerStyle}>
@@ -154,7 +216,7 @@ function SearchField() {
             {isOpen &&
               inputItems.map((item, index) => (
                 <li
-                  style={ {...itemStyle, 
+                  style={{...itemStyle, 
                     ...(highlightedIndex === index
                       ? { backgroundColor: '#f2f2f2' }
                       : {})}
@@ -163,7 +225,7 @@ function SearchField() {
                   {...getItemProps({ item, index })}
                 >
                   <div className="primary" style={primaryStyle}>{item.primary}</div>
-                  <div className="secondary" style={secondaryStyle}>{item.secondary}</div>
+                  <div className="secondary" style={secondaryStyle}>{item.secondary ?? "SA2 Region"}</div>
                 </li>
               ))}
           </ul>
