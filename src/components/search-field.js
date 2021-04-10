@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
 
+import { sameWidthModifier } from "../utils/popper-modifiers"
 // import { connect } from "react-redux";
 // import { setSearchBarInfo } from "../redux/action-creators";
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
@@ -74,36 +75,13 @@ const items = [{primary: "Adelaide", secondary: "Adelaide, SA, Australia"}, {pri
 
 function SearchField() {
   // Set up popper-js
-
-  // TODO: Lift popperModifiers and the same from dropdown.js into a separate
-  //       shared file.
-  // A modifier for popper-js to make the popup menu the same width as its
-  // source element. Copied from
-  // https://github.com/popperjs/popper-core/issues/794#issuecomment-640747771.
-  const popperModifiers = useMemo(
-    () => [
-      {
-        name: "sameWidth",
-        enabled: true,
-        phase: "beforeWrite",
-        requires: ["computeStyles"],
-        fn: ({ state }) => {
-          state.styles.popper.width = `${state.rects.reference.width}px`;
-        },
-        effect: ({ state }) => {
-          state.elements.popper.style.width = `${
-            state.elements.reference.offsetWidth
-          }px`
-        }
-      }
-    ],
-    []
-  )
-
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: popperModifiers,
+    // Set the popper's width to match the search field
+    modifiers: useMemo(
+      () => [sameWidthModifier], []
+    ),
     placement: "bottom-start"
   })
 
