@@ -8,7 +8,7 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-geocoder": "^4.7.0",
+    "@mapbox/mapbox-sdk": "^0.12.1",
     "@popperjs/core": "^2.9.2",
     "@turf/turf": "^5.1.6",
     "@visx/axis": "^1.7.0",
@@ -17,7 +17,7 @@
     "@visx/scale": "^1.7.0",
     "@visx/shape": "^1.7.0",
     "downshift": "^6.1.2",
-    "mapbox-gl": "^1.13.1",
+    "mapbox-gl": "^2.2.0",
     "mathjax-react": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
