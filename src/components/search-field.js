@@ -129,6 +129,7 @@ function SearchField() {
 
   // Set up downshift-js combobox / autocomplete
   // Default to showing all of the available options
+  const [inputElement, setInputElement] = useState(null)
   const [inputItems, setInputItems] = useState(items)
   const itemToString = item => (item ? item.primary : '')
   const {
@@ -147,9 +148,9 @@ function SearchField() {
   } = useCombobox({
     items: inputItems,
     itemToString,
-    // onSelectedItemChange: ({ selectedItem }) => {
-    //   console.log(selectedItem)
-    // },
+    onSelectedItemChange: ({ selectedItem }) => {
+      inputElement.blur()
+    },
     onInputValueChange: ({ inputValue }) => {
       if (inputValue === '') {
         setInputItems(items)
@@ -186,8 +187,10 @@ function SearchField() {
                     openMenu()
                   }
                 },
-          placeholder: "Search by suburb or region"
+          placeholder: "Search by suburb or region",
+          spellcheck: "disable",
           })}
+          ref={setInputElement}
           style={inputStyle}
         />
         { inputValue === '' ?
