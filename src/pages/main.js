@@ -21,8 +21,7 @@ const Main = class Main extends Component {
 
     return (
       <div style={mapStyler}>
-        <div style={screenFlexStyle}>
-          
+        <div style={screenFlexStyle}>     
           <Display />
           <Map />
         </div>

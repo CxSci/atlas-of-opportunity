@@ -66,7 +66,6 @@ let Map = class Map extends React.Component {
       fitBoundsOptions: { padding: 70 },
     });
 
-    console.log(this.map, "map");
     this.map.resize();
 
     // zoom buttons
@@ -223,7 +222,6 @@ let Map = class Map extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.sidebarOpen !== prevProps.sidebarOpen) {
-      console.log(this.props.sidebarOpen);
       this.map.resize();
     }
 

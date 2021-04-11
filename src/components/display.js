@@ -26,13 +26,6 @@ let Display = class Display extends React.Component {
     setSideBar(!this.props.sidebarOpen);
   };
 
-  // componentDidUpdate(prevProps) {
-    // return display to default settings if we've changed map types
-    // if (this.props.mapType !== prevProps.mapType) {
-    //   setDisplayDefault();
-    // }
-  // }
-
   renderDisplay() {
     let sidebarState = this.props.sidebarOpen ? 'open' : 'closed';
     
