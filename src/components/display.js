@@ -51,7 +51,7 @@ let Display = class Display extends React.Component {
     const { mapType } = this.props;
 
     const PanelContainer = (props) => (
-      <div className={`panel-container absolute top left h-full mr12 `}>
+      <div className={`panel-container h-full`}>
         {props.children}
       </div>
     );

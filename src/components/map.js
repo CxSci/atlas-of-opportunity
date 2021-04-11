@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
@@ -52,6 +52,7 @@ let Map = class Map extends React.Component {
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    sidebarOpen: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -64,6 +65,9 @@ let Map = class Map extends React.Component {
       ],
       fitBoundsOptions: { padding: 70 },
     });
+
+    console.log(this.map, "map");
+    this.map.resize();
 
     // zoom buttons
     var controls = new mapboxgl.NavigationControl({
@@ -218,6 +222,11 @@ let Map = class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.sidebarOpen !== prevProps.sidebarOpen) {
+      console.log(this.props.sidebarOpen);
+      this.map.resize();
+    }
+
     if (this.props.flowDirection !== prevProps.flowDirection) {
       this.redrawBridges();
     }
@@ -612,15 +621,15 @@ let Map = class Map extends React.Component {
       }
     }
   };
-
+  
   render() {
     return (
-      <div>
-        <div ref={this.mapRef} className="map absolute top right bottom" />
+      <Fragment>
+        <div id="map" ref={this.mapRef} className="map" />
         <div className="mapOnlySearchBar"> 
           {/* <SearchBar /> */}
         </div>
-      </div>
+      </Fragment>
     );
   }
 };
@@ -632,6 +641,7 @@ function mapStateToProps(state) {
     select: state.select,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
+    sidebarOpen: state.sidebarOpen,
   };
 }
 
