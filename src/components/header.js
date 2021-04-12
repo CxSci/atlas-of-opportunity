@@ -10,6 +10,7 @@ import "../css/header.css";
 
 const Header = class Header extends Component {
   static propTypes = {
+    features: PropTypes.array.isRequired,
     path: PropTypes.string.isRequired,
   };
 
@@ -33,12 +34,18 @@ const Header = class Header extends Component {
       alignItems: "center",
     };
 
+    const items = this.props.features.map((f) => {
+      return {
+        primary: f.properties.SA2_NAME16,
+      }
+    })
+
     return (
       <div className="container" style={headerBox}>
         {/* TODO: make header background color translucent white while in comparison mode */}
         <div className="navbarLeft">
           {/* TODO: put conditional sidebar toggle control here */}
-          <SearchField />
+          <SearchField localItems={items} />
         </div>
         <div className="navbarCenter">
           {/* TODO: put conditional comparison controls here */}
@@ -96,6 +103,7 @@ const Header = class Header extends Component {
 
 function mapStateToProps(state) {
   return {
+    features: state.features,
     path: state.path,
   };
 }

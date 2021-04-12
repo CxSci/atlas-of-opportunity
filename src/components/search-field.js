@@ -1,16 +1,14 @@
-import React, { useState, useMemo } from "react"
-// import PropTypes from "prop-types"
+import React, { useEffect, useMemo, useState } from "react"
+import PropTypes from "prop-types"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
-
-import { sameWidthModifier } from "../utils/popper-modifiers"
-// import { connect } from "react-redux";
-// import { setSearchBarInfo } from "../redux/action-creators";
-import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
-import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
-
+import LRU from "lru-cache"
 import MapboxClient from "@mapbox/mapbox-sdk"
 import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
+
+import { sameWidthModifier } from "../utils/popper-modifiers"
+import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
+import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
 
 const accessToken =
   "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
@@ -81,9 +79,7 @@ const geocodingClient = () => {
 const forwardGeocode = (geocoder, query, callback) => {
   const config = {
     query: query,
-    // mode: "mapbox.places",
     countries: ["AU"],
-    // proximity: coordinates,
     types: [
       "postcode", "district", "place", "locality"//, "neighborhood", "address"
     ],
@@ -111,11 +107,7 @@ const forwardGeocode = (geocoder, query, callback) => {
     })
 }
 
-// TODO: replace this with a prop on SearchField
-let items = [{primary: "Adelaide"}, {primary: "North Adelaide"}, {primary: "Adelaide Hills"}, {primary: "Aldgate - Stirling"}, {primary: "Hahndorf - Echunga"}, {primary: "Lobethal - Woodside"}, {primary: "Mount Barker"}, {primary: "Mount Barker Region"}, {primary: "Nairne"}, {primary: "Uraidla - Summertown"}, {primary: "Burnside - Wattle Park"}, {primary: "Glenside - Beaumont"}, {primary: "Toorak Gardens"}, {primary: "Athelstone"}, {primary: "Paradise - Newton"}, {primary: "Rostrevor - Magill"}, {primary: "Norwood (SA)"}, {primary: "Payneham - Felixstow"}, {primary: "St Peters - Marden"}, {primary: "Nailsworth - Broadview"}, {primary: "Prospect"}, {primary: "Walkerville"}, {primary: "Goodwood - Millswood"}, {primary: "Unley - Parkside"}, {primary: "Gawler - North"}, {primary: "Gawler - South"}, {primary: "Lewiston - Two Wells"}, {primary: "Craigmore - Blakeview"}, {primary: "Davoren Park"}, {primary: "Elizabeth"}, {primary: "Elizabeth East"}, {primary: "Munno Para West - Angle Vale"}, {primary: "One Tree Hill"}, {primary: "Smithfield - Elizabeth North"}, {primary: "Virginia - Waterloo Corner"}, {primary: "Enfield - Blair Athol"}, {primary: "Northgate - Oakden - Gilles Plains"}, {primary: "Windsor Gardens"}, {primary: "Dry Creek - North"}, {primary: "Ingle Farm"}, {primary: "Para Hills"}, {primary: "Parafield"}, {primary: "Parafield Gardens"}, {primary: "Paralowie"}, {primary: "Salisbury"}, {primary: "Salisbury East"}, {primary: "Salisbury North"}, {primary: "Mawson Lakes - Globe Derby Park"}, {primary: "Pooraka - Cavan"}, {primary: "Golden Grove"}, {primary: "Greenwith"}, {primary: "Highbury - Dernancourt"}, {primary: "Hope Valley - Modbury"}, {primary: "Modbury Heights"}, {primary: "Redwood Park"}, {primary: "St Agnes - Ridgehaven"}, {primary: "Brighton (SA)"}, {primary: "Glenelg (SA)"}, {primary: "Edwardstown"}, {primary: "Hallett Cove"}, {primary: "Marino - Seaview Downs"}, {primary: "Mitchell Park"}, {primary: "Morphettville"}, {primary: "Sheidow Park - Trott Park"}, {primary: "Warradale"}, {primary: "Belair"}, {primary: "Bellevue Heights"}, {primary: "Blackwood"}, {primary: "Colonel Light Gardens"}, {primary: "Mitcham (SA)"}, {primary: "Panorama"}, {primary: "Aberfoyle Park"}, {primary: "Aldinga"}, {primary: "Christie Downs"}, {primary: "Christies Beach"}, {primary: "Clarendon"}, {primary: "Coromandel Valley"}, {primary: "Flagstaff Hill"}, {primary: "Hackham - Onkaparinga Hills"}, {primary: "Hackham West - Huntfield Heights"}, {primary: "Happy Valley"}, {primary: "Happy Valley Reservoir"}, {primary: "Lonsdale"}, {primary: "McLaren Vale"}, {primary: "Morphett Vale - East"}, {primary: "Morphett Vale - West"}, {primary: "Reynella"}, {primary: "Seaford (SA)"}, {primary: "Willunga"}, {primary: "Woodcroft"}, {primary: "Beverley"}, {primary: "Flinders Park"}, {primary: "Henley Beach"}, {primary: "Hindmarsh - Brompton"}, {primary: "Royal Park - Hendon - Albert Park"}, {primary: "Seaton - Grange"}, {primary: "West Lakes"}, {primary: "Woodville - Cheltenham"}, {primary: "Dry Creek - South"}, {primary: "Largs Bay - Semaphore"}, {primary: "North Haven"}, {primary: "Port Adelaide"}, {primary: "The Parks"}, {primary: "Torrens Island"}, {primary: "Adelaide Airport"}, {primary: "Fulham"}, {primary: "Lockleys"}, {primary: "Plympton"}, {primary: "Richmond (SA)"}, {primary: "West Beach"}, {primary: "Barossa - Angaston"}, {primary: "Light"}, {primary: "Lyndoch"}, {primary: "Mallala"}, {primary: "Nuriootpa"}, {primary: "Tanunda"}, {primary: "Clare"}, {primary: "Gilbert Valley"}, {primary: "Goyder"}, {primary: "Wakefield - Barunga West"}, {primary: "Jamestown"}, {primary: "Peterborough - Mount Remarkable"}, {primary: "Port Pirie"}, {primary: "Port Pirie Region"}, {primary: "Kadina"}, {primary: "Moonta"}, {primary: "Wallaroo"}, {primary: "Yorke Peninsula - North"}, {primary: "Yorke Peninsula - South"}, {primary: "Ceduna"}, {primary: "Eyre Peninsula"}, {primary: "Kimba - Cleve - Franklin Harbour"}, {primary: "Le Hunte - Elliston"}, {primary: "Port Lincoln"}, {primary: "West Coast (SA)"}, {primary: "Western"}, {primary: "Whyalla"}, {primary: "Whyalla - North"}, {primary: "APY Lands"}, {primary: "Coober Pedy"}, {primary: "Quorn - Lake Gilles"}, {primary: "Outback"}, {primary: "Port Augusta"}, {primary: "Roxby Downs"}, {primary: "Goolwa - Port Elliot"}, {primary: "Kangaroo Island"}, {primary: "Strathalbyn"}, {primary: "Strathalbyn Region"}, {primary: "Victor Harbor"}, {primary: "Yankalilla"}, {primary: "Grant"}, {primary: "Kingston - Robe"}, {primary: "Millicent"}, {primary: "Naracoorte"}, {primary: "Naracoorte Region"}, {primary: "Penola"}, {primary: "Tatiara"}, {primary: "Wattle Range"}, {primary: "Mount Gambier - East"}, {primary: "Mount Gambier - West"}, {primary: "Barmera"}, {primary: "Berri"}, {primary: "Karoonda - Lameroo"}, {primary: "Loxton"}, {primary: "Loxton Region"}, {primary: "Mannum"}, {primary: "Murray Bridge"}, {primary: "Murray Bridge Region"}, {primary: "Renmark"}, {primary: "Renmark Region"}, {primary: "The Coorong"}, {primary: "Waikerie"}]
-items = items.sort((a, b) => a.primary.localeCompare(b.primary))
-
-function SearchField() {
+function SearchField({ localItems }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -130,7 +122,7 @@ function SearchField() {
   // Set up downshift-js combobox / autocomplete
   // Default to showing all of the available options
   const [inputElement, setInputElement] = useState(null)
-  const [inputItems, setInputItems] = useState(items)
+  const [inputItems, setInputItems] = useState([])
   const itemToString = item => (item ? item.primary : '')
   const {
     getComboboxProps,
@@ -148,34 +140,72 @@ function SearchField() {
   } = useCombobox({
     items: inputItems,
     itemToString,
-    onSelectedItemChange: ({ selectedItem }) => {
-      inputElement.blur()
-    },
-    onInputValueChange: ({ inputValue }) => {
-      if (inputValue === '') {
-        setInputItems(items)
-      } else {
-        forwardGeocode(geocoder, inputValue, (features) => {
-          setInputItems([
-            // Limit local items to ones containing the query
-            ...items.filter(item => item.primary.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1),
-            ...features]
-            .sort((a, b) => (
-              // First, local items get priority
-              (a.coordinates ?? []).length - (b.coordinates ?? []).length
-              // Then, what Mapbox considers the best match
-              || (b.relevance ?? 1.0) - (a.relevance ?? 1.0)
-              // Finally, alphabetically by matching item
-              || a.primary.localeCompare(b.primary))
-            )
-          )
-        })
+    onIsOpenChange: ({isOpen}) => {
+      // Anything that would close the suggestion menu should cause the input
+      // to lose focus too.
+      if (!isOpen) {
+        inputElement.blur()
       }
-    }
+    },
+    // onSelectedItemChange: ({ selectedItem }) => {
+    //   // find feature id of geocoded result
+    //   // fire off feature id to map for it to do with as it will
+    // }
   })
 
   // Set up geocoder
   const [geocoder] = useState(geocodingClient())
+  const [geocodedItems, setGeocodedItems] = useState([])
+  // Cache geocoding results for the last 1000 queries to save on API requests.
+  // https://docs.mapbox.com/api/search/geocoding/#geocoding-restrictions-and-limits
+  // https://www.mapbox.com/pricing/#search
+  // TODO: Figure out the memory impact of having this be a big number.
+  //       lru-cache can be configured to limit its actual memory size, though
+  //       you have to teach it how to calculate the size.
+  const [geocoderItemsCache] = useState(new LRU(1000))
+
+  useEffect(() => {
+    // TODO: Add a bit of hysteresis to uncached geocoding requests, e.g. wait
+    //       300ms before firing off forwardGeocode() and cancell any pending
+    //       calls currently waiting to go. Should be simple enough to do with
+    //       something like https://github.com/xnimorz/use-debounce.
+
+    // Normalize query to lowercase and compress whitespace
+    // e.g. " Ban  ana   " -> "Ban ana"
+    const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
+    // Don't waste the Geocoding API quota on very short queries
+    if (query.length < 3) {
+      setGeocodedItems([])
+    } else {
+      let cachedItems = geocoderItemsCache.get(query)
+      if (cachedItems) {
+        setGeocodedItems(cachedItems)
+      } else {
+        forwardGeocode(geocoder, query, (features) => {
+          geocoderItemsCache.set(query, features)
+          setGeocodedItems(features)
+        })
+      }
+    }
+  }, [inputValue, geocoder, geocoderItemsCache])
+
+  useEffect(() => {
+    const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
+    if (query === '') {
+      setInputItems(localItems.sort((a, b) => {a.primary.localeCompare(b.primary)}))
+    } else {
+      setInputItems([
+          // Case-insensitive substring match
+        ...localItems
+          .filter(item => item.primary.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+          .sort((a, b) => {a.primary.localeCompare(b.primary)}),
+        ...geocodedItems.sort((a, b) => {
+          (b.relevance ?? 1.0) - (a.relevance ?? 1.0) ||
+          a.primary.localeCompare(b.primary)
+        })
+      ])
+    }
+  }, [localItems, geocodedItems, inputValue])
 
   return (
     <div className="searchContainer" ref={setReferenceElement} style={containerStyle}>
@@ -188,9 +218,9 @@ function SearchField() {
                   }
                 },
           placeholder: "Search by suburb or region",
-          spellcheck: "disable",
+          spellCheck: "disable",
+          ref: setInputElement,
           })}
-          ref={setInputElement}
           style={inputStyle}
         />
         { inputValue === '' ?
@@ -236,6 +266,11 @@ function SearchField() {
       </div>
     </div>
   )
+}
+
+SearchField.propTypes = {
+  // TODO: Use arrayOf()
+  localItems: PropTypes.array
 }
 
 // let SearchBar = class SearchBar extends React.Component {
