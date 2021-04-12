@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-import data from "../data/SA_dashboard.geojson";
+import geojsonURL from "../data/SA_dashboard.geojson";
 
 const options = {};
 
@@ -82,7 +82,8 @@ const select = {
 };
 
 const initialState = {
-  data,
+  geojsonURL,
+  features: [], // Fetched asynchronously on app load
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
   select,
@@ -94,8 +95,26 @@ const initialState = {
   sidebarOpen: false,
 };
 
+function fetchFeatures() {
+  return fetch(geojsonURL)
+}
+
+function loadFeatures() {
+  return function(dispatch) {
+    return fetchFeatures().then((response) => response.json()).then(
+      (collection) => dispatch({type: "FEATURES", payload: collection.features}),
+      // TODO: Add proper error handling
+      (error) => { console.log(error) }
+    )
+  }
+}
+
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case "FEATURES":
+      return Object.assign({}, state, {
+        features: action.payload
+      })
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
         active: action.option,
@@ -140,4 +159,4 @@ function reducer(state = initialState, action) {
   }
 }
 
-export { reducer, initialState };
+export { reducer, initialState, loadFeatures };
