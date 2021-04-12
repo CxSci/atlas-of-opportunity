@@ -47,7 +47,7 @@ let Map = class Map extends React.Component {
   }
 
   static propTypes = {
-    data: PropTypes.string.isRequired,
+    geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
@@ -79,7 +79,7 @@ let Map = class Map extends React.Component {
     this.map.on("load", () => {
       this.map.addSource("sa2", {
         type: "geojson",
-        data: this.props.data,
+        data: this.props.geojsonURL,
         promoteId: "SA2_MAIN16",
       });
 
@@ -383,6 +383,8 @@ let Map = class Map extends React.Component {
         .filter((x) => x !== undefined && x !== "null")
 
       // Search map for SA2s matching the bridges.
+      // TODO: SA2_MAIN16 is the feature id, so this query is unnecessary.
+      //       Just use the SA2_MAIN16s of the bridges in setFeatureState().
       clickedFeatures = this.map.querySourceFeatures("sa2", {
         sourceLayer: "original",
         filter: [
@@ -634,7 +636,7 @@ let Map = class Map extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.data,
+    geojsonURL: state.geojsonURL,
     active: state.active,
     select: state.select,
     flowDirection: state.flowDirection,
