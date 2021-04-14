@@ -3,7 +3,6 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-// import SearchBar from "./searchbar";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -43,6 +42,7 @@ let Map = class Map extends React.Component {
     this.state = {
       clickedSA2: null,
       clickedFeatures: [],
+      highlightedFeature: null,
     };
   }
 
@@ -53,6 +53,8 @@ let Map = class Map extends React.Component {
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
+    selectedFeature: PropTypes.object,
+    highlightedFeature: PropTypes.object,
   };
 
   componentDidMount() {
@@ -73,8 +75,6 @@ let Map = class Map extends React.Component {
       showCompass: false,
     });
     this.map.addControl(controls, "bottom-right");
-
-    var hoveredSA2Id = null;
 
     this.map.on("load", () => {
       this.map.addSource("sa2", {
@@ -158,66 +158,50 @@ let Map = class Map extends React.Component {
 
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
-          var coordinates = turf.center(e.features[0]).geometry.coordinates;
-          var regionName = e.features[0].properties.SA2_NAME16;
-          var medIncome = e.features[0].properties.median_aud.toLocaleString(
-            undefined,
-            {
-              style: "currency",
-              currency: "AUS",
-            }
-          );
-          this.hoveredPopup
-            .setLngLat(coordinates)
-            .setHTML(
-              "<h5>" +
-                regionName +
-                "</h5> <p> <b> Population: </b> " +
-                e.features[0].properties.persons_num +
-                "<br /> <b> Median Income (AUS): </b>" +
-                medIncome +
-                "<br / > <b> GDP Growth Potential: </b>" +
-                e.features[0].properties.income_diversity +
-                "<br / > <b> Job Resiliance: </b>" +
-                e.features[0].properties.bridge_diversity +
-                "</p>"
-            )
-            .addTo(this.map);
-
-          if (hoveredSA2Id !== null) {
-            this.map.setFeatureState(
-              { source: "sa2", id: hoveredSA2Id },
-              { hover: false }
-            );
-          }
-
-          hoveredSA2Id = e.features[0].properties.SA2_MAIN16;
-          this.map.setFeatureState(
-            { source: "sa2", id: hoveredSA2Id },
-            { hover: true }
-          );
+          this.highlightFeature(e.features[0])
         }
       });
 
       // When the mouse leaves the sa2-fill layer, update the feature state of the
       // previously hovered feature.
 
-      this.map.on("mouseleave", "sa2-fills", () => {
-        if (hoveredSA2Id !== null) {
-          this.map.setFeatureState(
-            { source: "sa2", id: hoveredSA2Id },
-            { hover: false }
-          );
-        }
-
-        hoveredSA2Id = null;
-
-        // Remove hovered popup
-        this.hoveredPopup.remove();
-      });
+      this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
 
       this.map.on("click", "sa2-fills", this.onMapClick);
     });
+  }
+
+  highlightFeature = (feature) => {
+    // First, clear any old highlight
+    if (this.state.highlightedFeature) {
+      console.log("Clearing", this.state.highlightedFeature)
+      this.map.setFeatureState(
+        { source: "sa2", id: this.state.highlightedFeature.properties.SA2_MAIN16 },
+        { hover: false }
+      );
+    }
+
+    this.setState({ highlightedFeature: feature })
+
+    if (feature && feature.geometry) {
+      var coordinates = turf.center(feature).geometry.coordinates;
+      var regionName = feature.properties.SA2_NAME16;
+      this.hoveredPopup
+        .setLngLat(coordinates)
+        .setHTML(`<h5>${regionName}</h5>`)
+        .addTo(this.map);
+
+      this.map.setFeatureState(
+        { source: "sa2", id: feature.properties.SA2_MAIN16 },
+        { hover: true }
+      );
+    } else {
+      this.hoveredPopup.remove();
+    }
+  }
+
+  clearFeatureHighlight = () => {
+    this.highlightFeature(null)
   }
 
   componentDidUpdate(prevProps) {
@@ -229,10 +213,6 @@ let Map = class Map extends React.Component {
       this.redrawBridges();
     }
 
-    if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
-      this.onMapSearch(this.props.searchBarInfo);
-    }
-
     if (this.props.active.name !== prevProps.active.name) {
       let fillColor = {
         property: this.props.active.property,
@@ -240,6 +220,15 @@ let Map = class Map extends React.Component {
       };
 
       this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
+    }
+
+    if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
+      console.log("Highlight", this.props.highlightedFeature)
+      this.highlightFeature(this.props.highlightedFeature)
+    }
+
+    if (this.props.selectedFeature !== prevProps.selectedFeature) {
+      console.log("Selection", this.props.selectedFeature)
     }
   }
 
@@ -380,7 +369,7 @@ let Map = class Map extends React.Component {
       // like {"foo": null} into {"foo": "null"}.
       const bridges = keys
         .map((x) => clickedSA2.properties[x])
-        .filter((x) => x !== undefined && x !== "null")
+        .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
 
       // Search map for SA2s matching the bridges.
       // TODO: SA2_MAIN16 is the feature id, so this query is unnecessary.
@@ -642,6 +631,8 @@ function mapStateToProps(state) {
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
     sidebarOpen: state.sidebarOpen,
+    selectedFeature: state.selectedFeature,
+    highlightedFeature: state.highlightedFeature,
   };
 }
 
