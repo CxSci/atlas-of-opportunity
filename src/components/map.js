@@ -60,7 +60,7 @@ let Map = class Map extends React.Component {
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
-      style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
+      style: "mapbox://styles/mapbox/dark-v10",
       bounds: [
         [129, -38],
         [141, -26]
