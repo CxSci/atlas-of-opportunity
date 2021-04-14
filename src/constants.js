@@ -6,6 +6,8 @@ export const SET_SIDEBAR = "SET_SIDEBAR";
 export const CLICKEDSA2 = "CLICKEDSA2";
 export const CLICKEDFEATURES = "CLICKEDFEATURES";
 export const GEOCODER = "GEOCODER";
+export const SET_SELECTED_FEATURE = "SET_SELECTED_FEATURE";
+export const SET_HIGHLIGHTED_FEATURE = "SET_HIGHLIGHTED_FEATURE";
 
 export const MAP_TYPE = {
   GROWTH: "growth",
