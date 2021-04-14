@@ -40,9 +40,9 @@ let Map = class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedSA2: null,
-      clickedFeatures: [],
+      connectedFeatures: [],
       highlightedFeature: null,
+      selectedFeature: null,
     };
   }
 
@@ -172,17 +172,23 @@ let Map = class Map extends React.Component {
   }
 
   highlightFeature = (feature) => {
+    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16
+    const newId = feature?.properties?.SA2_MAIN16
+    if (prevId === newId) {
+      return
+    }
     // First, clear any old highlight
     if (this.state.highlightedFeature) {
-      console.log("Clearing", this.state.highlightedFeature)
       this.map.setFeatureState(
-        { source: "sa2", id: this.state.highlightedFeature.properties.SA2_MAIN16 },
+        { source: "sa2", id: prevId },
         { hover: false }
       );
     }
 
     this.setState({ highlightedFeature: feature })
 
+    // Skip the two SA2s which lack geometry, as they don't correspond to
+    // geographic areas and aren't mappable.
     if (feature && feature.geometry) {
       var coordinates = turf.center(feature).geometry.coordinates;
       var regionName = feature.properties.SA2_NAME16;
@@ -223,15 +229,34 @@ let Map = class Map extends React.Component {
     }
 
     if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
-      console.log("Highlight", this.props.highlightedFeature)
       this.highlightFeature(this.props.highlightedFeature)
     }
 
     if (this.props.selectedFeature !== prevProps.selectedFeature) {
-      console.log("Selection", this.props.selectedFeature)
+      this.selectFeature(this.props.selectedFeature)
     }
   }
 
+  selectFeature = (feature) => {
+    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16
+    const newId = feature?.properties?.SA2_MAIN16
+    if (prevId === newId) {
+      return
+    }
+
+    if (this.state.selectedFeature) {
+      console.log("Deselecting", this.state.selectedFeature)
+    }
+
+    // this.setState({ selectedFeature: feature })
+
+    // Skip the two SA2s which lack geometry, as they don't correspond to
+    // geographic areas and aren't mappable.
+    if (feature && feature.geometry) {
+      console.log("Selecting", feature)
+    }
+    this.redrawBridges(feature)
+  }
   onMapSearch = (e) => {
     this.map.fire("click", {
       latlng: e,
@@ -249,21 +274,20 @@ let Map = class Map extends React.Component {
   };
 
   onMapClick = (e) => {
-    let prevSA2 = this.state.clickedSA2;
+    let prevSA2 = this.state.selectedFeature;
     let clickedSA2 = e.features[0]; //properties.name;
     // Ignore clicks on the active SA2.
     if (
       !prevSA2 ||
       clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
     ) {
-      this.redrawBridges(e);
+      this.redrawBridges(clickedSA2);
     }
   };
 
   // Called when an SA2 is clicked and when the flow direction changes.
-  redrawBridges = (e) => {
-    var clickedFeatures = this.state.clickedFeatures;
-    var clickedSA2 = this.state.clickedSA2;
+  redrawBridges = (feature) => {
+    let connectedFeatures = this.state.connectedFeatures;
 
     // Remove popup
     this.clickedPopup.remove();
@@ -286,7 +310,7 @@ let Map = class Map extends React.Component {
     var regionName;
 
     // Reset regions
-    clickedFeatures.forEach((f) => {
+    connectedFeatures.forEach((f) => {
       // For each feature, update its 'click' state
       this.map.setFeatureState(
         {
@@ -299,25 +323,27 @@ let Map = class Map extends React.Component {
       );
     });
 
-    if (clickedSA2 !== null) {
+    if (this.state.selectedFeature) {
       this.map.setFeatureState(
         {
           source: "sa2",
-          id: clickedSA2.id,
+          id: this.state.selectedFeature.properties.SA2_MAIN16,
         },
         {
           click: false,
         }
       );
     }
-    // Reuse existing region if this call was due to a flow direction change.
-    if (e) {
-      // Update based on newly selected region.
-      clickedSA2 = e.features[0];
+
+    this.setState({ selectedFeature: feature })
+
+    if (!feature || !feature.geometry) {
+      return
     }
+
     // find the center point of the newly selected region
-    origin = turf.center(clickedSA2).geometry.coordinates;
-    regionName = clickedSA2.properties.SA2_NAME16;
+    origin = turf.center(feature).geometry.coordinates;
+    regionName = feature.properties.SA2_NAME16;
 
     // Set name of clicked region over it
     this.clickedPopup
@@ -328,7 +354,7 @@ let Map = class Map extends React.Component {
     this.map.setFeatureState(
       {
         source: "sa2",
-        id: clickedSA2.id,
+        id: feature.properties.SA2_MAIN16,
       },
       {
         click: true,
@@ -336,28 +362,26 @@ let Map = class Map extends React.Component {
     );
 
     const sa2_properties = {
-      sa2_name: clickedSA2.properties.SA2_NAME16,
-      population: clickedSA2.properties.persons_num.toLocaleString(),
-      income: clickedSA2.properties.median_aud.toLocaleString(undefined, {
+      sa2_name: feature.properties.SA2_NAME16,
+      population: feature.properties.persons_num.toLocaleString(),
+      income: feature.properties.median_aud.toLocaleString(undefined, {
         style: "currency",
         currency: "AUS",
       }),
-      ggp: clickedSA2.properties.income_diversity,
-      jr: clickedSA2.properties.bridge_diversity,
-      quartile: clickedSA2.properties.quartile,
-      fq1: clickedSA2.properties.fq1,
-      fq2: clickedSA2.properties.fq2,
-      fq3: clickedSA2.properties.fq3,
-      fq4: clickedSA2.properties.fq4,
-      inequality: clickedSA2.properties.inequality,
-      bgi: clickedSA2.properties.bsns_growth_rate,
-      sa1_codes: clickedSA2.properties.SA1_7DIGITCODE_LIST,
+      ggp: feature.properties.income_diversity,
+      jr: feature.properties.bridge_diversity,
+      quartile: feature.properties.quartile,
+      fq1: feature.properties.fq1,
+      fq2: feature.properties.fq2,
+      fq3: feature.properties.fq3,
+      fq4: feature.properties.fq4,
+      inequality: feature.properties.inequality,
+      bgi: feature.properties.bsns_growth_rate,
+      sa1_codes: feature.properties.SA1_7DIGITCODE_LIST,
       isDefault: false,
     };
 
     setSelect(sa2_properties);
-
-    this.setState({ clickedSA2: clickedSA2 });
 
     if (this.props.active.name !== "Inequality") {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
@@ -368,13 +392,13 @@ let Map = class Map extends React.Component {
       // Note that somewhere along the way, Mapbox GL turns GeoJSON properties
       // like {"foo": null} into {"foo": "null"}.
       const bridges = keys
-        .map((x) => clickedSA2.properties[x])
+        .map((x) => feature.properties[x])
         .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
 
       // Search map for SA2s matching the bridges.
       // TODO: SA2_MAIN16 is the feature id, so this query is unnecessary.
       //       Just use the SA2_MAIN16s of the bridges in setFeatureState().
-      clickedFeatures = this.map.querySourceFeatures("sa2", {
+      connectedFeatures = this.map.querySourceFeatures("sa2", {
         sourceLayer: "original",
         filter: [
           "in",
@@ -383,8 +407,8 @@ let Map = class Map extends React.Component {
         ],
       });
 
-      // get rid of the repeated features in the clickedFeatures array
-      clickedFeatures.forEach((f) => {
+      // get rid of the repeated features in the connectedFeatures array
+      connectedFeatures.forEach((f) => {
         // For each feature, update its 'highlight' state
         this.map.setFeatureState(
           {
@@ -401,9 +425,9 @@ let Map = class Map extends React.Component {
       });
 
       // Update component state now that our changes are ready.
-      this.setState({ clickedFeatures: clickedFeatures });
+      this.setState({ connectedFeatures: connectedFeatures });
 
-      // sort the clickedFeatures based on the ranking in bridges
+      // sort the connectedFeatures based on the ranking in bridges
       var featureList = [];
       bridges.forEach((b) => {
         featureList.push(featureObj[b]);
