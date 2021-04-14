@@ -70,3 +70,17 @@ export function setSideBar(payload) {
     payload: payload,
   });
 }
+
+export function setSelectedFeature(feature) {
+  store.dispatch({
+    type: Constants.SET_SELECTED_FEATURE,
+    feature: feature,
+  })
+}
+
+export function setHighlightedFeature(feature) {
+  store.dispatch({
+    type: Constants.SET_HIGHLIGHTED_FEATURE,
+    feature: feature,
+  })
+}

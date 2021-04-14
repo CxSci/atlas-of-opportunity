@@ -64,7 +64,7 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
-function SearchField({ localItems = [], geocoderConfig = {} }) {
+function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChange, onHighlightedItemChange }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -80,6 +80,7 @@ function SearchField({ localItems = [], geocoderConfig = {} }) {
   // Default to showing all of the available options
   const [inputElement, setInputElement] = useState(null)
   const [inputItems, setInputItems] = useState([])
+  const [highlightedItem, setHighlightedItem] = useState(null)
   const itemToString = item => (item ? item.primary : '')
   const {
     getComboboxProps,
@@ -103,16 +104,31 @@ function SearchField({ localItems = [], geocoderConfig = {} }) {
       // to lose focus too.
       if (!isOpen) {
         inputElement.blur()
+        setHighlightedItem(null)
+      } else {
+        setHighlightedItem(inputItems[highlightedIndex])
       }
     },
-    onSelectedItemChange: ({ selectedItem }) => {
-      if (selectedItem) {
-        // find feature id of geocoded result
-        // fire off feature id to map for it to do with as it will
-        console.log(`Selected ${selectedItem.primary} (${selectedItem.id})`)
+    onSelectedItemChange,
+    onHighlightedIndexChange: ({highlightedIndex, type}) => {
+      switch (type) {
+        // Ignore the hidden highlight change which occurs when selecting an
+        // item and the menu closes.
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.FunctionSelectItem:
+          break
+        default:
+          setHighlightedItem(inputItems[highlightedIndex])
       }
     }
   })
+
+  useEffect(() => {
+    if (typeof onHighlightedItemChange === "function") {
+      onHighlightedItemChange({highlightedItem})
+    }
+  }, [highlightedItem, onHighlightedItemChange])
 
   // Set up geocoder
   const geocodedItems = useGeocoder({
@@ -124,10 +140,8 @@ function SearchField({ localItems = [], geocoderConfig = {} }) {
           (item) => turf.booleanPointInPolygon(f.center, item)
         )
         return {
-          ...f,
-          primary: localFeature.primary,
-          id: localFeature.id,
-          secondary: f.place_name
+          ...localFeature,
+          secondary: f.place_name,
         }
       })
     ), [localItems])
@@ -214,7 +228,9 @@ function SearchField({ localItems = [], geocoderConfig = {} }) {
 
 SearchField.propTypes = {
   geocoderConfig: PropTypes.object,
-  localItems: PropTypes.arrayOf(PropTypes.object)
+  localItems: PropTypes.arrayOf(PropTypes.object),
+  onSelectedItemChange: PropTypes.func,
+  onHighlightedItemChange: PropTypes.func,
 }
 
 export default SearchField;
