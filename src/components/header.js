@@ -42,12 +42,28 @@ const Header = class Header extends Component {
       }
     })
 
+    const geocoderConfig = {
+      countries: ["AU"],
+      types: [
+        "postcode", "district", "place", "locality"//, "neighborhood", "address"
+      ],
+      // Restrict search to South Australia
+      bbox: [
+        129.001337, -38.062603,
+        141.002956, -25.996146
+      ],
+      limit: 5,
+    }
+
     return (
       <div className="container" style={headerBox}>
         {/* TODO: make header background color translucent white while in comparison mode */}
         <div className="navbarLeft">
           {/* TODO: put conditional sidebar toggle control here */}
-          <SearchField localItems={items} />
+          <SearchField
+            localItems={items}
+            geocoderConfig={geocoderConfig}
+          />
         </div>
         <div className="navbarCenter">
           {/* TODO: put conditional comparison controls here */}
