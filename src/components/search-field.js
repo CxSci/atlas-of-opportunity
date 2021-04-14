@@ -109,8 +109,14 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
         setHighlightedItem(inputItems[highlightedIndex])
       }
     },
+    onInputValueChange: ({ inputValue, type }) => {
+      // Clear the selection when the search field is cleared via backspace
+      if (inputValue === '' && type === useCombobox.stateChangeTypes.InputChange) {
+        selectItem(null)
+      }
+    },
     onSelectedItemChange,
-    onHighlightedIndexChange: ({highlightedIndex, type}) => {
+    onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       switch (type) {
         // Ignore the hidden highlight change which occurs when selecting an
         // item and the menu closes.
