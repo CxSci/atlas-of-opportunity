@@ -36,6 +36,8 @@ const Header = class Header extends Component {
 
     const items = this.props.features.map((f) => {
       return {
+        ...f,
+        id: f.properties.SA2_MAIN16,
         primary: f.properties.SA2_NAME16,
       }
     })
