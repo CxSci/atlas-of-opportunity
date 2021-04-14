@@ -138,6 +138,7 @@ function SearchField({ localItems }) {
     selectItem,
     // selectedItem,
   } = useCombobox({
+    defaultHighlightedIndex: 0,
     items: inputItems,
     itemToString,
     onIsOpenChange: ({isOpen}) => {
