@@ -1,18 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import PropTypes from "prop-types"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
-import LRU from "lru-cache"
-import MapboxClient from "@mapbox/mapbox-sdk"
-import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
 import * as turf from "@turf/turf"
 
+import useGeocoder from "../hooks/useGeocoder"
 import { sameWidthModifier } from "../utils/popper-modifiers"
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
 import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
-
-const accessToken =
-  "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
 // TODO: Lift all of this styling into a separate file.
 const containerStyle = {
@@ -69,47 +64,7 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
-const geocodingClient = () => {
-  const client = MapboxClient({
-    accessToken: accessToken
-  })
-  const geocoder = MapboxGeocoder(client)
-  return geocoder
-}
-
-const forwardGeocode = (geocoder, query, callback) => {
-  const config = {
-    query: query,
-    countries: ["AU"],
-    types: [
-      "postcode", "district", "place", "locality"//, "neighborhood", "address"
-    ],
-    // Restrict search to South Australia
-    bbox: [
-      129.001337, -38.062603,
-      141.002956, -25.996146
-    ],
-    limit: 5,
-  }
-  geocoder.forwardGeocode(config).send()
-    .then(response => {
-      if ("features" in response.body) {
-        console.log(response.body)
-        const features = response.body.features.map((f) => {
-          return {
-            // primary is filled by the callback when it merges this with the
-            // corresponding localItem.
-            secondary: f.place_name,
-            center: f.center,
-            relevance: f.relevance,
-          }
-        })
-        callback(features)
-      }
-    })
-}
-
-function SearchField({ localItems }) {
+function SearchField({ localItems = [], geocoderConfig = {} }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -160,48 +115,23 @@ function SearchField({ localItems }) {
   })
 
   // Set up geocoder
-  const [geocoder] = useState(geocodingClient())
-  const [geocodedItems, setGeocodedItems] = useState([])
-  // Cache geocoding results for the last 1000 queries to save on API requests.
-  // https://docs.mapbox.com/api/search/geocoding/#geocoding-restrictions-and-limits
-  // https://www.mapbox.com/pricing/#search
-  // TODO: Figure out the memory impact of having this be a big number.
-  //       lru-cache can be configured to limit its actual memory size, though
-  //       you have to teach it how to calculate the size.
-  const [geocoderItemsCache] = useState(new LRU(1000))
-
-  useEffect(() => {
-    // TODO: Add a bit of hysteresis to uncached geocoding requests, e.g. wait
-    //       300ms before firing off forwardGeocode() and cancell any pending
-    //       calls currently waiting to go. Should be simple enough to do with
-    //       something like https://github.com/xnimorz/use-debounce.
-
-    // Normalize query to lowercase and compress whitespace
-    // e.g. " Ban  ana   " -> "Ban ana"
-    const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
-    // Don't waste the Geocoding API quota on very short queries
-    if (query.length < 3) {
-      setGeocodedItems([])
-    } else {
-      let cachedItems = geocoderItemsCache.get(query)
-      if (cachedItems) {
-        setGeocodedItems(cachedItems)
-      } else {
-        forwardGeocode(geocoder, query, (features) => {
-          // Match localItems to search results located inside of them and
-          // add their properties as context.
-          features = features.map((f) => {
-            const localFeature = localItems.find(
-              (item) => turf.booleanPointInPolygon(f.center, item)
-            )
-            return {...f, primary: localFeature.primary, id: localFeature.id}
-          })
-          geocoderItemsCache.set(query, features)
-          setGeocodedItems(features)
-        })
-      }
-    }
-  }, [inputValue, geocoder, geocoderItemsCache, localItems])
+  const geocodedItems = useGeocoder({
+    inputValue,
+    config: geocoderConfig,
+    onNewFeatures: useCallback((features) => (
+      features.map((f) => {
+        const localFeature = localItems.find(
+          (item) => turf.booleanPointInPolygon(f.center, item)
+        )
+        return {
+          ...f,
+          primary: localFeature.primary,
+          id: localFeature.id,
+          secondary: f.place_name
+        }
+      })
+    ), [localItems])
+  })
 
   useEffect(() => {
     const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
@@ -283,55 +213,8 @@ function SearchField({ localItems }) {
 }
 
 SearchField.propTypes = {
-  // TODO: Use arrayOf()
-  localItems: PropTypes.array
+  geocoderConfig: PropTypes.object,
+  localItems: PropTypes.arrayOf(PropTypes.object)
 }
-
-// let SearchBar = class SearchBar extends React.Component {
-//   geocoder;
-
-//   componentDidMount() {
-//     this.geocoder = new MapboxGeocoder({
-//       accessToken: mapboxgl.accessToken,
-//       types: "neighborhood, locality, address",
-//       countries: "au",
-//       mapboxgl: mapboxgl,
-//     });
-
-//     if (document.getElementById("geocoder")) {
-//       document.getElementById("geocoder").appendChild(this.geocoder.onAdd());
-//     }
-
-//     this.geocoder.on("result", this.onMapSearch);
-//   }
-
-//   onMapSearch = (e) => {
-//     setSearchBarInfo(e.result.center);
-//   };
-
-//   render() {
-//     // Style components
-//     const search = {
-//       position: "absolute",
-//       top: "12px",
-//       left: "12px",
-//     };
-
-//     return (
-//         <div id="geocoder" style={search}></div>
-//     );
-//   }
-// };
-
-// function searchbarStateToProps(state) {
-//   return {
-//     data: state.data,
-//     active: state.active,
-//     select: state.select,
-//     flowDirection: state.flowDirection,
-//   };
-// }
-
-// SearchBar = connect(searchbarStateToProps)(SearchBar);
 
 export default SearchField;
