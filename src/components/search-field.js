@@ -5,6 +5,7 @@ import { usePopper } from "react-popper"
 import LRU from "lru-cache"
 import MapboxClient from "@mapbox/mapbox-sdk"
 import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
+import * as turf from "@turf/turf"
 
 import { sameWidthModifier } from "../utils/popper-modifiers"
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
@@ -96,9 +97,10 @@ const forwardGeocode = (geocoder, query, callback) => {
         console.log(response.body)
         const features = response.body.features.map((f) => {
           return {
-            primary: f.text,
+            // primary is filled by the callback when it merges this with the
+            // corresponding localItem.
             secondary: f.place_name,
-            coordinates: f.center,
+            center: f.center,
             relevance: f.relevance,
           }
         })
@@ -148,10 +150,13 @@ function SearchField({ localItems }) {
         inputElement.blur()
       }
     },
-    // onSelectedItemChange: ({ selectedItem }) => {
-    //   // find feature id of geocoded result
-    //   // fire off feature id to map for it to do with as it will
-    // }
+    onSelectedItemChange: ({ selectedItem }) => {
+      if (selectedItem) {
+        // find feature id of geocoded result
+        // fire off feature id to map for it to do with as it will
+        console.log(`Selected ${selectedItem.primary} (${selectedItem.id})`)
+      }
+    }
   })
 
   // Set up geocoder
@@ -183,12 +188,20 @@ function SearchField({ localItems }) {
         setGeocodedItems(cachedItems)
       } else {
         forwardGeocode(geocoder, query, (features) => {
+          // Match localItems to search results located inside of them and
+          // add their properties as context.
+          features = features.map((f) => {
+            const localFeature = localItems.find(
+              (item) => turf.booleanPointInPolygon(f.center, item)
+            )
+            return {...f, primary: localFeature.primary, id: localFeature.id}
+          })
           geocoderItemsCache.set(query, features)
           setGeocodedItems(features)
         })
       }
     }
-  }, [inputValue, geocoder, geocoderItemsCache])
+  }, [inputValue, geocoder, geocoderItemsCache, localItems])
 
   useEffect(() => {
     const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
