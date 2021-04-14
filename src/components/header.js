@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { setHeaderOption } from "../redux/action-creators";
+import { setHeaderOption, setHighlightedFeature, setSelectedFeature } from "../redux/action-creators";
 import SearchField from "./search-field";
 
 import "../css/header.css";
@@ -34,25 +34,31 @@ const Header = class Header extends Component {
       alignItems: "center",
     };
 
-    const items = this.props.features.map((f) => {
-      return {
-        ...f,
-        id: f.properties.SA2_MAIN16,
-        primary: f.properties.SA2_NAME16,
-      }
-    })
-
-    const geocoderConfig = {
-      countries: ["AU"],
-      types: [
-        "postcode", "district", "place", "locality"//, "neighborhood", "address"
-      ],
-      // Restrict search to South Australia
-      bbox: [
-        129.001337, -38.062603,
-        141.002956, -25.996146
-      ],
-      limit: 5,
+    const searchFieldProps = {
+      localItems: this.props.features.map((f) => {
+        return {
+          ...f,
+          primary: f.properties.SA2_NAME16,
+        }
+      }),
+      geocoderConfig: {
+        countries: ["AU"],
+        types: [
+          "postcode", "district", "place", "locality"//, "neighborhood", "address"
+        ],
+        // Restrict search to South Australia
+        bbox: [
+          129.001337, -38.062603,
+          141.002956, -25.996146
+        ],
+        limit: 5,
+      },
+      onSelectedItemChange: ({ selectedItem }) => {
+        setSelectedFeature(selectedItem)
+      },
+      onHighlightedItemChange: ({ highlightedItem }) => {
+        setHighlightedFeature(highlightedItem)
+      },
     }
 
     return (
@@ -60,10 +66,7 @@ const Header = class Header extends Component {
         {/* TODO: make header background color translucent white while in comparison mode */}
         <div className="navbarLeft">
           {/* TODO: put conditional sidebar toggle control here */}
-          <SearchField
-            localItems={items}
-            geocoderConfig={geocoderConfig}
-          />
+          <SearchField {...searchFieldProps} />
         </div>
         <div className="navbarCenter">
           {/* TODO: put conditional comparison controls here */}

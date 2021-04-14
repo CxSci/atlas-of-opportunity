@@ -93,6 +93,8 @@ const initialState = {
   flowDirection: Constants.FLOW_BI,
   searchBarInfo: [121, -26.5],
   sidebarOpen: false,
+  selectedFeature: null,
+  highlightedFeature: null,
 };
 
 function fetchFeatures() {
@@ -154,6 +156,14 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         sidebarOpen: action.payload,
       });
+    case Constants.SET_SELECTED_FEATURE:
+      return Object.assign({}, state, {
+        selectedFeature: action.feature,
+      })
+    case Constants.SET_HIGHLIGHTED_FEATURE:
+      return Object.assign({}, state, {
+        highlightedFeature: action.feature,
+      })
     default:
       return state;
   }
