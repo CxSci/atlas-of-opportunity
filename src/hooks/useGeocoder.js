@@ -5,7 +5,7 @@ import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
 
 const accessToken = "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
-const useGeocoder = ({ inputValue, config, onNewFeatures }) => {
+const useGeocoder = ({ inputValue, enabled, config, onNewFeatures }) => {
   // example MapboxGeocoder config:
   //
   // {
@@ -39,6 +39,10 @@ const useGeocoder = ({ inputValue, config, onNewFeatures }) => {
     //       calls currently waiting to go. Should be simple enough to do with
     //       something like https://github.com/xnimorz/use-debounce.
 
+    if (!enabled) {
+      return
+    }
+
     // Normalize query to lowercase and compress whitespace
     // e.g. " Ban  ana   " -> "Ban ana"
     const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
@@ -64,7 +68,7 @@ const useGeocoder = ({ inputValue, config, onNewFeatures }) => {
         })
       }
     }
-  }, [inputValue, options, geocoder, geocoderItemsCache, onNewFeatures])
+  }, [inputValue, enabled, options, geocoder, geocoderItemsCache, onNewFeatures])
 
   return geocodedItems
 }
