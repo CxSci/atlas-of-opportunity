@@ -175,6 +175,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
         return {
           ...localFeature,
           secondary: f.place_name,
+          relevance: f.relevance,
         }
       // Filter out results which aren't inside any of the regions this app
       // tracks. For example, a search for "west lak" includes Lake Mundi in
@@ -187,17 +188,16 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
   useEffect(() => {
     const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
     if (query === '') {
-      setInputItems(localItems.sort((a, b) => {a.primary.localeCompare(b.primary)}))
+      setInputItems(localItems.sort((a, b) => a.primary.localeCompare(b.primary)))
     } else {
       setInputItems([
         // Case-insensitive substring match
         ...localItems
-          .filter(item => item.primary.toLowerCase().indexOf(query.toLowerCase()) !== -1)
-          .sort((a, b) => {a.primary.localeCompare(b.primary)}),
-        ...geocodedItems.sort((a, b) => {
-          (b.relevance ?? 1.0) - (a.relevance ?? 1.0) ||
-          a.primary.localeCompare(b.primary)
-        })
+          .filter(item =>
+            item.primary.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+          .sort((a, b) => a.primary.localeCompare(b.primary)),
+        ...geocodedItems
+          .sort((a, b) => b.relevance - a.relevance || a.secondary.localeCompare(b.secondary))
       ])
     }
   }, [localItems, geocodedItems, inputValue, isOpen])
