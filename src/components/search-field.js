@@ -64,7 +64,7 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
-function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChange, onHighlightedItemChange }) {
+function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChange, onHighlightedItemChange, selectedFeature }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -95,6 +95,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     openMenu,
     selectItem,
     // selectedItem,
+    setInputValue,
   } = useCombobox({
     defaultHighlightedIndex: 0,
     items: inputItems,
@@ -113,6 +114,14 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
       // Clear the selection when the search field is cleared via backspace
       if (inputValue === '' && type === useCombobox.stateChangeTypes.InputChange) {
         selectItem(null)
+      // If inputValue changes while the search menu is closed, it's because 
+      // another component change selectedFeature, and that should be
+      // reflected in the selectedItem of the search field.
+      } else if (!isOpen && inputValue) {
+        const definiteMatch = localItems.find(item => item.primary === inputValue)
+        if (definiteMatch) {
+          selectItem(definiteMatch)
+        }
       }
     },
     onSelectedItemChange,
@@ -139,6 +148,8 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
   // Set up geocoder
   const geocodedItems = useGeocoder({
     inputValue,
+    // Skip geocoding API call if the results won't even be seen
+    enabled: isOpen,
     config: geocoderConfig,
     onNewFeatures: useCallback((features) => (
       features.map((f) => {
@@ -159,7 +170,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
       setInputItems(localItems.sort((a, b) => {a.primary.localeCompare(b.primary)}))
     } else {
       setInputItems([
-          // Case-insensitive substring match
+        // Case-insensitive substring match
         ...localItems
           .filter(item => item.primary.toLowerCase().indexOf(query.toLowerCase()) !== -1)
           .sort((a, b) => {a.primary.localeCompare(b.primary)}),
@@ -169,7 +180,17 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
         })
       ])
     }
-  }, [localItems, geocodedItems, inputValue])
+  }, [localItems, geocodedItems, inputValue, isOpen])
+
+  // If selectedFeature is set by another component, reflect that in the
+  // search field.
+  useEffect(() => {
+    if (!selectedFeature) {
+      setInputValue('')
+    } else {
+      setInputValue(selectedFeature.properties.SA2_NAME16)
+    }
+  }, [selectedFeature, setInputValue])
 
   return (
     <div className="searchContainer" ref={setReferenceElement} style={containerStyle}>
@@ -237,6 +258,7 @@ SearchField.propTypes = {
   localItems: PropTypes.arrayOf(PropTypes.object),
   onSelectedItemChange: PropTypes.func,
   onHighlightedItemChange: PropTypes.func,
+  selectedFeature: PropTypes.object,
 }
 
 export default SearchField;

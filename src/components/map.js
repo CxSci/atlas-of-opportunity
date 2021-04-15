@@ -3,6 +3,7 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
+import { setSelectedFeature } from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -47,6 +48,7 @@ let Map = class Map extends React.Component {
   }
 
   static propTypes = {
+    features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
@@ -190,7 +192,7 @@ let Map = class Map extends React.Component {
     // Skip the two SA2s which lack geometry, as they don't correspond to
     // geographic areas and aren't mappable.
     if (feature && feature.geometry) {
-      var coordinates = turf.center(feature).geometry.coordinates;
+      var coordinates = turf.centerOfMass(feature).geometry.coordinates;
       var regionName = feature.properties.SA2_NAME16;
       this.hoveredPopup
         .setLngLat(coordinates)
@@ -244,17 +246,6 @@ let Map = class Map extends React.Component {
       return
     }
 
-    if (this.state.selectedFeature) {
-      console.log("Deselecting", this.state.selectedFeature)
-    }
-
-    // this.setState({ selectedFeature: feature })
-
-    // Skip the two SA2s which lack geometry, as they don't correspond to
-    // geographic areas and aren't mappable.
-    if (feature && feature.geometry) {
-      console.log("Selecting", feature)
-    }
     this.redrawBridges(feature)
   }
   onMapSearch = (e) => {
@@ -275,13 +266,20 @@ let Map = class Map extends React.Component {
 
   onMapClick = (e) => {
     let prevSA2 = this.state.selectedFeature;
-    let clickedSA2 = e.features[0]; //properties.name;
+    let clickedFeature = e.features[0]
+
+    clickedFeature.properties = {
+      ...clickedFeature.properties,
+      primary: clickedFeature.properties.SA2_NAME16,
+    }
+
     // Ignore clicks on the active SA2.
     if (
       !prevSA2 ||
-      clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
+      clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
-      this.redrawBridges(clickedSA2);
+      this.redrawBridges(clickedFeature);
+      setSelectedFeature(clickedFeature)
     }
   };
 
@@ -315,7 +313,7 @@ let Map = class Map extends React.Component {
       this.map.setFeatureState(
         {
           source: "sa2",
-          id: f.id,
+          id: f.properties.SA2_MAIN16,
         },
         {
           highlight: false,
@@ -337,12 +335,13 @@ let Map = class Map extends React.Component {
 
     this.setState({ selectedFeature: feature })
 
-    if (!feature || !feature.geometry) {
+    if (!feature || !(feature.geometry || feature._geometry)) {
+      console.log("Skipping", feature)
       return
     }
 
     // find the center point of the newly selected region
-    origin = turf.center(feature).geometry.coordinates;
+    origin = turf.centerOfMass(feature).geometry.coordinates;
     regionName = feature.properties.SA2_NAME16;
 
     // Set name of clicked region over it
@@ -396,31 +395,27 @@ let Map = class Map extends React.Component {
         .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
 
       // Search map for SA2s matching the bridges.
-      // TODO: SA2_MAIN16 is the feature id, so this query is unnecessary.
-      //       Just use the SA2_MAIN16s of the bridges in setFeatureState().
-      connectedFeatures = this.map.querySourceFeatures("sa2", {
-        sourceLayer: "original",
-        filter: [
-          "in",
-          ["to-number", ["get", "SA2_MAIN16"]],
-          ["literal", bridges],
-        ],
-      });
+      // Search the GeoJSON loaded separately as `features`, as Mapbox does not
+      // support searching for features which aren't currently in view.
+      connectedFeatures = this.props.features
+        .filter(f => bridges
+          .some(b => b === Number(f.properties.SA2_MAIN16)))
 
       // get rid of the repeated features in the connectedFeatures array
       connectedFeatures.forEach((f) => {
         // For each feature, update its 'highlight' state
+        const featureId = f.properties.SA2_MAIN16
         this.map.setFeatureState(
           {
             source: "sa2",
-            id: f.id,
+            id: featureId,
           },
           {
             highlight: true,
           }
         );
-        if (!(f.properties.SA2_MAIN16 in featureObj)) {
-          featureObj[f.properties.SA2_MAIN16] = f;
+        if (!(featureId in featureObj)) {
+          featureObj[featureId] = f;
         }
       });
 
@@ -435,7 +430,7 @@ let Map = class Map extends React.Component {
 
       // create an array of center coordinates of each SA2 region
       featureList.forEach((ft, i) => {
-        var destination = turf.center(ft).geometry.coordinates;
+        var destination = turf.centerOfMass(ft).geometry.coordinates;
         var regionName = ft.properties.SA2_NAME16;
         destinationList.push(destination);
 
@@ -649,6 +644,7 @@ let Map = class Map extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    features: state.features,
     geojsonURL: state.geojsonURL,
     active: state.active,
     select: state.select,
