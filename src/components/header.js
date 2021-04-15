@@ -42,7 +42,6 @@ function Header ({ features, selectedFeature }) {
     },
     selectedFeature: selectedFeature,
     onSelectedItemChange: ({ selectedItem }) => {
-      console.log("onSelectedItemChange", selectedItem)
       setSelectedFeature(selectedItem)
     },
     onHighlightedItemChange: ({ highlightedItem }) => {

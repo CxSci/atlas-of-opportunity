@@ -253,7 +253,7 @@ let Map = class Map extends React.Component {
       this.map.fitBounds(
         [[minX, minY], [maxX, maxY]],
         {
-          maxZoom: 11,
+          maxZoom: 10,
           padding: 100,
           bearing: this.map.getBearing(),
           pitch: this.map.getPitch(),

@@ -105,9 +105,6 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
       // to lose focus too.
       if (!isOpen) {
         inputElement.blur()
-        setHighlightedItem(null)
-      } else {
-        setHighlightedItem(inputItems[highlightedIndex])
       }
     },
     onInputValueChange: ({ inputValue, type }) => {
@@ -139,7 +136,6 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     },
     stateReducer: (state, actionAndChanges) => {
       const {type, changes} = actionAndChanges
-      // eslint-disable-next-line no-unused-vars
       switch (type) {
         // Don't select whatever happened to be highlighted if the user
         // switches to another window.
@@ -155,11 +151,22 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     },
   })
 
+  // Highlight the first item in the search menu whenever it opens or its
+  // content changes.
+  useEffect(() => {
+    const newHighlightedItem = inputItems[highlightedIndex]
+    if (isOpen && highlightedIndex === 0 && highlightedIndex !== newHighlightedItem) {
+      setHighlightedItem(newHighlightedItem)
+    } else if (!isOpen) {
+      setHighlightedItem(null)
+    }
+  }, [highlightedIndex, setHighlightedItem, inputItems, isOpen])
+
   useEffect(() => {
     if (typeof onHighlightedItemChange === "function") {
       onHighlightedItemChange({highlightedItem})
     }
-  }, [highlightedItem, onHighlightedItemChange])
+  }, [highlightedItem, isOpen, onHighlightedItemChange])
 
   // Set up geocoder
   const geocodedItems = useGeocoder({
