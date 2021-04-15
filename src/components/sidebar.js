@@ -20,7 +20,7 @@ let Sidebar = class Sidebar extends React.Component {
     sidebarOpen: PropTypes.bool.isRequired,
   };
 
-  renderDisplay() {
+  renderSidebar() {
     let sidebarState = this.props.sidebarOpen ? 'open' : 'closed';
     
     const {
@@ -38,7 +38,7 @@ let Sidebar = class Sidebar extends React.Component {
     const { mapType } = this.props;
 
     const PanelContainer = (props) => (
-      <div className={`panel-container h-full`}>
+      <div className={`panel-container`}>
         {props.children}
       </div>
     );
@@ -138,7 +138,7 @@ let Sidebar = class Sidebar extends React.Component {
       case Constants.MAP_TYPE.TRANSCATIONS:
       case Constants.MAP_TYPE.GROWTH:
       default:
-        return this.renderDisplay();
+        return this.renderSidebar();
     }
   }
 };

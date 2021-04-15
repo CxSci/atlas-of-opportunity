@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setSideBar } from "../redux/action-creators";
+import { ReactComponent as ChevronLeftIcon} from "../assets/chevron_left.svg"
+import { ReactComponent as ChevronRightIcon} from "../assets/chevron_right.svg"
 
 import "../css/sidebar.css";
 
@@ -19,7 +21,7 @@ let SidebarButton = class SidebarButton extends React.Component {
     
     return (
       <div className={`toggleButton ${sidebarState}`} onClick={this.toggleSidebar}>
-        <i className={`arrow right ${sidebarState=="open"? "collapse" : "expand"}`}></i>
+        {sidebarState=="open" ? (<ChevronLeftIcon/>) : (<ChevronRightIcon/>)}
       </div>
     )
   }
