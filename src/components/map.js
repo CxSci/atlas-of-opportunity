@@ -247,7 +247,18 @@ let Map = class Map extends React.Component {
     }
 
     this.redrawBridges(feature)
+    if (feature && (feature.geometry || feature._geometry)) {
+      const [minX, minY, maxX, maxY] = turf.bbox(feature)
+      this.map.fitBounds(
+        [[minX, minY], [maxX, maxY]],
+        {
+          maxZoom: 11,
+          padding: 100,
+        }
+      )
+    }
   }
+
   onMapSearch = (e) => {
     this.map.fire("click", {
       latlng: e,
@@ -335,8 +346,9 @@ let Map = class Map extends React.Component {
 
     this.setState({ selectedFeature: feature })
 
+    // Skip features without geometry, like the two SA2s
+    // "Migratory - Offshore - Shipping (SA)" and "No usual address (SA)"
     if (!feature || !(feature.geometry || feature._geometry)) {
-      console.log("Skipping", feature)
       return
     }
 
