@@ -5,14 +5,13 @@ import ReactTooltip from 'react-tooltip';
 import Collapsible from "react-collapsible";
 
 import * as Constants from "../constants";
-// import { setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
 import SearchBar from "./searchbar";
 import SidebarButton from "./SidebarButton";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 
-let Display = class Display extends React.Component {
+let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
@@ -154,6 +153,6 @@ function mapStateToProps(state) {
   };
 }
 
-Display = connect(mapStateToProps)(Display);
+Sidebar = connect(mapStateToProps)(Sidebar);
 
-export default Display;
+export default Sidebar;

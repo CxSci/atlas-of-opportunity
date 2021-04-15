@@ -34,7 +34,6 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
-
 }
 
 .arrow {
@@ -46,7 +45,7 @@
 }
 
 .toggleButton.closed {
-    left: 0px !important;
+    left: 0px;
 }
   
 .expand {

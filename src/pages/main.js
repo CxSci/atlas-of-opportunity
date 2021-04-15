@@ -2,7 +2,7 @@ import React, {  Component } from "react";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
-import Display from "../components/display";
+import Sidebar from "../components/sidebar";
 import Legend from "../components/legend";
 
 const Main = class Main extends Component {
@@ -22,7 +22,7 @@ const Main = class Main extends Component {
     return (
       <div style={mapStyler}>
         <div style={screenFlexStyle}>     
-          <Display />
+          <Sidebar />
           <Map />
         </div>
         <Legend />
