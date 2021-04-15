@@ -136,7 +136,23 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
         default:
           setHighlightedItem(inputItems[highlightedIndex])
       }
-    }
+    },
+    stateReducer: (state, actionAndChanges) => {
+      const {type, changes} = actionAndChanges
+      // eslint-disable-next-line no-unused-vars
+      switch (type) {
+        // Don't select whatever happened to be highlighted if the user
+        // switches to another window.
+        case useCombobox.stateChangeTypes.InputBlur:
+          return {
+            ...changes,
+            inputValue: state.inputValue,
+            selectedItem: state.selectedItem,
+          }
+        default:
+          return changes
+      }
+    },
   })
 
   useEffect(() => {
