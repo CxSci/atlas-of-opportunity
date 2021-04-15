@@ -154,13 +154,17 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     onNewFeatures: useCallback((features) => (
       features.map((f) => {
         const localFeature = localItems.find(
-          (item) => turf.booleanPointInPolygon(f.center, item)
+          (item) => (item.geometry && turf.booleanPointInPolygon(f.center, item))
         )
         return {
           ...localFeature,
           secondary: f.place_name,
         }
-      })
+      // Filter out results which aren't inside any of the regions this app
+      // tracks. For example, a search for "west lak" includes Lake Mundi in
+      // Victoria, even though the geocoding request was restricted to Sourth
+      // Australia.
+      }).filter(f => f.primary)
     ), [localItems])
   })
 
