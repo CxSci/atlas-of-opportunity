@@ -19,10 +19,6 @@
     flex: 1 1 auto;
 }
 
-.sidebar-container.closed {
-    display: none;
-}
-
 .toggleButton {
     cursor: pointer;
     top: 5px;

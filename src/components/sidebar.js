@@ -17,12 +17,9 @@ let Sidebar = class Sidebar extends React.Component {
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
-    sidebarOpen: PropTypes.bool.isRequired,
   };
 
-  renderSidebar() {
-    let sidebarState = this.props.sidebarOpen ? 'open' : 'closed';
-    
+  renderSidebar() { 
     const {
       sa2_name,
       population,
@@ -114,7 +111,7 @@ let Sidebar = class Sidebar extends React.Component {
     return (
       <PanelContainer>
         <SidebarButton/>
-        <div className={`sidebar-container  ${sidebarState} `}>
+        <div className={`sidebar-container`}>
           <SearchBar/>
           <div className="sidebar-content"><TopPanel /></div>
           
@@ -149,7 +146,6 @@ function mapStateToProps(state) {
     select: state.select,
     mapType: state.mapType,
     searchBarInfo: state.searchBarInfo,
-    sidebarOpen: state.sidebarOpen
   };
 }
 
