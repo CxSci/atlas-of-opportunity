@@ -8,9 +8,9 @@ import * as Constants from "../constants";
 // import { setDisplayDefault } from "../redux/action-creators";
 import BarGraph from "./BarGraph";
 import SearchBar from "./searchbar";
+import SidebarButton from "./SidebarButton";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
-import { setSideBar } from "../redux/action-creators";
 
 let Display = class Display extends React.Component {
   static propTypes = {
@@ -19,11 +19,6 @@ let Display = class Display extends React.Component {
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
-  };
-
-  
-  toggleSidebar = () => {
-    setSideBar(!this.props.sidebarOpen);
   };
 
   renderDisplay() {
@@ -49,16 +44,10 @@ let Display = class Display extends React.Component {
       </div>
     );
 
-    const SidebarButton = () => (
-      <div className={`toggleButton ${sidebarState}`} onClick={this.toggleSidebar}>
-        <i className={`arrow right ${sidebarState=="open"? "collapse" : "expand"}`}></i>
-      </div>
-    )
-
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className={`sidebar bg-white flex-child flex-child--grow shadow-darken10 w300`}
+        className={`sidebar`}
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
