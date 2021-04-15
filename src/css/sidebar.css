@@ -25,11 +25,7 @@
 
 .toggleButton {
     cursor: pointer;
-    /* width: 20px;
-    height: 40px;
-    position: absolute; */
     top: 5px;
-    left: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,8 +42,3 @@
     border-radius: 0px 5px 5px 0px;
     
 }
-
-.toggleButton.closed {
-    left: 0px;
-}
-  

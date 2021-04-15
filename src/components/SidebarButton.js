@@ -20,7 +20,7 @@ let SidebarButton = class SidebarButton extends React.Component {
     let sidebarState = this.props.sidebarOpen ? 'open' : 'closed';
     
     return (
-      <div className={`toggleButton ${sidebarState}`} onClick={this.toggleSidebar}>
+      <div className={`toggleButton`} onClick={this.toggleSidebar}>
         {sidebarState=="open" ? (<ChevronLeftIcon/>) : (<ChevronRightIcon/>)}
       </div>
     )

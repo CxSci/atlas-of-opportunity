@@ -12,7 +12,6 @@ let Legend = class Legend extends React.Component {
   static propTypes = {
     active: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired,
-    sidebarOpen: PropTypes.bool.isRequired,
   };
 
   render() {
@@ -86,7 +85,7 @@ let Legend = class Legend extends React.Component {
     };
 
     return (
-      <div className={`legend ${this.props.sidebarOpen ? "resize" : ""} bg-white absolute bottom left mb36 shadow-darken10 round z1 w300`}>
+      <div className={`legend`}>
         <div className="mt6 mb12">
           <DropdownSelect
             items={mapTypes.map((t) => t.text)}
@@ -107,7 +106,6 @@ function mapStateToProps(state) {
   return {
     active: state.active,
     mapType: state.mapType,
-    sidebarOpen: state.sidebarOpen,
   };
 }
 
