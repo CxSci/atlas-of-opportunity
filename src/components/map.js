@@ -74,7 +74,8 @@ let Map = class Map extends React.Component {
 
     // zoom buttons
     var controls = new mapboxgl.NavigationControl({
-      showCompass: false,
+      showCompass: true,
+      visualizePitch: true,
     });
     this.map.addControl(controls, "bottom-right");
 
@@ -254,6 +255,8 @@ let Map = class Map extends React.Component {
         {
           maxZoom: 11,
           padding: 100,
+          bearing: this.map.getBearing(),
+          pitch: this.map.getPitch(),
         }
       )
     }
