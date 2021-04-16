@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import ReactTooltip from 'react-tooltip';
 import Collapsible from "react-collapsible";
 
-import * as Constants from "../constants";
 import BarGraph from "./BarGraph";
 import SidebarButton from "./SidebarButton";
 import "../css/collapsible.css";
@@ -18,7 +17,7 @@ let Sidebar = class Sidebar extends React.Component {
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
   };
 
-  renderSidebar() { 
+  render() {
     const {
       sa2_name,
       population,
@@ -116,25 +115,6 @@ let Sidebar = class Sidebar extends React.Component {
         </div>
       </PanelContainer>
     );
-  }
-
-  render() {
-    const { isDefault } = this.props.select; // const { name, description } = this.props.active;
-    const { mapType } = this.props;
-    if (isDefault) {
-      return (
-        <div className="wmax240">
-        </div>
-      );
-    }
-
-    switch (mapType) {
-      case Constants.MAP_TYPE.SEGREGATION:
-      case Constants.MAP_TYPE.TRANSCATIONS:
-      case Constants.MAP_TYPE.GROWTH:
-      default:
-        return this.renderSidebar();
-    }
   }
 };
 
