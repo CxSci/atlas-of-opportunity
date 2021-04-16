@@ -63,3 +63,10 @@ export function setSearchBarInfo(payload) {
     payload: payload,
   });
 }
+
+export function setSideBar(payload) {
+  store.dispatch({
+    type: Constants.SET_SIDEBAR,
+    payload: payload,
+  });
+}

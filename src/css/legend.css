@@ -1,0 +1,13 @@
+.legend {
+    padding: 12px 12px;
+    margin-left: 12px;
+    margin-bottom: 36px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    width: 300px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}

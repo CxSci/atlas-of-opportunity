@@ -6,6 +6,8 @@ import * as Constants from "../constants";
 import { setMapType } from "../redux/action-creators";
 import DropdownSelect from "./dropdown.js"
 
+import "../css/legend.css";
+
 let Legend = class Legend extends React.Component {
   static propTypes = {
     active: PropTypes.object.isRequired,
@@ -83,7 +85,7 @@ let Legend = class Legend extends React.Component {
     };
 
     return (
-      <div className="bg-white absolute bottom left ml12 mb36 py12 px12 shadow-darken10 round z1 w300">
+      <div className={`legend`}>
         <div className="mt6 mb12">
           <DropdownSelect
             items={mapTypes.map((t) => t.text)}

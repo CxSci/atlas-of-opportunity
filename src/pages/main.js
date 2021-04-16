@@ -1,28 +1,51 @@
-import React, { Fragment, Component } from "react";
+import React, {  Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
-import Display from "../components/display";
+import Sidebar from "../components/sidebar";
 import Legend from "../components/legend";
 
-const Main = class Main extends Component {
+import "../css/main.css";
+
+let Main = class Main extends Component {
+  static propTypes = {
+    sidebarOpen: PropTypes.bool.isRequired,
+  };
+
   render() {
     const mapStyler = {
       zindex: 0,
+      width: "100%",
+      height: "100%"
+    };
+    const screenFlexStyle = {
+      display: "flex",
+      flexDirection: 'row',
+      width: "100%",
+      height: "100%"
     };
 
+    let sidebarState = this.props.sidebarOpen ? 'sidebarOpen' : 'sidebarClosed';
+
     return (
-      <div style={mapStyler}>
-        <Map />
-        <Fragment>
-          <Fragment>
-            <Display />
-            <Legend />
-          </Fragment>
-        </Fragment>
+      <div className={`main ${sidebarState}`} style={mapStyler}>
+        <div style={screenFlexStyle}>     
+          <Sidebar />
+          <Map />
+        </div>
+        <Legend />
       </div>
     );
   }
 };
 
-export default connect()(Main);
+function mapStateToProps(state) {
+  return {
+    sidebarOpen: state.sidebarOpen
+  };
+}
+
+Main = connect(mapStateToProps)(Main);
+
+export default Main;

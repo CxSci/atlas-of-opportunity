@@ -35,13 +35,16 @@ let SearchBar = class SearchBar extends React.Component {
   render() {
     // Style components
     const search = {
-      position: "absolute",
-      top: "12px",
-      left: "12px",
+      // position: "absolute",
+      // top: "12px",
+      // left: "12px",
+      backgroundColor: "white",
+      margin: "auto",
+      padding: "8px 12px",
     };
 
     return (
-        <div id="geocoder" style={search}></div>
+        <div id="geocoder" className="searchBar" style={search}></div>
     );
   }
 };
