@@ -21,7 +21,7 @@
 
 .toggleButton {
     cursor: pointer;
-    top: 5px;
+    top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -53,7 +53,6 @@ function Header ({ features, selectedFeature }) {
     <div className="container" style={headerBox}>
       {/* TODO: make header background color translucent white while in comparison mode */}
       <div className="navbarLeft">
-        {/* TODO: put conditional sidebar toggle control here */}
         <SearchField {...searchFieldProps} />
       </div>
       <div className="navbarCenter">

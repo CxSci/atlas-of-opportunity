@@ -11,8 +11,8 @@ import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
 
 // TODO: Lift all of this styling into a separate file.
 const containerStyle = {
-  marginLeft: "10px",
-  width: '305px',
+  margin: "10px 0px 10px 10px",
+  width: "305px",
 }
 
 const fieldStyle = {
