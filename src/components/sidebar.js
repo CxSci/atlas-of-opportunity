@@ -6,7 +6,6 @@ import Collapsible from "react-collapsible";
 
 import * as Constants from "../constants";
 import BarGraph from "./BarGraph";
-import SearchBar from "./searchbar";
 import SidebarButton from "./SidebarButton";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
@@ -112,7 +111,6 @@ let Sidebar = class Sidebar extends React.Component {
       <PanelContainer>
         <SidebarButton/>
         <div className={`sidebar-container`}>
-          <SearchBar/>
           <div className="sidebar-content"><TopPanel /></div>
           
         </div>
