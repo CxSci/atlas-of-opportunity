@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { setHeaderOption, setHighlightedFeature, setSelectedFeature } from "../redux/action-creators";
-import SearchField from "./search-field";
+import { setHeaderOption } from "../redux/action-creators";
+import SASearchField from "./SASearchField";
 
 import "../css/header.css";
 
-function Header ({ features, selectedFeature }) {
+function Header ({ selectedFeature }) {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
 
@@ -21,39 +21,11 @@ function Header ({ features, selectedFeature }) {
     alignItems: "center",
   };
 
-  const searchFieldProps = {
-    localItems: features.map((f) => {
-      return {
-        ...f,
-        primary: f.properties.SA2_NAME16,
-      }
-    }),
-    geocoderConfig: {
-      countries: ["AU"],
-      types: [
-        "postcode", "district", "place", "locality"//, "neighborhood", "address"
-      ],
-      // Restrict search to South Australia
-      bbox: [
-        129.001337, -38.062603,
-        141.002956, -25.996146
-      ],
-      limit: 5,
-    },
-    selectedFeature: selectedFeature,
-    onSelectedItemChange: ({ selectedItem }) => {
-      setSelectedFeature(selectedItem)
-    },
-    onHighlightedItemChange: ({ highlightedItem }) => {
-      setHighlightedFeature(highlightedItem)
-    },
-  }
-
   return (
     <div className="container" style={headerBox}>
       {/* TODO: make header background color translucent white while in comparison mode */}
       <div className="navbarLeft">
-        <SearchField {...searchFieldProps} />
+        <SASearchField selectedFeature={selectedFeature} />
       </div>
       <div className="navbarCenter">
         {/* TODO: put conditional comparison controls here */}
@@ -109,14 +81,12 @@ function Header ({ features, selectedFeature }) {
 }
 
 Header.propTypes = {
-    features: PropTypes.array.isRequired,
     path: PropTypes.string.isRequired,
     selectedFeature: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    features: state.features,
     path: state.path,
     selectedFeature: state.selectedFeature,
   };
