@@ -6,6 +6,7 @@ import Collapsible from "react-collapsible";
 
 import BarGraph from "./BarGraph";
 import SidebarButton from "./SidebarButton";
+import SASearchField from "./SASearchField";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 
@@ -15,6 +16,7 @@ let Sidebar = class Sidebar extends React.Component {
     select: PropTypes.object.isRequired,
     mapType: PropTypes.string.isRequired, // one of { growth,segregation}
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    selectedFeature: PropTypes.object,
   };
 
   render() {
@@ -111,6 +113,9 @@ let Sidebar = class Sidebar extends React.Component {
         <SidebarButton/>
         <div className={`sidebar-container`}>
           <div className="sidebar-content"><TopPanel /></div>
+          <div style={{ height: "60px", backgroundColor: "green" }}>
+            <SASearchField />
+          </div>
           
         </div>
       </PanelContainer>
@@ -124,6 +129,7 @@ function mapStateToProps(state) {
     select: state.select,
     mapType: state.mapType,
     searchBarInfo: state.searchBarInfo,
+    selectedFeature: state.selectedFeature,
   };
 }
 
