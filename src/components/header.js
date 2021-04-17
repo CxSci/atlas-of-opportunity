@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
-import SASearchField from "./SASearchField";
 
 import "../css/header.css";
 
-function Header ({ selectedFeature }) {
+function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
 
@@ -25,7 +24,6 @@ function Header ({ selectedFeature }) {
     <div className="container" style={headerBox}>
       {/* TODO: make header background color translucent white while in comparison mode */}
       <div className="navbarLeft">
-        <SASearchField selectedFeature={selectedFeature} />
       </div>
       <div className="navbarCenter">
         {/* TODO: put conditional comparison controls here */}
@@ -82,13 +80,11 @@ function Header ({ selectedFeature }) {
 
 Header.propTypes = {
     path: PropTypes.string.isRequired,
-    selectedFeature: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
     path: state.path,
-    selectedFeature: state.selectedFeature,
   };
 }
 

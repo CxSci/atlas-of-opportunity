@@ -64,7 +64,7 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
-function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChange, onHighlightedItemChange, selectedFeature }) {
+function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, setHighlightedFeature, setSelectedFeature }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -95,9 +95,9 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     openMenu,
     selectItem,
     // selectedItem,
-    setInputValue,
   } = useCombobox({
     defaultHighlightedIndex: 0,
+    initialInputValue,
     items: inputItems,
     itemToString,
     onIsOpenChange: ({isOpen}) => {
@@ -110,7 +110,10 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     onInputValueChange: ({ inputValue, type }) => {
       // Clear the selection when the search field is cleared via backspace
       if (inputValue === '' && type === useCombobox.stateChangeTypes.InputChange) {
-        selectItem(null)
+        // Clear the redux state tracking the selected feature and let this
+        // component rerender based on that rather than calling
+        // selectItem(null) here
+        setSelectedFeature({ selectedItem: null })
       // If inputValue changes while the search menu is closed, it's because 
       // another component change selectedFeature, and that should be
       // reflected in the selectedItem of the search field.
@@ -121,7 +124,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
         }
       }
     },
-    onSelectedItemChange,
+    onSelectedItemChange: setSelectedFeature,
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       switch (type) {
         // Ignore the hidden highlight change which occurs when selecting an
@@ -151,22 +154,11 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     },
   })
 
-  // Highlight the first item in the search menu whenever it opens or its
-  // content changes.
   useEffect(() => {
-    const newHighlightedItem = inputItems[highlightedIndex]
-    if (isOpen && highlightedIndex === 0 && highlightedIndex !== newHighlightedItem) {
-      setHighlightedItem(newHighlightedItem)
-    } else if (!isOpen) {
-      setHighlightedItem(null)
+    if (typeof setHighlightedFeature === "function") {
+      setHighlightedFeature({highlightedItem})
     }
-  }, [highlightedIndex, setHighlightedItem, inputItems, isOpen])
-
-  useEffect(() => {
-    if (typeof onHighlightedItemChange === "function") {
-      onHighlightedItemChange({highlightedItem})
-    }
-  }, [highlightedItem, isOpen, onHighlightedItemChange])
+  }, [highlightedItem, setHighlightedFeature])
 
   // Set up geocoder
   const geocodedItems = useGeocoder({
@@ -209,28 +201,18 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
     }
   }, [localItems, geocodedItems, inputValue, isOpen])
 
-  // If selectedFeature is set by another component, reflect that in the
-  // search field.
-  useEffect(() => {
-    if (!selectedFeature) {
-      setInputValue('')
-    } else {
-      setInputValue(selectedFeature.properties.SA2_NAME16)
-    }
-  }, [selectedFeature, setInputValue])
-
   return (
     <div className="searchContainer" ref={setReferenceElement} style={containerStyle}>
       <div {...getComboboxProps()} className="searchField" style={fieldStyle}>
         {/* <label {...getLabelProps()}>Choose an element:</label> */}
         <input {...getInputProps({
           onFocus: () => {
-                  if (!isOpen) {
-                    openMenu()
-                  }
-                },
+            if (!isOpen) {
+              openMenu()
+            }
+          },
           placeholder: "Search by suburb or region",
-          spellCheck: "disable",
+          spellCheck: "false",
           ref: setInputElement,
           })}
           style={inputStyle}
@@ -248,7 +230,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
           <button
             tabIndex={-1}
             onClick={() => {
-              selectItem(null)
+              setSelectedFeature({ selectedItem: null })
             }}
             aria-label="clear selection"
             style={buttonStyle}
@@ -283,9 +265,9 @@ function SearchField({ localItems = [], geocoderConfig = {}, onSelectedItemChang
 SearchField.propTypes = {
   geocoderConfig: PropTypes.object,
   localItems: PropTypes.arrayOf(PropTypes.object),
-  onSelectedItemChange: PropTypes.func,
-  onHighlightedItemChange: PropTypes.func,
-  selectedFeature: PropTypes.object,
+  initialInputValue: PropTypes.string,
+  setSelectedFeature: PropTypes.func,
+  setHighlightedFeature: PropTypes.func,
 }
 
 export default SearchField;

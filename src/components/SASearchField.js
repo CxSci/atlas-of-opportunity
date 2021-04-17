@@ -5,9 +5,7 @@ import { connect } from "react-redux";
 
 import SearchField from "./SearchField"
 
-// features comes directy from redux
-// all other props come from the parent component
-function SASearchField ({features, ...props}) {
+function SASearchField ({features, selectedFeature, ...props}) {
   const searchFieldProps = {
     localItems: features.map((f) => {
       return {
@@ -27,11 +25,14 @@ function SASearchField ({features, ...props}) {
       ],
       limit: 5,
     },
-    onSelectedItemChange: ({ selectedItem }) => {
-      setSelectedFeature(selectedItem)
-    },
-    onHighlightedItemChange: ({ highlightedItem }) => {
+    initialInputValue: selectedFeature?.properties.SA2_NAME16 ?? '',
+    setHighlightedFeature: ({ highlightedItem }) => {
       setHighlightedFeature(highlightedItem)
+    },
+    setSelectedFeature: ({ selectedItem: newFeature }) => {
+      if (newFeature !== selectedFeature) {
+        setSelectedFeature(newFeature)
+      }
     },
     ...props
   }
@@ -43,11 +44,13 @@ function SASearchField ({features, ...props}) {
 
 SASearchField.propTypes = {
   features: PropTypes.arrayOf(PropTypes.object),
+  selectedFeature: PropTypes.object,
 }
 
 function mapStateToProps(state) {
   return {
     features: state.features,
+    selectedFeature: state.selectedFeature,
   };
 }
 
