@@ -10,6 +10,7 @@ import "../css/main.css";
 
 let Main = class Main extends Component {
   static propTypes = {
+    selectedFeature: PropTypes.object,
     sidebarOpen: PropTypes.bool.isRequired,
   };
 
@@ -26,10 +27,12 @@ let Main = class Main extends Component {
       height: "100%"
     };
 
-    let sidebarState = this.props.sidebarOpen ? 'sidebarOpen' : 'sidebarClosed';
+    const sidebarState = (
+      this.props.sidebarOpen && this.props.selectedFeature)
+        ? 'sidebarOpen' : 'sidebarClosed';
 
     return (
-      <div className={`main ${sidebarState}`} style={mapStyler}>
+      <div className={`main ${sidebarState} `} style={mapStyler}>
         <div style={screenFlexStyle}>     
           <Sidebar />
           <Map />
@@ -42,7 +45,8 @@ let Main = class Main extends Component {
 
 function mapStateToProps(state) {
   return {
-    sidebarOpen: state.sidebarOpen
+    selectedFeature: state.selectedFeature,
+    sidebarOpen: state.sidebarOpen,
   };
 }
 

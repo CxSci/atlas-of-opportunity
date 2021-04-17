@@ -238,7 +238,10 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
             <CancelIcon />
           </button>
         }
-        <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+        <div
+          ref={setPopperElement}
+          style={{...styles.popper, zIndex: 1}}
+          {...attributes.popper}>
           <ul {...getMenuProps()} hidden={!isOpen} style={menuStyles}>
             {isOpen &&
               inputItems.map((item, index) => (

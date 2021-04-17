@@ -2,6 +2,6 @@
     left: 320px;
 }
 
-.main.sidebarClosed .sidebar-container {
+.main.sidebarClosed .featureSelected .sidebar-container {
     display: none;
 }

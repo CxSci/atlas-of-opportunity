@@ -12,10 +12,7 @@ import "../css/sidebar.css";
 
 let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
-    active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
-    mapType: PropTypes.string.isRequired, // one of { growth,segregation}
-    searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     selectedFeature: PropTypes.object,
   };
 
@@ -32,13 +29,14 @@ let Sidebar = class Sidebar extends React.Component {
       sa1_codes,
     } = this.props.select;
 
-    const { mapType } = this.props;
-
-    const PanelContainer = (props) => (
-      <div className={`panel-container`}>
+    const PanelContainer = (props) => {
+      const featureSelected = this.props.selectedFeature ? 'featureSelected' : 'noFeatureSelected'
+      return (
+        <div className={`panel-container ${featureSelected}`}>
         {props.children}
       </div>
-    );
+      )
+    }
 
     const TopPanel = () => (
       <div
@@ -47,15 +45,6 @@ let Sidebar = class Sidebar extends React.Component {
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-        </div>
-        <div className="py12 px12">
-          <div className="mb6">
-            <h3>
-            {mapType === "growth"? "Pattern of Mobility"
-            : mapType === "segregation"? "Economic Inequality"
-            :"Pattern of Spending"}
-            </h3>
-          </div>
         </div>
 
         <Collapsible trigger = "Demographic Summary" >
@@ -108,14 +97,30 @@ let Sidebar = class Sidebar extends React.Component {
       </div>
     );
 
+    // const featureDebug = (feature) => {
+    //   if (!feature || !feature.properties) {
+    //     return ""
+    //   }
+    //   return (
+    //     <ul className="sidebar-content">
+    //     {
+    //       Object.keys(feature.properties).map((key) => (
+    //         <li key={key}>{key}: {feature.properties[key]}</li>
+    //       ))
+    //     }
+    //     </ul>
+    //   )
+    // }
+
     return (
       <PanelContainer>
         <SidebarButton/>
         <div className={`sidebar-container`}>
-          <div className="sidebar-content"><TopPanel /></div>
-          <div style={{ height: "60px", backgroundColor: "green" }}>
             <SASearchField />
-          </div>
+          {this.props.selectedFeature ?
+            <div className="sidebar-content"><TopPanel /></div> :
+            ""
+          }
           
         </div>
       </PanelContainer>
@@ -125,10 +130,7 @@ let Sidebar = class Sidebar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    active: state.active,
     select: state.select,
-    mapType: state.mapType,
-    searchBarInfo: state.searchBarInfo,
     selectedFeature: state.selectedFeature,
   };
 }
