@@ -5,6 +5,14 @@ import MapboxGeocoder from "@mapbox/mapbox-sdk/services/geocoding"
 
 const accessToken = "pk.eyJ1IjoieG16aHUiLCJhIjoiY2tibWlrZjY5MWo3YjJ1bXl4YXd1OGd3bCJ9.xEc_Vf2BkuPkdHhHz521-Q";
 
+// Cache geocoding results for the last 1000 queries to save on API requests.
+// https://docs.mapbox.com/api/search/geocoding/#geocoding-restrictions-and-limits
+// https://www.mapbox.com/pricing/#search
+// TODO: Figure out the memory impact of having this be a big number.
+//       lru-cache can be configured to limit its actual memory size, though
+//       you have to teach it how to calculate the size.
+const geocoderItemsCache = new LRU(1000)
+
 const useGeocoder = ({ inputValue, enabled, config, onNewFeatures }) => {
   // example MapboxGeocoder config:
   //
@@ -25,13 +33,6 @@ const useGeocoder = ({ inputValue, enabled, config, onNewFeatures }) => {
     MapboxClient({accessToken: accessToken}))
   )
   const [geocodedItems, setGeocodedItems] = useState([])
-  // Cache geocoding results for the last 1000 queries to save on API requests.
-  // https://docs.mapbox.com/api/search/geocoding/#geocoding-restrictions-and-limits
-  // https://www.mapbox.com/pricing/#search
-  // TODO: Figure out the memory impact of having this be a big number.
-  //       lru-cache can be configured to limit its actual memory size, though
-  //       you have to teach it how to calculate the size.
-  const [geocoderItemsCache] = useState(new LRU(1000))
 
   useEffect(() => {
     // TODO: Add a bit of hysteresis to uncached geocoding requests, e.g. wait
@@ -68,7 +69,7 @@ const useGeocoder = ({ inputValue, enabled, config, onNewFeatures }) => {
         })
       }
     }
-  }, [inputValue, enabled, options, geocoder, geocoderItemsCache, onNewFeatures])
+  }, [inputValue, enabled, options, geocoder, onNewFeatures])
 
   return geocodedItems
 }
