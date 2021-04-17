@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
@@ -214,7 +214,11 @@ let Map = class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.sidebarOpen !== prevProps.sidebarOpen) {
+    if (this.props.sidebarOpen !== prevProps.sidebarOpen
+      || (this.props.selectedFeature !== prevProps.selectedFeature
+        && (!this.props.selectedFeature || !prevProps.selectedFeature)
+      )
+    ) {
       this.map.resize();
     }
 
@@ -646,14 +650,7 @@ let Map = class Map extends React.Component {
   };
   
   render() {
-    return (
-      <Fragment>
-        <div id="map" ref={this.mapRef} className="map" />
-        <div className="mapOnlySearchBar"> 
-          {/* <SearchBar /> */}
-        </div>
-      </Fragment>
-    );
+    return <div id="map" ref={this.mapRef} className="map" />
   }
 };
 
