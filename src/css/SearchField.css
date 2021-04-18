@@ -1,0 +1,64 @@
+.searchContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px 0px 5px 10px;
+  width: 305px;
+}
+
+.searchContainer .searchField {
+  background: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.searchContainer input {
+  background: transparent;
+  margin: 0;
+  padding: 0px 15px;
+  line-height: 40px;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  border: none;
+  flex-grow: 1;
+}
+
+.searchContainer button {
+  height: 40px;
+  padding: 4px 15px 0 0;
+}
+
+.fancyTitle {
+    position: relative;
+    z-index: 1;
+    padding: 18px 10px 16px 20px;
+    margin-right: 40px;
+    background: white;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    /*pointer-events: none;*/
+    display: none;
+}
+
+.showBigTitle .fancyTitle {
+    display: block;
+}
+
+.showBigTitle .searchContainer .searchField {
+    box-shadow: none;
+}
+
+/*.searchContainer:focus-within + .fancyTitle {
+    display: none;
+}
+*/
+/*.beFancy input:not(:focus) {
+    color: purple;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+}*/

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { forwardRef, useCallback, useEffect, useMemo, useState } from "react"
 import PropTypes from "prop-types"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
@@ -10,35 +10,6 @@ import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
 import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
 
 // TODO: Lift all of this styling into a separate file.
-const containerStyle = {
-  margin: "10px 0px 10px 10px",
-  width: "305px",
-}
-
-const fieldStyle = {
-  background: 'white',
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
-  pointerEvents: "auto",
-  borderRadius: "5px",
-  display: "flex",
-  alignItems: "center",
-}
-
-const inputStyle = {
-  background: "transparent",
-  margin: 0,
-  padding: "0px 15px",
-  lineHeight: "40px",
-  fontFamily: "Roboto, sans-serif",
-  fontSize: 15,
-  border: "none",
-  flexGrow: 1,
-}
-
-const buttonStyle = {
-  height: "40px",
-  padding: "4px 15px 0 0",
-}
 
 const menuStyles = {
   maxHeight: "400px",
@@ -64,7 +35,15 @@ const secondaryStyle = {
   marginTop: 6,
 }
 
-function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, setHighlightedFeature, setSelectedFeature }) {
+const SearchField = forwardRef(({
+  localItems = [],
+  geocoderConfig = {},
+  initialInputValue,
+  onFocus,
+  onIsOpenChange,
+  setHighlightedFeature,
+  setSelectedFeature },
+  inputRef) => {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -78,7 +57,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
 
   // Set up downshift-js combobox / autocomplete
   // Default to showing all of the available options
-  const [inputElement, setInputElement] = useState(null)
+  // const [inputElement, setInputElement] = useState(null)
   const [inputItems, setInputItems] = useState([])
   const [highlightedItem, setHighlightedItem] = useState(null)
   const itemToString = item => (item ? item.primary : '')
@@ -100,12 +79,13 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
     initialInputValue,
     items: inputItems,
     itemToString,
-    onIsOpenChange: ({isOpen}) => {
+    onIsOpenChange: (changes) => {
       // Anything that would close the suggestion menu should cause the input
       // to lose focus too.
-      if (!isOpen) {
-        inputElement.blur()
+      if (!changes.isOpen) {
+        inputRef.current.blur()
       }
+      onIsOpenChange(changes)
     },
     onInputValueChange: ({ inputValue, type }) => {
       // Clear the selection when the search field is cleared via backspace
@@ -115,7 +95,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
         // selectItem(null) here
         setSelectedFeature({ selectedItem: null })
       // If inputValue changes while the search menu is closed, it's because 
-      // another component change selectedFeature, and that should be
+      // another component changed selectedFeature, and that should be
       // reflected in the selectedItem of the search field.
       } else if (!isOpen && inputValue) {
         const definiteMatch = localItems.find(item => item.primary === inputValue)
@@ -124,6 +104,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
         }
       }
     },
+    // Try moving everything about inputValue into stateReducer
     onSelectedItemChange: setSelectedFeature,
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       switch (type) {
@@ -145,7 +126,7 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
         case useCombobox.stateChangeTypes.InputBlur:
           return {
             ...changes,
-            inputValue: state.inputValue,
+            inputValue: initialInputValue,
             selectedItem: state.selectedItem,
           }
         default:
@@ -202,27 +183,30 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
   }, [localItems, geocodedItems, inputValue, isOpen])
 
   return (
-    <div className="searchContainer" ref={setReferenceElement} style={containerStyle}>
-      <div {...getComboboxProps()} className="searchField" style={fieldStyle}>
+    <div className="searchContainer" ref={setReferenceElement}>
+      <div {...getComboboxProps()} className="searchField">
         {/* <label {...getLabelProps()}>Choose an element:</label> */}
         <input {...getInputProps({
           onFocus: () => {
+            // Report out the focus event if the parent component cares
+            if (onFocus) {
+              onFocus()
+            }
+            // Open the menu if it's not already so
             if (!isOpen) {
               openMenu()
             }
           },
           placeholder: "Search by suburb or region",
           spellCheck: "false",
-          ref: setInputElement,
+          ref: inputRef,
           })}
-          style={inputStyle}
         />
         { inputValue === '' ?
           <button
             tabIndex={-1}
             {...getToggleButtonProps()}
             aria-label="toggle menu"
-            style={buttonStyle}
           >
             <SearchIcon />
           </button>
@@ -230,10 +214,10 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
           <button
             tabIndex={-1}
             onClick={() => {
+              selectItem(null)
               setSelectedFeature({ selectedItem: null })
             }}
             aria-label="clear selection"
-            style={buttonStyle}
           >
             <CancelIcon />
           </button>
@@ -263,12 +247,14 @@ function SearchField({ localItems = [], geocoderConfig = {}, initialInputValue, 
       </div>
     </div>
   )
-}
+})
 
 SearchField.propTypes = {
   geocoderConfig: PropTypes.object,
   localItems: PropTypes.arrayOf(PropTypes.object),
   initialInputValue: PropTypes.string,
+  onFocus: PropTypes.func,
+  onIsOpenChange: PropTypes.func,
   setSelectedFeature: PropTypes.func,
   setHighlightedFeature: PropTypes.func,
 }
