@@ -1,6 +1,7 @@
 {
   "name": "dashboard",
   "version": "0.0.1",
+  "proxy": "http://backend:5000",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
