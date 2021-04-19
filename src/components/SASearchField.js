@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { setHighlightedFeature, setSelectedFeature } from "../redux/action-creators"
 import { connect } from "react-redux";
 
+import BigTitle from "./BigTitle"
 import SearchField from "./SearchField"
 import "../css/SearchField.css"
 
@@ -65,14 +66,18 @@ function SASearchField ({features, selectedFeature, ...props}) {
   }, [selectedFeature])
 
   return (
-    <div className={ shouldShowBigTitle ? "showBigTitle" : ""}>
-      <div
-        className="fancyTitle"
-        onClick={() => {
+    <div className={`sidebarHeader ${shouldShowBigTitle ? "showBigTitle" : ""}`}>
+      <BigTitle 
+        onFocus={() => {
           console.log("Focus the search field", inputRef)
           inputRef.current.focus()
         }}
-      >{ selectedFeature?.properties.SA2_NAME16 }</div>
+        onCancel={() => {
+          setSelectedFeature(null)
+        }}
+      >
+        { selectedFeature?.properties.SA2_NAME16 }
+      </BigTitle>
       <SearchField {...searchFieldProps} />
     </div>
   )

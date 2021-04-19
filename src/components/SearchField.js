@@ -9,32 +9,8 @@ import { sameWidthModifier } from "../utils/popper-modifiers"
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
 import { ReactComponent as CancelIcon} from "../assets/search-icons/cancel.svg"
 
-// TODO: Lift all of this styling into a separate file.
-
-const menuStyles = {
-  maxHeight: "400px",
-  overflowY: "auto",
-  background: "white",
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
-  borderRadius: "5px",
-  marginTop: "10px",
-}
-
-const itemStyle = {
-  padding: "12px 15px"
-}
-
-const primaryStyle = {
-  fontSize: 16,
-  fontWeight: 500
-}
-
-const secondaryStyle = {
-  color: "#333333",
-  fontSize: 14,
-  marginTop: 6,
-}
-
+// Forward ref to input element for parents that want to send it events like
+// focus() and blur() directly.
 const SearchField = forwardRef(({
   localItems = [],
   geocoderConfig = {},
@@ -226,20 +202,18 @@ const SearchField = forwardRef(({
           ref={setPopperElement}
           style={{...styles.popper, zIndex: 1}}
           {...attributes.popper}>
-          <ul {...getMenuProps()} hidden={!isOpen} style={menuStyles}>
+          <ul {...getMenuProps({className: "searchMenu"})} hidden={!isOpen}>
             {isOpen &&
               inputItems.map((item, index) => (
-                <li
-                  style={{...itemStyle, 
-                    ...(highlightedIndex === index
-                      ? { backgroundColor: '#f2f2f2' }
-                      : {})}
+                <li className={(highlightedIndex === index
+                      ? "highlighted"
+                      : "")
                   }
                   key={`${item}${index}`}
                   {...getItemProps({ item, index })}
                 >
-                  <div className="primary" style={primaryStyle}>{item.primary}</div>
-                  <div className="secondary" style={secondaryStyle}>{item.secondary ?? "SA2 Region"}</div>
+                  <div className="primary">{item.primary}</div>
+                  <div className="secondary">{item.secondary ?? "SA2 Region"}</div>
                 </li>
               ))}
           </ul>
