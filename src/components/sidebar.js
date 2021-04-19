@@ -41,7 +41,7 @@ let Sidebar = class Sidebar extends React.Component {
     const TopPanel = () => (
       <div
         style={{ overflowY: "auto" }}
-        className={`sidebar`}
+        className={`sidebar-content`}
       >
         <div className="py12 px12" style = {{backgroundColor: "lightgray"}}>
             <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
@@ -118,10 +118,9 @@ let Sidebar = class Sidebar extends React.Component {
         <div className={`sidebar-container`}>
             <SASearchField />
           {this.props.selectedFeature ?
-            <div className="sidebar-content"><TopPanel /></div> :
+            <TopPanel /> :
             ""
           }
-          
         </div>
       </PanelContainer>
     );
