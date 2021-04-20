@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  backend:
-    build: ./backend
+  api:
+    build: ./api
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app
+      - ./api:/app
     environment:
       FLASK_ENV: development
   dashboard:
@@ -16,4 +16,4 @@ services:
     volumes:
       - /usr/src/app    
     depends_on:
-      - backend
+      - api
