@@ -124,6 +124,11 @@ const SearchField = forwardRef(({
     enabled: isOpen,
     config: geocoderConfig,
     onNewFeatures: useCallback((features) => (
+      // Geocoded results don't include values suitable for .primary, so map
+      // them to local features and then drop any which failed to map to
+      // anything. Any geocoding result not within a local feature is invalid.
+      // For example, a search for "west lak" includes Lake Mundi in Victoria,
+      // even though the geocoding request was restricted to South Australia.
       features.map((f) => {
         const localFeature = localItems.find(
           (item) => (item.geometry && turf.booleanPointInPolygon(f.center, item))
@@ -133,10 +138,6 @@ const SearchField = forwardRef(({
           secondary: f.place_name,
           relevance: f.relevance,
         }
-      // Filter out results which aren't inside any of the regions this app
-      // tracks. For example, a search for "west lak" includes Lake Mundi in
-      // Victoria, even though the geocoding request was restricted to Sourth
-      // Australia.
       }).filter(f => f.primary)
     ), [localItems])
   })
