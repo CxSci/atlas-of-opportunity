@@ -1,6 +1,4 @@
 import React, { useCallback, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
@@ -78,14 +76,4 @@ function Header () {
   );
 }
 
-Header.propTypes = {
-    path: PropTypes.string.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    path: state.path,
-  };
-}
-
-export default connect(mapStateToProps)(Header);
+export default Header;
