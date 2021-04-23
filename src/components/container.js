@@ -8,14 +8,23 @@ const Container = class Container extends Component {
   };
   render() {
     const { title, children } = this.props;
+
+    const popUpBox = {
+      width: "45%",
+      height: "100vh",
+    }
+
     const container = {
-      width: "100%",
-      minHeight: "100%",
+      width: "45%",
       position: "absolute",
       backgroundColor: "#f9f9f9",
+
     };
     const content = {
-      margin: '15vh 15vw'
+      width: "100%",
+      minHeight:"100%",
+      margin: '15vh 15vw',
+      position: "absolute",
     };
     const titleBox = {
       fontSize: "40px",
@@ -25,14 +34,28 @@ const Container = class Container extends Component {
     };
 
     return (
+      <div style={popUpBox}>
       <div style={container}>
         <div style={content}>
           <h3 style={titleBox}>{title}</h3>
           {children}
         </div>
       </div>
+      </div>
     );
   }
 };
+
+/* function popUpContainer(){
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return()
+
+
+} */
 
 export default Container;

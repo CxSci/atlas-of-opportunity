@@ -6,23 +6,49 @@ import { Link } from "react-router-dom";
 import { setHeaderOption } from "../redux/action-creators";
 
 import "../css/header.css";
+import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 
-const Header = class Header extends Component {
+
+const Header = class Header extends Component {  
+  container = React.createRef();
+
   static propTypes = {
     path: PropTypes.string.isRequired,
   };
 
   state = {
     showDropDown: false,
+    dimScreenVisible: false,
   };
 
   toggleDropDown = () => {
-    this.setState(prevState => ({ showDropDown: !prevState.showDropDown }));
+    this.setState(prevState => ({ showDropDown: !prevState.showDropDown }),);
+    this.setState(prevState => ({dimScreenVisible: !prevState.dimScreenVisible}),);
   };
 
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+  document.removeEventListener("mousedown", this.handleClickOutside);
+      }
+
+  handleClickOutside = (event) => {
+        if (
+          this.container.current &&
+          !this.container.current.contains(event.target)) {
+          this.setState({
+            showDropDown: false,
+            dimScreenVisible: false,
+          });
+        }
+      };      
+  
   render() {
     const { showDropDown } = this.state;
-
+    const { dimScreenVisible } = this.state;
+  
     const headerBox = {
       display: "flex",
       flexDirection: "row",
@@ -47,47 +73,62 @@ const Header = class Header extends Component {
                     and when viewing static pages */}
           {/* TODO: convert to use a similar downshift/popper setup as
                     the dropdownSelect */}
-          <div className="dropdown-menu">
+          {
+          this.state.dimScreenVisible
+            ? 
+            <div>
+              <div className={`dim-screen ${dimScreenVisible ? "show" : ""}`}></div>
+            </div>
+            : null
+          }   
+          <div className="dropdown-menu" ref={this.container}>
             <button className="menu-icon" onClick={this.toggleDropDown}>
               <div className="menu-icon-bar"></div>
               <div className="menu-icon-bar"></div>
               <div className="menu-icon-bar"></div>
             </button>
-            <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
-              <Link
-                to="/"
-                onClick={() => setHeaderOption("/")}
-              >
-                Map
-              </Link>
+          
+          <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
+            <div className="dropdown-header">
+              <div className="menu-title">Atlas of Opportunity</div>
+              <div className="close-icon"><CloseIcon/></div>
+             </div>
+
               <Link
                 to="/methods"
-                onClick={() => setHeaderOption("/methods")}
+                onClick={() => 
+                  {setHeaderOption("/methods");
+                  this.toggleDropDown()}
+              }
               >
                 Methods
               </Link>
+              
               <Link
                 to="/research"
-                onClick={() => setHeaderOption("/research")}
+                onClick={() => {setHeaderOption("/research");
+                this.toggleDropDown()}}
               >
                 Research
               </Link>
               <Link
-                to="/about"
-                onClick={() => setHeaderOption("/about")}
+                to="/faq"
+                onClick={() => {setHeaderOption("/faq");
+                this.toggleDropDown()}}
               >
-                About
+                Frequently Asked Questions
               </Link>
               <Link
-                to="/faq"
-                onClick={() => setHeaderOption("/faq")}
+                to="/about"
+                onClick={() => {setHeaderOption("/about");
+                this.toggleDropDown()}}
               >
-                FAQ
+                About the Atlas
               </Link>
+            </div>
             </div>
           </div>
         </div>
-      </div>
     );
   }
 };
@@ -97,5 +138,7 @@ function mapStateToProps(state) {
     path: state.path,
   };
 }
+
+
 
 export default connect(mapStateToProps)(Header);
