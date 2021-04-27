@@ -298,10 +298,12 @@ let Map = class Map extends React.Component {
     let clickedFeature = e.features ? e.features[0] : null
 
     if (clickedFeature) {
-      clickedFeature.properties = {
-        ...clickedFeature.properties,
-        primary: clickedFeature.properties.SA2_NAME16,
-      }
+      // Make sure this feature has a `primary` property for when it becomes
+      // selectedFeature, as the search field adds that to its own features and
+      // expects passed in features to have the same.
+      // TODO: Make SearchField and SASearchField smart enough to handle
+      //       features which lack `primary`.
+      clickedFeature.properties.primary = clickedFeature.properties.SA2_NAME16
     }
 
     // Ignore clicks on the active SA2.
