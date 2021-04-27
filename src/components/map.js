@@ -170,59 +170,10 @@ let Map = class Map extends React.Component {
 
       this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
 
+      // Handle clicks on map features
       this.map.on("click", "sa2-fills", this.onMapClick)
-      
-      //handle an off map click
-      this.map.on("click", (e) => {
-        if (!e.originalEvent.onMap) {
-        // Reset regions
-          this.state.clickedFeatures.forEach((f) => {
-            this.map.setFeatureState(
-              {
-                source: "sa2",
-                id: f.id,
-              },
-              {
-                highlight: false,
-              }
-            )
-          });
-
-        if (this.state.clickedSA2 != null){
-          this.map.setFeatureState(
-            {
-              source: "sa2",
-              id: this.state.clickedSA2.id,
-            },
-            {click: false}
-          )
-        }
-          
-        const sa2_properties = {}
-        setSelect(sa2_properties);
-
-
-          this.state.clickedFeatures = [];
-          this.state.clickedSA2 = null;
-              
-          //remove the previous routes and popups
-          this.clickedPopup.remove();
-          this.cntr0Popup.remove();
-          this.cntr1Popup.remove();
-          this.cntr2Popup.remove();
-        if (this.map.getLayer("route") !== undefined) {
-          this.map.removeLayer("route");
-          this.map.removeSource("route");
-        }
-        if (this.map.getLayer("point") !== undefined) {
-          this.map.removeLayer("point");
-          this.map.removeSource("point");
-          
-          
-
-        }}
-        
-      });
+      // Handle map clicks outside of map features
+      this.map.on("click", this.onMapClick);
     });
   }
 
@@ -335,18 +286,28 @@ let Map = class Map extends React.Component {
   };
 
   onMapClick = (e) => {
-    let prevSA2 = this.state.selectedFeature;
-    let clickedFeature = e.features[0]
+    // Ignore clicks that were already consumed by a deeper handler  e.g. if
+    // the user clicked on a map feature, ignore the same click event when
+    // seen by the overall map.
+    if (e.defaultPrevented) {
+      return
+    }
+    e.preventDefault()
 
-    e.originalEvent.onMap = true;
-    clickedFeature.properties = {
-      ...clickedFeature.properties,
-      primary: clickedFeature.properties.SA2_NAME16,
+    let prevSA2 = this.state.selectedFeature;
+    let clickedFeature = e.features ? e.features[0] : null
+
+    if (clickedFeature) {
+      clickedFeature.properties = {
+        ...clickedFeature.properties,
+        primary: clickedFeature.properties.SA2_NAME16,
+      }
     }
 
     // Ignore clicks on the active SA2.
     if (
       !prevSA2 ||
+      clickedFeature !== prevSA2 ||
       clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
       this.redrawBridges(clickedFeature);
