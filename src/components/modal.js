@@ -8,33 +8,39 @@ let Modal = class Modal extends Component {
       height: "100%",
       backgroundColor: "rgba(0, 0, 0, 0.05)",
       position: "absolute",
-      zIndex: 1,
+      zIndex: 2,
     };
     const modalContent = {
-      height: "100%",
-      marginLeft: "120px",
+      height: "83%",
+      marginLeft: "10px",
       display: "flex",
       justifyContent: "left",
       alignItems: "center",
+      marginBottom: "10%",
     };
     const modalBox = {
-      width: "450px",
-      height: "620px",
-      backgroundColor: "#f79640",
+      width: "305px",
+      height: "490px",
+      backgroundColor: "#FFFFFF",
       borderRadius: "8px",
       padding: "40px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",
+      overflow: "auto",
     };
     const title = {
-      color: "white",
+      color: "black",
+      marginTop: 10,
+      marginBottom: 10,
     };
     const content = {
-      color: "white",
+      color: "black",
       fontSize: "13px",
       textAlign: "justify",
+      marginTop: 10,
+      marginBottom: 10,
     };
     const contentButton = {
       width: "100%",
@@ -48,7 +54,10 @@ let Modal = class Modal extends Component {
       borderRadius: "5px",
       fontWeight: "bold",
       fontSize: "12px",
+      border: "black 1px solid",
+      cursor: "pointer",
     };
+    console.log("Rendering modal");
     return (
       <div style={container}>
         <div style={modalContent}>

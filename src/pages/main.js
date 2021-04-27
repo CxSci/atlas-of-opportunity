@@ -1,4 +1,4 @@
-import React, {  Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -18,22 +18,23 @@ let Main = class Main extends Component {
     const mapStyler = {
       zindex: 0,
       width: "100%",
-      height: "100%"
+      height: "100%",
     };
     const screenFlexStyle = {
       display: "flex",
-      flexDirection: 'row',
+      flexDirection: "row",
       width: "100%",
-      height: "100%"
+      height: "100%",
     };
 
-    const sidebarState = (
-      this.props.sidebarOpen && this.props.selectedFeature)
-        ? 'sidebarOpen' : 'sidebarClosed';
+    const sidebarState =
+      this.props.sidebarOpen && this.props.selectedFeature
+        ? "sidebarOpen"
+        : "sidebarClosed";
 
     return (
       <div className={`main ${sidebarState} `} style={mapStyler}>
-        <div style={screenFlexStyle}>     
+        <div style={screenFlexStyle}>
           <Sidebar />
           <Map />
         </div>
