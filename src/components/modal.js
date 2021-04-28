@@ -1,14 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import { setModal } from "../redux/action-creators";
 
 let Modal = class Modal extends Component {
+  static propTypes = {
+    showModal: PropTypes.bool.isRequired,
+  };
+
   render() {
+    //If dismissed render a react fragment which renders nothing to the DOM
+    //This is not persistent and only lasts in memory for the duration of the browser tab being open
+    if (!this.props.showModal) return <></>;
+
     const container = {
       width: "100%",
       height: "100%",
       backgroundColor: "rgba(0, 0, 0, 0.05)",
       position: "absolute",
       zIndex: 2,
+      pointerEvents: "auto",
     };
     const modalContent = {
       height: "83%",
@@ -29,6 +41,7 @@ let Modal = class Modal extends Component {
       alignItems: "center",
       justifyContent: "space-between",
       overflow: "auto",
+      position: "relative",
     };
     const title = {
       color: "black",
@@ -57,11 +70,40 @@ let Modal = class Modal extends Component {
       border: "black 1px solid",
       cursor: "pointer",
     };
-    console.log("Rendering modal");
+    const XButton = {
+      position: "absolute",
+      width: "12px",
+      height: "12px",
+      left: "278px",
+      top: "12px",
+    };
+    const leftChevron = {
+      position: "absolute",
+      width: "9px",
+      height: "4.5px",
+      right: "16.5px",
+      top: "22.5px",
+      border: "3px solid #666666",
+      transform: "rotate(-90deg)",
+    };
+    const rightChevron = {
+      position: "absolute",
+      width: "9px",
+      height: "4.5px",
+      right: "7.51px",
+      top: "13.5px",
+      border: "3px solid #666666",
+      transform: "rotate(90deg)",
+    };
+
     return (
       <div style={container}>
         <div style={modalContent}>
           <div style={modalBox}>
+            <div style={XButton}>
+              <div style={leftChevron} />
+              <div style={rightChevron} />
+            </div>
             <h1 style={title}>Atlas of Opportunity</h1>
             <p style={content}>
               This project is part of a collaborative research initiative
@@ -85,10 +127,13 @@ let Modal = class Modal extends Component {
               these insights more accessible. Get started below!
             </p>
             <div style={contentButton}>
-              <button style={button} onClick={() => setModal()}>
+              <button
+                style={{ ...button, width: 100, textAlign: "center" }}
+                onClick={() => setModal(false)}
+              >
                 Explore the dashboard
               </button>
-              <button style={button} onClick={() => setModal()}>
+              <button style={button} onClick={() => setModal(false)}>
                 Take a tour
               </button>
             </div>
@@ -99,4 +144,10 @@ let Modal = class Modal extends Component {
   }
 };
 
-export default Modal;
+function mapStateToProps(state) {
+  return {
+    showModal: state.showModal,
+  };
+}
+
+export default connect(mapStateToProps)(Modal);
