@@ -170,7 +170,10 @@ let Map = class Map extends React.Component {
 
       this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
 
-      this.map.on("click", "sa2-fills", this.onMapClick);
+      // Handle clicks on map features
+      this.map.on("click", "sa2-fills", this.onMapClick)
+      // Handle map clicks outside of map features
+      this.map.on("click", this.onMapClick);
     });
   }
 
@@ -283,17 +286,30 @@ let Map = class Map extends React.Component {
   };
 
   onMapClick = (e) => {
-    let prevSA2 = this.state.selectedFeature;
-    let clickedFeature = e.features[0]
+    // Ignore clicks that were already consumed by a deeper handler  e.g. if
+    // the user clicked on a map feature, ignore the same click event when
+    // seen by the overall map.
+    if (e.defaultPrevented) {
+      return
+    }
+    e.preventDefault()
 
-    clickedFeature.properties = {
-      ...clickedFeature.properties,
-      primary: clickedFeature.properties.SA2_NAME16,
+    let prevSA2 = this.state.selectedFeature;
+    let clickedFeature = e.features ? e.features[0] : null
+
+    if (clickedFeature) {
+      // Make sure this feature has a `primary` property for when it becomes
+      // selectedFeature, as the search field adds that to its own features and
+      // expects passed in features to have the same.
+      // TODO: Make SearchField and SASearchField smart enough to handle
+      //       features which lack `primary`.
+      clickedFeature.properties.primary = clickedFeature.properties.SA2_NAME16
     }
 
     // Ignore clicks on the active SA2.
     if (
       !prevSA2 ||
+      clickedFeature !== prevSA2 ||
       clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
       this.redrawBridges(clickedFeature);
