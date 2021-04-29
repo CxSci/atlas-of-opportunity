@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactTooltip from "react-tooltip";
@@ -8,6 +8,10 @@ import BarGraph from "./BarGraph";
 import SidebarButton from "./SidebarButton";
 import SASearchField from "./SASearchField";
 import Legend from "./legend";
+
+import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
+import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
+
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
@@ -39,8 +43,16 @@ let Sidebar = class Sidebar extends React.Component {
         <div className={`panel-container ${featureSelected}`}>
           {props.children}
         </div>
-      );
-    };
+      )
+    }
+    
+    const ActionButtons = () => (
+      <div className="actionButtonsContainer">
+        <button className="actionButton"><FavoriteIcon/> Add to Favorites</button>
+        <button className="actionButton"><ComparisonIcon/> Add to Comparison</button>
+      </div>
+
+    );
 
     const TopPanel = () => (
       <div
@@ -128,10 +140,17 @@ let Sidebar = class Sidebar extends React.Component {
         <SidebarButton />
         <div className={`sidebar-container`}>
           <SASearchField />
-          {this.props.selectedFeature ? <TopPanel /> : <>
-            <WelcomeDialog />
-            <Legend/>
-          </>}
+          {this.props.selectedFeature ?
+            <>
+              <ActionButtons/>
+              <TopPanel /> 
+            </>
+            :
+            <>
+              <WelcomeDialog />
+              <Legend/>
+            </>
+          }
         </div>
       </PanelContainer>
     );

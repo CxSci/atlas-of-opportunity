@@ -18,19 +18,7 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px 30px 10px;
-
-  position: static;
-  width: 320px;
-  left: 0px;
-  top: 36px;
-
   background: #FFFFFF;
-
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-  margin: 0px 0px;
 
 }
 
@@ -52,9 +40,6 @@ h2 {
 
   position: static;
   width: 300px;
-  height: 30px;
-  left: 10px;
-  top: 3px;
 
   background: #F7F7F7;
   border-radius: 5px;
@@ -62,10 +47,7 @@ h2 {
   flex: none;
   order: 0;
   align-self: stretch;
-  flex-grow: 0;
-  margin: 5px 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5px 10px;
 
   font-family: Roboto;
   font-style: normal;
