@@ -9,24 +9,29 @@
 }
 
 .navbar-title {
-    font-size: 1.3rem;
+    font-size: 20.8px;
 }
 
 
 .dim-screen{
-    width: 81%;
-    z-index: 2;
-    height: 100%;
-    box-shadow: 0 0 0 1000px rgba(0,0,0,.3);
-  /* for real browsers */
-    box-shadow: 0 0 0 100vmax rgba(0,0,0,.3);
+     /* Ignore our parent elements and the rest of
+        the DOM hierarchy. Position and size this
+        relative to the screen. */
+        position: fixed;
+        top: 0; /* Stretch to the edges of the screen */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1; /* Above map and below menu */
+        background: black;
+        opacity: 0.5;
+        pointer-events: auto;
 }
 
 
 .dropdown-menu {
-    margin-left: 2rem;
-    margin-right: 1rem;
-    width: 19%;
+    margin-left: 32px;
+    margin-right: 16px;
     z-index: 1;
 }
 
@@ -41,7 +46,7 @@
 
 .menu-title {
     color: black;
-    font-size: 1.1rem;
+    font-size: 17.6px;
     font-weight: bold;
     display: flex;
     flex-direction: column;
@@ -55,6 +60,7 @@
     flex-direction: column;
     margin-left: 25px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .dropdown-content {

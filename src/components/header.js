@@ -18,36 +18,14 @@ const Header = class Header extends Component {
 
   state = {
     showDropDown: false,
-    dimScreenVisible: false,
   };
 
   toggleDropDown = () => {
     this.setState(prevState => ({ showDropDown: !prevState.showDropDown }),);
-    this.setState(prevState => ({dimScreenVisible: !prevState.dimScreenVisible}),);
   };
 
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-    }
-
-    componentWillUnmount() {
-  document.removeEventListener("mousedown", this.handleClickOutside);
-      }
-
-  handleClickOutside = (event) => {
-        if (
-          this.container.current &&
-          !this.container.current.contains(event.target)) {
-          this.setState({
-            showDropDown: false,
-            dimScreenVisible: false,
-          });
-        }
-      };      
-  
   render() {
     const { showDropDown } = this.state;
-    const { dimScreenVisible } = this.state;
   
     const headerBox = {
       display: "flex",
@@ -74,11 +52,12 @@ const Header = class Header extends Component {
           {/* TODO: convert to use a similar downshift/popper setup as
                     the dropdownSelect */}
           {
-          this.state.dimScreenVisible
+          this.state.showDropDown
             ? 
-            <div>
-              <div className={`dim-screen ${dimScreenVisible ? "show" : ""}`}></div>
-            </div>
+              <div className={`dim-screen ${showDropDown ? "show" : ""}`}
+              onClick={() => { this.setState({ /* turn stuff off */
+                showDropDown: false }) }}
+              />
             : null
           }   
           <div className="dropdown-menu" ref={this.container}>
