@@ -20,7 +20,7 @@ let Sidebar = class Sidebar extends React.Component {
 
   render() {
     const {
-      sa2_name,
+      // sa2_name,
       population,
       income,
       quartile,
@@ -43,16 +43,15 @@ let Sidebar = class Sidebar extends React.Component {
     };
 
     const TopPanel = () => (
-      <div style={{ overflowY: "auto" }} className={`sidebar-content`}>
-        <div className="py12 px12" style={{ backgroundColor: "lightgray" }}>
-          <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-        </div>
-
+      <div
+        style={{ overflowY: "auto" }}
+        className={`sidebar-content`}
+      >
         <Collapsible trigger="Demographic Summary">
-          <h2>Population</h2>
-          <p>{population}</p>
-          <h2>Median Income</h2>
-          <p>{income}</p>
+           <h2>Population</h2>
+            <p>{population}</p>
+            <h2>Median Income</h2>
+            <p>{income}</p>
         </Collapsible>
 
         <Collapsible trigger="Economic Summary">
