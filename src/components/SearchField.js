@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
 import * as turf from "@turf/turf"
+import { useDebounce } from 'use-debounce';
+
 
 import useGeocoder from "../hooks/useGeocoder"
 import { sameWidthModifier } from "../utils/popper-modifiers"
@@ -37,6 +39,7 @@ const SearchField = forwardRef(({
   const [inputItems, setInputItems] = useState([])
   const [highlightedItem, setHighlightedItem] = useState(null)
   const itemToString = item => (item ? item.primary : '')
+
   const {
     getComboboxProps,
     getInputProps,
@@ -142,8 +145,10 @@ const SearchField = forwardRef(({
     ), [localItems])
   })
 
+  const [debouncedValue] = useDebounce(inputValue, 500);
+
   useEffect(() => {
-    const query = inputValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
+    const query = debouncedValue.toLowerCase().replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '')
     if (query === '') {
       setInputItems(localItems.sort((a, b) => a.primary.localeCompare(b.primary)))
     } else {
@@ -157,7 +162,7 @@ const SearchField = forwardRef(({
           .sort((a, b) => b.relevance - a.relevance || a.secondary.localeCompare(b.secondary))
       ])
     }
-  }, [localItems, geocodedItems, inputValue, isOpen])
+  }, [localItems, geocodedItems, debouncedValue, isOpen])
 
   return (
     <div className="searchContainer" ref={setReferenceElement}>
