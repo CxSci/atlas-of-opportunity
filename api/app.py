@@ -6,9 +6,6 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
-
-
 @app.route('/api', methods=['GET'])
 def index():
   return {

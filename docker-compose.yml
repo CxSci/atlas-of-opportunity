@@ -9,6 +9,16 @@ services:
       - ./api:/app
     environment:
       FLASK_ENV: development
+  db:
+    build: ./api/database 
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=SADashboard
+      - POSTGRES_PASSWORD=dashboard
+      - POSTGRES_DB=SAData
+    volumes:
+      - ./api/database:/data      
   dashboard:
     build: .
     ports:

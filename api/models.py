@@ -5,6 +5,11 @@ class SADatabase(db.Model):
 
     id = db.Column(db.Integer(), primary_key=True)
     SA2_code = db.Column(db.String(),nullable=False) 
+    X.1 = db.Column(db.String())
+    X = db.Column(db.String())
+    state_name = db.Column(db.String())
+    state_code = db.Column(db.String())
+    sa2_name16 = db.Column(db.String())   
     persons_num = db.Column(db.String())
     median_persons_age = db.Column(db.String())
     males_num = db.Column(db.String())

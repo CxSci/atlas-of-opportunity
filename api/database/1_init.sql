@@ -1,6 +1,11 @@
-CREATE TABLE CSVDATA(
+CREATE TABLE SAData(
     Id INT PRIMARY KEY NOT NULL, 
     SA2_code VARCHAR(1000) NOT NULL ,
+    X.1 VARCHAR(100) ,
+    X VARCHAR(100) ,
+    state_name VARCHAR(100) ,
+    state_code VARCHAR(100) ,
+    sa2_name16 VARCHAR(100) ,
     persons_num VARCHAR(100) ,
     median_persons_age VARCHAR(100) ,
     males_num VARCHAR(100) ,
