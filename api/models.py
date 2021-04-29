@@ -1,7 +1,7 @@
 from app import db
 
 class SADatabase(db.Model):
-    __tablename__ = 'sadata'
+    __tablename__ = 'SAdata'
 
     id = db.Column(db.Integer(), primary_key=True)
     SA2_code = db.Column(db.String(),nullable=False) 
