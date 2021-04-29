@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { setModal } from "../redux/action-creators";
+import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 
 let Modal = class Modal extends Component {
   static propTypes = {
@@ -74,26 +75,9 @@ let Modal = class Modal extends Component {
       position: "absolute",
       width: "12px",
       height: "12px",
-      left: "278px",
+      right: "10px",
       top: "12px",
-    };
-    const leftChevron = {
-      position: "absolute",
-      width: "9px",
-      height: "4.5px",
-      right: "16.5px",
-      top: "22.5px",
-      border: "3px solid #666666",
-      transform: "rotate(-90deg)",
-    };
-    const rightChevron = {
-      position: "absolute",
-      width: "9px",
-      height: "4.5px",
-      right: "7.51px",
-      top: "13.5px",
-      border: "3px solid #666666",
-      transform: "rotate(90deg)",
+      cursor: "pointer",
     };
 
     return (
@@ -101,8 +85,7 @@ let Modal = class Modal extends Component {
         <div style={modalContent}>
           <div style={modalBox}>
             <div style={XButton}>
-              <div style={leftChevron} />
-              <div style={rightChevron} />
+              <CloseIcon onClick={() => setModal(false)} />
             </div>
             <h1 style={title}>Atlas of Opportunity</h1>
             <p style={content}>
