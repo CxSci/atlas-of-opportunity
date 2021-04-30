@@ -18,21 +18,21 @@ let Modal = class Modal extends Component {
     const container = {
       width: "100%",
       height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.05)",
-      //position: "absolute",
-      zIndex: 2,
       pointerEvents: "auto",
-      marginBottom: 10
+      marginBottom: 10,
+      flexShrink: 1,
+      minHeight: 0,
+      top:0
     };
     const modalContent = {
-      marginLeft: "10px",
-      display: "flex",
-      justifyContent: "left",
-      alignItems: "center",
+      height: "auto",
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
+      maxHeight: "100%",
+      overflow: "auto"
     };
     const modalBox = {
       width: "305px",
-      height: "auto",
+      height: "100%",
       backgroundColor: "#FFFFFF",
       borderRadius: "5px",
       padding: "30px 35px",
@@ -42,7 +42,8 @@ let Modal = class Modal extends Component {
       justifyContent: "space-between",
       overflow: "auto",
       position: "relative",
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)"
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
+      marginLeft: "10px",
     };
     const title = {
       "fontFamily": "Roboto",
