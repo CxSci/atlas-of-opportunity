@@ -47,7 +47,7 @@ h2 {
   flex: none;
   order: 0;
   align-self: stretch;
-  margin: 5px 10px;
+  margin: 3px 10px;
 
   font-family: Roboto;
   font-style: normal;
@@ -58,12 +58,9 @@ h2 {
 }
 
 .Collapsible__trigger:after {
-  content: "\f007";        
-  font-family: 'Font Awesome\ 5 Free';      
-  position: absolute;
-  right: 10px;
-  top: 10px;
+  content: url(../assets/chevron.svg);              
   transition: transform 300ms; 
+  margin-left: auto;
 }
 
 .Collapsible__trigger.is-open:after {

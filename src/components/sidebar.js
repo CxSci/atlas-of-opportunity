@@ -48,8 +48,8 @@ let Sidebar = class Sidebar extends React.Component {
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
-        <button className="actionButton"><FavoriteIcon/> Add to Favorites</button>
-        <button className="actionButton"><ComparisonIcon/> Add to Comparison</button>
+        <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
+        <button className="actionButton"><ComparisonIcon className="icon"/> Add to Comparison</button>
       </div>
 
     );
