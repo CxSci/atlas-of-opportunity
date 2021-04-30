@@ -1,4 +1,4 @@
-from app import db
+from app import db, ma
 
 class SADatabase(db.Model):
     __tablename__ = 'SAdata'
@@ -74,4 +74,5 @@ class SADatabase(db.Model):
 
     def __repr__(self):
         return f"<SA2_code {self.SA2_code}>"
+
 
