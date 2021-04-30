@@ -37,7 +37,7 @@ let Main = class Main extends Component {
           <Sidebar />
           <Map />
         </div>
-        {this.props.selectedFeature ? <Legend /> : <></>}
+        {this.props.selectedFeature ? <Legend absolute /> : <></>}
       </div>
     );
   }
