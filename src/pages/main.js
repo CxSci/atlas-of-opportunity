@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import Map from "../components/map";
 import Sidebar from "../components/sidebar";
-
+import Legend from '../components/legend';
 import "../css/main.css";
 
 let Main = class Main extends Component {
@@ -37,6 +37,7 @@ let Main = class Main extends Component {
           <Sidebar />
           <Map />
         </div>
+        {this.props.selectedFeature ? <Legend /> : <></>}
       </div>
     );
   }
