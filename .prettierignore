@@ -2,7 +2,7 @@
 build
 coverage
 
-# Ignore all HTML files:
+# Ignore all development files:
 *.html
 *.js
 *.css
