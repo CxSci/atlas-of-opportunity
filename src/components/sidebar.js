@@ -7,6 +7,7 @@ import Collapsible from "react-collapsible";
 import BarGraph from "./BarGraph";
 import SidebarButton from "./SidebarButton";
 import SASearchField from "./SASearchField";
+import Legend from "./legend";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 import Modal from "./modal";
@@ -128,7 +129,10 @@ let Sidebar = class Sidebar extends React.Component {
         <SidebarButton />
         <div className={`sidebar-container`}>
           <SASearchField />
-          {this.props.selectedFeature ? <TopPanel /> : <Modal />}
+          {this.props.selectedFeature ? <TopPanel /> : <>
+            <Modal />
+            <Legend/>
+          </>}
         </div>
       </PanelContainer>
     );

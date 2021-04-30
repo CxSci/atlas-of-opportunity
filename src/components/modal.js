@@ -19,63 +19,54 @@ let Modal = class Modal extends Component {
       width: "100%",
       height: "100%",
       backgroundColor: "rgba(0, 0, 0, 0.05)",
-      position: "absolute",
+      //position: "absolute",
       zIndex: 2,
       pointerEvents: "auto",
+      marginBottom: 10
     };
     const modalContent = {
-      height: "83%",
       marginLeft: "10px",
       display: "flex",
       justifyContent: "left",
       alignItems: "center",
-      marginBottom: "10%",
     };
     const modalBox = {
       width: "305px",
-      height: "490px",
+      height: "auto",
       backgroundColor: "#FFFFFF",
-      borderRadius: "8px",
-      padding: "40px",
+      borderRadius: "5px",
+      padding: "30px 35px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",
       overflow: "auto",
       position: "relative",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)"
     };
     const title = {
-      color: "black",
-      marginTop: 10,
-      marginBottom: 10,
-    };
+      "fontFamily": "Roboto",
+      "fontStyle": "normal",
+      "fontWeight": "bold",
+      "fontSize": "20px",
+      "lineHeight": "23px",
+      "textAlign": "center",
+      "color": "#333333"
+    }
     const content = {
-      color: "black",
-      fontSize: "13px",
-      textAlign: "justify",
-      marginTop: 10,
-      marginBottom: 10,
-    };
-    const contentButton = {
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-evenly",
-    };
-    const button = {
-      color: "black",
-      backgroundColor: "white",
-      padding: "8px",
-      borderRadius: "5px",
-      fontWeight: "bold",
-      fontSize: "12px",
-      border: "black 1px solid",
-      cursor: "pointer",
-    };
+      "fontFamily": "Roboto",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "fontSize": "14px",
+      "lineHeight": "133%",
+      "color": "#333333",
+      marginTop: 15
+    }
     const XButton = {
       position: "absolute",
       width: "12px",
       height: "12px",
-      right: "10px",
+      right: "15px",
       top: "12px",
       cursor: "pointer",
     };
@@ -90,36 +81,23 @@ let Modal = class Modal extends Component {
             <h1 style={title}>Atlas of Opportunity</h1>
             <p style={content}>
               This project is part of a collaborative research initiative
-              enabled by principal partner{" "}
-              <b>
-                BankSA, MIT Connection Science, the South Australian Government
-                and technical partners Optus and DSpark
-              </b>
-              . This research is led by MIT Connection Science, its Adelaide
-              bigdata Living Lab, and local research institutes including
-              University of South Australia and The University of Adelaide.
+              enabled by principal partner BankSA, MIT Connection Science, the
+              South Australian Government and technical partners Optus and
+              DSpark . This research is led by MIT Connection Science, its
+              Adelaide bigdata Living Lab, and local research institutes
+              including University of South Australia and The University of
+              Adelaide.
             </p>
             <p style={content}>
-              The <b> Living Lab</b> works to better understand how social
-              interaction and economic behavior impact future outcomes of
-              communities across South Australia. This map showcases recent
-              research revealing that understanding community movement patterns
-              is crucial for understanding economic growth and mobility. Places
-              with more diverse movement patterns are more likely to have higher
+              The Living Lab works to better understand how social interaction
+              and economic behavior impact future outcomes of communities across
+              South Australia. This map showcases recent research revealing that
+              understanding community movement patterns is crucial for
+              understanding economic growth and mobility. Places with more
+              diverse movement patterns are more likely to have higher
               near-future economic growth. The goal of the Atlas is to make
               these insights more accessible. Get started below!
             </p>
-            <div style={contentButton}>
-              <button
-                style={{ ...button, width: 100, textAlign: "center" }}
-                onClick={() => setModal(false)}
-              >
-                Explore the dashboard
-              </button>
-              <button style={button} onClick={() => setModal(false)}>
-                Take a tour
-              </button>
-            </div>
           </div>
         </div>
       </div>
