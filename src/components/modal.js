@@ -22,7 +22,8 @@ let Modal = class Modal extends Component {
       marginBottom: 10,
       flexShrink: 1,
       minHeight: 0,
-      top:0
+      top:0,
+      marginTop: 5
     };
     const modalContent = {
       height: "auto",
