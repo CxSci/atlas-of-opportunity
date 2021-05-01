@@ -98,7 +98,7 @@ let Modal = class Modal extends Component {
               understanding economic growth and mobility. Places with more
               diverse movement patterns are more likely to have higher
               near-future economic growth. The goal of the Atlas is to make
-              these insights more accessible. Get started below!
+            these insights more accessible.
             </p>
           </div>
         </div>
