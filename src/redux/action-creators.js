@@ -22,6 +22,13 @@ export function setModal() {
   });
 }
 
+export function setShowWelcomeDialog(payload) {
+  store.dispatch({
+    type: Constants.SHOW_WELCOME_DIALOG,
+    payload: payload,
+  });
+}
+
 export function setDisplayDefault() {
   store.dispatch({
     type: "DisplayDefault",

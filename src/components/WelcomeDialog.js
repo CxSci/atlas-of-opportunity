@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { setModal } from "../redux/action-creators";
+import { setShowWelcomeDialog } from "../redux/action-creators";
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 
-let Modal = class Modal extends Component {
+let WelcomeDialog = class WelcomeDialog extends Component {
   static propTypes = {
-    showModal: PropTypes.bool.isRequired,
+    showDialog: PropTypes.bool.isRequired,
   };
 
   render() {
     //If dismissed render a react fragment which renders nothing to the DOM
     //This is not persistent and only lasts in memory for the duration of the browser tab being open
-    if (!this.props.showModal) return <></>;
+    if (!this.props.showDialog) return <></>;
 
-    const modalBox = {
+    const dialogBox = {
       width: "305px",
       flexGrow: 0,
       backgroundColor: "#FFFFFF",
@@ -63,8 +63,8 @@ let Modal = class Modal extends Component {
     };
 
     return (
-      <div style={modalBox}>
-        <CloseIcon onClick={() => setModal(false)} style={xButton} />
+      <div style={dialogBox}>
+        <CloseIcon onClick={() => setShowWelcomeDialog(false)} style={xButton} />
         <div style={scrollingWrapper}>
           <h1 style={title}>Atlas of Opportunity</h1>
           <p style={content}>
@@ -94,8 +94,8 @@ let Modal = class Modal extends Component {
 
 function mapStateToProps(state) {
   return {
-    showModal: state.showModal,
+    showDialog: state.showWelcomeDialog,
   };
 }
 
-export default connect(mapStateToProps)(Modal);
+export default connect(mapStateToProps)(WelcomeDialog);

@@ -10,7 +10,7 @@ import SASearchField from "./SASearchField";
 import Legend from "./legend";
 import "../css/collapsible.css";
 import "../css/sidebar.css";
-import Modal from "./modal";
+import WelcomeDialog from "./WelcomeDialog";
 
 let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
@@ -130,7 +130,7 @@ let Sidebar = class Sidebar extends React.Component {
         <div className={`sidebar-container`}>
           <SASearchField />
           {this.props.selectedFeature ? <TopPanel /> : <>
-            <Modal />
+            <WelcomeDialog />
             <Legend/>
           </>}
         </div>
