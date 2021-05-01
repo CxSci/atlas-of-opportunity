@@ -54,10 +54,11 @@ let Modal = class Modal extends Component {
 
     const xButton = {
       position: "absolute",
-      width: "12px",
-      height: "12px",
-      top: "12px",
       right: 0,
+      width: "24px", // Increase button's clickable area by 6px all around
+      height: "24px",
+      padding: "6px",
+      margin: "6px 14px 0 0", // Adds up to be "12px 15px 0 0" relative to rendered container
       cursor: "pointer",
     };
 
