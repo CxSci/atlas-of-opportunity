@@ -15,92 +15,76 @@ let Modal = class Modal extends Component {
     //This is not persistent and only lasts in memory for the duration of the browser tab being open
     if (!this.props.showModal) return <></>;
 
-    const container = {
-      width: "100%",
-      height: "100%",
-      pointerEvents: "auto",
-      marginBottom: 10,
-      flexShrink: 1,
-      minHeight: 0,
-      top:0,
-      marginTop: 5
-    };
-    const modalContent = {
-      height: "auto",
-      backgroundColor: "rgba(0, 0, 0, 0.05)",
-      maxHeight: "100%",
-      overflow: "auto"
-    };
     const modalBox = {
       width: "305px",
-      height: "100%",
+      flexGrow: 0,
       backgroundColor: "#FFFFFF",
       borderRadius: "5px",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
+      marginTop: "5px",
+      marginBottom: "10px",
+      marginLeft: "10px",
+      pointerEvents: "auto",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden",
+    };
+
+    const scrollingWrapper = {
       padding: "30px 35px",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-between",
       overflow: "auto",
-      position: "relative",
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
-      marginLeft: "10px",
-    };
+      color: "#333333",
+      fontSize: "14px",
+      lineHeight: "140%",
+    }
+
     const title = {
-      "fontFamily": "Roboto",
-      "fontStyle": "normal",
-      "fontWeight": "bold",
-      "fontSize": "20px",
-      "lineHeight": "23px",
-      "textAlign": "center",
-      "color": "#333333"
+      marginBottom: "5px",
+      fontWeight: "bold",
+      fontSize: "20px",
+      lineHeight: "23px",
+      textAlign: "center",
     }
+
     const content = {
-      "fontFamily": "Roboto",
-      "fontStyle": "normal",
-      "fontWeight": "normal",
-      "fontSize": "14px",
-      "lineHeight": "133%",
-      "color": "#333333",
-      marginTop: 15
+      marginTop: 15,
     }
-    const XButton = {
+
+    const xButton = {
       position: "absolute",
       width: "12px",
       height: "12px",
-      right: "15px",
       top: "12px",
+      right: 0,
       cursor: "pointer",
     };
 
     return (
-      <div style={container}>
-        <div style={modalContent}>
-          <div style={modalBox}>
-            <div style={XButton}>
-              <CloseIcon onClick={() => setModal(false)} />
-            </div>
-            <h1 style={title}>Atlas of Opportunity</h1>
-            <p style={content}>
-              This project is part of a collaborative research initiative
-              enabled by principal partner BankSA, MIT Connection Science, the
-              South Australian Government and technical partners Optus and
-              DSpark . This research is led by MIT Connection Science, its
-              Adelaide bigdata Living Lab, and local research institutes
-              including University of South Australia and The University of
-              Adelaide.
-            </p>
-            <p style={content}>
-              The Living Lab works to better understand how social interaction
-              and economic behavior impact future outcomes of communities across
-              South Australia. This map showcases recent research revealing that
-              understanding community movement patterns is crucial for
-              understanding economic growth and mobility. Places with more
-              diverse movement patterns are more likely to have higher
-              near-future economic growth. The goal of the Atlas is to make
+      <div style={modalBox}>
+        <CloseIcon onClick={() => setModal(false)} style={xButton} />
+        <div style={scrollingWrapper}>
+          <h1 style={title}>Atlas of Opportunity</h1>
+          <p style={content}>
+            This project is part of a collaborative research initiative
+            enabled by principal partner BankSA, MIT Connection Science, the
+            South Australian Government and technical partners Optus and
+            DSpark . This research is led by MIT Connection Science, its
+            Adelaide bigdata Living Lab, and local research institutes
+            including University of South Australia and The University of
+            Adelaide.
+          </p>
+          <p style={content}>
+            The Living Lab works to better understand how social interaction
+            and economic behavior impact future outcomes of communities across
+            South Australia. This map showcases recent research revealing that
+            understanding community movement patterns is crucial for
+            understanding economic growth and mobility. Places with more
+            diverse movement patterns are more likely to have higher
+            near-future economic growth. The goal of the Atlas is to make
             these insights more accessible.
-            </p>
-          </div>
+          </p>
         </div>
       </div>
     );
