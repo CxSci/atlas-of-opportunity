@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-import geojsonURL from "../data/SA_dashboard.geojson";
+import geojsonURL from "../data/SA_dashboard.json";
 
 const options = {};
 
