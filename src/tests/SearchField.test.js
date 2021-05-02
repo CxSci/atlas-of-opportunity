@@ -1,14 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SearchField from "../components/SearchField";
-
-const Mock = () => (
-  <>
-    <SearchField />
-  </>
-);
+import SASearchField from "../components/SASearchField";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<Mock />).toJSON();
+  jest.spyOn(window, "fetch").mockImplementationOnce((x) => {
+    return Promise.resolve({
+      json: () => Promise.resolve(x),
+    });
+  });
+  const tree = renderer.create(<SASearchField />).toJSON();
   expect(tree).toMatchSnapshot();
 });

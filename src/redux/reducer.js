@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-import geojsonURL from "../data/SA_dashboard.geojson";
+import geojsonURL from "../data/SA_dashboard.json";
 
 const options = {};
 
@@ -98,25 +98,30 @@ const initialState = {
 };
 
 function fetchFeatures() {
-  return fetch(geojsonURL)
+  return fetch(geojsonURL);
 }
 
 function loadFeatures() {
-  return function(dispatch) {
-    return fetchFeatures().then((response) => response.json()).then(
-      (collection) => dispatch({type: "FEATURES", payload: collection.features}),
-      // TODO: Add proper error handling
-      (error) => { console.log(error) }
-    )
-  }
+  return function (dispatch) {
+    return fetchFeatures()
+      .then((response) => response.json())
+      .then(
+        (collection) =>
+          dispatch({ type: "FEATURES", payload: collection.features }),
+        // TODO: Add proper error handling
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 }
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case "FEATURES":
       return Object.assign({}, state, {
-        features: action.payload
-      })
+        features: action.payload,
+      });
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
         active: action.option,
@@ -159,11 +164,11 @@ function reducer(state = initialState, action) {
     case Constants.SET_SELECTED_FEATURE:
       return Object.assign({}, state, {
         selectedFeature: action.feature,
-      })
+      });
     case Constants.SET_HIGHLIGHTED_FEATURE:
       return Object.assign({}, state, {
         highlightedFeature: action.feature,
-      })
+      });
     default:
       return state;
   }
