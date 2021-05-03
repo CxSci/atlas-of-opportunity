@@ -19,7 +19,8 @@ services:
     environment:
       FLASK_ENV: development
     depends_on:
-      - db       
+      - db 
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]      
   dashboard:
     build: .
     ports:
