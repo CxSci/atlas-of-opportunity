@@ -75,11 +75,11 @@ const renderLegendKeys = (stops) => (
   </div>
 );
 
-function Legend({ active }) {
+function Legend({ active, absolute }) {
   const { description, stops } = active;
 
   return (
-    <div className={`legend`}>
+    <div className={`legend`} style={{position: absolute ? "absolute" : undefined}}>
       <div className="mt6 mb12">
         <DropdownSelect
           items={mapTypes.map((t) => t.text)}
@@ -97,6 +97,7 @@ function Legend({ active }) {
 
 Legend.propTypes = {
   active: PropTypes.object.isRequired,
+  absolute: PropTypes.bool
 }
 
 function mapStateToProps(state) {

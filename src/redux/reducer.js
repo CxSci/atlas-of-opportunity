@@ -95,6 +95,8 @@ const initialState = {
   sidebarOpen: true,
   selectedFeature: null,
   highlightedFeature: null,
+  showModal: true,
+  showWelcomeDialog: true,
 };
 
 function fetchFeatures() {
@@ -130,6 +132,15 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         select: action.payload,
       });
+    case "Modal":
+      return Object.assign({}, state, {
+        showModal: action.payload,
+      });
+    case Constants.SHOW_WELCOME_DIALOG:
+      return {
+        ...state,
+        showWelcomeDialog: action.payload,
+      };
     case "Header":
       return Object.assign({}, state, {
         path: action.payload,
