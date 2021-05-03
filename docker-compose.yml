@@ -1,6 +1,15 @@
 version: '3'
-
 services:
+  db:
+    build: ./api/database 
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=SADatabase
+    volumes:
+      - ./api/database:/docker-entrypoint-initdb.d
   api:
     build: ./api
     ports:
@@ -9,16 +18,8 @@ services:
       - ./api:/app
     environment:
       FLASK_ENV: development
-  db:
-    build: ./api/database 
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=SADashboard
-      - POSTGRES_PASSWORD=dashboard
-      - POSTGRES_DB=SAData
-    volumes:
-      - ./api/database:/data      
+    depends_on:
+      - db       
   dashboard:
     build: .
     ports:
