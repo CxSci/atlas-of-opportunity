@@ -22,7 +22,6 @@ def test_health():
 def get_sa_data():
   cur.execute('SELECT * FROM sadata')
   rows = cur.fetchall()
-  print(rows)
   return jsonify(rows)
 
 if __name__== '__main__':

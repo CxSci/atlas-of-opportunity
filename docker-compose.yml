@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=SADatabase
     volumes:
+      - "./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv"
       - ./api/database:/docker-entrypoint-initdb.d
   api:
     build: ./api
