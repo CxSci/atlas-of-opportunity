@@ -1,8 +1,8 @@
 CREATE TABLE SAData(
     id INT PRIMARY KEY NOT NULL, 
-    sa2_code VARCHAR(1000) NOT NULL ,
-    x1 VARCHAR(100) ,
-    x VARCHAR(100) ,
+    SA2_code VARCHAR(1000) NOT NULL ,
+    "X.1" VARCHAR(100) ,
+    X VARCHAR(100) ,
     state_name VARCHAR(100) ,
     state_code VARCHAR(100) ,
     sa2_name16 VARCHAR(100) ,
