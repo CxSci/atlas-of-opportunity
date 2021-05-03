@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=SADatabase
     volumes:
-      - "./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv"
+      - ./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv
       - ./api/database:/docker-entrypoint-initdb.d
   api:
     build: ./api
@@ -21,7 +21,7 @@ services:
       FLASK_ENV: development
     depends_on:
       - db 
-    command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]      
+    command: sh -c './wait-for db:5432 -- python app.py'
   dashboard:
     build: .
     ports:
