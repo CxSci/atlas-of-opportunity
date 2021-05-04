@@ -6,7 +6,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
-    "test": "jest"
+    "test": "jest",
+    "update-snapshot":"jest --updateSnapshot"
   },
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.12.1",
