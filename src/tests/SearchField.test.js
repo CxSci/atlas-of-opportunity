@@ -6,6 +6,7 @@ import geoJson from "../data/SA_dashboard.geojson";
 import { preRender } from "./preRender";
 
 it("renders correctly", () => {
+  console.log(geoJson)
   fetchMock.mockResponse(() => geoJson);
   const tree = renderer.create(preRender(<SASearchField />)).toJSON();
   expect(tree).toMatchSnapshot();
