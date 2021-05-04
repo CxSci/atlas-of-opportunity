@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sidebarHeader "
+>
+  <div
+    className="bigTitle"
+  >
+    <div
+      className="titleButton"
+      onClick={[Function]}
+    >
+      <div
+        className="titleUnderline"
+      />
+    </div>
+    <div
+      className="cancelButton"
+      onClick={[Function]}
+    >
+      <div
+        className="cancelUnderline"
+      >
+        <Mock SVG />
+      </div>
+    </div>
+  </div>
+  <div
+    className="searchContainer"
+  >
+    <div
+      aria-expanded={false}
+      aria-haspopup="listbox"
+      aria-owns="downshift-0-menu"
+      className="searchField"
+      role="combobox"
+    >
+      <input
+        aria-autocomplete="list"
+        aria-controls="downshift-0-menu"
+        aria-labelledby="downshift-0-label"
+        autoComplete="off"
+        id="downshift-0-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search by suburb or region"
+        spellCheck="false"
+        value=""
+      />
+      <button
+        aria-label="toggle menu"
+        id="downshift-0-toggle-button"
+        onClick={[Function]}
+        tabIndex={-1}
+      >
+        <Mock SVG />
+      </button>
+      <div
+        style={
+          Object {
+            "left": "0",
+            "position": "absolute",
+            "top": "0",
+            "zIndex": 1,
+          }
+        }
+      >
+        <ul
+          aria-labelledby="downshift-0-label"
+          className="searchMenu"
+          hidden={true}
+          id="downshift-0-menu"
+          onMouseLeave={[Function]}
+          role="listbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
