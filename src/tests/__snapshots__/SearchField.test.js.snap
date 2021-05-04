@@ -21,9 +21,7 @@ exports[`renders correctly 1`] = `
     >
       <div
         className="cancelUnderline"
-      >
-        <Mock SVG />
-      </div>
+      />
     </div>
   </div>
   <div
@@ -55,9 +53,7 @@ exports[`renders correctly 1`] = `
         id="downshift-0-toggle-button"
         onClick={[Function]}
         tabIndex={-1}
-      >
-        <Mock SVG />
-      </button>
+      />
       <div
         style={
           Object {
