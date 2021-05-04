@@ -19,14 +19,14 @@ exports[`render dropdown on search input 1`] = `
         </BigTitle>
         <ForwardRef localItems={{...}} geocoderConfig={{...}} initialInputValue=\\"\\" onFocus={[Function: onFocus]} onIsOpenChange={[Function: onIsOpenChange]} setHighlightedFeature={[Function: setHighlightedFeature]} setSelectedFeature={[Function: setSelectedFeature]} dispatch={[Function (anonymous)]}>
           <div className=\\"searchContainer\\">
-            <div role=\\"combobox\\" aria-haspopup=\\"listbox\\" aria-owns=\\"downshift-3-menu\\" aria-expanded={true} className=\\"searchField\\">
-              <input id=\\"downshift-3-input\\" aria-autocomplete=\\"list\\" aria-controls=\\"downshift-3-menu\\" aria-activedescendant=\\"downshift-3-item-0\\" aria-labelledby=\\"downshift-3-label\\" autoComplete=\\"off\\" value=\\"ad\\" onChange={[Function (anonymous)]} onKeyDown={[Function (anonymous)]} onBlur={[Function (anonymous)]} onFocus={[Function: onFocus]} placeholder=\\"Search by suburb or region\\" spellCheck=\\"false\\" />
+            <div role=\\"combobox\\" aria-haspopup=\\"listbox\\" aria-owns=\\"downshift-4-menu\\" aria-expanded={true} className=\\"searchField\\">
+              <input id=\\"downshift-4-input\\" aria-autocomplete=\\"list\\" aria-controls=\\"downshift-4-menu\\" aria-activedescendant=\\"downshift-4-item-0\\" aria-labelledby=\\"downshift-4-label\\" autoComplete=\\"off\\" value=\\"ad\\" onChange={[Function (anonymous)]} onKeyDown={[Function (anonymous)]} onBlur={[Function (anonymous)]} onFocus={[Function: onFocus]} placeholder=\\"Search by suburb or region\\" spellCheck=\\"false\\" />
               <button tabIndex={-1} onClick={[Function: onClick]} aria-label=\\"clear selection\\">
                 <content />
               </button>
               <div style={{...}}>
-                <ul id=\\"downshift-3-menu\\" role=\\"listbox\\" aria-labelledby=\\"downshift-3-label\\" onMouseLeave={[Function (anonymous)]} className=\\"searchMenu\\" hidden={false}>
-                  <li className=\\"highlighted\\" role=\\"option\\" aria-selected=\\"true\\" id=\\"downshift-3-item-0\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                <ul id=\\"downshift-4-menu\\" role=\\"listbox\\" aria-labelledby=\\"downshift-4-label\\" onMouseLeave={[Function (anonymous)]} className=\\"searchMenu\\" hidden={false}>
+                  <li className=\\"highlighted\\" role=\\"option\\" aria-selected=\\"true\\" id=\\"downshift-4-item-0\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Aberfoyle Park
                     </div>
@@ -34,7 +34,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-1\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-1\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Adelaide
                     </div>
@@ -42,7 +42,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-2\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-2\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Adelaide Airport
                     </div>
@@ -50,7 +50,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-3\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-3\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Adelaide Hills
                     </div>
@@ -58,7 +58,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-4\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-4\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Aldgate - Stirling
                     </div>
@@ -66,7 +66,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-5\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-5\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Aldinga
                     </div>
@@ -74,7 +74,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-6\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-6\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       APY Lands
                     </div>
@@ -82,7 +82,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-7\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-7\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Athelstone
                     </div>
@@ -90,7 +90,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-8\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-8\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Barmera
                     </div>
@@ -98,7 +98,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-9\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-9\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Barossa - Angaston
                     </div>
@@ -106,7 +106,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-10\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-10\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Belair
                     </div>
@@ -114,7 +114,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-11\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-11\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Bellevue Heights
                     </div>
@@ -122,7 +122,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-12\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-12\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Berri
                     </div>
@@ -130,7 +130,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-13\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-13\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Beverley
                     </div>
@@ -138,7 +138,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-14\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-14\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Blackwood
                     </div>
@@ -146,7 +146,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-15\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-15\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Brighton (SA)
                     </div>
@@ -154,7 +154,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-16\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-16\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Burnside - Wattle Park
                     </div>
@@ -162,7 +162,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-17\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-17\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Ceduna
                     </div>
@@ -170,7 +170,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-18\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-18\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Christie Downs
                     </div>
@@ -178,7 +178,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-19\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-19\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Christies Beach
                     </div>
@@ -186,7 +186,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-20\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-20\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Clare
                     </div>
@@ -194,7 +194,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-21\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-21\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Clarendon
                     </div>
@@ -202,7 +202,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-22\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-22\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Colonel Light Gardens
                     </div>
@@ -210,7 +210,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-23\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-23\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Coober Pedy
                     </div>
@@ -218,7 +218,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-24\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-24\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Coromandel Valley
                     </div>
@@ -226,7 +226,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-25\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-25\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Craigmore - Blakeview
                     </div>
@@ -234,7 +234,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-26\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-26\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Davoren Park
                     </div>
@@ -242,7 +242,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-27\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-27\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Dry Creek - North
                     </div>
@@ -250,7 +250,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-28\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-28\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Dry Creek - South
                     </div>
@@ -258,7 +258,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-29\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-29\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Edwardstown
                     </div>
@@ -266,7 +266,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-30\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-30\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Elizabeth
                     </div>
@@ -274,7 +274,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-31\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-31\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Elizabeth East
                     </div>
@@ -282,7 +282,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-32\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-32\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Enfield - Blair Athol
                     </div>
@@ -290,7 +290,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-33\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-33\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Eyre Peninsula
                     </div>
@@ -298,7 +298,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-34\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-34\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Flagstaff Hill
                     </div>
@@ -306,7 +306,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-35\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-35\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Flinders Park
                     </div>
@@ -314,7 +314,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-36\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-36\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Fulham
                     </div>
@@ -322,7 +322,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-37\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-37\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Gawler - North
                     </div>
@@ -330,7 +330,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-38\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-38\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Gawler - South
                     </div>
@@ -338,7 +338,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-39\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-39\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Gilbert Valley
                     </div>
@@ -346,7 +346,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-40\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-40\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Glenelg (SA)
                     </div>
@@ -354,7 +354,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-41\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-41\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Glenside - Beaumont
                     </div>
@@ -362,7 +362,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-42\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-42\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Golden Grove
                     </div>
@@ -370,7 +370,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-43\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-43\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Goodwood - Millswood
                     </div>
@@ -378,7 +378,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-44\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-44\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Goolwa - Port Elliot
                     </div>
@@ -386,7 +386,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-45\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-45\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Goyder
                     </div>
@@ -394,7 +394,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-46\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-46\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Grant
                     </div>
@@ -402,7 +402,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-47\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-47\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Greenwith
                     </div>
@@ -410,7 +410,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-48\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-48\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hackham - Onkaparinga Hills
                     </div>
@@ -418,7 +418,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-49\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-49\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hackham West - Huntfield Heights
                     </div>
@@ -426,7 +426,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-50\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-50\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hahndorf - Echunga
                     </div>
@@ -434,7 +434,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-51\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-51\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hallett Cove
                     </div>
@@ -442,7 +442,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-52\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-52\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Happy Valley
                     </div>
@@ -450,7 +450,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-53\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-53\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Happy Valley Reservoir
                     </div>
@@ -458,7 +458,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-54\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-54\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Henley Beach
                     </div>
@@ -466,7 +466,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-55\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-55\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Highbury - Dernancourt
                     </div>
@@ -474,7 +474,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-56\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-56\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hindmarsh - Brompton
                     </div>
@@ -482,7 +482,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-57\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-57\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Hope Valley - Modbury
                     </div>
@@ -490,7 +490,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-58\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-58\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Ingle Farm
                     </div>
@@ -498,7 +498,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-59\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-59\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Jamestown
                     </div>
@@ -506,7 +506,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-60\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-60\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Kadina
                     </div>
@@ -514,7 +514,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-61\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-61\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Kangaroo Island
                     </div>
@@ -522,7 +522,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-62\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-62\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Karoonda - Lameroo
                     </div>
@@ -530,7 +530,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-63\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-63\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Kimba - Cleve - Franklin Harbour
                     </div>
@@ -538,7 +538,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-64\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-64\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Kingston - Robe
                     </div>
@@ -546,7 +546,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-65\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-65\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Largs Bay - Semaphore
                     </div>
@@ -554,7 +554,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-66\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-66\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Le Hunte - Elliston
                     </div>
@@ -562,7 +562,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-67\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-67\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Lewiston - Two Wells
                     </div>
@@ -570,7 +570,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-68\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-68\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Light
                     </div>
@@ -578,7 +578,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-69\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-69\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Lobethal - Woodside
                     </div>
@@ -586,7 +586,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-70\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-70\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Lockleys
                     </div>
@@ -594,7 +594,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-71\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-71\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Lonsdale
                     </div>
@@ -602,7 +602,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-72\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-72\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Loxton
                     </div>
@@ -610,7 +610,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-73\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-73\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Loxton Region
                     </div>
@@ -618,7 +618,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-74\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-74\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Lyndoch
                     </div>
@@ -626,7 +626,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-75\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-75\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mallala
                     </div>
@@ -634,7 +634,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-76\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-76\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mannum
                     </div>
@@ -642,7 +642,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-77\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-77\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Marino - Seaview Downs
                     </div>
@@ -650,7 +650,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-78\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-78\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mawson Lakes - Globe Derby Park
                     </div>
@@ -658,7 +658,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-79\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-79\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       McLaren Vale
                     </div>
@@ -666,7 +666,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-80\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-80\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Migratory - Offshore - Shipping (SA)
                     </div>
@@ -674,7 +674,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-81\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-81\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Millicent
                     </div>
@@ -682,7 +682,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-82\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-82\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mitcham (SA)
                     </div>
@@ -690,7 +690,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-83\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-83\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mitchell Park
                     </div>
@@ -698,7 +698,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-84\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-84\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Modbury Heights
                     </div>
@@ -706,7 +706,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-85\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-85\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Moonta
                     </div>
@@ -714,7 +714,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-86\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-86\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Morphett Vale - East
                     </div>
@@ -722,7 +722,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-87\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-87\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Morphett Vale - West
                     </div>
@@ -730,7 +730,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-88\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-88\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Morphettville
                     </div>
@@ -738,7 +738,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-89\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-89\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mount Barker
                     </div>
@@ -746,7 +746,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-90\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-90\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mount Barker Region
                     </div>
@@ -754,7 +754,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-91\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-91\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mount Gambier - East
                     </div>
@@ -762,7 +762,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-92\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-92\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Mount Gambier - West
                     </div>
@@ -770,7 +770,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-93\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-93\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Munno Para West - Angle Vale
                     </div>
@@ -778,7 +778,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-94\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-94\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Murray Bridge
                     </div>
@@ -786,7 +786,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-95\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-95\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Murray Bridge Region
                     </div>
@@ -794,7 +794,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-96\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-96\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Nailsworth - Broadview
                     </div>
@@ -802,7 +802,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-97\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-97\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Nairne
                     </div>
@@ -810,7 +810,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-98\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-98\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Naracoorte
                     </div>
@@ -818,7 +818,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-99\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-99\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Naracoorte Region
                     </div>
@@ -826,7 +826,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-100\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-100\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       No usual address (SA)
                     </div>
@@ -834,7 +834,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-101\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-101\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       North Adelaide
                     </div>
@@ -842,7 +842,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-102\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-102\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       North Haven
                     </div>
@@ -850,7 +850,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-103\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-103\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Northgate - Oakden - Gilles Plains
                     </div>
@@ -858,7 +858,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-104\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-104\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Norwood (SA)
                     </div>
@@ -866,7 +866,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-105\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-105\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Nuriootpa
                     </div>
@@ -874,7 +874,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-106\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-106\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       One Tree Hill
                     </div>
@@ -882,7 +882,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-107\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-107\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Outback
                     </div>
@@ -890,7 +890,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-108\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-108\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Panorama
                     </div>
@@ -898,7 +898,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-109\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-109\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Para Hills
                     </div>
@@ -906,7 +906,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-110\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-110\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Paradise - Newton
                     </div>
@@ -914,7 +914,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-111\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-111\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Parafield
                     </div>
@@ -922,7 +922,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-112\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-112\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Parafield Gardens
                     </div>
@@ -930,7 +930,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-113\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-113\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Paralowie
                     </div>
@@ -938,7 +938,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-114\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-114\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Payneham - Felixstow
                     </div>
@@ -946,7 +946,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-115\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-115\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Penola
                     </div>
@@ -954,7 +954,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-116\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-116\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Peterborough - Mount Remarkable
                     </div>
@@ -962,7 +962,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-117\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-117\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Plympton
                     </div>
@@ -970,7 +970,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-118\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-118\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Pooraka - Cavan
                     </div>
@@ -978,7 +978,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-119\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-119\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Port Adelaide
                     </div>
@@ -986,7 +986,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-120\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-120\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Port Augusta
                     </div>
@@ -994,7 +994,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-121\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-121\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Port Lincoln
                     </div>
@@ -1002,7 +1002,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-122\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-122\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Port Pirie
                     </div>
@@ -1010,7 +1010,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-123\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-123\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Port Pirie Region
                     </div>
@@ -1018,7 +1018,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-124\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-124\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Prospect
                     </div>
@@ -1026,7 +1026,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-125\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-125\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Quorn - Lake Gilles
                     </div>
@@ -1034,7 +1034,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-126\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-126\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Redwood Park
                     </div>
@@ -1042,7 +1042,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-127\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-127\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Renmark
                     </div>
@@ -1050,7 +1050,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-128\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-128\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Renmark Region
                     </div>
@@ -1058,7 +1058,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-129\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-129\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Reynella
                     </div>
@@ -1066,7 +1066,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-130\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-130\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Richmond (SA)
                     </div>
@@ -1074,7 +1074,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-131\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-131\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Rostrevor - Magill
                     </div>
@@ -1082,7 +1082,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-132\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-132\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Roxby Downs
                     </div>
@@ -1090,7 +1090,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-133\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-133\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Royal Park - Hendon - Albert Park
                     </div>
@@ -1098,7 +1098,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-134\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-134\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Salisbury
                     </div>
@@ -1106,7 +1106,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-135\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-135\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Salisbury East
                     </div>
@@ -1114,7 +1114,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-136\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-136\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Salisbury North
                     </div>
@@ -1122,7 +1122,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-137\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-137\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Seaford (SA)
                     </div>
@@ -1130,7 +1130,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-138\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-138\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Seaton - Grange
                     </div>
@@ -1138,7 +1138,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-139\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-139\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Sheidow Park - Trott Park
                     </div>
@@ -1146,7 +1146,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-140\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-140\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Smithfield - Elizabeth North
                     </div>
@@ -1154,7 +1154,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-141\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-141\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       St Agnes - Ridgehaven
                     </div>
@@ -1162,7 +1162,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-142\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-142\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       St Peters - Marden
                     </div>
@@ -1170,7 +1170,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-143\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-143\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Strathalbyn
                     </div>
@@ -1178,7 +1178,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-144\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-144\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Strathalbyn Region
                     </div>
@@ -1186,7 +1186,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-145\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-145\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Tanunda
                     </div>
@@ -1194,7 +1194,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-146\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-146\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Tatiara
                     </div>
@@ -1202,7 +1202,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-147\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-147\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       The Coorong
                     </div>
@@ -1210,7 +1210,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-148\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-148\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       The Parks
                     </div>
@@ -1218,7 +1218,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-149\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-149\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Toorak Gardens
                     </div>
@@ -1226,7 +1226,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-150\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-150\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Torrens Island
                     </div>
@@ -1234,7 +1234,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-151\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-151\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Unley - Parkside
                     </div>
@@ -1242,7 +1242,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-152\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-152\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Uraidla - Summertown
                     </div>
@@ -1250,7 +1250,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-153\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-153\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Victor Harbor
                     </div>
@@ -1258,7 +1258,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-154\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-154\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Virginia - Waterloo Corner
                     </div>
@@ -1266,7 +1266,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-155\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-155\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Waikerie
                     </div>
@@ -1274,7 +1274,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-156\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-156\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Wakefield - Barunga West
                     </div>
@@ -1282,7 +1282,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-157\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-157\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Walkerville
                     </div>
@@ -1290,7 +1290,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-158\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-158\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Wallaroo
                     </div>
@@ -1298,7 +1298,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-159\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-159\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Warradale
                     </div>
@@ -1306,7 +1306,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-160\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-160\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Wattle Range
                     </div>
@@ -1314,7 +1314,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-161\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-161\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       West Beach
                     </div>
@@ -1322,7 +1322,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-162\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-162\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       West Coast (SA)
                     </div>
@@ -1330,7 +1330,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-163\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-163\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       West Lakes
                     </div>
@@ -1338,7 +1338,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-164\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-164\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Western
                     </div>
@@ -1346,7 +1346,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-165\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-165\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Whyalla
                     </div>
@@ -1354,7 +1354,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-166\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-166\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Whyalla - North
                     </div>
@@ -1362,7 +1362,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-167\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-167\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Willunga
                     </div>
@@ -1370,7 +1370,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-168\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-168\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Windsor Gardens
                     </div>
@@ -1378,7 +1378,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-169\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-169\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Woodcroft
                     </div>
@@ -1386,7 +1386,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-170\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-170\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Woodville - Cheltenham
                     </div>
@@ -1394,7 +1394,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-171\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-171\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Yankalilla
                     </div>
@@ -1402,7 +1402,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-172\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-172\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Yorke Peninsula - North
                     </div>
@@ -1410,7 +1410,7 @@ exports[`render dropdown on search input 1`] = `
                       SA2 Region
                     </div>
                   </li>
-                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-173\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-4-item-173\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
                     <div className=\\"primary\\">
                       Yorke Peninsula - South
                     </div>
