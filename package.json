@@ -81,6 +81,7 @@
     ],
     "moduleNameMapper": {
       "\\.svg": "<rootDir>/src/utils/fileMock.js"
-    }
+    },
+    "testEnvironment": "jsdom"
   }
 }
