@@ -8,6 +8,7 @@
     /* children need to opt into mouse events with pointer-events: auto */
 }
 
+
 .navbar-title {
     font-size: 20.8px;
 }
@@ -40,8 +41,6 @@
     flex-direction: row;
     height: 50px;
     border-bottom: 1px solid #CCC;
-    
-
 }
 
 .menu-title {
@@ -61,6 +60,7 @@
     margin-left: 25px;
     margin-right: 10px;
     cursor: pointer;
+
 }
 
 .dropdown-content {

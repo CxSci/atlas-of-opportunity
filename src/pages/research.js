@@ -23,7 +23,7 @@ const Research = class Research extends Component {
 
   render() {
     const content = {
-      fontSize: "16px",
+      fontSize: "14px",
       textAlign: "justify",
       marginBottom: "15px",
     };

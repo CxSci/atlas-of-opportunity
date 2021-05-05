@@ -8,9 +8,12 @@ import Research from "../pages/research";
 import FAQ from "../pages/faq";
 import Methods from "../pages/methods";
 
-const Routes = class Routes extends Component {
-  render() {
+const Routes = class Routes extends Component { 
+
+  render() {  
+
     return (
+      <div> 
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/about" component={About} />
@@ -18,6 +21,7 @@ const Routes = class Routes extends Component {
         <Route exact path="/research" component={Research} />
         <Route exact path="/faq" component={FAQ} />
       </Switch>
+      </div> 
     );
   }
 };

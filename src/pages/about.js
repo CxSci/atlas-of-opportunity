@@ -13,7 +13,7 @@ const About = class About extends Component {
   static propTypes = {
     modal: PropTypes.bool.isRequired,
   };
-
+  
   componentDidMount() {
     if (this.props.modal === true) {
       setModal(false);
@@ -22,7 +22,7 @@ const About = class About extends Component {
 
   render() {
     const content = {
-      fontSize: "16px",
+      fontSize: "14px",
       textAlign: "justify",
       marginBottom: "15px",
     };
@@ -37,7 +37,7 @@ const About = class About extends Component {
       color: "#f79640",
     };
     return (
-      <Container title="About">
+      <Container title="About the Atlas">
         <p style={content}>
           The “MIT bigdata Living Lab” (Living Lab) is a research partnership
           enabled by principal partner BankSA, Massachusetts Institute of

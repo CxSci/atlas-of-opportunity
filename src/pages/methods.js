@@ -21,7 +21,7 @@ const Methods = class Methods extends Component {
 
   render() {
     const content = {
-      fontSize: "16px",
+      fontSize: "14px",
       textAlign: "justify",
       marginBottom: "15px",
     };
@@ -36,6 +36,7 @@ const Methods = class Methods extends Component {
     const image = {
       width: "100%",
     };
+
     return (
       <Container title="Methods" >
         <p style={content}>

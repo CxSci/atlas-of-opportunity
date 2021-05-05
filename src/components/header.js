@@ -72,9 +72,13 @@ const Header = class Header extends Component {
               <div className="menu-title">Atlas of Opportunity</div>
               <div className="close-icon"><CloseIcon/></div>
              </div>
-
+     
+      
               <Link
-                to="/methods"
+                to={{
+                  pathname: '/methods',
+                  state: {modal: true}
+                }}
                 onClick={() => 
                   {setHeaderOption("/methods");
                   this.toggleDropDown()}
@@ -82,28 +86,41 @@ const Header = class Header extends Component {
               >
                 Methods
               </Link>
+             
               
               <Link
-                to="/research"
+                to={{
+                  pathname: '/research',
+                  state: {modal: true}
+                }}
                 onClick={() => {setHeaderOption("/research");
                 this.toggleDropDown()}}
               >
                 Research
               </Link>
+
               <Link
-                to="/faq"
+                to={{
+                pathname: '/faq',
+                state: {modal: true}
+              }}
                 onClick={() => {setHeaderOption("/faq");
                 this.toggleDropDown()}}
               >
                 Frequently Asked Questions
               </Link>
               <Link
-                to="/about"
+                to={{
+                  pathname: '/about',
+                  state: {modal: true}
+                }}
                 onClick={() => {setHeaderOption("/about");
                 this.toggleDropDown()}}
               >
                 About the Atlas
               </Link>
+
+
             </div>
             </div>
           </div>
