@@ -35,6 +35,4 @@ it("can select feature", () => {
   component.find('input').simulate('mouseEnter').simulate('change', event)
   //console.log(component.debug())
   component.find("#downshift-16-item-0").simulate("click")
-  //console.log(component.debug())
-
 })
