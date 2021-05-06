@@ -50,16 +50,18 @@ h2 {
   font-size: 14px;
   line-height: 16px;
   color: #000000;
+  
 }
 
 .Collapsible__trigger:after {
   content: url(../assets/chevron.svg);              
   transition: transform 300ms; 
   margin-left: auto;
+  transform: rotateZ(180deg); 
 }
 
 .Collapsible__trigger.is-open:after {
-  transform: rotateZ(180deg); 
+  transform: rotateZ(0deg); 
 }
 
 .Collapsible__trigger.is-disabled {
