@@ -1,5 +1,7 @@
 import * as Constants from "../constants";
 import geojsonURL from "../data/SA_dashboard.geojson";
+import { loadGeoJSON } from "../tests/testUtils";
+import { IS_TEST } from "../utils/constants";
 
 const options = {};
 
@@ -106,6 +108,11 @@ function fetchFeatures() {
 
 function loadFeatures() {
   return function (dispatch) {
+    if (IS_TEST) {
+      dispatch({type: "FEATURES", payload: JSON.parse(loadGeoJSON("./src/data/" + geojsonURL)).features}); 
+      return;
+    }
+
     return fetchFeatures()
       .then((response) => response.json())
       .then(
