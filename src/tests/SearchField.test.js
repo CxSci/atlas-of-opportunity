@@ -33,6 +33,5 @@ it("can select feature", () => {
   const event = {target: {value: "ad"}};
   const component = Enzyme.mount(preRender(<SASearchField />, store));
   component.find('input').simulate('mouseEnter').simulate('change', event)
-  //console.log(component.debug())
   component.find("#downshift-16-item-0").simulate("click")
 })
