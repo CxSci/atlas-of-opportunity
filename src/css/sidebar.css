@@ -57,15 +57,15 @@
 }
 
 .actionButtonsContainer {
+    display: flex;
+    flex-direction: column;
     padding: 6px 0px 12px;
 }
 
 .actionButton {
     display: flex;
-    flex-direction: row;
     align-items: center;
     padding: 8px 20px 8px 30px;
-    font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
