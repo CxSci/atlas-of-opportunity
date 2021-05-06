@@ -71,6 +71,7 @@
     "typescript": "^4.2.3"
   },
   "jest": {
+    "automock": false,
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",
       "^.+\\.css$": "jest-transform-css",
