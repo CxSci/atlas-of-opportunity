@@ -77,7 +77,6 @@ const Header = class Header extends Component {
               <Link
                 to={{
                   pathname: '/methods',
-                  state: {modal: true}
                 }}
                 onClick={() => 
                   {setHeaderOption("/methods");
@@ -91,7 +90,6 @@ const Header = class Header extends Component {
               <Link
                 to={{
                   pathname: '/research',
-                  state: {modal: true}
                 }}
                 onClick={() => {setHeaderOption("/research");
                 this.toggleDropDown()}}
@@ -102,7 +100,6 @@ const Header = class Header extends Component {
               <Link
                 to={{
                 pathname: '/faq',
-                state: {modal: true}
               }}
                 onClick={() => {setHeaderOption("/faq");
                 this.toggleDropDown()}}
@@ -112,7 +109,6 @@ const Header = class Header extends Component {
               <Link
                 to={{
                   pathname: '/about',
-                  state: {modal: true}
                 }}
                 onClick={() => {setHeaderOption("/about");
                 this.toggleDropDown()}}
