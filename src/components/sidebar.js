@@ -15,11 +15,13 @@ import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
+import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 
 let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
     select: PropTypes.object.isRequired,
     selectedFeature: PropTypes.object,
+    comparisonFeatures: PropTypes.array.isRequired
   };
 
   render() {
@@ -45,11 +47,13 @@ let Sidebar = class Sidebar extends React.Component {
         </div>
       )
     }
+
+    const isCompared = this.props.comparisonFeatures.includes(this.props.selectedFeature)
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
-        <button className="actionButton"><ComparisonIcon className="icon"/> Add to Comparison</button>
+        <button className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
       </div>
 
     );
@@ -161,6 +165,7 @@ function mapStateToProps(state) {
   return {
     select: state.select,
     selectedFeature: state.selectedFeature,
+    comparisonFeatures: state.comparisonFeatures
   };
 }
 
