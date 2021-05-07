@@ -36,7 +36,8 @@ function LocationDetails(props) {
   const renderMetric = (metric) => {
     let value = featureProps[metric.id];
     if (typeof value === 'number') {
-      value = Math.floor(value).toLocaleString('en');
+      value = value > 10 ? Math.floor(value) : Math.floor(value * 10000) / 10000;
+      value = value.toLocaleString('en-US', { minimumFractionDigits: 4 });
     }
     if (metric.format) {
       value = metric.format(value);
