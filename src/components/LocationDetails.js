@@ -4,43 +4,46 @@ import ReactTooltip from "react-tooltip";
 import Collapsible from "react-collapsible";
 
 function LocationDetails(props) {
-  const select = props.select;
+  const featureProps = props.feature.properties;
 
   const propsMapping = [
     {
       title: 'Demographic Summary',
       content: [
-        { id: 'population', label: 'Population' },
-        { id: 'income', label: 'Median Income' },
+        { id: 'persons_num', label: 'Population' },
+        { id: 'median_aud', label: 'Median Income', format: (val) => `AUD ${val}` },
       ]
     },
     {
       title: 'Economic Summary',
       content: [
         { id: 'quartile', label: 'Income Quartile' },
-        { id: 'inequality', label: 'Inequality % (lower is better)' },
+        { id: 'inequality', label: 'Inequality (lower is better)', format: (val) => `${val}%` },
         { id: null, label: 'Visitor time spent by quartile' },
       ]
     },
     {
       title: 'Growth Summary',
       content: [
-        { id: 'ggp', label: 'GDP Growth Potential', desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.' },
-        { id: 'jr', label: 'Job Resilience', desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.' },
-        { id: 'bgi', label: 'Business Growth Index', desc: 'The growth rate is the measure of a company’s increase in revenue and potential to expand over a set period.' },
-        { id: 'sa1_codes', label: 'Included SA1 Regions' },
+        { id: 'income_diversity', label: 'GDP Growth Potential', desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.' },
+        { id: 'bridge_diversity', label: 'Job Resilience', desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.' },
+        { id: 'bsns_growth_rate', label: 'Business Growth Index', desc: 'The growth rate is the measure of a company’s increase in revenue and potential to expand over a set period.' },
+        { id: 'SA1_7DIGITCODE_LIST', label: 'Included SA1 Regions' },
       ]
     }
   ];
 
   const renderMetric = (metric) => {
-    let value = select[metric.id];
+    let value = featureProps[metric.id];
     if (typeof value === 'number') {
-      value = Math.floor(value);
+      value = Math.floor(value).toLocaleString('en');
+    }
+    if (metric.format) {
+      value = metric.format(value);
     }
 
     return (
-      <div>
+      <div key={metric.id}>
         <h2 data-tip data-for={metric.id}>{metric.label}</h2>
         {metric.desc && (
           <ReactTooltip id={metric.id}>
@@ -72,16 +75,7 @@ function LocationDetails(props) {
 }
 
 LocationDetails.propsTypes = {
-  select: PropTypes.shape({
-    population: PropTypes.string,
-    income: PropTypes.any,
-    quartile: PropTypes.any,
-    inequality: PropTypes.any,
-    ggp: PropTypes.any,
-    jr: PropTypes.any,
-    bgi: PropTypes.any,
-    sa1_codes: PropTypes.any,
-  })
+  feature: PropTypes.object
 }
 
 export default LocationDetails;

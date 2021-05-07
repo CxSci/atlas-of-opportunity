@@ -64,7 +64,7 @@ class Sidebar extends React.Component {
           {this.props.selectedFeature ?
             <>
               <ActionButtons/>
-              <LocationDetails select={this.props.select} />
+              <LocationDetails feature={this.props.selectedFeature} />
             </>
             :
             <>
