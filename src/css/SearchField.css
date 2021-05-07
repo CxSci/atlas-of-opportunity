@@ -1,0 +1,150 @@
+/* The search field is absolutely positioned, so when editing it and .bigTitle
+   disappears, there needs to be some spacer to prevent the rest of the
+   sidebar from sliding up under it. */
+.sidebarHeader {
+    min-height: 55px;
+}
+
+/* .bigTitle may wrap, but .searchContainer is always one line, so it opts out
+   of the default layout to overlap with .bigTitle */
+.searchContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px 0px 10px 10px;
+    width: 300px;
+}
+
+.searchContainer .searchField {
+    display: flex;
+    align-items: stretch;
+    height: 40px;
+    background: white;
+    pointer-events: auto;
+}
+
+/* When the sidebar is visible, underline the search field */
+.searchContainer:after {
+    content: '';
+    width: 275px;
+    position: absolute;
+    top: 33px;
+    left: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.searchContainer input {
+    background: transparent;
+    flex-grow: 1;
+    margin: 0;
+    padding: 2px 0px 0px 15px;
+    border: none;
+    font-family: "Roboto", sans-serif; /* Override assembly.css */
+    font-size: 15px;
+}
+
+.searchContainer button {
+    padding: 4px 10px 0 10px;
+}
+
+/* Floating search field */
+/* - A little wider */
+.panel-container.noFeatureSelected .searchContainer {
+    width: 305px;
+}
+
+/* - Rounded with a shadow */
+.panel-container.noFeatureSelected .searchContainer .searchField {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* - No underline */
+.panel-container.noFeatureSelected .searchContainer:after {
+    display: none;
+}
+
+/* - Menu/Cancel button adjusted for width change */
+.panel-container.noFeatureSelected .searchContainer button {
+    padding-right: 15px
+}
+
+
+.searchContainer .searchMenu {
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.searchContainer .searchMenu li {
+    padding: 12px 15px;
+}
+
+.searchContainer .searchMenu li.highlighted {
+    background-color: #f2f2f2;
+}
+
+.searchContainer .searchMenu li .primary {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.searchContainer .searchMenu li .secondary {
+  color: #333333;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.bigTitle {
+    position: relative; /* Relative so z-index works */
+    z-index: 1; /* Cover .searchField while .bigTitle is showing */
+    background: white;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    display: none; /* Hidden by default */
+}
+
+.showBigTitle .bigTitle {
+    display: flex; /* .showBigTitle enables .bigTitle visibility */
+    justify-content: space-between;
+    align-items: stretch;
+    cursor: pointer; /* Both elements have click handlers */
+}
+
+/* Don't actually hide .searchField. Leave it available for screen readers 
+   and tabbing. */
+
+.showBigTitle .bigTitle .titleButton,
+.showBigTitle .bigTitle .cancelButton {
+    padding: 19px 0px 11px 0; /* Pad buttons so min-height is 55px */
+}
+
+.showBigTitle .bigTitle .titleButton {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.showBigTitle .bigTitle .cancelButton {
+    padding-right: 20px;
+    display: flex;
+    align-items: stretch;
+}
+
+/* Draw an underline for .bigTitle which overlaps that of
+   .searchContainer */
+
+.showBigTitle .bigTitle .titleUnderline,
+.showBigTitle .bigTitle .cancelUnderline {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+}
+
+.showBigTitle .bigTitle .cancelUnderline {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}

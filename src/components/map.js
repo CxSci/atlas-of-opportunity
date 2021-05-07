@@ -3,7 +3,7 @@ import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import SearchBar from "./searchbar";
+import { setSelectedFeature } from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -41,23 +41,28 @@ let Map = class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedSA2: null,
-      clickedFeatures: [],
+      connectedFeatures: [],
+      highlightedFeature: null,
+      selectedFeature: null,
     };
   }
 
   static propTypes = {
-    data: PropTypes.string.isRequired,
+    features: PropTypes.arrayOf(PropTypes.object).isRequired,
+    geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
+    sidebarOpen: PropTypes.bool.isRequired,
+    selectedFeature: PropTypes.object,
+    highlightedFeature: PropTypes.object,
   };
 
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapRef.current,
-      style: "mapbox://styles/xmzhu/ckbqk0jmp4o041ipd7wkb39fw",
+      style: "mapbox://styles/mapbox/dark-v10",
       bounds: [
         [129, -38],
         [141, -26]
@@ -65,18 +70,19 @@ let Map = class Map extends React.Component {
       fitBoundsOptions: { padding: 70 },
     });
 
+    this.map.resize();
+
     // zoom buttons
     var controls = new mapboxgl.NavigationControl({
-      showCompass: false,
+      showCompass: true,
+      visualizePitch: true,
     });
     this.map.addControl(controls, "bottom-right");
-
-    var hoveredSA2Id = null;
 
     this.map.on("load", () => {
       this.map.addSource("sa2", {
         type: "geojson",
-        data: this.props.data,
+        data: this.props.geojsonURL,
         promoteId: "SA2_MAIN16",
       });
 
@@ -155,75 +161,72 @@ let Map = class Map extends React.Component {
 
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
-          var coordinates = turf.center(e.features[0]).geometry.coordinates;
-          var regionName = e.features[0].properties.SA2_NAME16;
-          var medIncome = e.features[0].properties.median_aud.toLocaleString(
-            undefined,
-            {
-              style: "currency",
-              currency: "AUS",
-            }
-          );
-          this.hoveredPopup
-            .setLngLat(coordinates)
-            .setHTML(
-              "<h5>" +
-                regionName +
-                "</h5> <p> <b> Population: </b> " +
-                e.features[0].properties.persons_num +
-                "<br /> <b> Median Income (AUS): </b>" +
-                medIncome +
-                "<br / > <b> GDP Growth Potential: </b>" +
-                e.features[0].properties.income_diversity +
-                "<br / > <b> Job Resiliance: </b>" +
-                e.features[0].properties.bridge_diversity +
-                "</p>"
-            )
-            .addTo(this.map);
-
-          if (hoveredSA2Id !== null) {
-            this.map.setFeatureState(
-              { source: "sa2", id: hoveredSA2Id },
-              { hover: false }
-            );
-          }
-
-          hoveredSA2Id = e.features[0].properties.SA2_MAIN16;
-          this.map.setFeatureState(
-            { source: "sa2", id: hoveredSA2Id },
-            { hover: true }
-          );
+          this.highlightFeature(e.features[0])
         }
       });
 
       // When the mouse leaves the sa2-fill layer, update the feature state of the
       // previously hovered feature.
 
-      this.map.on("mouseleave", "sa2-fills", () => {
-        if (hoveredSA2Id !== null) {
-          this.map.setFeatureState(
-            { source: "sa2", id: hoveredSA2Id },
-            { hover: false }
-          );
-        }
+      this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
 
-        hoveredSA2Id = null;
-
-        // Remove hovered popup
-        this.hoveredPopup.remove();
-      });
-
-      this.map.on("click", "sa2-fills", this.onMapClick);
+      // Handle clicks on map features
+      this.map.on("click", "sa2-fills", this.onMapClick)
+      // Handle map clicks outside of map features
+      this.map.on("click", this.onMapClick);
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.flowDirection !== prevProps.flowDirection) {
-      this.redrawBridges();
+  highlightFeature = (feature) => {
+    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16
+    const newId = feature?.properties?.SA2_MAIN16
+    if (prevId === newId) {
+      return
+    }
+    // First, clear any old highlight
+    if (this.state.highlightedFeature) {
+      this.map.setFeatureState(
+        { source: "sa2", id: prevId },
+        { hover: false }
+      );
     }
 
-    if (this.props.searchBarInfo !== prevProps.searchBarInfo) {
-      this.onMapSearch(this.props.searchBarInfo);
+    this.setState({ highlightedFeature: feature })
+
+    // Skip the two SA2s which lack geometry, as they don't correspond to
+    // geographic areas and aren't mappable.
+    if (feature && feature.geometry) {
+      var coordinates = turf.centerOfMass(feature).geometry.coordinates;
+      var regionName = feature.properties.SA2_NAME16;
+      this.hoveredPopup
+        .setLngLat(coordinates)
+        .setHTML(`<h5>${regionName}</h5>`)
+        .addTo(this.map);
+
+      this.map.setFeatureState(
+        { source: "sa2", id: feature.properties.SA2_MAIN16 },
+        { hover: true }
+      );
+    } else {
+      this.hoveredPopup.remove();
+    }
+  }
+
+  clearFeatureHighlight = () => {
+    this.highlightFeature(null)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.sidebarOpen !== prevProps.sidebarOpen
+      || (this.props.selectedFeature !== prevProps.selectedFeature
+        && (!this.props.selectedFeature || !prevProps.selectedFeature)
+      )
+    ) {
+      this.map.resize();
+    }
+
+    if (this.props.flowDirection !== prevProps.flowDirection) {
+      this.redrawBridges();
     }
 
     if (this.props.active.name !== prevProps.active.name) {
@@ -233,6 +236,36 @@ let Map = class Map extends React.Component {
       };
 
       this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
+    }
+
+    if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
+      this.highlightFeature(this.props.highlightedFeature)
+    }
+
+    if (this.props.selectedFeature !== prevProps.selectedFeature) {
+      this.selectFeature(this.props.selectedFeature)
+    }
+  }
+
+  selectFeature = (feature) => {
+    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16
+    const newId = feature?.properties?.SA2_MAIN16
+    if (prevId === newId) {
+      return
+    }
+
+    this.redrawBridges(feature)
+    if (feature && (feature.geometry || feature._geometry)) {
+      const [minX, minY, maxX, maxY] = turf.bbox(feature)
+      this.map.fitBounds(
+        [[minX, minY], [maxX, maxY]],
+        {
+          maxZoom: 10,
+          padding: 100,
+          bearing: this.map.getBearing(),
+          pitch: this.map.getPitch(),
+        }
+      )
     }
   }
 
@@ -253,21 +286,40 @@ let Map = class Map extends React.Component {
   };
 
   onMapClick = (e) => {
-    let prevSA2 = this.state.clickedSA2;
-    let clickedSA2 = e.features[0]; //properties.name;
+    // Ignore clicks that were already consumed by a deeper handler  e.g. if
+    // the user clicked on a map feature, ignore the same click event when
+    // seen by the overall map.
+    if (e.defaultPrevented) {
+      return
+    }
+    e.preventDefault()
+
+    let prevSA2 = this.state.selectedFeature;
+    let clickedFeature = e.features ? e.features[0] : null
+
+    if (clickedFeature) {
+      // Make sure this feature has a `primary` property for when it becomes
+      // selectedFeature, as the search field adds that to its own features and
+      // expects passed in features to have the same.
+      // TODO: Make SearchField and SASearchField smart enough to handle
+      //       features which lack `primary`.
+      clickedFeature.properties.primary = clickedFeature.properties.SA2_NAME16
+    }
+
     // Ignore clicks on the active SA2.
     if (
       !prevSA2 ||
-      clickedSA2.properties.SA2_NAME16 !== prevSA2.properties.SA2_NAME16
+      clickedFeature !== prevSA2 ||
+      clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
-      this.redrawBridges(e);
+      this.redrawBridges(clickedFeature);
+      setSelectedFeature(clickedFeature)
     }
   };
 
   // Called when an SA2 is clicked and when the flow direction changes.
-  redrawBridges = (e) => {
-    var clickedFeatures = this.state.clickedFeatures;
-    var clickedSA2 = this.state.clickedSA2;
+  redrawBridges = (feature) => {
+    let connectedFeatures = this.state.connectedFeatures;
 
     // Remove popup
     this.clickedPopup.remove();
@@ -290,12 +342,12 @@ let Map = class Map extends React.Component {
     var regionName;
 
     // Reset regions
-    clickedFeatures.forEach((f) => {
+    connectedFeatures.forEach((f) => {
       // For each feature, update its 'click' state
       this.map.setFeatureState(
         {
           source: "sa2",
-          id: f.id,
+          id: f.properties.SA2_MAIN16,
         },
         {
           highlight: false,
@@ -303,25 +355,29 @@ let Map = class Map extends React.Component {
       );
     });
 
-    if (clickedSA2 !== null) {
+    if (this.state.selectedFeature) {
       this.map.setFeatureState(
         {
           source: "sa2",
-          id: clickedSA2.id,
+          id: this.state.selectedFeature.properties.SA2_MAIN16,
         },
         {
           click: false,
         }
       );
     }
-    // Reuse existing region if this call was due to a flow direction change.
-    if (e) {
-      // Update based on newly selected region.
-      clickedSA2 = e.features[0];
+
+    this.setState({ selectedFeature: feature })
+
+    // Skip features without geometry, like the two SA2s
+    // "Migratory - Offshore - Shipping (SA)" and "No usual address (SA)"
+    if (!feature || !(feature.geometry || feature._geometry)) {
+      return
     }
+
     // find the center point of the newly selected region
-    origin = turf.center(clickedSA2).geometry.coordinates;
-    regionName = clickedSA2.properties.SA2_NAME16;
+    origin = turf.centerOfMass(feature).geometry.coordinates;
+    regionName = feature.properties.SA2_NAME16;
 
     // Set name of clicked region over it
     this.clickedPopup
@@ -332,7 +388,7 @@ let Map = class Map extends React.Component {
     this.map.setFeatureState(
       {
         source: "sa2",
-        id: clickedSA2.id,
+        id: feature.properties.SA2_MAIN16,
       },
       {
         click: true,
@@ -340,28 +396,26 @@ let Map = class Map extends React.Component {
     );
 
     const sa2_properties = {
-      sa2_name: clickedSA2.properties.SA2_NAME16,
-      population: clickedSA2.properties.persons_num.toLocaleString(),
-      income: clickedSA2.properties.median_aud.toLocaleString(undefined, {
+      sa2_name: feature.properties.SA2_NAME16,
+      population: feature.properties.persons_num.toLocaleString(),
+      income: feature.properties.median_aud.toLocaleString(undefined, {
         style: "currency",
         currency: "AUS",
       }),
-      ggp: clickedSA2.properties.income_diversity,
-      jr: clickedSA2.properties.bridge_diversity,
-      quartile: clickedSA2.properties.quartile,
-      fq1: clickedSA2.properties.fq1,
-      fq2: clickedSA2.properties.fq2,
-      fq3: clickedSA2.properties.fq3,
-      fq4: clickedSA2.properties.fq4,
-      inequality: clickedSA2.properties.inequality,
-      bgi: clickedSA2.properties.bsns_growth_rate,
-      sa1_codes: clickedSA2.properties.SA1_7DIGITCODE_LIST,
+      ggp: feature.properties.income_diversity,
+      jr: feature.properties.bridge_diversity,
+      quartile: feature.properties.quartile,
+      fq1: feature.properties.fq1,
+      fq2: feature.properties.fq2,
+      fq3: feature.properties.fq3,
+      fq4: feature.properties.fq4,
+      inequality: feature.properties.inequality,
+      bgi: feature.properties.bsns_growth_rate,
+      sa1_codes: feature.properties.SA1_7DIGITCODE_LIST,
       isDefault: false,
     };
 
     setSelect(sa2_properties);
-
-    this.setState({ clickedSA2: clickedSA2 });
 
     if (this.props.active.name !== "Inequality") {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
@@ -372,40 +426,38 @@ let Map = class Map extends React.Component {
       // Note that somewhere along the way, Mapbox GL turns GeoJSON properties
       // like {"foo": null} into {"foo": "null"}.
       const bridges = keys
-        .map((x) => clickedSA2.properties[x])
-        .filter((x) => x !== undefined && x !== "null")
+        .map((x) => feature.properties[x])
+        .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
 
       // Search map for SA2s matching the bridges.
-      clickedFeatures = this.map.querySourceFeatures("sa2", {
-        sourceLayer: "original",
-        filter: [
-          "in",
-          ["to-number", ["get", "SA2_MAIN16"]],
-          ["literal", bridges],
-        ],
-      });
+      // Search the GeoJSON loaded separately as `features`, as Mapbox does not
+      // support searching for features which aren't currently in view.
+      connectedFeatures = this.props.features
+        .filter(f => bridges
+          .some(b => b === Number(f.properties.SA2_MAIN16)))
 
-      // get rid of the repeated features in the clickedFeatures array
-      clickedFeatures.forEach((f) => {
+      // get rid of the repeated features in the connectedFeatures array
+      connectedFeatures.forEach((f) => {
         // For each feature, update its 'highlight' state
+        const featureId = f.properties.SA2_MAIN16
         this.map.setFeatureState(
           {
             source: "sa2",
-            id: f.id,
+            id: featureId,
           },
           {
             highlight: true,
           }
         );
-        if (!(f.properties.SA2_MAIN16 in featureObj)) {
-          featureObj[f.properties.SA2_MAIN16] = f;
+        if (!(featureId in featureObj)) {
+          featureObj[featureId] = f;
         }
       });
 
       // Update component state now that our changes are ready.
-      this.setState({ clickedFeatures: clickedFeatures });
+      this.setState({ connectedFeatures: connectedFeatures });
 
-      // sort the clickedFeatures based on the ranking in bridges
+      // sort the connectedFeatures based on the ranking in bridges
       var featureList = [];
       bridges.forEach((b) => {
         featureList.push(featureObj[b]);
@@ -413,7 +465,7 @@ let Map = class Map extends React.Component {
 
       // create an array of center coordinates of each SA2 region
       featureList.forEach((ft, i) => {
-        var destination = turf.center(ft).geometry.coordinates;
+        var destination = turf.centerOfMass(ft).geometry.coordinates;
         var regionName = ft.properties.SA2_NAME16;
         destinationList.push(destination);
 
@@ -612,27 +664,23 @@ let Map = class Map extends React.Component {
       }
     }
   };
-
+  
   render() {
-    return (
-      <div>
-        <div ref={this.mapRef} className="absolute top right left bottom" />
-        <div>
-          {" "}
-          <SearchBar />{" "}
-        </div>
-      </div>
-    );
+    return <div id="map" ref={this.mapRef} className="map" />
   }
 };
 
 function mapStateToProps(state) {
   return {
-    data: state.data,
+    features: state.features,
+    geojsonURL: state.geojsonURL,
     active: state.active,
     select: state.select,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
+    sidebarOpen: state.sidebarOpen,
+    selectedFeature: state.selectedFeature,
+    highlightedFeature: state.highlightedFeature,
   };
 }
 

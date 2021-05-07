@@ -1,0 +1,7 @@
+.main.sidebarOpen .legend, .main.sidebarOpen .toggleButton {
+    left: 320px;
+}
+
+.main.sidebarClosed .featureSelected .sidebar-container {
+    display: none;
+}

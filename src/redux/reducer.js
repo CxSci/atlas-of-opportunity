@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-import data from "../data/SA_dashboard.geojson";
+import geojsonURL from "../data/SA_dashboard.geojson";
 
 const options = {};
 
@@ -82,7 +82,8 @@ const select = {
 };
 
 const initialState = {
-  data,
+  geojsonURL,
+  features: [], // Fetched asynchronously on app load
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
   select,
@@ -91,10 +92,38 @@ const initialState = {
   dropdown: "off",
   flowDirection: Constants.FLOW_BI,
   searchBarInfo: [121, -26.5],
+  sidebarOpen: true,
+  selectedFeature: null,
+  highlightedFeature: null,
+  showModal: true,
+  showWelcomeDialog: true,
 };
+
+function fetchFeatures() {
+  return fetch(geojsonURL);
+}
+
+function loadFeatures() {
+  return function (dispatch) {
+    return fetchFeatures()
+      .then((response) => response.json())
+      .then(
+        (collection) =>
+          dispatch({ type: "FEATURES", payload: collection.features }),
+        // TODO: Add proper error handling
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+}
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case "FEATURES":
+      return Object.assign({}, state, {
+        features: action.payload,
+      });
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
         active: action.option,
@@ -103,6 +132,15 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         select: action.payload,
       });
+    case "Modal":
+      return Object.assign({}, state, {
+        showModal: action.payload,
+      });
+    case Constants.SHOW_WELCOME_DIALOG:
+      return {
+        ...state,
+        showWelcomeDialog: action.payload,
+      };
     case "Header":
       return Object.assign({}, state, {
         path: action.payload,
@@ -130,9 +168,21 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         searchBarInfo: action.payload,
       });
+    case Constants.SET_SIDEBAR:
+      return Object.assign({}, state, {
+        sidebarOpen: action.payload,
+      });
+    case Constants.SET_SELECTED_FEATURE:
+      return Object.assign({}, state, {
+        selectedFeature: action.feature,
+      });
+    case Constants.SET_HIGHLIGHTED_FEATURE:
+      return Object.assign({}, state, {
+        highlightedFeature: action.feature,
+      });
     default:
       return state;
   }
 }
 
-export { reducer, initialState };
+export { reducer, initialState, loadFeatures };

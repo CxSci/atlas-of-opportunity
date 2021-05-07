@@ -22,6 +22,13 @@ export function setModal() {
   });
 }
 
+export function setShowWelcomeDialog(payload) {
+  store.dispatch({
+    type: Constants.SHOW_WELCOME_DIALOG,
+    payload: payload,
+  });
+}
+
 export function setDisplayDefault() {
   store.dispatch({
     type: "DisplayDefault",
@@ -62,4 +69,25 @@ export function setSearchBarInfo(payload) {
     type: Constants.SET_SEARCH_BAR_INFO,
     payload: payload,
   });
+}
+
+export function setSideBar(payload) {
+  store.dispatch({
+    type: Constants.SET_SIDEBAR,
+    payload: payload,
+  });
+}
+
+export function setSelectedFeature(feature) {
+  store.dispatch({
+    type: Constants.SET_SELECTED_FEATURE,
+    feature: feature,
+  })
+}
+
+export function setHighlightedFeature(feature) {
+  store.dispatch({
+    type: Constants.SET_HIGHLIGHTED_FEATURE,
+    feature: feature,
+  })
 }

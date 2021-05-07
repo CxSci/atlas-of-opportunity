@@ -1,0 +1,78 @@
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    width: 320px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-content {
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+
+.toggleButton {
+    pointer-events: auto;
+    cursor: pointer;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    position: absolute;
+    width: 20px;
+    height: 40px;
+        
+    background: #FFFFFF;
+    /* Scratch/Standard Drop Shadow */
+    
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 5px 5px 0px;
+    
+}
+
+
+.panel-container.noFeatureSelected {
+    position: absolute;
+    pointer-events: none;
+}
+
+.panel-container.noFeatureSelected .sidebar-container {
+    background: transparent;
+    box-shadow: none;
+}
+
+.panel-container.noFeatureSelected .toggleButton {
+    display: none;
+}
+
+.actionButtonsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0px 12px;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px 8px 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.icon {
+    margin-right: 12px;
+}

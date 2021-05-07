@@ -1,33 +1,56 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
-import Display from "../components/display";
-import Legend from "../components/legend";
+import Sidebar from "../components/sidebar";
+import Legend from '../components/legend';
+import "../css/main.css";
 
-
-{/* change so Main contains routes */}
 import Routes from "../routes/index";
 
 const Main = class Main extends Component {
+  static propTypes = {
+    selectedFeature: PropTypes.object,
+    sidebarOpen: PropTypes.bool.isRequired,
+  };
   render() {
     const mapStyler = {
       zindex: 0,
+      width: "100%",
+      height: "100%",
+    };
+    const screenFlexStyle = {
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      height: "100%",
     };
 
+    const sidebarState =
+      this.props.sidebarOpen && this.props.selectedFeature
+        ? "sidebarOpen"
+        : "sidebarClosed";
+
     return (
-      <div style={mapStyler}>
-        <Map />
-        <Fragment>
-          <Fragment>
-            <Display />
-            <Legend />
-            <Routes />
-          </Fragment>
-        </Fragment>
+
+      <div className={`main ${sidebarState} `} style={mapStyler}>
+        <div style={screenFlexStyle}>
+          <Sidebar />
+          <Map />
+        </div>
+        {this.props.selectedFeature ? <Legend absolute /> : <></>}
+        <Routes />
       </div>
     );
   }
 };
 
-export default connect()(Main);
+function mapStateToProps(state) {
+  return {
+    selectedFeature: state.selectedFeature,
+    sidebarOpen: state.sidebarOpen,
+  };
+}
+
+export default connect(mapStateToProps)(Main);

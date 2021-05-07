@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
+import { setHeaderOption } from "../redux/action-creators";
 
+import { Link } from "react-router-dom";
 
 const Container = class Container extends Component {
 
@@ -31,7 +33,7 @@ const Container = class Container extends Component {
       position: "absolute",
       zIndex: "3",
       pointerEvents: "auto",
-
+      top: "0",
     };
 
     const container = {
@@ -59,10 +61,9 @@ const Container = class Container extends Component {
 
     const titleContent = {
       width: "100%",
-      paddingTop: "20px",
+      paddingTop: "28px",
       paddingBottom: "20px",
       paddingLeft: "40px",
-
 
     }
 
@@ -70,7 +71,7 @@ const Container = class Container extends Component {
       width: "100%",
       paddingLeft: "40px",
       paddingRight: "40px",
-      paddingTop: "10px",
+      paddingTop: "20px",
       paddingBottom: "20px",
       overflowY: "scroll",
       webkitOverflowScrolling: "touch",   
@@ -103,10 +104,12 @@ const Container = class Container extends Component {
           this.state.showPopUp
             ? 
             <div>
-              <div 
-              className={`popUpBox ${showPopUp ? "show" : ""}`}
+              <Link
+              to="/"
               style={popUpBox}
+              className={`popUpBox ${showPopUp ? "show" : ""}`}
               onClick={() => { 
+              setHeaderOption("/");
               this.setState({ /* turn stuff off */
                 showPopUp: false }) }}
               />
@@ -116,12 +119,14 @@ const Container = class Container extends Component {
                 <div style={titleContent}>
                   {title}
                  </div>
-                 <div style={closeIcon}
+
+                 <Link style={closeIcon}
+                  to="/"
                  onClick={() => { 
-        
+                  setHeaderOption("/");
                   this.setState({ /* turn stuff off */
                   showPopUp: false }) }}
-                ><CloseIcon/></div>
+                ><CloseIcon/></Link>
                 </h3>
     
              <div style={childrenContent}>
