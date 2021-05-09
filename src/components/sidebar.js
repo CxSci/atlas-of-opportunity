@@ -16,6 +16,7 @@ import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
+import LocationCompare from "./LocationCompare";
 
 let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
@@ -63,6 +64,9 @@ let Sidebar = class Sidebar extends React.Component {
         style={{ overflowY: "auto" }}
         className={`sidebar-content`}
       >
+        <Collapsible trigger="Locations to Compare">
+          <LocationCompare/>
+        </Collapsible>
         <Collapsible trigger="Demographic Summary">
            <h2>Population</h2>
             <p>{population}</p>

@@ -19,7 +19,12 @@ h2 {
   align-items: flex-start;
   padding: 0px 30px 10px;
   background: #FFFFFF;
+  width: 100%
 
+}
+
+.Collapsible__contentOuter {
+  width: 100%
 }
 
 .Collapsible__contentInner p {
