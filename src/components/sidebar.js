@@ -76,7 +76,7 @@ class Sidebar extends React.Component {
       </PanelContainer>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
