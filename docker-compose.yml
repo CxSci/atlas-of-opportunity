@@ -8,25 +8,27 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=SADatabase
-    volumes:
+    volumes:      
       - ./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv
       - ./api/database:/docker-entrypoint-initdb.d
+
   api:
     build: ./api
     ports:
       - "5000:5000"
     volumes:
+      - ./src/data/SA_SA2s.geojson:/data/SA_SA2s.geojson
       - ./api:/app
     environment:
       FLASK_ENV: development
     depends_on:
       - db 
     command: sh -c './wait-for db:5432 -- python app.py'
-  dashboard:
-    build: .
-    ports:
-      - '3000:3000'
-    volumes:
-      - /usr/src/app    
-    depends_on:
-      - api
+  # dashboard:
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - /usr/src/app    
+  #   depends_on:
+  #     - api
