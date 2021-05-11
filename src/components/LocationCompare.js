@@ -47,7 +47,8 @@ const buttonText = {
     "fontWeight": "500",
     "lineHeight": "16px",
     "letterSpacing": "0em",
-    "textAlign": "center"
+    "textAlign": "center",
+    marginRight: 8
   }
 
 const disclaimerText = {
@@ -77,7 +78,10 @@ const LocationCompare = () => {
             </div>
         })}
         <div style={buttonRoot}>
-            <p style={buttonText}>Show Comparison</p>
+            <div><p style={buttonText}>Show Comparison</p></div>
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.25 0.75L6.25 6L1.25 11.25" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
         </div>
         <div>
             <p style={disclaimerText}>Add up to 4 regions.</p>
@@ -86,3 +90,4 @@ const LocationCompare = () => {
 }
 
 export default LocationCompare;
+
