@@ -67,7 +67,6 @@ const LocationCompare = () => {
     const comparisonFeatures = useSelector(getComparisonFeatures);
     return <div style={root}>
         {comparisonFeatures.map(feature => {
-            console.log(feature)
             return <div style={featureRoot} key={feature.primary}>
                 <div>
                     <p>{feature.primary || feature.properties["SA2_NAME16"]}</p>
