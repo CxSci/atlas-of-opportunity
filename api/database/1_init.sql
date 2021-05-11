@@ -66,10 +66,10 @@ CREATE TABLE SAData(
     gain_r3 VARCHAR(100) ,
     exchanged_r1 VARCHAR(100) ,
     exchanged_r2 VARCHAR(100) ,
-    exchanged_r3 VARCHAR(100)  
+    exchanged_r3 VARCHAR(100)    
 );
 
-CREATE TABLE SA2Data(       
+CREATE TABLE sa2data(  
     SA2_MAIN16 VARCHAR(100),
     SA2_5DIG16 VARCHAR(100),
     SA2_NAME16 VARCHAR(100),
@@ -81,6 +81,6 @@ CREATE TABLE SA2Data(
     GCC_NAME16 VARCHAR(100),
     STE_CODE16 VARCHAR(100),
     STE_NAME16 VARCHAR(100),
-    AREASQKM16 VARCHAR(100),      
+    AREASQKM16 VARCHAR(100),
     "geometry" TEXT
-);       
+);
