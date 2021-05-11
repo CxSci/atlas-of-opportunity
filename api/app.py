@@ -1,23 +1,23 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 import psycopg2
 import json
-import sys
+import os
 
 app = Flask(__name__)
 
-con = psycopg2.connect(database="SADatabase",
-                       user="user",
-                       password="password",
-                       host="db",
-                       port="5432")
+con = psycopg2.connect(database=os.environ.get("POSTGRES_DB"),
+                       user=os.environ.get("POSTGRES_USER"),
+                       password=os.environ.get("POSTGRES_PASSWORD"),
+                       host=os.environ.get("POSTGRES_HOST"),
+                       port=os.environ.get("POSTGRES_PORT"))
 cur = con.cursor()
 
 # insert data from SA_SA2s.geojson file to sa2data database
 
 
 def insertDataToDatabase():
-    is_database_has_data =  cur.execute('SELECT EXISTS (SELECT 1 FROM sa2data)')
-    if(is_database_has_data):
+    is_database_not_empty =  cur.execute('SELECT EXISTS (SELECT 1 FROM sa2data)')
+    if(is_database_not_empty):
         return
 
     with open('/data/SA_SA2s.geojson', 'r') as file:
@@ -104,11 +104,8 @@ def get_sa_data():
     cur.execute(command)
     rows = cur.fetchall()
 
-    json_format = []
-    for row in rows:
-        json_format.append(row)
-
     geojson_data = {
+
         "type": "FeatureCollection",
         "name": "SA2_2016_AUST",
         "crs": {
@@ -196,9 +193,9 @@ def get_sa_data():
                     'exchanged_r3': data[72]
                 },
                 "geometry": "Not added yet"
-            } for data in json_format]
+            } for data in rows]
     }
-    json.dumps(geojson_data)
+
     return jsonify(geojson_data)
 
 

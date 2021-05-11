@@ -1,14 +1,14 @@
 version: '3'
 services:
   db:
-    build: ./api/database 
+    build: ./api/database
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=SADatabase
-    volumes:      
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
       - ./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv
       - ./api/database:/docker-entrypoint-initdb.d
 
@@ -20,15 +20,20 @@ services:
       - ./src/data/SA_SA2s.geojson:/data/SA_SA2s.geojson
       - ./api:/app
     environment:
-      FLASK_ENV: development
+      - FLASK_ENV=${FLASK_ENV}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
     depends_on:
-      - db 
+      - db
     command: sh -c './wait-for db:5432 -- python app.py'
   dashboard:
     build: .
     ports:
       - '3000:3000'
     volumes:
-      - /usr/src/app    
+      - /usr/src/app
     depends_on:
       - api
