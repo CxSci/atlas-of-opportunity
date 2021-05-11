@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
-import { setHeaderOption } from "../redux/action-creators";
 
 import { Link } from "react-router-dom";
 
@@ -12,17 +11,8 @@ const Container = class Container extends Component {
     children: PropTypes.array,
   };
 
-  state = {
-    showPopUp: true,
-  };
-
-  togglePopUp = () => {
-    this.setState(prevState => ({ showPopUp: !prevState.showPopUp }),);
-  };
-
 
   render() {
-    const { showPopUp } = this.state;
     const { title, children } = this.props;
 
     const popUpBox = {
@@ -39,108 +29,61 @@ const Container = class Container extends Component {
     const container = {
       position: "fixed",
       zIndex: "4",
-
       display:"flex",
       justifyContent:"center",
       alignItems: "center",
-
       width: "50%",
       maxHeight:"60%",
-
       top:"20%",
       left:"25%",
-      
       backgroundColor: "#ffffff",
       borderRadius: "8px",
       flexDirection: "column",
-
       pointerEvents: "auto",
 
 
     };
 
-    const titleContent = {
-      width: "100%",
-      paddingTop: "28px",
-      paddingBottom: "20px",
-      paddingLeft: "40px",
-
-    }
-
-    const childrenContent = {
-      width: "100%",
-      paddingLeft: "40px",
-      paddingRight: "40px",
-      paddingTop: "20px",
-      paddingBottom: "20px",
-      overflowY: "scroll",
-      webkitOverflowScrolling: "touch",   
-
-    }
-
     const titleBox = {
       display: "flex",
       flexDirection: "row",
+      justifyContent: "space-between",
+      lineHeight: "20px",
+      padding: "30px 40px 20px 40px",
       borderBottom: "1px solid #CCC",  
       width:"100%",
-      fontSize: "20px",
+      fontSize: "24px",
+      fontWeight: "500"
+
     };
 
-
-    const closeIcon = {
-      display: "flex",
-      flexDirection: "column",
-      paddingTop: "26px",
-      paddingBottom: "20px",
-      paddingRight: "30px",
-
-      cursor: "pointer",
+    const childrenContent = {
+      width: "100%",
+      padding: "20px 40px 20px 40px",
+      overflowY: "scroll",
     }
-    return (
 
-      <div>
-        
-        {
-          this.state.showPopUp
-            ? 
-            <div>
+    return (
+        <div>
               <Link
               to="/"
               style={popUpBox}
-              className={`popUpBox ${showPopUp ? "show" : ""}`}
-              onClick={() => { 
-              setHeaderOption("/");
-              this.setState({ /* turn stuff off */
-                showPopUp: false }) }}
               />
 
-          <div style={container} className={`popUpBoxContainer ${showPopUp ? "show" : ""}`}>
+          <div style={container}>
               <h3 style={titleBox}>
-                <div style={titleContent}>
                   {title}
-                 </div>
-
-                 <Link style={closeIcon}
+                 <Link
                   to="/"
-                 onClick={() => { 
-                  setHeaderOption("/");
-                  this.setState({ /* turn stuff off */
-                  showPopUp: false }) }}
                 ><CloseIcon/></Link>
                 </h3>
     
              <div style={childrenContent}>
                 {children}
               </div>
-              </div>
+          </div>
 
-              </div>
-            : null
-          }   
-
-      
-
-      </div>    
+        </div>
     );
   }
 };

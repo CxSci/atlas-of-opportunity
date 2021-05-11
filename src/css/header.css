@@ -8,12 +8,6 @@
     /* children need to opt into mouse events with pointer-events: auto */
 }
 
-
-.navbar-title {
-    font-size: 20.8px;
-}
-
-
 .dim-screen{
      /* Ignore our parent elements and the rest of
         the DOM hierarchy. Position and size this
@@ -39,19 +33,17 @@
 .dropdown-header{
     display: flex;
     flex-direction: row;
-    height: 50px;
+    height: 60px;
     border-bottom: 1px solid #CCC;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .menu-title {
     color: black;
-    font-size: 17.6px;
+    font-size: 18px;
     font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    margin-left: 25px;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    margin-left: 27px;
 }
 
 .close-icon{
@@ -65,12 +57,10 @@
 
 .dropdown-content {
     display: none;
-    justify-content: center;
+    min-width: 270px; 
     background-color: white; 
-    opacity: 1;
     position: absolute;
     top: 0px;
-    padding-top: 10px;
     padding-bottom: 100%;
     right: 0px;
     z-index: 1;
@@ -84,13 +74,10 @@
     display: flex;
     align-items: center;
     margin: 0;
-    padding: 0.875rem 1.25rem;
-    padding-left: 25px;
-    padding-top: 15px;
+    padding: 15px 20px 15px 27px;
     color: black;
-    font-size: 1.0rem;
+    font-size: 16px;
     cursor: pointer;
-    height: 50%;
     pointer-events: auto;
 }
 

@@ -1,21 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { setModal } from "../redux/action-creators";
-
 import Container from "../components/container";
 
 const FAQ = class FAQ extends Component {
-  static propTypes = {
-    modal: PropTypes.bool.isRequired,
-  };
-
-  componentDidMount() {
-    if (this.props.modal === true) {
-      setModal(false);
-    }
-  }
-
   render() {
     const content = {
       fontSize: "14px",
@@ -50,10 +36,4 @@ const FAQ = class FAQ extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    modal: state.modal,
-  };
-}
-
-export default connect(mapStateToProps)(FAQ);
+export default FAQ;

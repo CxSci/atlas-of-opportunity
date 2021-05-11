@@ -12,14 +12,12 @@ const Routes = class Routes extends Component {
   render() {  
 
     return (
-      <div> 
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/methods" component={Methods} />
         <Route exact path="/research" component={Research} />
         <Route exact path="/faq" component={FAQ} />
       </Switch>
-      </div> 
     );
   }
 };
