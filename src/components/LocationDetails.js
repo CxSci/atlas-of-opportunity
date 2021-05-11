@@ -51,6 +51,7 @@ function LocationDetails(props) {
       style={{ overflowY: "auto" }}
       className={`sidebar-content`}
     >
+      {props.children}
       {propsMapping.map((section) => (
         <Collapsible trigger={section.title} key={section.title}>
           {section.content.map((metric) => (
@@ -65,7 +66,8 @@ function LocationDetails(props) {
 LocationDetails.propTypes = {
   feature: PropTypes.shape({
     properties: PropTypes.any
-  })
+  }),
+  children: PropTypes.node
 }
 
 export default LocationDetails;
