@@ -64,9 +64,9 @@ let Sidebar = class Sidebar extends React.Component {
         style={{ overflowY: "auto" }}
         className={`sidebar-content`}
       >
-        <Collapsible trigger="Locations to Compare">
+        {this.props.comparisonFeatures.length > 0 ? <Collapsible trigger="Locations to Compare">
           <LocationCompare/>
-        </Collapsible>
+        </Collapsible> : <></>}
         <Collapsible trigger="Demographic Summary">
            <h2>Population</h2>
             <p>{population}</p>
