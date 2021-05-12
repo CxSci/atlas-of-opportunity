@@ -36,9 +36,9 @@ class Sidebar extends React.Component {
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
-        <Link to="/comparison">Comparison</Link>
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
         <button className="actionButton"><ComparisonIcon className="icon"/> Add to Comparison</button>
+        <Link to="/comparison" className="actionButton">Show Comparison &gt;</Link>
       </div>
 
     );

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import Sidebar from "../components/sidebar";
-// import Legend from '../components/legend';
+import ComparisonSidebar from "../components/ComparisonSidebar";
 import "../css/main.css";
 
 class Comparison extends Component {
@@ -33,9 +32,8 @@ class Comparison extends Component {
     return (
       <div className={`main ${sidebarState} `} style={mapStyler}>
         <div style={screenFlexStyle}>
-          <Sidebar />
+          <ComparisonSidebar />
         </div>
-        {/* {this.props.selectedFeature ? <Legend absolute /> : <></>} */}
       </div>
     );
   }

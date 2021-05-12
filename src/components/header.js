@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
 
@@ -9,10 +9,16 @@ function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
   const [comparisonMode, setComparisonMode] = useState(false);
-  const history = useHistory();
-  history.listen(location => {
+  const location = useLocation();
+
+  useEffect(() => {
     setComparisonMode(location.pathname.startsWith('/comparison'));
-  })
+  }, [location]);
+
+  // const history = useHistory();
+  // history.listen(location => {
+  //   setComparisonMode(location.pathname.startsWith('/comparison'));
+  // })
 
   const headerBox = {
     display: "flex",

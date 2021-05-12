@@ -76,3 +76,28 @@
 .icon {
     margin-right: 12px;
 }
+
+.comparison-title {
+    display: flex;
+    align-items: stretch;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    padding: 20px 20px 11px 20px;
+}
+
+.location-list {
+    padding: 8px 20px 8px 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 2;
+    color: #000000;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
