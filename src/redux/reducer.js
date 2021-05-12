@@ -184,7 +184,7 @@ function reducer(state = initialState, action) {
     case Constants.ADD_COMPARISON_FEATURE:
       return {...state, comparisonFeatures: state.comparisonFeatures.concat([action.feature])};
     case Constants.REMOVE_COMPARISON_FEATURE:
-      return {...state, comparisonFeatures: state.comparisonFeatures.filter(feature => feature !== action.feature)}
+      return {...state, comparisonFeatures: state.comparisonFeatures.filter(feature => feature.properties["SA2_MAIN16"] !== action.feature.properties["SA2_MAIN16"])}
     default:
       return state;
   }

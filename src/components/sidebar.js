@@ -49,7 +49,7 @@ let Sidebar = class Sidebar extends React.Component {
       )
     }
 
-    const isCompared = this.props.comparisonFeatures.includes(this.props.selectedFeature)
+    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature.properties["SA2_MAIN16"]) !== undefined;
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
