@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/header";
-import Routes from "./routes/index";
+
+{/* change so App has Main (rather than Routes) */}
+import Main from "./pages/main";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -15,7 +17,8 @@ const App = () => {
     <BrowserRouter>
       <Provider store={store}>
         <Header />
-        <Routes />
+        {/* change so App has Main */}
+        <Main /> 
       </Provider>
     </BrowserRouter>
   );
