@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
 
@@ -8,6 +8,11 @@ import "../css/header.css";
 function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
+  const [comparisonMode, setComparisonMode] = useState(false);
+  const history = useHistory();
+  history.listen(location => {
+    setComparisonMode(location.pathname.startsWith('/comparison'));
+  })
 
   const headerBox = {
     display: "flex",
@@ -34,9 +39,9 @@ function Header () {
                   the dropdownSelect */}
         <div className="dropdown-menu">
           <button className="menu-icon" onClick={toggleDropDown}>
-            <div className="menu-icon-bar"></div>
-            <div className="menu-icon-bar"></div>
-            <div className="menu-icon-bar"></div>
+            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
+            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
+            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
           </button>
           <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
             <Link

@@ -60,8 +60,15 @@
 .menu-icon-bar {
     width: 22px;
     height: 3px;
-    background-color: white;
     margin: 4px 0;
     border-radius: 2px;
+}
+
+.menu-icon-bar.white {
+    background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
+}
+
+.menu-icon-bar.black {
+    background-color: black;
 }
