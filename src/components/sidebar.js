@@ -16,7 +16,7 @@ import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
-import LocationCompare from "./LocationCompare";
+import LocationCompare from "./LocationToCompare";
 
 let Sidebar = class Sidebar extends React.Component {
   static propTypes = {
@@ -54,7 +54,7 @@ let Sidebar = class Sidebar extends React.Component {
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
-        <button className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
+        <button disabled={this.props.comparisonFeatures.length >= 4} className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
       </div>
 
     );
