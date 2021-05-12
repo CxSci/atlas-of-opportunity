@@ -20,6 +20,10 @@ const featureRoot = {
   marginTop: 15,
 };
 
+const listRoot = {
+    marginRight: "-9px"
+}
+
 const closeIcon = {
   cursor: "pointer",
 };
@@ -36,6 +40,7 @@ const LocationCompare = () => {
   const comparisonFeatures = useSelector(getComparisonFeatures);
   return (
     <div style={root}>
+    <div style={listRoot}>
       {comparisonFeatures.map((feature) => {
         return (
           <div style={featureRoot} key={feature.primary}>
@@ -49,6 +54,7 @@ const LocationCompare = () => {
           </div>
         );
       })}
+      </div>
       <ComparisonButton onClick={() => {}} />
       <div>
         <p style={disclaimerText}>Add up to 4 regions.</p>
