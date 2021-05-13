@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
+import { Link } from "react-router-dom";
+
 const buttonRoot = {
   width: "161px",
   height: "36px",
@@ -26,9 +28,11 @@ const buttonText = {
 
 const ComparisonButton = (props) => {
   return (
-    <div style={{...buttonRoot, ...props.style}} onClick={props.onClick}>
+    <div style={{...buttonRoot, ...props.style}}>
       <div>
-        <p style={buttonText}>Show Comparison</p>
+        <Link to="/comparison" style={buttonText}>
+          Show Comparison
+        </Link>
       </div>
       <svg
         width="7"
@@ -50,8 +54,7 @@ const ComparisonButton = (props) => {
 };
 
 ComparisonButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    style: PropTypes.object
+  style: PropTypes.object
 }
 
 export default ComparisonButton

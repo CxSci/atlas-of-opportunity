@@ -102,11 +102,11 @@
     border-radius: 2px;
 }
 
-.menu-icon-bar.white {
+.menu-icon.white .menu-icon-bar {
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
 }
 
-.menu-icon-bar.black {
+.menu-icon.black .menu-icon-bar {
     background-color: black;
 }

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Collapsible from "react-collapsible";
 import LocationCompare from "./LocationToCompare";
 
-class ComparisonMode extends React.Component {
+class ComparisonSidebarContent extends React.Component {
   
   render() {
 
@@ -31,4 +31,4 @@ class ComparisonMode extends React.Component {
   }
 }
 
-export default (ComparisonMode);
+export default (ComparisonSidebarContent);

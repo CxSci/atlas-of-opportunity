@@ -38,17 +38,28 @@ class Sidebar extends React.Component {
         </div>
       )
     }
-
+    
     const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
+    const enableButton = this.props.comparisonFeatures.length >= 4;
+    
+    const comparisonClick = (feature) => {
+      if (isCompared) {
+        removeComparisonFeature(feature);
+      } else {
+        addComparisonFeature(feature);
+      }
+    }
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
-        <button disabled={this.props.comparisonFeatures.length >= 4} className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
+        <button disabled={enableButton} className="actionButton" onClick={() => comparisonClick(this.props.selectedFeature)}>
+          <ComparisonIcon className="icon"/>
+          {isCompared ? "Remove from Comparison" : "Add to Comparison"}
+        </button>
       </div>
 
     );
-
     // const featureDebug = (feature) => {
     //   if (!feature || !feature.properties) {
     //     return ""

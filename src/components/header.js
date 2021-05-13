@@ -54,10 +54,10 @@ function Header () {
             : null
           }   
         <div className="dropdown-menu">
-          <button className="menu-icon" onClick={toggleDropDown}>
-            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
-            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
-            <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
+          <button className={`menu-icon ${comparisonMode ? 'black' : 'white'}`} onClick={toggleDropDown}>
+            <div className="menu-icon-bar"></div>
+            <div className="menu-icon-bar"></div>
+            <div className="menu-icon-bar"></div>
           </button>
           <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
           <div className="dropdown-header">
