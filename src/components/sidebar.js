@@ -17,7 +17,7 @@ import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
 import Collapsible from "react-collapsible";
 import { Switch, Route } from "react-router";
-import ComparisonMode from "./ComparisonMode";
+import ComparisonSidebarContent from "./ComparisonSidebarContent";
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
         <div className={`sidebar-container`}>
           <Switch>
             <Route exact path="/comparison" render={() => (
-              <ComparisonMode />
+              <ComparisonSidebarContent />
             )} />
             <Route exact path="/" render={() => (
               <>
