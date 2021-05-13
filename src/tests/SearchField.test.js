@@ -16,6 +16,13 @@ it("renders correctly", async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it("render dropdown on search input", async () => {
+  const event = {target: {value: "ad"}};
+  const component = Enzyme.mount(preRender(<SASearchField />));
+  component.find('input').simulate('mouseEnter').simulate('change', event)
+  
+})
+
 it("can select feature", () => {
   //console.log(JSON.parse(loadGeoJSON("./src/data/SA_dashboard.geojson")))
   //fetch.mockResponseOnce(loadGeoJSON("./src/data/SA_dashboard.geojson"))
