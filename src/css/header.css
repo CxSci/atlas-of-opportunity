@@ -8,26 +8,65 @@
     /* children need to opt into mouse events with pointer-events: auto */
 }
 
-.navbar-title {
-    font-size: 1.3rem;
+.dim-screen{
+     /* Ignore our parent elements and the rest of
+        the DOM hierarchy. Position and size this
+        relative to the screen. */
+        position: fixed;
+        top: 0; /* Stretch to the edges of the screen */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1; /* Above map and below menu */
+        background: black;
+        opacity: 0.5;
+        pointer-events: auto;
 }
 
+
 .dropdown-menu {
+    margin-left: 32px;
+    margin-right: 16px;
+    z-index: 1;
+}
+
+.dropdown-header{
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    border-bottom: 1px solid #CCC;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-title {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 27px;
+}
+
+.close-icon{
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
-    margin-right: 1rem;
+    margin-left: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+
 }
 
 .dropdown-content {
     display: none;
-    background-color: white;
-    opacity: 1;
-    flex-direction: column;
+    min-width: 270px; 
+    background-color: white; 
     position: absolute;
-    top: 50px;
-    right: 2rem;
-    z-index: 3;
+    top: 0px;
+    padding-bottom: 100%;
+    right: 0px;
+    z-index: 1;
+    flex-direction: column;
+    text-align: left;
+    
 }
 
 .dropdown-content a {
@@ -35,11 +74,10 @@
     display: flex;
     align-items: center;
     margin: 0;
-    padding: 0.5rem 1rem;
+    padding: 15px 20px 15px 27px;
     color: black;
-    font-size: 1.3rem;
+    font-size: 16px;
     cursor: pointer;
-    height: 100%;
     pointer-events: auto;
 }
 

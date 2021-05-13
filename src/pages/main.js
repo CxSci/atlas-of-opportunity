@@ -7,12 +7,13 @@ import Sidebar from "../components/sidebar";
 import Legend from '../components/legend';
 import "../css/main.css";
 
-let Main = class Main extends Component {
+import Routes from "../routes/index";
+
+const Main = class Main extends Component {
   static propTypes = {
     selectedFeature: PropTypes.object,
     sidebarOpen: PropTypes.bool.isRequired,
   };
-
   render() {
     const mapStyler = {
       zindex: 0,
@@ -32,12 +33,14 @@ let Main = class Main extends Component {
         : "sidebarClosed";
 
     return (
+
       <div className={`main ${sidebarState} `} style={mapStyler}>
         <div style={screenFlexStyle}>
           <Sidebar />
           <Map />
         </div>
         {this.props.selectedFeature ? <Legend absolute /> : <></>}
+        <Routes />
       </div>
     );
   }
@@ -50,6 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-Main = connect(mapStateToProps)(Main);
-
-export default Main;
+export default connect(mapStateToProps)(Main);

@@ -91,3 +91,17 @@ export function setHighlightedFeature(feature) {
     feature: feature,
   })
 }
+
+export function addComparisonFeature(feature) {
+  store.dispatch({
+    type: Constants.ADD_COMPARISON_FEATURE,
+    feature
+  })
+}
+
+export function removeComparisonFeature(feature) {
+  store.dispatch({
+    type: Constants.REMOVE_COMPARISON_FEATURE,
+    feature
+  })
+}

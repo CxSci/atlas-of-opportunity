@@ -84,6 +84,7 @@ const select = {
 const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
+  comparisonFeatures: [],
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
   select,
@@ -180,6 +181,10 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         highlightedFeature: action.feature,
       });
+    case Constants.ADD_COMPARISON_FEATURE:
+      return {...state, comparisonFeatures: state.comparisonFeatures.concat([action.feature])};
+    case Constants.REMOVE_COMPARISON_FEATURE:
+      return {...state, comparisonFeatures: state.comparisonFeatures.filter(feature => feature.properties["SA2_MAIN16"] !== action.feature.properties["SA2_MAIN16"])}
     default:
       return state;
   }

@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { setModal } from "../redux/action-creators";
-
 import livingLab from "../assets/livinglab.png";
 import banksa from "../assets/banksa.png";
 import dspark from "../assets/dspark.png";
@@ -10,19 +6,9 @@ import dspark from "../assets/dspark.png";
 import Container from "../components/container";
 
 const About = class About extends Component {
-  static propTypes = {
-    modal: PropTypes.bool.isRequired,
-  };
-
-  componentDidMount() {
-    if (this.props.modal === true) {
-      setModal(false);
-    }
-  }
-
   render() {
     const content = {
-      fontSize: "16px",
+      fontSize: "14px",
       textAlign: "justify",
       marginBottom: "15px",
     };
@@ -37,7 +23,7 @@ const About = class About extends Component {
       color: "#f79640",
     };
     return (
-      <Container title="About">
+      <Container title="About the Atlas">
         <p style={content}>
           The “MIT bigdata Living Lab” (Living Lab) is a research partnership
           enabled by principal partner BankSA, Massachusetts Institute of
@@ -80,10 +66,6 @@ const About = class About extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    modal: state.modal,
-  };
-}
 
-export default connect(mapStateToProps)(About);
+
+export default About;

@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { setHeaderOption } from "../redux/action-creators";
 
 import "../css/header.css";
+import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 
 function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
@@ -43,6 +44,15 @@ function Header () {
                   and when viewing static pages */}
         {/* TODO: convert to use a similar downshift/popper setup as
                   the dropdownSelect */}
+
+          {
+          showDropDown
+            ? 
+              <div className={`dim-screen ${showDropDown ? "show" : ""}`}
+              onClick={() => { setShowDropDown(false) }}
+              />
+            : null
+          }   
         <div className="dropdown-menu">
           <button className="menu-icon" onClick={toggleDropDown}>
             <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
@@ -50,33 +60,36 @@ function Header () {
             <div className={`menu-icon-bar ${comparisonMode ? 'black' : 'white'}`}></div>
           </button>
           <div className={`dropdown-content ${showDropDown ? "show" : ""}`}>
-            <Link
-              to="/"
-              onClick={() => setHeaderOption("/")}
-            >
-              Map
-            </Link>
+          <div className="dropdown-header">
+              <div className="menu-title">Atlas of Opportunity</div>
+              <div className="close-icon"><CloseIcon/></div>
+             </div>
+            
             <Link
               to="/methods"
-              onClick={() => setHeaderOption("/methods")}
+              onClick={() => setHeaderOption("/methods"),
+              toggleDropDown}
             >
               Methods
             </Link>
             <Link
               to="/research"
-              onClick={() => setHeaderOption("/research")}
+              onClick={() => setHeaderOption("/research"),
+              toggleDropDown}
             >
               Research
             </Link>
             <Link
               to="/about"
-              onClick={() => setHeaderOption("/about")}
+              onClick={() => setHeaderOption("/about"),
+              toggleDropDown}
             >
               About
             </Link>
             <Link
               to="/faq"
-              onClick={() => setHeaderOption("/faq")}
+              onClick={() => setHeaderOption("/faq"),
+              toggleDropDown}
             >
               FAQ
             </Link>

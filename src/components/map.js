@@ -67,7 +67,11 @@ let Map = class Map extends React.Component {
         [129, -38],
         [141, -26]
       ],
-      fitBoundsOptions: { padding: 70 },
+      // 70px padding around initial viewport, with an extra 310 on the left
+      // to account for <WelcomeDialog />.
+      // TODO: Calculate width of WelcomeDialog at runtime instead of
+      //       hardcoding it here.
+      fitBoundsOptions: { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
     });
 
     this.map.resize();
@@ -216,13 +220,25 @@ let Map = class Map extends React.Component {
     this.highlightFeature(null)
   }
 
+  resizeMapPinningNortheast = () => {
+    // Resize the map without moving its northeast corner
+    const oldCorner = this.map.getBounds().getNorthEast();
+    this.map.resize();
+    let corner = this.map.getBounds().getNorthEast();
+    let center = this.map.getCenter();
+    let shiftVector = { x: corner.lng - oldCorner.lng, y: corner.lat - oldCorner.lat };
+    let newCenter = new mapboxgl.LngLat(center.lng - shiftVector.x, center.lat - shiftVector.y);
+    this.map.setCenter(newCenter);
+  }
+
+
   componentDidUpdate(prevProps) {
     if (this.props.sidebarOpen !== prevProps.sidebarOpen
       || (this.props.selectedFeature !== prevProps.selectedFeature
         && (!this.props.selectedFeature || !prevProps.selectedFeature)
       )
     ) {
-      this.map.resize();
+      this.resizeMapPinningNortheast()
     }
 
     if (this.props.flowDirection !== prevProps.flowDirection) {
