@@ -79,7 +79,7 @@ class Sidebar extends React.Component {
                   <>
                     <ActionButtons/>
                     {this.props.comparisonFeatures.length > 0 &&
-                      <Collapsible trigger="Locations to Compare">
+                      <Collapsible trigger="Locations to Compare" open={true}>
                         <LocationCompare showButton />
                       </Collapsible> 
                     }

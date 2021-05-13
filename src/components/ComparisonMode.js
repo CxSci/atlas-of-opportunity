@@ -22,7 +22,7 @@ class ComparisonMode extends React.Component {
           </span>
         </div>
         <div className="sidebar-content">
-          <Collapsible trigger="Locations to Compare">
+          <Collapsible trigger="Locations to Compare" open={true}>
             <LocationCompare />
           </Collapsible>
         </div>
