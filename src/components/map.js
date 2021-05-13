@@ -239,6 +239,18 @@ let Map = class Map extends React.Component {
   }
 
 
+  resizeMapPinningNortheast = () => {
+    // Resize the map without moving its northeast corner
+    const oldCorner = this.map.getBounds().getNorthEast();
+    this.map.resize();
+    let corner = this.map.getBounds().getNorthEast();
+    let center = this.map.getCenter();
+    let shiftVector = { x: corner.lng - oldCorner.lng, y: corner.lat - oldCorner.lat };
+    let newCenter = new mapboxgl.LngLat(center.lng - shiftVector.x, center.lat - shiftVector.y);
+    this.map.setCenter(newCenter);
+  }
+
+
   componentDidUpdate(prevProps) {
     if (
       this.props.sidebarOpen !== prevProps.sidebarOpen ||
