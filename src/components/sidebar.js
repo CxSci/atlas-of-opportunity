@@ -13,7 +13,6 @@ import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
 import LocationDetails from "./LocationDetails";
-import { Link } from "react-router-dom";
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -38,7 +37,6 @@ class Sidebar extends React.Component {
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
         <button className="actionButton"><ComparisonIcon className="icon"/> Add to Comparison</button>
-        <Link to="/comparison" className="actionButton">Show Comparison &gt;</Link>
       </div>
 
     );
