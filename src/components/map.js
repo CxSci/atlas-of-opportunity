@@ -10,6 +10,8 @@ import "../css/map.css";
 
 import * as Constants from "../constants";
 import { IS_TEST } from "../utils/constants";
+import { store } from "../redux/store";
+import { loadFeatures } from "../redux/reducer";
 
 mapboxgl.accessToken = IS_TEST
   ? "DUMMY_TOKEN"
@@ -92,6 +94,12 @@ let Map = class Map extends React.Component {
         data: this.props.geojsonURL,
         promoteId: "SA2_MAIN16",
       });
+
+      this.map.on("sourcedata", (e) => {
+        if (e.sourceId === "sa2" && e.isSourceLoaded && !e.sourceCacheId) {
+          store.dispatch(loadFeatures())
+        }
+      })
 
       this.map.addLayer({
         id: "sa2-fills",

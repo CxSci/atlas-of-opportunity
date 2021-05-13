@@ -105,3 +105,7 @@ export function removeComparisonFeature(feature) {
     feature
   })
 }
+
+export function resetState() {
+  store.dispatch({type: "RESET"})
+}

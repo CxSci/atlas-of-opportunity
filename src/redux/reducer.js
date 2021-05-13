@@ -149,6 +149,8 @@ function reducer(state = initialState, action) {
         ...state,
         showWelcomeDialog: action.payload,
       };
+    case "RESET":
+      return initialState;
     case "Header":
       return Object.assign({}, state, {
         path: action.payload,

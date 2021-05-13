@@ -1,10 +1,9 @@
 import { Provider } from "react-redux";
-import { store } from "../redux/store";
 import React from "react";
 
 const fs = require("fs");
 
-export const preRender = (element) => (
+export const preRender = (element, store) => (
   <Provider store={store}>{element}</Provider>
 );
 

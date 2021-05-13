@@ -1,5 +1,1434 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render dropdown on search input 1`] = `
+"<Provider store={{...}}>
+  <Connect(SASearchField)>
+    <SASearchField features={{...}} selectedFeature={{...}} dispatch={[Function (anonymous)]}>
+      <div className=\\"sidebarHeader \\">
+        <BigTitle onFocus={[Function: onFocus]} onCancel={[Function: onCancel]}>
+          <div className=\\"bigTitle\\">
+            <div className=\\"titleButton\\" onClick={[Function: onFocus]}>
+              <div className=\\"titleUnderline\\" />
+            </div>
+            <div className=\\"cancelButton\\" onClick={[Function: onCancel]}>
+              <div className=\\"cancelUnderline\\">
+                <content />
+              </div>
+            </div>
+          </div>
+        </BigTitle>
+        <ForwardRef localItems={{...}} geocoderConfig={{...}} initialInputValue=\\"\\" onFocus={[Function: onFocus]} onIsOpenChange={[Function: onIsOpenChange]} setHighlightedFeature={[Function: setHighlightedFeature]} setSelectedFeature={[Function: setSelectedFeature]} dispatch={[Function (anonymous)]}>
+          <div className=\\"searchContainer\\">
+            <div role=\\"combobox\\" aria-haspopup=\\"listbox\\" aria-owns=\\"downshift-3-menu\\" aria-expanded={true} className=\\"searchField\\">
+              <input id=\\"downshift-3-input\\" aria-autocomplete=\\"list\\" aria-controls=\\"downshift-3-menu\\" aria-activedescendant=\\"downshift-3-item-0\\" aria-labelledby=\\"downshift-3-label\\" autoComplete=\\"off\\" value=\\"ad\\" onChange={[Function (anonymous)]} onKeyDown={[Function (anonymous)]} onBlur={[Function (anonymous)]} onFocus={[Function: onFocus]} placeholder=\\"Search by suburb or region\\" spellCheck=\\"false\\" />
+              <button tabIndex={-1} onClick={[Function: onClick]} aria-label=\\"clear selection\\">
+                <content />
+              </button>
+              <div style={{...}}>
+                <ul id=\\"downshift-3-menu\\" role=\\"listbox\\" aria-labelledby=\\"downshift-3-label\\" onMouseLeave={[Function (anonymous)]} className=\\"searchMenu\\" hidden={false}>
+                  <li className=\\"highlighted\\" role=\\"option\\" aria-selected=\\"true\\" id=\\"downshift-3-item-0\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Aberfoyle Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-1\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Adelaide
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-2\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Adelaide Airport
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-3\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Adelaide Hills
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-4\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Aldgate - Stirling
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-5\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Aldinga
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-6\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      APY Lands
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-7\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Athelstone
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-8\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Barmera
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-9\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Barossa - Angaston
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-10\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Belair
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-11\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Bellevue Heights
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-12\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Berri
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-13\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Beverley
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-14\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Blackwood
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-15\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Brighton (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-16\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Burnside - Wattle Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-17\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Ceduna
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-18\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Christie Downs
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-19\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Christies Beach
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-20\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Clare
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-21\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Clarendon
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-22\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Colonel Light Gardens
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-23\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Coober Pedy
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-24\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Coromandel Valley
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-25\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Craigmore - Blakeview
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-26\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Davoren Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-27\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Dry Creek - North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-28\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Dry Creek - South
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-29\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Edwardstown
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-30\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Elizabeth
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-31\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Elizabeth East
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-32\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Enfield - Blair Athol
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-33\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Eyre Peninsula
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-34\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Flagstaff Hill
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-35\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Flinders Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-36\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Fulham
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-37\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Gawler - North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-38\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Gawler - South
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-39\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Gilbert Valley
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-40\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Glenelg (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-41\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Glenside - Beaumont
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-42\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Golden Grove
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-43\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Goodwood - Millswood
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-44\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Goolwa - Port Elliot
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-45\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Goyder
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-46\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Grant
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-47\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Greenwith
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-48\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hackham - Onkaparinga Hills
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-49\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hackham West - Huntfield Heights
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-50\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hahndorf - Echunga
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-51\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hallett Cove
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-52\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Happy Valley
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-53\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Happy Valley Reservoir
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-54\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Henley Beach
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-55\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Highbury - Dernancourt
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-56\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hindmarsh - Brompton
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-57\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Hope Valley - Modbury
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-58\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Ingle Farm
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-59\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Jamestown
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-60\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Kadina
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-61\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Kangaroo Island
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-62\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Karoonda - Lameroo
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-63\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Kimba - Cleve - Franklin Harbour
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-64\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Kingston - Robe
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-65\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Largs Bay - Semaphore
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-66\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Le Hunte - Elliston
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-67\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Lewiston - Two Wells
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-68\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Light
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-69\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Lobethal - Woodside
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-70\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Lockleys
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-71\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Lonsdale
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-72\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Loxton
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-73\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Loxton Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-74\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Lyndoch
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-75\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mallala
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-76\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mannum
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-77\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Marino - Seaview Downs
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-78\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mawson Lakes - Globe Derby Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-79\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      McLaren Vale
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-80\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Migratory - Offshore - Shipping (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-81\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Millicent
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-82\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mitcham (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-83\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mitchell Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-84\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Modbury Heights
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-85\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Moonta
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-86\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Morphett Vale - East
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-87\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Morphett Vale - West
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-88\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Morphettville
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-89\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mount Barker
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-90\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mount Barker Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-91\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mount Gambier - East
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-92\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Mount Gambier - West
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-93\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Munno Para West - Angle Vale
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-94\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Murray Bridge
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-95\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Murray Bridge Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-96\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Nailsworth - Broadview
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-97\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Nairne
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-98\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Naracoorte
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-99\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Naracoorte Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-100\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      No usual address (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-101\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      North Adelaide
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-102\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      North Haven
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-103\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Northgate - Oakden - Gilles Plains
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-104\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Norwood (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-105\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Nuriootpa
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-106\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      One Tree Hill
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-107\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Outback
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-108\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Panorama
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-109\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Para Hills
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-110\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Paradise - Newton
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-111\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Parafield
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-112\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Parafield Gardens
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-113\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Paralowie
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-114\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Payneham - Felixstow
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-115\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Penola
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-116\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Peterborough - Mount Remarkable
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-117\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Plympton
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-118\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Pooraka - Cavan
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-119\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Port Adelaide
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-120\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Port Augusta
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-121\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Port Lincoln
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-122\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Port Pirie
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-123\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Port Pirie Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-124\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Prospect
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-125\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Quorn - Lake Gilles
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-126\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Redwood Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-127\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Renmark
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-128\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Renmark Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-129\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Reynella
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-130\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Richmond (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-131\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Rostrevor - Magill
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-132\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Roxby Downs
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-133\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Royal Park - Hendon - Albert Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-134\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Salisbury
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-135\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Salisbury East
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-136\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Salisbury North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-137\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Seaford (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-138\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Seaton - Grange
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-139\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Sheidow Park - Trott Park
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-140\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Smithfield - Elizabeth North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-141\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      St Agnes - Ridgehaven
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-142\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      St Peters - Marden
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-143\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Strathalbyn
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-144\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Strathalbyn Region
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-145\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Tanunda
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-146\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Tatiara
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-147\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      The Coorong
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-148\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      The Parks
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-149\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Toorak Gardens
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-150\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Torrens Island
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-151\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Unley - Parkside
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-152\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Uraidla - Summertown
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-153\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Victor Harbor
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-154\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Virginia - Waterloo Corner
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-155\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Waikerie
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-156\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Wakefield - Barunga West
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-157\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Walkerville
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-158\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Wallaroo
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-159\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Warradale
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-160\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Wattle Range
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-161\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      West Beach
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-162\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      West Coast (SA)
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-163\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      West Lakes
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-164\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Western
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-165\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Whyalla
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-166\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Whyalla - North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-167\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Willunga
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-168\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Windsor Gardens
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-169\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Woodcroft
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-170\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Woodville - Cheltenham
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-171\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Yankalilla
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-172\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Yorke Peninsula - North
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                  <li className=\\"\\" role=\\"option\\" aria-selected=\\"false\\" id=\\"downshift-3-item-173\\" onMouseMove={[Function (anonymous)]} onClick={[Function (anonymous)]}>
+                    <div className=\\"primary\\">
+                      Yorke Peninsula - South
+                    </div>
+                    <div className=\\"secondary\\">
+                      SA2 Region
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </ForwardRef>
+      </div>
+    </SASearchField>
+  </Connect(SASearchField)>
+</Provider>"
+`;
+
 exports[`renders correctly 1`] = `
 <div
   className="sidebarHeader "
