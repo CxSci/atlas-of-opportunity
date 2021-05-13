@@ -69,6 +69,8 @@ let Map = class Map extends React.Component {
       ],
       // 70px padding around initial viewport, with an extra 310 on the left
       // to account for <WelcomeDialog />.
+      // TODO: Calculate width of WelcomeDialog at runtime instead of
+      //       hardcoding it here.
       fitBoundsOptions: { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
     });
 
