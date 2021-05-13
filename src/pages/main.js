@@ -42,7 +42,7 @@ const Main = (props) => {
           <Sidebar />
           {!comparisonMode && <Map />}
         </div>
-        {props.selectedFeature && <Legend absolute />}
+        {props.selectedFeature && !comparisonMode && <Legend absolute />}
         <Routes />
       </div>
     );

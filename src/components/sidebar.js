@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
       )
     }
 
-    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature.properties["SA2_MAIN16"]) !== undefined;
+    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
