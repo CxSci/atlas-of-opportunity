@@ -69,7 +69,7 @@ let Map = class Map extends React.Component {
       style: "mapbox://styles/mapbox/dark-v10",
       bounds: [
         [129, -38],
-        [141, -26]
+        [141, -26],
       ],
       // 70px padding around initial viewport, with an extra 310 on the left
       // to account for <WelcomeDialog />.
@@ -175,7 +175,7 @@ let Map = class Map extends React.Component {
 
       this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
-          this.highlightFeature(e.features[0])
+          this.highlightFeature(e.features[0]);
         }
       });
 
@@ -192,20 +192,17 @@ let Map = class Map extends React.Component {
   }
 
   highlightFeature = (feature) => {
-    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16
-    const newId = feature?.properties?.SA2_MAIN16
+    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16;
+    const newId = feature?.properties?.SA2_MAIN16;
     if (prevId === newId) {
-      return
+      return;
     }
     // First, clear any old highlight
     if (this.state.highlightedFeature) {
-      this.map.setFeatureState(
-        { source: "sa2", id: prevId },
-        { hover: false }
-      );
+      this.map.setFeatureState({ source: "sa2", id: prevId }, { hover: false });
     }
 
-    this.setState({ highlightedFeature: feature })
+    this.setState({ highlightedFeature: feature });
 
     // Skip the two SA2s which lack geometry, as they don't correspond to
     // geographic areas and aren't mappable.
@@ -224,11 +221,11 @@ let Map = class Map extends React.Component {
     } else {
       this.hoveredPopup.remove();
     }
-  }
+  };
 
   clearFeatureHighlight = () => {
-    this.highlightFeature(null)
-  }
+    this.highlightFeature(null);
+  };
 
   resizeMapPinningNortheast = () => {
     // Resize the map without moving its northeast corner
@@ -243,10 +240,10 @@ let Map = class Map extends React.Component {
 
 
   componentDidUpdate(prevProps) {
-    if (this.props.sidebarOpen !== prevProps.sidebarOpen
-      || (this.props.selectedFeature !== prevProps.selectedFeature
-        && (!this.props.selectedFeature || !prevProps.selectedFeature)
-      )
+    if (
+      this.props.sidebarOpen !== prevProps.sidebarOpen ||
+      (this.props.selectedFeature !== prevProps.selectedFeature &&
+        (!this.props.selectedFeature || !prevProps.selectedFeature))
     ) {
       this.resizeMapPinningNortheast()
     }
@@ -265,35 +262,38 @@ let Map = class Map extends React.Component {
     }
 
     if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
-      this.highlightFeature(this.props.highlightedFeature)
+      this.highlightFeature(this.props.highlightedFeature);
     }
 
     if (this.props.selectedFeature !== prevProps.selectedFeature) {
-      this.selectFeature(this.props.selectedFeature)
+      this.selectFeature(this.props.selectedFeature);
     }
   }
 
   selectFeature = (feature) => {
-    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16
-    const newId = feature?.properties?.SA2_MAIN16
+    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16;
+    const newId = feature?.properties?.SA2_MAIN16;
     if (prevId === newId) {
-      return
+      return;
     }
 
-    this.redrawBridges(feature)
+    this.redrawBridges(feature);
     if (feature && (feature.geometry || feature._geometry)) {
-      const [minX, minY, maxX, maxY] = turf.bbox(feature)
+      const [minX, minY, maxX, maxY] = turf.bbox(feature);
       this.map.fitBounds(
-        [[minX, minY], [maxX, maxY]],
+        [
+          [minX, minY],
+          [maxX, maxY],
+        ],
         {
           maxZoom: 10,
           padding: 100,
           bearing: this.map.getBearing(),
           pitch: this.map.getPitch(),
         }
-      )
+      );
     }
-  }
+  };
 
   onMapSearch = (e) => {
     this.map.fire("click", {
@@ -339,7 +339,7 @@ let Map = class Map extends React.Component {
       clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
       this.redrawBridges(clickedFeature);
-      setSelectedFeature(clickedFeature)
+      setSelectedFeature(clickedFeature);
     }
   };
 
@@ -393,12 +393,12 @@ let Map = class Map extends React.Component {
       );
     }
 
-    this.setState({ selectedFeature: feature })
+    this.setState({ selectedFeature: feature });
 
     // Skip features without geometry, like the two SA2s
     // "Migratory - Offshore - Shipping (SA)" and "No usual address (SA)"
     if (!feature || !(feature.geometry || feature._geometry)) {
-      return
+      return;
     }
 
     // find the center point of the newly selected region
@@ -453,19 +453,25 @@ let Map = class Map extends React.Component {
       // like {"foo": null} into {"foo": "null"}.
       const bridges = keys
         .map((x) => feature.properties[x])
-        .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
+        .filter(
+          (x) =>
+            x !== undefined &&
+            x !== "null" &&
+            typeof x === "number" &&
+            isFinite(x)
+        );
 
       // Search map for SA2s matching the bridges.
       // Search the GeoJSON loaded separately as `features`, as Mapbox does not
       // support searching for features which aren't currently in view.
-      connectedFeatures = this.props.features
-        .filter(f => bridges
-          .some(b => b === Number(f.properties.SA2_MAIN16)))
+      connectedFeatures = this.props.features.filter((f) =>
+        bridges.some((b) => b === Number(f.properties.SA2_MAIN16))
+      );
 
       // get rid of the repeated features in the connectedFeatures array
       connectedFeatures.forEach((f) => {
         // For each feature, update its 'highlight' state
-        const featureId = f.properties.SA2_MAIN16
+        const featureId = f.properties.SA2_MAIN16;
         this.map.setFeatureState(
           {
             source: "sa2",
@@ -618,7 +624,13 @@ let Map = class Map extends React.Component {
       let steps = 1000;
       var that = this;
 
-      const animate = function animate(featureIdx, cntr, point, route, pointID) {
+      const animate = function animate(
+        featureIdx,
+        cntr,
+        point,
+        route,
+        pointID
+      ) {
         // Update point geometry to a new position based on counter denoting
         // the index to access the arc.
         if (
@@ -668,7 +680,7 @@ let Map = class Map extends React.Component {
             });
           }
         }
-      }
+      };
 
       // Reset the counter used for in and outflow
       var cntr0 = 0;
@@ -690,9 +702,9 @@ let Map = class Map extends React.Component {
       }
     }
   };
-  
+
   render() {
-    return <div id="map" ref={this.mapRef} className="map" />
+    return <div id="map" ref={this.mapRef} className="map" />;
   }
 };
 
