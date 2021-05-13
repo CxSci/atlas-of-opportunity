@@ -16,6 +16,8 @@ import { addComparisonFeature, removeComparisonFeature } from "../redux/action-c
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
 import Collapsible from "react-collapsible";
+import { Switch, Route } from "react-router";
+import ComparisonMode from "./ComparisonMode";
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -66,24 +68,33 @@ class Sidebar extends React.Component {
       <PanelContainer>
         <SidebarButton />
         <div className={`sidebar-container`}>
-          <SASearchField />
-          {this.props.selectedFeature ?
-            <>
-              <ActionButtons/>
-              {this.props.comparisonFeatures.length > 0 ?
-              <Collapsible trigger="Locations to Compare">
-                <LocationCompare/>
-              </Collapsible> 
-              : <></> }
-              <LocationDetails feature={this.props.selectedFeature}>
-              </LocationDetails>
-            </>
-            :
-            <>
-              <WelcomeDialog />
-              <Legend/>
-            </>
-          }
+          <Switch>
+            <Route exact path="/comparison" render={() => (
+              <ComparisonMode />
+            )} />
+            <Route exact path="/" render={() => (
+              <>
+                <SASearchField />
+                {this.props.selectedFeature ?
+                  <>
+                    <ActionButtons/>
+                    {this.props.comparisonFeatures.length > 0 &&
+                      <Collapsible trigger="Locations to Compare">
+                        <LocationCompare showButton />
+                      </Collapsible> 
+                    }
+                    <LocationDetails feature={this.props.selectedFeature}>
+                    </LocationDetails>
+                  </>
+                  :
+                  <>
+                    <WelcomeDialog />
+                    <Legend/>
+                  </>
+                }
+              </>
+            )}  />
+          </Switch>
         </div>
       </PanelContainer>
     );
