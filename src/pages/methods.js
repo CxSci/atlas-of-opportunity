@@ -1,27 +1,15 @@
 import React, { Component } from "react";
 import { MathComponent } from "mathjax-react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { setModal } from "../redux/action-creators";
 
 import flow from "../assets/flow.png";
 
 import Container from "../components/container";
 
 const Methods = class Methods extends Component {
-  static propTypes = {
-    modal: PropTypes.bool.isRequired,
-  };
-
-  componentDidMount() {
-    if (this.props.modal === true) {
-      setModal(false);
-    }
-  }
 
   render() {
     const content = {
-      fontSize: "16px",
+      fontSize: "14px",
       textAlign: "justify",
       marginBottom: "15px",
     };
@@ -36,6 +24,7 @@ const Methods = class Methods extends Component {
     const image = {
       width: "100%",
     };
+
     return (
       <Container title="Methods" >
         <p style={content}>
@@ -130,10 +119,4 @@ const Methods = class Methods extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    modal: state.modal,
-  };
-}
-
-export default connect(mapStateToProps)(Methods);
+export default Methods;

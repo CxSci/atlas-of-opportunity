@@ -1,35 +1,30 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ReactTooltip from "react-tooltip";
-import Collapsible from "react-collapsible";
 
-import BarGraph from "./BarGraph";
 import SidebarButton from "./SidebarButton";
 import SASearchField from "./SASearchField";
 import Legend from "./legend";
+
+import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
+import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
+
 import "../css/collapsible.css";
 import "../css/sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
+import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
+import LocationCompare from "./LocationToCompare";
+import LocationDetails from "./LocationDetails";
+import Collapsible from "react-collapsible";
 
-let Sidebar = class Sidebar extends React.Component {
+class Sidebar extends React.Component {
   static propTypes = {
     select: PropTypes.object.isRequired,
     selectedFeature: PropTypes.object,
+    comparisonFeatures: PropTypes.array.isRequired
   };
 
   render() {
-    const {
-      sa2_name,
-      population,
-      income,
-      quartile,
-      inequality,
-      ggp,
-      jr,
-      bgi,
-      sa1_codes,
-    } = this.props.select;
 
     const PanelContainer = (props) => {
       const featureSelected = this.props.selectedFeature
@@ -39,72 +34,17 @@ let Sidebar = class Sidebar extends React.Component {
         <div className={`panel-container ${featureSelected}`}>
           {props.children}
         </div>
-      );
-    };
+      )
+    }
 
-    const TopPanel = () => (
-      <div style={{ overflowY: "auto" }} className={`sidebar-content`}>
-        <div className="py12 px12" style={{ backgroundColor: "lightgray" }}>
-          <h2 className="txt-bold txt-l txt-uppercase block">{sa2_name}</h2>
-        </div>
-
-        <Collapsible trigger="Demographic Summary">
-          <h2>Population</h2>
-          <p>{population}</p>
-          <h2>Median Income</h2>
-          <p>{income}</p>
-        </Collapsible>
-
-        <Collapsible trigger="Economic Summary">
-          <h2>Income Quartile</h2>
-          <p>{quartile}</p>
-          <h2> Inequality (lower is better)</h2>
-          <p>{Math.floor(inequality)}%</p>
-          <h2>Visitor time spent by quartile</h2>
-          <div>
-            <BarGraph width={200} height={120} />
-          </div>
-        </Collapsible>
-
-        <Collapsible trigger="Growth Summary ">
-          <h2 data-tip data-for="GDPTip">
-            GDP Growth Potential
-          </h2>
-          <ReactTooltip id="GDPTip">
-            <b> GDP Growth Potential </b> <br />
-            Economic growth is an increase in the production <br />
-            of economic goods and services,compared from <br /> one period of
-            time to another...Traditionally, aggregate <br />
-            economic growth is measured in terms of gross national <br />
-            product (GNP) or gross domestic product (GDP), although
-            <br /> alternative metrics are sometimes used.
-          </ReactTooltip>
-          <p>{ggp}</p>
-          <h2 data-tip data-for="jobTip">
-            Job Resilience
-          </h2>
-          <ReactTooltip id="jobTip">
-            <b> Job Resilience </b> <br />
-            The ability to adjust to career change as it happens <br />
-            and,by extension, adapt to what the market demands.
-          </ReactTooltip>
-          <p>{jr}</p>
-          <h2 data-tip data-for="bgiTip">
-            Business Growth Index
-          </h2>
-          <ReactTooltip id="bgiTip">
-            <b> Business Growth Index </b> <br />
-            The growth rate is the measure of a company’s increase <br />
-            in revenue and potential to expand over a set period.
-          </ReactTooltip>
-          <p>{bgi}</p>
-          <h2 data-tip data-for="SATip">
-            {" "}
-            Included SA1 Regions
-          </h2>
-          <p>{sa1_codes}</p>
-        </Collapsible>
+    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature.properties["SA2_MAIN16"]) !== undefined;
+    
+    const ActionButtons = () => (
+      <div className="actionButtonsContainer">
+        <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
+        <button disabled={this.props.comparisonFeatures.length >= 4} className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
       </div>
+
     );
 
     // const featureDebug = (feature) => {
@@ -122,30 +62,40 @@ let Sidebar = class Sidebar extends React.Component {
     //   )
     // }
 
-    console.log(this.props.selectedFeature);
-
     return (
       <PanelContainer>
         <SidebarButton />
         <div className={`sidebar-container`}>
           <SASearchField />
-          {this.props.selectedFeature ? <TopPanel /> : <>
-            <WelcomeDialog />
-            <Legend/>
-          </>}
+          {this.props.selectedFeature ?
+            <>
+              <ActionButtons/>
+              {this.props.comparisonFeatures.length > 0 ?
+              <Collapsible trigger="Locations to Compare">
+                <LocationCompare/>
+              </Collapsible> 
+              : <></> }
+              <LocationDetails feature={this.props.selectedFeature}>
+              </LocationDetails>
+            </>
+            :
+            <>
+              <WelcomeDialog />
+              <Legend/>
+            </>
+          }
         </div>
       </PanelContainer>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
     select: state.select,
     selectedFeature: state.selectedFeature,
+    comparisonFeatures: state.comparisonFeatures
   };
 }
 
-Sidebar = connect(mapStateToProps)(Sidebar);
-
-export default Sidebar;
+export default connect(mapStateToProps)(Sidebar);
