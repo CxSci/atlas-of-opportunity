@@ -76,3 +76,13 @@
 .icon {
     margin-right: 12px;
 }
+
+.comparison-title {
+    display: flex;
+    align-items: center;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    padding: 19px 20px 13px 20px;
+}

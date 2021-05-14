@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
 
@@ -9,6 +9,17 @@ import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
+  const [comparisonMode, setComparisonMode] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setComparisonMode(location.pathname.startsWith('/comparison'));
+  }, [location]);
+
+  // const history = useHistory();
+  // history.listen(location => {
+  //   setComparisonMode(location.pathname.startsWith('/comparison'));
+  // })
 
   const headerBox = {
     display: "flex",
@@ -43,7 +54,7 @@ function Header () {
             : null
           }   
         <div className="dropdown-menu">
-          <button className="menu-icon" onClick={toggleDropDown}>
+          <button className={`menu-icon ${comparisonMode ? 'black' : 'white'}`} onClick={toggleDropDown}>
             <div className="menu-icon-bar"></div>
             <div className="menu-icon-bar"></div>
             <div className="menu-icon-bar"></div>
