@@ -43,7 +43,7 @@ const Main = (props) => {
           {!comparisonMode && <Map />}
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
-        <Footer inDarkMode/>
+        <Footer inDarkMode={!comparisonMode}/>
         <Routes />
       </div>
     );

@@ -16,8 +16,9 @@
 }
 
 .sidebar-content {
-    overflow-y: auto;
-    flex: 1 1 auto;
+    flex-grow: 1; 
+    flex-shrink: 0; 
+    flex-basis: 0;
 }
 
 .toggleButton {
