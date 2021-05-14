@@ -82,7 +82,7 @@ let Map = class Map extends React.Component {
       showCompass: true,
       visualizePitch: true,
     });
-    this.map.addControl(controls, "bottom-right");
+    if (!this.props.mini) this.map.addControl(controls, "bottom-right");
 
     this.map.on("load", () => {
       this.map.addSource("sa2", {
