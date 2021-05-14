@@ -98,8 +98,15 @@
 .menu-icon-bar {
     width: 22px;
     height: 3px;
-    background-color: white;
     margin: 4px 0;
     border-radius: 2px;
+}
+
+.menu-icon.white .menu-icon-bar {
+    background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
+}
+
+.menu-icon.black .menu-icon-bar {
+    background-color: black;
 }
