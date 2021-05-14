@@ -10,16 +10,19 @@ import LocationCompare from "./LocationToCompare";
 class ComparisonSidebarContent extends React.Component {
   
   render() {
+    const backButtonStyle = {
+      display: "flex",
+      alignItems: "center",
+      marginRight: 11,
+    }
 
     return (
       <>
-        <div className="comparison-title">
-          <Link to="/" style={{lineHeight: 0}}>
+        <div className="comparison-title" >
+          <Link to="/" style={backButtonStyle}>
             <BackIcon />
           </Link>
-          <span style={{marginLeft: 10}}>
-            Comparing Locations
-          </span>
+          Comparing Locations
         </div>
         <div className="sidebar-content">
           <Collapsible trigger="Locations to Compare" open={true}>
