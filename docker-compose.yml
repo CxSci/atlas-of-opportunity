@@ -10,8 +10,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - ./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv
-      - ./api/database:/docker-entrypoint-initdb.d
-
+      - ./api/database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
   api:
     build: ./api
     ports:
@@ -29,11 +28,11 @@ services:
     depends_on:
       - db
     command: sh -c './wait-for db:5432 -- python app.py'
-  # dashboard:
-  #   build: .
-  #   ports:
-  #     - '3000:3000'
-  #   volumes:
-  #     - /usr/src/app
-  #   depends_on:
-  #     - api
+  dashboard:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - /usr/src/app
+    depends_on:
+      - api
