@@ -83,7 +83,7 @@ class Sidebar extends React.Component {
             <Route exact path="/comparison" render={() => (
               <ComparisonSidebarContent />
             )} />
-            <Route exact path="/" render={() => (
+            <Route render={() => (
               <>
                 <SASearchField />
                 {this.props.selectedFeature ?
