@@ -57,6 +57,7 @@ let Map = class Map extends React.Component {
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
     highlightedFeature: PropTypes.object,
+    mini: PropTypes.bool
   };
 
   componentDidMount() {
@@ -71,7 +72,7 @@ let Map = class Map extends React.Component {
       // to account for <WelcomeDialog />.
       // TODO: Calculate width of WelcomeDialog at runtime instead of
       //       hardcoding it here.
-      fitBoundsOptions: { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
+      fitBoundsOptions: this.props.mini ? undefined : { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
     });
 
     this.map.resize();
@@ -163,7 +164,7 @@ let Map = class Map extends React.Component {
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
 
-      this.map.on("mousemove", "sa2-fills", (e) => {
+      if (!this.props.mini) this.map.on("mousemove", "sa2-fills", (e) => {
         if (e.features.length > 0) {
           this.highlightFeature(e.features[0])
         }
@@ -172,12 +173,12 @@ let Map = class Map extends React.Component {
       // When the mouse leaves the sa2-fill layer, update the feature state of the
       // previously hovered feature.
 
-      this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
+      if (!this.props.mini) this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
 
       // Handle clicks on map features
-      this.map.on("click", "sa2-fills", this.onMapClick)
+      if (!this.props.mini) this.map.on("click", "sa2-fills", this.onMapClick)
       // Handle map clicks outside of map features
-      this.map.on("click", this.onMapClick);
+      if (!this.props.mini) this.map.on("click", this.onMapClick);
     });
   }
 
