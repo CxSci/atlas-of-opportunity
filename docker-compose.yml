@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    build: ./api/database
+    image: "postgres:alpine"
     ports:
       - "5432:5432"
     environment:
@@ -29,11 +29,11 @@ services:
     depends_on:
       - db
     command: sh -c './wait-for db:5432 -- python app.py'
-  dashboard:
-    build: .
-    ports:
-      - '3000:3000'
-    volumes:
-      - /usr/src/app
-    depends_on:
-      - api
+  # dashboard:
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - /usr/src/app
+  #   depends_on:
+  #     - api
