@@ -23,6 +23,7 @@ class Sidebar extends React.Component {
   static propTypes = {
     select: PropTypes.object.isRequired,
     selectedFeature: PropTypes.object,
+    collapsibleState: PropTypes.object,
     comparisonFeatures: PropTypes.array.isRequired
   };
 
@@ -94,7 +95,7 @@ class Sidebar extends React.Component {
                         <LocationCompare showButton />
                       </Collapsible> 
                     }
-                    <LocationDetails feature={this.props.selectedFeature}>
+                    <LocationDetails feature={this.props.selectedFeature} collapsibleState={this.props.collapsibleState}>
                     </LocationDetails>
                   </>
                   :
@@ -116,6 +117,7 @@ function mapStateToProps(state) {
   return {
     select: state.select,
     selectedFeature: state.selectedFeature,
+    collapsibleState: state.collapsibleState,
     comparisonFeatures: state.comparisonFeatures
   };
 }

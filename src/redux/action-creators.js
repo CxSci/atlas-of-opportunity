@@ -105,3 +105,10 @@ export function removeComparisonFeature(feature) {
     feature
   })
 }
+
+export function updateCollapsibleState(state) {
+  store.dispatch({
+    type: Constants.UPDATE_COLLAPSIBLE_STATE,
+    payload: state
+  })
+}

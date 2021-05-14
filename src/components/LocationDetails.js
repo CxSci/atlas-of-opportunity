@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 import Collapsible from "react-collapsible";
 import propsMapping from "./propsMapping";
+import { updateCollapsibleState } from "../redux/action-creators";
 
-function LocationDetails(props) {
+const initialOpen = Object.fromEntries(propsMapping.map(x => ([x.title, true])));
+
+const LocationDetails = (props) => {
   const featureProps = props.feature.properties;
+  const isOpen = props.collapsibleState || initialOpen;
 
   const renderMetric = (metric) => {
     let value = featureProps[metric.id];
@@ -46,6 +50,14 @@ function LocationDetails(props) {
     )
   }
 
+  const onOpen = (key) => updateIsOpen(key, true);
+  const onClose = (key) => updateIsOpen(key, false);
+
+  const updateIsOpen = (key, value) => {
+    const newValue = {...isOpen, [key]: value};
+    updateCollapsibleState(newValue);
+  }
+
   return (
     <div
       style={{ overflowY: "auto" }}
@@ -53,7 +65,7 @@ function LocationDetails(props) {
     >
       {props.children}
       {propsMapping.map((section) => (
-        <Collapsible trigger={section.title} key={section.title}>
+        <Collapsible trigger={section.title} key={section.title} open={isOpen[section.title]} onOpen={() => onOpen(section.title)} onClose={() => onClose(section.title)}>
           {section.content.map((metric) => (
             renderMetric(metric)
           ))}
@@ -67,6 +79,7 @@ LocationDetails.propTypes = {
   feature: PropTypes.shape({
     properties: PropTypes.any
   }),
+  collapsibleState: PropTypes.object,
   children: PropTypes.node
 }
 
