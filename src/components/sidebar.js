@@ -18,12 +18,6 @@ import LocationDetails from "./LocationDetails";
 import Collapsible from "react-collapsible";
 import { Switch, Route } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
-import Map from './map'
-
-const miniMap = {
-  width: "100%",
-  height: 310
-}
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -100,11 +94,6 @@ class Sidebar extends React.Component {
                         <LocationCompare showButton />
                       </Collapsible> 
                     }
-                    <Collapsible trigger="Map">
-                      <div style={miniMap}>
-                        <Map mini={true}/>
-                      </div>
-                    </Collapsible>
                     <LocationDetails feature={this.props.selectedFeature}>
                     </LocationDetails>
                   </>

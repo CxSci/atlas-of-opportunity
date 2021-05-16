@@ -6,7 +6,12 @@ import "../css/sidebar.css";
 import { Link } from "react-router-dom";
 import Collapsible from "react-collapsible";
 import LocationCompare from "./LocationToCompare";
+import Map from './map'
 
+const miniMap = {
+  width: "100%",
+  height: 310
+}
 class ComparisonSidebarContent extends React.Component {
   
   render() {
@@ -27,6 +32,11 @@ class ComparisonSidebarContent extends React.Component {
         <div className="sidebar-content">
           <Collapsible trigger="Locations to Compare" open={true}>
             <LocationCompare />
+          </Collapsible>
+          <Collapsible trigger="Map">
+            <div style={miniMap}>
+              <Map mini={true}/>
+            </div>
           </Collapsible>
         </div>
       </>
