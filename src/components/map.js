@@ -92,7 +92,7 @@ let Map = class Map extends React.Component {
         promoteId: "SA2_MAIN16",
       });
 
-      this.map.addLayer({
+      if (!this.props.mini) this.map.addLayer({
         id: "sa2-fills",
         type: "fill",
         source: "sa2",
