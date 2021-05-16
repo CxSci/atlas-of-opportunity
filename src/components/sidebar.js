@@ -100,7 +100,7 @@ class Sidebar extends React.Component {
                         <LocationCompare showButton />
                       </Collapsible> 
                     }
-                    <Collapsible>
+                    <Collapsible trigger="Map">
                       <div style={miniMap}>
                         <Map mini={true}/>
                       </div>

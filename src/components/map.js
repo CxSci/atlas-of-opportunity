@@ -73,6 +73,7 @@ let Map = class Map extends React.Component {
       // TODO: Calculate width of WelcomeDialog at runtime instead of
       //       hardcoding it here.
       fitBoundsOptions: this.props.mini ? undefined : { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
+      interactive: !this.props.mini
     });
 
     this.map.resize();
