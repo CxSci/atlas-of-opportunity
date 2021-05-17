@@ -182,7 +182,15 @@ function reducer(state = initialState, action) {
         highlightedFeature: action.feature,
       });
     case Constants.ADD_COMPARISON_FEATURE:
-      return {...state, comparisonFeatures: state.comparisonFeatures.concat([action.feature])};
+    {
+      let collapsibleState = state.collapsibleState;
+      collapsibleState['Locations to Compare'] = true;
+      return {
+        ...state,
+        collapsibleState,
+        comparisonFeatures: state.comparisonFeatures.concat([action.feature])
+      };
+    }
     case Constants.REMOVE_COMPARISON_FEATURE:
       return {...state, comparisonFeatures: state.comparisonFeatures.filter(feature => feature.properties["SA2_MAIN16"] !== action.feature.properties["SA2_MAIN16"])}
     case Constants.UPDATE_COLLAPSIBLE_STATE:

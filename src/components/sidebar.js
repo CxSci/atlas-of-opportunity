@@ -15,7 +15,6 @@ import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
-import Collapsible from "react-collapsible";
 import { Switch, Route } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
 
@@ -90,12 +89,8 @@ class Sidebar extends React.Component {
                 {this.props.selectedFeature ?
                   <>
                     <ActionButtons/>
-                    {this.props.comparisonFeatures.length > 0 &&
-                      <Collapsible trigger="Locations to Compare" open={true}>
-                        <LocationCompare showButton />
-                      </Collapsible> 
-                    }
-                    <LocationDetails feature={this.props.selectedFeature} collapsibleState={this.props.collapsibleState}>
+                    <LocationDetails feature={this.props.selectedFeature} comparison={this.props.comparisonFeatures} collapsibleState={this.props.collapsibleState}>
+                      <LocationCompare showButton />
                     </LocationDetails>
                   </>
                   :
