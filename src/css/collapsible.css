@@ -27,7 +27,9 @@ h2 {
 .Collapsible__contentInner p {
   margin-bottom: 10px;
   font-size: 14px;
-  line-height: 20px; 
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Collapsible__contentInner p:last-child {
