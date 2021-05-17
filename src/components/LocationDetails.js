@@ -5,11 +5,19 @@ import Collapsible from "react-collapsible";
 import propsMapping from "./propsMapping";
 import { updateCollapsibleState } from "../redux/action-creators";
 
-const initialOpen = Object.fromEntries(propsMapping.map(x => ([x.title, true])));
+const sections = [['Locations to Compare', true], ...propsMapping.map(x => ([x.title, true]))];
+const initialOpen = Object.fromEntries(sections);
 
 const LocationDetails = (props) => {
   const featureProps = props.feature.properties;
+  const comparisonFts = props.comparison;
   const isOpen = props.collapsibleState || initialOpen;
+  
+  React.useEffect(() => {
+    if (!props.collapsibleState) {
+      updateCollapsibleState(initialOpen);
+    }
+  }, [props.collapsibleState])
 
   const renderMetric = (metric) => {
     let value = featureProps[metric.id];
@@ -57,13 +65,18 @@ const LocationDetails = (props) => {
     const newValue = {...isOpen, [key]: value};
     updateCollapsibleState(newValue);
   }
+  const compTitle = 'Locations to Compare';
 
   return (
     <div
       style={{ overflowY: "auto" }}
       className={`sidebar-content`}
     >
-      {props.children}
+      {comparisonFts.length > 0 && 
+        <Collapsible trigger={compTitle} open={isOpen[compTitle]} onOpen={() => onOpen(compTitle)} onClose={() => onClose(compTitle)}>
+          {props.children}
+        </Collapsible>
+      }
       {propsMapping.map((section) => (
         <Collapsible trigger={section.title} key={section.title} open={isOpen[section.title]} onOpen={() => onOpen(section.title)} onClose={() => onClose(section.title)}>
           {section.content.map((metric) => (
@@ -77,8 +90,10 @@ const LocationDetails = (props) => {
 
 LocationDetails.propTypes = {
   feature: PropTypes.shape({
+    id: PropTypes.number,
     properties: PropTypes.any
   }),
+  comparison: PropTypes.array,
   collapsibleState: PropTypes.object,
   children: PropTypes.node
 }
