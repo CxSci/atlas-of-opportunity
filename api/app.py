@@ -16,34 +16,33 @@ dict_cur = con.cursor(cursor_factory=RealDictCursor)
 
 # insert data from SA_SA2s.geojson file to sa2data database
 
+# def insertDataToDatabase():
+#     is_database_not_empty = cur.execute(
+#         'SELECT EXISTS (SELECT 1 FROM sa2data)')
+#     if(is_database_not_empty):
+#         return
 
-def insertDataToDatabase():
-    is_database_not_empty = cur.execute(
-        'SELECT EXISTS (SELECT 1 FROM sa2data)')
-    if(is_database_not_empty):
-        return
+#     with open('/data/SA_SA2s.geojson', 'r') as file:
+#         df = json.load(file)
 
-    with open('/data/SA_SA2s.geojson', 'r') as file:
-        df = json.load(file)
+#         for feature in df['features']:
+#             cur.execute("""INSERT INTO sa2data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
+#                         (feature['properties']['SA2_MAIN16'],
+#                          feature['properties']['SA2_5DIG16'],
+#                          feature['properties']['SA2_NAME16'],
+#                          feature['properties']['SA3_CODE16'],
+#                          feature['properties']['SA3_NAME16'],
+#                          feature['properties']['SA4_CODE16'],
+#                          feature['properties']['SA4_NAME16'],
+#                          feature['properties']['GCC_CODE16'],
+#                          feature['properties']['GCC_NAME16'],
+#                          feature['properties']['STE_CODE16'],
+#                          feature['properties']['STE_CODE16'],
+#                          feature['properties']['AREASQKM16'],
+#                          json.dumps(feature['geometry'])))
+#             con.commit()
 
-        for feature in df['features']:
-            cur.execute("""INSERT INTO sa2data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
-                        (feature['properties']['SA2_MAIN16'],
-                         feature['properties']['SA2_5DIG16'],
-                         feature['properties']['SA2_NAME16'],
-                         feature['properties']['SA3_CODE16'],
-                         feature['properties']['SA3_NAME16'],
-                         feature['properties']['SA4_CODE16'],
-                         feature['properties']['SA4_NAME16'],
-                         feature['properties']['GCC_CODE16'],
-                         feature['properties']['GCC_NAME16'],
-                         feature['properties']['STE_CODE16'],
-                         feature['properties']['STE_CODE16'],
-                         feature['properties']['AREASQKM16'],
-                         json.dumps(feature['geometry'])))
-            con.commit()
-
-insertDataToDatabase()
+# insertDataToDatabase()
 
 # API endpoints
 

@@ -1,5 +1,5 @@
 CREATE TABLE SAData(
-    id INT PRIMARY KEY NOT NULL, 
+    id INT PRIMARY KEY NOT NULL,
     SA2_code VARCHAR(1000) NOT NULL ,
     "X.1" VARCHAR(100) ,
     X VARCHAR(100) ,
@@ -66,10 +66,10 @@ CREATE TABLE SAData(
     gain_r3 VARCHAR(100) ,
     exchanged_r1 VARCHAR(100) ,
     exchanged_r2 VARCHAR(100) ,
-    exchanged_r3 VARCHAR(100)    
+    exchanged_r3 VARCHAR(100)
 );
 
-CREATE TABLE sa2data(  
+CREATE TABLE sa2data(
     SA2_MAIN16 VARCHAR(100),
     SA2_5DIG16 VARCHAR(100),
     SA2_NAME16 VARCHAR(100),
