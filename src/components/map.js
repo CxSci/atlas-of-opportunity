@@ -56,6 +56,7 @@ let Map = class Map extends React.Component {
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
+    comparisonFeatures: PropTypes.array,
     highlightedFeature: PropTypes.object,
     mini: PropTypes.bool
   };
@@ -96,7 +97,7 @@ let Map = class Map extends React.Component {
         id: "sa2-fills",
         type: "fill",
         source: "sa2",
-        sourceLayer: "original",
+        sourceLayer: "original",  
         layout: {},
         paint: {
           /*['case',
@@ -233,6 +234,45 @@ let Map = class Map extends React.Component {
     this.map.setCenter(newCenter);
   }
 
+  highlightComparisonFeatures = (features) => {
+    const comparisonFeatures = {type: "FeatureCollection", features}
+    console.log(comparisonFeatures)
+    if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
+    this.map.addSource("sa2-comp", {
+      type: "geojson",
+      data: comparisonFeatures,
+      promoteId: "SA2_MAIN16",
+    })
+    this.map.addLayer({
+      id: "sa2-comp-fills",
+      type: "fill",
+      source: "sa2-comp",
+      sourceLayer: "original",  
+      layout: {},
+      paint: {
+        /*['case',
+        ['boolean', ['feature-state', 'click'], false],
+        '#696969',
+
+        ]*/
+        "fill-color": {
+          property: this.props.active.property,
+          stops: this.props.active.stops,
+        },
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "click"], false],
+          1,
+          ["boolean", ["feature-state", "highlight"], false],
+          1,
+          ["boolean", ["feature-state", "hover"], false],
+          1,
+          0.8,
+        ],
+      },
+    });
+  }
+
 
   componentDidUpdate(prevProps) {
     if (this.props.sidebarOpen !== prevProps.sidebarOpen
@@ -262,6 +302,10 @@ let Map = class Map extends React.Component {
 
     if (this.props.selectedFeature !== prevProps.selectedFeature) {
       this.selectFeature(this.props.selectedFeature)
+    }
+
+    if (this.props.comparisonFeatures !== prevProps.comparisonFeatures) {
+      this.highlightComparisonFeatures(this.props.comparisonFeatures)
     }
   }
 
@@ -699,6 +743,7 @@ function mapStateToProps(state) {
     sidebarOpen: state.sidebarOpen,
     selectedFeature: state.selectedFeature,
     highlightedFeature: state.highlightedFeature,
+    comparisonFeatures: state.comparisonFeatures
   };
 }
 
