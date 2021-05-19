@@ -17,16 +17,20 @@ import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
 import { Switch, Route } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
+import CollapsibleSection from "./CollapsibleSection";
 
 class Sidebar extends React.Component {
   static propTypes = {
     select: PropTypes.object.isRequired,
     selectedFeature: PropTypes.object,
-    collapsibleState: PropTypes.object,
     comparisonFeatures: PropTypes.array.isRequired
   };
-
+  
   render() {
+    const {
+      selectedFeature,
+      comparisonFeatures,
+    } = this.props;
 
     const PanelContainer = (props) => {
       const featureSelected = this.props.selectedFeature
@@ -89,8 +93,12 @@ class Sidebar extends React.Component {
                 {this.props.selectedFeature ?
                   <>
                     <ActionButtons/>
-                    <LocationDetails feature={this.props.selectedFeature} comparison={this.props.comparisonFeatures} collapsibleState={this.props.collapsibleState}>
-                      <LocationCompare showButton />
+                    {comparisonFeatures.length > 0 &&
+                      <CollapsibleSection title="Locations to Compare">
+                        <LocationCompare showButton />
+                      </CollapsibleSection>
+                    }
+                    <LocationDetails feature={selectedFeature} comparison={comparisonFeatures}>
                     </LocationDetails>
                   </>
                   :
@@ -112,7 +120,6 @@ function mapStateToProps(state) {
   return {
     select: state.select,
     selectedFeature: state.selectedFeature,
-    collapsibleState: state.collapsibleState,
     comparisonFeatures: state.comparisonFeatures
   };
 }
