@@ -1,24 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import Collapsible from "react-collapsible";
 import propsMapping from "./propsMapping";
-import { updateCollapsibleState } from "../redux/action-creators";
-
-const sections = [['Locations to Compare', true], ...propsMapping.map(x => ([x.title, true]))];
-const initialOpen = Object.fromEntries(sections);
+import CollapsibleSection from "./CollapsibleSection";
 
 const LocationDetails = (props) => {
   const featureProps = props.feature.properties;
-  const comparisonFts = props.comparison;
-  const isOpen = props.collapsibleState || initialOpen;
   
-  React.useEffect(() => {
-    if (!props.collapsibleState) {
-      updateCollapsibleState(initialOpen);
-    }
-  }, [props.collapsibleState])
-
   const renderMetric = (metric) => {
     let value = featureProps[metric.id];
     switch (metric.format) {
@@ -58,31 +46,18 @@ const LocationDetails = (props) => {
     )
   }
 
-  const onOpen = (key) => updateIsOpen(key, true);
-  const onClose = (key) => updateIsOpen(key, false);
-
-  const updateIsOpen = (key, value) => {
-    const newValue = {...isOpen, [key]: value};
-    updateCollapsibleState(newValue);
-  }
-  const compTitle = 'Locations to Compare';
-
   return (
     <div
       style={{ overflowY: "auto" }}
       className={`sidebar-content`}
     >
-      {comparisonFts.length > 0 && 
-        <Collapsible trigger={compTitle} open={isOpen[compTitle]} onOpen={() => onOpen(compTitle)} onClose={() => onClose(compTitle)}>
-          {props.children}
-        </Collapsible>
-      }
+      {props.children}
       {propsMapping.map((section) => (
-        <Collapsible trigger={section.title} key={section.title} open={isOpen[section.title]} onOpen={() => onOpen(section.title)} onClose={() => onClose(section.title)}>
+        <CollapsibleSection title={section.title} key={section.title}>
           {section.content.map((metric) => (
             renderMetric(metric)
           ))}
-        </Collapsible>
+        </CollapsibleSection>
       ))}
     </div>
   )
@@ -94,7 +69,6 @@ LocationDetails.propTypes = {
     properties: PropTypes.any
   }),
   comparison: PropTypes.array,
-  collapsibleState: PropTypes.object,
   children: PropTypes.node
 }
 
