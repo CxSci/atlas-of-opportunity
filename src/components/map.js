@@ -87,6 +87,8 @@ let Map = class Map extends React.Component {
     if (!this.props.mini) this.map.addControl(controls, "bottom-right");
 
     this.map.on("load", () => {
+      console.log("Loading 1")
+      console.log(this.props.comparisonFeatures)
       this.map.addSource("sa2", {
         type: "geojson",
         data: this.props.geojsonURL,
@@ -162,6 +164,8 @@ let Map = class Map extends React.Component {
         },
       });
 
+      if (this.props.mini) this.highlightComparisonFeatures(this.props.comparisonFeatures)
+
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
@@ -235,42 +239,43 @@ let Map = class Map extends React.Component {
   }
 
   highlightComparisonFeatures = (features) => {
-    const comparisonFeatures = {type: "FeatureCollection", features}
-    console.log(comparisonFeatures)
-    if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
-    this.map.addSource("sa2-comp", {
-      type: "geojson",
-      data: comparisonFeatures,
-      promoteId: "SA2_MAIN16",
-    })
-    this.map.addLayer({
-      id: "sa2-comp-fills",
-      type: "fill",
-      source: "sa2-comp",
-      sourceLayer: "original",  
-      layout: {},
-      paint: {
-        /*['case',
-        ['boolean', ['feature-state', 'click'], false],
-        '#696969',
 
-        ]*/
-        "fill-color": {
-          property: this.props.active.property,
-          stops: this.props.active.stops,
+      const comparisonFeatures = {type: "FeatureCollection", features}
+      console.log(comparisonFeatures)
+      if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
+      this.map.addSource("sa2-comp", {
+        type: "geojson",
+        data: comparisonFeatures,
+        promoteId: "SA2_MAIN16",
+      })
+      this.map.addLayer({
+        id: "sa2-fills",
+        type: "fill",
+        source: "sa2-comp",
+        sourceLayer: "original",  
+        layout: {},
+        paint: {
+          /*['case',
+          ['boolean', ['feature-state', 'click'], false],
+          '#696969',
+  
+          ]*/
+          "fill-color": {
+            property: this.props.active.property,
+            stops: this.props.active.stops,
+          },
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "click"], false],
+            1,
+            ["boolean", ["feature-state", "highlight"], false],
+            1,
+            ["boolean", ["feature-state", "hover"], false],
+            1,
+            0.8,
+          ],
         },
-        "fill-opacity": [
-          "case",
-          ["boolean", ["feature-state", "click"], false],
-          1,
-          ["boolean", ["feature-state", "highlight"], false],
-          1,
-          ["boolean", ["feature-state", "hover"], false],
-          1,
-          0.8,
-        ],
-      },
-    });
+      });
   }
 
 
