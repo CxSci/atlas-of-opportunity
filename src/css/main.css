@@ -1,3 +1,8 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    
+}
 .main.sidebarOpen .legend, .main.sidebarOpen .toggleButton {
     left: 320px;
 }

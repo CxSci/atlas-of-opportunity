@@ -1,0 +1,27 @@
+.footerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px;
+    height: 60px;
+    left: 20px;
+    top: 20px;
+    min-width: max-content;
+    width: 60%;
+}
+
+.dark {
+    background-color: #191A1A;
+}
+
+.light {
+    background-color: #FFFFFF;
+}
