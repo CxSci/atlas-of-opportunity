@@ -85,6 +85,7 @@ const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
   comparisonFeatures: [],
+  collapsibleState: {},
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
   select,
