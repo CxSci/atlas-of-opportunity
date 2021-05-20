@@ -241,9 +241,7 @@ let Map = class Map extends React.Component {
   highlightComparisonFeatures = (features) => {
 
       const comparisonFeatures = {type: "FeatureCollection", features}
-      console.log(comparisonFeatures)
       const bounds = turf.bbox(comparisonFeatures);
-      console.log(bounds)
       this.map.setMaxBounds(bounds);
       if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
       this.map.addSource("sa2-comp", {
