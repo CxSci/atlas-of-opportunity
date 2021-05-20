@@ -8,7 +8,10 @@ import { formatValue } from "../utils/formatValue";
 const LocationDetails = (props) => {
   const featureProps = props.feature.properties;
   const comparisonFts = props.comparison;
-  const allFeatures = [...comparisonFts, props.feature].filter((val, idx, arr) => arr.indexOf(val) === idx);
+  let allFeatures = comparisonFts;
+  if (!comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === props.feature.properties["SA2_MAIN16"])) {
+    allFeatures = [...allFeatures, props.feature]
+  }
 
   const renderMetric = (metric) => {
     let rawValue = featureProps[metric.id];
