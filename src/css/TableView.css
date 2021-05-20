@@ -4,9 +4,27 @@
   margin-top: 50px;
 }
 
+
 .table-header {
   display: flex;
-  text-align: left;
+  text-align: right;
   font-size: 14px;
   font-weight: bold;
+}
+
+.table-view .Collapsible__trigger {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.table-view .Collapsible__contentInner {
+  padding: 0px 20px 10px;
+}
+
+.ReactVirtualized__Table__row > div:first-child {
+  font-weight: 500;
+}
+
+.ReactVirtualized__Table__row > div:not(:first-child) {
+  text-align: right;
 }
