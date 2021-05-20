@@ -1,0 +1,12 @@
+.table-view {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+.table-header {
+  display: flex;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
