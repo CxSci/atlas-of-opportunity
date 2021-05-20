@@ -65,7 +65,6 @@ const LocationDetails = (props) => {
 
 LocationDetails.propTypes = {
   feature: PropTypes.shape({
-    id: PropTypes.number,
     properties: PropTypes.any
   }),
   comparison: PropTypes.array,
