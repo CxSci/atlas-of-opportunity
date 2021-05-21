@@ -266,11 +266,6 @@ let Map = class Map extends React.Component {
         sourceLayer: "original",  
         layout: {},
         paint: {
-          /*['case',
-          ['boolean', ['feature-state', 'click'], false],
-          '#696969',
-  
-          ]*/
           "fill-color": {
             property: this.props.active.property,
             stops: this.props.active.stops,
