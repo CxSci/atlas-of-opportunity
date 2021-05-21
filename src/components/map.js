@@ -239,8 +239,14 @@ let Map = class Map extends React.Component {
   highlightComparisonFeatures = (features) => {
 
       const comparisonFeatures = {type: "FeatureCollection", features}
-      const bounds = turf.bbox(comparisonFeatures);
-      this.map.setMaxBounds(bounds);
+      const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
+      this.map.fitBounds(
+        [[minX, minY], [maxX, maxY]],
+        {
+          padding: {top: 20, bottom: 40, left: 20, right: 20},
+          animate: false,
+        }
+      )
       if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
       this.map.addSource("sa2-comp", {
         type: "geojson",
