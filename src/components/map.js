@@ -87,8 +87,6 @@ let Map = class Map extends React.Component {
     if (!this.props.mini) this.map.addControl(controls, "bottom-right");
 
     this.map.on("load", () => {
-      console.log("Loading 1")
-      console.log(this.props.comparisonFeatures)
       this.map.addSource("sa2", {
         type: "geojson",
         data: this.props.geojsonURL,
