@@ -265,16 +265,7 @@ let Map = class Map extends React.Component {
             property: this.props.active.property,
             stops: this.props.active.stops,
           },
-          "fill-opacity": this.props.mini ? 0.8 : [
-            "case",
-            ["boolean", ["feature-state", "click"], false],
-            1,
-            ["boolean", ["feature-state", "highlight"], false],
-            1,
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.8,
-          ],
+          "fill-opacity": 0.8,
         },
       });
   }
