@@ -162,27 +162,31 @@ let Map = class Map extends React.Component {
         },
       });
 
-      if (this.props.mini) this.highlightComparisonFeatures(this.props.comparisonFeatures)
+      if (this.props.mini) {
+        this.highlightComparisonFeatures(this.props.comparisonFeatures)
+      }
 
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
 
-      if (!this.props.mini) this.map.on("mousemove", "sa2-fills", (e) => {
-        if (e.features.length > 0) {
-          this.highlightFeature(e.features[0])
-        }
-      });
-
-      // When the mouse leaves the sa2-fill layer, update the feature state of the
-      // previously hovered feature.
-
-      if (!this.props.mini) this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
-
-      // Handle clicks on map features
-      if (!this.props.mini) this.map.on("click", "sa2-fills", this.onMapClick)
-      // Handle map clicks outside of map features
-      if (!this.props.mini) this.map.on("click", this.onMapClick);
+      if (!this.props.mini) {
+        this.map.on("mousemove", "sa2-fills", (e) => {
+          if (e.features.length > 0) {
+            this.highlightFeature(e.features[0])
+          }
+        });
+  
+        // When the mouse leaves the sa2-fill layer, update the feature state of the
+        // previously hovered feature.
+  
+        this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
+  
+        // Handle clicks on map features
+        this.map.on("click", "sa2-fills", this.onMapClick)
+        // Handle map clicks outside of map features
+        this.map.on("click", this.onMapClick);
+      }
     });
   }
 
@@ -247,7 +251,9 @@ let Map = class Map extends React.Component {
           animate: false,
         }
       )
-      if (this.map.getSource("sa2-comp")) this.map.removeSource("sa2-comp")
+      if (this.map.getSource("sa2-comp")) {
+        this.map.removeSource("sa2-comp")
+      }
       this.map.addSource("sa2-comp", {
         type: "geojson",
         data: comparisonFeatures,
