@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+export const IS_TEST = process.env.NODE_ENV === "test";
 export const SET_ACTIVE_OPTION = "SET_ACTIVE_OPTION";
 export const SET_SELECT = "SET_SELECT";
 export const SHOW_WELCOME_DIALOG = "SHOW_WELCOME_DIALOG";

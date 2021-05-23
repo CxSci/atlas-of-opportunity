@@ -9,7 +9,7 @@ import * as turf from "@turf/turf";
 import "../css/map.css";
 
 import * as Constants from "../constants";
-import { IS_TEST } from "../utils/constants";
+import { IS_TEST } from "../constants";
 import { store } from "../redux/store";
 import { loadFeatures } from "../redux/reducer";
 

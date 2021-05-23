@@ -1,7 +1,5 @@
 import * as Constants from "../constants";
 import geojsonURL from "../data/SA_dashboard.geojson";
-import { loadGeoJSON } from "../tests/testUtils";
-import { IS_TEST } from "../utils/constants";
 
 const options = {};
 
