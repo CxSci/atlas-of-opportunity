@@ -69,7 +69,7 @@ function SASearchField ({features, selectedFeature, ...props}) {
     <div className={`sidebarHeader ${shouldShowBigTitle ? "showBigTitle" : ""}`}>
       <BigTitle 
         onFocus={() => {
-          console.log("Focus the search field", inputRef)
+          //console.log("Focus the search field", inputRef)
           inputRef.current.focus()
         }}
         onCancel={() => {
