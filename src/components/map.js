@@ -103,11 +103,6 @@ let Map = class Map extends React.Component {
           sourceLayer: "original",  
           layout: {},
           paint: {
-            /*['case',
-            ['boolean', ['feature-state', 'click'], false],
-            '#696969',
-
-            ]*/
             "fill-color": {
               property: this.props.active.property,
               stops: this.props.active.stops,
@@ -166,10 +161,6 @@ let Map = class Map extends React.Component {
         },
       });
 
-      if (this.props.mini) {
-        this.highlightComparisonFeatures(this.props.comparisonFeatures)
-      }
-
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
@@ -190,6 +181,8 @@ let Map = class Map extends React.Component {
         this.map.on("click", "sa2-fills", this.onMapClick)
         // Handle map clicks outside of map features
         this.map.on("click", this.onMapClick);
+      } else {
+        this.highlightComparisonFeatures(this.props.comparisonFeatures)
       }
     });
   }
@@ -275,6 +268,18 @@ let Map = class Map extends React.Component {
             stops: this.props.active.stops,
           },
           "fill-opacity": 0.8,
+        },
+      });
+      this.map.addLayer({
+        id: "sa2-borders",
+        type: "line",
+        source: "sa2-comp",
+        sourceLayer: "original",
+        layout: {},
+        paint: {
+          "line-color": "#000080",
+          "line-width": 2,
+          "line-opacity": 1.5,
         },
       });
   }

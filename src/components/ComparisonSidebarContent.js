@@ -9,9 +9,10 @@ import LocationCompare from "./LocationToCompare";
 import Map from './map'
 
 const miniMap = {
-  width: "300px",
-  height: 310,
-  marginLeft: -20
+  width: 300,
+  height: 300,
+  marginLeft: -20,
+  marginTop: 5
 }
 class ComparisonSidebarContent extends React.Component {
   
