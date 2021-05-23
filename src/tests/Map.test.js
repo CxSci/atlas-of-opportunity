@@ -14,7 +14,6 @@ beforeEach(() => {
 })
 it("renders correctly", () => {
   // eslint-disable-next-line no-undef
-  fetchMock.mockResponse(loadGeoJSON("./src/data/SA_dashboard.geojson"));
   const tree = renderer.create(preRender(<Map/>, store)).toJSON();
   expect(tree).toMatchSnapshot();
 });
