@@ -79,12 +79,14 @@ let Map = class Map extends React.Component {
 
     this.map.resize();
 
+    if (!this.props.mini) {
     // zoom buttons
-    var controls = new mapboxgl.NavigationControl({
-      showCompass: true,
-      visualizePitch: true,
-    });
-    if (!this.props.mini) this.map.addControl(controls, "bottom-right");
+      var controls = new mapboxgl.NavigationControl({
+        showCompass: true,
+        visualizePitch: true,
+      });
+      this.map.addControl(controls, "bottom-right");
+    }
 
     this.map.on("load", () => {
       this.map.addSource("sa2", {
@@ -93,34 +95,36 @@ let Map = class Map extends React.Component {
         promoteId: "SA2_MAIN16",
       });
 
-      if (!this.props.mini) this.map.addLayer({
-        id: "sa2-fills",
-        type: "fill",
-        source: "sa2",
-        sourceLayer: "original",  
-        layout: {},
-        paint: {
-          /*['case',
-          ['boolean', ['feature-state', 'click'], false],
-          '#696969',
+      if (!this.props.mini) {
+        this.map.addLayer({
+          id: "sa2-fills",
+          type: "fill",
+          source: "sa2",
+          sourceLayer: "original",  
+          layout: {},
+          paint: {
+            /*['case',
+            ['boolean', ['feature-state', 'click'], false],
+            '#696969',
 
-          ]*/
-          "fill-color": {
-            property: this.props.active.property,
-            stops: this.props.active.stops,
+            ]*/
+            "fill-color": {
+              property: this.props.active.property,
+              stops: this.props.active.stops,
+            },
+            "fill-opacity": [
+              "case",
+              ["boolean", ["feature-state", "click"], false],
+              1,
+              ["boolean", ["feature-state", "highlight"], false],
+              1,
+              ["boolean", ["feature-state", "hover"], false],
+              1,
+              0.8,
+            ],
           },
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "click"], false],
-            1,
-            ["boolean", ["feature-state", "highlight"], false],
-            1,
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.8,
-          ],
-        },
-      });
+        });
+      }
 
       this.map.addLayer({
         id: "sa2-borders",
