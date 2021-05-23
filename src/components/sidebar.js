@@ -15,7 +15,9 @@ import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
-import Collapsible from "react-collapsible";
+import { Switch, Route } from "react-router";
+import ComparisonSidebarContent from "./ComparisonSidebarContent";
+import CollapsibleSection from "./CollapsibleSection";
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -23,8 +25,12 @@ class Sidebar extends React.Component {
     selectedFeature: PropTypes.object,
     comparisonFeatures: PropTypes.array.isRequired
   };
-
+  
   render() {
+    const {
+      selectedFeature,
+      comparisonFeatures,
+    } = this.props;
 
     const PanelContainer = (props) => {
       const featureSelected = this.props.selectedFeature
@@ -36,17 +42,28 @@ class Sidebar extends React.Component {
         </div>
       )
     }
-
-    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature.properties["SA2_MAIN16"]) !== undefined;
+    
+    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
+    const enableButton = this.props.comparisonFeatures.length >= 4;
+    
+    const comparisonClick = (feature) => {
+      if (isCompared) {
+        removeComparisonFeature(feature);
+      } else {
+        addComparisonFeature(feature);
+      }
+    }
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
-        <button disabled={this.props.comparisonFeatures.length >= 4} className="actionButton" onClick={()=>{isCompared ? removeComparisonFeature(this.props.selectedFeature) : addComparisonFeature(this.props.selectedFeature)}}><ComparisonIcon className="icon"/> {isCompared ? "Remove from Comparison" : "Add to Comparison"}</button>
+        <button disabled={enableButton} className="actionButton" onClick={() => comparisonClick(this.props.selectedFeature)}>
+          <ComparisonIcon className="icon"/>
+          {isCompared ? "Remove from Comparison" : "Add to Comparison"}
+        </button>
       </div>
 
     );
-
     // const featureDebug = (feature) => {
     //   if (!feature || !feature.properties) {
     //     return ""
@@ -66,24 +83,33 @@ class Sidebar extends React.Component {
       <PanelContainer>
         <SidebarButton />
         <div className={`sidebar-container`}>
-          <SASearchField />
-          {this.props.selectedFeature ?
-            <>
-              <ActionButtons/>
-              {this.props.comparisonFeatures.length > 0 ?
-              <Collapsible trigger="Locations to Compare">
-                <LocationCompare/>
-              </Collapsible> 
-              : <></> }
-              <LocationDetails feature={this.props.selectedFeature}>
-              </LocationDetails>
-            </>
-            :
-            <>
-              <WelcomeDialog />
-              <Legend/>
-            </>
-          }
+          <Switch>
+            <Route exact path="/comparison" render={() => (
+              <ComparisonSidebarContent />
+            )} />
+            <Route render={() => (
+              <>
+                <SASearchField />
+                {this.props.selectedFeature ?
+                  <>
+                    <ActionButtons/>
+                    {comparisonFeatures.length > 0 &&
+                      <CollapsibleSection title="Locations to Compare">
+                        <LocationCompare showButton />
+                      </CollapsibleSection>
+                    }
+                    <LocationDetails feature={selectedFeature} comparison={comparisonFeatures}>
+                    </LocationDetails>
+                  </>
+                  :
+                  <>
+                    <WelcomeDialog />
+                    <Legend/>
+                  </>
+                }
+              </>
+            )}  />
+          </Switch>
         </div>
       </PanelContainer>
     );

@@ -1,34 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import Collapsible from "react-collapsible";
 import propsMapping from "./propsMapping";
+import CollapsibleSection from "./CollapsibleSection";
+import { formatValue } from "../utils/formatValue";
 
-function LocationDetails(props) {
+const LocationDetails = (props) => {
   const featureProps = props.feature.properties;
+  const comparisonFts = props.comparison;
+  let allFeatures = comparisonFts;
+  if (!comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === props.feature.properties["SA2_MAIN16"])) {
+    allFeatures = [...allFeatures, props.feature]
+  }
 
   const renderMetric = (metric) => {
-    let value = featureProps[metric.id];
-    switch (metric.format) {
-      case 'number':
-        if (value > 100) {
-          value = Math.floor(value)
-          value = value.toLocaleString('en-US');
-        }
-        else {
-          value = Math.floor(value * 10000) / 10000;
-          value = value.toLocaleString('en-US', { minimumFractionDigits: 4 });
-        }
-        break;
-      case 'currency':
-        value = value.toLocaleString(undefined, { style: "currency", currency: "AUS" });
-        break;
-      case 'percent':
-        value = `${Math.floor(value)}%`;
-        break;
-      default:
-        break;
-    }
+    let rawValue = featureProps[metric.id];
+    const value = formatValue(rawValue, metric.format);
 
     return (
       <div key={metric.id}>
@@ -41,8 +28,26 @@ function LocationDetails(props) {
             </div>
           </ReactTooltip>
         )}
-        <p>{value}</p>
+        {comparisonFts.length ? (
+          allFeatures.map(ft => 
+            renderValue(ft, metric)
+          )
+        ) : (
+          <p>{value}</p>
+        )}
       </div>
+    )
+  }
+
+  const renderValue = (feature, metric) => {
+    let rawValue = feature.properties[metric.id];
+    const value = formatValue(rawValue, metric.format);
+    
+    return (
+      <p key={feature.id} className="comparison">
+        <span>{feature.properties.SA2_NAME16}</span>
+        <span>{value}</span>
+      </p>
     )
   }
 
@@ -53,11 +58,11 @@ function LocationDetails(props) {
     >
       {props.children}
       {propsMapping.map((section) => (
-        <Collapsible trigger={section.title} key={section.title}>
+        <CollapsibleSection title={section.title} key={section.title}>
           {section.content.map((metric) => (
             renderMetric(metric)
           ))}
-        </Collapsible>
+        </CollapsibleSection>
       ))}
     </div>
   )
@@ -67,6 +72,7 @@ LocationDetails.propTypes = {
   feature: PropTypes.shape({
     properties: PropTypes.any
   }),
+  comparison: PropTypes.array,
   children: PropTypes.node
 }
 

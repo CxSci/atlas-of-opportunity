@@ -27,7 +27,12 @@ h2 {
 .Collapsible__contentInner p {
   margin-bottom: 10px;
   font-size: 14px;
-  line-height: 20px; 
+  line-height: 20px;
+}
+
+.Collapsible__contentInner p.comparison {
+  display: flex;
+  justify-content: space-between;
 }
 
 .Collapsible__contentInner p:last-child {
@@ -52,7 +57,7 @@ h2 {
   font-size: 14px;
   line-height: 16px;
   color: #000000;
-  
+  cursor: pointer;
 }
 
 .Collapsible__trigger:after {
