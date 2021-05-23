@@ -108,4 +108,10 @@ export function removeComparisonFeature(feature) {
 
 export function resetState() {
   store.dispatch({type: "RESET"})
+
+export function updateCollapsibleState(state) {
+  store.dispatch({
+    type: Constants.UPDATE_COLLAPSIBLE_STATE,
+    payload: state
+  })
 }
