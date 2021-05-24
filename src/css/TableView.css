@@ -7,9 +7,14 @@
 
 .table-header {
   display: flex;
+  justify-content: center;
   text-align: right;
   font-size: 14px;
   font-weight: bold;
+}
+
+.table-view .Collapsible {
+  min-width: 670px;
 }
 
 .table-view .Collapsible__trigger {
@@ -21,10 +26,34 @@
   padding: 0px 20px 10px;
 }
 
+.table-view .Collapsible table {
+  margin: auto;
+}
+
+.fake-chart {
+  width: 120px;
+  height: 80px;
+  background-color: #808080;
+}
+
+.table-row > td {
+  padding: 8px 10px;
+}
+.table-row:nth-child(even) {
+  background-color: #F5F5F5;
+}
+.table-row > td:first-child {
+  font-weight: 500;
+}
+.table-row > td:not(:first-child) {
+  text-align: right;
+}
+
+/* 
 .ReactVirtualized__Table__row > div:first-child {
   font-weight: 500;
 }
 
 .ReactVirtualized__Table__row > div:not(:first-child) {
   text-align: right;
-}
+} */
