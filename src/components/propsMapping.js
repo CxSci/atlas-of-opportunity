@@ -2,6 +2,7 @@ export default [
   {
     title: 'Demographic Summary',
     content: [
+      { id: 'fake', label: 'Fake metric', type: 'chart' },
       { id: 'persons_num', label: 'Population', format: 'number' },
       { id: 'median_aud', label: 'Median Income', format: 'currency' },
     ]
