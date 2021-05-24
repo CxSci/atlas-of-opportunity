@@ -5,6 +5,7 @@ import json
 import os
 
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
 
 con = psycopg2.connect(database=os.environ.get("POSTGRES_DB"),
                        user=os.environ.get("POSTGRES_USER"),
