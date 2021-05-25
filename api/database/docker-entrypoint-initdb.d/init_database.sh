@@ -1,4 +1,2 @@
-#!usr/bin/python
-echo "-------------- ---- hi from shel script ----------"
-chmod +x ./init_database.py
-python ./init_database.py
+chmod +x /data/init_database.py
+python3 /data/init_database.py

@@ -3,6 +3,11 @@ import psycopg2
 import json
 import os
 
+print("POSTGRES_DB", os.environ.get("POSTGRES_DB"))
+print("POSTGRES_USER", os.environ.get("POSTGRES_USER"))
+print("POSTGRES_PASSWORD", os.environ.get("POSTGRES_PASSWORD"))
+print("POSTGRES_PORT", os.environ.get("POSTGRES_PORT"))
+print("POSTGRES_HOST", os.environ.get("POSTGRES_HOST"))
 
 con = psycopg2.connect(database=os.environ.get("POSTGRES_DB"),
                        user=os.environ.get("POSTGRES_USER"),

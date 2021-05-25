@@ -1,2 +1,0 @@
-python==3-alpine
-psycopg2==2.8.5
