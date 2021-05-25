@@ -271,15 +271,15 @@ let Map = class Map extends React.Component {
         },
       });
       this.map.addLayer({
-        id: "sa2-borders",
+        id: "sa2-borders-comp",
         type: "line",
         source: "sa2-comp",
         sourceLayer: "original",
         layout: {},
         paint: {
-          "line-color": "#000080",
+          "line-color": "#FFFFFF",
           "line-width": 2,
-          "line-opacity": 1.5,
+          "line-opacity": 1,
         },
       });
   }
