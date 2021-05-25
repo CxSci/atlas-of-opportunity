@@ -3,7 +3,7 @@
     flex-direction: column;
     
 }
-.main.sidebarOpen .legend, .main.sidebarOpen .toggleButton {
+.main.sidebarOpen .legend, .main.sidebarOpen .toggleButton, .sidebarOpen {
     left: 320px;
 }
 
