@@ -28,10 +28,11 @@ function Header () {
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
+    right: 0
   };
 
   return (
-    <div className="container" style={headerBox}>
+    <div className="container sidebarOpen" style={headerBox}>
       {/* TODO: make header background color translucent white while in comparison mode */}
       <div className="navbarLeft">
       </div>
