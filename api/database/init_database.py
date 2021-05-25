@@ -1,49 +1,42 @@
 
-import psycopg2
 import json
-import os
+import csv
 
-print("POSTGRES_DB", os.environ.get("POSTGRES_DB"))
-print("POSTGRES_USER", os.environ.get("POSTGRES_USER"))
-print("POSTGRES_PASSWORD", os.environ.get("POSTGRES_PASSWORD"))
-print("POSTGRES_PORT", os.environ.get("POSTGRES_PORT"))
-print("POSTGRES_HOST", os.environ.get("POSTGRES_HOST"))
+# create SA_SA2s.csv from SA_SA2s.geojson file
+def createSA2sCSVFile():
 
-con = psycopg2.connect(database=os.environ.get("POSTGRES_DB"),
-                       user=os.environ.get("POSTGRES_USER"),
-                       password=os.environ.get("POSTGRES_PASSWORD"),
-                       host=os.environ.get("POSTGRES_HOST"),
-                       port=os.environ.get("POSTGRES_PORT"))
-cur = con.cursor()
+    csvHeader = ['SA2_MAIN16','SA2_5DIG16','SA2_NAME16','SA3_CODE16',
+                'SA3_NAME16','SA4_CODE16','SA4_NAME16','GCC_CODE16',
+                'GCC_NAME16','STE_CODE16','STE_CODE16','AREASQKM16','geometry']
 
+    geojsonFile = open('/data/SA_SA2s.geojson', 'r')
+    df = json.load(geojsonFile)
 
-# insert data from SA_SA2s.geojson file to sa2data database
-def insertDataToDatabase():
-    is_database_not_empty = cur.execute(
-        'SELECT EXISTS (SELECT 1 FROM sa2data)')
-    if(is_database_not_empty):
-        return
+    csvFile = open('/data/SA_SA2s.csv', 'w')
+    # create the csv writer
+    writer = csv.writer(csvFile)
 
-    with open('/data/SA_SA2s.geojson', 'r') as file:
-        df = json.load(file)
-        for feature in df['features']:
-            cur.execute("""INSERT INTO sa2data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
-                        (feature['properties']['SA2_MAIN16'],
-                         feature['properties']['SA2_5DIG16'],
-                         feature['properties']['SA2_NAME16'],
-                         feature['properties']['SA3_CODE16'],
-                         feature['properties']['SA3_NAME16'],
-                         feature['properties']['SA4_CODE16'],
-                         feature['properties']['SA4_NAME16'],
-                         feature['properties']['GCC_CODE16'],
-                         feature['properties']['GCC_NAME16'],
-                         feature['properties']['STE_CODE16'],
-                         feature['properties']['STE_CODE16'],
-                         feature['properties']['AREASQKM16'],
-                         json.dumps(feature['geometry'])))
-            con.commit()
+    writer.writerow(csvHeader)
+    for feature in df['features']:
+        # write each row to the csv file
+        row = []
+        row.append(feature['properties']['SA2_MAIN16'])
+        row.append(feature['properties']['SA2_5DIG16'])
+        row.append(feature['properties']['SA2_NAME16'])
+        row.append(feature['properties']['SA3_CODE16'])
+        row.append(feature['properties']['SA3_NAME16'])
+        row.append(feature['properties']['SA4_CODE16'])
+        row.append(feature['properties']['SA4_NAME16'])
+        row.append(feature['properties']['GCC_CODE16'])
+        row.append(feature['properties']['GCC_NAME16'])
+        row.append(feature['properties']['STE_CODE16'])
+        row.append(feature['properties']['STE_CODE16'])
+        row.append(feature['properties']['AREASQKM16'])
+        row.append(json.dumps(feature['geometry']))
 
-insertDataToDatabase()
+        writer.writerow(row)
+    csvFile.close()
+    geojsonFile.close()
 
 
-
+createSA2sCSVFile()

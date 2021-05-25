@@ -8,5 +8,5 @@ RUN apt-get -y install python3-dev
 RUN apt-get install -y postgresql-server-dev-10 gcc python3-dev musl-dev
 
 # install psycopg2 library
-RUN pip3 install psycopg2
+#RUN pip3 install psycopg2
 

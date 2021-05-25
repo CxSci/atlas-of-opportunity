@@ -13,6 +13,7 @@ services:
     volumes:
       - ./src/data/SA2_info_for_dashboard.csv:/data/SA2_info_for_dashboard.csv
       - ./src/data/SA_SA2s.geojson:/data/SA_SA2s.geojson
+      - ./src/data/SA_SA2s.csv:/data/SA_SA2s.csv
       - ./api/database/init_database.py:/data/init_database.py
       - ./api/database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
   api:
