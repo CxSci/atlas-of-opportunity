@@ -56,7 +56,9 @@ let Map = class Map extends React.Component {
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
+    comparisonFeatures: PropTypes.array,
     highlightedFeature: PropTypes.object,
+    mini: PropTypes.bool
   };
 
   componentDidMount() {
@@ -71,17 +73,20 @@ let Map = class Map extends React.Component {
       // to account for <WelcomeDialog />.
       // TODO: Calculate width of WelcomeDialog at runtime instead of
       //       hardcoding it here.
-      fitBoundsOptions: { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
+      fitBoundsOptions: this.props.mini ? undefined : { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
+      interactive: !this.props.mini
     });
 
     this.map.resize();
 
+    if (!this.props.mini) {
     // zoom buttons
-    var controls = new mapboxgl.NavigationControl({
-      showCompass: true,
-      visualizePitch: true,
-    });
-    this.map.addControl(controls, "bottom-right");
+      var controls = new mapboxgl.NavigationControl({
+        showCompass: true,
+        visualizePitch: true,
+      });
+      this.map.addControl(controls, "bottom-right");
+    }
 
     this.map.on("load", () => {
       this.map.addSource("sa2", {
@@ -90,34 +95,31 @@ let Map = class Map extends React.Component {
         promoteId: "SA2_MAIN16",
       });
 
-      this.map.addLayer({
-        id: "sa2-fills",
-        type: "fill",
-        source: "sa2",
-        sourceLayer: "original",
-        layout: {},
-        paint: {
-          /*['case',
-          ['boolean', ['feature-state', 'click'], false],
-          '#696969',
-
-          ]*/
-          "fill-color": {
-            property: this.props.active.property,
-            stops: this.props.active.stops,
+      if (!this.props.mini) {
+        this.map.addLayer({
+          id: "sa2-fills",
+          type: "fill",
+          source: "sa2",
+          sourceLayer: "original",  
+          layout: {},
+          paint: {
+            "fill-color": {
+              property: this.props.active.property,
+              stops: this.props.active.stops,
+            },
+            "fill-opacity": [
+              "case",
+              ["boolean", ["feature-state", "click"], false],
+              1,
+              ["boolean", ["feature-state", "highlight"], false],
+              1,
+              ["boolean", ["feature-state", "hover"], false],
+              1,
+              0.8,
+            ],
           },
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "click"], false],
-            1,
-            ["boolean", ["feature-state", "highlight"], false],
-            1,
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.8,
-          ],
-        },
-      });
+        });
+      }
 
       this.map.addLayer({
         id: "sa2-borders",
@@ -163,21 +165,25 @@ let Map = class Map extends React.Component {
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
 
-      this.map.on("mousemove", "sa2-fills", (e) => {
-        if (e.features.length > 0) {
-          this.highlightFeature(e.features[0])
-        }
-      });
-
-      // When the mouse leaves the sa2-fill layer, update the feature state of the
-      // previously hovered feature.
-
-      this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
-
-      // Handle clicks on map features
-      this.map.on("click", "sa2-fills", this.onMapClick)
-      // Handle map clicks outside of map features
-      this.map.on("click", this.onMapClick);
+      if (!this.props.mini) {
+        this.map.on("mousemove", "sa2-fills", (e) => {
+          if (e.features.length > 0) {
+            this.highlightFeature(e.features[0])
+          }
+        });
+  
+        // When the mouse leaves the sa2-fill layer, update the feature state of the
+        // previously hovered feature.
+  
+        this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
+  
+        // Handle clicks on map features
+        this.map.on("click", "sa2-fills", this.onMapClick)
+        // Handle map clicks outside of map features
+        this.map.on("click", this.onMapClick);
+      } else {
+        this.highlightComparisonFeatures(this.props.comparisonFeatures)
+      }
     });
   }
 
@@ -231,6 +237,53 @@ let Map = class Map extends React.Component {
     this.map.setCenter(newCenter);
   }
 
+  highlightComparisonFeatures = (features) => {
+
+      const comparisonFeatures = {type: "FeatureCollection", features}
+      const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
+      this.map.fitBounds(
+        [[minX, minY], [maxX, maxY]],
+        {
+          padding: {top: 20, bottom: 40, left: 20, right: 20},
+          animate: false,
+        }
+      )
+      if (this.map.getSource("sa2-comp")) {
+        this.map.removeSource("sa2-comp")
+      }
+      this.map.addSource("sa2-comp", {
+        type: "geojson",
+        data: comparisonFeatures,
+        promoteId: "SA2_MAIN16",
+      })
+      this.map.addLayer({
+        id: "sa2-fills",
+        type: "fill",
+        source: "sa2-comp",
+        sourceLayer: "original",  
+        layout: {},
+        paint: {
+          "fill-color": {
+            property: this.props.active.property,
+            stops: this.props.active.stops,
+          },
+          "fill-opacity": 0.8,
+        },
+      });
+      this.map.addLayer({
+        id: "sa2-borders-comp",
+        type: "line",
+        source: "sa2-comp",
+        sourceLayer: "original",
+        layout: {},
+        paint: {
+          "line-color": "#FFFFFF",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+      });
+  }
+
 
   componentDidUpdate(prevProps) {
     if (this.props.sidebarOpen !== prevProps.sidebarOpen
@@ -260,6 +313,10 @@ let Map = class Map extends React.Component {
 
     if (this.props.selectedFeature !== prevProps.selectedFeature) {
       this.selectFeature(this.props.selectedFeature)
+    }
+
+    if (this.props.comparisonFeatures !== prevProps.comparisonFeatures && this.props.mini) {
+      this.highlightComparisonFeatures(this.props.comparisonFeatures)
     }
   }
 
@@ -697,6 +754,7 @@ function mapStateToProps(state) {
     sidebarOpen: state.sidebarOpen,
     selectedFeature: state.selectedFeature,
     highlightedFeature: state.highlightedFeature,
+    comparisonFeatures: state.comparisonFeatures
   };
 }
 
