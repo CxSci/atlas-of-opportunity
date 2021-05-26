@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { setHeaderOption } from "../redux/action-creators";
 
 import "../css/header.css";
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 
-function Header () {
+function Header (props) {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
   const [comparisonMode, setComparisonMode] = useState(false);
@@ -32,7 +33,7 @@ function Header () {
   };
 
   return (
-    <div className="container sidebarOpen" style={headerBox}>
+    <div className={`container ${props.sidebarCss}`} style={headerBox}>
       {/* TODO: make header background color translucent white while in comparison mode */}
       <div className="navbarLeft">
       </div>
@@ -99,6 +100,10 @@ function Header () {
       </div>
     </div>
   );
+}
+
+Header.propTypes = {
+  sidebarCss: PropTypes.string.isRequired
 }
 
 export default Header;

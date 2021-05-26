@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/header";
@@ -12,16 +13,32 @@ import { store } from "./redux/store";
 
 import "./css/App.css"
 
-const App = () => {
+const App = (props) => {
+  const sidebarCss =
+  props.sidebarOpen && props.selectedFeature
+    ? "sidebarOpen"
+    : "sidebarClosed";
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Header />
+        <Header sidebarCss={sidebarCss}/>
         {/* change so App has Main */}
-        <Main /> 
+        <Main sidebarCss={sidebarCss}/> 
       </Provider>
     </BrowserRouter>
   );
 };
 
-export default connect()(App);
+App.propTypes = {
+  selectedFeature: PropTypes.object,
+  sidebarOpen: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    selectedFeature: state.selectedFeature,
+    sidebarOpen: state.sidebarOpen,
+  };
+}
+
+export default connect(mapStateToProps)(App);
