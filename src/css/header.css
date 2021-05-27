@@ -121,3 +121,7 @@
 .menu-icon.black .menu-icon-bar {
     background-color: black;
 }
+
+.button-group {
+    pointer-events: auto;
+}
