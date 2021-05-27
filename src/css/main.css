@@ -1,12 +1,4 @@
 .main {
     display: flex;
-    flex-direction: column;
-    
-}
-.main.sidebarOpen .legend, .main.sidebarOpen .toggleButton, .sidebarOpen {
-    left: 320px;
-}
-
-.main.sidebarClosed .featureSelected .sidebar-container {
-    display: none;
+    flex-direction: column;    
 }

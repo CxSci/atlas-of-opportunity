@@ -32,7 +32,7 @@ const Main = (props) => {
 
     return (
 
-      <div className={`main ${props.sidebarCss} `} style={mapStyler}>
+      <div className="main" style={mapStyler}>
         <div style={screenFlexStyle}>
           <Sidebar />
           {!comparisonMode && <Map />}
@@ -46,14 +46,11 @@ const Main = (props) => {
 
 Main.propTypes = {
   selectedFeature: PropTypes.object,
-  sidebarOpen: PropTypes.bool.isRequired,
-  sidebarCss: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     selectedFeature: state.selectedFeature,
-    sidebarOpen: state.sidebarOpen,
   };
 }
 
