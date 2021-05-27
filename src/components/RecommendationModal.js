@@ -35,13 +35,22 @@ const ModalRoot = {
     cursor: "pointer",
   };
 
+  const modalText = {
+    "fontFamily": "Roboto",
+    "fontStyle": "normal",
+    "fontWeight": "normal",
+    "fontSize": "14px",
+    "lineHeight": "133%",
+    "color": "#333333"
+  }
+
 const RecommendationModal = () => {
 
     return (
     <div style={ModalRoot}>
         <CloseIcon onClick={() => {}} style={xButton} />
         <div style={scrollingWrapper}>
-            <p>Not sure where to start? Try the Recommendation Tool.</p>
+            <p style={modalText}>Not sure where to start? Try the Recommendation Tool.</p>
         </div>
     </div>
     )
