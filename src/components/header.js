@@ -17,8 +17,7 @@ function Header () {
   }, [location]);
 
   return (
-    <div className="container" style={headerBox}>
-      {/* TODO: make header background color translucent white while in comparison mode */}
+    <div className={`container ${comparisonMode && "comparisonMode"}`}>
       <div className="navbarLeft">
       </div>
       <div className="navbarCenter">
