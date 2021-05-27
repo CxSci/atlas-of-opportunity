@@ -14,16 +14,15 @@ import { store } from "./redux/store";
 import "./css/App.css"
 
 const App = (props) => {
-  const sidebarCss =
-  props.sidebarOpen && props.selectedFeature
-    ? "sidebarOpen"
-    : "sidebarClosed";
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Header sidebarCss={sidebarCss}/>
-        {/* change so App has Main */}
-        <Main sidebarCss={sidebarCss}/> 
+        <div className={(props.sidebarOpen && props.selectedFeature)
+          ? "sidebarOpen"
+          : "sidebarClosed"}>
+          <Header/>
+          <Main/> 
+        </div>
       </Provider>
     </BrowserRouter>
   );
