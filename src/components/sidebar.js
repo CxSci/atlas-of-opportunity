@@ -18,6 +18,7 @@ import LocationDetails from "./LocationDetails";
 import { Switch, Route } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
 import CollapsibleSection from "./CollapsibleSection";
+import RecommendationModal from "./RecommendationModal";
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -104,6 +105,7 @@ class Sidebar extends React.Component {
                   :
                   <>
                     <WelcomeDialog />
+                    <RecommendationModal />
                     <Legend/>
                   </>
                 }
