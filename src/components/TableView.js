@@ -14,16 +14,17 @@ const TableView = ({comparisonFeatures}) => {
   const nameColumnWidth = 170;
   const dataColumnWidth = 120;
   const colPadding = 10 * 2;
+  const tableWidth = (nameColumnWidth + colPadding) + (dataColumnWidth + colPadding) * comparisonFeatures.length;
   const columns = comparisonFeatures.map((ft, idx) => ({ 
     dataKey: `regionData${idx + 1}`,
     label: ft.properties.SA2_NAME16
   }));
   const nameColumnStyle = {
-    width: nameColumnWidth,
+    flex: `0 1 ${nameColumnWidth}px`,
     margin: '0 10px',
   }
   const dataColumnStyle = {
-    width: dataColumnWidth,
+    flex: `0 0 ${dataColumnWidth}px`,
     margin: '0 10px',
   }
 
@@ -62,6 +63,7 @@ const TableView = ({comparisonFeatures}) => {
         rowKey="id"
         showHeader={false}
         rowClassName="table-row"
+        style={{width: tableWidth}}
       >
         <Column dataIndex='regionName' width={nameColumnWidth + colPadding} />
         {columns.map(col => (
@@ -73,7 +75,7 @@ const TableView = ({comparisonFeatures}) => {
   
   return (
     <div className="table-view">
-      <div className="table-header">
+      <div className="table-header" style={{width: tableWidth}}>
         <div style={nameColumnStyle}></div>
         {columns.map(col => (
           <div key={col.dataKey} style={dataColumnStyle}>
