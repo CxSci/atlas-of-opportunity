@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 
@@ -44,13 +45,45 @@ const ModalRoot = {
     "color": "#333333"
   }
 
+  const button = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "position": "static",
+    "width": "187px",
+    "height": "36px",
+    "left": "0px",
+    "top": "0px",
+    "background": "#3DBEFF",
+    "borderRadius": "100px",
+    cursor: "pointer",
+    marginTop: 20
+  }
+
+  const buttonText = {
+    "fontFamily": "Roboto",
+    "fontStyle": "normal",
+    "fontWeight": "bold",
+    "fontSize": "14px",
+    "lineHeight": "16px",
+    "display": "flex",
+    "alignItems": "center",
+    "textAlign": "center",
+    "color": "#FFFFFF"
+  }
+
 const RecommendationModal = () => {
+
+  const history = useHistory();
 
     return (
     <div style={ModalRoot}>
         <CloseIcon onClick={() => {}} style={xButton} />
         <div style={scrollingWrapper}>
             <p style={modalText}>Not sure where to start? Try the Recommendation Tool.</p>
+            <div style={button} onClick={()=>{history.push("/recommendation")}}>
+                <p style={buttonText}>Recommendation Tool</p>
+            </div>
         </div>
     </div>
     )
