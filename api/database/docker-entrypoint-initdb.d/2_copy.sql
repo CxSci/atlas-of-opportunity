@@ -1,1 +1,1 @@
-\copy sadata FROM '/data/SA2_info_for_dashboard.csv' with DELIMITER ',' CSV HEADER
+\copy sadata FROM '/data/SA2_info_for_dashboard.csv' with DELIMITER ','  Null as 'NA' CSV HEADER
