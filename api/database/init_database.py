@@ -30,7 +30,7 @@ def createSA2sCSVFile():
         row.append(feature['properties']['GCC_CODE16'])
         row.append(feature['properties']['GCC_NAME16'])
         row.append(feature['properties']['STE_CODE16'])
-        row.append(feature['properties']['STE_CODE16'])
+        row.append(feature['properties']['STE_NAME16'])
         row.append(feature['properties']['AREASQKM16'])
         row.append(json.dumps(feature['geometry']))
 
