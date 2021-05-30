@@ -7,7 +7,7 @@ import urllib.request
 # Usage:
 #   python3 compare_json.py
 
-api_url = 'http://localhost/api/features.geojson'
+api_url = 'http://localhost:5000/api/features.geojson'
 file_path = 'SA_dashboard.geojson'
 
 with urllib.request.urlopen(api_url) as f:

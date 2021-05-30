@@ -35,7 +35,7 @@ def get_sa_data():
         bridge_rank1,bridge_rank2,bridge_rank3,bridge_rank4,bridge_rank5,time_q1,time_q2,time_q3,time_q4,tot_time,
         fq1,fq2,fq3,fq4,income_diversity,raw_inequality,inequality,inflow_r1,inflow_r2,inflow_r3,outflow_r1,outflow_r2,outflow_r3,
         spent_r1,spent_r2,spent_r3,gain_r1,gain_r2,gain_r3,exchanged_r1,exchanged_r2,exchanged_r3
-        FROM sadata c INNER JOIN sa2data j ON c.SA2_code = j.SA2_MAIN16"""
+        FROM sa2data j LEFT JOIN sadata c ON j.SA2_MAIN16 = c.SA2_code """
 
     dict_cur.execute(command)
     rows = dict_cur.fetchall()
