@@ -22,3 +22,63 @@ export const MAP_TYPE = {
 export const FLOW_IN = "inflow";
 export const FLOW_OUT = "outflow";
 export const FLOW_BI = "bidirectional";
+export const RECOMMENDATION_DUMMY_DATA = [
+  {
+    title: "Your Business",
+    description: "We will ask you a few questions about your business needs, and then provide location recommendations based on your answers.",
+    questions: [
+    {
+      type: "multiple_choice",
+      question: "What type of business is it?",
+      answers: ["B2B", "B2C", "Both"]
+    },
+    {
+      type: "select",
+      question: "What kind of business are you looking to open?",
+      placeholder: "Select Business Category",
+      answers: ["Category 1", "Category 2", "Category 3"]
+    },
+    {
+      type: "select",
+      question: "",
+      placeholder: "Select Business Subcategory",
+      answers: ["Category 1", "Category 2", "Category 3"]
+    },
+    {
+      type: "select",
+      question: "What type of location do you have in mind?",
+      placeholder: "Select Location Type",
+      answers: ["Location 1", "Location 2", "Location 3"]
+    },
+  ]
+  },
+  {
+    title: "Your Customers",
+    description: "",
+    questions: [
+      {
+      type: "checkbox",
+      question: "What characteristics describe your typical customers?",
+      hint: "Select all that apply",
+      answers: ["Tourists", "Locals", "One-off Purchases", "Repeat Customers", "Culturally Diverse"]
+    },
+    {
+      type: "checkbox",
+      question: "Waht's their typical household income?",
+      hint: "Select all that apply",
+      answers: ["Low", "Medium", "High", "Not Sure"]
+    }
+  ]
+  },
+  {
+    title: "Premises",
+    description: "",
+    questions: [
+      {
+        type: "multiple_choice",
+        question: "What about commercial premises leasing expenses?",
+        answers: ["I have a limited budget", "Willing to look at locations that can justify the rent with profitable business returns.", "Leasing a premises is not a concern for me."]
+      }
+    ]
+  }
+]
