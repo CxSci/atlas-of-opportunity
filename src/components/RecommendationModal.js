@@ -7,7 +7,7 @@ const ModalRoot = {
     pointerEvents: "auto",
     //"padding": "30px 35px",
     //"position": "absolute",
-    "height": "300px",
+    "height": "150px",
     "left": "0px",
     "right": "0px",
     "top": "0px",

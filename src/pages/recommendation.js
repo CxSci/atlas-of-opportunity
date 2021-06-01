@@ -1,5 +1,7 @@
 import React from 'react';
 import RecommendationTool from '../components/RecommendationTool';
+import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const root = {
     width: "100vw",
@@ -11,9 +13,34 @@ const root = {
     left: 0
 }
 
+const titleRow = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    "padding": "30px 40px",
+    borderBottom: "1px solid #CCCCCC"
+}
+
+const titleText = {
+    "fontFamily": "Roboto",
+    "fontStyle": "normal",
+    "fontWeight": "500",
+    "fontSize": "24px",
+    "lineHeight": "20px",
+    "color": "#000000",
+  }
+
+  const iconButton = {
+    cursor: "pointer"
+  }
+
 const Recommendation = () => {
+    const history = useHistory()
     return <div style={root}>
-        <p>Recommendation Tool</p>
+        <div style={titleRow}>
+        <p style={titleText}>Recommendation Tool</p>
+            <CloseIcon style={iconButton} onClick={()=>{history.goBack()}}/>
+        </div>
         <RecommendationTool/>
     </div>
 };
