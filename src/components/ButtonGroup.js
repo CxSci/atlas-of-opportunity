@@ -29,11 +29,11 @@ const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
 
 ButtonGroup.propTypes = {
   defaultValue: PropTypes.any,
-  options: PropTypes.arrayOf({
+  options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
     value: PropTypes.string,
-    icon: PropTypes.node
-  }).isRequired,
+    icon: PropTypes.node,
+  })).isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
 }
