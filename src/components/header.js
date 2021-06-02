@@ -6,7 +6,7 @@ import { setHeaderOption } from "../redux/action-creators";
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
 import { ReactComponent as GridIcon} from "../assets/icons/grid.svg";
-import ButtonGroup from "./ButtonGroup";
+import SegmentedControl from "./SegmentedControl";
 import "../css/header.css";
 
 function Header () {
@@ -33,7 +33,7 @@ function Header () {
       </div>
       <div className="navbarCenter">
         {comparisonMode && 
-          <ButtonGroup
+          <SegmentedControl
             options={options}
             defaultValue="table"
             onChange={onBGroupChange}
