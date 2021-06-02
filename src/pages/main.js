@@ -10,7 +10,8 @@ import "../css/main.css";
 
 import Routes from "../routes/index";
 import { useLocation } from "react-router";
-import TableView from "../components/TableView";
+// import TableView from "../components/TableView";
+import GridView from "../components/GridView";
 
 const Main = (props) => {
     const mapStyler = {
@@ -38,7 +39,8 @@ const Main = (props) => {
         <div style={screenFlexStyle}>
           <Sidebar />
           {!comparisonMode && <Map />}
-          {comparisonMode && <TableView />}
+          {/* {comparisonMode && <TableView />} */}
+          {comparisonMode && <GridView />}
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
         <Footer inDarkMode={!comparisonMode}/>
