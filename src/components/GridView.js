@@ -7,30 +7,36 @@ import { formatValue } from "../utils/formatValue";
 import "../css/GridView.css"
 
 const GridView = ({comparisonFeatures}) => {
+  const comparisonFts = comparisonFeatures;
 
   const renderTable = (section) => {
-    const data = [];
-    
-    section.content.forEach((metric, idx) => {
-      let columnValues = comparisonFeatures.map((ft, idx) => {
-        let rawValue = ft.properties[metric.id];
-        const value = formatValue(rawValue, metric.format);
-        return ({ [`regionData${idx + 1}`]: value })
-      });
-      columnValues.push({regionName: metric.label});
-      columnValues.push({id: idx});
-      const row = columnValues.reduce((prev, curr) => ({...prev, ...curr}));
-      data.push(row);
-    })
-
     return (
       <div className="grid-container">
-        {data.map(item => (
-          <div key={item.id} className="grid-item">
-            {item.regionName}
+        {section.content.map((metric) => (
+          <div key={metric.id} className="grid-item">
+            <div className="grid-item-head">
+              <h2>{metric.label}</h2>
+            </div>
+            <div className="grid-item-body">
+              {comparisonFts.map(ft => 
+                renderValue(ft, metric)
+              )}
+            </div>
           </div>
         ))}
       </div>
+    )
+  }
+
+  const renderValue = (feature, metric) => {
+    let rawValue = feature.properties[metric.id];
+    const value = formatValue(rawValue, metric.format);
+    
+    return (
+      <p key={feature.id} className="comparison">
+        <span>{feature.properties.SA2_NAME16}</span>
+        <span>{value}</span>
+      </p>
     )
   }
   
