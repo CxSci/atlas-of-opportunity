@@ -1,9 +1,9 @@
-.button-group {
+.segmentedControl {
   display: flex;
   pointer-events: auto;
 }
 
-.button-group label input[type=radio] {
+.segmentedControl label input[type=radio] {
   position: absolute; /* Opt the radio button out of layout so it doesn't affect label's flex layout in Firefox */
   height: 0;
   opacity: 0;
@@ -13,20 +13,20 @@
   margin: 0;
 }
 
-.button-group svg {
+.segmentedControl svg {
   line-height: 0;
   margin-right: 4px;
 }
 
-.button-group label:first-child {
+.segmentedControl label:first-child {
   border-left: 1px solid #999999;
   border-radius: 5px 0 0 5px;
 }
-.button-group label:last-child {
+.segmentedControl label:last-child {
   border-radius: 0 5px 5px 0;
 }
 
-.button-group label {
+.segmentedControl label {
   border-color: #999999;
   border-style: solid;
   border-width: 1px 1px 1px 0;
@@ -40,7 +40,7 @@
   align-items: center;
 }
 
-.button-group label.active {
+.segmentedControl label.active {
   background: #666666;
   color: #ffffff;
 }

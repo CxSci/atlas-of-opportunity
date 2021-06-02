@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../css/ButtonGroup.css";
+import "../css/SegmentedControl.css";
 
-const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
+const SegmentedControl = ({ defaultValue, options, onChange, width = 100 }) => {
   const [value, setValue] = useState(defaultValue);
 
   const onRadioChange = (ev) => {
@@ -11,7 +11,7 @@ const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
   }
 
   return (
-    <div className="button-group" style={{width: `${width}px`}}>
+    <div className="segmentedControl" style={{width: `${width}px`}}>
       {options.map(op => (
         <label className={op.value === value ? 'active' : ''} key={op.value}>
           <input type="radio"
@@ -27,7 +27,7 @@ const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
   )
 }
 
-ButtonGroup.propTypes = {
+SegmentedControl.propTypes = {
   defaultValue: PropTypes.any,
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
@@ -38,4 +38,4 @@ ButtonGroup.propTypes = {
   width: PropTypes.number,
 }
 
-export default ButtonGroup;
+export default SegmentedControl;
