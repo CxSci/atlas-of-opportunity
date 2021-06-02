@@ -4,6 +4,7 @@ import ReactTooltip from "react-tooltip";
 import propsMapping from "./propsMapping";
 import CollapsibleSection from "./CollapsibleSection";
 import { formatValue } from "../utils/formatValue";
+import MetricDetails from "./MetricDetails";
 
 const LocationDetails = (props) => {
   const selectedFeature = props.feature;
@@ -14,6 +15,9 @@ const LocationDetails = (props) => {
   }
 
   const renderMetric = (metric) => {
+    let rawValue = props.feature.properties[metric.id];
+    const value = formatValue(rawValue, metric.format);
+
     return (
       <div key={metric.id}>
         <h2 data-tip data-for={metric.id}>{metric.label}</h2>
@@ -26,28 +30,14 @@ const LocationDetails = (props) => {
           </ReactTooltip>
         )}
         {comparisonFts.length ? (
-          renderStackedFeatures(allFeatures, metric)
+          allFeatures.map(ft => 
+            <MetricDetails key={ft.id} feature={ft} metric={metric} />
+          )
         ) : (
-          formatMetric(selectedFeature, metric)
+          <p>{value}</p>
         )}
       </div>
     )
-  }
-
-  const renderStackedFeatures = (features, metric) => {
-    return (
-      features.map(feature => 
-        <p key={feature.properties.SA2_MAIN16} className="comparison">
-          <span>{feature.properties.SA2_NAME16}</span>
-          <span>{formatMetric(feature, metric)}</span>
-        </p>
-      )
-    )
-  }
-
-  const formatMetric = (feature, metric) => {
-    const rawValue = feature.properties[metric.id];
-    return formatValue(rawValue, metric.format);
   }
 
   return (

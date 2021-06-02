@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import propsMapping from "./propsMapping";
-import { formatValue } from "../utils/formatValue";
+import MetricDetails from "./MetricDetails";
 import "../css/GridView.css"
 
 const GridView = ({comparisonFeatures}) => {
@@ -19,24 +19,12 @@ const GridView = ({comparisonFeatures}) => {
             </div>
             <div className="grid-item-body">
               {comparisonFts.map(ft => 
-                renderValue(ft, metric)
+                <MetricDetails key={ft.id} feature={ft} metric={metric} />
               )}
             </div>
           </div>
         ))}
       </div>
-    )
-  }
-
-  const renderValue = (feature, metric) => {
-    let rawValue = feature.properties[metric.id];
-    const value = formatValue(rawValue, metric.format);
-    
-    return (
-      <p key={feature.id} className="comparison">
-        <span>{feature.properties.SA2_NAME16}</span>
-        <span>{value}</span>
-      </p>
     )
   }
   
