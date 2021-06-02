@@ -33,7 +33,12 @@ function Header () {
       </div>
       <div className="navbarCenter">
         {comparisonMode && 
-          <ButtonGroup options={options} defaultValue="table" onChange={onBGroupChange} />
+          <ButtonGroup
+            options={options}
+            defaultValue="table"
+            onChange={onBGroupChange}
+            width={170}
+          />
         }
       </div>
       <div className="navbarRight">
