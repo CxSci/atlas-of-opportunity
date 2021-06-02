@@ -13,14 +13,14 @@ const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
   return (
     <div className="button-group" style={{width: `${width}px`}}>
       {options.map(op => (
-        <label className={`radio-button-wrapper ${op.value === value ? 'active' : ''}`} key={op.value}>
-          <span className="radio-button">
-            <input type="radio" className="radio-button-input" value={op.value} checked={op.value === value} onChange={onRadioChange} />
-          </span>
-          <span className="radio-button-icon">
-            {op.icon}
-          </span>
-          <span>{op.label}</span>
+        <label className={op.value === value ? 'active' : ''} key={op.value}>
+          <input type="radio"
+            value={op.value}
+            checked={op.value === value}
+            onChange={onRadioChange}
+          />
+          {op.icon}
+          {op.label}
         </label>
       ))}
     </div>
