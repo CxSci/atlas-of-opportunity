@@ -2,7 +2,7 @@ import React from 'react';
 import RecommendationTool from '../components/RecommendationTool';
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import {RECOMMENDATION_DUMMY_DATA} from '../constants'
 const root = {
     width: "100vw",
     height: "100vh",
@@ -41,7 +41,7 @@ const Recommendation = () => {
         <p style={titleText}>Recommendation Tool</p>
             <CloseIcon style={iconButton} onClick={()=>{history.goBack()}}/>
         </div>
-        <RecommendationTool/>
+        <RecommendationTool data={RECOMMENDATION_DUMMY_DATA}/>
     </div>
 };
 
