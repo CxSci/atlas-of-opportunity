@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../css/ButtonGroup.css";
 
-const ButtonGroup = ({ defaultValue, options, onChange }) => {
+const ButtonGroup = ({ defaultValue, options, onChange, width = 100 }) => {
   const [value, setValue] = useState(defaultValue);
 
   const onRadioChange = (ev) => {
@@ -11,7 +11,7 @@ const ButtonGroup = ({ defaultValue, options, onChange }) => {
   }
 
   return (
-    <div className="button-group">
+    <div className="button-group" style={{width: `${width}px`}}>
       {options.map(op => (
         <label className={`radio-button-wrapper ${op.value === value ? 'active' : ''}`} key={op.value}>
           <span className="radio-button">
@@ -35,6 +35,7 @@ ButtonGroup.propTypes = {
     icon: PropTypes.node
   }).isRequired,
   onChange: PropTypes.func.isRequired,
+  width: PropTypes.number,
 }
 
 export default ButtonGroup;
