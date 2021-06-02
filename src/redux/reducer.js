@@ -65,6 +65,7 @@ const initialState = {
   selectedFeature: null,
   highlightedFeature: null,
   showWelcomeDialog: true,
+  activeView: 'table',
 };
 
 function fetchFeatures() {
@@ -152,9 +153,14 @@ function reducer(state = initialState, action) {
         ...state, 
         collapsibleState: action.payload
       };
+    case Constants.SET_ACTIVE_VIEW:
+      return {
+        ...state, 
+        activeView: action.payload
+      };
     default:
       return state;
   }
 }
-
+// 08103452699
 export { reducer, initialState, loadFeatures };

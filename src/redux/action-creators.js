@@ -91,3 +91,10 @@ export function updateCollapsibleState(state) {
     payload: state
   })
 }
+
+export function setActiveView(state) {
+  store.dispatch({
+    type: Constants.SET_ACTIVE_VIEW,
+    payload: state
+  })
+}

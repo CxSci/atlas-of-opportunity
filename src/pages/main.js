@@ -10,7 +10,7 @@ import "../css/main.css";
 
 import Routes from "../routes/index";
 import { useLocation } from "react-router";
-// import TableView from "../components/TableView";
+import TableView from "../components/TableView";
 import GridView from "../components/GridView";
 
 const Main = (props) => {
@@ -39,8 +39,12 @@ const Main = (props) => {
         <div style={screenFlexStyle}>
           <Sidebar />
           {!comparisonMode && <Map />}
-          {/* {comparisonMode && <TableView />} */}
-          {comparisonMode && <GridView />}
+          {comparisonMode && (
+            props.activeView === 'table' && <TableView />
+          )}
+          {comparisonMode && (
+            props.activeView === 'grid' && <GridView />
+          )}
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
         <Footer inDarkMode={!comparisonMode}/>
@@ -51,11 +55,13 @@ const Main = (props) => {
 
 Main.propTypes = {
   selectedFeature: PropTypes.object,
+  activeView: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     selectedFeature: state.selectedFeature,
+    activeView: state.activeView,
   };
 }
 
