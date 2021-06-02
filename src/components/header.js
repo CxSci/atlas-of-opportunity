@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { setHeaderOption } from "../redux/action-creators";
+import { setHeaderOption, setActiveView } from "../redux/action-creators";
 
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
@@ -23,8 +23,8 @@ function Header () {
     setComparisonMode(location.pathname.startsWith('/comparison'));
   }, [location]);
 
-  const onBGroupChange = () => {
-
+  const onSegmentedControlChange = (value) => {
+    setActiveView(value);
   }
 
   return (
@@ -36,7 +36,7 @@ function Header () {
           <SegmentedControl
             options={options}
             defaultValue="table"
-            onChange={onBGroupChange}
+            onChange={onSegmentedControlChange}
             width={170}
           />
         }
