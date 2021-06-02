@@ -1,53 +1,46 @@
-.radio-button-wrapper > .radio-button {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: -1;
+.button-group {
+  display: flex;
+  pointer-events: auto;
 }
 
-.radio-button-wrapper input[type=radio] {
+.button-group label input[type=radio] {
+  position: absolute; /* Opt the radio button out of layout so it doesn't affect label's flex layout in Firefox */
   height: 0;
   opacity: 0;
   width: 0;
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
 }
 
-.radio-button-icon {
-  display: inline-block;
+.button-group svg {
   line-height: 0;
-  vertical-align: -0.325em;
-  margin: 0 4px;
+  margin-right: 4px;
 }
 
-.radio-button-wrapper:first-child {
+.button-group label:first-child {
   border-left: 1px solid #999999;
   border-radius: 5px 0 0 5px;
 }
-.radio-button-wrapper:last-child {
+.button-group label:last-child {
   border-radius: 0 5px 5px 0;
 }
 
-.radio-button-wrapper {
-  background: #ffffff;
+.button-group label {
   border-color: #999999;
   border-style: solid;
   border-width: 1px 1px 1px 0;
-  color: rgba(0,0,0,.85);
+  color: #333;
   cursor: pointer;
-  display: inline-block;
   font-size: 14px;
-  font-weight: 500;
-  height: 32px;
-  line-height: 30px;
-  margin: 0;
-  padding: 0 15px;
-  position: relative;
+  line-height: 34px;
+  flex: 1 0 0; /* flex-basis 0 to make all segments the same width regardless of content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.radio-button-wrapper.active {
+.button-group label.active {
   background: #666666;
   color: #ffffff;
 }
