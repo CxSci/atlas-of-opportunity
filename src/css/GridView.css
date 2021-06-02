@@ -28,12 +28,24 @@
 }
 
 .grid-container {
-  display: flex;
+  width: 1000px;
 }
 
 .grid-container .grid-item {
   width: 250px;
-  height: 170px;
+  display: inline-block;
+}
+
+.grid-container .grid-item-head {
+  padding: 0 20px;
+}
+
+.grid-container .grid-item-body {
+  padding: 0 20px;
   border-right: 1px solid #e6e6e6;
-  margin: 10px;
+  height: 130px;
+  margin-bottom: 30px;
+}
+.grid-container .grid-item:nth-child(4n) .grid-item-body {
+  border-right: none;
 }
