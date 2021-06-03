@@ -7,10 +7,13 @@ import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
 import { ReactComponent as GridIcon} from "../assets/icons/grid.svg";
 import SegmentedControl from "./SegmentedControl";
-import "../css/header.css";
 import { COMPARISON_TYPE } from "../constants";
+import { useSelector } from "react-redux";
+import { getComparisonType } from "../redux/getters";
+import "../css/header.css";
 
 function Header () {
+  const comparisonType = useSelector(getComparisonType);
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
   const [comparisonMode, setComparisonMode] = useState(false);
@@ -36,7 +39,7 @@ function Header () {
         {comparisonMode && 
           <SegmentedControl
             options={options}
-            defaultValue={COMPARISON_TYPE.TABLE}
+            defaultValue={comparisonType}
             onChange={onSegmentedControlChange}
             width={170}
           />
