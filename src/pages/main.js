@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/SideBar";
 import Legend from '../components/legend';
 import Footer from '../components/footer';
 import "../css/main.css";
