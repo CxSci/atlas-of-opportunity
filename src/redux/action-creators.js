@@ -92,9 +92,9 @@ export function updateCollapsibleState(state) {
   })
 }
 
-export function setActiveView(state) {
+export function setComparisonType(state) {
   store.dispatch({
-    type: Constants.SET_ACTIVE_VIEW,
+    type: Constants.SET_COMPARISON_TYPE,
     payload: state
   })
 }

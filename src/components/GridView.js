@@ -9,7 +9,7 @@ import "../css/GridView.css"
 const GridView = ({comparisonFeatures}) => {
   const comparisonFts = comparisonFeatures;
 
-  const renderTable = (section) => {
+  const renderGrid = (section) => {
     return (
       <div className="grid-container">
         {section.content.map((metric) => (
@@ -19,7 +19,7 @@ const GridView = ({comparisonFeatures}) => {
             </div>
             <div className="grid-item-body">
               {comparisonFts.map(ft => 
-                <MetricDetails key={ft.id} feature={ft} metric={metric} />
+                <MetricDetails key={ft.properties.SA2_MAIN16} feature={ft} metric={metric} />
               )}
             </div>
           </div>
@@ -32,7 +32,7 @@ const GridView = ({comparisonFeatures}) => {
     <div className="grid-view">
       {propsMapping.map((section) => (
         <Collapsible trigger={section.title} key={section.title} open={true}>
-          {renderTable(section)}
+          {renderGrid(section)}
         </Collapsible>
       ))}
     </div>

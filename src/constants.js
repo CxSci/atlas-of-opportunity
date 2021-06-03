@@ -12,12 +12,17 @@ export const SET_HIGHLIGHTED_FEATURE = "SET_HIGHLIGHTED_FEATURE";
 export const ADD_COMPARISON_FEATURE = "ADD_COMPARISON_FEATURE";
 export const REMOVE_COMPARISON_FEATURE = "REMOVE_COMPARISON_FEATURE";
 export const UPDATE_COLLAPSIBLE_STATE = "UPDATE_COLLAPSIBLE_STATE";
-export const SET_ACTIVE_VIEW = "SET_ACTIVE_VIEW";
+export const SET_COMPARISON_TYPE = "SET_COMPARISON_TYPE";
 
 export const MAP_TYPE = {
   GROWTH: "growth",
   TRANSACTIONS: "transactions",
   SEGREGATION: "segregation",
+};
+
+export const COMPARISON_TYPE = {
+  TABLE: "table",
+  GRID: "grid",
 };
 
 export const FLOW_IN = "inflow";

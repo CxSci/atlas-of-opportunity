@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { setHeaderOption, setActiveView } from "../redux/action-creators";
+import { setHeaderOption, setComparisonType } from "../redux/action-creators";
 
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
 import { ReactComponent as GridIcon} from "../assets/icons/grid.svg";
 import SegmentedControl from "./SegmentedControl";
 import "../css/header.css";
+import { COMPARISON_TYPE } from "../constants";
 
 function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
@@ -15,8 +16,8 @@ function Header () {
   const [comparisonMode, setComparisonMode] = useState(false);
   const location = useLocation();
   const options = [
-    { label: 'Table', value: 'table', icon: <TableIcon /> },
-    { label: 'Grid', value: 'grid', icon: <GridIcon /> },
+    { label: 'Table', value: COMPARISON_TYPE.TABLE, icon: <TableIcon /> },
+    { label: 'Grid', value: COMPARISON_TYPE.GRID, icon: <GridIcon /> },
   ];
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function Header () {
   }, [location]);
 
   const onSegmentedControlChange = (value) => {
-    setActiveView(value);
+    setComparisonType(value);
   }
 
   return (
@@ -35,7 +36,7 @@ function Header () {
         {comparisonMode && 
           <SegmentedControl
             options={options}
-            defaultValue="table"
+            defaultValue={COMPARISON_TYPE.TABLE}
             onChange={onSegmentedControlChange}
             width={170}
           />

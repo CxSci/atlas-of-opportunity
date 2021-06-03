@@ -40,10 +40,10 @@ const Main = (props) => {
           <Sidebar />
           {!comparisonMode && <Map />}
           {comparisonMode && (
-            props.activeView === 'table' && <TableView />
+            props.comparisonType === 'table' && <TableView />
           )}
           {comparisonMode && (
-            props.activeView === 'grid' && <GridView />
+            props.comparisonType === 'grid' && <GridView />
           )}
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
@@ -55,13 +55,13 @@ const Main = (props) => {
 
 Main.propTypes = {
   selectedFeature: PropTypes.object,
-  activeView: PropTypes.string,
+  comparisonType: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     selectedFeature: state.selectedFeature,
-    activeView: state.activeView,
+    comparisonType: state.comparisonType,
   };
 }
 

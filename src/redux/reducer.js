@@ -65,7 +65,7 @@ const initialState = {
   selectedFeature: null,
   highlightedFeature: null,
   showWelcomeDialog: true,
-  activeView: 'table',
+  comparisonType: Constants.COMPARISON_TYPE.TABLE,
 };
 
 function fetchFeatures() {
@@ -153,14 +153,14 @@ function reducer(state = initialState, action) {
         ...state, 
         collapsibleState: action.payload
       };
-    case Constants.SET_ACTIVE_VIEW:
+    case Constants.SET_COMPARISON_TYPE:
       return {
         ...state, 
-        activeView: action.payload
+        comparisonType: action.payload
       };
     default:
       return state;
   }
 }
-// 08103452699
+
 export { reducer, initialState, loadFeatures };

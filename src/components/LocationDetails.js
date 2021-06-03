@@ -31,7 +31,7 @@ const LocationDetails = (props) => {
         )}
         {comparisonFts.length ? (
           allFeatures.map(ft => 
-            <MetricDetails key={ft.id} feature={ft} metric={metric} />
+            <MetricDetails key={ft.properties.SA2_MAIN16} feature={ft} metric={metric} />
           )
         ) : (
           <p>{value}</p>
