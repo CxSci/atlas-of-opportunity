@@ -21,7 +21,7 @@ const buttonRoot = {
 
 const ComparisonButton = (props) => {
   return (
-    <Link to="/comparison" style={{...buttonRoot, ...props.style}}>
+    <Link to={props.url} style={{...buttonRoot, ...props.style}}>
       Show Comparison
       <svg
         width="15"
@@ -43,6 +43,7 @@ const ComparisonButton = (props) => {
 };
 
 ComparisonButton.propTypes = {
+  url: PropTypes.string,
   style: PropTypes.object
 }
 
