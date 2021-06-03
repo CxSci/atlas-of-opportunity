@@ -39,7 +39,7 @@ const Recommendation = () => {
     return <div style={root}>
         <div style={titleRow}>
         <p style={titleText}>Recommendation Tool</p>
-            <CloseIcon style={iconButton} onClick={()=>{history.goBack()}}/>
+            <CloseIcon style={iconButton} onClick={()=>{ history.goBack() }}/>
         </div>
         <RecommendationTool data={RECOMMENDATION_DUMMY_DATA}/>
     </div>
