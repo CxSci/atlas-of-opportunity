@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React, {  } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import Table from "rc-table";
 import propsMapping from "./propsMapping";
 import { formatValue } from "../utils/formatValue";
-import { useHistory } from "react-router";
 import "../css/TableView.css"
 const { Column } = Table;
 
 const TableView = ({comparisonFeatures}) => {
-  const history = useHistory();
   const nameColumnWidth = 170;
   const dataColumnWidth = 120;
   const colPadding = 10 * 2;
@@ -27,12 +25,6 @@ const TableView = ({comparisonFeatures}) => {
     flex: `0 0 ${dataColumnWidth}px`,
     margin: '0 10px',
   }
-
-  useEffect(() => {
-    if (!comparisonFeatures.length) {
-      history.push('/');
-    }
-  });
   
   const renderTable = (section) => {
     const data = [];

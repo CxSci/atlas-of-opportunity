@@ -15,7 +15,7 @@ import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature, setSelectedFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
-import { Switch, Route, useLocation } from "react-router";
+import { Switch, Route, useLocation, useHistory } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
 import CollapsibleSection from "./CollapsibleSection";
 
@@ -26,6 +26,7 @@ const Sidebar = (props) => {
       comparisonFeatures,
     } = props;
     const location = useLocation();
+    const history = useHistory();
     
     const isCompared = comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
     const enableButton = comparisonFeatures.length >= 4;
@@ -66,6 +67,23 @@ const Sidebar = (props) => {
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [features]);
+
+    // Effect to update url when removing comparionFeatures
+    useEffect(() => {
+      if (location.pathname.startsWith('/comparison/') && features.length) {
+        if (!comparisonFeatures.length) {
+          history.push('/');
+        }
+        else {
+          const ids = comparisonFeatures.map(feature => feature.properties.SA2_MAIN16);
+          const newPath = '/comparison/' + ids.join('+');
+          if (location.pathname !== newPath) {
+            history.replace(newPath);
+          }
+        }
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [comparisonFeatures]);
 
     return (
       <div className={`panel-container ${selectedFeature ? "featureSelected" : "noFeatureSelected"}`}>
