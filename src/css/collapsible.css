@@ -1,7 +1,7 @@
 
-h2 {
-  font-weight: 800;
-  font-size: 15px;
+.Collapsible__contentInner h2 {
+  font-weight: 700;
+  font-size: 14px;
   margin-top: 10px;
   margin-bottom: 10px; 
 }
