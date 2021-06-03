@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RecommendationHeader from './RecommendationHeader';
 import PropTypes from "prop-types";
+import DropdownSelect from './dropdown';
 
 const root = {
     marginTop: 125
@@ -59,7 +60,11 @@ const buttonText = {
     "fontSize": "16px",
     "lineHeight": "19px",
     "color": "#FFFFFF"
-  }
+}
+
+const labelRoot = {
+    display: "block"
+}
 
 const RecommendationTool = (props) => {
     // eslint-disable-next-line no-unused-vars
@@ -74,13 +79,17 @@ const RecommendationTool = (props) => {
                 let inputComponent = <></>
                 switch (question.type) {
                     case "multiple_choice":
-                        inputComponent = <>{question.answers.map(answer => <><label key={answer}><input type="radio"/>{answer}</label><br/></>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <><label key={answer} style={labelRoot}><input type="radio"/>{answer}</label><br/></>)}</>;
                         break;
                     case "select":
-                        inputComponent = <select>{question.placeholder && <option disabled selected>{question.placeholder}</option>}{question.answers.map(answer => <option key={answer}>{answer}</option>)}</select>;
+                        inputComponent = <DropdownSelect
+                            items={question.answers}
+                            initialSelectedItem={""}
+                            handleSelectionChanged={()=>{}}
+                        />;
                         break;
                     case "checkbox":
-                        inputComponent = <>{question.answers.map(answer => <><label key={answer}><input type="checkbox"/>{answer}</label><br/></>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <><label key={answer} style={labelRoot}><input type="checkbox"/>{answer}</label><br/></>)}</>;
                         break;
                     default:
                         break;
