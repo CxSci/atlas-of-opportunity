@@ -5,11 +5,12 @@ import { formatValue } from "../utils/formatValue";
 const MetricDetails = ({ feature, metric }) => {
   let rawValue = feature.properties[metric.id];
   const value = formatValue(rawValue, metric.format);
+  const name = feature.properties.SA2_NAME16;
   
   return (
     <p key={feature.id} className="comparison">
-      <span>{feature.properties.SA2_NAME16}</span>
-      <span>{value}</span>
+      <label title={name}>{name}</label>
+      <data value={rawValue}>{value}</data>
     </p>
   )
 }
