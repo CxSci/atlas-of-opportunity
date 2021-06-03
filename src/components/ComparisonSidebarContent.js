@@ -37,7 +37,7 @@ class ComparisonSidebarContent extends React.Component {
           </Collapsible>
           <Collapsible trigger="Map">
             <div style={miniMap}>
-              <Map mini={true}/>
+              {false && <Map mini={true}/>}
             </div>
           </Collapsible>
         </div>
