@@ -10,7 +10,7 @@ import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
 import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
 
 import "../css/collapsible.css";
-import "../css/sidebar.css";
+import "../css/Sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature, setSelectedFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
