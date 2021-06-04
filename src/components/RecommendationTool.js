@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RecommendationHeader from './RecommendationHeader';
 import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
+import { Fragment } from 'react';
 
 const root = {
     marginTop: 125
@@ -67,7 +68,6 @@ const labelRoot = {
 }
 
 const RecommendationTool = (props) => {
-    // eslint-disable-next-line no-unused-vars
     const [currentStage, setCurrentStage] = useState(0);
     // eslint-disable-next-line no-unused-vars
     const [formState, setFormState] = useState({});
@@ -79,7 +79,7 @@ const RecommendationTool = (props) => {
                 let inputComponent = <></>
                 switch (question.type) {
                     case "multiple_choice":
-                        inputComponent = <>{question.answers.map(answer => <><label key={answer} style={labelRoot}><input type="radio"/>{answer}</label><br/></>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="radio" name={question.key} />{answer}</label><br/></Fragment>)}</>;
                         break;
                     case "select":
                         inputComponent = <DropdownSelect
@@ -89,7 +89,7 @@ const RecommendationTool = (props) => {
                         />;
                         break;
                     case "checkbox":
-                        inputComponent = <>{question.answers.map(answer => <><label key={answer} style={labelRoot}><input type="checkbox"/>{answer}</label><br/></>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="checkbox" name={question.key}/>{answer}</label><br/></Fragment>)}</>;
                         break;
                     default:
                         break;

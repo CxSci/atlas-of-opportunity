@@ -69,7 +69,7 @@ export const RECOMMENDATION_DUMMY_DATA = [
     },
     {
       type: "checkbox",
-      question: "Waht's their typical household income?",
+      question: "What's their typical household income?",
       hint: "Select all that apply",
       key: "household_income",
       answers: ["Low", "Medium", "High", "Not Sure"]

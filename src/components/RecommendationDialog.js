@@ -5,13 +5,11 @@ import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 
 const ModalRoot = {
     pointerEvents: "auto",
-    //"padding": "30px 35px",
-    //"position": "absolute",
     "height": "150px",
     "left": "0px",
     "right": "0px",
     "top": "0px",
-    width: "305px",
+    marginRight: 5,
     "background": "#FFFFFF",
     "borderRadius": "5px",
     "marginBottom": "10px",
