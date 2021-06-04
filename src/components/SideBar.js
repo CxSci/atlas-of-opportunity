@@ -12,7 +12,7 @@ import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
 import "../css/collapsible.css";
 import "../css/Sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
-import { addComparisonFeature, removeComparisonFeature, setSelectedFeature } from "../redux/action-creators";
+import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
 import { Switch, Route, useLocation, useHistory } from "react-router";
@@ -51,18 +51,14 @@ const Sidebar = (props) => {
     
     // Efect to load features from url ids
     useEffect(() => {
-      if (location.pathname.startsWith('/comparison/')) {
+      if (!comparisonFeatures.length && location.pathname.startsWith('/comparison/')) {
         const pathIds = location.pathname.replace('/comparison/', '');
         if (pathIds) {
           const ids = pathIds.split('+');
           const featuresFromUrl = features.filter(ft => ids.includes(ft.properties["SA2_MAIN16"].toString()));
-          if (!comparisonFeatures.length) {
-            featuresFromUrl.forEach(feature => {
-              addComparisonFeature(feature);
-            })
-            // HACK: set a selectedFeature as the user would do in normal use
-            setSelectedFeature(featuresFromUrl[0]);
-          }
+          featuresFromUrl.forEach(feature => {
+            addComparisonFeature(feature);
+          })
         }
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +82,7 @@ const Sidebar = (props) => {
     }, [comparisonFeatures]);
 
     return (
-      <div className={`panel-container ${selectedFeature ? "featureSelected" : "noFeatureSelected"}`}>
+      <div className={`panel-container ${(selectedFeature || comparisonFeatures.length) ? "featureSelected" : "noFeatureSelected"}`}>
         <SidebarButton />
         <div className={`sidebar-container`}>
           <Switch>
@@ -96,7 +92,7 @@ const Sidebar = (props) => {
             <Route render={() => (
               <>
                 <SASearchField />
-                {selectedFeature ?
+                {(selectedFeature || comparisonFeatures.length) ?
                   <>
                     <ActionButtons/>
                     {comparisonFeatures.length > 0 &&
