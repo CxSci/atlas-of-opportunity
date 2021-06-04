@@ -123,7 +123,6 @@ const Sidebar = (props) => {
 
 Sidebar.propTypes = {
   features: PropTypes.array,
-  select: PropTypes.object.isRequired,
   selectedFeature: PropTypes.object,
   comparisonFeatures: PropTypes.array.isRequired
 };
@@ -131,7 +130,6 @@ Sidebar.propTypes = {
 function mapStateToProps(state) {
   return {
     features: state.features,
-    select: state.select,
     selectedFeature: state.selectedFeature,
     comparisonFeatures: state.comparisonFeatures
   };

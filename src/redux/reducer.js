@@ -49,38 +49,6 @@ options[Constants.MAP_TYPE.SEGREGATION] = {
   ],
 };
 
-/*
-  {
-  name: 'GDP',
-  description: 'Estimate total GDP in millions of dollars',
-  property: 'gdp_md_est',
-  stops: [
-    [0, '#f8d5cc'],
-    [1000, '#f4bfb6'],
-    [5000, '#f1a8a5'],
-    [10000, '#ee8f9a'],
-    [50000, '#ec739b'],
-    [100000, '#dd5ca8'],
-    [250000, '#c44cc0'],
-    [5000000, '#9f43d7'],
-    [10000000, '#6e40e6']
-  ]
-},
-];
-*/
-
-const select = {
-  sa2_name: "",
-  population: "",
-  income: "",
-  inequality: "",
-  ggp: "",
-  jr: "",
-  bgi: "",
-  sa1_codes: "",
-  isDefault: true,
-};
-
 const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
@@ -88,7 +56,6 @@ const initialState = {
   collapsibleState: {},
   options,
   active: options[Constants.MAP_TYPE.GROWTH],
-  select,
   mapType: Constants.MAP_TYPE.GROWTH,
   path: window.location.pathname,
   dropdown: "off",
@@ -97,7 +64,6 @@ const initialState = {
   sidebarOpen: true,
   selectedFeature: null,
   highlightedFeature: null,
-  showModal: true,
   showWelcomeDialog: true,
 };
 
@@ -130,14 +96,6 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         active: action.option,
       });
-    case Constants.SET_SELECT:
-      return Object.assign({}, state, {
-        select: action.payload,
-      });
-    case "Modal":
-      return Object.assign({}, state, {
-        showModal: action.payload,
-      });
     case Constants.SHOW_WELCOME_DIALOG:
       return {
         ...state,
@@ -152,11 +110,6 @@ function reducer(state = initialState, action) {
         ...state,
         mapType: action.payload,
         active: options[action.payload],
-      };
-    case "DisplayDefault":
-      return {
-        ...state,
-        select: { ...state.select, isDefault: action.payload },
       };
     case "DropDown":
       return Object.assign({}, state, {

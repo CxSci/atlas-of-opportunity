@@ -8,31 +8,10 @@ export function setActiveOption(option) {
   });
 }
 
-export function setSelect(payload) {
-  store.dispatch({
-    type: Constants.SET_SELECT,
-    payload: payload,
-  });
-}
-
-export function setModal() {
-  store.dispatch({
-    type: "Modal",
-    payload: false,
-  });
-}
-
 export function setShowWelcomeDialog(payload) {
   store.dispatch({
     type: Constants.SHOW_WELCOME_DIALOG,
     payload: payload,
-  });
-}
-
-export function setDisplayDefault() {
-  store.dispatch({
-    type: "DisplayDefault",
-    payload: true,
   });
 }
 
