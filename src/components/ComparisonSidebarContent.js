@@ -2,7 +2,7 @@ import React from "react";
 
 import { ReactComponent as BackIcon} from "../assets/search-icons/back.svg";
 import "../css/collapsible.css";
-import "../css/sidebar.css";
+import "../css/Sidebar.css";
 import { Link } from "react-router-dom";
 import Collapsible from "react-collapsible";
 import LocationCompare from "./LocationToCompare";

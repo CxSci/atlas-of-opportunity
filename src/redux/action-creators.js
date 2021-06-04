@@ -50,7 +50,7 @@ export function setSearchBarInfo(payload) {
   });
 }
 
-export function setSideBar(payload) {
+export function setSidebar(payload) {
   store.dispatch({
     type: Constants.SET_SIDEBAR,
     payload: payload,
