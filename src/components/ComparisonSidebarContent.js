@@ -35,9 +35,9 @@ class ComparisonSidebarContent extends React.Component {
           <Collapsible trigger="Locations to Compare" open={true}>
             <LocationCompare />
           </Collapsible>
-          <Collapsible trigger="Map">
+          <Collapsible trigger="Map" open={true}>
             <div style={miniMap}>
-              {false && <Map mini={true}/>}
+              <Map mini={true}/>
             </div>
           </Collapsible>
         </div>
