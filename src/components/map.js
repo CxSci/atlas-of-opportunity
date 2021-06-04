@@ -296,10 +296,13 @@ let Map = class Map extends React.Component {
 
 
   componentDidUpdate(prevProps) {
+    // Mapbox only notices changes to the window's dimensions. Manually resize
+    // whenever the sidebar appears or disappears.
     if (this.props.sidebarOpen !== prevProps.sidebarOpen
       || (this.props.selectedFeature !== prevProps.selectedFeature
-        && (!this.props.selectedFeature || !prevProps.selectedFeature)
-      )
+        && (!this.props.selectedFeature || !prevProps.selectedFeature))
+      || (this.props.comparisonFeatures.length !== prevProps.comparisonFeatures.length
+        && this.props.comparisonFeatures.length == 0)
     ) {
       // The order of redux's prop delivery to different components isn't
       // guaranteed, so it's possible the map's size has not yet changed when
