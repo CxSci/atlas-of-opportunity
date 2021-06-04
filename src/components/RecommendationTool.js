@@ -3,6 +3,8 @@ import RecommendationHeader from './RecommendationHeader';
 import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
+import ComparisonButton from './ComparisonButton';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const root = {
     marginTop: 125
@@ -37,7 +39,8 @@ const nextButton = {
     "bottom": "30px",
     "background": "#3DBEFF",
     "borderRadius": "100px",
-    "cursor": "pointer"
+    "cursor": "pointer",
+    border: "none"
 }
 
 const previousButton = {
@@ -51,7 +54,21 @@ const previousButton = {
     "bottom": "30px",
     "background": "#3DBEFF",
     "borderRadius": "100px",
-    "cursor": "pointer"
+    "cursor": "pointer",
+    border: "none",
+
+}
+
+const comparisonButton = {
+    "position": "absolute",
+    "width": "186px",
+    "height": "39px",
+    "right": "40px",
+    "bottom": "30px",
+    "background": "#3DBEFF",
+    "borderRadius": "100px",
+    cursor: "pointer",
+    border: "none"
 }
 
 const buttonText = {
@@ -70,6 +87,7 @@ const labelRoot = {
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
     const [formState, setFormState] = useState({});
+    const history = useHistory();
 
     const setRadioValue = (key, answer) => {
         setFormState({...formState, [key]: answer})
@@ -88,8 +106,8 @@ const RecommendationTool = (props) => {
     return <>
         <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
         <div style={root}>
-            <p style={descriptionText}>{props.data[currentStage].description}</p>
-            {props.data[currentStage].questions.map(question => {
+            <p style={descriptionText}>{currentStage === props.data.length ? <></> : props.data[currentStage].description}</p>
+            {currentStage === props.data.length ? <></> : props.data[currentStage].questions.map(question => {
                 let inputComponent = <></>
                 switch (question.type) {
                     case "multiple_choice":
@@ -114,8 +132,10 @@ const RecommendationTool = (props) => {
                     <div style={inputRoot}>{inputComponent}</div>
                 </div>
             })}
-            {currentStage !== props.data.length - 1 && <div style={nextButton} onClick={() => {setCurrentStage(currentStage + 1)}}><p style={buttonText}>Next</p></div>}
-            {currentStage !== 0 && <div style={previousButton} onClick={() => {setCurrentStage(currentStage - 1)}}><p style={buttonText}>Previous</p></div>}
+            
+            {currentStage !== props.data.length && <ComparisonButton textStyle={buttonText} noChevron style={nextButton} onClick={() => {setCurrentStage(currentStage + 1)}} text="Next"/>}
+            {currentStage !== 0 && <ComparisonButton textStyle={buttonText} noChevron style={previousButton} onClick={() => {setCurrentStage(currentStage - 1)}} text="Previous"/>}
+            {currentStage === props.data.length && <ComparisonButton chevronColor="white" textStyle={buttonText} style={comparisonButton} onClick={()=>{history.goBack()}} text="Compare Locations"/>}
         </div>
     </>
 };
