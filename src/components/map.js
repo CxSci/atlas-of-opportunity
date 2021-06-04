@@ -304,13 +304,8 @@ let Map = class Map extends React.Component {
       || (this.props.comparisonFeatures.length !== prevProps.comparisonFeatures.length
         && this.props.comparisonFeatures.length == 0)
     ) {
-      // The order of redux's prop delivery to different components isn't
-      // guaranteed, so it's possible the map's size has not yet changed when
-      // this resize call is made. setTimeout() guarantees a resize only after
-      // prop changes have been delivered everywhere.
-      setTimeout(() => {
-        this.resizeMapPinningNortheast()
-      }, 0);
+      // Putting a timeout on this lead to flashes of weirdness and halted map animations.
+      this.resizeMapPinningNortheast()
     }
 
     if (this.props.flowDirection !== prevProps.flowDirection) {
