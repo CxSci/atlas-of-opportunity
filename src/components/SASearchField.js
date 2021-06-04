@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from "react"
-import PropTypes from "prop-types";
 import { setHighlightedFeature, setSelectedFeature } from "../redux/action-creators"
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import BigTitle from "./BigTitle"
 import SearchField from "./SearchField"
 import "../css/SearchField.css"
 
-function SASearchField ({features, selectedFeature, ...props}) {
+function SASearchField (props) {
   const inputRef = useRef(null)
   const [shouldShowBigTitle, setShouldShowBigTitle] = useState(false)
+  const features = useSelector((state) => state.features)
+  const selectedFeature = useSelector((state) => state.selectedFeature, (a, b) => a?.properties?.SA2_MAIN16 === b?.properties?.SA2_MAIN16)
   const searchFieldProps = {
     localItems: features.map((f) => {
       return {
@@ -47,11 +48,13 @@ function SASearchField ({features, selectedFeature, ...props}) {
     onIsOpenChange: ({ isOpen }) => {
       setShouldShowBigTitle(!isOpen && selectedFeature)
     },
+    selectedFeature: selectedFeature,
     setHighlightedFeature: ({ highlightedItem }) => {
       setHighlightedFeature(highlightedItem)
     },
     setSelectedFeature: ({ selectedItem: newFeature }) => {
-      if (newFeature !== selectedFeature) {
+      if (!!newFeature !== !!selectedFeature
+          || newFeature?.properties.SA2_MAIN16 !== selectedFeature?.properties.SA2_MAIN16) {
         setSelectedFeature(newFeature)
       }
     },
@@ -69,7 +72,6 @@ function SASearchField ({features, selectedFeature, ...props}) {
     <div className={`sidebarHeader ${shouldShowBigTitle ? "showBigTitle" : ""}`}>
       <BigTitle 
         onFocus={() => {
-          console.log("Focus the search field", inputRef)
           inputRef.current.focus()
         }}
         onCancel={() => {
@@ -83,16 +85,4 @@ function SASearchField ({features, selectedFeature, ...props}) {
   )
 }
 
-SASearchField.propTypes = {
-  features: PropTypes.arrayOf(PropTypes.object),
-  selectedFeature: PropTypes.object,
-}
-
-function mapStateToProps(state) {
-  return {
-    features: state.features,
-    selectedFeature: state.selectedFeature,
-  };
-}
-
-export default connect(mapStateToProps)(SASearchField)
+export default SASearchField

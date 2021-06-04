@@ -4,7 +4,7 @@ import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
 import * as turf from "@turf/turf"
 import { useDebounce } from 'use-debounce';
-
+import { useSelector } from "react-redux";
 
 import useGeocoder from "../hooks/useGeocoder"
 import { sameWidthModifier } from "../utils/popper-modifiers"
@@ -22,6 +22,7 @@ const SearchField = forwardRef(({
   setHighlightedFeature,
   setSelectedFeature },
   inputRef) => {
+  const selectedFeature = useSelector((state) => state.selectedFeature, (a, b) => a?.properties?.SA2_MAIN16 === b?.properties?.SA2_MAIN16)
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -44,15 +45,15 @@ const SearchField = forwardRef(({
     getComboboxProps,
     getInputProps,
     getItemProps,
-    // getLabelProps,
     getMenuProps,
     getToggleButtonProps,
     highlightedIndex,
     inputValue,
     isOpen,
     openMenu,
+    reset,
     selectItem,
-    // selectedItem,
+    setInputValue,
   } = useCombobox({
     defaultHighlightedIndex: 0,
     initialInputValue,
@@ -83,7 +84,6 @@ const SearchField = forwardRef(({
         }
       }
     },
-    // Try moving everything about inputValue into stateReducer
     onSelectedItemChange: setSelectedFeature,
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       switch (type) {
@@ -113,6 +113,12 @@ const SearchField = forwardRef(({
       }
     },
   })
+
+  // When selectedFeature changes due to another component, make sure the
+  // search field reflects that.
+  useEffect(() => {
+    setInputValue(selectedFeature?.properties.SA2_NAME16 ?? '')
+  }, [selectedFeature, setInputValue])
 
   useEffect(() => {
     if (typeof setHighlightedFeature === "function") {
@@ -196,8 +202,9 @@ const SearchField = forwardRef(({
           <button
             tabIndex={-1}
             onClick={() => {
-              selectItem(null)
+              setHighlightedItem(null)
               setSelectedFeature({ selectedItem: null })
+              reset()
             }}
             aria-label="clear selection"
           >
