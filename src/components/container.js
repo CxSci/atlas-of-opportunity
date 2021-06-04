@@ -3,12 +3,16 @@ import PropTypes from "prop-types";
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
 
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 const Container = class Container extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.array,
+    history: {
+      goBack: () => {}
+    }
   };
 
 
@@ -63,6 +67,10 @@ const Container = class Container extends Component {
       overflowY: "scroll",
     }
 
+    const iconButton = {
+      cursor: "pointer"
+    }
+
     return (
         <div>
               <Link
@@ -73,10 +81,8 @@ const Container = class Container extends Component {
           <div style={container}>
               <h3 style={titleBox}>
                   {title}
-                 <Link
-                  to="/"
-                ><CloseIcon/></Link>
-                </h3>
+                  <CloseIcon style={iconButton} onClick={()=>this.props.history.goBack()}/>
+              </h3>
     
              <div style={childrenContent}>
                 {children}
@@ -100,4 +106,4 @@ const Container = class Container extends Component {
 
 } */
 
-export default Container;
+export default withRouter(Container);
