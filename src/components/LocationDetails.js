@@ -44,7 +44,7 @@ const LocationDetails = (props) => {
     const value = formatValue(rawValue, metric.format);
     
     return (
-      <p key={feature.id} className="comparison">
+      <p key={feature.properties.SA2_MAIN16} className="comparison">
         <span>{feature.properties.SA2_NAME16}</span>
         <span>{value}</span>
       </p>
