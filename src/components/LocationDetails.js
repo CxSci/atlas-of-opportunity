@@ -6,17 +6,14 @@ import CollapsibleSection from "./CollapsibleSection";
 import { formatValue } from "../utils/formatValue";
 
 const LocationDetails = (props) => {
-  const featureProps = props.feature.properties;
+  const selectedFeature = props.feature;
   const comparisonFts = props.comparison;
   let allFeatures = comparisonFts;
-  if (!comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === props.feature.properties["SA2_MAIN16"])) {
+  if (selectedFeature && !comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature.properties["SA2_MAIN16"])) {
     allFeatures = [...allFeatures, props.feature]
   }
 
   const renderMetric = (metric) => {
-    let rawValue = featureProps[metric.id];
-    const value = formatValue(rawValue, metric.format);
-
     return (
       <div key={metric.id}>
         <h2 data-tip data-for={metric.id}>{metric.label}</h2>
@@ -29,26 +26,28 @@ const LocationDetails = (props) => {
           </ReactTooltip>
         )}
         {comparisonFts.length ? (
-          allFeatures.map(ft => 
-            renderValue(ft, metric)
-          )
+          renderStackedFeatures(allFeatures, metric)
         ) : (
-          <p>{value}</p>
+          formatMetric(selectedFeature, metric)
         )}
       </div>
     )
   }
 
-  const renderValue = (feature, metric) => {
-    let rawValue = feature.properties[metric.id];
-    const value = formatValue(rawValue, metric.format);
-    
+  const renderStackedFeatures = (features, metric) => {
     return (
-      <p key={feature.properties.SA2_MAIN16} className="comparison">
-        <span>{feature.properties.SA2_NAME16}</span>
-        <span>{value}</span>
-      </p>
+      features.map(feature => 
+        <p key={feature.properties.SA2_MAIN16} className="comparison">
+          <span>{feature.properties.SA2_NAME16}</span>
+          <span>{formatMetric(feature, metric)}</span>
+        </p>
+      )
     )
+  }
+
+  const formatMetric = (feature, metric) => {
+    const rawValue = feature.properties[metric.id];
+    return formatValue(rawValue, metric.format);
   }
 
   return (
