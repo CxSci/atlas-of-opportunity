@@ -72,7 +72,7 @@ const ModalRoot = {
     "color": "#FFFFFF"
   }
 
-const RecommendationModal = () => {
+const RecommendationDialog = () => {
 
   const history = useHistory();
 
@@ -89,4 +89,4 @@ const RecommendationModal = () => {
     )
 }
 
-export default RecommendationModal;
+export default RecommendationDialog;
