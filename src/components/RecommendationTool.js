@@ -71,6 +71,21 @@ const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
     // eslint-disable-next-line no-unused-vars
     const [formState, setFormState] = useState({});
+    console.log(formState)
+    const setRadioValue = (key, answer) => {
+        setFormState({...formState, [key]: answer})
+    }
+
+    const setCheckboxValue = (key, answer) => {
+        const newArray = formState[key] ? Array.from(formState[key]) : [];
+        if (newArray.includes(answer)) newArray.splice(newArray.indexOf(answer), 1);
+        else newArray.push(answer);
+        setFormState({...formState, [key]: newArray});
+    }
+
+    const setSelectValue = (key, answer) => {
+        setFormState({...formState, [key]: answer})
+    }
     return <>
         <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
         <div style={root}>
@@ -79,17 +94,17 @@ const RecommendationTool = (props) => {
                 let inputComponent = <></>
                 switch (question.type) {
                     case "multiple_choice":
-                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="radio" name={question.key} />{answer}</label><br/></Fragment>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="radio" name={question.key} onClick={()=>setRadioValue(question.key, answer)}/>{answer}</label><br/></Fragment>)}</>;
                         break;
                     case "select":
                         inputComponent = <DropdownSelect
                             items={question.answers}
                             initialSelectedItem={""}
-                            handleSelectionChanged={()=>{}}
+                            handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
                         />;
                         break;
                     case "checkbox":
-                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="checkbox" name={question.key}/>{answer}</label><br/></Fragment>)}</>;
+                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="checkbox" name={question.key} onClick={()=>setCheckboxValue(question.key, answer)}/>{answer}</label><br/></Fragment>)}</>;
                         break;
                     default:
                         break;
