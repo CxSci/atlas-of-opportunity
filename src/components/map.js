@@ -1,5 +1,4 @@
 import React from "react";
-import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
@@ -51,7 +50,6 @@ let Map = class Map extends React.Component {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
-    select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
@@ -487,28 +485,6 @@ let Map = class Map extends React.Component {
       }
     );
 
-    const sa2_properties = {
-      sa2_name: feature.properties.SA2_NAME16,
-      population: feature.properties.persons_num.toLocaleString(),
-      income: feature.properties.median_aud.toLocaleString(undefined, {
-        style: "currency",
-        currency: "AUS",
-      }),
-      ggp: feature.properties.income_diversity,
-      jr: feature.properties.bridge_diversity,
-      quartile: feature.properties.quartile,
-      fq1: feature.properties.fq1,
-      fq2: feature.properties.fq2,
-      fq3: feature.properties.fq3,
-      fq4: feature.properties.fq4,
-      inequality: feature.properties.inequality,
-      bgi: feature.properties.bsns_growth_rate,
-      sa1_codes: feature.properties.SA1_7DIGITCODE_LIST,
-      isDefault: false,
-    };
-
-    setSelect(sa2_properties);
-
     if (this.props.active.name !== "Inequality") {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
       // flowDirection should be one of "inflow", "outflow", or "bidirectional"
@@ -767,7 +743,6 @@ function mapStateToProps(state) {
     features: state.features,
     geojsonURL: state.geojsonURL,
     active: state.active,
-    select: state.select,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
     sidebarOpen: state.sidebarOpen,
