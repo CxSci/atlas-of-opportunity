@@ -61,13 +61,15 @@ const Sidebar = (props) => {
                 {(selectedFeature || comparisonFeatures.length) ?
                   <>
                     {selectedFeature && <ActionButtons/>}
-                    {comparisonFeatures.length > 0 &&
-                      <CollapsibleSection title="Locations to Compare">
-                        <LocationCompare showButton />
-                      </CollapsibleSection>
-                    }
-                    <LocationDetails feature={selectedFeature} comparison={comparisonFeatures}>
-                    </LocationDetails>
+                    <div className="sidebar-content">
+                      {comparisonFeatures.length > 0 &&
+                        <CollapsibleSection title="Locations to Compare">
+                          <LocationCompare showButton />
+                        </CollapsibleSection>
+                      }
+                      <LocationDetails feature={selectedFeature} comparison={comparisonFeatures}>
+                      </LocationDetails>
+                    </div>
                   </>
                   :
                   <>

@@ -59,10 +59,7 @@ const LocationDetails = (props) => {
   }
 
   return (
-    <div
-      style={{ overflowY: "auto" }}
-      className={`sidebar-content`}
-    >
+    <>
       {props.children}
       {propsMapping.map((section) => (
         <CollapsibleSection title={section.title} key={section.title}>
@@ -71,7 +68,7 @@ const LocationDetails = (props) => {
           ))}
         </CollapsibleSection>
       ))}
-    </div>
+    </>
   )
 }
 
