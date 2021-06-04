@@ -69,9 +69,8 @@ const labelRoot = {
 
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
-    // eslint-disable-next-line no-unused-vars
     const [formState, setFormState] = useState({});
-    console.log(formState)
+
     const setRadioValue = (key, answer) => {
         setFormState({...formState, [key]: answer})
     }
