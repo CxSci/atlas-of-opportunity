@@ -39,6 +39,19 @@
   margin-bottom: 0; 
 }
 
+.Collapsible__contentInner div.comparison-bar {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Collapsible__contentInner div.comparison-bar label {
+  align-self: flex-end;
+  margin-right: 8px;
+}
+
 .Collapsible__trigger {
   display: flex;
   flex-direction: row;
