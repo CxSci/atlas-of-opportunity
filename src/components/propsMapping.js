@@ -136,7 +136,7 @@ export default [
     title: 'Growth Summary',
     content: [
       {
-        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number',
+        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'hilo-bar',
         desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
       },
       {
