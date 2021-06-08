@@ -21,7 +21,7 @@ const buttonRoot = {
 
 const ComparisonButton = (props) => {
   return (
-    <Link to="/comparison" onClick={props.onClick ? (event)=>{event.stopPropagation; event.preventDefault(); props.onClick()} : undefined} style={{...buttonRoot, ...props.style}}>
+    <Link to={props.url} onClick={props.onClick ? (event)=>{event.stopPropagation; event.preventDefault(); props.onClick()} : undefined} style={{...buttonRoot, ...props.style}}>
       <p style={props.textStyle}>{props.text || "Show Comparison"}</p>
       {props.noChevron ? <></> : <svg
         width="15"
@@ -49,6 +49,7 @@ ComparisonButton.propTypes = {
   text: PropTypes.string,
   onClick: PropTypes.func,
   noChevron: PropTypes.bool,
+  url: PropTypes.string,
 }
 
 export default ComparisonButton

@@ -1,5 +1,4 @@
 import React from "react";
-import { setSelect } from "../redux/action-creators";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
@@ -51,7 +50,6 @@ let Map = class Map extends React.Component {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
-    select: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
@@ -161,6 +159,41 @@ let Map = class Map extends React.Component {
         },
       });
 
+      // Source and layers for comparison-mode mini map
+      if (this.props.mini) {
+        this.map.addSource("sa2-comp", {
+          type: "geojson",
+          data: null,
+          promoteId: "SA2_MAIN16",
+        })
+        this.map.addLayer({
+          id: "sa2-fills",
+          type: "fill",
+          source: "sa2-comp",
+          sourceLayer: "original",  
+          layout: {},
+          paint: {
+            "fill-color": {
+              property: this.props.active.property,
+              stops: this.props.active.stops,
+            },
+            "fill-opacity": 0.8,
+          },
+        });
+        this.map.addLayer({
+          id: "sa2-borders-comp",
+          type: "line",
+          source: "sa2-comp",
+          sourceLayer: "original",
+          layout: {},
+          paint: {
+            "line-color": "#FFFFFF",
+            "line-width": 2,
+            "line-opacity": 1,
+          },
+        });
+      }
+
       // When the user moves their mouse over the sa2-fill layer, we'll update the
       // feature state for the feature under the mouse.
       // name of sa2-fills appear over the region
@@ -181,7 +214,11 @@ let Map = class Map extends React.Component {
         this.map.on("click", "sa2-fills", this.onMapClick)
         // Handle map clicks outside of map features
         this.map.on("click", this.onMapClick);
-      } else {
+        if (this.props.selectedFeature) {
+          this.selectFeature(this.props.selectedFeature)
+        }
+      }
+      else {
         this.highlightComparisonFeatures(this.props.comparisonFeatures)
       }
     });
@@ -238,7 +275,6 @@ let Map = class Map extends React.Component {
   }
 
   highlightComparisonFeatures = (features) => {
-
       const comparisonFeatures = {type: "FeatureCollection", features}
       const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
       this.map.fitBounds(
@@ -248,49 +284,27 @@ let Map = class Map extends React.Component {
           animate: false,
         }
       )
-      if (this.map.getSource("sa2-comp")) {
-        this.map.removeSource("sa2-comp")
+      // If sa2-comp doesn't exist then the map hasn't finished loading yet.
+      // In that case, ignore this call to highlightComparisonFeatures and let
+      // the map's on("load") call it after it has loaded all styles and
+      // sources.
+      const source = this.map.getSource("sa2-comp");
+      if (source) {
+        source.setData(comparisonFeatures)
       }
-      this.map.addSource("sa2-comp", {
-        type: "geojson",
-        data: comparisonFeatures,
-        promoteId: "SA2_MAIN16",
-      })
-      this.map.addLayer({
-        id: "sa2-fills",
-        type: "fill",
-        source: "sa2-comp",
-        sourceLayer: "original",  
-        layout: {},
-        paint: {
-          "fill-color": {
-            property: this.props.active.property,
-            stops: this.props.active.stops,
-          },
-          "fill-opacity": 0.8,
-        },
-      });
-      this.map.addLayer({
-        id: "sa2-borders-comp",
-        type: "line",
-        source: "sa2-comp",
-        sourceLayer: "original",
-        layout: {},
-        paint: {
-          "line-color": "#FFFFFF",
-          "line-width": 2,
-          "line-opacity": 1,
-        },
-      });
   }
 
 
   componentDidUpdate(prevProps) {
+    // Mapbox only notices changes to the window's dimensions. Manually resize
+    // whenever the sidebar appears or disappears.
     if (this.props.sidebarOpen !== prevProps.sidebarOpen
       || (this.props.selectedFeature !== prevProps.selectedFeature
-        && (!this.props.selectedFeature || !prevProps.selectedFeature)
-      )
+        && (!this.props.selectedFeature || !prevProps.selectedFeature))
+      || (this.props.comparisonFeatures.length !== prevProps.comparisonFeatures.length
+        && this.props.comparisonFeatures.length == 0)
     ) {
+      // Putting a timeout on this lead to flashes of weirdness and halted map animations.
       this.resizeMapPinningNortheast()
     }
 
@@ -323,7 +337,8 @@ let Map = class Map extends React.Component {
   selectFeature = (feature) => {
     const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16
     const newId = feature?.properties?.SA2_MAIN16
-    if (prevId === newId) {
+    // Skip if the selection hasn't actually changed or if the map isn't fully loaded yet
+    if (prevId === newId || !this.map.getSource("sa2") || !this.map.isSourceLoaded("sa2")) {
       return
     }
 
@@ -467,28 +482,6 @@ let Map = class Map extends React.Component {
         click: true,
       }
     );
-
-    const sa2_properties = {
-      sa2_name: feature.properties.SA2_NAME16,
-      population: feature.properties.persons_num.toLocaleString(),
-      income: feature.properties.median_aud.toLocaleString(undefined, {
-        style: "currency",
-        currency: "AUS",
-      }),
-      ggp: feature.properties.income_diversity,
-      jr: feature.properties.bridge_diversity,
-      quartile: feature.properties.quartile,
-      fq1: feature.properties.fq1,
-      fq2: feature.properties.fq2,
-      fq3: feature.properties.fq3,
-      fq4: feature.properties.fq4,
-      inequality: feature.properties.inequality,
-      bgi: feature.properties.bsns_growth_rate,
-      sa1_codes: feature.properties.SA1_7DIGITCODE_LIST,
-      isDefault: false,
-    };
-
-    setSelect(sa2_properties);
 
     if (this.props.active.name !== "Inequality") {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
@@ -748,7 +741,6 @@ function mapStateToProps(state) {
     features: state.features,
     geojsonURL: state.geojsonURL,
     active: state.active,
-    select: state.select,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,
     sidebarOpen: state.sidebarOpen,

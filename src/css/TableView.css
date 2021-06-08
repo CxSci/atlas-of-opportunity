@@ -1,0 +1,55 @@
+.table-view {
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 60px;
+  font-size: 14px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: center;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 500;
+  align-items: flex-end;
+  line-height: 1.5;
+  margin: 0 20px 12px;
+}
+
+.table-view .Collapsible {
+  min-width: 670px;
+}
+
+.table-view .Collapsible__trigger {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.table-view .Collapsible__contentInner {
+  padding: 0px 20px 10px;
+}
+
+.table-view .Collapsible table {
+  margin: auto;
+}
+
+.fake-chart {
+  width: 120px;
+  height: 80px;
+  background-color: #808080;
+}
+
+.table-row > td {
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+.table-row:nth-child(even) {
+  background-color: #F5F5F5;
+}
+.table-row > td:first-child {
+  font-weight: 500;
+}
+.table-row > td:not(:first-child) {
+  text-align: right;
+}

@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Map from "../components/map";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/Sidebar";
 import Legend from '../components/legend';
 import Footer from '../components/footer';
 import "../css/main.css";
 
 import Routes from "../routes/index";
 import { useLocation } from "react-router";
+import TableView from "../components/TableView";
 
 const Main = (props) => {
     const mapStyler = {
@@ -21,12 +22,8 @@ const Main = (props) => {
       flexDirection: "row",
       width: "100%",
       height: "100%",
+      overflow: "hidden",
     };
-
-    const sidebarState =
-      props.sidebarOpen && props.selectedFeature
-        ? "sidebarOpen"
-        : "sidebarClosed";
 
     const [comparisonMode, setComparisonMode] = useState(false);
     const location = useLocation();
@@ -37,10 +34,11 @@ const Main = (props) => {
 
     return (
 
-      <div className={`main ${sidebarState} `} style={mapStyler}>
+      <div className="main" style={mapStyler}>
         <div style={screenFlexStyle}>
           <Sidebar />
           {!comparisonMode && <Map />}
+          {comparisonMode && <TableView />}
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
         <Footer inDarkMode={!comparisonMode}/>
@@ -51,13 +49,11 @@ const Main = (props) => {
 
 Main.propTypes = {
   selectedFeature: PropTypes.object,
-  sidebarOpen: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     selectedFeature: state.selectedFeature,
-    sidebarOpen: state.sidebarOpen,
   };
 }
 

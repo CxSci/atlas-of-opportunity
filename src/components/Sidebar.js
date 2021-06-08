@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -10,42 +10,27 @@ import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
 import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
 
 import "../css/collapsible.css";
-import "../css/sidebar.css";
+import "../css/Sidebar.css";
 import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
-import { Switch, Route } from "react-router";
+import { Switch, Route, useLocation, useHistory } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
 import CollapsibleSection from "./CollapsibleSection";
 import RecommendationDialog from "./RecommendationDialog";
 
-class Sidebar extends React.Component {
-  static propTypes = {
-    select: PropTypes.object.isRequired,
-    selectedFeature: PropTypes.object,
-    comparisonFeatures: PropTypes.array.isRequired
-  };
-  
-  render() {
+const Sidebar = (props) => {
     const {
+      features,
       selectedFeature,
       comparisonFeatures,
-    } = this.props;
-
-    const PanelContainer = (props) => {
-      const featureSelected = this.props.selectedFeature
-        ? "featureSelected"
-        : "noFeatureSelected";
-      return (
-        <div className={`panel-container ${featureSelected}`}>
-          {props.children}
-        </div>
-      )
-    }
+    } = props;
+    const location = useLocation();
+    const history = useHistory();
     
-    const isCompared = this.props.comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === this.props.selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
-    const enableButton = this.props.comparisonFeatures.length >= 4;
+    const isCompared = comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
+    const enableButton = comparisonFeatures.length >= 4;
     
     const comparisonClick = (feature) => {
       if (isCompared) {
@@ -58,40 +43,57 @@ class Sidebar extends React.Component {
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
         <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
-        <button disabled={enableButton} className="actionButton" onClick={() => comparisonClick(this.props.selectedFeature)}>
+        <button disabled={enableButton} className="actionButton" onClick={() => comparisonClick(selectedFeature)}>
           <ComparisonIcon className="icon"/>
           {isCompared ? "Remove from Comparison" : "Add to Comparison"}
         </button>
       </div>
-
     );
-    // const featureDebug = (feature) => {
-    //   if (!feature || !feature.properties) {
-    //     return ""
-    //   }
-    //   return (
-    //     <ul className="sidebar-content">
-    //     {
-    //       Object.keys(feature.properties).map((key) => (
-    //         <li key={key}>{key}: {feature.properties[key]}</li>
-    //       ))
-    //     }
-    //     </ul>
-    //   )
-    // }
+    
+    // Efect to load features from url ids
+    useEffect(() => {
+      if (!comparisonFeatures.length && location.pathname.startsWith('/comparison/')) {
+        const pathIds = location.pathname.replace('/comparison/', '');
+        if (pathIds) {
+          const ids = pathIds.split('+');
+          const featuresFromUrl = features.filter(ft => ids.includes(ft.properties["SA2_MAIN16"].toString()));
+          featuresFromUrl.forEach(feature => {
+            addComparisonFeature(feature);
+          })
+        }
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [features]);
+
+    // Effect to update url when removing comparionFeatures
+    useEffect(() => {
+      if (location.pathname.startsWith('/comparison/') && features.length) {
+        if (!comparisonFeatures.length) {
+          history.push('/');
+        }
+        else {
+          const ids = comparisonFeatures.map(feature => feature.properties.SA2_MAIN16);
+          const newPath = '/comparison/' + ids.join('+');
+          if (location.pathname !== newPath) {
+            history.replace(newPath);
+          }
+        }
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [comparisonFeatures]);
 
     return (
-      <PanelContainer>
+      <div className={`panel-container ${(selectedFeature || comparisonFeatures.length) ? "featureSelected" : "noFeatureSelected"}`}>
         <SidebarButton />
         <div className={`sidebar-container`}>
           <Switch>
-            <Route exact path="/comparison" render={() => (
+            <Route path="/comparison/" render={() => (
               <ComparisonSidebarContent />
             )} />
             <Route render={() => (
               <>
                 <SASearchField />
-                {this.props.selectedFeature ?
+                {(selectedFeature || comparisonFeatures.length) ?
                   <>
                     <ActionButtons/>
                     {comparisonFeatures.length > 0 &&
@@ -113,14 +115,19 @@ class Sidebar extends React.Component {
             )}  />
           </Switch>
         </div>
-      </PanelContainer>
+      </div>
     );
-  }
 }
+
+Sidebar.propTypes = {
+  features: PropTypes.array,
+  selectedFeature: PropTypes.object,
+  comparisonFeatures: PropTypes.array.isRequired
+};
 
 function mapStateToProps(state) {
   return {
-    select: state.select,
+    features: state.features,
     selectedFeature: state.selectedFeature,
     comparisonFeatures: state.comparisonFeatures
   };

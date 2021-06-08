@@ -39,6 +39,7 @@ const disclaimerText = {
 
 const LocationCompare = ({showButton}) => {
   const comparisonFeatures = useSelector(getComparisonFeatures);
+  const ids = comparisonFeatures.map(feature => feature.properties.SA2_MAIN16);
 
   return (
     <div style={root}>
@@ -57,7 +58,7 @@ const LocationCompare = ({showButton}) => {
       </div>
       {showButton && (
         <>
-          <ComparisonButton />
+          <ComparisonButton url={"/comparison/" + ids.join('+')} />
           <div>
             <p style={disclaimerText}>Add up to 4 regions.</p>
           </div>

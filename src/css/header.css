@@ -1,11 +1,26 @@
 .container {
-    width: 100%;
     height: 60px;
     position: fixed;
-    z-index: 3; /* 2 for detail pane, 1 for footer logos */
+    z-index: 2; /* 2 for detail pane, 1 for footer logos */
     top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
     pointer-events: none;
     /* children need to opt into mouse events with pointer-events: auto */
+}
+
+.container.comparisonMode {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.navbarLeft {
+    margin-right: 60px;
 }
 
 .dim-screen{
@@ -25,7 +40,7 @@
 
 
 .dropdown-menu {
-    margin-left: 32px;
+    margin-left: 12px;
     margin-right: 16px;
     z-index: 1;
 }

@@ -3,40 +3,43 @@ import { Link, useLocation } from "react-router-dom";
 
 import { setHeaderOption } from "../redux/action-creators";
 
-import "../css/header.css";
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
+import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
+import { ReactComponent as GridIcon} from "../assets/icons/grid.svg";
+import SegmentedControl from "./SegmentedControl";
+import "../css/header.css";
 
 function Header () {
   const [showDropDown, setShowDropDown] = useState(false)
   const toggleDropDown = useCallback(() => setShowDropDown(state => !state), []);
   const [comparisonMode, setComparisonMode] = useState(false);
   const location = useLocation();
+  const options = [
+    { label: 'Table', value: 'table', icon: <TableIcon /> },
+    { label: 'Grid', value: 'grid', icon: <GridIcon /> },
+  ];
 
   useEffect(() => {
     setComparisonMode(location.pathname.startsWith('/comparison'));
   }, [location]);
 
-  // const history = useHistory();
-  // history.listen(location => {
-  //   setComparisonMode(location.pathname.startsWith('/comparison'));
-  // })
+  const onBGroupChange = () => {
 
-  const headerBox = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    alignContent: "center",
-    alignItems: "center",
-  };
+  }
 
   return (
-    <div className="container" style={headerBox}>
-      {/* TODO: make header background color translucent white while in comparison mode */}
+    <div className={`container ${comparisonMode && "comparisonMode"}`}>
       <div className="navbarLeft">
       </div>
       <div className="navbarCenter">
-        {/* TODO: put conditional comparison controls here */}
+        {comparisonMode && 
+          <SegmentedControl
+            options={options}
+            defaultValue="table"
+            onChange={onBGroupChange}
+            width={170}
+          />
+        }
       </div>
       <div className="navbarRight">
         {/* TODO: refactor hamburger menu into its own React component */}

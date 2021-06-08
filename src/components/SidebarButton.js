@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { setSideBar } from "../redux/action-creators";
+import { setSidebar } from "../redux/action-creators";
 import { ReactComponent as ChevronLeftIcon} from "../assets/chevron_left.svg"
 import { ReactComponent as ChevronRightIcon} from "../assets/chevron_right.svg"
 
-import "../css/sidebar.css";
+import "../css/Sidebar.css";
 
 let SidebarButton = class SidebarButton extends React.Component {
   static propTypes = {
@@ -13,7 +13,7 @@ let SidebarButton = class SidebarButton extends React.Component {
   };
 
   toggleSidebar = () => {
-    setSideBar(!this.props.sidebarOpen);
+    setSidebar(!this.props.sidebarOpen);
   };
 
   render() {
