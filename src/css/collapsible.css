@@ -48,8 +48,11 @@
 }
 
 .Collapsible__contentInner div.comparison-bar label {
-  align-self: flex-end;
+  align-self: center;
   margin-right: 8px;
+  white-space: nowrap;
+  overflow-x: auto;
+  text-overflow: ellipsis;
 }
 
 .Collapsible__trigger {

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { formatValue } from "../utils/formatValue";
 import GradientBar from "./charts/GradientBar";
+import SolidBar from "./charts/SolidBar";
 
 const MetricDetails = ({ feature, metric }) => {
   let rawValue = feature.properties[metric.id];
@@ -14,6 +15,13 @@ const MetricDetails = ({ feature, metric }) => {
         <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
           <label title={name}>{name}</label>
           <GradientBar value={rawValue} />
+        </div>
+      )
+    case 'solid-bar':
+      return (
+        <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
+          <label title={name} data-value={rawValue}>{name}</label>
+          <SolidBar label={value} value={rawValue} />
         </div>
       )
     default:
