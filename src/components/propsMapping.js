@@ -84,7 +84,7 @@ export default [
         label: 'Quartile of the Median Income of this SA2 Among all SA2s in South Australia', // too long and shouldn't use the "SA2"
         // format: 'range', // One of 1, 2, 3, or 4
       },
-      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent' }, // show this or no?
+      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent', type: 'solid-bar' }, // show this or no?
       {
         id: 'occup_diversity',
         label: 'Diversity of Occupation Types',
