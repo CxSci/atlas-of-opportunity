@@ -26,10 +26,10 @@ const MetricDetails = ({ feature, metric }) => {
       )
     default:
       return (
-        <p key={feature.properties.SA2_MAIN16} className="comparison">
+        <div key={feature.properties.SA2_MAIN16} className="comparison">
           <label title={name}>{name}</label>
           <data value={rawValue}>{value}</data>
-        </p>
+        </div>
       )
   }
 }

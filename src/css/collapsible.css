@@ -24,30 +24,23 @@
   align-items: stretch;
 }
 
-.Collapsible__contentInner p {
+.Collapsible__contentInner .metric div {
   margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;
 }
 
-.Collapsible__contentInner p.comparison {
+.Collapsible__contentInner .metric div.comparison {
   display: flex;
   justify-content: space-between;
 }
 
-.Collapsible__contentInner p:last-child {
-  margin-bottom: 0; 
-}
-
-.Collapsible__contentInner div.comparison-bar {
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 20px;
+.Collapsible__contentInner .metric div.comparison-bar {
   display: flex;
   justify-content: flex-end;
 }
 
-.Collapsible__contentInner div.comparison-bar label {
+.Collapsible__contentInner .metric div.comparison-bar label {
   align-self: center;
   margin-right: 8px;
   white-space: nowrap;
