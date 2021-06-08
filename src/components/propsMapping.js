@@ -11,7 +11,7 @@ export default [
     title: 'Economic Summary',
     content: [
       { id: 'quartile', label: 'Income Quartile' },
-      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent' },
+      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent', type: 'solid-bar' },
       { id: null, label: 'Visitor time spent by quartile' },
     ]
   },
