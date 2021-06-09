@@ -1,18 +1,18 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropType from "prop-types";
 import {
   ComposedChart,
   Bar,
   XAxis,
   YAxis,
   Scatter,
-  LabelList
+  ReferenceArea,
+  Label,
 } from "recharts";
 
-const GradientBar = ({ width = 150, height = 24, value = 0.6 }) => {
+const GradientBar = ({ width = 150, height = 24, value }) => {
   const data = [{
-    name: "HIGH",
-    name2: "LOW",
+    name: "value1",
     max: 1.2,
     value: value,
   }];
@@ -33,21 +33,34 @@ const GradientBar = ({ width = 150, height = 24, value = 0.6 }) => {
       <XAxis type="number" domain={[0, 1]} hide={true} />
       <YAxis type="category" dataKey="name" hide={true} />
       <Bar dataKey="value"
-        barSize={18}
+        barSize={height - 6}
         background={renderGradientShape('max')}
         shape={renderGradientShape('value')}
         isAnimationActive={false}
-      >
-        <LabelList dataKey="name" position="insideLeft" />
-        <LabelList dataKey="name2" position="insideRight" />
-      </Bar>
+      />
+      <Scatter dataKey="value"
+        shape={renderDashedLine}
+        isAnimationActive={false}
+      />
       <Scatter dataKey="value"
         shape={renderTriangleShape}
         isAnimationActive={false}
       />
+      <ReferenceArea x1="0" x2={data.max} fill="transparent">
+        <Label value="LOW" position="insideLeft" fontSize={12} />
+        <Label value="HIGH" position="insideRight" fontSize={12} />
+      </ReferenceArea>
     </ComposedChart>
   )
 }
+
+GradientBar.propTypes = {
+  width: PropType.number,
+  height: PropType.number,
+  value: PropType.number.isRequired,
+}
+
+export default GradientBar;
 
 const renderGradientShape = (key) => {
   const component = ({ height, width, x, y, ...rest }) => {
@@ -80,12 +93,19 @@ const renderGradientShape = (key) => {
 }
 
 const renderTriangleShape = (props) => {
-  const x = props.x;
+  const posX = props.x - 5;
   return (
-    <svg width="18" height="12" viewBox="0 0 18 12" x={x-5} y={0}>
-      <path d="M9 12L0.33 0L17.66 0L9 12Z" fill="black"/>
+    <svg width="18" height="12" viewBox="0 0 18 12" x={posX} y={0}>
+      <path d="M9 12L0 0L18 0L9 12Z" fill="black"/>
     </svg>
   )
 }
 
-export default GradientBar;
+const renderDashedLine = (props) => {
+  const lineX = props.xAxis.width / 2;
+  const mTop = 5;
+  const lineY = props.yAxis.height + mTop;
+  return (
+    <line x1={lineX} y1={mTop} x2={lineX} y2={lineY} stroke="white" strokeDasharray="1 1"/>
+  )
+}
