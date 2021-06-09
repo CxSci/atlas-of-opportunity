@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import '../css/recommendation.css';
 
 const RecommendationHeader = (props) => {
-    return <div className="recommendation-container">
-        <ul className="progressbar">
-            {props.stages.map((stage, idx) => {
-                return <li style={{width: 100/props.stages.length + "%"}} key={stage} className={props.currentStage === idx ? "active" : ""}>
-                    <p style={{color: "#000000"}}>{stage}</p>
-                </li>
-            })}
-        </ul>
-    </div>
+    return <ul className="progressBar">
+        {props.stages.map((stage, idx) => {
+            return <li key={stage} className={`${props.currentStage > idx ? "completed" : ""} ${props.currentStage === idx ? "active" : ""}`}>
+                <div className="progressGraphic">
+                    <div className="progressBubble" />
+                </div>
+                <p>{stage}</p>
+            </li>
+        })}
+    </ul>
 }
 
 RecommendationHeader.propTypes = {
