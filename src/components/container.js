@@ -15,37 +15,47 @@ const Container = class Container extends Component {
     }
   };
 
-
   render() {
     const { title, children } = this.props;
 
-    const popUpBox = {
-      width: "100%",
-      height: "100%",
-      background: "black",
-      opacity: "0.5",
+    const modalContainer = {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      zIndex: 3,
+      display: "flex",
+      justifyContent: "center",
+    }
+
+    const dimScreen = {
       position: "absolute",
-      zIndex: "3",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      background: "rgba(0, 0, 0, 0.5)",
       pointerEvents: "auto",
-      top: "0",
     };
 
     const container = {
-      position: "fixed",
-      zIndex: "4",
+      zIndex: 0,
+      display: "flex",
+      margin: 60,
+      flexDirection: "column",
+      justifyContent: "center",
+      flex: "1 1 680px",
+      maxWidth: 680,
+    }
+
+    const dialog = {
       display:"flex",
-      justifyContent:"center",
-      alignItems: "center",
-      width: "50%",
-      maxHeight:"60%",
-      top:"20%",
-      left:"25%",
       backgroundColor: "#ffffff",
       borderRadius: "8px",
       flexDirection: "column",
       pointerEvents: "auto",
-
-
+      overflowY: "auto",
     };
 
     const titleBox = {
@@ -62,9 +72,8 @@ const Container = class Container extends Component {
     };
 
     const childrenContent = {
-      width: "100%",
-      padding: "20px 40px 20px 40px",
-      overflowY: "scroll",
+      padding: "20px 40px",
+      overflowY: "auto",
     }
 
     const iconButton = {
@@ -72,38 +81,25 @@ const Container = class Container extends Component {
     }
 
     return (
-        <div>
-              <Link
-              to="/"
-              style={popUpBox}
-              />
-
-          <div style={container}>
-              <h3 style={titleBox}>
-                  {title}
-                  <CloseIcon style={iconButton} onClick={()=>this.props.history.goBack()}/>
-              </h3>
-    
-             <div style={childrenContent}>
-                {children}
-              </div>
+      <div style={modalContainer}>
+        <Link
+          to="/"
+          style={dimScreen}
+        />
+        <div style={container}>
+          <div style={dialog}>
+            <h3 style={titleBox}>
+              {title}
+              <CloseIcon style={iconButton} onClick={()=>this.props.history.goBack()}/>
+            </h3>  
+            <div style={childrenContent}>
+              {children}
+            </div>
           </div>
-
         </div>
+      </div>
     );
   }
 };
-
-/* function popUpContainer(){
-  const [isOpen, setIsOpen] = useState(false);
- 
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return()
-
-
-} */
 
 export default withRouter(Container);
