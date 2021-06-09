@@ -5,6 +5,8 @@ import Collapsible from "react-collapsible";
 import Table from "rc-table";
 import propsMapping from "./propsMapping";
 import { formatValue } from "../utils/formatValue";
+import GradientBar from "./charts/GradientBar";
+import SolidBar from "./charts/SolidBar";
 import "../css/TableView.css"
 const { Column } = Table;
 
@@ -32,8 +34,7 @@ const TableView = ({comparisonFeatures}) => {
     section.content.forEach((metric, idx) => {
       let columnValues = comparisonFeatures.map((ft, idx) => {
         let rawValue = ft.properties[metric.id];
-        const value = formatValue(rawValue, metric.format);
-        return ({ [`regionData${idx + 1}`]: value })
+        return ({ [`regionData${idx + 1}`]: rawValue });
       });
       columnValues.push({regionName: metric.label});
       columnValues.push({id: idx});
@@ -41,12 +42,20 @@ const TableView = ({comparisonFeatures}) => {
       data.push(row);
     })
 
-    const renderCell = (value, record) => {
+    const renderCell = (rawValue, record) => {
       const metric = section.content[record.id];
-      const isChart = metric.type === 'chart';
-      return (
-        !isChart ? value : <div className="fake-chart"></div>
-      );
+      const value = formatValue(rawValue, metric.format);
+
+      switch (metric.type) {
+        case 'chart':
+          return <div className="fake-chart"></div>
+        case 'hilo-bar':
+          return <GradientBar value={rawValue} width={120} />
+        case 'solid-bar':
+          return <SolidBar label={value} value={rawValue} width={120} />
+        default:
+          return value
+      }
     }
 
     return (
