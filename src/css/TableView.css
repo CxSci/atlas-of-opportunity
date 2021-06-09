@@ -41,7 +41,8 @@
 }
 
 .table-row > td {
-  padding: 8px 10px;
+  line-height: 24px;
+  padding: 3px 10px;
   vertical-align: middle;
 }
 .table-row:nth-child(even) {

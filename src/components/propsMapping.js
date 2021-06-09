@@ -23,7 +23,7 @@ export default [
         desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
       },
       {
-        id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
+        id: 'bridge_diversity', label: 'Job Resilience', format: 'number', type: 'hilo-bar',
         desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.'
       },
       {
