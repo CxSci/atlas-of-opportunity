@@ -143,6 +143,7 @@ export default [
         id: 'bridge_diversity',
         label: 'Social Bridge Diversity', // not Job Resilience?
         format: 'number',
+        type: 'hilo-bar',
       },
       // {
       //   id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
