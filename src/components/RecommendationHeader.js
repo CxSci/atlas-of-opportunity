@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import '../css/recommendation.css';
 
 const RecommendationHeader = (props) => {
-    return <div className="reccomendation-container">
+    return <div className="recommendation-container">
         <ul className="progressbar">
             {props.stages.map((stage, idx) => {
                 return <li style={{width: 100/props.stages.length + "%"}} key={stage} className={props.currentStage === idx ? "active" : ""}>
