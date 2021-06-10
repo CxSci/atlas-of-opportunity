@@ -1,27 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { formatValue } from "../utils/formatValue";
-import GradientBar from "./charts/GradientBar";
+import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 
-const MetricDetails = ({ feature, metric }) => {
+const MetricDetails = ({ feature, metric, small }) => {
   let rawValue = feature.properties[metric.id];
   const value = formatValue(rawValue, metric.format);
   const name = feature.properties.SA2_NAME16;
+  const width = small ? 115 : undefined;
 
   switch (metric.type) {
-    case 'hilo-bar':
+    case 'range':
       return (
         <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
           <label title={name}>{name}</label>
-          <GradientBar value={rawValue} />
+          <RangeBar value={rawValue} min={metric.min} max={metric.max} width={width}/>
         </div>
       )
-    case 'solid-bar':
+    case 'bar':
       return (
         <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
           <label title={name} data-value={rawValue}>{name}</label>
-          <SolidBar label={value} value={rawValue} />
+          <SolidBar label={value} value={rawValue} max={metric.max} width={width} />
         </div>
       )
     default:
@@ -37,6 +38,7 @@ const MetricDetails = ({ feature, metric }) => {
 MetricDetails.propTypes = {
   feature: PropTypes.any,
   metric: PropTypes.any,
+  small: PropTypes.bool,
 };
 
 export default MetricDetails;

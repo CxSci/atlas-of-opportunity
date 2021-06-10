@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, LabelList } from 'recharts';
 
-const SolidBar = ({ width = 150, height = 24, label, value }) => {
+const SolidBar = ({ width = 150, height = 24, label, value, max = 100 }) => {
   const data = [{
     name: label,
     value: value,
@@ -19,7 +19,7 @@ const SolidBar = ({ width = 150, height = 24, label, value }) => {
         bottom: 0,
         right: 0,
       }}>
-      <XAxis type="number" domain={[0, 100]} hide />
+      <XAxis type="number" domain={[0, max]} hide />
       <YAxis type="category" dataKey="name" hide />
       <Bar dataKey="value" barSize={height} fill="#ffb266" isAnimationActive={false}>
         <LabelList dataKey="name" position="insideLeft" />
@@ -33,6 +33,7 @@ SolidBar.propTypes = {
   height: PropType.number,
   label: PropType.string,
   value: PropType.number.isRequired,
+  max: PropType.number,
 }
 
 export default SolidBar;

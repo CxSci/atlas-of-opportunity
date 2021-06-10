@@ -10,10 +10,10 @@ import {
   Label,
 } from "recharts";
 
-const GradientBar = ({ width = 150, height = 24, value }) => {
+const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2}) => {
   const data = [{
     name: "value1",
-    max: 1.2,
+    max: max,
     value: value,
   }];
 
@@ -30,7 +30,7 @@ const GradientBar = ({ width = 150, height = 24, value }) => {
         right: 0,
       }}
     >
-      <XAxis type="number" domain={[0, 1]} hide={true} />
+      <XAxis type="number" domain={[min, max]} hide={true} />
       <YAxis type="category" dataKey="name" hide={true} />
       <Bar dataKey="value"
         barSize={height - 6}
@@ -54,13 +54,15 @@ const GradientBar = ({ width = 150, height = 24, value }) => {
   )
 }
 
-GradientBar.propTypes = {
+RangeBar.propTypes = {
   width: PropType.number,
   height: PropType.number,
   value: PropType.number.isRequired,
+  min: PropType.number,
+  max: PropType.number,
 }
 
-export default GradientBar;
+export default RangeBar;
 
 const renderGradientShape = (key) => {
   const component = ({ height, width, x, y, ...rest }) => {

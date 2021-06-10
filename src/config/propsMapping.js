@@ -1,8 +1,20 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * This file contains the configuration for each metric we want to show
+ * {
+ *    id:     field
+ *    label:  name to show
+ *    type:   chart type (bar | range | line-chart)
+ *    min:    minimun for type range
+ *    max:    maximun for type range, bar
+ *    format: value format (number | percent | currency)
+ *    desc:   description to show with tooltip
+ * }
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default [
   {
     title: 'Demographic Summary',
     content: [
-      { id: 'fake', label: 'Fake metric', type: 'chart' },
+      { id: 'fake', label: 'Fake metric', type: 'line-chart' },
       { id: 'persons_num', label: 'Population', format: 'number' },
       {
         id: 'popfraction',
@@ -82,9 +94,17 @@ export default [
       {
         id: 'quartile',
         label: 'Quartile of the Median Income of this SA2 Among all SA2s in South Australia', // too long and shouldn't use the "SA2"
+        type: 'bar',
+        max: 10,
         // format: 'range', // One of 1, 2, 3, or 4
       },
-      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent', type: 'solid-bar' }, // show this or no?
+      {
+        id: 'inequality', // show this or no?
+        label: 'Inequality (lower is better)',
+        format: 'percent',
+        type: 'bar',
+        max: 100,
+      },
       {
         id: 'occup_diversity',
         label: 'Diversity of Occupation Types',
@@ -136,14 +156,14 @@ export default [
     title: 'Growth Summary',
     content: [
       {
-        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'hilo-bar',
+        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'range', min: 0, max: 1.2,
         desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
       },
       {
         id: 'bridge_diversity',
         label: 'Social Bridge Diversity', // not Job Resilience?
         format: 'number',
-        type: 'hilo-bar',
+        type: 'range',
       },
       // {
       //   id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
