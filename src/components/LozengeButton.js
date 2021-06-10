@@ -60,7 +60,7 @@ const LozengeButton = (props) => {
   }
 
   return (
-    <Link to={props.url}
+    <Link to={props.url || ""}
       onClick={
         props.onClick ? event => {
           event.stopPropagation();

@@ -76,7 +76,8 @@ const RecommendationTool = (props) => {
                                 return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
                                     <p className="description">
                                         {question.question}
-                                        <p className="help">{question.hint}</p>
+                                        <br/>
+                                        <span className="help">{question.hint}</span>
                                     </p>
                                     <div className="inputRoot">{inputComponentForQuestion(question)}</div>
                                 </div>
