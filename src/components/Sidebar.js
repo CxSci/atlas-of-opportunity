@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -15,19 +15,16 @@ import WelcomeDialog from "./WelcomeDialog";
 import { addComparisonFeature, removeComparisonFeature } from "../redux/action-creators";
 import LocationCompare from "./LocationToCompare";
 import LocationDetails from "./LocationDetails";
-import { Switch, Route, useLocation, useHistory } from "react-router";
+import { Switch, Route } from "react-router";
 import ComparisonSidebarContent from "./ComparisonSidebarContent";
 import CollapsibleSection from "./CollapsibleSection";
 import RecommendationDialog from "./RecommendationDialog";
 
 const Sidebar = (props) => {
     const {
-      features,
       selectedFeature,
       comparisonFeatures,
     } = props;
-    const location = useLocation();
-    const history = useHistory();
     
     const isCompared = comparisonFeatures.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature?.properties["SA2_MAIN16"]) !== undefined;
     const enableButton = comparisonFeatures.length >= 4;
@@ -49,38 +46,6 @@ const Sidebar = (props) => {
         </button>
       </div>
     );
-    
-    // Efect to load features from url ids
-    useEffect(() => {
-      if (!comparisonFeatures.length && location.pathname.startsWith('/comparison/')) {
-        const pathIds = location.pathname.replace('/comparison/', '');
-        if (pathIds) {
-          const ids = pathIds.split('+');
-          const featuresFromUrl = features.filter(ft => ids.includes(ft.properties["SA2_MAIN16"].toString()));
-          featuresFromUrl.forEach(feature => {
-            addComparisonFeature(feature);
-          })
-        }
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [features]);
-
-    // Effect to update url when removing comparionFeatures
-    useEffect(() => {
-      if (location.pathname.startsWith('/comparison/') && features.length) {
-        if (!comparisonFeatures.length) {
-          history.push('/');
-        }
-        else {
-          const ids = comparisonFeatures.map(feature => feature.properties.SA2_MAIN16);
-          const newPath = '/comparison/' + ids.join('+');
-          if (location.pathname !== newPath) {
-            history.replace(newPath);
-          }
-        }
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [comparisonFeatures]);
 
     return (
       <div className={`panel-container ${(selectedFeature || comparisonFeatures.length) ? "featureSelected" : "noFeatureSelected"}`}>
@@ -120,14 +85,12 @@ const Sidebar = (props) => {
 }
 
 Sidebar.propTypes = {
-  features: PropTypes.array,
   selectedFeature: PropTypes.object,
   comparisonFeatures: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    features: state.features,
     selectedFeature: state.selectedFeature,
     comparisonFeatures: state.comparisonFeatures
   };
