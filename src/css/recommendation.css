@@ -69,7 +69,6 @@
 .questionList {
   display: flex;
   flex-direction: column;
-  /*background: lightblue;*/
 }
 
 .question {
@@ -87,13 +86,8 @@
 }
 
 .question .help {
-  /*text-align: center;*/
   font-style: italic;
   font-weight: normal;
-}
-
-.inputRoot {
-
 }
 
 .nextButton {
@@ -148,12 +142,12 @@
   color: #FFFFFF
 }
 
-.labelRoot {
+.question label {
   display: block;
   margin-bottom: 15px;
 }
 
-.labelRoot:last-child {
+.question label:last-child {
   margin-bottom: 0;
 }
 

@@ -4,13 +4,11 @@ import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import '../css/recommendation.css';
 
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
     const [formState, setFormState] = useState({});
-    const history = useHistory();
 
     const setRadioValue = (key, answer) => {
         setFormState({...formState, [key]: answer})
@@ -32,7 +30,7 @@ const RecommendationTool = (props) => {
             case "multiple_choice":
                 return <>{question.answers.map(answer =>
                     <Fragment key={answer}>
-                        <label className="labelRoot">
+                        <label>
                             <input type="radio"
                                 name={question.key}
                                 onClick={()=>setRadioValue(question.key, answer)
@@ -49,7 +47,7 @@ const RecommendationTool = (props) => {
             case "checkbox":
                 return <>{question.answers.map(answer =>
                     <Fragment key={answer}>
-                        <label className="labelRoot">
+                        <label>
                             <input type="checkbox"
                                 name={question.key}
                                 onClick={()=>setCheckboxValue(question.key, answer)}
@@ -65,21 +63,37 @@ const RecommendationTool = (props) => {
     return <>
         <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
         <div className="stage">
-            {(currentStage === props.data.length || !props.data[currentStage].description) ?
-                <></> :
-                <p className="stageDescription">{props.data[currentStage].description}</p>
-            }
-            <div className="questionList">
-                {currentStage === props.data.length ? <></> : props.data[currentStage].questions.map((question, idx) => {
-                    return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
-                        <p className="description">
-                            {question.question}
-                            <p className="help">{question.hint}</p>
-                        </p>
-                        <div className="inputRoot">{inputComponentForQuestion(question)}</div>
+            {currentStage < props.data.length ?
+                <>
+                    {!props.data[currentStage].description ?
+                        <></> :
+                        <p className="stageDescription">{props.data[currentStage].description}</p>
+                    }
+                    <div className="questionList">
+                        {currentStage === props.data.length ?
+                            <></> :
+                            props.data[currentStage].questions.map((question, idx) => {
+                                return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
+                                    <p className="description">
+                                        {question.question}
+                                        <p className="help">{question.hint}</p>
+                                    </p>
+                                    <div className="inputRoot">{inputComponentForQuestion(question)}</div>
+                                </div>
+                            })
+                        }
                     </div>
-                })}
-            </div>
+                </> :
+                <>
+                    <p className="stageDescription">Based on the information you provided, the following locations could be a good match:</p>
+                    <ul style={{ fontSize: 18, fontWeight: 500, lineHeight: "200%" }}>
+                        <li>Adelaide Hills</li>
+                        <li>Barossa - Angaston</li>
+                        <li>Mannum</li>
+                        <li>Northgate - Oakden - Gilles Plains</li>
+                    </ul>
+                </>
+            }
         </div>
         <div className="actions">
             {currentStage !== 0 &&
@@ -103,7 +117,7 @@ const RecommendationTool = (props) => {
                     buttonType="prominent"
                     buttonSize="medium"
                     showChevron={true}
-                    onClick={()=>{history.goBack()}}
+                    url="/comparison/401021003+405011110+407031164+402031037"
                     text="Compare Locations"
                 />
             }
