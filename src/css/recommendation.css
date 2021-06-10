@@ -1,7 +1,7 @@
+/* Progress bar */
 .progressBar {
   counter-reset: step;
   display: flex;
-  margin-bottom: 30px;
 }
 .progressBar li {
   list-style-type: none;
@@ -49,4 +49,109 @@
   height: 34px;
   margin-top: 0;
   margin-bottom: 10px;
+}
+
+/* Questions */
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+  margin: 30px auto;
+}
+
+.stageDescription {
+  text-align: center;
+  line-height: 21px;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  /*background: lightblue;*/
+}
+
+.question {
+  margin-top: 30px;
+}
+
+.question.continued {
+  margin-top: 0;
+}
+
+.question .description {
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.question .help {
+  /*text-align: center;*/
+  font-style: italic;
+  font-weight: normal;
+}
+
+.inputRoot {
+
+}
+
+.nextButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 64px;
+  height: 39px;
+  right: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+}
+
+.previousButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 94px;
+  height: 39px;
+  left: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+
+}
+
+.comparisonButton {
+  position: absolute;
+  width: 186px;
+  height: 39px;
+  right: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  borderRadius: 100px;
+  cursor: pointer;
+  border: none;
+}
+
+.buttonText {
+  fontFamily: Roboto;
+  fontStyle: normal;
+  fontWeight: bold;
+  fontSize: 16px;
+  lineHeight: 19px;
+  color: #FFFFFF
+}
+
+.labelRoot {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.labelRoot:last-child {
+  margin-bottom: 0;
 }

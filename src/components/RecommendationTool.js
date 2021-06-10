@@ -5,28 +5,7 @@ import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
 import ComparisonButton from './ComparisonButton';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
-const root = {
-    marginTop: 125
-}
-
-const descriptionText = {
-    textAlign:"center", 
-    marginTop: 25,
-    marginBottom: 25
-}
-
-const helpText = {
-    marginTop: -15,
-    marginBottom: 25,
-    textAlign: "center",
-    fontStyle: "italic"
-}
-
-const inputRoot = {
-    margin: "auto",
-    width: "max-content"
-}
+import '../css/recommendation.css';
 
 const nextButton = {
     display: "flex",
@@ -80,10 +59,6 @@ const buttonText = {
     "color": "#FFFFFF"
 }
 
-const labelRoot = {
-    display: "block"
-}
-
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
     const [formState, setFormState] = useState({});
@@ -103,35 +78,57 @@ const RecommendationTool = (props) => {
     const setSelectValue = (key, answer) => {
         setFormState({...formState, [key]: answer})
     }
+
+    const inputComponentForQuestion = (question) => {
+        switch (question.type) {
+            case "multiple_choice":
+                return <>{question.answers.map(answer =>
+                    <Fragment key={answer}>
+                        <label className="labelRoot">
+                            <input type="radio"
+                                name={question.key}
+                                onClick={()=>setRadioValue(question.key, answer)
+                            }/>&nbsp;
+                            {answer}
+                        </label>
+                    </Fragment>)}</>;
+            case "select":
+                return <DropdownSelect
+                    items={question.answers}
+                    initialSelectedItem={""}
+                    handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
+                    />;
+            case "checkbox":
+                return <>{question.answers.map(answer =>
+                    <Fragment key={answer}>
+                        <label className="labelRoot">
+                            <input type="checkbox"
+                                name={question.key}
+                                onClick={()=>setCheckboxValue(question.key, answer)}
+                            />&nbsp;
+                            {answer}
+                        </label>
+                    </Fragment>)}</>;
+            default:
+                return <></>
+        }
+    }
+
     return <>
         <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
-        <div style={root}>
-            <p style={descriptionText}>{currentStage === props.data.length ? <></> : props.data[currentStage].description}</p>
-            {currentStage === props.data.length ? <></> : props.data[currentStage].questions.map(question => {
-                let inputComponent = <></>
-                switch (question.type) {
-                    case "multiple_choice":
-                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="radio" name={question.key} onClick={()=>setRadioValue(question.key, answer)}/>{answer}</label><br/></Fragment>)}</>;
-                        break;
-                    case "select":
-                        inputComponent = <DropdownSelect
-                            items={question.answers}
-                            initialSelectedItem={""}
-                            handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
-                        />;
-                        break;
-                    case "checkbox":
-                        inputComponent = <>{question.answers.map(answer => <Fragment key={answer}><label style={labelRoot}><input type="checkbox" name={question.key} onClick={()=>setCheckboxValue(question.key, answer)}/>{answer}</label><br/></Fragment>)}</>;
-                        break;
-                    default:
-                        break;
-                }
-                return <div key={question.question}>
-                    <p style={descriptionText}>{question.question}</p>
-                    <p style={helpText}>{question.hint}</p>
-                    <div style={inputRoot}>{inputComponent}</div>
-                </div>
-            })}
+        <div className="stage">
+            <p className="stageDescription">{currentStage === props.data.length ? <></> : props.data[currentStage].description}</p>
+            <div className="questionList">
+                {currentStage === props.data.length ? <></> : props.data[currentStage].questions.map((question, idx) => {
+                    return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
+                        <p className="description">
+                            {question.question}
+                            <p className="help">{question.hint}</p>
+                        </p>
+                        <div className="inputRoot">{inputComponentForQuestion(question)}</div>
+                    </div>
+                })}
+            </div>
             
             {currentStage !== props.data.length && <ComparisonButton textStyle={buttonText} noChevron style={nextButton} onClick={() => {setCurrentStage(currentStage + 1)}} text="Next"/>}
             {currentStage !== 0 && <ComparisonButton textStyle={buttonText} noChevron style={previousButton} onClick={() => {setCurrentStage(currentStage - 1)}} text="Previous"/>}
