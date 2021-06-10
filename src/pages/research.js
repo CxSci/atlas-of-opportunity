@@ -5,7 +5,7 @@ import jobsIncreases from "../assets/jobs_increases.png";
 import GDP from "../assets/GDP.png";
 import consumptionDiversity from "../assets/consumption_diversity.png";
 
-import Container from "../components/container";
+import ModalContainer from "../components/ModalContainer";
 
 const Research = class Research extends Component {
   render() {
@@ -30,7 +30,7 @@ const Research = class Research extends Component {
       width: "100%",
     };
     return (
-      <Container title="Research">
+      <ModalContainer title="Research">
         <p style={content}>
           What new advantages can communities have if they have the ability to
           analyze their data? People often think of monetizing personal data,
@@ -320,7 +320,7 @@ const Research = class Research extends Component {
           build more and more inclusive trust and social capital. Access to
           community-level data is what can make this possible.
         </p>
-      </Container>
+      </ModalContainer>
     );
   }
 };

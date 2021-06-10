@@ -5,7 +5,7 @@ import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
-const Container = class Container extends Component {
+const ModalContainer = class ModalContainer extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -102,4 +102,4 @@ const Container = class Container extends Component {
   }
 };
 
-export default withRouter(Container);
+export default withRouter(ModalContainer);
