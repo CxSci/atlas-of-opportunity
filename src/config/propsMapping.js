@@ -1,8 +1,20 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * This file contains the configuration for each metric we want to show
+ * {
+ *    id:     field
+ *    label:  name to show
+ *    type:   chart type (bar | range | line-chart)
+ *    min:    minimun for type range
+ *    max:    maximun for type range, bar
+ *    format: value format (number | percent | currency)
+ *    desc:   description to show with tooltip
+ * }
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default [
   {
     title: 'Demographic Summary',
     content: [
-      { id: 'fake', label: 'Fake metric', type: 'chart' },
+      { id: 'fake', label: 'Fake metric', type: 'line-chart' },
       { id: 'persons_num', label: 'Population', format: 'number' },
       { id: 'median_aud', label: 'Median Income', format: 'currency' },
     ]
@@ -10,8 +22,8 @@ export default [
   {
     title: 'Economic Summary',
     content: [
-      { id: 'quartile', label: 'Income Quartile' },
-      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent', type: 'solid-bar' },
+      { id: 'quartile', label: 'Income Quartile', type: 'bar', max: 10 },
+      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent', type: 'bar', max: 100 },
       { id: null, label: 'Visitor time spent by quartile' },
     ]
   },
@@ -19,11 +31,11 @@ export default [
     title: 'Growth Summary',
     content: [
       {
-        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'hilo-bar',
+        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'range', min: 0, max: 1.2,
         desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
       },
       {
-        id: 'bridge_diversity', label: 'Job Resilience', format: 'number', type: 'hilo-bar',
+        id: 'bridge_diversity', label: 'Job Resilience', format: 'number', type: 'range',
         desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.'
       },
       {

@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import propsMapping from "./propsMapping";
+import propsMapping from "../config/propsMapping";
 import CollapsibleSection from "./CollapsibleSection";
 import { formatValue } from "../utils/formatValue";
 import MetricDetails from "./MetricDetails";
-import GradientBar from "./charts/GradientBar";
+import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 
 const LocationDetails = (props) => {
@@ -44,10 +44,10 @@ const LocationDetails = (props) => {
     const value = formatValue(rawValue, metric.format);
     
     switch (metric.type) {
-      case 'hilo-bar':
-        return <GradientBar value={rawValue} width={260} />
-      case 'solid-bar':
-        return <SolidBar label={value} value={rawValue} width={260} />
+      case 'range':
+        return <RangeBar value={rawValue} min={metric.min} max={metric.max} width={260} />
+      case 'bar':
+        return <SolidBar label={value} value={rawValue} max={metric.max} width={260} />
       default:
         return <div>{value}</div>
     }
