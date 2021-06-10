@@ -25,17 +25,18 @@
 }
 
 .Collapsible__contentInner .metric div {
-  margin-bottom: 10px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 24px;
 }
 
 .Collapsible__contentInner .metric div.comparison {
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 .Collapsible__contentInner .metric div.comparison-bar {
+  margin-bottom: 10px;
   display: flex;
   justify-content: flex-end;
 }
