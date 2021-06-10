@@ -63,6 +63,7 @@
 .stageDescription {
   text-align: center;
   line-height: 21px;
+  margin-bottom: 30px;
 }
 
 .questionList {
@@ -75,7 +76,7 @@
   margin-top: 30px;
 }
 
-.question.continued {
+.question.continued, .question:first-child {
   margin-top: 0;
 }
 
@@ -154,4 +155,13 @@
 
 .labelRoot:last-child {
   margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions a:last-child {
+  margin-left: auto;
 }

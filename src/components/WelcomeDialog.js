@@ -16,14 +16,11 @@ let WelcomeDialog = class WelcomeDialog extends Component {
     if (!this.props.showDialog) return <></>;
 
     const dialogBox = {
-      width: "305px",
       flexGrow: 0,
       backgroundColor: "#FFFFFF",
       borderRadius: "5px",
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
-      marginTop: "5px",
-      marginBottom: "10px",
-      marginLeft: "10px",
+      margin: "5px 5px 5px 10px",
       pointerEvents: "auto",
       display: "flex",
       flexDirection: "column",

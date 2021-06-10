@@ -1,26 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+import LozengeButton from './LozengeButton';
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 
 const ModalRoot = {
     pointerEvents: "auto",
-    "height": "150px",
-    "left": "0px",
-    "right": "0px",
-    "top": "0px",
-    marginRight: 5,
-    "background": "#FFFFFF",
-    "borderRadius": "5px",
-    "marginBottom": "10px",
-    "marginLeft": "10px"
+    background: "#FFFFFF",
+    borderRadius: "5px",
+    margin: "5px 5px 10px 10px",
   }
   const scrollingWrapper = {
-    "display": "flex",
-    "flexDirection": "column",
-    "alignItems": "center",
-    height: "100%",
-    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: "30px 35px"
   }
 
@@ -35,39 +28,10 @@ const ModalRoot = {
   };
 
   const modalText = {
-    "fontFamily": "Roboto",
-    "fontStyle": "normal",
-    "fontWeight": "normal",
-    "fontSize": "14px",
-    "lineHeight": "133%",
-    "color": "#333333"
-  }
-
-  const button = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "position": "static",
-    "width": "187px",
-    "height": "36px",
-    "left": "0px",
-    "top": "0px",
-    "background": "#3DBEFF",
-    "borderRadius": "100px",
-    cursor: "pointer",
-    marginTop: 20
-  }
-
-  const buttonText = {
-    "fontFamily": "Roboto",
-    "fontStyle": "normal",
-    "fontWeight": "bold",
-    "fontSize": "14px",
-    "lineHeight": "16px",
-    "display": "flex",
-    "alignItems": "center",
-    "textAlign": "center",
-    "color": "#FFFFFF"
+    fontSize: "14px",
+    lineHeight: "133%",
+    color: "#333333",
+    marginBottom: 20,
   }
 
 const RecommendationDialog = () => {
@@ -79,9 +43,13 @@ const RecommendationDialog = () => {
         <CloseIcon onClick={() => {}} style={xButton} />
         <div style={scrollingWrapper}>
             <p style={modalText}>Not sure where to start? Try the Recommendation Tool.</p>
-            <div style={button} onClick={()=>{history.push("/recommendation")}}>
-                <p style={buttonText}>Recommendation Tool</p>
-            </div>
+            <LozengeButton
+                buttonType="prominent"
+                buttonSize="small"
+                showChevron={true}
+                onClick={()=>{history.push("/recommendation")}}
+                text="Recommendation Tool"
+            />
         </div>
     </div>
     )

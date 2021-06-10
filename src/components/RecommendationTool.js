@@ -3,61 +3,9 @@ import RecommendationHeader from './RecommendationHeader';
 import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
-import ComparisonButton from './ComparisonButton';
+import LozengeButton from './LozengeButton';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import '../css/recommendation.css';
-
-const nextButton = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "position": "absolute",
-    "width": "64px",
-    "height": "39px",
-    "right": "40px",
-    "bottom": "30px",
-    "background": "#3DBEFF",
-    "borderRadius": "100px",
-    "cursor": "pointer",
-    border: "none"
-}
-
-const previousButton = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "position": "absolute",
-    "width": "94px",
-    "height": "39px",
-    "left": "40px",
-    "bottom": "30px",
-    "background": "#3DBEFF",
-    "borderRadius": "100px",
-    "cursor": "pointer",
-    border: "none",
-
-}
-
-const comparisonButton = {
-    "position": "absolute",
-    "width": "186px",
-    "height": "39px",
-    "right": "40px",
-    "bottom": "30px",
-    "background": "#3DBEFF",
-    "borderRadius": "100px",
-    cursor: "pointer",
-    border: "none"
-}
-
-const buttonText = {
-    "fontFamily": "Roboto",
-    "fontStyle": "normal",
-    "fontWeight": "bold",
-    "fontSize": "16px",
-    "lineHeight": "19px",
-    "color": "#FFFFFF"
-}
 
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
@@ -117,7 +65,10 @@ const RecommendationTool = (props) => {
     return <>
         <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
         <div className="stage">
-            <p className="stageDescription">{currentStage === props.data.length ? <></> : props.data[currentStage].description}</p>
+            {(currentStage === props.data.length || !props.data[currentStage].description) ?
+                <></> :
+                <p className="stageDescription">{props.data[currentStage].description}</p>
+            }
             <div className="questionList">
                 {currentStage === props.data.length ? <></> : props.data[currentStage].questions.map((question, idx) => {
                     return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
@@ -129,10 +80,33 @@ const RecommendationTool = (props) => {
                     </div>
                 })}
             </div>
-            
-            {currentStage !== props.data.length && <ComparisonButton textStyle={buttonText} noChevron style={nextButton} onClick={() => {setCurrentStage(currentStage + 1)}} text="Next"/>}
-            {currentStage !== 0 && <ComparisonButton textStyle={buttonText} noChevron style={previousButton} onClick={() => {setCurrentStage(currentStage - 1)}} text="Previous"/>}
-            {currentStage === props.data.length && <ComparisonButton chevronColor="white" textStyle={buttonText} style={comparisonButton} onClick={()=>{history.goBack()}} text="Compare Locations"/>}
+        </div>
+        <div className="actions">
+            {currentStage !== 0 &&
+                <LozengeButton
+                    buttonType="prominent"
+                    buttonSize="medium"
+                    onClick={() => {setCurrentStage(currentStage - 1)}}
+                    text="Previous"
+                />
+            }
+            {currentStage !== props.data.length &&
+                <LozengeButton
+                    buttonType="prominent"
+                    buttonSize="medium"
+                    onClick={() => {setCurrentStage(currentStage + 1)}}
+                    text="Next"
+                />
+            }
+            {currentStage === props.data.length &&
+                <LozengeButton
+                    buttonType="prominent"
+                    buttonSize="medium"
+                    showChevron={true}
+                    onClick={()=>{history.goBack()}}
+                    text="Compare Locations"
+                />
+            }
         </div>
     </>
 };

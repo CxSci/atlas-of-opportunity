@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getComparisonFeatures } from "../redux/getters";
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
 import { removeComparisonFeature } from "../redux/action-creators";
-import ComparisonButton from "./ComparisonButton";
+import LozengeButton from "./LozengeButton";
 import PropTypes from "prop-types";
 
 const root = {
@@ -22,12 +22,17 @@ const featureRoot = {
 };
 
 const listRoot = {
-    marginRight: "-9px"
+  marginRight: "-9px",
+  marginBottom: "15px",
 }
 
 const closeIcon = {
   cursor: "pointer",
 };
+
+const buttonStyle = {
+  alignSelf: "center",
+}
 
 const disclaimerText = {
   fontSize: "14px",
@@ -43,22 +48,28 @@ const LocationCompare = ({showButton}) => {
 
   return (
     <div style={root}>
-    <div style={listRoot}>
-      {comparisonFeatures.map((feature) => {
-        return (
-          <div style={featureRoot} key={feature.properties.SA2_MAIN16}>
-            {feature.properties["SA2_NAME16"]}
-            <CloseIcon
-              style={closeIcon}
-              onClick={() => removeComparisonFeature(feature)}
-            />
-          </div>
-        );
-      })}
+      <div style={listRoot}>
+        {comparisonFeatures.map((feature) => {
+          return (
+            <div style={featureRoot} key={feature.properties.SA2_MAIN16}>
+              {feature.properties["SA2_NAME16"]}
+              <CloseIcon
+                style={closeIcon}
+                onClick={() => removeComparisonFeature(feature)}
+              />
+            </div>
+          );
+        })}
       </div>
       {showButton && (
         <>
-          <ComparisonButton url={"/comparison/" + ids.join('+')} />
+          <LozengeButton
+            style={buttonStyle}
+            buttonType="normal"
+            buttomSize="small"
+            showChevron={true}
+            url={"/comparison/" + ids.join('+')}
+          />
           <div>
             <p style={disclaimerText}>Add up to 4 regions.</p>
           </div>
