@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import Table from "rc-table";
-import propsMapping from "./propsMapping";
+import propsMapping from "../config/propsMapping";
 import { formatValue } from "../utils/formatValue";
-import GradientBar from "./charts/GradientBar";
+import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import "../css/TableView.css"
 const { Column } = Table;
@@ -47,12 +47,12 @@ const TableView = ({comparisonFeatures}) => {
       const value = formatValue(rawValue, metric.format);
 
       switch (metric.type) {
-        case 'chart':
+        case 'line-chart':
           return <div className="fake-chart"></div>
-        case 'hilo-bar':
-          return <GradientBar value={rawValue} width={120} />
-        case 'solid-bar':
-          return <SolidBar label={value} value={rawValue} width={120} />
+        case 'range':
+          return <RangeBar value={rawValue} min={metric.min} max={metric.max} width={120} />
+        case 'bar':
+          return <SolidBar label={value} value={rawValue} max={metric.max} width={120} />
         default:
           return value
       }
