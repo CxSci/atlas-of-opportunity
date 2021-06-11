@@ -34,8 +34,7 @@ const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2}) => {
       <YAxis type="category" dataKey="name" hide={true} />
       <Bar dataKey="value"
         barSize={height - 6}
-        background={renderGradientShape('max')}
-        shape={renderGradientShape('value')}
+        shape={renderGradientShape}
         isAnimationActive={false}
       />
       <Scatter dataKey="value"
@@ -47,8 +46,8 @@ const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2}) => {
         isAnimationActive={false}
       />
       <ReferenceArea x1="0" x2={data.max} fill="transparent">
-        <Label value="LOW" position="insideLeft" fontSize={12} />
-        <Label value="HIGH" position="insideRight" fontSize={12} />
+        <Label value="LOW" position="insideLeft" fontSize={10} fontWeight={500} />
+        <Label value="HIGH" position="insideRight" fontSize={10} fontWeight={500} />
       </ReferenceArea>
     </ComposedChart>
   )
@@ -64,34 +63,22 @@ RangeBar.propTypes = {
 
 export default RangeBar;
 
-const renderGradientShape = (key) => {
-  const component = ({ height, width, x, y, ...rest }) => {
-    const gradX = rest.max / rest[key];
-    const style = {
-      "max": [
-        { stopColor: "rgb(255,244,146)" },
-        { stopColor: "rgb(249,133,133)" },
-      ],
-      "value": [
-        { stopColor: "rgb(255,233,0)" },
-        { stopColor: "rgb(242,11,11)" },
-      ]
-    }
+const renderGradientShape = ({height, width, x, y, background}) => {
+  const whiteLayerX = width;
+  const whiteLayerWith = background.width - width;
 
-    return (
-      <svg x={x} y={y} key={key}>
-        <defs>
-          <linearGradient id={`grad-${key}`} x1="0" y1="0" x2={gradX} y2="0" >
-            <stop offset="0%" style={style[key][0]} />
-            <stop offset="100%" style={style[key][1]} />
-          </linearGradient>
-        </defs>
-        <rect width={width} height={height} x={x} fill={`url(#grad-${key})`} />
-      </svg>
-    );
-  };
-  
-  return component;
+  return (
+    <svg x={x} y={y}>
+      <defs>
+        <linearGradient id="gradient-bar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" style={{ stopColor: "rgb(255,233,0)" }} />
+          <stop offset="100%" style={{ stopColor: "rgb(242,11,11)" }} />
+        </linearGradient>
+      </defs>
+      <rect width={background.width} height={background.height} fill="url(#gradient-bar)" />
+      <rect width={whiteLayerWith} height={height} x={whiteLayerX} fill="white" opacity="0.5" />
+    </svg>
+  );
 }
 
 const renderTriangleShape = (props) => {
