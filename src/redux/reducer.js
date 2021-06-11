@@ -65,6 +65,7 @@ const initialState = {
   selectedFeature: null,
   highlightedFeature: null,
   showWelcomeDialog: true,
+  hamburgerMenuOpen: false,
 };
 
 function fetchFeatures() {
@@ -80,6 +81,7 @@ function loadFeatures() {
           dispatch({ type: "FEATURES", payload: collection.features }),
         // TODO: Add proper error handling
         (error) => {
+          // eslint-disable-next-line no-console
           console.log(error);
         }
       );
@@ -101,10 +103,6 @@ function reducer(state = initialState, action) {
         ...state,
         showWelcomeDialog: action.payload,
       };
-    case "Header":
-      return Object.assign({}, state, {
-        path: action.payload,
-      });
     case "MapType":
       return {
         ...state,
@@ -152,6 +150,11 @@ function reducer(state = initialState, action) {
         ...state, 
         collapsibleState: action.payload
       };
+    case Constants.SET_HAMBURGER_MENU_OPEN:
+      return {
+        ...state,
+        hamburgerMenuOpen: action.payload,
+      }
     default:
       return state;
   }
