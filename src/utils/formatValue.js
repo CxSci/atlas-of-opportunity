@@ -12,6 +12,6 @@ export function formatValue(value, format) {
     case 'percent_normalized':
       return `${(value * 100.0).toFixed(2)}%`;
     default:
-      return value;
+      return value ? value + '' : '';
   }
 }
