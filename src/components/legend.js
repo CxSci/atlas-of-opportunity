@@ -32,7 +32,10 @@ const mapTypeEvent = (value) => {
   setMapType(mapType.value);
 };
 
-const renderLegendKeys = (stops) => (
+const renderLegendKeys = (stops) => {
+  if (!stops || stops.length === 0) return <></>
+
+  return (
   <div className="txt-m">
     <span
       className="h24 inline-block align-middle"
@@ -77,7 +80,7 @@ const renderLegendKeys = (stops) => (
       ))}
     </div>
   </div>
-);
+);}
 
 function Legend({ active, absolute }) {
   const { description, stops } = active;
@@ -91,9 +94,9 @@ function Legend({ active, absolute }) {
           handleSelectionChanged={mapTypeEvent}
         />
       </div>
-      <div className="mb6">
+      {description && <div className="mb6">
         <p className="txt-s color-gray">{description}</p>
-      </div>
+      </div>}
       {renderLegendKeys(stops)}
     </div>
   )
