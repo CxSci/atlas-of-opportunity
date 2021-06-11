@@ -61,7 +61,7 @@ const RecommendationTool = (props) => {
     }
 
     return <>
-        <RecommendationHeader currentStage={currentStage} stages={props.data.map(x => x.title)}/>
+        <RecommendationHeader currentStage={currentStage} stages={[...props.data.map(x => x.title), "Results"]}/>
         <div className="stage">
             {currentStage < props.data.length ?
                 <>
