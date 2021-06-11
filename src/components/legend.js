@@ -21,6 +21,10 @@ const mapTypes = [
     value: Constants.MAP_TYPE.TRANSACTIONS,
     text: "Financial Interactions - Growth Potential",
   },
+  {
+    value: Constants.MAP_TYPE.BUSINESS,
+    text: "Business"
+  }
 ];
 
 const mapTypeEvent = (value) => {

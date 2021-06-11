@@ -49,6 +49,14 @@ options[Constants.MAP_TYPE.SEGREGATION] = {
   ],
 };
 
+options[Constants.MAP_TYPE.BUSINESS] = {
+  name: "Business",
+  description: "",
+  property: "",
+  legendName: "Business",
+  stops: [],
+}
+
 const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
