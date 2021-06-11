@@ -6,6 +6,7 @@ import * as turf from "@turf/turf"
 import { useDebounce } from 'use-debounce';
 import { useSelector } from "react-redux";
 
+import { getSelectedFeature, featuresEqual } from "../redux/getters";
 import useGeocoder from "../hooks/useGeocoder"
 import { sameWidthModifier } from "../utils/popper-modifiers"
 import { ReactComponent as SearchIcon} from "../assets/search-icons/search.svg"
@@ -22,7 +23,7 @@ const SearchField = forwardRef(({
   setHighlightedFeature,
   setSelectedFeature },
   inputRef) => {
-  const selectedFeature = useSelector((state) => state.selectedFeature, (a, b) => a?.properties?.SA2_MAIN16 === b?.properties?.SA2_MAIN16)
+  const selectedFeature = useSelector(getSelectedFeature, featuresEqual)
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
