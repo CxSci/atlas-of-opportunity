@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import LozengeButton from './LozengeButton';
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
@@ -35,23 +34,20 @@ const ModalRoot = {
   }
 
 const RecommendationDialog = () => {
-
-  const history = useHistory();
-
     return (
-    <div style={ModalRoot}>
-        <CloseIcon onClick={() => {}} style={xButton} />
-        <div style={scrollingWrapper}>
-            <p style={modalText}>Not sure where to start? Try the Recommendation Tool.</p>
-            <LozengeButton
-                buttonType="prominent"
-                buttonSize="small"
-                showChevron={true}
-                onClick={()=>{history.push("/recommendation")}}
-                text="Recommendation Tool"
-            />
+        <div style={ModalRoot}>
+            <CloseIcon onClick={() => {}} style={xButton} />
+            <div style={scrollingWrapper}>
+                <p style={modalText}>Not sure where to start? Try the Recommendation Tool.</p>
+                <LozengeButton
+                    buttonType="prominent"
+                    buttonSize="small"
+                    showChevron={true}
+                    url="/recommendation"
+                    text="Recommendation Tool"
+                />
+            </div>
         </div>
-    </div>
     )
 }
 
