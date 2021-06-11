@@ -17,7 +17,7 @@ export function formatValue(value, format) {
       result = `${Math.floor(value)}%`;
       break;
     default:
-      result = value;
+      result = value ? value + '' : '';
       break;
   }
   return result;
