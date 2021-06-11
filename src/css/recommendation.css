@@ -82,7 +82,6 @@
 .question .description {
   margin-bottom: 10px;
   font-weight: 500;
-  line-height: 21px;
 }
 
 .question .help {
@@ -143,12 +142,19 @@
 }
 
 .question label {
-  display: block;
-  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .question label:last-child {
   margin-bottom: 0;
+}
+
+.question input {
+  /* Size input element to its natural size and let its siblings fill the
+     remaining space. */
+  flex: 0 0 auto;
 }
 
 .actions {

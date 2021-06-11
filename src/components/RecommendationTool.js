@@ -35,7 +35,7 @@ const RecommendationTool = (props) => {
                                 name={question.key}
                                 onClick={()=>setRadioValue(question.key, answer)
                             }/>&nbsp;
-                            {answer}
+                            <span>{answer}</span>
                         </label>
                     </Fragment>)}</>;
             case "select":
