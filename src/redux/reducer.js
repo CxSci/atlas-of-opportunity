@@ -1,5 +1,6 @@
 import * as Constants from "../constants";
 import geojsonURL from "../data/SA_dashboard.geojson";
+import OsiPoiUrl from "../data/OSM_POIs.geojson";
 
 const options = {};
 
@@ -80,6 +81,10 @@ function fetchFeatures() {
   return fetch(geojsonURL);
 }
 
+function fetchPOI() {
+  return fetch(OsiPoiUrl);
+}
+
 function loadFeatures() {
   return function (dispatch) {
     return fetchFeatures()
@@ -95,12 +100,24 @@ function loadFeatures() {
   };
 }
 
+function loadPOI() {
+  return function(dispatch) {
+    return fetchPOI()
+    .then(response => response.json())
+    .then(collection => dispatch({ type: "POI", payload: collection.features }))
+  }
+}
+
 function reducer(state = initialState, action) {
   switch (action.type) {
     case "FEATURES":
       return Object.assign({}, state, {
         features: action.payload,
       });
+    case "POI":
+      return Object.assign({}, state, {
+        poiFeatures: action.payload
+      })
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
         active: action.option,
@@ -171,4 +188,4 @@ function reducer(state = initialState, action) {
   }
 }
 
-export { reducer, initialState, loadFeatures };
+export { reducer, initialState, loadFeatures, loadPOI };
