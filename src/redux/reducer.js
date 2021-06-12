@@ -61,6 +61,7 @@ options[Constants.MAP_TYPE.BUSINESS] = {
 const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
+  poiFeatures: [],
   comparisonFeatures: [],
   collapsibleState: {},
   options,

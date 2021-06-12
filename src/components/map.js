@@ -55,6 +55,7 @@ let Map = class Map extends React.Component {
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
     comparisonFeatures: PropTypes.array,
+    poiFeatures: PropTypes.array,
     highlightedFeature: PropTypes.object,
     mini: PropTypes.bool
   };
@@ -92,6 +93,16 @@ let Map = class Map extends React.Component {
         data: this.props.geojsonURL,
         promoteId: "SA2_MAIN16",
       });
+
+      this.map.addSource('business', {
+        type: 'geojson',
+        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+        data:{ type: "FeatureCollection" ,features: this.props.poiFeatures},
+        cluster: true,
+        clusterMaxZoom: 14, // Max zoom to cluster points on
+        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        });
 
       if (!this.props.mini) {
         this.map.addLayer({
@@ -294,6 +305,54 @@ let Map = class Map extends React.Component {
       }
   }
 
+  drawBusinessClusters() {
+    if ( this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
+    if ( !this.map.getLayer("clusters")) this.map.addLayer({
+      id: 'clusters',
+      type: 'circle',
+      source: 'business',
+      filter: ['has', 'point_count'],
+      paint: {
+      // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+      // with three steps to implement three types of circles:
+      //   * Blue, 20px circles when point count is less than 100
+      //   * Yellow, 30px circles when point count is between 100 and 750
+      //   * Pink, 40px circles when point count is greater than or equal to 750
+      'circle-color': [
+      'step',
+      ['get', 'point_count'],
+      '#51bbd6',
+      100,
+      '#f1f075',
+      750,
+      '#f28cb1'
+      ],
+      'circle-radius': [
+      'step',
+      ['get', 'point_count'],
+      20,
+      100,
+      30,
+      750,
+      40
+      ]
+      }
+      });
+       
+      if ( !this.map.getLayer("cluster-count"))this.map.addLayer({
+      id: 'cluster-count',
+      type: 'symbol',
+      source: 'business',
+      filter: ['has', 'point_count'],
+      layout: {
+      'text-field': '{point_count_abbreviated}',
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12
+      }
+      });
+
+  }
+
 
   componentDidUpdate(prevProps) {
     // Mapbox only notices changes to the window's dimensions. Manually resize
@@ -313,6 +372,37 @@ let Map = class Map extends React.Component {
     }
 
     if (this.props.active.name !== prevProps.active.name) {
+      if (this.props.active.name === "Business") {
+        this.drawBusinessClusters()
+        return;
+      } else {
+        if ( this.map.getLayer("clusters")) this.map.removeLayer("clusters");
+        if ( this.map.getLayer("cluster-count")) this.map.removeLayer("cluster-count");
+        if ( !this.map.getLayer("sa2-fills")) this.map.addLayer({
+          id: "sa2-fills",
+          type: "fill",
+          source: "sa2",
+          sourceLayer: "original",  
+          layout: {},
+          paint: {
+            "fill-color": {
+              property: this.props.active.property,
+              stops: this.props.active.stops,
+            },
+            "fill-opacity": [
+              "case",
+              ["boolean", ["feature-state", "click"], false],
+              1,
+              ["boolean", ["feature-state", "highlight"], false],
+              1,
+              ["boolean", ["feature-state", "hover"], false],
+              1,
+              0.8,
+            ],
+          },
+        });
+      }
+
       let fillColor = {
         property: this.props.active.property,
         stops: this.props.active.stops,
@@ -746,7 +836,8 @@ function mapStateToProps(state) {
     sidebarOpen: state.sidebarOpen,
     selectedFeature: state.selectedFeature,
     highlightedFeature: state.highlightedFeature,
-    comparisonFeatures: state.comparisonFeatures
+    comparisonFeatures: state.comparisonFeatures,
+    poiFeatures: state.poiFeatures
   };
 }
 
