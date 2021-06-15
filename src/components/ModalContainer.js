@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
 
@@ -37,6 +37,8 @@ const ModalContainer = (props) => {
     justifyContent: "center",
     flex: "1 1 680px",
     maxWidth: 680,
+    // Don't let padding, margin, or flex sizing block clickthroughs to dimScreen.
+    pointerEvents: "none",
   }
 
   const dialog = {
@@ -71,8 +73,8 @@ const ModalContainer = (props) => {
 
   return (
     <div style={modalContainer}>
-      <Link
-        to="/"
+      <div
+        onClick={history.goBack}
         style={dimScreen}
       />
       <div style={container}>
