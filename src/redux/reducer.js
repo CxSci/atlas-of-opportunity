@@ -64,7 +64,7 @@ const initialState = {
   sidebarOpen: true,
   selectedFeature: null,
   highlightedFeature: null,
-  showWelcomeDialog: true,
+  hiddenSidebarDialogs: [],
   hamburgerMenuOpen: false,
 };
 
@@ -98,11 +98,12 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         active: action.option,
       });
-    case Constants.SHOW_WELCOME_DIALOG:
+    case Constants.HIDE_SIDEBAR_DIALOG:
       return {
         ...state,
-        showWelcomeDialog: action.payload,
-      };
+        hiddenSidebarDialogs: 
+          [...new Set([...state.hiddenSidebarDialogs, action.payload])],
+      }
     case "MapType":
       return {
         ...state,

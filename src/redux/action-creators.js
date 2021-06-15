@@ -8,9 +8,9 @@ export function setActiveOption(option) {
   });
 }
 
-export function setShowWelcomeDialog(payload) {
+export function hideSidebarDialog(payload) {
   store.dispatch({
-    type: Constants.SHOW_WELCOME_DIALOG,
+    type: Constants.HIDE_SIDEBAR_DIALOG,
     payload: payload,
   });
 }
