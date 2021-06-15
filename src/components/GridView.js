@@ -7,7 +7,6 @@ import MetricDetails from "./MetricDetails";
 import "../css/GridView.css"
 
 const GridView = ({comparisonFeatures}) => {
-  const comparisonFts = comparisonFeatures;
 
   const renderGrid = (section) => {
     return (
@@ -18,9 +17,7 @@ const GridView = ({comparisonFeatures}) => {
               <h2>{metric.label}</h2>
             </div>
             <div className="grid-item-body">
-              {comparisonFts.map(ft => 
-                <MetricDetails key={ft.properties.SA2_MAIN16} feature={ft} metric={metric} small />
-              )}
+              <MetricDetails featureList={comparisonFeatures} metric={metric} small />
             </div>
           </div>
         ))}
