@@ -20,7 +20,7 @@ const HamburgerMenu = () => {
       { url: "/faq", title: "FAQ", },
     ],
     [
-      { url: "/recommendation", title: "Recommendation", },
+      { url: "/recommendation", title: "Recommendation Tool", },
     ]
   ]
 
