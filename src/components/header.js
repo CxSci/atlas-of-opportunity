@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import SegmentedControl from "./SegmentedControl";
-import HamburgerMenu from "./HamburgerMenu";
-import { getHamburgerMenuOpen } from "../redux/getters";
 import { setHamburgerMenuOpen } from "../redux/action-creators";
 
 import { ReactComponent as TableIcon} from "../assets/icons/table.svg";
@@ -12,7 +9,6 @@ import { ReactComponent as GridIcon} from "../assets/icons/grid.svg";
 import "../css/header.css";
 
 function Header () {
-  const showDropDown = useSelector(getHamburgerMenuOpen)
   const [comparisonMode, setComparisonMode] = useState(false);
   const location = useLocation();
   const options = [
@@ -43,16 +39,13 @@ function Header () {
         }
       </div>
       <div className="navbarRight">
-        {/* TODO: refactor hamburger menu into its own React component */}
-          {
-          showDropDown
-            ? 
-              <div className={`dim-screen ${showDropDown ? "show" : ""}`}
-              onClick={() => { setHamburgerMenuOpen(false) }}
-              />
-            : null
-          }   
-          <HamburgerMenu lightBackground={comparisonMode} />
+        <button className={`hamburgerButton ${comparisonMode ? "black" : "white"}`}
+          onClick={() => setHamburgerMenuOpen(true)}
+        >
+          <div className="menu-icon-bar"></div>
+          <div className="menu-icon-bar"></div>
+          <div className="menu-icon-bar"></div>
+        </button>
       </div>
     </div>
   );

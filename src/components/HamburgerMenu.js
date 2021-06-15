@@ -8,7 +8,7 @@ import { setHamburgerMenuOpen } from "../redux/action-creators";
 
 import { ReactComponent as CloseIcon} from "../assets/close-icon.svg";
 
-const HamburgerMenu = ({lightBackground = false}) => {
+const HamburgerMenu = () => {
   const menuOpen = useSelector(getHamburgerMenuOpen)
   const toggleMenuOpen = () => setHamburgerMenuOpen(!menuOpen)
 
@@ -25,18 +25,17 @@ const HamburgerMenu = ({lightBackground = false}) => {
   ]
 
   return (
-    <div className="dropdown-menu">
-      <button className={`menu-icon ${lightBackground ? "black" : "white"}`} onClick={toggleMenuOpen}>
-        <div className="menu-icon-bar"></div>
-        <div className="menu-icon-bar"></div>
-        <div className="menu-icon-bar"></div>
-      </button>
+    menuOpen ?
+    <>
+      <div className={`dim-screen ${menuOpen && "show"}`}
+        onClick={() => { setHamburgerMenuOpen(false) }}
+      />
       <div className={`dropdown-content ${menuOpen && "show"}`}>
-      <div className="dropdown-header">
-        <div className="menu-title">Atlas of Opportunity</div>
-          <button className="close-icon" onClick={toggleMenuOpen}>
-            <CloseIcon/>
-          </button>
+        <div className="dropdown-header">
+          <div className="menu-title">Atlas of Opportunity</div>
+            <button className="close-icon" onClick={toggleMenuOpen}>
+              <CloseIcon/>
+            </button>
         </div>
         { sections.map((choices, idx) => 
           <div key={idx} className="dropdownSection">
@@ -51,7 +50,8 @@ const HamburgerMenu = ({lightBackground = false}) => {
           </div>
         )}
       </div>
-    </div>
+    </>
+    : <></>
   )
 }
 

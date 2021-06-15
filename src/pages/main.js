@@ -10,6 +10,7 @@ import Legend from '../components/legend';
 import Footer from '../components/footer';
 import Routes from "../routes/index";
 import TableView from "../components/TableView";
+import HamburgerMenu from "../components/HamburgerMenu";
 
 import "../css/main.css";
 
@@ -74,6 +75,7 @@ const Main = (props) => {
           <Sidebar />
           {!comparisonMode && <Map />}
           {comparisonMode && <TableView />}
+          <HamburgerMenu />
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
         <Footer inDarkMode={!comparisonMode}/>
