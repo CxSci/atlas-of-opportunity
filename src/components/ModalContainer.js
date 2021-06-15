@@ -78,7 +78,7 @@ const ModalContainer = (props) => {
       <div style={container}>
         <div style={dialog}>
           <h3 style={titleBox}>
-            {title} Potato
+            {title}
             <CloseIcon style={iconButton} onClick={history.goBack}/>
           </h3>  
           <div style={childrenContent}>
