@@ -12,7 +12,7 @@ export function getColorFromGradient(rgbString1, rgbString2, value) {
 }
 
 const stringToColor = (rgbString) => {
-  const array = rgbString.replace(/rgb\((.*)\)/, '$1').split(',');
+  const array = rgbString.replace(/rgba?\((.*)\)/, '$1').split(',');
   const color = {
     red: array[0] * 1,
     green: array[1] * 1,

@@ -29,9 +29,7 @@ const LocationDetails = (props) => {
           </ReactTooltip>
         )}
         {comparisonFts.length ? (
-          allFeatures.map(ft => 
-            <MetricDetails key={ft.properties.SA2_MAIN16} feature={ft} metric={metric} />
-          )
+          <MetricDetails featureList={allFeatures} metric={metric} />
         ) : (
           renderSelectedValue(metric)
         )}
