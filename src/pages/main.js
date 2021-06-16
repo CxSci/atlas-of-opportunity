@@ -10,6 +10,7 @@ import Legend from '../components/legend';
 import Footer from '../components/footer';
 import Routes from "../routes/index";
 import TableView from "../components/TableView";
+import GridView from "../components/GridView";
 import HamburgerMenu from "../components/HamburgerMenu";
 
 import "../css/main.css";
@@ -74,7 +75,12 @@ const Main = (props) => {
         <div style={screenFlexStyle}>
           <Sidebar />
           {!comparisonMode && <Map />}
-          {comparisonMode && <TableView />}
+          {comparisonMode && (
+            props.comparisonType === 'table' && <TableView />
+          )}
+          {comparisonMode && (
+            props.comparisonType === 'grid' && <GridView />
+          )}
           <HamburgerMenu />
         </div>
         {props.selectedFeature && !comparisonMode && <Legend absolute />}
@@ -88,6 +94,7 @@ Main.propTypes = {
   comparisonFeatures: PropTypes.arrayOf(PropTypes.object),
   features: PropTypes.arrayOf(PropTypes.object),
   selectedFeature: PropTypes.object,
+  comparisonType: PropTypes.string,
 };
 
 function mapStateToProps(state) {
@@ -95,6 +102,7 @@ function mapStateToProps(state) {
     comparisonFeatures: state.comparisonFeatures,
     features: state.features,
     selectedFeature: state.selectedFeature,
+    comparisonType: state.comparisonType,
   };
 }
 

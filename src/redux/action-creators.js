@@ -84,3 +84,10 @@ export function updateCollapsibleState(state) {
     payload: state
   })
 }
+
+export function setComparisonType(state) {
+  store.dispatch({
+    type: Constants.SET_COMPARISON_TYPE,
+    payload: state
+  })
+}

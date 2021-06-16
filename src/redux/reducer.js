@@ -66,6 +66,7 @@ const initialState = {
   highlightedFeature: null,
   hiddenSidebarDialogs: [],
   hamburgerMenuOpen: false,
+  comparisonType: Constants.COMPARISON_TYPE.TABLE,
 };
 
 function fetchFeatures() {
@@ -156,6 +157,11 @@ function reducer(state = initialState, action) {
         ...state,
         hamburgerMenuOpen: action.payload,
       }
+    case Constants.SET_COMPARISON_TYPE:
+      return {
+        ...state, 
+        comparisonType: action.payload
+      };
     default:
       return state;
   }
