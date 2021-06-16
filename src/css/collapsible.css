@@ -26,27 +26,33 @@
 
 .Collapsible__contentInner .metric div {
   font-size: 14px;
-  line-height: 24px;
 }
 
 .Collapsible__contentInner .metric div.comparison {
+  line-height: 24px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 .Collapsible__contentInner .metric div.comparison-bar {
+  line-height: 24px;
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-end;
 }
 
 .Collapsible__contentInner .metric div.comparison-bar label {
+  line-height: 24px;
   align-self: center;
   margin-right: 8px;
   white-space: nowrap;
   overflow-x: auto;
   text-overflow: ellipsis;
+}
+
+.Collapsible__contentInner .metric .recharts-legend-item-text {
+  color: rgba(87, 73, 73, 1) !important;
 }
 
 .Collapsible__trigger {

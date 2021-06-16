@@ -40,8 +40,10 @@
   background-color: #808080;
 }
 
-.table-row > td {
+.table-row > td .cell-data {
   line-height: 24px;
+}
+.table-row > td {
   padding: 3px 10px;
   vertical-align: middle;
 }
