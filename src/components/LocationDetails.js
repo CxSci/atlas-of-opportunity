@@ -7,6 +7,7 @@ import { formatValue } from "../utils/formatValue";
 import MetricDetails from "./MetricDetails";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
+import LineChartMetric from "./charts/LineChartMetric";
 
 const LocationDetails = (props) => {
   const selectedFeature = props.feature;
@@ -42,6 +43,10 @@ const LocationDetails = (props) => {
     const value = formatValue(rawValue, metric.format);
     
     switch (metric.type) {
+      case 'line-chart': {
+        const data = JSON.parse(rawValue);
+        return <LineChartMetric data={data} width={260} />
+      }
       case 'range':
         return <RangeBar value={rawValue} min={metric.min} max={metric.max} width={260} />
       case 'bar':
