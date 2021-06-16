@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { setHighlightedFeature, setSelectedFeature } from "../redux/action-creators"
 import { useSelector } from "react-redux";
 
+import { getSelectedFeature, featuresEqual } from "../redux/getters";
 import BigTitle from "./BigTitle"
 import SearchField from "./SearchField"
 import "../css/SearchField.css"
@@ -10,7 +11,7 @@ function SASearchField (props) {
   const inputRef = useRef(null)
   const [shouldShowBigTitle, setShouldShowBigTitle] = useState(false)
   const features = useSelector((state) => state.features)
-  const selectedFeature = useSelector((state) => state.selectedFeature, (a, b) => a?.properties?.SA2_MAIN16 === b?.properties?.SA2_MAIN16)
+  const selectedFeature = useSelector(getSelectedFeature, featuresEqual)
   const searchFieldProps = {
     localItems: features.map((f) => {
       return {

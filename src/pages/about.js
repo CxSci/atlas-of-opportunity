@@ -3,7 +3,7 @@ import livingLab from "../assets/livinglab.png";
 import banksa from "../assets/banksa.png";
 import dspark from "../assets/dspark.png";
 
-import Container from "../components/container";
+import ModalContainer from "../components/ModalContainer";
 
 const About = class About extends Component {
   render() {
@@ -23,7 +23,7 @@ const About = class About extends Component {
       color: "#f79640",
     };
     return (
-      <Container title="About the Atlas">
+      <ModalContainer title="About the Atlas">
         <p style={content}>
           The “MIT bigdata Living Lab” (Living Lab) is a research partnership
           enabled by principal partner BankSA, Massachusetts Institute of
@@ -61,7 +61,7 @@ const About = class About extends Component {
           <img style={image} src={banksa} alt={""} />
           <img style={image} src={dspark} alt={""} />
         </div>
-      </Container>
+      </ModalContainer>
     );
   }
 };

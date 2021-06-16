@@ -3,7 +3,7 @@ import { MathComponent } from "mathjax-react";
 
 import flow from "../assets/flow.png";
 
-import Container from "../components/container";
+import ModalContainer from "../components/ModalContainer";
 
 const Methods = class Methods extends Component {
 
@@ -26,7 +26,7 @@ const Methods = class Methods extends Component {
     };
 
     return (
-      <Container title="Methods" >
+      <ModalContainer title="Methods" >
         <p style={content}>
           The Atlas of Opportunity showcases recent research finding that shared
           workplaces between two neighborhoods can create what we call &quot;social
@@ -114,7 +114,7 @@ const Methods = class Methods extends Component {
             restaurants and cafes.
           </p>
         </div>
-      </Container>
+      </ModalContainer>
     );
   }
 };

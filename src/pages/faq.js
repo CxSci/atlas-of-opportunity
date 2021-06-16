@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Container from "../components/container";
+import ModalContainer from "../components/ModalContainer";
 
 const FAQ = class FAQ extends Component {
   render() {
@@ -9,7 +9,7 @@ const FAQ = class FAQ extends Component {
       marginBottom: "15px",
     };
     return (
-      <Container title="FAQ">
+      <ModalContainer title="FAQ">
         <br />
         <h2>Privacy</h2>
         <p style={content}>
@@ -31,7 +31,7 @@ const FAQ = class FAQ extends Component {
           aggregations (counts) at the level of census tract areas, not
           individuals.
         </p>
-      </Container>
+      </ModalContainer>
     );
   }
 };

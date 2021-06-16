@@ -275,6 +275,9 @@ let Map = class Map extends React.Component {
   }
 
   highlightComparisonFeatures = (features) => {
+      if (features.length <= 0) {
+        return;
+      }
       const comparisonFeatures = {type: "FeatureCollection", features}
       const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
       this.map.fitBounds(

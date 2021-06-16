@@ -8,23 +8,16 @@ export function setActiveOption(option) {
   });
 }
 
-export function setShowWelcomeDialog(payload) {
+export function hideSidebarDialog(payload) {
   store.dispatch({
-    type: Constants.SHOW_WELCOME_DIALOG,
+    type: Constants.HIDE_SIDEBAR_DIALOG,
     payload: payload,
   });
 }
 
-export function setHeaderOption(payload) {
+export function setHamburgerMenuOpen(payload) {
   store.dispatch({
-    type: "Header",
-    payload: payload,
-  });
-}
-
-export function setDropDown(payload) {
-  store.dispatch({
-    type: "DropDown",
+    type: Constants.SET_HAMBURGER_MENU_OPEN,
     payload: payload,
   });
 }

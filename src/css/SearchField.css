@@ -2,7 +2,7 @@
    disappears, there needs to be some spacer to prevent the rest of the
    sidebar from sliding up under it. */
 .sidebarHeader {
-    min-height: 55px;
+    min-height: 60px;
 }
 
 /* .bigTitle may wrap, but .searchContainer is always one line, so it opts out
