@@ -7,6 +7,7 @@ import propsMapping from "../config/propsMapping";
 import { formatValue } from "../utils/formatValue";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
+import LineChartMetric from "./charts/LineChartMetric";
 import "../css/TableView.css"
 const { Column } = Table;
 
@@ -44,17 +45,23 @@ const TableView = ({comparisonFeatures}) => {
 
     const renderCell = (rawValue, record) => {
       const metric = section.content[record.id];
-      const value = formatValue(rawValue, metric.format);
-
+      
       switch (metric.type) {
-        case 'line-chart':
-          return <div className="fake-chart"></div>
-        case 'range':
-          return <RangeBar value={rawValue} min={metric.min} max={metric.max} width={120} />
-        case 'bar':
+        case 'line-chart':{
+          return <LineChartMetric data={rawValue} width={120} height={115} />
+        }
+        case 'range':{
+          const value = rawValue || 0;
+          return <RangeBar value={value} min={metric.min} max={metric.max} width={120} />
+        }
+        case 'bar':{
+          const value = formatValue(rawValue, metric.format);
           return <SolidBar label={value} value={rawValue} max={metric.max} width={120} />
-        default:
-          return value
+        }
+        default:{
+          const value = formatValue(rawValue, metric.format);
+          return <span className="cell-data">{value}</span>
+        }
       }
     }
 
