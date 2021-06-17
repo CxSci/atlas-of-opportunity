@@ -30,14 +30,14 @@
 
 .Collapsible__contentInner .metric div.comparison {
   line-height: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
 }
 
 .Collapsible__contentInner .metric div.comparison-bar {
   line-height: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: flex-end;
 }
@@ -53,6 +53,13 @@
 
 .Collapsible__contentInner .metric .recharts-legend-item-text {
   color: rgba(87, 73, 73, 1) !important;
+}
+.Collapsible__contentInner .metric .recharts-tooltip-item-list .recharts-tooltip-item > span {
+  color: #666666;
+}
+.Collapsible__contentInner .metric .recharts-tooltip-item-list .recharts-tooltip-item::before {
+  content: "\02587";
+  margin-right: 4px;
 }
 
 .Collapsible__trigger {
