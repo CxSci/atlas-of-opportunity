@@ -6,11 +6,8 @@ import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
 
 const MetricDetails = ({ featureList, metric, small }) => {
-  const width = small ? 240 : undefined;
-  const data = featureList.map((feature) => JSON.parse(feature.properties['pop_proj']));
-  
   const renderSingleMetic = (feature) => {
-    let rawValue = feature.properties[metric.id];
+    let rawValue = feature.properties[metric.id] || 0;
     const value = formatValue(rawValue, metric.format);
     const name = feature.properties.SA2_NAME16;
     const width = small ? 115 : undefined;
@@ -40,9 +37,19 @@ const MetricDetails = ({ featureList, metric, small }) => {
     }
   }
 
+  const renderChartMetric = () => {
+    const width = small ? 240 : undefined;
+    const data = featureList.map((feature) => {
+      const prop = feature.properties[metric.id];
+      const value = typeof prop === 'string' ? JSON.parse(prop) : prop;
+      return value;
+    });
+    return (<LineChartMetric data={data} width={width} showLegend />)
+  }
+
   return (
     metric.type === 'line-chart'
-      ? <LineChartMetric data={data} width={width} />
+      ? renderChartMetric()
       : featureList.map(renderSingleMetic)
   )
 }
