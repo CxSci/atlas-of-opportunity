@@ -39,12 +39,12 @@ const MetricDetails = ({ featureList, metric, small }) => {
 
   const renderChartMetric = () => {
     const width = small ? 240 : undefined;
-    const data = featureList.map((feature) => {
+    const series = featureList.map((feature) => {
       const prop = feature.properties[metric.id];
-      const value = typeof prop === 'string' ? JSON.parse(prop) : prop;
-      return value;
+      const data = typeof prop === 'string' ? JSON.parse(prop) : prop;
+      return { name: feature.properties.SA2_NAME16, data };
     });
-    return (<LineChartMetric data={data} width={width} showLegend />)
+    return (<LineChartMetric series={series} width={width} showLegend />)
   }
 
   return (
