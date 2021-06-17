@@ -14,7 +14,7 @@ export default [
   {
     title: 'Demographic Summary',
     content: [
-      { id: 'fake', label: 'Fake metric', type: 'line-chart' },
+      { id: 'pop_proj', label: 'Population Grow', type: 'line-chart' },
       { id: 'persons_num', label: 'Population', format: 'number' },
       {
         id: 'popfraction',

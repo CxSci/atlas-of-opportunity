@@ -7,10 +7,14 @@ import {
   YAxis,
   CartesianGrid,
   Legend,
+  Tooltip,
 } from "recharts";
 import { getColorFromGradient } from '../../utils/colors';
 
-const LineChartMetric = ({ width = 260, height = 260, data }) => {
+const LineChartMetric = ({ width = 260, height = 140, data, showLegend }) => {
+  const mgBottom = showLegend ? 0 : -10;
+  if (showLegend) height += 40;
+  
   if (data && !Array.isArray(data[0])) {
     data = [data];
   }
@@ -33,13 +37,19 @@ const LineChartMetric = ({ width = 260, height = 260, data }) => {
 
   return (
     <LineChart width={width} height={height} data={adapedData}
-      margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+      margin={{ top: 5, right: 10, left: -2, bottom: mgBottom }}
+    >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="year" fontSize={12} />
-      <YAxis type="number" 
+      <YAxis type="number" domain={['auto','auto']}
         width={30} fontSize={12}
-        tickFormatter={val => val.toLocaleString('en-US', { notation: 'compact' })} />
-      <Legend layout="vertical" />
+        tickFormatter={val => val.toLocaleString('en-US', { notation: 'compact', maximumFractionDigits: 0 })} />
+      <Tooltip
+        contentStyle={{fontSize: 10, padding: 2}}
+        itemStyle={{padding: '1px 0'}} />
+      {showLegend && 
+        <Legend layout="vertical" />
+      }
       {lines.map(line => 
         <Line key={line.dataKey} dataKey={line.dataKey} stroke={line.color} 
           dot={false} strokeWidth={4} legendType='rect' isAnimationActive={false} />
@@ -53,8 +63,7 @@ LineChartMetric.propTypes = {
   height: PropType.number,
   label: PropType.string,
   data: PropType.array,
-  value: PropType.number,
-  max: PropType.number,
+  showLegend: PropType.bool,
 }
 
 export default LineChartMetric;
