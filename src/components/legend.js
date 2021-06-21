@@ -23,7 +23,7 @@ const mapTypes = [
   },
   {
     value: Constants.MAP_TYPE.BUSINESS,
-    text: "Business"
+    text: "Businesses"
   }
 ];
 
