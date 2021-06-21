@@ -162,6 +162,11 @@ function reducer(state = initialState, action) {
         ...state, 
         comparisonType: action.payload
       };
+    case Constants.SET_SAVED_MAP_POSITION:
+      return {
+        ...state,
+        savedMapPosition: action.payload,
+      }
     default:
       return state;
   }
