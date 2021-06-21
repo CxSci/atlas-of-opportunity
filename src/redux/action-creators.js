@@ -91,3 +91,10 @@ export function setComparisonType(state) {
     payload: state
   })
 }
+
+export function setSavedMapPosition(state) {
+  store.dispatch({
+    type: Constants.SET_SAVED_MAP_POSITION,
+    payload: state,
+  })
+}

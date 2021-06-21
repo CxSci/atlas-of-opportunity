@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import { setSelectedFeature } from "../redux/action-creators";
+import { setSelectedFeature, setSavedMapPosition } from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -51,6 +51,7 @@ let Map = class Map extends React.Component {
     geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
+    savedMapPosition: PropTypes.object,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
@@ -78,7 +79,16 @@ let Map = class Map extends React.Component {
     this.map.resize();
 
     if (!this.props.mini) {
-    // zoom buttons
+      // Look at the same place as last time if that was saved
+      if (this.props.savedMapPosition) {
+        const { center, zoom, pitch, bearing } = this.props.savedMapPosition
+        this.map.setCenter(center)
+        this.map.setZoom(zoom)
+        this.map.setPitch(pitch)
+        this.map.setBearing(bearing)
+      }
+
+      // zoom buttons
       var controls = new mapboxgl.NavigationControl({
         showCompass: true,
         visualizePitch: true,
@@ -222,6 +232,19 @@ let Map = class Map extends React.Component {
         this.highlightComparisonFeatures(this.props.comparisonFeatures)
       }
     });
+  }
+
+  componentWillUnmount() {
+    // If this isn't a minimap, remember where the map is looking for later.
+    if (!this.props.mini) {
+      setSavedMapPosition({
+        center: this.map.getCenter(),
+        zoom: this.map.getZoom(),
+        pitch: this.map.getPitch(),
+        bearing: this.map.getBearing(),
+      })
+    }
+    this.map.remove()
   }
 
   highlightFeature = (feature) => {
@@ -745,6 +768,7 @@ function mapStateToProps(state) {
     geojsonURL: state.geojsonURL,
     active: state.active,
     flowDirection: state.flowDirection,
+    savedMapPosition: state.savedMapPosition,
     searchBarInfo: state.searchBarInfo,
     sidebarOpen: state.sidebarOpen,
     selectedFeature: state.selectedFeature,
