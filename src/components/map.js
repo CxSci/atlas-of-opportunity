@@ -245,6 +245,7 @@ let Map = class Map extends React.Component {
       })
     }
     this.map.remove()
+    setSelectedFeature(null)
   }
 
   highlightFeature = (feature) => {
