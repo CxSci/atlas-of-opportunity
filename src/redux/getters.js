@@ -1,4 +1,4 @@
-export const getSelectedFeature = (state) => state.getSelectedFeature;
+export const getSelectedFeature = (state) => state.selectedFeature;
 export const getComparisonFeatures = (state) => state.comparisonFeatures;
 export const getComparisonType = (state) => state.comparisonType;
 export const getHamburgerMenuOpen = (state) => state.hamburgerMenuOpen;
