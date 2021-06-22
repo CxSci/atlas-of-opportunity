@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import { setSelectedFeature, setSavedMapPosition } from "../redux/action-creators";
+import {
+  setSelectedFeature,
+  setSavedMapPosition,
+} from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -82,14 +85,13 @@ let Map = class Map extends React.Component {
     this.map.resize();
 
     if (!this.props.mini) {
-      
       // Look at the same place as last time if that was saved
       if (this.props.savedMapPosition) {
-        const { center, zoom, pitch, bearing } = this.props.savedMapPosition
-        this.map.setCenter(center)
-        this.map.setZoom(zoom)
-        this.map.setPitch(pitch)
-        this.map.setBearing(bearing)
+        const { center, zoom, pitch, bearing } = this.props.savedMapPosition;
+        this.map.setCenter(center);
+        this.map.setZoom(zoom);
+        this.map.setPitch(pitch);
+        this.map.setBearing(bearing);
       }
 
       // zoom buttons
@@ -240,9 +242,16 @@ let Map = class Map extends React.Component {
         // Handle clicks on clusters
         this.map.on("click", "clusters", this.zoomOnClick);
 
+        // Handle clicks on business points
+        this.map.on("click", "unclustered-point", this.pointOnClick);
+
         // Add hover cursor for clusters
         this.map.on("mouseenter", "clusters", this.setCursorPointer);
         this.map.on("mouseleave", "clusters", this.setCursorNone);
+
+        // Add hover cursor for points
+        this.map.on("mouseenter", "unclustered-point", this.setCursorPointer);
+        this.map.on("mouseleave", "unclustered-point", this.setCursorNone);
 
         // Handle map clicks outside of map features
         this.map.on("click", this.onMapClick);
@@ -254,6 +263,24 @@ let Map = class Map extends React.Component {
       }
     });
   }
+
+  pointOnClick = (e) => {
+    var coordinates = e.features[0].geometry.coordinates.slice();
+
+    const properties = e.features[0].properties;
+
+    // Ensure that if the map is zoomed out such that
+    // multiple copies of the feature are visible, the
+    // popup appears over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML("Name: " + properties.name + "<br>Type: " + properties.type)
+      .addTo(this.map);
+  };
 
   setCursorPointer = () => {
     this.map.getCanvas().style.cursor = "pointer";
@@ -284,7 +311,7 @@ let Map = class Map extends React.Component {
       zoom: zoom,
     });
   };
-  
+
   componentWillUnmount() {
     // If this isn't a minimap, remember where the map is looking for later.
     if (!this.props.mini) {
@@ -293,12 +320,11 @@ let Map = class Map extends React.Component {
         zoom: this.map.getZoom(),
         pitch: this.map.getPitch(),
         bearing: this.map.getBearing(),
-      })
+      });
     }
-    this.map.remove()
-    setSelectedFeature(null)
+    this.map.remove();
+    setSelectedFeature(null);
   }
-
 
   highlightFeature = (feature) => {
     const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16;
@@ -357,24 +383,27 @@ let Map = class Map extends React.Component {
     if (features.length <= 0) {
       return;
     }
-    const comparisonFeatures = {type: "FeatureCollection", features}
-    const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
+    const comparisonFeatures = { type: "FeatureCollection", features };
+    const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures);
     this.map.fitBounds(
-      [[minX, minY], [maxX, maxY]],
+      [
+        [minX, minY],
+        [maxX, maxY],
+      ],
       {
-        padding: {top: 20, bottom: 40, left: 20, right: 20},
+        padding: { top: 20, bottom: 40, left: 20, right: 20 },
         animate: false,
       }
-    )
+    );
     // If sa2-comp doesn't exist then the map hasn't finished loading yet.
     // In that case, ignore this call to highlightComparisonFeatures and let
     // the map's on("load") call it after it has loaded all styles and
     // sources.
     const source = this.map.getSource("sa2-comp");
     if (source) {
-      source.setData(comparisonFeatures)
+      source.setData(comparisonFeatures);
     }
-}
+  };
 
   drawBusinessClusters() {
     if (this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
