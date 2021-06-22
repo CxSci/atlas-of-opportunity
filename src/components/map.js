@@ -490,7 +490,6 @@ let Map = class Map extends React.Component {
     if (this.props.active.key !== prevProps.active.key) {
       if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES) {
         this.drawBusinessClusters();
-        return;
       } else {
         if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
         if (this.map.getLayer("cluster-count"))
@@ -522,8 +521,6 @@ let Map = class Map extends React.Component {
               ],
             },
           });
-      }
-
         let fillColor = {
           property: this.props.active.property,
           stops: this.props.active.stops,
@@ -531,6 +528,7 @@ let Map = class Map extends React.Component {
 
         this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
       }
+    }
 
     if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
       this.highlightFeature(this.props.highlightedFeature);
