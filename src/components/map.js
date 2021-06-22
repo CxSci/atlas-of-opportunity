@@ -48,7 +48,7 @@ let Map = class Map extends React.Component {
 
   static propTypes = {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
-    geojsonURL: PropTypes.string.isRequired,
+    geojson: PropTypes.object,
     active: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
@@ -89,7 +89,7 @@ let Map = class Map extends React.Component {
     this.map.on("load", () => {
       this.map.addSource("sa2", {
         type: "geojson",
-        data: this.props.geojsonURL,
+        data: this.props.geojson,
         promoteId: "SA2_MAIN16",
       });
 
@@ -739,7 +739,7 @@ let Map = class Map extends React.Component {
 function mapStateToProps(state) {
   return {
     features: state.features,
-    geojsonURL: state.geojsonURL,
+    geojson: state.geojson,
     active: state.active,
     flowDirection: state.flowDirection,
     searchBarInfo: state.searchBarInfo,

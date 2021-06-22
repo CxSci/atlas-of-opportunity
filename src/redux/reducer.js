@@ -1,5 +1,7 @@
 import * as Constants from "../constants";
-import geojsonURL from "../data/SA_dashboard.geojson";
+// import geojsonURL2 from "../data/SA_dashboard.geojson";
+import geojsonURL from "../data/geodata.txt";
+import { convertFeatures, rebuildFeatures } from "../utils/geojson";
 
 const options = {};
 
@@ -50,7 +52,7 @@ options[Constants.MAP_TYPE.SEGREGATION] = {
 };
 
 const initialState = {
-  geojsonURL,
+  geojsonURL: null,
   features: [], // Fetched asynchronously on app load
   comparisonFeatures: [],
   collapsibleState: {},
@@ -77,11 +79,15 @@ function loadFeatures() {
     return fetchFeatures()
       .then((response) => response.json())
       .then(
-        (collection) =>
-          dispatch({ type: "FEATURES", payload: collection.features }),
+        (collection) => {
+          const features = rebuildFeatures(collection.features);
+          const newCollection = { type: "FeatureCollection", features: features };
+          dispatch({ type: "geojson", payload: newCollection });
+          dispatch({ type: "FEATURES", payload: features });
+        },
         // TODO: Add proper error handling
         (error) => {
-          console.log(error);
+          console.error(error);
         }
       );
   };
@@ -93,6 +99,8 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         features: action.payload,
       });
+    case "geojson":
+      return { ...state, geojson: action.payload }
     case Constants.SET_ACTIVE_OPTION:
       return Object.assign({}, state, {
         active: action.option,
