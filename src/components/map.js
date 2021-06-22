@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import mapboxgl from "mapbox-gl";
+// Add '!' so production builds work. See: https://docs.mapbox.com/mapbox-gl-js/api/#excluding-gl-js-explicitly-from-transpilation
+import mapboxgl from "!mapbox-gl";
 import { connect } from "react-redux";
 import { setSelectedFeature, setSavedMapPosition } from "../redux/action-creators";
 import * as turf from "@turf/turf";
