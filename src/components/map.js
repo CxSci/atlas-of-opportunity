@@ -264,10 +264,13 @@ let Map = class Map extends React.Component {
   };
 
   zoomOnClick = (e) => {
+    //Get list of all clusters available
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: ["clusters"],
     });
+    // Get selected cluster id
     var clusterId = features[0].properties.cluster_id;
+    // Use the ease effect to slowly zoom/pan into the clicked on cluster
     this.map
       .getSource("business")
       .getClusterExpansionZoom(clusterId, this.easeToFeature(features));
@@ -351,37 +354,27 @@ let Map = class Map extends React.Component {
   };
 
   highlightComparisonFeatures = (features) => {
-
-      if (features.length <= 0) {
-        return;
+    if (features.length <= 0) {
+      return;
+    }
+    const comparisonFeatures = {type: "FeatureCollection", features}
+    const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
+    this.map.fitBounds(
+      [[minX, minY], [maxX, maxY]],
+      {
+        padding: {top: 20, bottom: 40, left: 20, right: 20},
+        animate: false,
       }
-      const comparisonFeatures = {type: "FeatureCollection", features}
-      const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
-      this.map.fitBounds(
-        [[minX, minY], [maxX, maxY]],
-        {
-          padding: {top: 20, bottom: 40, left: 20, right: 20},
-          animate: false,
-        }
-      )
-      // If sa2-comp doesn't exist then the map hasn't finished loading yet.
-      // In that case, ignore this call to highlightComparisonFeatures and let
-      // the map's on("load") call it after it has loaded all styles and
-      // sources.
-      const source = this.map.getSource("sa2-comp");
-      if (source) {
-        source.setData(comparisonFeatures)
-      }
-    );
+    )
     // If sa2-comp doesn't exist then the map hasn't finished loading yet.
     // In that case, ignore this call to highlightComparisonFeatures and let
     // the map's on("load") call it after it has loaded all styles and
     // sources.
     const source = this.map.getSource("sa2-comp");
     if (source) {
-      source.setData(comparisonFeatures);
+      source.setData(comparisonFeatures)
     }
-  };
+}
 
   drawBusinessClusters() {
     if (this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
