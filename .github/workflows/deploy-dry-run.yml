@@ -96,7 +96,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: nginx
-          image: ${{ steps.vars.outputs.IMAGE_TAG }}
+          image: ${{ steps.vars.outputs.IMAGE_SHA }}
 
       # 3. Cleanup
 
