@@ -32,24 +32,17 @@
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1; /* Above map and below menu */
+        z-index: 2; /* Above map and sidebar */
         background: black;
         opacity: 0.5;
         pointer-events: auto;
 }
 
 
-.dropdown-menu {
-    margin-left: 12px;
-    margin-right: 16px;
-    z-index: 1;
-}
-
 .dropdown-header{
     display: flex;
     flex-direction: row;
     height: 60px;
-    border-bottom: 1px solid #CCC;
     align-items: center;
     justify-content: space-between;
 }
@@ -76,12 +69,17 @@
     background-color: white; 
     position: absolute;
     top: 0px;
-    padding-bottom: 100%;
+    bottom: 60px;
     right: 0px;
-    z-index: 1;
+    z-index: 2;
     flex-direction: column;
     text-align: left;
-    
+    pointer-events: auto;
+}
+
+.dropdown-content .dropdownSection {
+    border-top: 1px solid #CCC;
+    padding: 5px 0;
 }
 
 .dropdown-content a {
@@ -92,21 +90,23 @@
     padding: 15px 20px 15px 27px;
     color: black;
     font-size: 16px;
+    line-height: 120%;
     cursor: pointer;
-    pointer-events: auto;
 }
 
 .dropdown-content a:hover, .dropdown-content a:active {
-    background-color: #2D9CDB;
-    font-weight: 600;
+    background-color: #F5F5F5;
 }
 
 .show {
     display: flex;
 }
 
-.menu-icon {
+.hamburgerButton {
     padding: 3px 5px;
+    margin-left: 12px;
+    margin-right: 16px;
+    z-index: 1;
     pointer-events: auto;
 }
 
@@ -117,11 +117,11 @@
     border-radius: 2px;
 }
 
-.menu-icon.white .menu-icon-bar {
+.hamburgerButton.white .menu-icon-bar {
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
 }
 
-.menu-icon.black .menu-icon-bar {
+.hamburgerButton.black .menu-icon-bar {
     background-color: black;
 }

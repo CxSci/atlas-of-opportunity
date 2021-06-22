@@ -15,7 +15,7 @@ const LocationDetails = (props) => {
   }
 
   const renderMetric = (metric) => {
-    let rawValue = props.feature.properties[metric.id];
+    let rawValue = selectedFeature ? selectedFeature.properties[metric.id] : "";
     const value = formatValue(rawValue, metric.format);
 
     return (

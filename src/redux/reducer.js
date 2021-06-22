@@ -74,7 +74,8 @@ const initialState = {
   sidebarOpen: true,
   selectedFeature: null,
   highlightedFeature: null,
-  showWelcomeDialog: true,
+  hiddenSidebarDialogs: [],
+  hamburgerMenuOpen: false,
   comparisonType: Constants.COMPARISON_TYPE.TABLE,
 };
 
@@ -95,6 +96,7 @@ function loadFeatures() {
           dispatch({ type: "FEATURES", payload: collection.features }),
         // TODO: Add proper error handling
         (error) => {
+          // eslint-disable-next-line no-console
           console.log(error);
         }
       );
@@ -123,15 +125,12 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         active: action.option,
       });
-    case Constants.SHOW_WELCOME_DIALOG:
+    case Constants.HIDE_SIDEBAR_DIALOG:
       return {
         ...state,
-        showWelcomeDialog: action.payload,
-      };
-    case "Header":
-      return Object.assign({}, state, {
-        path: action.payload,
-      });
+        hiddenSidebarDialogs: 
+          [...new Set([...state.hiddenSidebarDialogs, action.payload])],
+      }
     case "MapType":
       return {
         ...state,
@@ -179,11 +178,21 @@ function reducer(state = initialState, action) {
         ...state, 
         collapsibleState: action.payload
       };
+    case Constants.SET_HAMBURGER_MENU_OPEN:
+      return {
+        ...state,
+        hamburgerMenuOpen: action.payload,
+      }
     case Constants.SET_COMPARISON_TYPE:
       return {
         ...state, 
         comparisonType: action.payload
       };
+    case Constants.SET_SAVED_MAP_POSITION:
+      return {
+        ...state,
+        savedMapPosition: action.payload,
+      }
     default:
       return state;
   }

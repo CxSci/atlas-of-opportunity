@@ -6,6 +6,7 @@ import About from "../pages/about";
 import Research from "../pages/research";
 import FAQ from "../pages/faq";
 import Methods from "../pages/methods";
+import Recommendation from "../pages/recommendation";
 
 const Routes = class Routes extends Component { 
 
@@ -17,6 +18,7 @@ const Routes = class Routes extends Component {
         <Route exact path="/methods" component={Methods} />
         <Route exact path="/research" component={Research} />
         <Route exact path="/faq" component={FAQ} />
+        <Route exact path="/recommendation" component={Recommendation}/>
       </Switch>
     );
   }

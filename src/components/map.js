@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import { setSelectedFeature } from "../redux/action-creators";
+import { setSelectedFeature, setSavedMapPosition } from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
 import "../css/map.css";
@@ -51,6 +51,7 @@ let Map = class Map extends React.Component {
     geojsonURL: PropTypes.string.isRequired,
     active: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
+    savedMapPosition: PropTypes.object,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
     sidebarOpen: PropTypes.bool.isRequired,
     selectedFeature: PropTypes.object,
@@ -81,6 +82,16 @@ let Map = class Map extends React.Component {
     this.map.resize();
 
     if (!this.props.mini) {
+      
+      // Look at the same place as last time if that was saved
+      if (this.props.savedMapPosition) {
+        const { center, zoom, pitch, bearing } = this.props.savedMapPosition
+        this.map.setCenter(center)
+        this.map.setZoom(zoom)
+        this.map.setPitch(pitch)
+        this.map.setBearing(bearing)
+      }
+
       // zoom buttons
       var controls = new mapboxgl.NavigationControl({
         showCompass: true,
@@ -270,6 +281,21 @@ let Map = class Map extends React.Component {
       zoom: zoom,
     });
   };
+  
+  componentWillUnmount() {
+    // If this isn't a minimap, remember where the map is looking for later.
+    if (!this.props.mini) {
+      setSavedMapPosition({
+        center: this.map.getCenter(),
+        zoom: this.map.getZoom(),
+        pitch: this.map.getPitch(),
+        bearing: this.map.getBearing(),
+      })
+    }
+    this.map.remove()
+    setSelectedFeature(null)
+  }
+
 
   highlightFeature = (feature) => {
     const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16;
@@ -325,16 +351,26 @@ let Map = class Map extends React.Component {
   };
 
   highlightComparisonFeatures = (features) => {
-    const comparisonFeatures = { type: "FeatureCollection", features };
-    const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures);
-    this.map.fitBounds(
-      [
-        [minX, minY],
-        [maxX, maxY],
-      ],
-      {
-        padding: { top: 20, bottom: 40, left: 20, right: 20 },
-        animate: false,
+
+      if (features.length <= 0) {
+        return;
+      }
+      const comparisonFeatures = {type: "FeatureCollection", features}
+      const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
+      this.map.fitBounds(
+        [[minX, minY], [maxX, maxY]],
+        {
+          padding: {top: 20, bottom: 40, left: 20, right: 20},
+          animate: false,
+        }
+      )
+      // If sa2-comp doesn't exist then the map hasn't finished loading yet.
+      // In that case, ignore this call to highlightComparisonFeatures and let
+      // the map's on("load") call it after it has loaded all styles and
+      // sources.
+      const source = this.map.getSource("sa2-comp");
+      if (source) {
+        source.setData(comparisonFeatures)
       }
     );
     // If sa2-comp doesn't exist then the map hasn't finished loading yet.
@@ -917,6 +953,7 @@ function mapStateToProps(state) {
     geojsonURL: state.geojsonURL,
     active: state.active,
     flowDirection: state.flowDirection,
+    savedMapPosition: state.savedMapPosition,
     searchBarInfo: state.searchBarInfo,
     sidebarOpen: state.sidebarOpen,
     selectedFeature: state.selectedFeature,

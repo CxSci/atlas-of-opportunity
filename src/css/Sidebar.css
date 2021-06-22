@@ -68,7 +68,7 @@
 .actionButtonsContainer {
     display: flex;
     flex-direction: column;
-    padding: 6px 0px 12px;
+    padding: 1px 0px 12px;
 }
 
 .actionButton {

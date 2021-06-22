@@ -1,0 +1,167 @@
+/* Progress bar */
+.progressBar {
+  counter-reset: step;
+  display: flex;
+}
+.progressBar li {
+  list-style-type: none;
+  text-align: center;
+  font-weight: 600;
+  flex: 1;
+}
+.progressBar li p {
+  color: black;
+}
+.progressBar li.active {
+  color: #666666;
+}
+.progressBar li .progressGraphic {
+  display: flex;
+  align-items: center;
+}
+/* CSS for creating horizontal line */
+.progressBar li .progressGraphic:before, .progressBar li .progressGraphic:after {
+  content: '';
+  flex: 1;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border: 2px #666666 solid;
+}
+.progressBar li:first-child .progressGraphic:before, .progressBar li:last-child .progressGraphic:after {
+  border-color: transparent;
+}
+/* CSS for creating progress bubbles */
+.progressBar li .progressBubble {
+  height: 22px;
+  width: 22px;
+  border: 4px solid #666666;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background-color: white;
+}
+.progressBar li.completed .progressBubble {
+  background-color: #666666;
+}
+.progressBar li.active .progressBubble {
+  background-color: #666666;
+  width: 34px;
+  height: 34px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Questions */
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+  margin: 30px auto;
+}
+
+.stageDescription {
+  text-align: center;
+  line-height: 21px;
+  margin-bottom: 30px;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  margin-top: 30px;
+}
+
+.question.continued, .question:first-child {
+  margin-top: 0;
+}
+
+.question .description {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.question .help {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.nextButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 64px;
+  height: 39px;
+  right: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+}
+
+.previousButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 94px;
+  height: 39px;
+  left: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+
+}
+
+.comparisonButton {
+  position: absolute;
+  width: 186px;
+  height: 39px;
+  right: 40px;
+  bottom: 30px;
+  background: #3DBEFF;
+  borderRadius: 100px;
+  cursor: pointer;
+  border: none;
+}
+
+.buttonText {
+  fontFamily: Roboto;
+  fontStyle: normal;
+  fontWeight: bold;
+  fontSize: 16px;
+  lineHeight: 19px;
+  color: #FFFFFF
+}
+
+.question label {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.question label:last-child {
+  margin-bottom: 0;
+}
+
+.question input {
+  /* Size input element to its natural size and let its siblings fill the
+     remaining space. */
+  flex: 0 0 auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions a:last-child {
+  margin-left: auto;
+}
