@@ -57,7 +57,7 @@ let Map = class Map extends React.Component {
     comparisonFeatures: PropTypes.array,
     poiFeatures: PropTypes.array,
     highlightedFeature: PropTypes.object,
-    mini: PropTypes.bool
+    mini: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -66,20 +66,22 @@ let Map = class Map extends React.Component {
       style: "mapbox://styles/mapbox/dark-v10",
       bounds: [
         [129, -38],
-        [141, -26]
+        [141, -26],
       ],
       // 70px padding around initial viewport, with an extra 310 on the left
       // to account for <WelcomeDialog />.
       // TODO: Calculate width of WelcomeDialog at runtime instead of
       //       hardcoding it here.
-      fitBoundsOptions: this.props.mini ? undefined : { padding: {top: 70, bottom: 70, left: 70 + 310, right: 70} },
-      interactive: !this.props.mini
+      fitBoundsOptions: this.props.mini
+        ? undefined
+        : { padding: { top: 70, bottom: 70, left: 70 + 310, right: 70 } },
+      interactive: !this.props.mini,
     });
 
     this.map.resize();
 
     if (!this.props.mini) {
-    // zoom buttons
+      // zoom buttons
       var controls = new mapboxgl.NavigationControl({
         showCompass: true,
         visualizePitch: true,
@@ -94,22 +96,22 @@ let Map = class Map extends React.Component {
         promoteId: "SA2_MAIN16",
       });
 
-      this.map.addSource('business', {
-        type: 'geojson',
+      this.map.addSource("business", {
+        type: "geojson",
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data:{ type: "FeatureCollection" ,features: this.props.poiFeatures},
+        data: { type: "FeatureCollection", features: this.props.poiFeatures },
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
-        });
+        clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
+      });
 
       if (!this.props.mini) {
         this.map.addLayer({
           id: "sa2-fills",
           type: "fill",
           source: "sa2",
-          sourceLayer: "original",  
+          sourceLayer: "original",
           layout: {},
           paint: {
             "fill-color": {
@@ -176,12 +178,12 @@ let Map = class Map extends React.Component {
           type: "geojson",
           data: null,
           promoteId: "SA2_MAIN16",
-        })
+        });
         this.map.addLayer({
           id: "sa2-fills",
           type: "fill",
           source: "sa2-comp",
-          sourceLayer: "original",  
+          sourceLayer: "original",
           layout: {},
           paint: {
             "fill-color": {
@@ -212,44 +214,75 @@ let Map = class Map extends React.Component {
       if (!this.props.mini) {
         this.map.on("mousemove", "sa2-fills", (e) => {
           if (e.features.length > 0) {
-            this.highlightFeature(e.features[0])
+            this.highlightFeature(e.features[0]);
           }
         });
-  
+
         // When the mouse leaves the sa2-fill layer, update the feature state of the
         // previously hovered feature.
-  
+
         this.map.on("mouseleave", "sa2-fills", this.clearFeatureHighlight);
-  
+
         // Handle clicks on map features
-        this.map.on("click", "sa2-fills", this.onMapClick)
+        this.map.on("click", "sa2-fills", this.onMapClick);
+
+        // Handle clicks on clusters
+        this.map.on("click", "clusters", this.zoomOnClick);
+
+        // Add hover cursor for clusters
+        this.map.on("mouseenter", "clusters", this.setCursorPointer);
+        this.map.on("mouseleave", "clusters", this.setCursorNone);
+
         // Handle map clicks outside of map features
         this.map.on("click", this.onMapClick);
         if (this.props.selectedFeature) {
-          this.selectFeature(this.props.selectedFeature)
+          this.selectFeature(this.props.selectedFeature);
         }
-      }
-      else {
-        this.highlightComparisonFeatures(this.props.comparisonFeatures)
+      } else {
+        this.highlightComparisonFeatures(this.props.comparisonFeatures);
       }
     });
   }
 
+  setCursorPointer = () => {
+    this.map.getCanvas().style.cursor = "pointer";
+  };
+
+  setCursorNone = () => {
+    this.map.getCanvas().style.cursor = "";
+  };
+
+  zoomOnClick = (e) => {
+    var features = this.map.queryRenderedFeatures(e.point, {
+      layers: ["clusters"],
+    });
+    var clusterId = features[0].properties.cluster_id;
+    this.map
+      .getSource("business")
+      .getClusterExpansionZoom(clusterId, this.easeToFeature(features));
+  };
+
+  easeToFeature = (features) => (err, zoom) => {
+    if (err) return;
+
+    this.map.easeTo({
+      center: features[0].geometry.coordinates,
+      zoom: zoom,
+    });
+  };
+
   highlightFeature = (feature) => {
-    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16
-    const newId = feature?.properties?.SA2_MAIN16
+    const prevId = this.state.highlightedFeature?.properties?.SA2_MAIN16;
+    const newId = feature?.properties?.SA2_MAIN16;
     if (prevId === newId) {
-      return
+      return;
     }
     // First, clear any old highlight
     if (this.state.highlightedFeature) {
-      this.map.setFeatureState(
-        { source: "sa2", id: prevId },
-        { hover: false }
-      );
+      this.map.setFeatureState({ source: "sa2", id: prevId }, { hover: false });
     }
 
-    this.setState({ highlightedFeature: feature })
+    this.setState({ highlightedFeature: feature });
 
     // Skip the two SA2s which lack geometry, as they don't correspond to
     // geographic areas and aren't mappable.
@@ -268,11 +301,11 @@ let Map = class Map extends React.Component {
     } else {
       this.hoveredPopup.remove();
     }
-  }
+  };
 
   clearFeatureHighlight = () => {
-    this.highlightFeature(null)
-  }
+    this.highlightFeature(null);
+  };
 
   resizeMapPinningNortheast = () => {
     // Resize the map without moving its northeast corner
@@ -280,91 +313,116 @@ let Map = class Map extends React.Component {
     this.map.resize();
     let corner = this.map.getBounds().getNorthEast();
     let center = this.map.getCenter();
-    let shiftVector = { x: corner.lng - oldCorner.lng, y: corner.lat - oldCorner.lat };
-    let newCenter = new mapboxgl.LngLat(center.lng - shiftVector.x, center.lat - shiftVector.y);
+    let shiftVector = {
+      x: corner.lng - oldCorner.lng,
+      y: corner.lat - oldCorner.lat,
+    };
+    let newCenter = new mapboxgl.LngLat(
+      center.lng - shiftVector.x,
+      center.lat - shiftVector.y
+    );
     this.map.setCenter(newCenter);
-  }
+  };
 
   highlightComparisonFeatures = (features) => {
-      const comparisonFeatures = {type: "FeatureCollection", features}
-      const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures)
-      this.map.fitBounds(
-        [[minX, minY], [maxX, maxY]],
-        {
-          padding: {top: 20, bottom: 40, left: 20, right: 20},
-          animate: false,
-        }
-      )
-      // If sa2-comp doesn't exist then the map hasn't finished loading yet.
-      // In that case, ignore this call to highlightComparisonFeatures and let
-      // the map's on("load") call it after it has loaded all styles and
-      // sources.
-      const source = this.map.getSource("sa2-comp");
-      if (source) {
-        source.setData(comparisonFeatures)
+    const comparisonFeatures = { type: "FeatureCollection", features };
+    const [minX, minY, maxX, maxY] = turf.bbox(comparisonFeatures);
+    this.map.fitBounds(
+      [
+        [minX, minY],
+        [maxX, maxY],
+      ],
+      {
+        padding: { top: 20, bottom: 40, left: 20, right: 20 },
+        animate: false,
       }
-  }
+    );
+    // If sa2-comp doesn't exist then the map hasn't finished loading yet.
+    // In that case, ignore this call to highlightComparisonFeatures and let
+    // the map's on("load") call it after it has loaded all styles and
+    // sources.
+    const source = this.map.getSource("sa2-comp");
+    if (source) {
+      source.setData(comparisonFeatures);
+    }
+  };
 
   drawBusinessClusters() {
-    if ( this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
-    if ( !this.map.getLayer("clusters")) this.map.addLayer({
-      id: 'clusters',
-      type: 'circle',
-      source: 'business',
-      filter: ['has', 'point_count'],
-      paint: {
-      // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-      // with three steps to implement three types of circles:
-      //   * Blue, 20px circles when point count is less than 100
-      //   * Yellow, 30px circles when point count is between 100 and 750
-      //   * Pink, 40px circles when point count is greater than or equal to 750
-      'circle-color': [
-      'step',
-      ['get', 'point_count'],
-      '#51bbd6',
-      100,
-      '#f1f075',
-      750,
-      '#f28cb1'
-      ],
-      'circle-radius': [
-      'step',
-      ['get', 'point_count'],
-      20,
-      100,
-      30,
-      750,
-      40
-      ]
-      }
-      });
-       
-      if ( !this.map.getLayer("cluster-count"))this.map.addLayer({
-      id: 'cluster-count',
-      type: 'symbol',
-      source: 'business',
-      filter: ['has', 'point_count'],
-      layout: {
-      'text-field': '{point_count_abbreviated}',
-      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-      'text-size': 12
-      }
+    if (this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
+    if (!this.map.getLayer("clusters"))
+      this.map.addLayer({
+        id: "clusters",
+        type: "circle",
+        source: "business",
+        filter: ["has", "point_count"],
+        paint: {
+          // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+          // with three steps to implement three types of circles:
+          //   * Blue, 20px circles when point count is less than 100
+          //   * Yellow, 30px circles when point count is between 100 and 750
+          //   * Pink, 40px circles when point count is greater than or equal to 750
+          "circle-color": [
+            "step",
+            ["get", "point_count"],
+            "#51bbd6",
+            100,
+            "#f1f075",
+            750,
+            "#f28cb1",
+          ],
+          "circle-radius": [
+            "step",
+            ["get", "point_count"],
+            20,
+            100,
+            30,
+            750,
+            40,
+          ],
+        },
       });
 
+    if (!this.map.getLayer("cluster-count"))
+      this.map.addLayer({
+        id: "cluster-count",
+        type: "symbol",
+        source: "business",
+        filter: ["has", "point_count"],
+        layout: {
+          "text-field": "{point_count_abbreviated}",
+          "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+          "text-size": 12,
+        },
+      });
+
+    if (!this.map.getLayer("unclustered-point"))
+      this.map.addLayer({
+        id: "unclustered-point",
+        type: "circle",
+        source: "business",
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+          "circle-color": "#11b4da",
+          "circle-radius": 4,
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#fff",
+        },
+      });
   }
-
 
   componentDidUpdate(prevProps) {
     // Mapbox only notices changes to the window's dimensions. Manually resize
     // whenever the sidebar appears or disappears.
-    if (this.props.sidebarOpen !== prevProps.sidebarOpen
-      || (this.props.selectedFeature !== prevProps.selectedFeature
-        && (!this.props.selectedFeature || !prevProps.selectedFeature))
-      || (this.props.comparisonFeatures.length !== prevProps.comparisonFeatures.length
-        && this.props.comparisonFeatures.length == 0)
+    if (
+      this.props.sidebarOpen !== prevProps.sidebarOpen ||
+      (this.props.selectedFeature !== prevProps.selectedFeature &&
+        (!this.props.selectedFeature || !prevProps.selectedFeature)) ||
+      (this.props.comparisonFeatures.length !==
+        prevProps.comparisonFeatures.length &&
+        this.props.comparisonFeatures.length == 0)
     ) {
       // Putting a timeout on this lead to flashes of weirdness and halted map animations.
-      this.resizeMapPinningNortheast()
+      this.resizeMapPinningNortheast();
     }
 
     if (this.props.flowDirection !== prevProps.flowDirection) {
@@ -373,34 +431,39 @@ let Map = class Map extends React.Component {
 
     if (this.props.active.name !== prevProps.active.name) {
       if (this.props.active.name === "Business") {
-        this.drawBusinessClusters()
+        this.drawBusinessClusters();
         return;
       } else {
-        if ( this.map.getLayer("clusters")) this.map.removeLayer("clusters");
-        if ( this.map.getLayer("cluster-count")) this.map.removeLayer("cluster-count");
-        if ( !this.map.getLayer("sa2-fills")) this.map.addLayer({
-          id: "sa2-fills",
-          type: "fill",
-          source: "sa2",
-          sourceLayer: "original",  
-          layout: {},
-          paint: {
-            "fill-color": {
-              property: this.props.active.property,
-              stops: this.props.active.stops,
+        if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
+        if (this.map.getLayer("cluster-count"))
+          this.map.removeLayer("cluster-count");
+        if (this.map.getLayer("unclustered-point"))
+          this.map.removeLayer("unclustered-point");
+
+        if (!this.map.getLayer("sa2-fills"))
+          this.map.addLayer({
+            id: "sa2-fills",
+            type: "fill",
+            source: "sa2",
+            sourceLayer: "original",
+            layout: {},
+            paint: {
+              "fill-color": {
+                property: this.props.active.property,
+                stops: this.props.active.stops,
+              },
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "click"], false],
+                1,
+                ["boolean", ["feature-state", "highlight"], false],
+                1,
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.8,
+              ],
             },
-            "fill-opacity": [
-              "case",
-              ["boolean", ["feature-state", "click"], false],
-              1,
-              ["boolean", ["feature-state", "highlight"], false],
-              1,
-              ["boolean", ["feature-state", "hover"], false],
-              1,
-              0.8,
-            ],
-          },
-        });
+          });
       }
 
       let fillColor = {
@@ -412,40 +475,50 @@ let Map = class Map extends React.Component {
     }
 
     if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
-      this.highlightFeature(this.props.highlightedFeature)
+      this.highlightFeature(this.props.highlightedFeature);
     }
 
     if (this.props.selectedFeature !== prevProps.selectedFeature) {
-      this.selectFeature(this.props.selectedFeature)
+      this.selectFeature(this.props.selectedFeature);
     }
 
-    if (this.props.comparisonFeatures !== prevProps.comparisonFeatures && this.props.mini) {
-      this.highlightComparisonFeatures(this.props.comparisonFeatures)
+    if (
+      this.props.comparisonFeatures !== prevProps.comparisonFeatures &&
+      this.props.mini
+    ) {
+      this.highlightComparisonFeatures(this.props.comparisonFeatures);
     }
   }
 
   selectFeature = (feature) => {
-    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16
-    const newId = feature?.properties?.SA2_MAIN16
+    const prevId = this.state.selectedFeature?.properties?.SA2_MAIN16;
+    const newId = feature?.properties?.SA2_MAIN16;
     // Skip if the selection hasn't actually changed or if the map isn't fully loaded yet
-    if (prevId === newId || !this.map.getSource("sa2") || !this.map.isSourceLoaded("sa2")) {
-      return
+    if (
+      prevId === newId ||
+      !this.map.getSource("sa2") ||
+      !this.map.isSourceLoaded("sa2")
+    ) {
+      return;
     }
 
-    this.redrawBridges(feature)
+    this.redrawBridges(feature);
     if (feature && (feature.geometry || feature._geometry)) {
-      const [minX, minY, maxX, maxY] = turf.bbox(feature)
+      const [minX, minY, maxX, maxY] = turf.bbox(feature);
       this.map.fitBounds(
-        [[minX, minY], [maxX, maxY]],
+        [
+          [minX, minY],
+          [maxX, maxY],
+        ],
         {
           maxZoom: 10,
           padding: 100,
           bearing: this.map.getBearing(),
           pitch: this.map.getPitch(),
         }
-      )
+      );
     }
-  }
+  };
 
   onMapSearch = (e) => {
     this.map.fire("click", {
@@ -468,12 +541,12 @@ let Map = class Map extends React.Component {
     // the user clicked on a map feature, ignore the same click event when
     // seen by the overall map.
     if (e.defaultPrevented) {
-      return
+      return;
     }
-    e.preventDefault()
+    e.preventDefault();
 
     let prevSA2 = this.state.selectedFeature;
-    let clickedFeature = e.features ? e.features[0] : null
+    let clickedFeature = e.features ? e.features[0] : null;
 
     if (clickedFeature) {
       // Make sure this feature has a `primary` property for when it becomes
@@ -481,7 +554,7 @@ let Map = class Map extends React.Component {
       // expects passed in features to have the same.
       // TODO: Make SearchField and SASearchField smart enough to handle
       //       features which lack `primary`.
-      clickedFeature.properties.primary = clickedFeature.properties.SA2_NAME16
+      clickedFeature.properties.primary = clickedFeature.properties.SA2_NAME16;
     }
 
     // Ignore clicks on the active SA2.
@@ -491,7 +564,7 @@ let Map = class Map extends React.Component {
       clickedFeature.properties.SA2_MAIN16 !== prevSA2.properties.SA2_MAIN16
     ) {
       this.redrawBridges(clickedFeature);
-      setSelectedFeature(clickedFeature)
+      setSelectedFeature(clickedFeature);
     }
   };
 
@@ -545,12 +618,12 @@ let Map = class Map extends React.Component {
       );
     }
 
-    this.setState({ selectedFeature: feature })
+    this.setState({ selectedFeature: feature });
 
     // Skip features without geometry, like the two SA2s
     // "Migratory - Offshore - Shipping (SA)" and "No usual address (SA)"
     if (!feature || !(feature.geometry || feature._geometry)) {
-      return
+      return;
     }
 
     // find the center point of the newly selected region
@@ -583,19 +656,25 @@ let Map = class Map extends React.Component {
       // like {"foo": null} into {"foo": "null"}.
       const bridges = keys
         .map((x) => feature.properties[x])
-        .filter((x) => x !== undefined && x !== "null" && typeof x === "number" && isFinite(x))
+        .filter(
+          (x) =>
+            x !== undefined &&
+            x !== "null" &&
+            typeof x === "number" &&
+            isFinite(x)
+        );
 
       // Search map for SA2s matching the bridges.
       // Search the GeoJSON loaded separately as `features`, as Mapbox does not
       // support searching for features which aren't currently in view.
-      connectedFeatures = this.props.features
-        .filter(f => bridges
-          .some(b => b === Number(f.properties.SA2_MAIN16)))
+      connectedFeatures = this.props.features.filter((f) =>
+        bridges.some((b) => b === Number(f.properties.SA2_MAIN16))
+      );
 
       // get rid of the repeated features in the connectedFeatures array
       connectedFeatures.forEach((f) => {
         // For each feature, update its 'highlight' state
-        const featureId = f.properties.SA2_MAIN16
+        const featureId = f.properties.SA2_MAIN16;
         this.map.setFeatureState(
           {
             source: "sa2",
@@ -748,7 +827,13 @@ let Map = class Map extends React.Component {
       let steps = 1000;
       var that = this;
 
-      const animate = function animate(featureIdx, cntr, point, route, pointID) {
+      const animate = function animate(
+        featureIdx,
+        cntr,
+        point,
+        route,
+        pointID
+      ) {
         // Update point geometry to a new position based on counter denoting
         // the index to access the arc.
         if (
@@ -798,7 +883,7 @@ let Map = class Map extends React.Component {
             });
           }
         }
-      }
+      };
 
       // Reset the counter used for in and outflow
       var cntr0 = 0;
@@ -820,9 +905,9 @@ let Map = class Map extends React.Component {
       }
     }
   };
-  
+
   render() {
-    return <div id="map" ref={this.mapRef} className="map" />
+    return <div id="map" ref={this.mapRef} className="map" />;
   }
 };
 
@@ -837,7 +922,7 @@ function mapStateToProps(state) {
     selectedFeature: state.selectedFeature,
     highlightedFeature: state.highlightedFeature,
     comparisonFeatures: state.comparisonFeatures,
-    poiFeatures: state.poiFeatures
+    poiFeatures: state.poiFeatures,
   };
 }
 
