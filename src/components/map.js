@@ -973,7 +973,7 @@ function mapStateToProps(state) {
   return {
     features: state.features,
     geojsonURL: state.geojsonURL,
-    active: state.active,
+    active: state.activeLayer,
     flowDirection: state.flowDirection,
     savedMapPosition: state.savedMapPosition,
     searchBarInfo: state.searchBarInfo,

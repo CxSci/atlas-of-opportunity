@@ -2,13 +2,12 @@ import * as Constants from "../constants";
 import geojsonURL from "../data/SA_dashboard.geojson";
 import OsiPoiUrl from "../data/OSM_POIs.geojson";
 
-const options = {};
+const mapLayers = {};
 
-options[Constants.MAP_TYPE.GROWTH] = {
-  name: "Growth",
+mapLayers[Constants.MAP_TYPE.GROWTH] = {
+  name: "Mobility - GDP Growth Potential",
   description: "",
   property: "income_diversity",
-  legendName: "Growth Potential",
   stops: [
     [0, "#fdedc4"],
     [0.6, "#f09647"],
@@ -21,11 +20,10 @@ options[Constants.MAP_TYPE.GROWTH] = {
   },
 };
 
-options[Constants.MAP_TYPE.TRANSACTIONS] = {
-  name: "transactions",
+mapLayers[Constants.MAP_TYPE.TRANSACTIONS] = {
+  name: "Financial Interactions - Growth Potential",
   description: "",
   property: "income_diversity",
-  legendName: "Growth Potential",
   stops: [
     [0, "#cce7ff"],
     [0.6, "#47a1f0"],
@@ -38,11 +36,10 @@ options[Constants.MAP_TYPE.TRANSACTIONS] = {
   },
 };
 
-options[Constants.MAP_TYPE.SEGREGATION] = {
-  name: "Inequality",
+mapLayers[Constants.MAP_TYPE.SEGREGATION] = {
+  name: "Economic Segregation - Inequality Index",
   description: "Inequality in time spent",
   property: "inequality",
-  legendName: "Inequality Index",
   stops: [
     [0, "#fdedc4"],
     [40, "#f09647"],
@@ -50,11 +47,10 @@ options[Constants.MAP_TYPE.SEGREGATION] = {
   ],
 };
 
-options[Constants.MAP_TYPE.BUSINESS] = {
-  name: "Business",
+mapLayers[Constants.MAP_TYPE.BUSINESS] = {
+  name: "Businesses",
   description: "",
   property: "",
-  legendName: "Business",
   stops: [],
 }
 
@@ -64,8 +60,8 @@ const initialState = {
   poiFeatures: [],
   comparisonFeatures: [],
   collapsibleState: {},
-  options,
-  active: options[Constants.MAP_TYPE.GROWTH],
+  mapLayers,
+  activeLayer: mapLayers[Constants.MAP_TYPE.GROWTH],
   mapType: Constants.MAP_TYPE.GROWTH,
   path: window.location.pathname,
   dropdown: "off",
@@ -121,10 +117,6 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         poiFeatures: action.payload
       })
-    case Constants.SET_ACTIVE_OPTION:
-      return Object.assign({}, state, {
-        active: action.option,
-      });
     case Constants.HIDE_SIDEBAR_DIALOG:
       return {
         ...state,
@@ -135,7 +127,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         mapType: action.payload,
-        active: options[action.payload],
+        activeLayer: mapLayers[action.payload],
       };
     case "DropDown":
       return Object.assign({}, state, {
