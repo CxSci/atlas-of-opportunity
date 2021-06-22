@@ -487,8 +487,8 @@ let Map = class Map extends React.Component {
       this.redrawBridges();
     }
 
-    if (this.props.active.name !== prevProps.active.name) {
-      if (this.props.active.name === "Business") {
+    if (this.props.active.key !== prevProps.active.key) {
+      if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES) {
         this.drawBusinessClusters();
         return;
       } else {
@@ -524,13 +524,13 @@ let Map = class Map extends React.Component {
           });
       }
 
-      let fillColor = {
-        property: this.props.active.property,
-        stops: this.props.active.stops,
-      };
+        let fillColor = {
+          property: this.props.active.property,
+          stops: this.props.active.stops,
+        };
 
-      this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
-    }
+        this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
+      }
 
     if (this.props.highlightedFeature !== prevProps.highlightedFeature) {
       this.highlightFeature(this.props.highlightedFeature);
@@ -704,7 +704,7 @@ let Map = class Map extends React.Component {
       }
     );
 
-    if (this.props.active.name !== "Inequality") {
+    if (this.props.active.key !== Constants.MAP_TYPE.SEGREGATION) {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
       // flowDirection should be one of "inflow", "outflow", or "bidirectional"
       // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]

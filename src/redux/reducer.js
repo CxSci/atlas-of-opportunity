@@ -5,6 +5,7 @@ import OsiPoiUrl from "../data/OSM_POIs.geojson";
 const mapLayers = {};
 
 mapLayers[Constants.MAP_TYPE.GROWTH] = {
+  key: Constants.MAP_TYPE.GROWTH,
   name: "Mobility - GDP Growth Potential",
   description: "",
   property: "income_diversity",
@@ -21,6 +22,7 @@ mapLayers[Constants.MAP_TYPE.GROWTH] = {
 };
 
 mapLayers[Constants.MAP_TYPE.TRANSACTIONS] = {
+  key: Constants.MAP_TYPE.TRANSACTIONS,
   name: "Financial Interactions - Growth Potential",
   description: "",
   property: "income_diversity",
@@ -37,6 +39,7 @@ mapLayers[Constants.MAP_TYPE.TRANSACTIONS] = {
 };
 
 mapLayers[Constants.MAP_TYPE.SEGREGATION] = {
+  key: Constants.MAP_TYPE.SEGREGATION,
   name: "Economic Segregation - Inequality Index",
   description: "Inequality in time spent",
   property: "inequality",
@@ -47,7 +50,8 @@ mapLayers[Constants.MAP_TYPE.SEGREGATION] = {
   ],
 };
 
-mapLayers[Constants.MAP_TYPE.BUSINESS] = {
+mapLayers[Constants.MAP_TYPE.BUSINESSES] = {
+  key: Constants.MAP_TYPE.BUSINESSES,
   name: "Businesses",
   description: "",
   property: "",

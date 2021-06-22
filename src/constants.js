@@ -18,7 +18,7 @@ export const MAP_TYPE = {
   GROWTH: "growth",
   TRANSACTIONS: "transactions",
   SEGREGATION: "segregation",
-  BUSINESS: "business"
+  BUSINESSES: "businesses"
 };
 
 export const COMPARISON_TYPE = {
