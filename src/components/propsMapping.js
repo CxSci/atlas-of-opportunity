@@ -4,15 +4,132 @@ export default [
     content: [
       { id: 'fake', label: 'Fake metric', type: 'chart' },
       { id: 'persons_num', label: 'Population', format: 'number' },
-      { id: 'median_aud', label: 'Median Income', format: 'currency' },
+      {
+        id: 'popfraction',
+        label: 'Fraction of South Australia Population Living in this Region', // too long
+        format: 'percent_normalized', // 0.42 -> 42%
+      },
+      {
+        id: 'median_persons_age',
+        label: 'Median Age of Residents',
+        format: 'number',
+      },
+      {
+        id: 'males_num',
+        label: 'Male Residents',
+        format: 'number',
+      },
+      {
+        id: 'median_male_age',
+        label: 'Median Age of Male Residents',
+        format: 'number',
+      },
+      {
+        id: 'females_num',
+        label: 'Female Residents',
+        format: 'number',
+      },
+      {
+        id: 'median_female_age',
+        label: 'Median Age of Female Residents',
+        format: 'number',
+      },
+      {
+        id: 'percentage_person_aged_0_14',
+        label: 'Residents Aged 0-14',
+        format: 'percent',
+      },
+      {
+        id: 'percentage_person_aged_15_64',
+        label: 'Residents Aged 15-64',
+        format: 'percent',
+      },
+      {
+        id: 'percentage_person_aged_65_plus',
+        label: 'Residents Aged 65+',
+        format: 'percent',
+      },
     ]
   },
   {
     title: 'Economic Summary',
     content: [
-      { id: 'quartile', label: 'Income Quartile' },
-      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent' },
-      { id: null, label: 'Visitor time spent by quartile' },
+      {
+        id: 'earners_persons',
+        label: 'Number of Wage Earners',
+        format: 'number',
+      },
+      {
+        id: 'median_age_of_earners_years',
+        label: 'Median Age of Wage Earners',
+        format: 'number',
+      },
+      {
+        id: 'median_aud',
+        label: 'Median Income',
+        format: 'currency',
+      },
+      {
+        id: 'mean_aud',
+        label: 'Mean Income',
+        format: 'currency',
+      },
+      {
+        id: 'income_aud',
+        label: 'Accumulate Income', // ?
+        format: 'currency',
+      },
+      {
+        id: 'quartile',
+        label: 'Quartile of the Median Income of this SA2 Among all SA2s in South Australia', // too long and shouldn't use the "SA2"
+        // format: 'range', // One of 1, 2, 3, or 4
+      },
+      { id: 'inequality', label: 'Inequality (lower is better)', format: 'percent' }, // show this or no?
+      {
+        id: 'occup_diversity',
+        label: 'Diversity of Occupation Types',
+        format: 'number',
+      },
+      {
+        id: 'gini_coefficient_no',
+        label: 'Income Gini Coefficient',
+        // format: 'range', // from 0 to 1
+      },
+      {
+        id: 'highest_quartile_pc',
+        label: 'Earners Falling into Highest Income Quartile',
+        format: 'percent',
+      },
+      {
+        id: 'third_quartile_pc',
+        label: 'Earners Falling into Third Income Quartile',
+        format: 'percent',
+      },
+      {
+        id: 'second_quartile_pc',
+        label: 'Earners Falling into Second Income Quartile',
+        format: 'percent',
+      },
+      {
+        id: 'lowest_quartile_pc',
+        label: 'Earners Falling into Lowest Income Quartile',
+        format: 'percent',
+      },
+      {
+        id: 'income_share_top_1pc',
+        label: 'Income Share of Top 1% Income Group',
+        format: 'percent',
+      },
+      {
+        id: 'income_share_top_5pc',
+        label: 'Income Share of Top 5% Income Group',
+        format: 'percent',
+      },
+      {
+        id: 'income_share_top_10pc',
+        label: 'Income Share of Top 10% Income Group',
+        format: 'percent',
+      },
     ]
   },
   {
@@ -23,17 +140,37 @@ export default [
         desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
       },
       {
-        id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
-        desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.'
+        id: 'bridge_diversity',
+        label: 'Social Bridge Diversity', // not Job Resilience?
+        format: 'number',
+      },
+      // {
+      //   id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
+      //   desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.'
+      // },
+      {
+        id: 'bsns_entries',
+        label: 'Number of Businesses Opened', // when?
+        format: 'number',
       },
       {
-        id: 'bsns_growth_rate', label: 'Business Growth Index', format: 'number',
-        desc: 'The growth rate is the measure of a company’s increase in revenue and potential to expand over a set period.'
+        id: 'bsns_exits',
+        label: 'Number of Businesses Closed', // when?
+        format: 'number',
       },
+      {
+        id: 'bsns_growth_rate',
+        label: 'Business Growth Rate',
+        format: 'number',
+      },
+      // {
+      //   id: 'bsns_growth_rate', label: 'Business Growth Index', format: 'number',
+      //   desc: 'The growth rate is the measure of a company’s increase in revenue and potential to expand over a set period.'
+      // },
     ]
   },
   {
-    title: 'Housing Summary',
+    title: 'Residential Housing Summary',
     content: [
       {
         id: 'housing_median_1br_apt',
