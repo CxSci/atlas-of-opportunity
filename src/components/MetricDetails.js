@@ -17,7 +17,7 @@ const MetricDetails = ({ featureList, metric, small }) => {
         return (
           <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
             <label title={name}>{name}</label>
-            <RangeBar value={rawValue} min={metric.min} max={metric.max} width={width}/>
+            <RangeBar value={rawValue} min={metric.min} max={metric.max} options={metric.options} width={width}/>
           </div>
         )
       case 'bar':

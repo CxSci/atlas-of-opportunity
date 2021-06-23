@@ -9,13 +9,38 @@ import {
   ReferenceArea,
   Label,
 } from "recharts";
+let gradientId = 0;
 
-const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2}) => {
+const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2, options }) => {
   const data = [{
     name: "value1",
     max: max,
     value: value,
   }];
+
+  const minLabel = options?.minLabel || 'LOW';
+  const maxLabel = options?.maxLabel || 'HIGH';
+  const minColor = options?.minColor || 'rgb(255,233,0)';
+  const maxColor = options?.maxColor || 'rgb(242,11,11)';
+
+  const renderGradientShape = ({height, width, x, y, background}) => {
+    const whiteLayerX = width;
+    const whiteLayerWith = background.width - width;
+    const id = gradientId++;
+  
+    return (
+      <svg x={x} y={y}>
+        <defs>
+          <linearGradient id={`gradient-bar${id}`} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" style={{ stopColor: minColor }} />
+            <stop offset="100%" style={{ stopColor: maxColor }} />
+          </linearGradient>
+        </defs>
+        <rect width={background.width} height={background.height} fill={`url(#gradient-bar${id})`} />
+        <rect width={whiteLayerWith} height={height} x={whiteLayerX} fill="white" opacity="0.5" />
+      </svg>
+    );
+  }
 
   return (
     <ComposedChart
@@ -46,8 +71,8 @@ const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2}) => {
         isAnimationActive={false}
       />
       <ReferenceArea x1="0" x2={data.max} fill="transparent">
-        <Label value="LOW" position="insideLeft" fontSize={10} fontWeight={500} />
-        <Label value="HIGH" position="insideRight" fontSize={10} fontWeight={500} />
+        <Label value={minLabel} position="insideLeft" fontSize={10} fontWeight={500} />
+        <Label value={maxLabel} position="insideRight" fontSize={10} fontWeight={500} />
       </ReferenceArea>
     </ComposedChart>
   )
@@ -59,27 +84,15 @@ RangeBar.propTypes = {
   value: PropType.number.isRequired,
   min: PropType.number,
   max: PropType.number,
+  options: PropType.shape({ 
+    minLabel: PropType.string,
+    maxLabel: PropType.string,
+    minColor: PropType.string,
+    maxColor: PropType.string,
+  },)
 }
 
 export default RangeBar;
-
-const renderGradientShape = ({height, width, x, y, background}) => {
-  const whiteLayerX = width;
-  const whiteLayerWith = background.width - width;
-
-  return (
-    <svg x={x} y={y}>
-      <defs>
-        <linearGradient id="gradient-bar" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" style={{ stopColor: "rgb(255,233,0)" }} />
-          <stop offset="100%" style={{ stopColor: "rgb(242,11,11)" }} />
-        </linearGradient>
-      </defs>
-      <rect width={background.width} height={background.height} fill="url(#gradient-bar)" />
-      <rect width={whiteLayerWith} height={height} x={whiteLayerX} fill="white" opacity="0.5" />
-    </svg>
-  );
-}
 
 const renderTriangleShape = (props) => {
   const posX = props.x - 5;

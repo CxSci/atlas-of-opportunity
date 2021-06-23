@@ -48,7 +48,7 @@ const LocationDetails = (props) => {
         return <LineChartMetric data={data} width={260} />
       }
       case 'range':
-        return <RangeBar value={rawValue} min={metric.min} max={metric.max} width={260} />
+        return <RangeBar value={rawValue} min={metric.min} max={metric.max} options={metric.options} width={260} />
       case 'bar':
         return <SolidBar label={value} value={rawValue} max={metric.max} width={260} />
       default:
