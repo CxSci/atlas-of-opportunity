@@ -44,8 +44,7 @@ const LocationDetails = (props) => {
     
     switch (metric.type) {
       case 'line-chart': {
-        const data = JSON.parse(rawValue);
-        return <LineChartMetric data={data} width={260} />
+        return <LineChartMetric data={rawValue} width={260} />
       }
       case 'range':
         return <RangeBar value={rawValue} min={metric.min} max={metric.max} options={metric.options} width={260} />
