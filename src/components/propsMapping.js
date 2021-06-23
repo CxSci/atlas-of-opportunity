@@ -30,7 +30,51 @@ export default [
         id: 'bsns_growth_rate', label: 'Business Growth Index', format: 'number',
         desc: 'The growth rate is the measure of a company’s increase in revenue and potential to expand over a set period.'
       },
-      { id: 'SA1_7DIGITCODE_LIST', label: 'Included SA1 Regions', format: 'number' },
+    ]
+  },
+  {
+    title: 'Housing Summary',
+    content: [
+      {
+        id: 'housing_median_1br_apt',
+        label: 'Median 1BR Apt Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_2br_apt',
+        label: 'Median 2BR Apt Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_3br_apt',
+        label: 'Median 3BR Apt Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_4above_apt',
+        label: 'Median 4BR+ Apt Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_1br_h',
+        label: 'Median 1BR House Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_2br_h',
+        label: 'Median 2BR House Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_3br_h',
+        label: 'Median 3BR House Weekly',
+        format: 'currency',
+      },
+      {
+        id: 'housing_median_4above_h',
+        label: 'Median 4BR+ House Weekly',
+        format: 'currency',
+      },
     ]
   }
 ];
