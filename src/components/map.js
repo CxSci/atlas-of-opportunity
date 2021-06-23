@@ -281,7 +281,7 @@ let Map = class Map extends React.Component {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    new mapboxgl.Popup()
+    new mapboxgl.Popup({closeButton: false})
       .setLngLat(coordinates)
       .setHTML("<div class=\"popup-root\"><p class=\"popup-text-header\"> " + properties.name + "</p><br><p class=\"popup-text\">Type: " + properties.type + "</p></div>")
       .addTo(this.map);
