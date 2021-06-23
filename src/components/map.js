@@ -231,6 +231,11 @@ let Map = class Map extends React.Component {
           }
         });
 
+        // Create clusters on load if selected for initial map loads to business layer
+        if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES) {
+          this.drawBusinessClusters()
+        }
+
         // When the mouse leaves the sa2-fill layer, update the feature state of the
         // previously hovered feature.
 
@@ -278,7 +283,7 @@ let Map = class Map extends React.Component {
 
     new mapboxgl.Popup()
       .setLngLat(coordinates)
-      .setHTML("Name: " + properties.name + "<br>Type: " + properties.type)
+      .setHTML("<div class=\"popup-root\"><p class=\"popup-text-header\"> " + properties.name + "</p><br><p class=\"popup-text\">Type: " + properties.type + "</p></div>")
       .addTo(this.map);
   };
 
@@ -488,7 +493,7 @@ let Map = class Map extends React.Component {
     }
 
     if (this.props.active.key !== prevProps.active.key) {
-      if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES) {
+      if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES && !this.props.mini) {
         this.drawBusinessClusters();
       } else {
         if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
@@ -496,6 +501,11 @@ let Map = class Map extends React.Component {
           this.map.removeLayer("cluster-count");
         if (this.map.getLayer("unclustered-point"))
           this.map.removeLayer("unclustered-point");
+
+          const popup = document.getElementsByClassName('mapboxgl-popup');
+          if ( popup.length ) {
+              popup[0].remove();
+          }
 
         if (!this.map.getLayer("sa2-fills"))
           this.map.addLayer({

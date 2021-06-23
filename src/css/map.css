@@ -5,9 +5,10 @@
   -moz-user-select: none;       
   -ms-user-select: none;       
   user-select: none;
-  pointer-events:none;
+  pointer-events:auto;
   border: none;
-  background: #ffffffdd;
+  border-radius: 10px;
+  background: #FFFFFF;
   padding: 5px 8px 4px;
   box-shadow: none;
 }
@@ -37,4 +38,26 @@
   top: 12px;
   left: 12px;
   z-index: 1;
+}
+
+.popup-text-header {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 200%;
+  color: #000000;
+}
+
+.popup-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 250%;
+  color: #000000;
+}
+
+.popup-root {
+  padding: 15px;
 }

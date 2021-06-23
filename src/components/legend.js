@@ -8,9 +8,8 @@ import DropdownSelect from "./dropdown.js"
 import "../css/legend.css";
 
 const renderLegendKeys = (stops) => {
-  if (!stops || stops.length === 0) return <></>
 
-  return (
+  return !stops || stops.length === 0 ? <></> : (
   <div className="txt-m">
     <span
       className="h24 inline-block align-middle"
