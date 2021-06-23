@@ -1,13 +1,14 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * This file contains the configuration for each metric we want to show
  * {
- *    id:     field
- *    label:  name to show
- *    type:   chart type (bar | range | line-chart)
- *    min:    minimun for type range
- *    max:    maximun for type range, bar
- *    format: value format (number | percent | currency)
- *    desc:   description to show with tooltip
+ *    id:       field
+ *    label:    name to show
+ *    type:     chart type (bar | range | line-chart)
+ *    min:      minimun for type range
+ *    max:      maximun for type range, bar
+ *    format:   value format (number | percent | currency)
+ *    desc:     description to show with tooltip
+ *    options:  cutomization for type range { minLabel, maxLabel, minColor, maxColor }
  * }
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default [
@@ -157,13 +158,19 @@ export default [
     content: [
       {
         id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'range', min: 0, max: 1.2,
-        desc: 'Economic growth is an increase in the production of economic goods and services,compared from one period of time to another... Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.'
+        desc: `Economic growth is an increase in the production of economic goods and services, compared from one period of time to another. Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.`
       },
       {
         id: 'bridge_diversity',
         label: 'Social Bridge Diversity', // not Job Resilience?
         format: 'number',
         type: 'range',
+        options: {
+          minLabel: 'MIN',
+          maxLabel: 'MAX',
+          minColor: 'rgb(89,207,245)',
+          maxColor: 'rgb(45,156,219)'
+        },
       },
       // {
       //   id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
