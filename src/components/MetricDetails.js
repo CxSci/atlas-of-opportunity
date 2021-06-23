@@ -16,7 +16,7 @@ const MetricDetails = ({ featureList, metric, small }) => {
       case 'range':
         return (
           <div key={feature.properties.SA2_MAIN16} className="comparison-bar">
-            <label title={name}>{name}</label>
+            <label title={name} data-value={rawValue}>{name}</label>
             <RangeBar value={rawValue} min={metric.min} max={metric.max} options={metric.options} width={width}/>
           </div>
         )
@@ -40,8 +40,7 @@ const MetricDetails = ({ featureList, metric, small }) => {
   const renderChartMetric = () => {
     const width = small ? 240 : undefined;
     const series = featureList.map((feature) => {
-      const prop = feature.properties[metric.id];
-      const data = typeof prop === 'string' ? JSON.parse(prop) : prop;
+      const data = feature.properties[metric.id];
       return { name: feature.properties.SA2_NAME16, data };
     });
     return (<LineChartMetric series={series} width={width} showLegend />)
