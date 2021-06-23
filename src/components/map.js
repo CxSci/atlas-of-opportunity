@@ -566,9 +566,10 @@ let Map = class Map extends React.Component {
       !this.map.isSourceLoaded("sa2")
     ) {
       return;
+    } else if (this.props.active.key !== Constants.MAP_TYPE.BUSINESSES) {
+      this.redrawBridges(feature);
     }
 
-    this.redrawBridges(feature);
     if (feature && (feature.geometry || feature._geometry)) {
       const [minX, minY, maxX, maxY] = turf.bbox(feature);
       this.map.fitBounds(
