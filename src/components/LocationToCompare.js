@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getComparisonFeatures } from "../redux/getters";
 import { ReactComponent as CloseIcon } from "../assets/close_icon.svg";
-import { removeComparisonFeature } from "../redux/action-creators";
+import { removeComparisonFeature, setMapType } from "../redux/action-creators";
 import LozengeButton from "./LozengeButton";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 const root = {
   display: "flex",
@@ -45,7 +46,7 @@ const disclaimerText = {
 const LocationCompare = ({showButton}) => {
   const comparisonFeatures = useSelector(getComparisonFeatures);
   const ids = comparisonFeatures.map(feature => feature.properties.SA2_MAIN16);
-
+  const history = useHistory()
   return (
     <div style={root}>
       <div style={listRoot}>
@@ -68,6 +69,7 @@ const LocationCompare = ({showButton}) => {
             buttonType="normal"
             buttomSize="small"
             showChevron={true}
+            onClick={() => {setMapType("growth"); history.push("/comparison/" + ids.join('+'))}}
             url={"/comparison/" + ids.join('+')}
           />
           <div>
