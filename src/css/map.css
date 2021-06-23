@@ -14,7 +14,7 @@
 }
 
 .mapboxgl-popup-tip {
-  display: none;
+  display: block;
 }
 
 .mapboxgl-ctrl-top-left {

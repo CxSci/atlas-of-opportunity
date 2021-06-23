@@ -495,6 +495,14 @@ let Map = class Map extends React.Component {
     if (this.props.active.key !== prevProps.active.key) {
       if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES && !this.props.mini) {
         this.drawBusinessClusters();
+        if (this.map.getLayer("route") !== undefined) {
+          this.map.removeLayer("route");
+          this.map.removeSource("route");
+        }
+        if (this.map.getLayer("point") !== undefined) {
+          this.map.removeLayer("point");
+          this.map.removeSource("point");
+        }
       } else {
         if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
         if (this.map.getLayer("cluster-count"))
