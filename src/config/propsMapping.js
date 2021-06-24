@@ -17,7 +17,7 @@ export default [
     content: [
       {
         id: 'pop_proj',
-        label: 'Population Grow',
+        label: 'Projected Population',
         type: 'line-chart'
       },
       {
@@ -59,16 +59,19 @@ export default [
         id: 'percentage_person_aged_0_14',
         label: 'Residents Aged 0-14',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'percentage_person_aged_15_64',
         label: 'Residents Aged 15-64',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'percentage_person_aged_65_plus',
         label: 'Residents Aged 65+',
         format: 'percent',
+        type: 'bar',
       },
     ]
   },
@@ -104,7 +107,7 @@ export default [
         id: 'quartile',
         label: 'Quartile of the Median Income of this SA2 Among all SA2s in South Australia', // too long and shouldn't use the "SA2"
         type: 'bar',
-        max: 10,
+        max: 4,
         // format: 'range', // One of 1, 2, 3, or 4
       },
       {
@@ -123,41 +126,50 @@ export default [
         id: 'gini_coefficient_no',
         label: 'Income Gini Coefficient',
         // format: 'range', // from 0 to 1
+        type: 'bar',
+        max: 1.0,
       },
       {
         id: 'highest_quartile_pc',
         label: 'Earners Falling into Highest Income Quartile',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'third_quartile_pc',
         label: 'Earners Falling into Third Income Quartile',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'second_quartile_pc',
         label: 'Earners Falling into Second Income Quartile',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'lowest_quartile_pc',
         label: 'Earners Falling into Lowest Income Quartile',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'income_share_top_1pc',
         label: 'Income Share of Top 1% Income Group',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'income_share_top_5pc',
         label: 'Income Share of Top 5% Income Group',
         format: 'percent',
+        type: 'bar',
       },
       {
         id: 'income_share_top_10pc',
         label: 'Income Share of Top 10% Income Group',
         format: 'percent',
+        type: 'bar',
       },
     ]
   },
@@ -178,6 +190,7 @@ export default [
         label: 'Social Bridge Diversity', // not Job Resilience?
         format: 'number',
         type: 'range',
+        max: 5.0,
         options: {
           minLabel: 'MIN',
           maxLabel: 'MAX',
