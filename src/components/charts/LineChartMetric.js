@@ -38,6 +38,25 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
   const legendHeigth = (lines.length * 15);
   if (showLegend) height += legendHeigth;
 
+  const tickFormatter = (value) => {
+    // Note: Change this to use Intl.NumberFormat() some day when more browsers
+    //       support it.
+
+    // Reduce to 3 significant digits.
+    value = Number.parseFloat(value.toPrecision(3))
+
+    // Reduce to 
+    if (value > 1e9) {
+      return (value / 1e9).toString() + 'B';
+    } else if (value > 1e6) {
+      return (value / 1e6).toString() + 'M';
+    } else if (value > 1e3) {
+      return (value / 1e3).toString() + 'K';
+    } else {
+      return value.toString();
+    }
+  }
+
   return (
     <div style={{ height: height }}>
       {loaded &&
@@ -48,7 +67,7 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           <XAxis dataKey="year" fontSize={12} allowDuplicatedCategory={false} />
           <YAxis type="number" domain={['auto','auto']}
             width={40} fontSize={12}
-            tickFormatter={val => val.toLocaleString(undefined, { notation: 'compact', maximumFractionDigits: 1 })} />
+            tickFormatter={tickFormatter} />
           <Tooltip
             contentStyle={{ fontSize: 10, padding: '2px 4px' }}
             labelStyle={{ display: 'none' }}
