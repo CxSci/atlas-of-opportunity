@@ -6,7 +6,7 @@ import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
 
 const MetricDetails = ({ featureList, metric, small }) => {
-  const renderSingleMetic = (feature) => {
+  const renderSingleMetric = (feature) => {
     let rawValue = feature.properties[metric.id] || 0;
     const value = formatValue(rawValue, metric.format);
     const name = feature.properties.SA2_NAME16;
@@ -49,7 +49,7 @@ const MetricDetails = ({ featureList, metric, small }) => {
   return (
     metric.type === 'line-chart'
       ? renderChartMetric()
-      : featureList.map(renderSingleMetic)
+      : featureList.map(renderSingleMetric)
   )
 }
 

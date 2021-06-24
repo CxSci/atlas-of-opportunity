@@ -45,6 +45,9 @@ const TableView = ({comparisonFeatures}) => {
 
     const renderCell = (rawValue, record) => {
       const metric = section.content[record.id];
+      if (rawValue === undefined || rawValue === null || (typeof rawValue === 'string' && rawValue.match(/missing/i))) {
+        return rawValue || 'No data';
+      }
       
       switch (metric.type) {
         case 'line-chart':{
@@ -52,7 +55,7 @@ const TableView = ({comparisonFeatures}) => {
         }
         case 'range':{
           const value = rawValue || 0;
-          return <RangeBar value={value} min={metric.min} max={metric.max} width={120} />
+          return <RangeBar value={value} min={metric.min} max={metric.max} options={metric.options} width={120} />
         }
         case 'bar':{
           const value = formatValue(rawValue, metric.format);
