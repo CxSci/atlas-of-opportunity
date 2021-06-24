@@ -30,6 +30,7 @@
 .grid-container {
   max-width: 1040px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .grid-container .grid-item {
@@ -53,7 +54,7 @@
 }
 .grid-container .grid-item .comparison > label {
   text-overflow: ellipsis;
-  overflow: auto;
+  overflow: hidden;
   white-space: nowrap;
   margin-right: 8px;
 }
