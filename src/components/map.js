@@ -39,6 +39,10 @@ let Map = class Map extends React.Component {
     closeButton: false,
     closeOnClick: false,
   });
+  businessPopup = new mapboxgl.Popup({
+    closeButton: false, 
+    className: "business-popup"
+  });
 
   constructor(props) {
     super(props);
@@ -111,8 +115,6 @@ let Map = class Map extends React.Component {
 
       this.map.addSource("business", {
         type: "geojson",
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         data: { type: "FeatureCollection", features: this.props.poiFeatures },
         cluster: true,
         clusterMaxZoom: 11, // Max zoom to cluster points on
@@ -281,9 +283,9 @@ let Map = class Map extends React.Component {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    new mapboxgl.Popup({closeButton: false})
+    this.businessPopup
       .setLngLat(coordinates)
-      .setHTML("<div class=\"popup-root\"><p class=\"popup-text-header\"> " + properties.name + "</p><br><p class=\"popup-text\">Type: " + properties.type + "</p></div>")
+      .setHTML("<div class=\"popup-root\"><p class=\"popup-text-header\"> " + properties.name + "</p><p class=\"popup-text\">" + properties.type + "</p></div>")
       .addTo(this.map);
   };
 
@@ -505,17 +507,16 @@ let Map = class Map extends React.Component {
         }
       } else {
         if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
-        if (this.map.getLayer("cluster-count"))
+        if (this.map.getLayer("cluster-count")) {
           this.map.removeLayer("cluster-count");
-        if (this.map.getLayer("unclustered-point"))
+        }
+        if (this.map.getLayer("unclustered-point")) { 
           this.map.removeLayer("unclustered-point");
+        }
 
-          const popup = document.getElementsByClassName('mapboxgl-popup');
-          if ( popup.length ) {
-              popup[0].remove();
-          }
+        this.businessPopup.remove();
 
-        if (!this.map.getLayer("sa2-fills"))
+        if (!this.map.getLayer("sa2-fills")) {
           this.map.addLayer({
             id: "sa2-fills",
             type: "fill",
@@ -539,6 +540,7 @@ let Map = class Map extends React.Component {
               ],
             },
           });
+        }
         let fillColor = {
           property: this.props.active.property,
           stops: this.props.active.stops,
