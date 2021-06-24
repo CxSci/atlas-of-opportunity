@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import '../css/recommendation.css';
 
 const RecommendationTool = (props) => {
@@ -11,7 +13,7 @@ const RecommendationTool = (props) => {
     const [formState, setFormState] = useState({});
 
     const setRadioValue = (key, answer) => {
-        setFormState({...formState, [key]: answer})
+        setFormState({...formState, [key]: answer});
     }
 
     const setCheckboxValue = (key, answer) => {
@@ -22,7 +24,11 @@ const RecommendationTool = (props) => {
     }
 
     const setSelectValue = (key, answer) => {
-        setFormState({...formState, [key]: answer})
+        setFormState({...formState, [key]: answer});
+    }
+
+    const setSliderValue = (key, answer) => {
+        setFormState({...formState, [key]: answer});
     }
 
     const inputComponentForQuestion = (question) => {
@@ -55,6 +61,11 @@ const RecommendationTool = (props) => {
                             {answer}
                         </label>
                     </Fragment>)}</>;
+            case "slider":
+                return <>{
+                    <Slider step={20} onChange={(val) => setSliderValue(question.key, val)}/>
+                }
+                </>
             default:
                 return <></>
         }
