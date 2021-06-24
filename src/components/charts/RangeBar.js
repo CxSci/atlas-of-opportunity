@@ -9,19 +9,27 @@ import {
   ReferenceArea,
   Label,
 } from "recharts";
+
 let gradientId = 0;
 
-const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.2, options }) => {
+const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.0, options = {} }) => {
   const data = [{
     name: "value1",
     max: max,
     value: value,
   }];
 
-  const minLabel = options?.minLabel || 'LOW';
-  const maxLabel = options?.maxLabel || 'HIGH';
-  const minColor = options?.minColor || 'rgb(255,233,0)';
-  const maxColor = options?.maxColor || 'rgb(242,11,11)';
+  options = {
+    // defaults
+    minLabel: 'LOW',
+    maxLabel: 'HIGH',
+    minColor: 'rgb(255,233,0)',
+    maxColor: 'rgb(242,11,11)',
+    // overrides
+    ...options
+  }
+
+  const { minLabel, maxLabel, minColor, maxColor } = options;
 
   const renderGradientShape = ({height, width, x, y, background}) => {
     const whiteLayerX = width;
