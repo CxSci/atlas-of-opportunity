@@ -47,8 +47,8 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="year" fontSize={12} allowDuplicatedCategory={false} />
           <YAxis type="number" domain={['auto','auto']}
-            width={30} fontSize={12}
-            tickFormatter={val => val.toLocaleString('en-US', { notation: 'compact', maximumFractionDigits: 0 })} />
+            width={40} fontSize={12}
+            tickFormatter={val => val.toLocaleString(undefined, { notation: 'compact', maximumFractionDigits: 1 })} />
           <Tooltip
             contentStyle={{ fontSize: 10, padding: '2px 4px' }}
             labelStyle={{ display: 'none' }}
