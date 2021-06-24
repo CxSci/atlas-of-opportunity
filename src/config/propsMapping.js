@@ -15,8 +15,16 @@ export default [
   {
     title: 'Demographic Summary',
     content: [
-      { id: 'pop_proj', label: 'Population Grow', type: 'line-chart' },
-      { id: 'persons_num', label: 'Population', format: 'number' },
+      {
+        id: 'pop_proj',
+        label: 'Population Grow',
+        type: 'line-chart'
+      },
+      {
+        id: 'persons_num',
+        label: 'Population',
+        format: 'number'
+      },
       {
         id: 'popfraction',
         label: 'Fraction of South Australia Population Living in this Region', // too long
@@ -157,8 +165,13 @@ export default [
     title: 'Growth Summary',
     content: [
       {
-        id: 'income_diversity', label: 'GDP Growth Potential', format: 'number', type: 'range', min: 0, max: 1.2,
-        desc: `Economic growth is an increase in the production of economic goods and services, compared from one period of time to another. Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.`
+        id: 'income_diversity',
+        label: 'GDP Growth Potential',
+        desc: `Economic growth is an increase in the production of economic goods and services, compared from one period of time to another. Traditionally, aggregate economic growth is measured in terms of gross national product (GNP) or gross domestic product (GDP), although alternative metrics are sometimes used.`,
+        format: 'number',
+        type: 'range',
+        min: 0,
+        max: 1.2,
       },
       {
         id: 'bridge_diversity',
@@ -169,7 +182,7 @@ export default [
           minLabel: 'MIN',
           maxLabel: 'MAX',
           minColor: 'rgb(89,207,245)',
-          maxColor: 'rgb(45,156,219)'
+          maxColor: 'rgb(45,156,219)',
         },
       },
       // {
