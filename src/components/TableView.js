@@ -45,7 +45,7 @@ const TableView = ({comparisonFeatures}) => {
 
     const renderCell = (rawValue, record) => {
       const metric = section.content[record.id];
-      if (rawValue === undefined || rawValue === null || (typeof rawValue === 'string' && rawValue.match(/missing/i))) {
+      if (rawValue === undefined || rawValue === null) {
         return rawValue || 'No data';
       }
       

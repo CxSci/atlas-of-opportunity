@@ -40,10 +40,9 @@ const LocationDetails = (props) => {
   
   const renderSelectedValue = (metric) => {
     let rawValue = selectedFeature.properties[metric.id];
-    if (rawValue === undefined || rawValue === null || (typeof rawValue === 'string' && rawValue.match(/missing/i))) {
+    if (rawValue === undefined || rawValue === null) {
       return rawValue || 'No data';
     }
-
     const value = formatValue(rawValue, metric.format);
     
     switch (metric.type) {
