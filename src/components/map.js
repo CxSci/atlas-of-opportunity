@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   setSelectedFeature,
   setSavedMapPosition,
+  setMapType,
 } from "../redux/action-creators";
 import * as turf from "@turf/turf";
 
@@ -578,6 +579,8 @@ let Map = class Map extends React.Component {
       return;
     } else if (this.props.active.key !== Constants.MAP_TYPE.BUSINESSES) {
       this.redrawBridges(feature);
+    } else {
+      setMapType("growth")
     }
 
     if (feature && (feature.geometry || feature._geometry)) {
