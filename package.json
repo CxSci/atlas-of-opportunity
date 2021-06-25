@@ -16,6 +16,7 @@
     "mapbox-gl": "^2.2.0",
     "mathjax-react": "^1.0.6",
     "prop-types": "^15.7.2",
+    "rc-slider": "^9.7.2",
     "rc-table": "^7.15.1",
     "react": "^16.9.0",
     "react-collapsible": "^2.8.3",
