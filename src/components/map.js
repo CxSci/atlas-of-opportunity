@@ -575,7 +575,7 @@ let Map = class Map extends React.Component {
                 0.8,
               ],
             },
-          });
+          }, "sa2-borders");
         }
         let fillColor = {
           property: this.props.active.property,
