@@ -88,7 +88,7 @@ function DropdownSelect({ items, selectedItem, handleSelectionChanged }) {
   } = useSelect({
     items,
     // Default to the first item in the list
-    selectedItem: selectedItem || items[0],
+    selectedItem,
     onSelectedItemChange: ({ selectedItem }) => {
       // The height of the select <button /> may change with the selection, so
       // we have the popper lazily recaclulate the dropdown menu's offset each

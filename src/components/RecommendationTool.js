@@ -44,8 +44,8 @@ const RecommendationTool = (props) => {
                     </Fragment>)}</>;
             case "select":
                 return <DropdownSelect
-                    items={question.answers}
-                    initialSelectedItem={""}
+                    items={[question.placeholder, ...question.answers]}
+                    selectedItem={formState[question.key] || question.placeholder}
                     handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
                     />;
             case "checkbox":
