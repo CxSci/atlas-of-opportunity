@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
-import Slider from 'rc-slider';
+import { Range } from 'rc-slider';
+
 import 'rc-slider/assets/index.css';
 import '../css/recommendation.css';
 
@@ -61,9 +62,18 @@ const RecommendationTool = (props) => {
                             {answer}
                         </label>
                     </Fragment>)}</>;
-            case "slider":
+            case "slider_range":
                 return <>{
-                    <Slider step={20} marks={question.answers.reduce((acc, answer, idx) => ({...acc, [idx*20]: {label: answer}}))} onChange={(val) => setSliderValue(question.key, val)}/>
+                    <Range
+                        // Each mark is a step.
+                        step={null}
+                        // Must be in the form { 0: "Foo" }, where 0 is where
+                        // the mark should appear on the slider from 0 to 100.
+                        marks={question.answers}
+                        defaultValue={[0, 100]}
+                        onAfterChange={(val) => {
+                            setSliderValue(question.key, val.map(v => question.answers[v]))}}
+                    />
                 }
                 </>
             default:

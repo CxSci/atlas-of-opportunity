@@ -63,10 +63,17 @@ export const RECOMMENDATION_DUMMY_DATA = [
       answers: ["Location 1", "Location 2", "Location 3"]
     },
     {
-    type:"slider",
-    question: "What is the value of this slider",
-    key: "slider_test",
-    answers: ["0", "20", "40", "60", "80", "100"]
+      type:"slider_range",
+      question: "What is the income range of the customers you would like to reach?",
+      key: "customer_income",
+      answers: {
+        0: "$0",
+        20: "$25,000",
+        40: "$50,000",
+        60: "$75,000",
+        80: "$100,000",
+        100: "$250,000+"
+      }
     }
   ]
   },
