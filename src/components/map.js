@@ -620,22 +620,6 @@ let Map = class Map extends React.Component {
     }
   };
 
-  onMapSearch = (e) => {
-    this.map.fire("click", {
-      latlng: e,
-      point: this.map.project(e),
-    });
-    this.map.flyTo({
-      center: e,
-      zoom: 11,
-      speed: 1.2,
-      curve: 1,
-      easing: function (t) {
-        return t;
-      },
-    });
-  };
-
   onMapClick = (e) => {
     // Ignore clicks that were already consumed by a deeper handler  e.g. if
     // the user clicked on a map feature, ignore the same click event when
