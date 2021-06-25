@@ -45,9 +45,21 @@ let Map = class Map extends React.Component {
     closeOnClick: false,
     className: "floating-popup",
   });
+  markerRadius = 4;
   detailPopup = new mapboxgl.Popup({
     closeButton: true, 
     className: "detail-popup",
+    // Ensure .mapboxgl-popup-tip doesn't overlap the marker it points to
+    offset: {
+      'top': [0, this.markerRadius],
+      'top-left': [this.markerRadius, this.markerRadius],
+      'top-right': [-this.markerRadius, this.markerRadius],
+      'bottom': [0, -this.markerRadius],
+      'bottom-left': [this.markerRadius, -this.markerRadius],
+      'bottom-right': [-this.markerRadius, -this.markerRadius],
+      'left': [this.markerRadius, 0],
+      'right': [-this.markerRadius, 0],
+    }
   });
 
   constructor(props) {
@@ -481,7 +493,7 @@ let Map = class Map extends React.Component {
         filter: ["!", ["has", "point_count"]],
         paint: {
           "circle-color": "#11b4da",
-          "circle-radius": 4,
+          "circle-radius": this.markerRadius,
           "circle-stroke-width": 1,
           "circle-stroke-color": "#fff",
         },
