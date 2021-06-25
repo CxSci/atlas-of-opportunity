@@ -175,7 +175,7 @@ let Map = class Map extends React.Component {
           "line-color": [
             "case",
             ["boolean", ["feature-state", "click"], false],
-            "#000080",
+            "#fef4e1",
             ["boolean", ["feature-state", "highlight"], false],
             "#008000",
             ["boolean", ["feature-state", "hover"], false],
