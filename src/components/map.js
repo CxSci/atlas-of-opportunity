@@ -23,26 +23,31 @@ let Map = class Map extends React.Component {
   hoveredPopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    className: "floating-popup",
   });
   clickedPopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    className: "floating-popup",
   });
   cntr0Popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    className: "floating-popup",
   });
   cntr1Popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    className: "floating-popup",
   });
   cntr2Popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
+    className: "floating-popup",
   });
-  businessPopup = new mapboxgl.Popup({
-    closeButton: false, 
-    className: "business-popup"
+  detailPopup = new mapboxgl.Popup({
+    closeButton: true, 
+    className: "detail-popup",
   });
 
   constructor(props) {
@@ -284,7 +289,7 @@ let Map = class Map extends React.Component {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    this.businessPopup
+    this.detailPopup
       .setLngLat(coordinates)
       .setHTML("<div class=\"popup-root\"><p class=\"popup-text-header\"> " + properties.name + "</p><p class=\"popup-text\">" + properties.type + "</p></div>")
       .addTo(this.map);
@@ -481,7 +486,7 @@ let Map = class Map extends React.Component {
           "circle-stroke-color": "#fff",
         },
       });
-  }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -533,7 +538,7 @@ let Map = class Map extends React.Component {
           this.map.removeLayer("unclustered-point");
         }
 
-        this.businessPopup.remove();
+        this.detailPopup.remove();
 
         if (!this.map.getLayer("sa2-fills")) {
           this.map.addLayer({
