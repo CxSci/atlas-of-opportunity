@@ -19,8 +19,12 @@ const RecommendationTool = (props) => {
 
     const setCheckboxValue = (key, answer) => {
         const newArray = formState[key] ? Array.from(formState[key]) : [];
-        if (newArray.includes(answer)) newArray.splice(newArray.indexOf(answer), 1);
-        else newArray.push(answer);
+        if (newArray.includes(answer)) {
+            newArray.splice(newArray.indexOf(answer), 1);
+        }
+        else {
+            newArray.push(answer);
+        }
         setFormState({...formState, [key]: newArray});
     }
 
@@ -47,8 +51,8 @@ const RecommendationTool = (props) => {
                     </Fragment>)}</>;
             case "select":
                 return <DropdownSelect
-                    items={question.answers}
-                    initialSelectedItem={""}
+                    items={[question.placeholder, ...question.answers]}
+                    selectedItem={formState[question.key] || question.placeholder}
                     handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
                     />;
             case "checkbox":
@@ -96,11 +100,13 @@ const RecommendationTool = (props) => {
                             <></> :
                             props.data[currentStage].questions.map((question, idx) => {
                                 return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
-                                    <p className="description">
-                                        {question.question}
-                                        <br/>
-                                        <span className="help">{question.hint}</span>
-                                    </p>
+                                    {(question.question) &&
+                                        <p className="description">
+                                            {question.question}
+                                            <br/>
+                                            <span className="help">{question.hint}</span>
+                                        </p>
+                                    }
                                     <div className="inputRoot">{inputComponentForQuestion(question)}</div>
                                 </div>
                             })

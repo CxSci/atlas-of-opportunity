@@ -83,7 +83,7 @@ const Main = (props) => {
           )}
           <HamburgerMenu />
         </div>
-        {props.selectedFeature && !comparisonMode && <Legend absolute />}
+        {(props.selectedFeature || props.comparisonFeatures.length > 0) && !comparisonMode && <Legend absolute />}
         <Footer inDarkMode={!comparisonMode}/>
         <Routes />
       </div>

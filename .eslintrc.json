@@ -21,7 +21,8 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-console": "warn"
+        "no-console": "warn",
+        "curly": "warn"
     },
     "settings": {
         "react": {

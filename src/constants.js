@@ -1,6 +1,5 @@
-export const SET_ACTIVE_OPTION = "SET_ACTIVE_OPTION";
-export const SET_SELECT = "SET_SELECT";
 export const HIDE_SIDEBAR_DIALOG = "HIDE_SIDEBAR_DIALOG";
+export const SET_ACTIVE_MAP_LAYER = "SET_ACTIVE_MAP_LAYER";
 export const SET_FLOW_DIRECTION = "SET_FLOW_DIRECTION";
 export const SET_SEARCH_BAR_INFO = "SET_SEARCH_BAR_INFO";
 export const SET_SIDEBAR = "SET_SIDEBAR";
@@ -20,6 +19,7 @@ export const MAP_TYPE = {
   GROWTH: "growth",
   TRANSACTIONS: "transactions",
   SEGREGATION: "segregation",
+  BUSINESSES: "businesses"
 };
 
 export const COMPARISON_TYPE = {

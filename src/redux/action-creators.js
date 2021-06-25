@@ -1,13 +1,6 @@
 import { store } from "./store";
 import * as Constants from "../constants";
 
-export function setActiveOption(option) {
-  store.dispatch({
-    type: Constants.SET_ACTIVE_OPTION,
-    option,
-  });
-}
-
 export function hideSidebarDialog(payload) {
   store.dispatch({
     type: Constants.HIDE_SIDEBAR_DIALOG,
@@ -24,7 +17,7 @@ export function setHamburgerMenuOpen(payload) {
 
 export function setMapType(payload) {
   store.dispatch({
-    type: "MapType",
+    type: Constants.SET_ACTIVE_MAP_LAYER,
     payload: payload,
   });
 }

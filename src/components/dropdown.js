@@ -65,7 +65,7 @@ ChevronIcon.propTypes = {
   isOpen: PropTypes.bool
 }
 
-function DropdownSelect({ items, initialSelectedItem, handleSelectionChanged }) {
+function DropdownSelect({ items, selectedItem, handleSelectionChanged }) {
   // Set up popper-js
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
@@ -78,15 +78,8 @@ function DropdownSelect({ items, initialSelectedItem, handleSelectionChanged }) 
   })
 
   // Set up downshift-js
-
-  // Default to the first item in the list
-  if (!initialSelectedItem) {
-    initialSelectedItem = items[0]
-  }
-
   const {
     isOpen,
-    selectedItem,
     getToggleButtonProps,
     getLabelProps,
     getMenuProps,
@@ -94,7 +87,8 @@ function DropdownSelect({ items, initialSelectedItem, handleSelectionChanged }) 
     getItemProps,
   } = useSelect({
     items,
-    initialSelectedItem,
+    // Default to the first item in the list
+    selectedItem,
     onSelectedItemChange: ({ selectedItem }) => {
       // The height of the select <button /> may change with the selection, so
       // we have the popper lazily recaclulate the dropdown menu's offset each
@@ -142,7 +136,7 @@ function DropdownSelect({ items, initialSelectedItem, handleSelectionChanged }) 
 
 DropdownSelect.propTypes = {
   items: PropTypes.array.isRequired,
-  initialSelectedItem: PropTypes.string,
+  selectedItem: PropTypes.string,
   handleSelectionChanged: PropTypes.func.isRequired
 }
 
