@@ -63,13 +63,14 @@ const RecommendationTool = (props) => {
                     </Fragment>)}</>;
             case "slider":
                 return <>{
-                    <Slider step={20} onChange={(val) => setSliderValue(question.key, val)}/>
+                    <Slider step={20} marks={question.answers.reduce((acc, answer, idx) => ({...acc, [idx*20]: {label: answer}}))} onChange={(val) => setSliderValue(question.key, val)}/>
                 }
                 </>
             default:
                 return <></>
         }
     }
+    
 
     return <>
         <RecommendationHeader currentStage={currentStage} stages={[...props.data.map(x => x.title), "Results"]}/>

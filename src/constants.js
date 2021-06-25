@@ -62,6 +62,12 @@ export const RECOMMENDATION_DUMMY_DATA = [
       key: "location_type",
       answers: ["Location 1", "Location 2", "Location 3"]
     },
+    {
+    type:"slider",
+    question: "What is the value of this slider",
+    key: "slider_test",
+    answers: ["0", "20", "40", "60", "80", "100"]
+    }
   ]
   },
   {
