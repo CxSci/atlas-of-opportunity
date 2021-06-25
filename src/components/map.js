@@ -449,6 +449,7 @@ let Map = class Map extends React.Component {
       });
 
     if (!this.map.getLayer("cluster-count"))
+    //Mapbox uses it's own fonts and doesn't support roboto
       this.map.addLayer({
         id: "cluster-count",
         type: "symbol",
