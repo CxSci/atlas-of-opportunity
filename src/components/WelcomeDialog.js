@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import SidebarDialog from "./SidebarDialog";
 
@@ -15,6 +16,12 @@ let WelcomeDialog = class WelcomeDialog extends Component {
 
     const content = {
       marginTop: 15,
+      lineHeight: "150%",
+    }
+
+    const linkStyle = {
+      alignSelf: "flex-start",
+      color: "#0099E5",
     }
 
     return (
@@ -28,16 +35,9 @@ let WelcomeDialog = class WelcomeDialog extends Component {
           Adelaide bigdata Living Lab, and local research institutes
           including University of South Australia and The University of
           Adelaide.
-        </p>
-        <p style={content}>
-          The Living Lab works to better understand how social interaction
-          and economic behavior impact future outcomes of communities across
-          South Australia. This map showcases recent research revealing that
-          understanding community movement patterns is crucial for
-          understanding economic growth and mobility. Places with more
-          diverse movement patterns are more likely to have higher
-          near-future economic growth. The goal of the Atlas is to make
-          these insights more accessible.
+          <br/>
+          <br/>
+          <Link to="/about" style={linkStyle}>Read more…</Link>
         </p>
       </SidebarDialog>
     );

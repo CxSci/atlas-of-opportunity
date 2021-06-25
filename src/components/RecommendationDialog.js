@@ -5,7 +5,7 @@ import LozengeButton from './LozengeButton';
 
 const modalText = {
   fontSize: "14px",
-  lineHeight: "133%",
+  lineHeight: "150%",
   color: "#333333",
   marginBottom: 20,
 }
