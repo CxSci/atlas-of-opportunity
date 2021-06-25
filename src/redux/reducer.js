@@ -127,7 +127,7 @@ function reducer(state = initialState, action) {
         hiddenSidebarDialogs: 
           [...new Set([...state.hiddenSidebarDialogs, action.payload])],
       }
-    case "MapType":
+    case Constants.SET_ACTIVE_MAP_LAYER:
       return {
         ...state,
         mapType: action.payload,
