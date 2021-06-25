@@ -29,6 +29,8 @@
 
 .grid-container {
   max-width: 1040px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .grid-container .grid-item {
@@ -44,7 +46,7 @@
 .grid-container .grid-item-body {
   padding: 0 15px;
   border-right: 1px solid #e6e6e6;
-  height: 110px;
+  min-height: 110px;
   margin-bottom: 20px;
 }
 .grid-container .grid-item:nth-child(4n) .grid-item-body {
@@ -52,7 +54,7 @@
 }
 .grid-container .grid-item .comparison > label {
   text-overflow: ellipsis;
-  overflow: auto;
+  overflow: hidden;
   white-space: nowrap;
   margin-right: 8px;
 }

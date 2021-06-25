@@ -40,8 +40,11 @@
   background-color: #808080;
 }
 
+.table-row > td .cell-data {
+  line-height: 24px;
+}
 .table-row > td {
-  padding: 8px 10px;
+  padding: 3px 10px;
   vertical-align: middle;
 }
 .table-row:nth-child(even) {

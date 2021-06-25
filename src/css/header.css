@@ -103,9 +103,13 @@
 }
 
 .hamburgerButton {
-    padding: 3px 5px;
-    margin-left: 12px;
-    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    padding-right: 2px;
     z-index: 1;
     pointer-events: auto;
 }
@@ -113,7 +117,7 @@
 .menu-icon-bar {
     width: 22px;
     height: 3px;
-    margin: 4px 0;
+    margin: 2px 0;
     border-radius: 2px;
 }
 
