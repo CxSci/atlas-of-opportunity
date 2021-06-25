@@ -69,7 +69,7 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
       <div className="mt6 mb12">
         <DropdownSelect
           items={Object.keys(mapLayers).map(t => mapLayers[t].name)}
-          initialSelectedItem={name}
+          selectedItem={name}
           handleSelectionChanged={mapTypeEvent}
         />
       </div>
