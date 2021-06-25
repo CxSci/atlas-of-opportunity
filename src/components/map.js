@@ -76,6 +76,7 @@ let Map = class Map extends React.Component {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
     activeLayer: PropTypes.object.isRequired,
+    mapLayers: PropTypes.array.isRequired,
     flowDirection: PropTypes.string.isRequired,
     savedMapPosition: PropTypes.object,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
@@ -221,8 +222,8 @@ let Map = class Map extends React.Component {
           layout: {},
           paint: {
             "fill-color": {
-              property: this.props.activeLayer.property,
-              stops: this.props.activeLayer.stops,
+              property: this.props.mapLayers[Constants.MAP_TYPE.GROWTH].property,
+              stops: this.props.mapLayers[Constants.MAP_TYPE.GROWTH].stops,
             },
             "fill-opacity": 0.8,
           },
@@ -1003,6 +1004,7 @@ function mapStateToProps(state) {
     features: state.features,
     geojsonURL: state.geojsonURL,
     activeLayer: state.activeLayer,
+    mapLayers: state.mapLayers,
     flowDirection: state.flowDirection,
     savedMapPosition: state.savedMapPosition,
     searchBarInfo: state.searchBarInfo,
