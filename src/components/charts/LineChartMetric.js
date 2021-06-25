@@ -36,7 +36,9 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
   }));
 
   const legendHeigth = (lines.length * 15);
-  if (showLegend) height += legendHeigth;
+  if (showLegend) {
+    height += legendHeigth;
+  }
 
   const tickFormatter = (value) => {
     // Note: Change this to use Intl.NumberFormat() some day when more browsers

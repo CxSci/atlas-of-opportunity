@@ -16,8 +16,12 @@ const RecommendationTool = (props) => {
 
     const setCheckboxValue = (key, answer) => {
         const newArray = formState[key] ? Array.from(formState[key]) : [];
-        if (newArray.includes(answer)) newArray.splice(newArray.indexOf(answer), 1);
-        else newArray.push(answer);
+        if (newArray.includes(answer)) {
+            newArray.splice(newArray.indexOf(answer), 1);
+        }
+        else {
+            newArray.push(answer);
+        }
         setFormState({...formState, [key]: newArray});
     }
 
