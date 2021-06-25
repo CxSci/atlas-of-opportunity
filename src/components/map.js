@@ -312,7 +312,9 @@ let Map = class Map extends React.Component {
   };
 
   easeToFeature = (features) => (err, zoom) => {
-    if (err) return;
+    if (err) {
+      return;
+    }
 
     this.map.easeTo({
       center: features[0].geometry.coordinates,
@@ -414,8 +416,10 @@ let Map = class Map extends React.Component {
   };
 
   drawBusinessClusters() {
-    if (this.map.getLayer("sa2-fills")) this.map.removeLayer("sa2-fills");
-    if (!this.map.getLayer("clusters"))
+    if (this.map.getLayer("sa2-fills")) {
+      this.map.removeLayer("sa2-fills");
+    } 
+    if (!this.map.getLayer("clusters")) {
       this.map.addLayer({
         id: "clusters",
         type: "circle",
@@ -447,9 +451,10 @@ let Map = class Map extends React.Component {
           ],
         },
       });
+    }
 
-    if (!this.map.getLayer("cluster-count"))
     //Mapbox uses it's own fonts and doesn't support roboto
+    if (!this.map.getLayer("cluster-count")) {
       this.map.addLayer({
         id: "cluster-count",
         type: "symbol",
@@ -461,8 +466,9 @@ let Map = class Map extends React.Component {
           "text-size": 12,
         },
       });
+    }
 
-    if (!this.map.getLayer("unclustered-point"))
+    if (!this.map.getLayer("unclustered-point")) {
       this.map.addLayer({
         id: "unclustered-point",
         type: "circle",
@@ -475,6 +481,7 @@ let Map = class Map extends React.Component {
           "circle-stroke-color": "#fff",
         },
       });
+  }
   }
 
   componentDidUpdate(prevProps) {
@@ -508,7 +515,9 @@ let Map = class Map extends React.Component {
           this.map.removeSource("point");
         }
       } else {
-        if (this.map.getLayer("clusters")) this.map.removeLayer("clusters");
+        if (this.map.getLayer("clusters")) {
+          this.map.removeLayer("clusters");
+        }
         if (this.map.getLayer("cluster-count")) {
           this.map.removeLayer("cluster-count");
         }
