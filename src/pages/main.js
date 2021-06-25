@@ -18,7 +18,6 @@ import "../css/main.css";
 const Main = (props) => {
     const {comparisonFeatures, features} = props;
     const mapStyler = {
-      zindex: 0,
       width: "100%",
     };
     const screenFlexStyle = {
@@ -27,6 +26,7 @@ const Main = (props) => {
       width: "100%",
       height: "100%",
       overflow: "hidden",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25), 0px -1px 0px rgba(0, 0, 0, 0.1)",
     };
 
     const [comparisonMode, setComparisonMode] = useState(false);

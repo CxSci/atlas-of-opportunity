@@ -1,0 +1,48 @@
+.modalContainerContent {
+    font-size: 14px;
+    line-height: 150%;    
+}
+
+.modalContainerContent h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modalContainerContent h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 25px;
+    margin-bottom: 15px
+}
+
+.modalContainerContent p {
+    margin-bottom: 15px;    
+}
+
+.modalContainerContent p.pubAuthors {
+    margin-bottom: 0;    
+}
+
+.modalContainerContent a {
+    color: #0099E5;
+}
+
+.modalContainerContent .imageFill {
+    width: 100%;
+}
+
+.modalContainerContent .formula {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 15px 0;
+}
+
+.modalContainerContent p.faqQ {
+    font-weight: bold;
+    margin-top: 20px;
+}

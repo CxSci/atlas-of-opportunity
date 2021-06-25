@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import mapboxgl from "mapbox-gl";
+// Add '!' so production builds work. See: https://docs.mapbox.com/mapbox-gl-js/api/#excluding-gl-js-explicitly-from-transpilation
+import mapboxgl from "!mapbox-gl";
 import { connect } from "react-redux";
 import {
   setSelectedFeature,
@@ -630,9 +631,11 @@ let Map = class Map extends React.Component {
     e.preventDefault();
 
     let prevSA2 = this.state.selectedFeature;
-    let clickedFeature = e.features ? e.features[0] : null;
+    let clickedFeature = null;
+    let clickedFeatureId = e.features?.[0].properties.SA2_MAIN16;
 
-    if (clickedFeature) {
+    if (clickedFeatureId) {
+      clickedFeature = this.props.features.find(ft => ft.properties.SA2_MAIN16 === clickedFeatureId);
       // Make sure this feature has a `primary` property for when it becomes
       // selectedFeature, as the search field adds that to its own features and
       // expects passed in features to have the same.

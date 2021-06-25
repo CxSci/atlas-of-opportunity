@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import Table from "rc-table";
-import propsMapping from "./propsMapping";
+import propsMapping from "../config/propsMapping";
 import { formatValue } from "../utils/formatValue";
+import RangeBar from "./charts/RangeBar";
+import SolidBar from "./charts/SolidBar";
+import LineChartMetric from "./charts/LineChartMetric";
 import "../css/TableView.css"
 const { Column } = Table;
 
@@ -32,8 +35,7 @@ const TableView = ({comparisonFeatures}) => {
     section.content.forEach((metric, idx) => {
       let columnValues = comparisonFeatures.map((ft, idx) => {
         let rawValue = ft.properties[metric.id];
-        const value = formatValue(rawValue, metric.format);
-        return ({ [`regionData${idx + 1}`]: value })
+        return ({ [`regionData${idx + 1}`]: rawValue });
       });
       columnValues.push({regionName: metric.label});
       columnValues.push({id: idx});
@@ -41,12 +43,29 @@ const TableView = ({comparisonFeatures}) => {
       data.push(row);
     })
 
-    const renderCell = (value, record) => {
+    const renderCell = (rawValue, record) => {
       const metric = section.content[record.id];
-      const isChart = metric.type === 'chart';
-      return (
-        !isChart ? value : <div className="fake-chart"></div>
-      );
+      if (rawValue === undefined || rawValue === null) {
+        return rawValue || 'No data';
+      }
+      
+      switch (metric.type) {
+        case 'line-chart':{
+          return <LineChartMetric data={rawValue} width={120} height={115} />
+        }
+        case 'range':{
+          const value = rawValue || 0;
+          return <RangeBar value={value} min={metric.min} max={metric.max} options={metric.options} width={120} />
+        }
+        case 'bar':{
+          const value = formatValue(rawValue, metric.format);
+          return <SolidBar label={value} value={rawValue} max={metric.max} width={120} />
+        }
+        default:{
+          const value = formatValue(rawValue, metric.format);
+          return <span className="cell-data">{value}</span>
+        }
+      }
     }
 
     return (

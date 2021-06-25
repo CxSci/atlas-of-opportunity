@@ -1,24 +1,17 @@
 export function formatValue(value, format) {
-  let result = null;
+  if (!value) {
+    return "n/a";
+  }
   switch (format) {
     case 'number':
-      if (value > 100) {
-        result = Math.floor(value).toLocaleString('en-US');
-      }
-      else {
-        value = Math.floor(value * 10000) / 10000;
-        result = value.toLocaleString('en-US', { minimumFractionDigits: 4 });
-      }
-      break;
+      return value.toLocaleString();
     case 'currency':
-      result = value.toLocaleString(undefined, { style: "currency", currency: "AUS" });
-      break;
+      return value.toLocaleString(undefined, { style: "currency", currency: "AUS" });
     case 'percent':
-      result = `${Math.floor(value)}%`;
-      break;
+      return `${Math.floor(value)}%`;
+    case 'percent_normalized':
+      return `${(value * 100.0).toFixed(2)}%`;
     default:
-      result = value;
-      break;
+      return value ? value + '' : '';
   }
-  return result;
 }

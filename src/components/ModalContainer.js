@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
+import '../css/ModalContainer.css'
+
 import { ReactComponent as CloseIcon} from "../assets/closeIconPage.svg";
 
 const ModalContainer = (props) => {
@@ -72,7 +74,7 @@ const ModalContainer = (props) => {
   }
 
   return (
-    <div style={modalContainer}>
+    <div className="modalContainer" style={modalContainer}>
       <div
         onClick={history.goBack}
         style={dimScreen}
@@ -83,7 +85,7 @@ const ModalContainer = (props) => {
             {title}
             <CloseIcon style={iconButton} onClick={history.goBack}/>
           </h3>  
-          <div style={childrenContent}>
+          <div className="modalContainerContent" style={childrenContent}>
             {children}
           </div>
         </div>

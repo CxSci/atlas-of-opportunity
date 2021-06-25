@@ -1,0 +1,5062 @@
+[
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0111",
+        "group_code": "011",
+        "class_title": "Nursery Production (Under Cover)",
+        "subdivision_code": "01",
+        "group_title": "Nursery and Floriculture Production",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0112",
+        "group_code": "011",
+        "class_title": "Nursery Production (Outdoors)",
+        "subdivision_code": "01",
+        "group_title": "Nursery and Floriculture Production",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0113",
+        "group_code": "011",
+        "class_title": "Turf Growing",
+        "subdivision_code": "01",
+        "group_title": "Nursery and Floriculture Production",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0114",
+        "group_code": "011",
+        "class_title": "Floriculture Production (Under Cover)",
+        "subdivision_code": "01",
+        "group_title": "Nursery and Floriculture Production",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0115",
+        "group_code": "011",
+        "class_title": "Floriculture Production (Outdoors)",
+        "subdivision_code": "01",
+        "group_title": "Nursery and Floriculture Production",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0121",
+        "group_code": "012",
+        "class_title": "Mushroom Growing",
+        "subdivision_code": "01",
+        "group_title": "Mushroom and Vegetable Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0122",
+        "group_code": "012",
+        "class_title": "Vegetable Growing (Under Cover)",
+        "subdivision_code": "01",
+        "group_title": "Mushroom and Vegetable Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0123",
+        "group_code": "012",
+        "class_title": "Vegetable Growing (Outdoors)",
+        "subdivision_code": "01",
+        "group_title": "Mushroom and Vegetable Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0131",
+        "group_code": "013",
+        "class_title": "Grape Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0132",
+        "group_code": "013",
+        "class_title": "Kiwifruit Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0133",
+        "group_code": "013",
+        "class_title": "Berry Fruit Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0134",
+        "group_code": "013",
+        "class_title": "Apple and Pear Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0135",
+        "group_code": "013",
+        "class_title": "Stone Fruit Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0136",
+        "group_code": "013",
+        "class_title": "Citrus Fruit Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0137",
+        "group_code": "013",
+        "class_title": "Olive Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0139",
+        "group_code": "013",
+        "class_title": "Other Fruit and Tree Nut Growing",
+        "subdivision_code": "01",
+        "group_title": "Fruit and Tree Nut Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0141",
+        "group_code": "014",
+        "class_title": "Sheep Farming (Specialised)",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0142",
+        "group_code": "014",
+        "class_title": "Beef Cattle Farming (Specialised)",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0143",
+        "group_code": "014",
+        "class_title": "Beef Cattle Feedlots (Specialised)",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0144",
+        "group_code": "014",
+        "class_title": "Sheep-Beef Cattle Farming",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0145",
+        "group_code": "014",
+        "class_title": "Grain-Sheep or Grain-Beef Cattle Farming",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0146",
+        "group_code": "014",
+        "class_title": "Rice Growing",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0149",
+        "group_code": "014",
+        "class_title": "Other Grain Growing",
+        "subdivision_code": "01",
+        "group_title": "Sheep, Beef Cattle and Grain Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0151",
+        "group_code": "015",
+        "class_title": "Sugar Cane Growing",
+        "subdivision_code": "01",
+        "group_title": "Other Crop Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0152",
+        "group_code": "015",
+        "class_title": "Cotton Growing",
+        "subdivision_code": "01",
+        "group_title": "Other Crop Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0159",
+        "group_code": "015",
+        "class_title": "Other Crop Growing n.e.c.",
+        "subdivision_code": "01",
+        "group_title": "Other Crop Growing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0160",
+        "group_code": "016",
+        "class_title": "Dairy Cattle Farming",
+        "subdivision_code": "01",
+        "group_title": "Dairy Cattle Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0171",
+        "group_code": "017",
+        "class_title": "Poultry Farming (Meat)",
+        "subdivision_code": "01",
+        "group_title": "Poultry Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0172",
+        "group_code": "017",
+        "class_title": "Poultry Farming (Eggs)",
+        "subdivision_code": "01",
+        "group_title": "Poultry Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0180",
+        "group_code": "018",
+        "class_title": "Deer Farming",
+        "subdivision_code": "01",
+        "group_title": "Deer Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0191",
+        "group_code": "019",
+        "class_title": "Horse Farming",
+        "subdivision_code": "01",
+        "group_title": "Other Livestock Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0192",
+        "group_code": "019",
+        "class_title": "Pig Farming",
+        "subdivision_code": "01",
+        "group_title": "Other Livestock Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0193",
+        "group_code": "019",
+        "class_title": "Beekeeping",
+        "subdivision_code": "01",
+        "group_title": "Other Livestock Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture",
+        "class_code": "0199",
+        "group_code": "019",
+        "class_title": "Other Livestock Farming n.e.c.",
+        "subdivision_code": "01",
+        "group_title": "Other Livestock Farming",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Aquaculture",
+        "class_code": "0201",
+        "group_code": "020",
+        "class_title": "Offshore Longline and Rack Aquaculture",
+        "subdivision_code": "02",
+        "group_title": "Aquaculture",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Aquaculture",
+        "class_code": "0202",
+        "group_code": "020",
+        "class_title": "Offshore Caged Aquaculture",
+        "subdivision_code": "02",
+        "group_title": "Aquaculture",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Aquaculture",
+        "class_code": "0203",
+        "group_code": "020",
+        "class_title": "Onshore Aquaculture",
+        "subdivision_code": "02",
+        "group_title": "Aquaculture",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Forestry and Logging",
+        "class_code": "0301",
+        "group_code": "030",
+        "class_title": "Forestry",
+        "subdivision_code": "03",
+        "group_title": "Forestry and Logging",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Forestry and Logging",
+        "class_code": "0302",
+        "group_code": "030",
+        "class_title": "Logging",
+        "subdivision_code": "03",
+        "group_title": "Forestry and Logging",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0411",
+        "group_code": "041",
+        "class_title": "Rock Lobster and Crab Potting",
+        "subdivision_code": "04",
+        "group_title": "Fishing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0412",
+        "group_code": "041",
+        "class_title": "Prawn Fishing",
+        "subdivision_code": "04",
+        "group_title": "Fishing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0413",
+        "group_code": "041",
+        "class_title": "Line Fishing",
+        "subdivision_code": "04",
+        "group_title": "Fishing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0414",
+        "group_code": "041",
+        "class_title": "Fish Trawling, Seining and Netting",
+        "subdivision_code": "04",
+        "group_title": "Fishing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0419",
+        "group_code": "041",
+        "class_title": "Other Fishing",
+        "subdivision_code": "04",
+        "group_title": "Fishing",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Fishing, Hunting and Trapping",
+        "class_code": "0420",
+        "group_code": "042",
+        "class_title": "Hunting and Trapping",
+        "subdivision_code": "04",
+        "group_title": "Hunting and Trapping",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture, Forestry and Fishing Support Services",
+        "class_code": "0510",
+        "group_code": "051",
+        "class_title": "Forestry Support Services",
+        "subdivision_code": "05",
+        "group_title": "Forestry Support Services",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture, Forestry and Fishing Support Services",
+        "class_code": "0521",
+        "group_code": "052",
+        "class_title": "Cotton Ginning",
+        "subdivision_code": "05",
+        "group_title": "Agriculture and Fishing Support Services",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture, Forestry and Fishing Support Services",
+        "class_code": "0522",
+        "group_code": "052",
+        "class_title": "Shearing Services",
+        "subdivision_code": "05",
+        "group_title": "Agriculture and Fishing Support Services",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Agriculture, Forestry and Fishing",
+        "subdivision_title": "Agriculture, Forestry and Fishing Support Services",
+        "class_code": "0529",
+        "group_code": "052",
+        "class_title": "Other Agriculture and Fishing Support Services",
+        "subdivision_code": "05",
+        "group_title": "Agriculture and Fishing Support Services",
+        "division_code": "A"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Coal Mining",
+        "class_code": "0600",
+        "group_code": "060",
+        "class_title": "Coal Mining",
+        "subdivision_code": "06",
+        "group_title": "Coal Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Oil and Gas Extraction",
+        "class_code": "0700",
+        "group_code": "070",
+        "class_title": "Oil and Gas Extraction",
+        "subdivision_code": "07",
+        "group_title": "Oil and Gas Extraction",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0801",
+        "group_code": "080",
+        "class_title": "Iron Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0802",
+        "group_code": "080",
+        "class_title": "Bauxite Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0803",
+        "group_code": "080",
+        "class_title": "Copper Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0804",
+        "group_code": "080",
+        "class_title": "Gold Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0805",
+        "group_code": "080",
+        "class_title": "Mineral Sand Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0806",
+        "group_code": "080",
+        "class_title": "Nickel Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0807",
+        "group_code": "080",
+        "class_title": "Silver-Lead-Zinc Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Metal Ore Mining",
+        "class_code": "0809",
+        "group_code": "080",
+        "class_title": "Other Metal Ore Mining",
+        "subdivision_code": "08",
+        "group_title": "Metal Ore Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Non-Metallic Mineral Mining and Quarrying",
+        "class_code": "0911",
+        "group_code": "091",
+        "class_title": "Gravel and Sand Quarrying",
+        "subdivision_code": "09",
+        "group_title": "Construction Material Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Non-Metallic Mineral Mining and Quarrying",
+        "class_code": "0919",
+        "group_code": "091",
+        "class_title": "Other Construction Material Mining",
+        "subdivision_code": "09",
+        "group_title": "Construction Material Mining",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Non-Metallic Mineral Mining and Quarrying",
+        "class_code": "0990",
+        "group_code": "099",
+        "class_title": "Other Non-Metallic Mineral Mining and Quarrying",
+        "subdivision_code": "09",
+        "group_title": "Other Non-Metallic Mineral Mining and Quarrying",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Exploration and Other Mining Support Services",
+        "class_code": "1011",
+        "group_code": "101",
+        "class_title": "Petroleum Exploration",
+        "subdivision_code": "10",
+        "group_title": "Exploration",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Exploration and Other Mining Support Services",
+        "class_code": "1012",
+        "group_code": "101",
+        "class_title": "Mineral Exploration",
+        "subdivision_code": "10",
+        "group_title": "Exploration",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Mining",
+        "subdivision_title": "Exploration and Other Mining Support Services",
+        "class_code": "1090",
+        "group_code": "109",
+        "class_title": "Other Mining Support Services",
+        "subdivision_code": "10",
+        "group_title": "Other Mining Support Services",
+        "division_code": "B"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1111",
+        "group_code": "111",
+        "class_title": "Meat Processing",
+        "subdivision_code": "11",
+        "group_title": "Meat and Meat Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1112",
+        "group_code": "111",
+        "class_title": "Poultry Processing",
+        "subdivision_code": "11",
+        "group_title": "Meat and Meat Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1113",
+        "group_code": "111",
+        "class_title": "Cured Meat and Smallgoods Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Meat and Meat Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1120",
+        "group_code": "112",
+        "class_title": "Seafood Processing",
+        "subdivision_code": "11",
+        "group_title": "Seafood Processing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1131",
+        "group_code": "113",
+        "class_title": "Milk and Cream Processing",
+        "subdivision_code": "11",
+        "group_title": "Dairy Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1132",
+        "group_code": "113",
+        "class_title": "Ice Cream Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Dairy Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1133",
+        "group_code": "113",
+        "class_title": "Cheese and Other Dairy Product Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Dairy Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1140",
+        "group_code": "114",
+        "class_title": "Fruit and Vegetable Processing",
+        "subdivision_code": "11",
+        "group_title": "Fruit and Vegetable Processing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1150",
+        "group_code": "115",
+        "class_title": "Oil and Fat Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Oil and Fat Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1161",
+        "group_code": "116",
+        "class_title": "Grain Mill Product Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Grain Mill and Cereal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1162",
+        "group_code": "116",
+        "class_title": "Cereal, Pasta and Baking Mix Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Grain Mill and Cereal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1171",
+        "group_code": "117",
+        "class_title": "Bread Manufacturing (Factory based)",
+        "subdivision_code": "11",
+        "group_title": "Bakery Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1172",
+        "group_code": "117",
+        "class_title": "Cake and Pastry Manufacturing (Factory based)",
+        "subdivision_code": "11",
+        "group_title": "Bakery Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1173",
+        "group_code": "117",
+        "class_title": "Biscuit Manufacturing (Factory based)",
+        "subdivision_code": "11",
+        "group_title": "Bakery Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1174",
+        "group_code": "117",
+        "class_title": "Bakery Product Manufacturing (Non-factory based)",
+        "subdivision_code": "11",
+        "group_title": "Bakery Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1181",
+        "group_code": "118",
+        "class_title": "Sugar Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Sugar and Confectionery Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1182",
+        "group_code": "118",
+        "class_title": "Confectionery Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Sugar and Confectionery Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1191",
+        "group_code": "119",
+        "class_title": "Potato, Corn and Other Crisp Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Other Food Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1192",
+        "group_code": "119",
+        "class_title": "Prepared Animal and Bird Feed Manufacturing",
+        "subdivision_code": "11",
+        "group_title": "Other Food Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Food Product Manufacturing",
+        "class_code": "1199",
+        "group_code": "119",
+        "class_title": "Other Food Product Manufacturing n.e.c.",
+        "subdivision_code": "11",
+        "group_title": "Other Food Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Beverage and Tobacco Product Manufacturing",
+        "class_code": "1211",
+        "group_code": "121",
+        "class_title": "Soft Drink, Cordial and Syrup Manufacturing",
+        "subdivision_code": "12",
+        "group_title": "Beverage Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Beverage and Tobacco Product Manufacturing",
+        "class_code": "1212",
+        "group_code": "121",
+        "class_title": "Beer Manufacturing",
+        "subdivision_code": "12",
+        "group_title": "Beverage Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Beverage and Tobacco Product Manufacturing",
+        "class_code": "1213",
+        "group_code": "121",
+        "class_title": "Spirit Manufacturing",
+        "subdivision_code": "12",
+        "group_title": "Beverage Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Beverage and Tobacco Product Manufacturing",
+        "class_code": "1214",
+        "group_code": "121",
+        "class_title": "Wine and Other Alcoholic Beverage Manufacturing",
+        "subdivision_code": "12",
+        "group_title": "Beverage Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Beverage and Tobacco Product Manufacturing",
+        "class_code": "1220",
+        "group_code": "122",
+        "class_title": "Cigarette and Tobacco Product Manufacturing",
+        "subdivision_code": "12",
+        "group_title": "Cigarette and Tobacco Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1311",
+        "group_code": "131",
+        "class_title": "Wool Scouring",
+        "subdivision_code": "13",
+        "group_title": "Textile Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1312",
+        "group_code": "131",
+        "class_title": "Natural Textile Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1313",
+        "group_code": "131",
+        "class_title": "Synthetic Textile Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1320",
+        "group_code": "132",
+        "class_title": "Leather Tanning, Fur Dressing and Leather Product Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Leather Tanning, Fur Dressing and Leather Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1331",
+        "group_code": "133",
+        "class_title": "Textile Floor Covering Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1332",
+        "group_code": "133",
+        "class_title": "Rope, Cordage and Twine Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1333",
+        "group_code": "133",
+        "class_title": "Cut and Sewn Textile Product Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1334",
+        "group_code": "133",
+        "class_title": "Textile Finishing and Other Textile Product Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Textile Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1340",
+        "group_code": "134",
+        "class_title": "Knitted Product Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Knitted Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1351",
+        "group_code": "135",
+        "class_title": "Clothing Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Clothing and Footwear Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Textile, Leather, Clothing and Footwear Manufacturing",
+        "class_code": "1352",
+        "group_code": "135",
+        "class_title": "Footwear Manufacturing",
+        "subdivision_code": "13",
+        "group_title": "Clothing and Footwear Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1411",
+        "group_code": "141",
+        "class_title": "Log Sawmilling",
+        "subdivision_code": "14",
+        "group_title": "Log Sawmilling and Timber Dressing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1412",
+        "group_code": "141",
+        "class_title": "Wood Chipping",
+        "subdivision_code": "14",
+        "group_title": "Log Sawmilling and Timber Dressing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1413",
+        "group_code": "141",
+        "class_title": "Timber Resawing and Dressing",
+        "subdivision_code": "14",
+        "group_title": "Log Sawmilling and Timber Dressing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1491",
+        "group_code": "149",
+        "class_title": "Prefabricated Wooden Building Manufacturing",
+        "subdivision_code": "14",
+        "group_title": "Other Wood Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1492",
+        "group_code": "149",
+        "class_title": "Wooden Structural Fitting and Component Manufacturing",
+        "subdivision_code": "14",
+        "group_title": "Other Wood Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1493",
+        "group_code": "149",
+        "class_title": "Veneer and Plywood Manufacturing",
+        "subdivision_code": "14",
+        "group_title": "Other Wood Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1494",
+        "group_code": "149",
+        "class_title": "Reconstituted Wood Product Manufacturing",
+        "subdivision_code": "14",
+        "group_title": "Other Wood Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Wood Product Manufacturing",
+        "class_code": "1499",
+        "group_code": "149",
+        "class_title": "Other Wood Product Manufacturing n.e.c.",
+        "subdivision_code": "14",
+        "group_title": "Other Wood Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1510",
+        "group_code": "151",
+        "class_title": "Pulp, Paper and Paperboard Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Pulp, Paper and Paperboard Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1521",
+        "group_code": "152",
+        "class_title": "Corrugated Paperboard and Paperboard Container Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Converted Paper Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1522",
+        "group_code": "152",
+        "class_title": "Paper Bag Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Converted Paper Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1523",
+        "group_code": "152",
+        "class_title": "Paper Stationery Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Converted Paper Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1524",
+        "group_code": "152",
+        "class_title": "Sanitary Paper Product Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Converted Paper Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Pulp, Paper and Converted Paper Product Manufacturing",
+        "class_code": "1529",
+        "group_code": "152",
+        "class_title": "Other Converted Paper Product Manufacturing",
+        "subdivision_code": "15",
+        "group_title": "Converted Paper Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Printing (including the Reproduction of Recorded Media)",
+        "class_code": "1611",
+        "group_code": "161",
+        "class_title": "Printing",
+        "subdivision_code": "16",
+        "group_title": "Printing and Printing Support Services",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Printing (including the Reproduction of Recorded Media)",
+        "class_code": "1612",
+        "group_code": "161",
+        "class_title": "Printing Support Services",
+        "subdivision_code": "16",
+        "group_title": "Printing and Printing Support Services",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Printing (including the Reproduction of Recorded Media)",
+        "class_code": "1620",
+        "group_code": "162",
+        "class_title": "Reproduction of Recorded Media",
+        "subdivision_code": "16",
+        "group_title": "Reproduction of Recorded Media",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Petroleum and Coal Product Manufacturing",
+        "class_code": "1701",
+        "group_code": "170",
+        "class_title": "Petroleum Refining and Petroleum Fuel Manufacturing",
+        "subdivision_code": "17",
+        "group_title": "Petroleum and Coal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Petroleum and Coal Product Manufacturing",
+        "class_code": "1709",
+        "group_code": "170",
+        "class_title": "Other Petroleum and Coal Product Manufacturing",
+        "subdivision_code": "17",
+        "group_title": "Petroleum and Coal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1811",
+        "group_code": "181",
+        "class_title": "Industrial Gas Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Basic Chemical Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1812",
+        "group_code": "181",
+        "class_title": "Basic Organic Chemical Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Basic Chemical Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1813",
+        "group_code": "181",
+        "class_title": "Basic Inorganic Chemical Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Basic Chemical Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1821",
+        "group_code": "182",
+        "class_title": "Synthetic Resin and Synthetic Rubber Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Basic Polymer Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1829",
+        "group_code": "182",
+        "class_title": "Other Basic Polymer Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Basic Polymer Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1831",
+        "group_code": "183",
+        "class_title": "Fertiliser Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Fertiliser and Pesticide Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1832",
+        "group_code": "183",
+        "class_title": "Pesticide Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Fertiliser and Pesticide Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1841",
+        "group_code": "184",
+        "class_title": "Human Pharmaceutical and Medicinal Product Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Pharmaceutical and Medicinal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1842",
+        "group_code": "184",
+        "class_title": "Veterinary Pharmaceutical and Medicinal Product Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Pharmaceutical and Medicinal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1851",
+        "group_code": "185",
+        "class_title": "Cleaning Compound Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Cleaning Compound and Toiletry Preparation Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1852",
+        "group_code": "185",
+        "class_title": "Cosmetic and Toiletry Preparation Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Cleaning Compound and Toiletry Preparation Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1891",
+        "group_code": "189",
+        "class_title": "Photographic Chemical Product Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Other Basic Chemical Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1892",
+        "group_code": "189",
+        "class_title": "Explosive Manufacturing",
+        "subdivision_code": "18",
+        "group_title": "Other Basic Chemical Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Basic Chemical and Chemical Product Manufacturing",
+        "class_code": "1899",
+        "group_code": "189",
+        "class_title": "Other Basic Chemical Product Manufacturing n.e.c.",
+        "subdivision_code": "18",
+        "group_title": "Other Basic Chemical Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1911",
+        "group_code": "191",
+        "class_title": "Polymer Film and Sheet Packaging Material Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1912",
+        "group_code": "191",
+        "class_title": "Rigid and Semi-Rigid Polymer Product Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1913",
+        "group_code": "191",
+        "class_title": "Polymer Foam Product Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1914",
+        "group_code": "191",
+        "class_title": "Tyre Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1915",
+        "group_code": "191",
+        "class_title": "Adhesive Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1916",
+        "group_code": "191",
+        "class_title": "Paint and Coatings Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1919",
+        "group_code": "191",
+        "class_title": "Other Polymer Product Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Polymer Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Polymer Product and Rubber Product Manufacturing",
+        "class_code": "1920",
+        "group_code": "192",
+        "class_title": "Natural Rubber Product Manufacturing",
+        "subdivision_code": "19",
+        "group_title": "Natural Rubber Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2010",
+        "group_code": "201",
+        "class_title": "Glass and Glass Product Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Glass and Glass Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2021",
+        "group_code": "202",
+        "class_title": "Clay Brick Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Ceramic Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2029",
+        "group_code": "202",
+        "class_title": "Other Ceramic Product Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Ceramic Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2031",
+        "group_code": "203",
+        "class_title": "Cement and Lime Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Cement, Lime, Plaster and Concrete Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2032",
+        "group_code": "203",
+        "class_title": "Plaster Product Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Cement, Lime, Plaster and Concrete Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2033",
+        "group_code": "203",
+        "class_title": "Ready-Mixed Concrete Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Cement, Lime, Plaster and Concrete Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2034",
+        "group_code": "203",
+        "class_title": "Concrete Product Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Cement, Lime, Plaster and Concrete Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Non-Metallic Mineral Product Manufacturing",
+        "class_code": "2090",
+        "group_code": "209",
+        "class_title": "Other Non-Metallic Mineral Product Manufacturing",
+        "subdivision_code": "20",
+        "group_title": "Other Non-Metallic Mineral Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2110",
+        "group_code": "211",
+        "class_title": "Iron Smelting and Steel Manufacturing",
+        "subdivision_code": "21",
+        "group_title": "Basic Ferrous Metal Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2121",
+        "group_code": "212",
+        "class_title": "Iron and Steel Casting",
+        "subdivision_code": "21",
+        "group_title": "Basic Ferrous Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2122",
+        "group_code": "212",
+        "class_title": "Steel Pipe and Tube Manufacturing",
+        "subdivision_code": "21",
+        "group_title": "Basic Ferrous Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2131",
+        "group_code": "213",
+        "class_title": "Alumina Production",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2132",
+        "group_code": "213",
+        "class_title": "Aluminium Smelting",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2133",
+        "group_code": "213",
+        "class_title": "Copper, Silver, Lead and Zinc Smelting and Refining",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2139",
+        "group_code": "213",
+        "class_title": "Other Basic Non-Ferrous Metal Manufacturing",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2141",
+        "group_code": "214",
+        "class_title": "Non-Ferrous Metal Casting",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2142",
+        "group_code": "214",
+        "class_title": "Aluminium Rolling, Drawing, Extruding",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Primary Metal and Metal Product Manufacturing",
+        "class_code": "2149",
+        "group_code": "214",
+        "class_title": "Other Basic Non-Ferrous Metal Product Manufacturing",
+        "subdivision_code": "21",
+        "group_title": "Basic Non-Ferrous Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2210",
+        "group_code": "221",
+        "class_title": "Iron and Steel Forging",
+        "subdivision_code": "22",
+        "group_title": "Iron and Steel Forging",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2221",
+        "group_code": "222",
+        "class_title": "Structural Steel Fabricating",
+        "subdivision_code": "22",
+        "group_title": "Structural Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2222",
+        "group_code": "222",
+        "class_title": "Prefabricated Metal Building Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Structural Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2223",
+        "group_code": "222",
+        "class_title": "Architectural Aluminium Product Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Structural Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2224",
+        "group_code": "222",
+        "class_title": "Metal Roof and Guttering Manufacturing (except Aluminium)",
+        "subdivision_code": "22",
+        "group_title": "Structural Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2229",
+        "group_code": "222",
+        "class_title": "Other Structural Metal Product Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Structural Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2231",
+        "group_code": "223",
+        "class_title": "Boiler, Tank and Other Heavy Gauge Metal Container Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Metal Container Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2239",
+        "group_code": "223",
+        "class_title": "Other Metal Container Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Metal Container Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2240",
+        "group_code": "224",
+        "class_title": "Sheet Metal Product Manufacturing (except Metal Structural and Container",
+        "subdivision_code": "22",
+        "group_title": "Sheet Metal Product Manufacturing (except Metal Structural and Container Products)",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2291",
+        "group_code": "229",
+        "class_title": "Spring and Wire Product Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Other Fabricated Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2292",
+        "group_code": "229",
+        "class_title": "Nut, Bolt, Screw and Rivet Manufacturing",
+        "subdivision_code": "22",
+        "group_title": "Other Fabricated Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2293",
+        "group_code": "229",
+        "class_title": "Metal Coating and Finishing",
+        "subdivision_code": "22",
+        "group_title": "Other Fabricated Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Fabricated Metal Product Manufacturing",
+        "class_code": "2299",
+        "group_code": "229",
+        "class_title": "Other Fabricated Metal Product Manufacturing n.e.c.",
+        "subdivision_code": "22",
+        "group_title": "Other Fabricated Metal Product Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2311",
+        "group_code": "231",
+        "class_title": "Motor Vehicle Manufacturing",
+        "subdivision_code": "23",
+        "group_title": "Motor Vehicle and Motor Vehicle Part Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2312",
+        "group_code": "231",
+        "class_title": "Motor Vehicle Body and Trailer Manufacturing",
+        "subdivision_code": "23",
+        "group_title": "Motor Vehicle and Motor Vehicle Part Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2313",
+        "group_code": "231",
+        "class_title": "Automotive Electrical Component Manufacturing",
+        "subdivision_code": "23",
+        "group_title": "Motor Vehicle and Motor Vehicle Part Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2319",
+        "group_code": "231",
+        "class_title": "Other Motor Vehicle Parts Manufacturing",
+        "subdivision_code": "23",
+        "group_title": "Motor Vehicle and Motor Vehicle Part Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2391",
+        "group_code": "239",
+        "class_title": "Shipbuilding and Repair Services",
+        "subdivision_code": "23",
+        "group_title": "Other Transport Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2392",
+        "group_code": "239",
+        "class_title": "Boatbuilding and Repair Services",
+        "subdivision_code": "23",
+        "group_title": "Other Transport Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2393",
+        "group_code": "239",
+        "class_title": "Railway Rolling Stock Manufacturing and Repair Services",
+        "subdivision_code": "23",
+        "group_title": "Other Transport Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2394",
+        "group_code": "239",
+        "class_title": "Aircraft Manufacturing and Repair Services",
+        "subdivision_code": "23",
+        "group_title": "Other Transport Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Transport Equipment Manufacturing",
+        "class_code": "2399",
+        "group_code": "239",
+        "class_title": "Other Transport Equipment Manufacturing n.e.c.",
+        "subdivision_code": "23",
+        "group_title": "Other Transport Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2411",
+        "group_code": "241",
+        "class_title": "Photographic, Optical and Ophthalmic Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Professional and Scientific Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2412",
+        "group_code": "241",
+        "class_title": "Medical and Surgical Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Professional and Scientific Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2419",
+        "group_code": "241",
+        "class_title": "Other Professional and Scientific Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Professional and Scientific Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2421",
+        "group_code": "242",
+        "class_title": "Computer and Electronic Office Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Computer and Electronic Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2422",
+        "group_code": "242",
+        "class_title": "Communication Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Computer and Electronic Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2429",
+        "group_code": "242",
+        "class_title": "Other Electronic Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Computer and Electronic Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2431",
+        "group_code": "243",
+        "class_title": "Electric Cable and Wire Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Electrical Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2432",
+        "group_code": "243",
+        "class_title": "Electric Lighting Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Electrical Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2439",
+        "group_code": "243",
+        "class_title": "Other Electrical Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Electrical Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2441",
+        "group_code": "244",
+        "class_title": "Whiteware Appliance Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Domestic Appliance Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2449",
+        "group_code": "244",
+        "class_title": "Other Domestic Appliance Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Domestic Appliance Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2451",
+        "group_code": "245",
+        "class_title": "Pump and Compressor Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Pump, Compressor, Heating and Ventilation Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2452",
+        "group_code": "245",
+        "class_title": "Fixed Space Heating, Cooling and Ventilation Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Pump, Compressor, Heating and Ventilation Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2461",
+        "group_code": "246",
+        "class_title": "Agricultural Machinery and Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Specialised Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2462",
+        "group_code": "246",
+        "class_title": "Mining and Construction Machinery Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Specialised Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2463",
+        "group_code": "246",
+        "class_title": "Machine Tool and Parts Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Specialised Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2469",
+        "group_code": "246",
+        "class_title": "Other Specialised Machinery and Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Specialised Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2491",
+        "group_code": "249",
+        "class_title": "Lifting and Material Handling Equipment Manufacturing",
+        "subdivision_code": "24",
+        "group_title": "Other Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Machinery and Equipment Manufacturing",
+        "class_code": "2499",
+        "group_code": "249",
+        "class_title": "Other Machinery and Equipment Manufacturing n.e.c.",
+        "subdivision_code": "24",
+        "group_title": "Other Machinery and Equipment Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2511",
+        "group_code": "251",
+        "class_title": "Wooden Furniture and Upholstered Seat Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Furniture Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2512",
+        "group_code": "251",
+        "class_title": "Metal Furniture Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Furniture Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2513",
+        "group_code": "251",
+        "class_title": "Mattress Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Furniture Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2519",
+        "group_code": "251",
+        "class_title": "Other Furniture Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Furniture Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2591",
+        "group_code": "259",
+        "class_title": "Jewellery and Silverware Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Other Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2592",
+        "group_code": "259",
+        "class_title": "Toy, Sporting and Recreational Product Manufacturing",
+        "subdivision_code": "25",
+        "group_title": "Other Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Manufacturing",
+        "subdivision_title": "Furniture and Other Manufacturing",
+        "class_code": "2599",
+        "group_code": "259",
+        "class_title": "Other Manufacturing n.e.c.",
+        "subdivision_code": "25",
+        "group_title": "Other Manufacturing",
+        "division_code": "C"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2611",
+        "group_code": "261",
+        "class_title": "Fossil Fuel Electricity Generation",
+        "subdivision_code": "26",
+        "group_title": "Electricity Generation",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2612",
+        "group_code": "261",
+        "class_title": "Hydro-Electricity Generation",
+        "subdivision_code": "26",
+        "group_title": "Electricity Generation",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2619",
+        "group_code": "261",
+        "class_title": "Other Electricity Generation",
+        "subdivision_code": "26",
+        "group_title": "Electricity Generation",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2620",
+        "group_code": "262",
+        "class_title": "Electricity Transmission",
+        "subdivision_code": "26",
+        "group_title": "Electricity Transmission",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2630",
+        "group_code": "263",
+        "class_title": "Electricity Distribution",
+        "subdivision_code": "26",
+        "group_title": "Electricity Distribution",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Electricity Supply",
+        "class_code": "2640",
+        "group_code": "264",
+        "class_title": "On Selling Electricity and Electricity Market Operation",
+        "subdivision_code": "26",
+        "group_title": "On Selling Electricity and Electricity Market Operation",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Gas Supply",
+        "class_code": "2700",
+        "group_code": "270",
+        "class_title": "Gas Supply",
+        "subdivision_code": "27",
+        "group_title": "Gas Supply",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Water Supply, Sewerage and Drainage Services",
+        "class_code": "2811",
+        "group_code": "281",
+        "class_title": "Water Supply",
+        "subdivision_code": "28",
+        "group_title": "Water Supply, Sewerage and Drainage Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Water Supply, Sewerage and Drainage Services",
+        "class_code": "2812",
+        "group_code": "281",
+        "class_title": "Sewerage and Drainage Services",
+        "subdivision_code": "28",
+        "group_title": "Water Supply, Sewerage and Drainage Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Waste Collection, Treatment and Disposal Services",
+        "class_code": "2911",
+        "group_code": "291",
+        "class_title": "Solid Waste Collection Services",
+        "subdivision_code": "29",
+        "group_title": "Waste Collection Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Waste Collection, Treatment and Disposal Services",
+        "class_code": "2919",
+        "group_code": "291",
+        "class_title": "Other Waste Collection Services",
+        "subdivision_code": "29",
+        "group_title": "Waste Collection Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Waste Collection, Treatment and Disposal Services",
+        "class_code": "2921",
+        "group_code": "292",
+        "class_title": "Waste Treatment and Disposal Services",
+        "subdivision_code": "29",
+        "group_title": "Waste Treatment, Disposal and Remediation Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Electricity, Gas, Water and Waste Services",
+        "subdivision_title": "Waste Collection, Treatment and Disposal Services",
+        "class_code": "2922",
+        "group_code": "292",
+        "class_title": "Waste Remediation and Materials Recovery Services",
+        "subdivision_code": "29",
+        "group_title": "Waste Treatment, Disposal and Remediation Services",
+        "division_code": "D"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Building Construction",
+        "class_code": "3011",
+        "group_code": "301",
+        "class_title": "House Construction",
+        "subdivision_code": "30",
+        "group_title": "Residential Building Construction",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Building Construction",
+        "class_code": "3019",
+        "group_code": "301",
+        "class_title": "Other Residential Building Construction",
+        "subdivision_code": "30",
+        "group_title": "Residential Building Construction",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Building Construction",
+        "class_code": "3020",
+        "group_code": "302",
+        "class_title": "Non-Residential Building Construction",
+        "subdivision_code": "30",
+        "group_title": "Non-Residential Building Construction",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Heavy and Civil Engineering Construction",
+        "class_code": "3101",
+        "group_code": "310",
+        "class_title": "Road and Bridge Construction",
+        "subdivision_code": "31",
+        "group_title": "Heavy and Civil Engineering Construction",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Heavy and Civil Engineering Construction",
+        "class_code": "3109",
+        "group_code": "310",
+        "class_title": "Other Heavy and Civil Engineering Construction",
+        "subdivision_code": "31",
+        "group_title": "Heavy and Civil Engineering Construction",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3211",
+        "group_code": "321",
+        "class_title": "Land Development and Subdivision",
+        "subdivision_code": "32",
+        "group_title": "Land Development and Site Preparation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3212",
+        "group_code": "321",
+        "class_title": "Site Preparation Services",
+        "subdivision_code": "32",
+        "group_title": "Land Development and Site Preparation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3221",
+        "group_code": "322",
+        "class_title": "Concreting Services",
+        "subdivision_code": "32",
+        "group_title": "Building Structure Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3222",
+        "group_code": "322",
+        "class_title": "Bricklaying Services",
+        "subdivision_code": "32",
+        "group_title": "Building Structure Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3223",
+        "group_code": "322",
+        "class_title": "Roofing Services",
+        "subdivision_code": "32",
+        "group_title": "Building Structure Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3224",
+        "group_code": "322",
+        "class_title": "Structural Steel Erection Services",
+        "subdivision_code": "32",
+        "group_title": "Building Structure Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3231",
+        "group_code": "323",
+        "class_title": "Plumbing Services",
+        "subdivision_code": "32",
+        "group_title": "Building Installation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3232",
+        "group_code": "323",
+        "class_title": "Electrical Services",
+        "subdivision_code": "32",
+        "group_title": "Building Installation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3233",
+        "group_code": "323",
+        "class_title": "Air Conditioning and Heating Services",
+        "subdivision_code": "32",
+        "group_title": "Building Installation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3234",
+        "group_code": "323",
+        "class_title": "Fire and Security Alarm Installation Services",
+        "subdivision_code": "32",
+        "group_title": "Building Installation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3239",
+        "group_code": "323",
+        "class_title": "Other Building Installation Services",
+        "subdivision_code": "32",
+        "group_title": "Building Installation Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3241",
+        "group_code": "324",
+        "class_title": "Plastering and Ceiling Services",
+        "subdivision_code": "32",
+        "group_title": "Building Completion Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3242",
+        "group_code": "324",
+        "class_title": "Carpentry Services",
+        "subdivision_code": "32",
+        "group_title": "Building Completion Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3243",
+        "group_code": "324",
+        "class_title": "Tiling and Carpeting Services",
+        "subdivision_code": "32",
+        "group_title": "Building Completion Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3244",
+        "group_code": "324",
+        "class_title": "Painting and Decorating Services",
+        "subdivision_code": "32",
+        "group_title": "Building Completion Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3245",
+        "group_code": "324",
+        "class_title": "Glazing Services",
+        "subdivision_code": "32",
+        "group_title": "Building Completion Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3291",
+        "group_code": "329",
+        "class_title": "Landscape Construction Services",
+        "subdivision_code": "32",
+        "group_title": "Other Construction Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3292",
+        "group_code": "329",
+        "class_title": "Hire of Construction Machinery with Operator",
+        "subdivision_code": "32",
+        "group_title": "Other Construction Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Construction",
+        "subdivision_title": "Construction Services",
+        "class_code": "3299",
+        "group_code": "329",
+        "class_title": "Other Construction Services n.e.c.",
+        "subdivision_code": "32",
+        "group_title": "Other Construction Services",
+        "division_code": "E"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3311",
+        "group_code": "331",
+        "class_title": "Wool Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Agricultural Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3312",
+        "group_code": "331",
+        "class_title": "Cereal Grain Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Agricultural Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3319",
+        "group_code": "331",
+        "class_title": "Other Agricultural Product Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Agricultural Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3321",
+        "group_code": "332",
+        "class_title": "Petroleum Product Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Mineral, Metal and Chemical Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3322",
+        "group_code": "332",
+        "class_title": "Metal and Mineral Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Mineral, Metal and Chemical Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3323",
+        "group_code": "332",
+        "class_title": "Industrial and Agricultural Chemical Product Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Mineral, Metal and Chemical Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3331",
+        "group_code": "333",
+        "class_title": "Timber Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Timber and Hardware Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3332",
+        "group_code": "333",
+        "class_title": "Plumbing Goods Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Timber and Hardware Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Basic Material Wholesaling",
+        "class_code": "3339",
+        "group_code": "333",
+        "class_title": "Other Hardware Goods Wholesaling",
+        "subdivision_code": "33",
+        "group_title": "Timber and Hardware Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3411",
+        "group_code": "341",
+        "class_title": "Agricultural and Construction Machinery Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Specialised Industrial Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3419",
+        "group_code": "341",
+        "class_title": "Other Specialised Industrial Machinery and Equipment Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Specialised Industrial Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3491",
+        "group_code": "349",
+        "class_title": "Professional and Scientific Goods Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Other Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3492",
+        "group_code": "349",
+        "class_title": "Computer and Computer Peripheral Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Other Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3493",
+        "group_code": "349",
+        "class_title": "Telecommunication Goods Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Other Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3494",
+        "group_code": "349",
+        "class_title": "Other Electrical and Electronic Goods Wholesaling",
+        "subdivision_code": "34",
+        "group_title": "Other Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Machinery and Equipment Wholesaling",
+        "class_code": "3499",
+        "group_code": "349",
+        "class_title": "Other Machinery and Equipment Wholesaling n.e.c.",
+        "subdivision_code": "34",
+        "group_title": "Other Machinery and Equipment Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "class_code": "3501",
+        "group_code": "350",
+        "class_title": "Car Wholesaling",
+        "subdivision_code": "35",
+        "group_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "class_code": "3502",
+        "group_code": "350",
+        "class_title": "Commercial Vehicle Wholesaling",
+        "subdivision_code": "35",
+        "group_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "class_code": "3503",
+        "group_code": "350",
+        "class_title": "Trailer and Other Motor Vehicle Wholesaling",
+        "subdivision_code": "35",
+        "group_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "class_code": "3504",
+        "group_code": "350",
+        "class_title": "Motor Vehicle New Parts Wholesaling",
+        "subdivision_code": "35",
+        "group_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "class_code": "3505",
+        "group_code": "350",
+        "class_title": "Motor Vehicle Dismantling and Used Parts Wholesaling",
+        "subdivision_code": "35",
+        "group_title": "Motor Vehicle and Motor Vehicle Parts Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3601",
+        "group_code": "360",
+        "class_title": "General Line Grocery Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3602",
+        "group_code": "360",
+        "class_title": "Meat, Poultry and Smallgoods Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3603",
+        "group_code": "360",
+        "class_title": "Dairy Produce Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3604",
+        "group_code": "360",
+        "class_title": "Fish and Seafood Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3605",
+        "group_code": "360",
+        "class_title": "Fruit and Vegetable Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3606",
+        "group_code": "360",
+        "class_title": "Liquor and Tobacco Product Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "class_code": "3609",
+        "group_code": "360",
+        "class_title": "Other Grocery Wholesaling",
+        "subdivision_code": "36",
+        "group_title": "Grocery, Liquor and Tobacco Product Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3711",
+        "group_code": "371",
+        "class_title": "Textile Product Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Textile, Clothing and Footwear Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3712",
+        "group_code": "371",
+        "class_title": "Clothing and Footwear Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Textile, Clothing and Footwear Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3720",
+        "group_code": "372",
+        "class_title": "Pharmaceutical and Toiletry Goods Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Pharmaceutical and Toiletry Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3731",
+        "group_code": "373",
+        "class_title": "Furniture and Floor Covering Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3732",
+        "group_code": "373",
+        "class_title": "Jewellery and Watch Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3733",
+        "group_code": "373",
+        "class_title": "Kitchen and Diningware Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3734",
+        "group_code": "373",
+        "class_title": "Toy and Sporting Goods Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3735",
+        "group_code": "373",
+        "class_title": "Book and Magazine Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3736",
+        "group_code": "373",
+        "class_title": "Paper Product Wholesaling",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Other Goods Wholesaling",
+        "class_code": "3739",
+        "group_code": "373",
+        "class_title": "Other Goods Wholesaling n.e.c.",
+        "subdivision_code": "37",
+        "group_title": "Furniture, Floor Covering and Other Goods Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Wholesale Trade",
+        "subdivision_title": "Commission-Based Wholesaling",
+        "class_code": "3800",
+        "group_code": "380",
+        "class_title": "Commission-Based Wholesaling",
+        "subdivision_code": "38",
+        "group_title": "Commission-Based Wholesaling",
+        "division_code": "F"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Retailing",
+        "class_code": "3911",
+        "group_code": "391",
+        "class_title": "Car Retailing",
+        "subdivision_code": "39",
+        "group_title": "Motor Vehicle Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Retailing",
+        "class_code": "3912",
+        "group_code": "391",
+        "class_title": "Motor Cycle Retailing",
+        "subdivision_code": "39",
+        "group_title": "Motor Vehicle Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Retailing",
+        "class_code": "3913",
+        "group_code": "391",
+        "class_title": "Trailer and Other Motor Vehicle Retailing",
+        "subdivision_code": "39",
+        "group_title": "Motor Vehicle Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Retailing",
+        "class_code": "3921",
+        "group_code": "392",
+        "class_title": "Motor Vehicle Parts Retailing",
+        "subdivision_code": "39",
+        "group_title": "Motor Vehicle Parts and Tyre Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Motor Vehicle and Motor Vehicle Parts Retailing",
+        "class_code": "3922",
+        "group_code": "392",
+        "class_title": "Tyre Retailing",
+        "subdivision_code": "39",
+        "group_title": "Motor Vehicle Parts and Tyre Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Fuel Retailing",
+        "class_code": "4000",
+        "group_code": "400",
+        "class_title": "Fuel Retailing",
+        "subdivision_code": "40",
+        "group_title": "Fuel Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Food Retailing",
+        "class_code": "4110",
+        "group_code": "411",
+        "class_title": "Supermarket and Grocery Stores",
+        "subdivision_code": "41",
+        "group_title": "Supermarket and Grocery Stores",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Food Retailing",
+        "class_code": "4121",
+        "group_code": "412",
+        "class_title": "Fresh Meat, Fish and Poultry Retailing",
+        "subdivision_code": "41",
+        "group_title": "Specialised Food Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Food Retailing",
+        "class_code": "4122",
+        "group_code": "412",
+        "class_title": "Fruit and Vegetable Retailing",
+        "subdivision_code": "41",
+        "group_title": "Specialised Food Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Food Retailing",
+        "class_code": "4123",
+        "group_code": "412",
+        "class_title": "Liquor Retailing",
+        "subdivision_code": "41",
+        "group_title": "Specialised Food Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Food Retailing",
+        "class_code": "4129",
+        "group_code": "412",
+        "class_title": "Other Specialised Food Retailing",
+        "subdivision_code": "41",
+        "group_title": "Specialised Food Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4211",
+        "group_code": "421",
+        "class_title": "Furniture Retailing",
+        "subdivision_code": "42",
+        "group_title": "Furniture, Floor Coverings, Houseware and Textile Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4212",
+        "group_code": "421",
+        "class_title": "Floor Coverings Retailing",
+        "subdivision_code": "42",
+        "group_title": "Furniture, Floor Coverings, Houseware and Textile Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4213",
+        "group_code": "421",
+        "class_title": "Houseware Retailing",
+        "subdivision_code": "42",
+        "group_title": "Furniture, Floor Coverings, Houseware and Textile Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4214",
+        "group_code": "421",
+        "class_title": "Manchester and Other Textile Goods Retailing",
+        "subdivision_code": "42",
+        "group_title": "Furniture, Floor Coverings, Houseware and Textile Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4221",
+        "group_code": "422",
+        "class_title": "Electrical, Electronic and Gas Appliance Retailing",
+        "subdivision_code": "42",
+        "group_title": "Electrical and Electronic Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4222",
+        "group_code": "422",
+        "class_title": "Computer and Computer Peripheral Retailing",
+        "subdivision_code": "42",
+        "group_title": "Electrical and Electronic Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4229",
+        "group_code": "422",
+        "class_title": "Other Electrical and Electronic Goods Retailing",
+        "subdivision_code": "42",
+        "group_title": "Electrical and Electronic Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4231",
+        "group_code": "423",
+        "class_title": "Hardware and Building Supplies Retailing",
+        "subdivision_code": "42",
+        "group_title": "Hardware, Building and Garden Supplies Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4232",
+        "group_code": "423",
+        "class_title": "Garden Supplies Retailing",
+        "subdivision_code": "42",
+        "group_title": "Hardware, Building and Garden Supplies Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4241",
+        "group_code": "424",
+        "class_title": "Sport and Camping Equipment Retailing",
+        "subdivision_code": "42",
+        "group_title": "Recreational Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4242",
+        "group_code": "424",
+        "class_title": "Entertainment Media Retailing",
+        "subdivision_code": "42",
+        "group_title": "Recreational Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4243",
+        "group_code": "424",
+        "class_title": "Toy and Game Retailing",
+        "subdivision_code": "42",
+        "group_title": "Recreational Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4244",
+        "group_code": "424",
+        "class_title": "Newspaper and Book Retailing",
+        "subdivision_code": "42",
+        "group_title": "Recreational Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4245",
+        "group_code": "424",
+        "class_title": "Marine Equipment Retailing",
+        "subdivision_code": "42",
+        "group_title": "Recreational Goods Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4251",
+        "group_code": "425",
+        "class_title": "Clothing Retailing",
+        "subdivision_code": "42",
+        "group_title": "Clothing, Footwear and Personal Accessory Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4252",
+        "group_code": "425",
+        "class_title": "Footwear Retailing",
+        "subdivision_code": "42",
+        "group_title": "Clothing, Footwear and Personal Accessory Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4253",
+        "group_code": "425",
+        "class_title": "Watch and Jewellery Retailing",
+        "subdivision_code": "42",
+        "group_title": "Clothing, Footwear and Personal Accessory Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4259",
+        "group_code": "425",
+        "class_title": "Other Personal Accessory Retailing",
+        "subdivision_code": "42",
+        "group_title": "Clothing, Footwear and Personal Accessory Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4260",
+        "group_code": "426",
+        "class_title": "Department Stores",
+        "subdivision_code": "42",
+        "group_title": "Department Stores",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4271",
+        "group_code": "427",
+        "class_title": "Pharmaceutical, Cosmetic and Toiletry Goods Retailing",
+        "subdivision_code": "42",
+        "group_title": "Pharmaceutical and Other Store-Based Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4272",
+        "group_code": "427",
+        "class_title": "Stationery Goods Retailing",
+        "subdivision_code": "42",
+        "group_title": "Pharmaceutical and Other Store-Based Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4273",
+        "group_code": "427",
+        "class_title": "Antique and Used Goods Retailing",
+        "subdivision_code": "42",
+        "group_title": "Pharmaceutical and Other Store-Based Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4274",
+        "group_code": "427",
+        "class_title": "Flower Retailing",
+        "subdivision_code": "42",
+        "group_title": "Pharmaceutical and Other Store-Based Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Other Store-Based Retailing",
+        "class_code": "4279",
+        "group_code": "427",
+        "class_title": "Other Store-Based Retailing n.e.c.",
+        "subdivision_code": "42",
+        "group_title": "Pharmaceutical and Other Store-Based Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Non-Store Retailing and Retail Commission-Based Buying and/or Selling",
+        "class_code": "4310",
+        "group_code": "431",
+        "class_title": "Non-Store Retailing",
+        "subdivision_code": "43",
+        "group_title": "Non-Store Retailing",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Retail Trade",
+        "subdivision_title": "Non-Store Retailing and Retail Commission-Based Buying and/or Selling",
+        "class_code": "4320",
+        "group_code": "432",
+        "class_title": "Retail Commission-Based Buying and/or Selling",
+        "subdivision_code": "43",
+        "group_title": "Retail Commission-Based Buying and/or Selling",
+        "division_code": "G"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Accommodation",
+        "class_code": "4400",
+        "group_code": "440",
+        "class_title": "Accommodation",
+        "subdivision_code": "44",
+        "group_title": "Accommodation",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Food and Beverage Services",
+        "class_code": "4511",
+        "group_code": "451",
+        "class_title": "Cafes and Restaurants",
+        "subdivision_code": "45",
+        "group_title": "Cafes, Restaurants and Takeaway Food Services",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Food and Beverage Services",
+        "class_code": "4512",
+        "group_code": "451",
+        "class_title": "Takeaway Food Services",
+        "subdivision_code": "45",
+        "group_title": "Cafes, Restaurants and Takeaway Food Services",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Food and Beverage Services",
+        "class_code": "4513",
+        "group_code": "451",
+        "class_title": "Catering Services",
+        "subdivision_code": "45",
+        "group_title": "Cafes, Restaurants and Takeaway Food Services",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Food and Beverage Services",
+        "class_code": "4520",
+        "group_code": "452",
+        "class_title": "Pubs, Taverns and Bars",
+        "subdivision_code": "45",
+        "group_title": "Pubs, Taverns and Bars",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Accommodation and Food Services",
+        "subdivision_title": "Food and Beverage Services",
+        "class_code": "4530",
+        "group_code": "453",
+        "class_title": "Clubs (Hospitality)",
+        "subdivision_code": "45",
+        "group_title": "Clubs (Hospitality)",
+        "division_code": "H"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Road Transport",
+        "class_code": "4610",
+        "group_code": "461",
+        "class_title": "Road Freight Transport",
+        "subdivision_code": "46",
+        "group_title": "Road Freight Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Road Transport",
+        "class_code": "4621",
+        "group_code": "462",
+        "class_title": "Interurban and Rural Bus Transport",
+        "subdivision_code": "46",
+        "group_title": "Road Passenger Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Road Transport",
+        "class_code": "4622",
+        "group_code": "462",
+        "class_title": "Urban Bus Transport (Including Tramway)",
+        "subdivision_code": "46",
+        "group_title": "Road Passenger Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Road Transport",
+        "class_code": "4623",
+        "group_code": "462",
+        "class_title": "Taxi and Other Road Transport",
+        "subdivision_code": "46",
+        "group_title": "Road Passenger Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Rail Transport",
+        "class_code": "4710",
+        "group_code": "471",
+        "class_title": "Rail Freight Transport",
+        "subdivision_code": "47",
+        "group_title": "Rail Freight Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Rail Transport",
+        "class_code": "4720",
+        "group_code": "472",
+        "class_title": "Rail Passenger Transport",
+        "subdivision_code": "47",
+        "group_title": "Rail Passenger Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Water Transport",
+        "class_code": "4810",
+        "group_code": "481",
+        "class_title": "Water Freight Transport",
+        "subdivision_code": "48",
+        "group_title": "Water Freight Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Water Transport",
+        "class_code": "4820",
+        "group_code": "482",
+        "class_title": "Water Passenger Transport",
+        "subdivision_code": "48",
+        "group_title": "Water Passenger Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Air and Space Transport",
+        "class_code": "4900",
+        "group_code": "490",
+        "class_title": "Air and Space Transport",
+        "subdivision_code": "49",
+        "group_title": "Air and Space Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Other Transport",
+        "class_code": "5010",
+        "group_code": "501",
+        "class_title": "Scenic and Sightseeing Transport",
+        "subdivision_code": "50",
+        "group_title": "Scenic and Sightseeing Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Other Transport",
+        "class_code": "5021",
+        "group_code": "502",
+        "class_title": "Pipeline Transport",
+        "subdivision_code": "50",
+        "group_title": "Pipeline and Other Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Other Transport",
+        "class_code": "5029",
+        "group_code": "502",
+        "class_title": "Other Transport n.e.c.",
+        "subdivision_code": "50",
+        "group_title": "Pipeline and Other Transport",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Postal and Courier Pick-up and Delivery Services",
+        "class_code": "5101",
+        "group_code": "510",
+        "class_title": "Postal Services",
+        "subdivision_code": "51",
+        "group_title": "Postal and Courier Pick-up and Delivery Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Postal and Courier Pick-up and Delivery Services",
+        "class_code": "5102",
+        "group_code": "510",
+        "class_title": "Courier Pick-up and Delivery Services",
+        "subdivision_code": "51",
+        "group_title": "Postal and Courier Pick-up and Delivery Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5211",
+        "group_code": "521",
+        "class_title": "Stevedoring Services",
+        "subdivision_code": "52",
+        "group_title": "Water Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5212",
+        "group_code": "521",
+        "class_title": "Port and Water Transport Terminal Operations",
+        "subdivision_code": "52",
+        "group_title": "Water Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5219",
+        "group_code": "521",
+        "class_title": "Other Water Transport Support Services",
+        "subdivision_code": "52",
+        "group_title": "Water Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5220",
+        "group_code": "522",
+        "class_title": "Airport Operations and Other Air Transport Support Services",
+        "subdivision_code": "52",
+        "group_title": "Airport Operations and Other Air Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5291",
+        "group_code": "529",
+        "class_title": "Customs Agency Services",
+        "subdivision_code": "52",
+        "group_title": "Other Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5292",
+        "group_code": "529",
+        "class_title": "Freight Forwarding Services",
+        "subdivision_code": "52",
+        "group_title": "Other Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Transport Support Services",
+        "class_code": "5299",
+        "group_code": "529",
+        "class_title": "Other Transport Support Services n.e.c.",
+        "subdivision_code": "52",
+        "group_title": "Other Transport Support Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Warehousing and Storage Services",
+        "class_code": "5301",
+        "group_code": "530",
+        "class_title": "Grain Storage Services",
+        "subdivision_code": "53",
+        "group_title": "Warehousing and Storage Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Transport, Postal and Warehousing",
+        "subdivision_title": "Warehousing and Storage Services",
+        "class_code": "5309",
+        "group_code": "530",
+        "class_title": "Other Warehousing and Storage Services",
+        "subdivision_code": "53",
+        "group_title": "Warehousing and Storage Services",
+        "division_code": "I"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5411",
+        "group_code": "541",
+        "class_title": "Newspaper Publishing",
+        "subdivision_code": "54",
+        "group_title": "Newspaper, Periodical, Book and Directory Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5412",
+        "group_code": "541",
+        "class_title": "Magazine and Other Periodical Publishing",
+        "subdivision_code": "54",
+        "group_title": "Newspaper, Periodical, Book and Directory Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5413",
+        "group_code": "541",
+        "class_title": "Book Publishing",
+        "subdivision_code": "54",
+        "group_title": "Newspaper, Periodical, Book and Directory Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5414",
+        "group_code": "541",
+        "class_title": "Directory and Mailing List Publishing",
+        "subdivision_code": "54",
+        "group_title": "Newspaper, Periodical, Book and Directory Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5419",
+        "group_code": "541",
+        "class_title": "Other Publishing (except Software, Music and Internet)",
+        "subdivision_code": "54",
+        "group_title": "Newspaper, Periodical, Book and Directory Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Publishing (except Internet and Music Publishing)",
+        "class_code": "5420",
+        "group_code": "542",
+        "class_title": "Software Publishing",
+        "subdivision_code": "54",
+        "group_title": "Software Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5511",
+        "group_code": "551",
+        "class_title": "Motion Picture and Video Production",
+        "subdivision_code": "55",
+        "group_title": "Motion Picture and Video Activities",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5512",
+        "group_code": "551",
+        "class_title": "Motion Picture and Video Distribution",
+        "subdivision_code": "55",
+        "group_title": "Motion Picture and Video Activities",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5513",
+        "group_code": "551",
+        "class_title": "Motion Picture Exhibition",
+        "subdivision_code": "55",
+        "group_title": "Motion Picture and Video Activities",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5514",
+        "group_code": "551",
+        "class_title": "Post-production Services and Other Motion Picture and Video Activities",
+        "subdivision_code": "55",
+        "group_title": "Motion Picture and Video Activities",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5521",
+        "group_code": "552",
+        "class_title": "Music Publishing",
+        "subdivision_code": "55",
+        "group_title": "Sound Recording and Music Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Motion Picture and Sound Recording Activities",
+        "class_code": "5522",
+        "group_code": "552",
+        "class_title": "Music and Other Sound Recording Activities",
+        "subdivision_code": "55",
+        "group_title": "Sound Recording and Music Publishing",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Broadcasting (except Internet)",
+        "class_code": "5610",
+        "group_code": "561",
+        "class_title": "Radio Broadcasting",
+        "subdivision_code": "56",
+        "group_title": "Radio Broadcasting",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Broadcasting (except Internet)",
+        "class_code": "5621",
+        "group_code": "562",
+        "class_title": "Free-to-Air Television Broadcasting",
+        "subdivision_code": "56",
+        "group_title": "Television Broadcasting",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Broadcasting (except Internet)",
+        "class_code": "5622",
+        "group_code": "562",
+        "class_title": "Cable and Other Subscription Broadcasting",
+        "subdivision_code": "56",
+        "group_title": "Television Broadcasting",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Internet Publishing and Broadcasting",
+        "class_code": "5700",
+        "group_code": "570",
+        "class_title": "Internet Publishing and Broadcasting",
+        "subdivision_code": "57",
+        "group_title": "Internet Publishing and Broadcasting",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Telecommunications Services",
+        "class_code": "5801",
+        "group_code": "580",
+        "class_title": "Wired Telecommunications Network Operation",
+        "subdivision_code": "58",
+        "group_title": "Telecommunications Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Telecommunications Services",
+        "class_code": "5802",
+        "group_code": "580",
+        "class_title": "Other Telecommunications Network Operation",
+        "subdivision_code": "58",
+        "group_title": "Telecommunications Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Telecommunications Services",
+        "class_code": "5809",
+        "group_code": "580",
+        "class_title": "Other Telecommunications Services",
+        "subdivision_code": "58",
+        "group_title": "Telecommunications Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Internet Service Providers, Web Search Portals and Data Processing Services",
+        "class_code": "5910",
+        "group_code": "591",
+        "class_title": "Internet Service Providers and Web Search Portals",
+        "subdivision_code": "59",
+        "group_title": "Internet Service Providers and Web Search Portals",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Internet Service Providers, Web Search Portals and Data Processing Services",
+        "class_code": "5921",
+        "group_code": "592",
+        "class_title": "Data Processing and Web Hosting Services",
+        "subdivision_code": "59",
+        "group_title": "Data Processing, Web Hosting and Electronic Information Storage Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Internet Service Providers, Web Search Portals and Data Processing Services",
+        "class_code": "5922",
+        "group_code": "592",
+        "class_title": "Electronic Information Storage Services",
+        "subdivision_code": "59",
+        "group_title": "Data Processing, Web Hosting and Electronic Information Storage Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Library and Other Information Services",
+        "class_code": "6010",
+        "group_code": "601",
+        "class_title": "Libraries and Archives",
+        "subdivision_code": "60",
+        "group_title": "Libraries and Archives",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Information Media and Telecommunications",
+        "subdivision_title": "Library and Other Information Services",
+        "class_code": "6020",
+        "group_code": "602",
+        "class_title": "Other Information Services",
+        "subdivision_code": "60",
+        "group_title": "Other Information Services",
+        "division_code": "J"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6210",
+        "group_code": "621",
+        "class_title": "Central Banking",
+        "subdivision_code": "62",
+        "group_title": "Central Banking",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6221",
+        "group_code": "622",
+        "class_title": "Banking",
+        "subdivision_code": "62",
+        "group_title": "Depository Financial Intermediation",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6222",
+        "group_code": "622",
+        "class_title": "Building Society Operation",
+        "subdivision_code": "62",
+        "group_title": "Depository Financial Intermediation",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6223",
+        "group_code": "622",
+        "class_title": "Credit Union Operation",
+        "subdivision_code": "62",
+        "group_title": "Depository Financial Intermediation",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6229",
+        "group_code": "622",
+        "class_title": "Other Depository Financial Intermediation",
+        "subdivision_code": "62",
+        "group_title": "Depository Financial Intermediation",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6230",
+        "group_code": "623",
+        "class_title": "Non-Depository Financing",
+        "subdivision_code": "62",
+        "group_title": "Non-Depository Financing",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Finance",
+        "class_code": "6240",
+        "group_code": "624",
+        "class_title": "Financial Asset Investing",
+        "subdivision_code": "62",
+        "group_title": "Financial Asset Investing",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Insurance and Superannuation Funds",
+        "class_code": "6310",
+        "group_code": "631",
+        "class_title": "Life Insurance",
+        "subdivision_code": "63",
+        "group_title": "Life Insurance",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Insurance and Superannuation Funds",
+        "class_code": "6321",
+        "group_code": "632",
+        "class_title": "Health Insurance",
+        "subdivision_code": "63",
+        "group_title": "Health and General Insurance",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Insurance and Superannuation Funds",
+        "class_code": "6322",
+        "group_code": "632",
+        "class_title": "General Insurance",
+        "subdivision_code": "63",
+        "group_title": "Health and General Insurance",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Insurance and Superannuation Funds",
+        "class_code": "6330",
+        "group_code": "633",
+        "class_title": "Superannuation Funds",
+        "subdivision_code": "63",
+        "group_title": "Superannuation Funds",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Auxiliary Finance and Insurance Services",
+        "class_code": "6411",
+        "group_code": "641",
+        "class_title": "Financial Asset Broking Services",
+        "subdivision_code": "64",
+        "group_title": "Auxiliary Finance and Investment Services",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Auxiliary Finance and Insurance Services",
+        "class_code": "6419",
+        "group_code": "641",
+        "class_title": "Other Auxiliary Finance and Investment Services",
+        "subdivision_code": "64",
+        "group_title": "Auxiliary Finance and Investment Services",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Financial and Insurance Services",
+        "subdivision_title": "Auxiliary Finance and Insurance Services",
+        "class_code": "6420",
+        "group_code": "642",
+        "class_title": "Auxiliary Insurance Services",
+        "subdivision_code": "64",
+        "group_title": "Auxiliary Insurance Services",
+        "division_code": "K"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6611",
+        "group_code": "661",
+        "class_title": "Passenger Car Rental and Hiring",
+        "subdivision_code": "66",
+        "group_title": "Motor Vehicle and Transport Equipment Rental and Hiring",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6619",
+        "group_code": "661",
+        "class_title": "Other Motor Vehicle and Transport Equipment Rental and Hiring",
+        "subdivision_code": "66",
+        "group_title": "Motor Vehicle and Transport Equipment Rental and Hiring",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6620",
+        "group_code": "662",
+        "class_title": "Farm Animal and Bloodstock Leasing",
+        "subdivision_code": "66",
+        "group_title": "Farm Animal and Bloodstock Leasing",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6631",
+        "group_code": "663",
+        "class_title": "Heavy Machinery and Scaffolding Rental and Hiring",
+        "subdivision_code": "66",
+        "group_title": "Other Goods and Equipment Rental and Hiring",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6632",
+        "group_code": "663",
+        "class_title": "Video and Other Electronic Media Rental and Hiring",
+        "subdivision_code": "66",
+        "group_title": "Other Goods and Equipment Rental and Hiring",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6639",
+        "group_code": "663",
+        "class_title": "Other Goods and Equipment Rental and Hiring n.e.c.",
+        "subdivision_code": "66",
+        "group_title": "Other Goods and Equipment Rental and Hiring",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Rental and Hiring Services (except Real Estate)",
+        "class_code": "6640",
+        "group_code": "664",
+        "class_title": "Non-Financial Intangible Assets (Except Copyrights) Leasing",
+        "subdivision_code": "66",
+        "group_title": "Non-Financial Intangible Assets (Except Copyrights) Leasing",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Property Operators and Real Estate Services",
+        "class_code": "6711",
+        "group_code": "671",
+        "class_title": "Residential Property Operators",
+        "subdivision_code": "67",
+        "group_title": "Property Operators",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Property Operators and Real Estate Services",
+        "class_code": "6712",
+        "group_code": "671",
+        "class_title": "Non-Residential Property Operators",
+        "subdivision_code": "67",
+        "group_title": "Property Operators",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Rental, Hiring and Real Estate Services",
+        "subdivision_title": "Property Operators and Real Estate Services",
+        "class_code": "6720",
+        "group_code": "672",
+        "class_title": "Real Estate Services",
+        "subdivision_code": "67",
+        "group_title": "Real Estate Services",
+        "division_code": "L"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6910",
+        "group_code": "691",
+        "class_title": "Scientific Research Services",
+        "subdivision_code": "69",
+        "group_title": "Scientific Research Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6921",
+        "group_code": "692",
+        "class_title": "Architectural Services",
+        "subdivision_code": "69",
+        "group_title": "Architectural, Engineering and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6922",
+        "group_code": "692",
+        "class_title": "Surveying and Mapping Services",
+        "subdivision_code": "69",
+        "group_title": "Architectural, Engineering and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6923",
+        "group_code": "692",
+        "class_title": "Engineering Design and Engineering Consulting Services",
+        "subdivision_code": "69",
+        "group_title": "Architectural, Engineering and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6924",
+        "group_code": "692",
+        "class_title": "Other Specialised Design Services",
+        "subdivision_code": "69",
+        "group_title": "Architectural, Engineering and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6925",
+        "group_code": "692",
+        "class_title": "Scientific Testing and Analysis Services",
+        "subdivision_code": "69",
+        "group_title": "Architectural, Engineering and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6931",
+        "group_code": "693",
+        "class_title": "Legal Services",
+        "subdivision_code": "69",
+        "group_title": "Legal and Accounting Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6932",
+        "group_code": "693",
+        "class_title": "Accounting Services",
+        "subdivision_code": "69",
+        "group_title": "Legal and Accounting Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6940",
+        "group_code": "694",
+        "class_title": "Advertising Services",
+        "subdivision_code": "69",
+        "group_title": "Advertising Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6950",
+        "group_code": "695",
+        "class_title": "Market Research and Statistical Services",
+        "subdivision_code": "69",
+        "group_title": "Market Research and Statistical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6961",
+        "group_code": "696",
+        "class_title": "Corporate Head Office Management Services",
+        "subdivision_code": "69",
+        "group_title": "Management and Related Consulting Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6962",
+        "group_code": "696",
+        "class_title": "Management Advice and Related Consulting Services",
+        "subdivision_code": "69",
+        "group_title": "Management and Related Consulting Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6970",
+        "group_code": "697",
+        "class_title": "Veterinary Services",
+        "subdivision_code": "69",
+        "group_title": "Veterinary Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6991",
+        "group_code": "699",
+        "class_title": "Professional Photographic Services",
+        "subdivision_code": "69",
+        "group_title": "Other Professional, Scientific and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+        "class_code": "6999",
+        "group_code": "699",
+        "class_title": "Other Professional, Scientific and Technical Services n.e.c.",
+        "subdivision_code": "69",
+        "group_title": "Other Professional, Scientific and Technical Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Professional, Scientific and Technical Services",
+        "subdivision_title": "Computer System Design and Related Services",
+        "class_code": "7000",
+        "group_code": "700",
+        "class_title": "Computer System Design and Related Services",
+        "subdivision_code": "70",
+        "group_title": "Computer System Design and Related Services",
+        "division_code": "M"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7211",
+        "group_code": "721",
+        "class_title": "Employment Placement and Recruitment Services",
+        "subdivision_code": "72",
+        "group_title": "Employment Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7212",
+        "group_code": "721",
+        "class_title": "Labour Supply Services",
+        "subdivision_code": "72",
+        "group_title": "Employment Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7220",
+        "group_code": "722",
+        "class_title": "Travel Agency and Tour Arrangement Services",
+        "subdivision_code": "72",
+        "group_title": "Travel Agency and Tour Arrangement Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7291",
+        "group_code": "729",
+        "class_title": "Office Administrative Services",
+        "subdivision_code": "72",
+        "group_title": "Other Administrative Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7292",
+        "group_code": "729",
+        "class_title": "Document Preparation Services",
+        "subdivision_code": "72",
+        "group_title": "Other Administrative Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7293",
+        "group_code": "729",
+        "class_title": "Credit Reporting and Debt Collection Services",
+        "subdivision_code": "72",
+        "group_title": "Other Administrative Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7294",
+        "group_code": "729",
+        "class_title": "Call Centre Operation",
+        "subdivision_code": "72",
+        "group_title": "Other Administrative Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Administrative Services",
+        "class_code": "7299",
+        "group_code": "729",
+        "class_title": "Other Administrative Services n.e.c.",
+        "subdivision_code": "72",
+        "group_title": "Other Administrative Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Building Cleaning, Pest Control and Other Support Services",
+        "class_code": "7311",
+        "group_code": "731",
+        "class_title": "Building and Other Industrial Cleaning Services",
+        "subdivision_code": "73",
+        "group_title": "Building Cleaning, Pest Control and Gardening Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Building Cleaning, Pest Control and Other Support Services",
+        "class_code": "7312",
+        "group_code": "731",
+        "class_title": "Building Pest Control Services",
+        "subdivision_code": "73",
+        "group_title": "Building Cleaning, Pest Control and Gardening Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Building Cleaning, Pest Control and Other Support Services",
+        "class_code": "7313",
+        "group_code": "731",
+        "class_title": "Gardening Services",
+        "subdivision_code": "73",
+        "group_title": "Building Cleaning, Pest Control and Gardening Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Administrative and Support Services",
+        "subdivision_title": "Building Cleaning, Pest Control and Other Support Services",
+        "class_code": "7320",
+        "group_code": "732",
+        "class_title": "Packaging Services",
+        "subdivision_code": "73",
+        "group_title": "Packaging Services",
+        "division_code": "N"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7510",
+        "group_code": "751",
+        "class_title": "Central Government Administration",
+        "subdivision_code": "75",
+        "group_title": "Central Government Administration",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7520",
+        "group_code": "752",
+        "class_title": "State Government Administration",
+        "subdivision_code": "75",
+        "group_title": "State Government Administration",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7530",
+        "group_code": "753",
+        "class_title": "Local Government Administration",
+        "subdivision_code": "75",
+        "group_title": "Local Government Administration",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7540",
+        "group_code": "754",
+        "class_title": "Justice",
+        "subdivision_code": "75",
+        "group_title": "Justice",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7551",
+        "group_code": "755",
+        "class_title": "Domestic Government Representation",
+        "subdivision_code": "75",
+        "group_title": "Government Representation",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Administration",
+        "class_code": "7552",
+        "group_code": "755",
+        "class_title": "Foreign Government Representation",
+        "subdivision_code": "75",
+        "group_title": "Government Representation",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Defence",
+        "class_code": "7600",
+        "group_code": "760",
+        "class_title": "Defence",
+        "subdivision_code": "76",
+        "group_title": "Defence",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7711",
+        "group_code": "771",
+        "class_title": "Police Services",
+        "subdivision_code": "77",
+        "group_title": "Public Order and Safety Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7712",
+        "group_code": "771",
+        "class_title": "Investigation and Security Services",
+        "subdivision_code": "77",
+        "group_title": "Public Order and Safety Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7713",
+        "group_code": "771",
+        "class_title": "Fire Protection and Other Emergency Services",
+        "subdivision_code": "77",
+        "group_title": "Public Order and Safety Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7714",
+        "group_code": "771",
+        "class_title": "Correctional and Detention Services",
+        "subdivision_code": "77",
+        "group_title": "Public Order and Safety Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7719",
+        "group_code": "771",
+        "class_title": "Other Public Order and Safety Services",
+        "subdivision_code": "77",
+        "group_title": "Public Order and Safety Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Public Administration and Safety",
+        "subdivision_title": "Public Order, Safety and Regulatory Services",
+        "class_code": "7720",
+        "group_code": "772",
+        "class_title": "Regulatory Services",
+        "subdivision_code": "77",
+        "group_title": "Regulatory Services",
+        "division_code": "O"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Preschool and School Education",
+        "class_code": "8010",
+        "group_code": "801",
+        "class_title": "Preschool Education",
+        "subdivision_code": "80",
+        "group_title": "Preschool Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Preschool and School Education",
+        "class_code": "8021",
+        "group_code": "802",
+        "class_title": "Primary Education",
+        "subdivision_code": "80",
+        "group_title": "School Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Preschool and School Education",
+        "class_code": "8022",
+        "group_code": "802",
+        "class_title": "Secondary Education",
+        "subdivision_code": "80",
+        "group_title": "School Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Preschool and School Education",
+        "class_code": "8023",
+        "group_code": "802",
+        "class_title": "Combined Primary and Secondary Education",
+        "subdivision_code": "80",
+        "group_title": "School Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Preschool and School Education",
+        "class_code": "8024",
+        "group_code": "802",
+        "class_title": "Special School Education",
+        "subdivision_code": "80",
+        "group_title": "School Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Tertiary Education",
+        "class_code": "8101",
+        "group_code": "810",
+        "class_title": "Technical and Vocational Education and Training",
+        "subdivision_code": "81",
+        "group_title": "Tertiary Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Tertiary Education",
+        "class_code": "8102",
+        "group_code": "810",
+        "class_title": "Higher Education",
+        "subdivision_code": "81",
+        "group_title": "Tertiary Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Adult, Community and Other Education",
+        "class_code": "8211",
+        "group_code": "821",
+        "class_title": "Sports and Physical Recreation Instruction",
+        "subdivision_code": "82",
+        "group_title": "Adult, Community and Other Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Adult, Community and Other Education",
+        "class_code": "8212",
+        "group_code": "821",
+        "class_title": "Arts Education",
+        "subdivision_code": "82",
+        "group_title": "Adult, Community and Other Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Adult, Community and Other Education",
+        "class_code": "8219",
+        "group_code": "821",
+        "class_title": "Adult, Community and Other Education n.e.c.",
+        "subdivision_code": "82",
+        "group_title": "Adult, Community and Other Education",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Education and Training",
+        "subdivision_title": "Adult, Community and Other Education",
+        "class_code": "8220",
+        "group_code": "822",
+        "class_title": "Educational Support Services",
+        "subdivision_code": "82",
+        "group_title": "Educational Support Services",
+        "division_code": "P"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Hospitals",
+        "class_code": "8401",
+        "group_code": "840",
+        "class_title": "Hospitals (Except Psychiatric Hospitals)",
+        "subdivision_code": "84",
+        "group_title": "Hospitals",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Hospitals",
+        "class_code": "8402",
+        "group_code": "840",
+        "class_title": "Psychiatric Hospitals",
+        "subdivision_code": "84",
+        "group_title": "Hospitals",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8511",
+        "group_code": "851",
+        "class_title": "General Practice Medical Services",
+        "subdivision_code": "85",
+        "group_title": "Medical Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8512",
+        "group_code": "851",
+        "class_title": "Specialist Medical Services",
+        "subdivision_code": "85",
+        "group_title": "Medical Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8520",
+        "group_code": "852",
+        "class_title": "Pathology and Diagnostic Imaging Services",
+        "subdivision_code": "85",
+        "group_title": "Pathology and Diagnostic Imaging Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8531",
+        "group_code": "853",
+        "class_title": "Dental Services",
+        "subdivision_code": "85",
+        "group_title": "Allied Health Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8532",
+        "group_code": "853",
+        "class_title": "Optometry and Optical Dispensing",
+        "subdivision_code": "85",
+        "group_title": "Allied Health Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8533",
+        "group_code": "853",
+        "class_title": "Physiotherapy Services",
+        "subdivision_code": "85",
+        "group_title": "Allied Health Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8534",
+        "group_code": "853",
+        "class_title": "Chiropractic and Osteopathic Services",
+        "subdivision_code": "85",
+        "group_title": "Allied Health Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8539",
+        "group_code": "853",
+        "class_title": "Other Allied Health Services",
+        "subdivision_code": "85",
+        "group_title": "Allied Health Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8591",
+        "group_code": "859",
+        "class_title": "Ambulance Services",
+        "subdivision_code": "85",
+        "group_title": "Other Health Care Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Medical and Other Health Care Services",
+        "class_code": "8599",
+        "group_code": "859",
+        "class_title": "Other Health Care Services n.e.c.",
+        "subdivision_code": "85",
+        "group_title": "Other Health Care Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Residential Care Services",
+        "class_code": "8601",
+        "group_code": "860",
+        "class_title": "Aged Care Residential Services",
+        "subdivision_code": "86",
+        "group_title": "Residential Care Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Residential Care Services",
+        "class_code": "8609",
+        "group_code": "860",
+        "class_title": "Other Residential Care Services",
+        "subdivision_code": "86",
+        "group_title": "Residential Care Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Social Assistance Services",
+        "class_code": "8710",
+        "group_code": "871",
+        "class_title": "Child Care Services",
+        "subdivision_code": "87",
+        "group_title": "Child Care Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Health Care and Social Assistance",
+        "subdivision_title": "Social Assistance Services",
+        "class_code": "8790",
+        "group_code": "879",
+        "class_title": "Other Social Assistance Services",
+        "subdivision_code": "87",
+        "group_title": "Other Social Assistance Services",
+        "division_code": "Q"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Heritage Activities",
+        "class_code": "8910",
+        "group_code": "891",
+        "class_title": "Museum Operation",
+        "subdivision_code": "89",
+        "group_title": "Museum Operation",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Heritage Activities",
+        "class_code": "8921",
+        "group_code": "892",
+        "class_title": "Zoological and Botanical Gardens Operation",
+        "subdivision_code": "89",
+        "group_title": "Parks and Gardens Operations",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Heritage Activities",
+        "class_code": "8922",
+        "group_code": "892",
+        "class_title": "Nature Reserves and Conservation Parks Operation",
+        "subdivision_code": "89",
+        "group_title": "Parks and Gardens Operations",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Creative and Performing Arts Activities",
+        "class_code": "9001",
+        "group_code": "900",
+        "class_title": "Performing Arts Operation",
+        "subdivision_code": "90",
+        "group_title": "Creative and Performing Arts Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Creative and Performing Arts Activities",
+        "class_code": "9002",
+        "group_code": "900",
+        "class_title": "Creative Artists, Musicians, Writers and Performers",
+        "subdivision_code": "90",
+        "group_title": "Creative and Performing Arts Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Creative and Performing Arts Activities",
+        "class_code": "9003",
+        "group_code": "900",
+        "class_title": "Performing Arts Venue Operation",
+        "subdivision_code": "90",
+        "group_title": "Creative and Performing Arts Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9111",
+        "group_code": "911",
+        "class_title": "Health and Fitness Centres and Gymnasia Operation",
+        "subdivision_code": "91",
+        "group_title": "Sports and Physical Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9112",
+        "group_code": "911",
+        "class_title": "Sports and Physical Recreation Clubs and Sports Professionals",
+        "subdivision_code": "91",
+        "group_title": "Sports and Physical Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9113",
+        "group_code": "911",
+        "class_title": "Sports and Physical Recreation Venues, Grounds and Facilities Operation",
+        "subdivision_code": "91",
+        "group_title": "Sports and Physical Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9114",
+        "group_code": "911",
+        "class_title": "Sports and Physical Recreation Administrative Service",
+        "subdivision_code": "91",
+        "group_title": "Sports and Physical Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9121",
+        "group_code": "912",
+        "class_title": "Horse and Dog Racing Administration and Track Operation",
+        "subdivision_code": "91",
+        "group_title": "Horse and Dog Racing Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9129",
+        "group_code": "912",
+        "class_title": "Other Horse and Dog Racing Activities",
+        "subdivision_code": "91",
+        "group_title": "Horse and Dog Racing Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9131",
+        "group_code": "913",
+        "class_title": "Amusement Parks and Centres Operation",
+        "subdivision_code": "91",
+        "group_title": "Amusement and Other Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Sports and Recreation Activities",
+        "class_code": "9139",
+        "group_code": "913",
+        "class_title": "Amusement and Other Recreational Activities n.e.c.",
+        "subdivision_code": "91",
+        "group_title": "Amusement and Other Recreation Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Gambling Activities",
+        "class_code": "9201",
+        "group_code": "920",
+        "class_title": "Casino Operation",
+        "subdivision_code": "92",
+        "group_title": "Gambling Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Gambling Activities",
+        "class_code": "9202",
+        "group_code": "920",
+        "class_title": "Lottery Operation",
+        "subdivision_code": "92",
+        "group_title": "Gambling Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Arts and Recreation Services",
+        "subdivision_title": "Gambling Activities",
+        "class_code": "9209",
+        "group_code": "920",
+        "class_title": "Other Gambling Activities",
+        "subdivision_code": "92",
+        "group_title": "Gambling Activities",
+        "division_code": "R"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9411",
+        "group_code": "941",
+        "class_title": "Automotive Electrical Services",
+        "subdivision_code": "94",
+        "group_title": "Automotive Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9412",
+        "group_code": "941",
+        "class_title": "Automotive Body, Paint and Interior Repair",
+        "subdivision_code": "94",
+        "group_title": "Automotive Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9419",
+        "group_code": "941",
+        "class_title": "Other Automotive Repair and Maintenance",
+        "subdivision_code": "94",
+        "group_title": "Automotive Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9421",
+        "group_code": "942",
+        "class_title": "Domestic Appliance Repair and Maintenance",
+        "subdivision_code": "94",
+        "group_title": "Machinery and Equipment Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9422",
+        "group_code": "942",
+        "class_title": "Electronic (except Domestic Appliance) and Precision Equipment Repair",
+        "subdivision_code": "94",
+        "group_title": "Machinery and Equipment Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9429",
+        "group_code": "942",
+        "class_title": "Other Machinery and Equipment Repair and Maintenance",
+        "subdivision_code": "94",
+        "group_title": "Machinery and Equipment Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9491",
+        "group_code": "949",
+        "class_title": "Clothing and Footwear Repair",
+        "subdivision_code": "94",
+        "group_title": "Other Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Repair and Maintenance",
+        "class_code": "9499",
+        "group_code": "949",
+        "class_title": "Other Repair and Maintenance n.e.c.",
+        "subdivision_code": "94",
+        "group_title": "Other Repair and Maintenance",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9511",
+        "group_code": "951",
+        "class_title": "Hairdressing and Beauty Services",
+        "subdivision_code": "95",
+        "group_title": "Personal Care Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9512",
+        "group_code": "951",
+        "class_title": "Diet and Weight Reduction Centre Operation",
+        "subdivision_code": "95",
+        "group_title": "Personal Care Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9520",
+        "group_code": "952",
+        "class_title": "Funeral, Crematorium and Cemetery Services",
+        "subdivision_code": "95",
+        "group_title": "Funeral, Crematorium and Cemetery Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9531",
+        "group_code": "953",
+        "class_title": "Laundry and Dry-Cleaning Services",
+        "subdivision_code": "95",
+        "group_title": "Other Personal Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9532",
+        "group_code": "953",
+        "class_title": "Photographic Film Processing",
+        "subdivision_code": "95",
+        "group_title": "Other Personal Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9533",
+        "group_code": "953",
+        "class_title": "Parking Services",
+        "subdivision_code": "95",
+        "group_title": "Other Personal Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9534",
+        "group_code": "953",
+        "class_title": "Brothel Keeping and Prostitution Services",
+        "subdivision_code": "95",
+        "group_title": "Other Personal Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9539",
+        "group_code": "953",
+        "class_title": "Other Personal Services n.e.c.",
+        "subdivision_code": "95",
+        "group_title": "Other Personal Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9540",
+        "group_code": "954",
+        "class_title": "Religious Services",
+        "subdivision_code": "95",
+        "group_title": "Religious Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9551",
+        "group_code": "955",
+        "class_title": "Business and Professional Association Services",
+        "subdivision_code": "95",
+        "group_title": "Civic, Professional and Other Interest Group Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9552",
+        "group_code": "955",
+        "class_title": "Labour Association Services",
+        "subdivision_code": "95",
+        "group_title": "Civic, Professional and Other Interest Group Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Personal and Other Services",
+        "class_code": "9559",
+        "group_code": "955",
+        "class_title": "Other Interest Group Services n.e.c.",
+        "subdivision_code": "95",
+        "group_title": "Civic, Professional and Other Interest Group Services",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "class_code": "9601",
+        "group_code": "960",
+        "class_title": "Private Households Employing Staff",
+        "subdivision_code": "96",
+        "group_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "class_code": "9602",
+        "group_code": "960",
+        "class_title": "Undifferentiated Goods-Producing Activities of Private Households for Own Use",
+        "subdivision_code": "96",
+        "group_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "division_code": "S"
+    },
+    {
+        "division_title": "Other Services",
+        "subdivision_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "class_code": "9603",
+        "group_code": "960",
+        "class_title": "Undifferentiated Service-Producing Activities of Private Households for Own Use",
+        "subdivision_code": "96",
+        "group_title": "Private Households Employing Staff and Undifferentiated Goods- and Service-Producing Activities of Households for Own Use",
+        "division_code": "S"
+    }
+]

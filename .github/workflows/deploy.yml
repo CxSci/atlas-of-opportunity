@@ -7,7 +7,7 @@
 
 on:
   push:
-    # Triggers on new tags/releases like v0.0.1
+    # Triggers on new tags/releases like "v0.0.1"
     tags:
       v[0-9]+.[0-9]+.[0-9]+
   workflow_dispatch:
@@ -16,13 +16,10 @@ name: Deploy to Amazon ECS
 
 env:
   AWS_REGION: us-east-1
-  ECS_SERVICE: opportunity-prod-service
+  ECS_SERVICE: opportunity-mit-edu-service
   ECS_CLUSTER: opportunity-prod-cluster
   ECS_TASK_DEFINITION: .github/workflows/.aws/task-definition.json
-  NGINX_ECR_REPOSITORY: opportunity-prod/nginx
-  NGINX_CONTAINER_NAME: nginx
-  DASHBOARD_ECR_REPOSITORY: opportunity-prod/dashboard
-  DASHBOARD_CONTAINER_NAME: dashboard
+  ECR_REPOSITORY: opportunity-prod/nginx
 
 jobs:
   deploy:
@@ -49,13 +46,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
+      # Temporarily disabling layering caching due to issues with builds
+      # writing layers to the cache. That's a change in behavior on GitHub's
+      # side, so it's assumed it will start working again at some point in
+      # the future.
+      # - name: Cache Docker layers
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/.buildx-cache
+      #     key: ${{ runner.os }}-buildx-${{ github.sha }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-buildx-
 
       - name: Derive tag name and set vars
         id: vars
@@ -64,63 +65,39 @@ jobs:
         # Creates tags like:
         #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/nginx:f4455f62fba95ae5c529f0186b6eb861c87ed5b4
         #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/nginx:v0.0.1
-        #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/dashboard:f4455f62fba95ae5c529f0186b6eb861c87ed5b4
-        #   xxxxxx.dkr.ecr.us-east-1.amazonaws.com/dashboard:v0.0.1
         run: |
           TAG=${GITHUB_REF/refs\/tags\//}
-          NGINX_ROOT=$ECR_REGISTRY/$NGINX_ECR_REPOSITORY
-          DASHBOARD_ROOT=$ECR_REGISTRY/$DASHBOARD_ECR_REPOSITORY
-          echo "::set-output name=NGINX_SHA_IMAGE::$NGINX_ROOT:${{ github.sha }}"
-          echo "::set-output name=NGINX_TAG_IMAGE::$NGINX_ROOT:$TAG"
-          echo "::set-output name=DASHBOARD_SHA_IMAGE::$DASHBOARD_ROOT:${{ github.sha }}"
-          echo "::set-output name=DASHBOARD_TAG_IMAGE::$DASHBOARD_ROOT:$TAG"
+          IMAGE_NAME=$ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=IMAGE_SHA::$IMAGE_NAME:${{ github.sha }}"
+          echo "::set-output name=IMAGE_TAG::$IMAGE_NAME:$TAG"
 
       # 2. Build
-
-      # 2a. NGINX
       - name: Build, tag, and push Docker image to Amazon ECR
-        id: nginx-build-image
+        id: build-image
         uses: docker/build-push-action@v2
         with:
-          context: nginx
+          context: .
+          file: nginx/Dockerfile
           push: true
-          tags: ${{ steps.vars.outputs.NGINX_SHA_IMAGE }}, ${{ steps.vars.outputs.NGINX_TAG_IMAGE }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+          tags: ${{ steps.vars.outputs.IMAGE_SHA }}, ${{ steps.vars.outputs.IMAGE_TAG }}
+          # See above actions/cache@v2 about temporarily commenting out layer caching.
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+          # buildkitd-flags: --debug
 
       - name: Fill in the new image ID in the Amazon ECS task definition
-        id: nginx-task-def
+        id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: nginx
-          image: ${{ steps.vars.outputs.NGINX_TAG_IMAGE }}
-
-      # 2b. Dashboard
-      - name: Build, tag, and push Docker image to Amazon ECR
-        id: dashboard-build-image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.vars.outputs.DASHBOARD_SHA_IMAGE }}, ${{ steps.vars.outputs.DASHBOARD_TAG_IMAGE }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: dashboard-task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ steps.nginx-task-def.outputs.task-definition }}
-          container-name: dashboard
-          image: ${{ steps.vars.outputs.DASHBOARD_TAG_IMAGE }}
-
+          image: ${{ steps.vars.outputs.IMAGE_TAG }}
 
       # 3. Deploy
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.dashboard-task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
@@ -130,7 +107,7 @@ jobs:
       # For avoiding a runaway cache size bug
       # https://github.com/docker/build-push-action/issues/252
       # https://github.com/moby/buildkit/issues/1896
-      - name: Move Docker cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # - name: Move Docker cache
+      #   run: |
+      #     rm -rf /tmp/.buildx-cache
+      #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
