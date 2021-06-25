@@ -74,7 +74,7 @@ let Map = class Map extends React.Component {
   static propTypes = {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
-    active: PropTypes.object.isRequired,
+    activeLayer: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     savedMapPosition: PropTypes.object,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
@@ -148,8 +148,8 @@ let Map = class Map extends React.Component {
           layout: {},
           paint: {
             "fill-color": {
-              property: this.props.active.property,
-              stops: this.props.active.stops,
+              property: this.props.activeLayer.property,
+              stops: this.props.activeLayer.stops,
             },
             "fill-opacity": [
               "case",
@@ -220,8 +220,8 @@ let Map = class Map extends React.Component {
           layout: {},
           paint: {
             "fill-color": {
-              property: this.props.active.property,
-              stops: this.props.active.stops,
+              property: this.props.activeLayer.property,
+              stops: this.props.activeLayer.stops,
             },
             "fill-opacity": 0.8,
           },
@@ -252,7 +252,7 @@ let Map = class Map extends React.Component {
         });
 
         // Create clusters on load if selected for initial map loads to business layer
-        if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES) {
+        if (this.props.activeLayer.key === Constants.MAP_TYPE.BUSINESSES) {
           this.drawBusinessClusters()
         }
 
@@ -520,8 +520,8 @@ let Map = class Map extends React.Component {
       this.redrawBridges();
     }
 
-    if (this.props.active.key !== prevProps.active.key) {
-      if (this.props.active.key === Constants.MAP_TYPE.BUSINESSES && !this.props.mini) {
+    if (this.props.activeLayer.key !== prevProps.activeLayer.key) {
+      if (this.props.activeLayer.key === Constants.MAP_TYPE.BUSINESSES && !this.props.mini) {
         this.redrawBridges();
         this.drawBusinessClusters();
       } else {
@@ -546,8 +546,8 @@ let Map = class Map extends React.Component {
             layout: {},
             paint: {
               "fill-color": {
-                property: this.props.active.property,
-                stops: this.props.active.stops,
+                property: this.props.activeLayer.property,
+                stops: this.props.activeLayer.stops,
               },
               "fill-opacity": [
                 "case",
@@ -563,8 +563,8 @@ let Map = class Map extends React.Component {
           }, "sa2-borders");
         }
         let fillColor = {
-          property: this.props.active.property,
-          stops: this.props.active.stops,
+          property: this.props.activeLayer.property,
+          stops: this.props.activeLayer.stops,
         };
 
         this.map.setPaintProperty("sa2-fills", "fill-color", fillColor);
@@ -597,7 +597,7 @@ let Map = class Map extends React.Component {
       !this.map.isSourceLoaded("sa2")
     ) {
       return;
-    } else if (this.props.active.key !== Constants.MAP_TYPE.BUSINESSES) {
+    } else if (this.props.activeLayer.key !== Constants.MAP_TYPE.BUSINESSES) {
       this.redrawBridges(feature);
     } else {
       setMapType("growth")
@@ -746,11 +746,11 @@ let Map = class Map extends React.Component {
       }
     );
 
-    if (this.props.active.key !== Constants.MAP_TYPE.SEGREGATION) {
+    if (this.props.activeLayer.key !== Constants.MAP_TYPE.SEGREGATION) {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
       // flowDirection should be one of "inflow", "outflow", or "bidirectional"
       // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
-      let keys = this.props.active.bridgeKeys[this.props.flowDirection];
+      let keys = this.props.activeLayer.bridgeKeys[this.props.flowDirection];
       // Get bridges and ignore missing values
       // Note that somewhere along the way, Mapbox GL turns GeoJSON properties
       // like {"foo": null} into {"foo": "null"}.
@@ -1015,7 +1015,7 @@ function mapStateToProps(state) {
   return {
     features: state.features,
     geojsonURL: state.geojsonURL,
-    active: state.activeLayer,
+    activeLayer: state.activeLayer,
     flowDirection: state.flowDirection,
     savedMapPosition: state.savedMapPosition,
     searchBarInfo: state.searchBarInfo,
