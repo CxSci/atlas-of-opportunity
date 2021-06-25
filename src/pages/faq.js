@@ -3,25 +3,22 @@ import ModalContainer from "../components/ModalContainer";
 
 const FAQ = class FAQ extends Component {
   render() {
-    const content = {
-      fontSize: "14px",
-      textAlign: "justify",
-      marginBottom: "15px",
-    };
     return (
       <ModalContainer title="FAQ">
-        <br />
-        <h2>Privacy</h2>
-        <p style={content}>
-          <b>Where did you obtain the data? Is this legal?</b>
-          <br />
+        <h1>Privacy</h1>
+        <p className="faqQ">
+          Where did you obtain the data? Is this legal?
+        </p>
+        <p>
           The SA2-level census tract data come from collaboration with
           government departments along with telecom and bank companies. It is
           fully compliant with all privacy laws within Australia (and also the
           EU GDPR).
-          <br />
-          <br />
-          <b>Are you singling out individuals?</b>
+        </p>
+        <p className="faqQ">
+          Are you singling out individuals?
+        </p>
+        <p>
           No. We are not interested in individual behavior and are not using
           individual behavior in our analysis. The data is aggregated to SA2
           census tracts, at which point it has no individual level information
