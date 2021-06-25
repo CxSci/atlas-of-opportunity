@@ -78,11 +78,13 @@ const RecommendationTool = (props) => {
                             <></> :
                             props.data[currentStage].questions.map((question, idx) => {
                                 return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
-                                    <p className="description">
-                                        {question.question}
-                                        <br/>
-                                        <span className="help">{question.hint}</span>
-                                    </p>
+                                    {(question.question) &&
+                                        <p className="description">
+                                            {question.question}
+                                            <br/>
+                                            <span className="help">{question.hint}</span>
+                                        </p>
+                                    }
                                     <div className="inputRoot">{inputComponentForQuestion(question)}</div>
                                 </div>
                             })
