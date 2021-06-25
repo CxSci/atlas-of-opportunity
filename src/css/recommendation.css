@@ -89,58 +89,6 @@
   font-weight: normal;
 }
 
-.nextButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 64px;
-  height: 39px;
-  right: 40px;
-  bottom: 30px;
-  background: #3DBEFF;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-}
-
-.previousButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 94px;
-  height: 39px;
-  left: 40px;
-  bottom: 30px;
-  background: #3DBEFF;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-
-}
-
-.comparisonButton {
-  position: absolute;
-  width: 186px;
-  height: 39px;
-  right: 40px;
-  bottom: 30px;
-  background: #3DBEFF;
-  borderRadius: 100px;
-  cursor: pointer;
-  border: none;
-}
-
-.buttonText {
-  fontFamily: Roboto;
-  fontStyle: normal;
-  fontWeight: bold;
-  fontSize: 16px;
-  lineHeight: 19px;
-  color: #FFFFFF
-}
-
 .question label {
   display: flex;
   align-items: flex-start;
