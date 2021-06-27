@@ -6,7 +6,7 @@ import SidebarButton from "./SidebarButton";
 import SASearchField from "./SASearchField";
 import Legend from "./legend";
 
-import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
+//import { ReactComponent as FavoriteIcon} from "../assets/favorite.svg"
 import { ReactComponent as ComparisonIcon} from "../assets/compare.svg"
 
 import "../css/collapsible.css";
@@ -39,7 +39,7 @@ const Sidebar = (props) => {
     
     const ActionButtons = () => (
       <div className="actionButtonsContainer">
-        <button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>
+        {/*<button className="actionButton"><FavoriteIcon className="icon"/> Add to Favorites</button>*/}
         <button disabled={enableButton} className="actionButton" onClick={() => comparisonClick(selectedFeature)}>
           <ComparisonIcon className="icon"/>
           {isCompared ? "Remove from Comparison" : "Add to Comparison"}
@@ -60,7 +60,7 @@ const Sidebar = (props) => {
                 <SASearchField />
                 {(selectedFeature || comparisonFeatures.length) ?
                   <>
-                    <ActionButtons/>
+                    {selectedFeature && <ActionButtons/>}
                     {comparisonFeatures.length > 0 &&
                       <CollapsibleSection title="Locations to Compare">
                         <LocationCompare showButton />
