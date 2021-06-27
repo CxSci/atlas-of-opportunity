@@ -667,16 +667,16 @@ let Map = class Map extends React.Component {
     this.cntr2Popup.remove();
 
     //remove the previous routes
-    if (this.map.getLayer("route") !== undefined) {
+    /*if (this.map.getLayer("route") !== undefined) {
       this.map.removeLayer("route");
       this.map.removeSource("route");
     }
     if (this.map.getLayer("point") !== undefined) {
       this.map.removeLayer("point");
       this.map.removeSource("point");
-    }
-    var featureObj = {};
-    var destinationList = [];
+    }*/
+    //var featureObj = {};
+    //var destinationList = [];
     var origin = [];
     var regionName;
 
@@ -734,7 +734,7 @@ let Map = class Map extends React.Component {
       }
     );
 
-    if (this.props.activeLayer.key !== Constants.MAP_TYPE.SEGREGATION) {
+    /*if (this.props.activeLayer.key !== Constants.MAP_TYPE.SEGREGATION) {
       // Show the bridges for the selected flow direction {in, out, bi-directional}.
       // flowDirection should be one of "inflow", "outflow", or "bidirectional"
       // e.g. keys = ["inflow_r1", "inflow_r2", "inflow_r3"]
@@ -991,7 +991,7 @@ let Map = class Map extends React.Component {
           animate(2, cntr2, point, route, "point");
         }
       }
-    }
+    }*/
   };
 
   render() {
