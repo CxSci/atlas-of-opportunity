@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import DropdownSelect from './dropdown';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
+import { Range } from 'rc-slider';
+
+import 'rc-slider/assets/index.css';
 import '../css/recommendation.css';
 
 const RecommendationTool = (props) => {
@@ -11,18 +14,26 @@ const RecommendationTool = (props) => {
     const [formState, setFormState] = useState({});
 
     const setRadioValue = (key, answer) => {
-        setFormState({...formState, [key]: answer})
+        setFormState({...formState, [key]: answer});
     }
 
     const setCheckboxValue = (key, answer) => {
         const newArray = formState[key] ? Array.from(formState[key]) : [];
-        if (newArray.includes(answer)) newArray.splice(newArray.indexOf(answer), 1);
-        else newArray.push(answer);
+        if (newArray.includes(answer)) {
+            newArray.splice(newArray.indexOf(answer), 1);
+        }
+        else {
+            newArray.push(answer);
+        }
         setFormState({...formState, [key]: newArray});
     }
 
     const setSelectValue = (key, answer) => {
-        setFormState({...formState, [key]: answer})
+        setFormState({...formState, [key]: answer});
+    }
+
+    const setSliderValue = (key, answer) => {
+        setFormState({...formState, [key]: answer});
     }
 
     const inputComponentForQuestion = (question) => {
@@ -40,8 +51,8 @@ const RecommendationTool = (props) => {
                     </Fragment>)}</>;
             case "select":
                 return <DropdownSelect
-                    items={question.answers}
-                    initialSelectedItem={""}
+                    items={[question.placeholder, ...question.answers]}
+                    selectedItem={formState[question.key] || question.placeholder}
                     handleSelectionChanged={(value)=>{setSelectValue(question.key, value)}}
                     />;
             case "checkbox":
@@ -55,10 +66,25 @@ const RecommendationTool = (props) => {
                             {answer}
                         </label>
                     </Fragment>)}</>;
+            case "slider_range":
+                return <>{
+                    <Range
+                        // Each mark is a step.
+                        step={null}
+                        // Must be in the form { 0: "Foo" }, where 0 is where
+                        // the mark should appear on the slider from 0 to 100.
+                        marks={question.answers}
+                        defaultValue={[0, 100]}
+                        onAfterChange={(val) => {
+                            setSliderValue(question.key, val.map(v => question.answers[v]))}}
+                    />
+                }
+                </>
             default:
                 return <></>
         }
     }
+    
 
     return <>
         <RecommendationHeader currentStage={currentStage} stages={[...props.data.map(x => x.title), "Results"]}/>
@@ -74,11 +100,13 @@ const RecommendationTool = (props) => {
                             <></> :
                             props.data[currentStage].questions.map((question, idx) => {
                                 return <div key={`${question.question}-${idx}`} className={`question ${question.question ? "" : "continued"}`}>
-                                    <p className="description">
-                                        {question.question}
-                                        <br/>
-                                        <span className="help">{question.hint}</span>
-                                    </p>
+                                    {(question.question) &&
+                                        <p className="description">
+                                            {question.question}
+                                            <br/>
+                                            <span className="help">{question.hint}</span>
+                                        </p>
+                                    }
                                     <div className="inputRoot">{inputComponentForQuestion(question)}</div>
                                 </div>
                             })

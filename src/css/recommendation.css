@@ -113,3 +113,47 @@
 .actions a:last-child {
   margin-left: auto;
 }
+
+/* Slider and range questions */
+.question .rc-slider {
+  margin: 0 10px;
+  width: initial;
+}
+
+.question .rc-slider-rail {
+  background-color: #999;
+}
+
+.question .rc-slider-track {
+  background-color: #333;
+}
+
+.question .rc-slider-dot {
+  border-color: #999;
+}
+
+.question .rc-slider-dot-active, .question .rc-slider-handle {
+  border-color: #333;
+}
+
+.question .rc-slider-handle:hover {
+  border-color: #000;
+}
+
+.question .rc-slider-handle:focus {
+  border-color: #000;
+}
+
+.question .rc-slider-handle:active {
+  border-color: #333;
+  box-shadow: 0 0 5px #333;
+}
+
+.question .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+  border-color: #333;
+  box-shadow: 0 0 5px #333;
+}
+
+.question .rc-slider-mark {
+  font-size: 14px;
+}
