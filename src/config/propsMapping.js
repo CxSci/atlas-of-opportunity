@@ -215,7 +215,7 @@ export default [
       {
         id: 'bsns_growth_rate',
         label: 'Business Growth Rate',
-        format: 'number',
+        format: 'percent_normalized',
       },
       // {
       //   id: 'bsns_growth_rate', label: 'Business Growth Index', format: 'number',
