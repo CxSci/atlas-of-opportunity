@@ -76,7 +76,7 @@ let Map = class Map extends React.Component {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     geojsonURL: PropTypes.string.isRequired,
     activeLayer: PropTypes.object.isRequired,
-    mapLayers: PropTypes.array.isRequired,
+    mapLayers: PropTypes.object.isRequired,
     flowDirection: PropTypes.string.isRequired,
     savedMapPosition: PropTypes.object,
     searchBarInfo: PropTypes.arrayOf(PropTypes.number),
