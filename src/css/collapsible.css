@@ -2,8 +2,9 @@
 .Collapsible__contentInner h2 {
   font-weight: 700;
   font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 10px; 
+  margin: 10px 0;
+  display: inline-block;
+  max-width: 220px;
 }
     
 .Collapsible {
@@ -26,6 +27,11 @@
 
 .Collapsible__contentInner .metric div {
   font-size: 14px;
+}
+
+.Collapsible__contentInner .metric div.inline {
+  float: right;
+  margin: 10px 0;
 }
 
 .Collapsible__contentInner .metric div.comparison {

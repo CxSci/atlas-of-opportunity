@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Legend,
   Tooltip,
+  Label,
 } from "recharts";
 import { getColorFromGradient } from '../../utils/colors';
 const truncate = (str, n) => (str.length > n) ? str.substr(0, n - 1) + '…' : str;
@@ -34,11 +35,11 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
     name: truncate(item.name, 20),
     color: getColorFromGradient('rgb(255,233,36)', 'rgb(242,11,11)', (idx + 1) / 5)
   }));
+  const hasNoData = series.every(item => item.data.length === 0);
 
-  const legendHeigth = (lines.length * 15);
-  if (showLegend) {
-    height += legendHeigth;
-  }
+  const labelOffset = height / 2 + (showLegend ? 5 : 15);
+  const legendHeight = (lines.length * 15);
+  if (showLegend) height += legendHeight;
 
   const tickFormatter = (value) => {
     // Note: Change this to use Intl.NumberFormat() some day when more browsers
@@ -66,7 +67,11 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           margin={{ top: 5, right: 10, left: -2, bottom: mgBottom }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" fontSize={12} allowDuplicatedCategory={false} />
+          <XAxis dataKey="year" fontSize={12} allowDuplicatedCategory={false}>
+            {hasNoData &&
+              <Label value="No data" offset={labelOffset} position="insideBottom" />
+            }
+          </XAxis>
           <YAxis type="number" domain={['auto','auto']}
             width={40} fontSize={12}
             tickFormatter={tickFormatter} />
@@ -77,7 +82,7 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           />
           {showLegend &&
             <Legend
-              height={legendHeigth}
+              height={legendHeight}
               layout="vertical" />
           }
           {lines.map(line =>

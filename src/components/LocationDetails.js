@@ -41,7 +41,7 @@ const LocationDetails = (props) => {
   const renderSelectedValue = (metric) => {
     let rawValue = selectedFeature.properties[metric.id];
     if (rawValue === undefined || rawValue === null) {
-      return rawValue || 'No data';
+      return <div className="inline">n/a</div>;
     }
     const value = formatValue(rawValue, metric.format);
     
@@ -54,7 +54,7 @@ const LocationDetails = (props) => {
       case 'bar':
         return <SolidBar label={value} value={rawValue} max={metric.max} width={260} />
       default:
-        return <div>{value}</div>
+        return <div className="inline">{value}</div>
     }
   }
 
