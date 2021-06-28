@@ -37,6 +37,7 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
   }));
   const hasNoData = series.every(item => item.data.length === 0);
 
+  const labelOffset = height / 2 + (showLegend ? 5 : 15);
   const legendHeigth = (lines.length * 15);
   if (showLegend) height += legendHeigth;
 
@@ -68,7 +69,7 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="year" fontSize={12} allowDuplicatedCategory={false}>
             {hasNoData &&
-              <Label value="No data" offset={(height - legendHeigth) / 2 + 5} position="insideBottom" />
+              <Label value="No data" offset={labelOffset} position="insideBottom" />
             }
           </XAxis>
           <YAxis type="number" domain={['auto','auto']}
