@@ -38,8 +38,8 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
   const hasNoData = series.every(item => item.data.length === 0);
 
   const labelOffset = height / 2 + (showLegend ? 5 : 15);
-  const legendHeigth = (lines.length * 15);
-  if (showLegend) height += legendHeigth;
+  const legendHeight = (lines.length * 15);
+  if (showLegend) height += legendHeight;
 
   const tickFormatter = (value) => {
     // Note: Change this to use Intl.NumberFormat() some day when more browsers
@@ -82,7 +82,7 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
           />
           {showLegend &&
             <Legend
-              height={legendHeigth}
+              height={legendHeight}
               layout="vertical" />
           }
           {lines.map(line =>
