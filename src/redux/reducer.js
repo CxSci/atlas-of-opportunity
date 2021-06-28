@@ -21,34 +21,34 @@ mapLayers[Constants.MAP_TYPE.GROWTH] = {
   },
 };
 
-mapLayers[Constants.MAP_TYPE.TRANSACTIONS] = {
-  key: Constants.MAP_TYPE.TRANSACTIONS,
-  name: "Financial Interactions - Growth Potential",
-  description: "",
-  property: "income_diversity",
-  stops: [
-    [0, "#cce7ff"],
-    [0.6, "#47a1f0"],
-    [1.2, "#2e90e6"],
-  ],
-  bridgeKeys: {
-    inflow: ["gain_r1", "gain_r2", "gain_r3"],
-    outflow: ["spent_r1", "spent_r2", "spent_r3"],
-    bidirectional: ["exchanged_r1", "exchanged_r2", "exchanged_r3"],
-  },
-};
+// mapLayers[Constants.MAP_TYPE.TRANSACTIONS] = {
+//   key: Constants.MAP_TYPE.TRANSACTIONS,
+//   name: "Financial Interactions - Growth Potential",
+//   description: "",
+//   property: "income_diversity",
+//   stops: [
+//     [0, "#cce7ff"],
+//     [0.6, "#47a1f0"],
+//     [1.2, "#2e90e6"],
+//   ],
+//   bridgeKeys: {
+//     inflow: ["gain_r1", "gain_r2", "gain_r3"],
+//     outflow: ["spent_r1", "spent_r2", "spent_r3"],
+//     bidirectional: ["exchanged_r1", "exchanged_r2", "exchanged_r3"],
+//   },
+// };
 
-mapLayers[Constants.MAP_TYPE.SEGREGATION] = {
-  key: Constants.MAP_TYPE.SEGREGATION,
-  name: "Economic Segregation - Inequality Index",
-  description: "Inequality in time spent",
-  property: "inequality",
-  stops: [
-    [0, "#fdedc4"],
-    [40, "#f09647"],
-    [60, "#dd4b27"],
-  ],
-};
+// mapLayers[Constants.MAP_TYPE.SEGREGATION] = {
+//   key: Constants.MAP_TYPE.SEGREGATION,
+//   name: "Economic Segregation - Inequality Index",
+//   description: "Inequality in time spent",
+//   property: "inequality",
+//   stops: [
+//     [0, "#fdedc4"],
+//     [40, "#f09647"],
+//     [60, "#dd4b27"],
+//   ],
+// };
 
 mapLayers[Constants.MAP_TYPE.BUSINESSES] = {
   key: Constants.MAP_TYPE.BUSINESSES,

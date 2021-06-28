@@ -110,13 +110,13 @@ export default [
         max: 4,
         // format: 'range', // One of 1, 2, 3, or 4
       },
-      {
-        id: 'inequality', // show this or no?
-        label: 'Inequality (lower is better)',
-        format: 'percent',
-        type: 'bar',
-        max: 100,
-      },
+      // {
+      //   id: 'inequality',
+      //   label: 'Inequality (lower is better)',
+      //   format: 'percent',
+      //   type: 'bar',
+      //   max: 100,
+      // },
       {
         id: 'occup_diversity',
         label: 'Diversity of Occupation Types',
