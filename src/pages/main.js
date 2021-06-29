@@ -76,10 +76,10 @@ const Main = (props) => {
           <Sidebar />
           {!comparisonMode && <Map />}
           {comparisonMode && (
-            props.comparisonType === 'table' && <TableView />
-          )}
-          {comparisonMode && (
-            props.comparisonType === 'grid' && <GridView />
+            <div className="viewer-container">
+              {props.comparisonType === 'table' && <TableView />}
+              {props.comparisonType === 'grid' && <GridView />}
+            </div>
           )}
           <HamburgerMenu />
         </div>
