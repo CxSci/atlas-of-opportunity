@@ -63,7 +63,7 @@ const initialState = {
   features: [], // Fetched asynchronously on app load
   poiFeatures: [],
   comparisonFeatures: [],
-  collapsibleState: {},
+  collapsibleState: {"Demographic Summary": true},
   mapLayers,
   activeLayer: mapLayers[Constants.MAP_TYPE.GROWTH],
   mapType: Constants.MAP_TYPE.GROWTH,
