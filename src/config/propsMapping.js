@@ -9,6 +9,7 @@
  *    format:   value format (number | percent | currency)
  *    desc:     description to show with tooltip
  *    options:  cutomization for type range { minLabel, maxLabel, minColor, maxColor }
+ *    generator: function to generate metrics that vary depending on their feature or features
  * }
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default [
@@ -288,8 +289,8 @@ export default [
           const prefix = 'trans'
 
           const types = {
-            avg_spent_index: "Average Spent",
-            trx_count_index: "Transaction Count",
+            'avg_spent_index': "Average Spent",
+            'trx_count_index': "Transaction Count",
           }
 
           const categories = {
@@ -332,5 +333,84 @@ export default [
         }
       },
     ]
-  }
+  },
+  {
+    title: 'Business Counts',
+    content: [
+      {
+        generator: (featureOrFeatures) => {
+          let keys = []
+          // Get just the keys of the features' properties.
+          // If there are multiple features, merge all of their keys into one
+          // list.
+          if (Array.isArray(featureOrFeatures)) {
+            const multiKeys = featureOrFeatures.map(f => Object.keys(f.properties))
+            keys = [...new Set([].concat(...multiKeys))]
+          } else {
+            keys = Object.keys(featureOrFeatures.properties)
+          }
+
+          let metrics = []
+          const prefix = 'bsns_cnt'
+
+          const types = {
+            'total': 'Total',
+            // Leave finer grained buckets out until filtering and something
+            // like react-virtualized is added in a future release. Otherwise,
+            // this ends up adding 100+ line charts to the sidebar, which makes
+            // things very slow.
+            // 'emp200': '200+ Employees',
+            // 'emp20_199': '20-199 Employees',
+            // 'emp5_19': '5-19 Employees',
+            // 'emp1_4': '1-4 Employees',
+            // 'non_emp': '0 Employees',
+          }
+
+          // ANZSIC division codes and labels
+          const categories = {
+            'a': 'Agriculture, Forestry and Fishing',
+            'b': 'Mining',
+            'c': 'Manufacturing',
+            'd': 'Electricity, Gas, Water and Waste Services',
+            'e': 'Construction',
+            'f': 'Wholesale Trade',
+            'g': 'Retail Trade',
+            'h': 'Accommodation and Food Services',
+            'i': 'Transport, Postal and Warehousing',
+            'j': 'Information Media and Telecommunications',
+            'k': 'Financial and Insurance Services',
+            'l': 'Rental, Hiring and Real Estate Services',
+            'm': 'Professional, Scientific and Technical Services',
+            'n': 'Administrative and Support Services',
+            'o': 'Public Administration and Safety',
+            'p': 'Education and Training',
+            'q': 'Health Care and Social Assistance',
+            'r': 'Arts and Recreation Services',
+            's': 'Other Services',
+          }
+
+          Object.keys(categories).map((categoryKey) => {
+            Object.keys(types).map((typeKey) => {
+              // Produces ids like:
+              //   trans_avg_spent_index_apparel_dept
+              //   trans_trx_count_index_apparel_dept
+              const id = `${prefix}_${categoryKey}_${typeKey}`
+              // Metric isn't shown if the data is missing
+              if (keys.indexOf(id) !== -1) {
+                metrics.push({
+                  id: id,
+                  // Produces labels like:
+                  //   Average Spent: Apparel Discount and Department Stores
+                  //   Transaction Count: Apparel Discount and Department Stores
+                  label: `${categories[categoryKey]}: ${types[typeKey]}`,
+                  type: 'line-chart',
+                })
+              }
+            })
+          })
+          return metrics
+        }
+      },
+    ]
+  },
 ];
