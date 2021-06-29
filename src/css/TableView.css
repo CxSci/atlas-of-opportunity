@@ -1,9 +1,6 @@
 .table-view {
-  overflow: scroll;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 60px;
   font-size: 14px;
+  height: max-content;
 }
 
 .table-header {

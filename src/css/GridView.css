@@ -1,8 +1,6 @@
 .grid-view {
-  overflow: scroll;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 65px 25px 0;
+  padding: 0 25px;
+  height: max-content;
 }
 
 .grid-view .Collapsible {
