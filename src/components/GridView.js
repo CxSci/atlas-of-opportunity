@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
+
 import propsMapping from "../config/propsMapping";
 import MetricDetails from "./MetricDetails";
+import generateMetrics from "../utils/generateMetrics";
 import "../css/GridView.css"
 
 const GridView = ({comparisonFeatures}) => {
@@ -11,7 +13,7 @@ const GridView = ({comparisonFeatures}) => {
   const renderGrid = (section) => {
     return (
       <div className="grid-container">
-        {section.content.map((metric) => (
+        {generateMetrics(section.content, comparisonFeatures).map((metric) => (
           <div key={metric.id} className="grid-item metric">
             <div className="grid-item-head">
               <h2>{metric.label}</h2>
