@@ -17,6 +17,20 @@ const LocationDetails = (props) => {
     allFeatures = [...allFeatures, props.feature]
   }
 
+  // Add some metrics programmatically by calling their generator
+  // e.g. some metrics are mostly repetitions except for their business
+  // category.
+  const generateMetrics = (contents) => {
+    return contents.reduce((results, metric) => {
+      if (!metric.generator) {
+        results.push(metric)
+      } else {
+        results.push(...metric.generator(comparisonFts.length ? allFeatures : selectedFeature))
+      }
+      return results
+    }, [])
+  }
+
   const renderMetric = (metric) => {
     return (
       <div key={metric.id} className="metric">
@@ -63,7 +77,8 @@ const LocationDetails = (props) => {
       {props.children}
       {propsMapping.map((section) => (
         <CollapsibleSection title={section.title} key={section.title}>
-          {section.content.map((metric) => (
+          {/* Preprocess section.content to expand its generators */}
+          {generateMetrics(section.content).map((metric) => (
             renderMetric(metric)
           ))}
         </CollapsibleSection>

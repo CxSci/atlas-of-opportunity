@@ -272,180 +272,64 @@ export default [
     title: 'Financial Transactions',
     content: [
       {
-        id: 'trans_avg_spent_index_apparel_dept',
-        label: 'Average Spent: Apparel Discount and Department Stores',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_apparel_dept',
-        label: 'Transaction Count: Apparel Discount and Department Stores',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_auto_transp',
-        label: 'Average Spent: Auto and Transportation',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_auto_transp',
-        label: 'Transaction Count: Auto and Transportation',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_index_avg_spent_dining_sports_ent',
-        label: 'Average Spent: Dining Sports and Entertainment',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_dining_sports_ent',
-        label: 'Transaction Count: Dining Sports and Entertainment',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_hardware_homeware',
-        label: 'Average Spent: Hardware Supplies and Homewares',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_hardware_homeware',
-        label: 'Transaction Count: Hardware Supplies and Homewares',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_luxury_specialty',
-        label: 'Average Spent: Luxury and Speciality Stores',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_luxury_specialty',
-        label: 'Transaction Count: Luxury and Speciality Stores',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_med_care',
-        label: 'Average Spent: Medical and Personal Care',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_med_care',
-        label: 'Transaction Count: Medical and Personal Care',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_personal_svcs',
-        label: 'Average Spent: Personal Services',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_personal_svcs',
-        label: 'Transaction Count: Personal Services',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_prof_svcs',
-        label: 'Average Spent: Professional Services',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_prof_svcs',
-        label: 'Transaction Count: Professional Services',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'avg_spent_trans_index_grocery',
-        label: 'Average Spent: Retail Food Grocery and Supermarkets',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_grocery',
-        label: 'Transaction Count: Retail Food Grocery and Supermarkets',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_avg_spent_index_trade_manuf',
-        label: 'Average Spent: Trades and Light Manufacturing',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_trade_manuf',
-        label: 'Transaction Count: Trades and Light Manufacturing',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_index_avg_spent_travel_accom_rent',
-        label: 'Average Spent: Travel Accommodation and Rentals',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
-      },
-      {
-        id: 'trans_trx_count_index_travel_accom_rent',
-        label: 'Transaction Count: Travel Accommodation and Rentals',
-        format: 'number',
-        type: 'range',
-        min: 0.0,
-        max: 1.0,
+        generator: (featureOrFeatures) => {
+          let keys = []
+          // Get just the keys of the features' properties.
+          // If there are multiple features, merge all of their keys into one
+          // list.
+          if (Array.isArray(featureOrFeatures)) {
+            const multiKeys = featureOrFeatures.map(f => Object.keys(f.properties))
+            keys = [...new Set([].concat(...multiKeys))]
+          } else {
+            keys = Object.keys(featureOrFeatures.properties)
+          }
+
+          let metrics = []
+          const prefix = 'trans'
+
+          const types = {
+            avg_spent_index: "Average Spent",
+            trx_count_index: "Transaction Count",
+          }
+
+          const categories = {
+            'apparel_dept':       'Apparel Discount and Department Stores',
+            'auto_transp':        'Auto and Transportation',
+            'dining_sports_ent':  'Dining Sports and Entertainment',
+            'hardware_homeware':  'Hardware Supplies and Homewares',
+            'luxury_specialty':   'Luxury and Speciality Stores',
+            'med_care':           'Medical and Personal Care',
+            'personal_svcs':      'Personal Services',
+            'prof_svcs':          'Professional Services',
+            'grocery':            'Retail Food Grocery and Supermarkets',
+            'trade_manuf':        'Trades and Light Manufacturing',
+            'travel_accom_rent':  'Travel Accommodation and Rentals',
+          }
+
+          Object.keys(categories).map((categoryKey) => {
+            Object.keys(types).map((typeKey) => {
+              // Produces ids like:
+              //   trans_avg_spent_index_apparel_dept
+              //   trans_trx_count_index_apparel_dept
+              const id = `${prefix}_${typeKey}_${categoryKey}`
+              // Metric isn't shown if the data is missing
+              if (keys.indexOf(id) !== -1) {
+                metrics.push({
+                  id: id,
+                  // Produces labels like:
+                  //   Average Spent: Apparel Discount and Department Stores
+                  //   Transaction Count: Apparel Discount and Department Stores
+                  label: `${types[typeKey]}: ${categories[categoryKey]}`,
+                  format: 'number',
+                  type: 'range',
+                  min: 0.0,
+                  max: 1.0,            
+                })
+              }
+            })
+          })
+          return metrics
+        }
       },
     ]
   }
