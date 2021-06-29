@@ -12,7 +12,7 @@ const CollapsibleSection = (props) => {
 
   const isOpen = (key) => {
     const value = collapsibleState && collapsibleState[key];
-    return value ?? true;
+    return value ?? false;
   }
 
   const updateIsOpen = (key, value) => {
@@ -25,6 +25,7 @@ const CollapsibleSection = (props) => {
       open={isOpen(title)}
       onOpening={() => onOpen(title)}
       onClosing={() => onClose(title)}
+      lazyRender={true}
     >
       {props.children}
     </Collapsible>
