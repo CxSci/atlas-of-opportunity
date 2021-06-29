@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
+
 import propsMapping from "../config/propsMapping";
 import CollapsibleSection from "./CollapsibleSection";
 import { formatValue } from "../utils/formatValue";
@@ -8,6 +9,7 @@ import MetricDetails from "./MetricDetails";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
+import generateMetrics from "../utils/generateMetrics";
 
 const LocationDetails = (props) => {
   const selectedFeature = props.feature;
@@ -15,20 +17,6 @@ const LocationDetails = (props) => {
   let allFeatures = comparisonFts;
   if (selectedFeature && !comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature.properties["SA2_MAIN16"])) {
     allFeatures = [...allFeatures, props.feature]
-  }
-
-  // Add some metrics programmatically by calling their generator
-  // e.g. some metrics are mostly repetitions except for their business
-  // category.
-  const generateMetrics = (contents) => {
-    return contents.reduce((results, metric) => {
-      if (!metric.generator) {
-        results.push(metric)
-      } else {
-        results.push(...metric.generator(comparisonFts.length ? allFeatures : selectedFeature))
-      }
-      return results
-    }, [])
   }
 
   const renderMetric = (metric) => {
@@ -78,7 +66,7 @@ const LocationDetails = (props) => {
       {propsMapping.map((section) => (
         <CollapsibleSection title={section.title} key={section.title}>
           {/* Preprocess section.content to expand its generators */}
-          {generateMetrics(section.content).map((metric) => (
+          {generateMetrics(section.content, allFeatures).map((metric) => (
             renderMetric(metric)
           ))}
         </CollapsibleSection>

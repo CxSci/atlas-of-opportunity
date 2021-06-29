@@ -273,17 +273,12 @@ export default [
     title: 'Financial Transactions',
     content: [
       {
-        generator: (featureOrFeatures) => {
-          let keys = []
+        generator: (features) => {
           // Get just the keys of the features' properties.
           // If there are multiple features, merge all of their keys into one
           // list.
-          if (Array.isArray(featureOrFeatures)) {
-            const multiKeys = featureOrFeatures.map(f => Object.keys(f.properties))
-            keys = [...new Set([].concat(...multiKeys))]
-          } else {
-            keys = Object.keys(featureOrFeatures.properties)
-          }
+          const multiKeys = features.map(f => Object.keys(f.properties))
+          const keys = [...new Set([].concat(...multiKeys))]
 
           let metrics = []
           const prefix = 'trans'
@@ -338,17 +333,12 @@ export default [
     title: 'Business Counts',
     content: [
       {
-        generator: (featureOrFeatures) => {
-          let keys = []
+        generator: (features) => {
           // Get just the keys of the features' properties.
           // If there are multiple features, merge all of their keys into one
           // list.
-          if (Array.isArray(featureOrFeatures)) {
-            const multiKeys = featureOrFeatures.map(f => Object.keys(f.properties))
-            keys = [...new Set([].concat(...multiKeys))]
-          } else {
-            keys = Object.keys(featureOrFeatures.properties)
-          }
+          const multiKeys = features.map(f => Object.keys(f.properties))
+          const keys = [...new Set([].concat(...multiKeys))]
 
           let metrics = []
           const prefix = 'bsns_cnt'
