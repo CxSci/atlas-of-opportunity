@@ -6,7 +6,7 @@ export function formatValue(value, format) {
     case 'number':
       return value.toLocaleString();
     case 'currency':
-      return value.toLocaleString(undefined, { style: "currency", currency: "AUS" });
+      return value.toLocaleString(undefined, { style: "currency", currency: "AUD" });
     case 'percent':
       return `${Math.floor(value)}%`;
     case 'percent_normalized':
