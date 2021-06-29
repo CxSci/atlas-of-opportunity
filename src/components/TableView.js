@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import Table from "rc-table";
+
 import propsMapping from "../config/propsMapping";
 import { formatValue } from "../utils/formatValue";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
+import generateMetrics from "../utils/generateMetrics";
 import "../css/TableView.css"
+
 const { Column } = Table;
 
 const TableView = ({comparisonFeatures}) => {
@@ -29,10 +32,10 @@ const TableView = ({comparisonFeatures}) => {
     margin: '0 10px',
   }
   
-  const renderTable = (section) => {
+  const renderTable = (content) => {
     const data = [];
     
-    section.content.forEach((metric, idx) => {
+    content.forEach((metric, idx) => {
       let columnValues = comparisonFeatures.map((ft, idx) => {
         let rawValue = ft.properties[metric.id];
         return ({ [`regionData${idx + 1}`]: rawValue });
@@ -44,7 +47,7 @@ const TableView = ({comparisonFeatures}) => {
     })
 
     const renderCell = (rawValue, record) => {
-      const metric = section.content[record.id];
+      const metric = content[record.id];
       if (rawValue === undefined || rawValue === null) {
         return 'No data';
       }
@@ -96,7 +99,7 @@ const TableView = ({comparisonFeatures}) => {
       </div>
       {propsMapping.map((section) => (
         <Collapsible trigger={section.title} key={section.title} open={true}>
-          {renderTable(section)}
+          {renderTable(generateMetrics(section.content, comparisonFeatures))}
         </Collapsible>
       ))}
     </div>
