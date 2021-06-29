@@ -53,7 +53,7 @@
   align-self: center;
   margin-right: 8px;
   white-space: nowrap;
-  overflow-x: auto;
+  overflow-x: hidden;
   text-overflow: ellipsis;
 }
 
