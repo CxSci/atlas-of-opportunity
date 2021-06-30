@@ -35,67 +35,46 @@ export const RECOMMENDATION_DUMMY_DATA = [
     title: "Your Business",
     description: "We will ask you a few questions about your business needs, and then provide location recommendations based on your answers.",
     questions: [
-    {
-      type: "multiple_choice",
-      question: "What type of business is it?",
-      key: "type",
-      answers: ["B2B", "B2C", "Both"]
-    },
-    {
-      type: "select",
-      question: "What kind of business are you looking to open?",
-      placeholder: "Select Business Category",
-      key: "business_category",
-      answers: ["Category 1", "Category 2", "Category 3"]
-    },
-    {
-      type: "select",
-      question: "",
-      placeholder: "Select Business Subcategory",
-      key: "business_subcategory",
-      answers: ["Category 1", "Category 2", "Category 3"]
-    },
-    {
-      type: "select",
-      question: "What type of location do you have in mind?",
-      placeholder: "Select Location Type",
-      key: "location_type",
-      answers: ["Location 1", "Location 2", "Location 3"]
-    },
-    {
-      type:"slider_range",
-      question: "What is the income range of the customers you would like to reach?",
-      key: "customer_income",
-      answers: {
-        0: "$0",
-        20: "$25,000",
-        40: "$50,000",
-        60: "$75,000",
-        80: "$100,000",
-        100: "$250,000+"
-      }
-    }
-  ]
+      {
+        type: "typeahead_select",
+        question: "What kind of business are you looking to open?",
+        key: "anzsic_code",
+        answers: [], // Populated from anzsic_code.json in RecommendationTool
+      },
+    ]
   },
   {
     title: "Your Customers",
     description: "",
     questions: [
       {
-      type: "checkbox",
-      question: "What characteristics describe your typical customers?",
-      hint: "Select all that apply",
-      key: "characteristics",
-      answers: ["Tourists", "Locals", "One-off Purchases", "Repeat Customers", "Culturally Diverse"]
-    },
-    {
-      type: "checkbox",
-      question: "What's their typical household income?",
-      hint: "Select all that apply",
-      key: "household_income",
-      answers: ["Low", "Medium", "High", "Not Sure"]
-    }
-  ]
+        type:"slider_range",
+        question: "What is the income range of the customers you would like to reach?",
+        key: "customer_income",
+        answers: {
+          0: "$0",
+          20: "$25,000",
+          40: "$50,000",
+          60: "$75,000",
+          80: "$100,000",
+          100: "$250,000+"
+        }
+      },
+      {
+        type: "checkbox",
+        question: "What characteristics describe your typical customers?",
+        hint: "Select all that apply",
+        key: "characteristics",
+        answers: ["Tourists", "Locals", "One-off Purchases", "Repeat Customers", "Culturally Diverse"]
+      },
+      {
+        type: "checkbox",
+        question: "What's their typical household income?",
+        hint: "Select all that apply",
+        key: "household_income",
+        answers: ["Low", "Medium", "High", "Not Sure"]
+      }
+    ]
   },
   {
     title: "Premises",

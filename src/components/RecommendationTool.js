@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import RecommendationHeader from './RecommendationHeader';
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+
+import { getANZSICCodes } from "../redux/getters";
 import DropdownSelect from './dropdown';
+import TypeaheadSelect from './TypeaheadSelect';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
 import { Range } from 'rc-slider';
@@ -12,6 +16,34 @@ import '../css/recommendation.css';
 const RecommendationTool = (props) => {
     const [currentStage, setCurrentStage] = useState(0);
     const [formState, setFormState] = useState({});
+
+    const anzsicCodes = useSelector(getANZSICCodes);
+    const [anzsicAnswers] = useState(() => {
+        const uniqueDivisionCodes = new Set()
+        const uniqueSubdivisionCodes = new Set()
+        const uniqueGroupCodes = new Set()
+
+        return anzsicCodes.reduce((result, code) => {
+            // Create a new division-level entry if needed
+            if (!uniqueDivisionCodes.has(code.division_code)) {
+                uniqueDivisionCodes.add(code.division_code)
+                result.push(`${code.division_code}: ${code.division_title}`)
+            }
+            // Create a new subdivision-level entry if needed
+            if (!uniqueSubdivisionCodes.has(code.division_code)) {
+                result.push(`${code.subdivision_code}: ${code.subdivision_title}`)
+                uniqueSubdivisionCodes.add(code.division_code)
+            }
+            // Create a new group-level entry if needed
+            if (!uniqueGroupCodes.has(code.division_code)) {
+                result.push(`${code.group_code}: ${code.group_title}`)
+                uniqueGroupCodes.add(code.division_code)
+            }
+            // Create a class-level entry
+            result.push(`${code.class_code}: ${code.class_title}`)
+            return result
+        }, [])
+    })
 
     const setRadioValue = (key, answer) => {
         setFormState({...formState, [key]: answer});
@@ -80,6 +112,12 @@ const RecommendationTool = (props) => {
                     />
                 }
                 </>
+            case "typeahead_select":
+                return <TypeaheadSelect
+                    items={(question.key == "anzsic_code") ? anzsicAnswers : question.answers}
+                    placeholder="Search by business category or ANZSIC code"
+                    handleSelectionChanged={value => {console.log(value)}}
+                    />
             default:
                 return <></>
         }
