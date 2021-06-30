@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
+import { useSelector } from "react-redux";
 
+import { getANZSICCodes } from "../redux/getters";
 import propsMapping from "../config/propsMapping";
 import CollapsibleSection from "./CollapsibleSection";
-import { formatValue } from "../utils/formatValue";
+import { formatLabel, formatValue } from "../utils/formatValue";
 import MetricDetails from "./MetricDetails";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
@@ -14,18 +16,21 @@ import generateMetrics from "../utils/generateMetrics";
 const LocationDetails = (props) => {
   const selectedFeature = props.feature;
   const comparisonFts = props.comparison;
+  const anzsicCodes = useSelector(getANZSICCodes);
+
   let allFeatures = comparisonFts;
   if (selectedFeature && !comparisonFts.find(feature => feature.properties["SA2_MAIN16"] === selectedFeature.properties["SA2_MAIN16"])) {
     allFeatures = [...allFeatures, props.feature]
   }
 
   const renderMetric = (metric) => {
+    const label = formatLabel(metric, anzsicCodes)
     return (
       <div key={metric.id} className="metric">
-        <h2 data-tip data-for={metric.id}>{metric.label}</h2>
+        <h2 data-tip data-for={metric.id}>{label}</h2>
         {metric.desc && (
           <ReactTooltip id={metric.id}>
-            <strong>{metric.label}</strong>
+            <strong>{label}</strong>
             <div style={{maxWidth: 400}}>
               {metric.desc}
             </div>

@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Collapsible from "react-collapsible";
 import Table from "rc-table";
+import { useSelector } from "react-redux";
 
+import { getANZSICCodes } from "../redux/getters";
 import propsMapping from "../config/propsMapping";
-import { formatValue } from "../utils/formatValue";
+import { formatLabel, formatValue } from "../utils/formatValue";
 import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
@@ -31,6 +33,7 @@ const TableView = ({comparisonFeatures}) => {
     flex: `0 0 ${dataColumnWidth}px`,
     margin: '0 10px',
   }
+  const anzsicCodes = useSelector(getANZSICCodes);
   
   const renderTable = (content) => {
     const data = [];
@@ -40,7 +43,7 @@ const TableView = ({comparisonFeatures}) => {
         let rawValue = ft.properties[metric.id];
         return ({ [`regionData${idx + 1}`]: rawValue });
       });
-      columnValues.push({regionName: metric.label});
+      columnValues.push({regionName: formatLabel(metric, anzsicCodes)});
       columnValues.push({id: idx});
       const row = columnValues.reduce((prev, curr) => ({...prev, ...curr}));
       data.push(row);
