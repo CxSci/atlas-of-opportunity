@@ -4,57 +4,9 @@ import { connect } from "react-redux";
 
 import { setMapType } from "../redux/action-creators";
 import DropdownSelect from "./dropdown.js"
+import { BarChart, Bar, XAxis, YAxis, ReferenceArea, Label } from 'recharts';
 
 import "../css/legend.css";
-
-const renderLegendKeys = (stops) => {
-
-  return !stops || stops.length === 0 ? <></> : (
-  <div className="txt-m">
-    <span
-      className="h24 inline-block align-middle"
-      style={{
-        background: `linear-gradient(90deg, ${stops.map(
-          (stop) => stop[1]
-        )})`,
-        width: "100%",
-        borderRadius: "2px",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        {stops.map((stop, i) => {
-          if (i !== 0 && i !== stops.length - 1) {
-            return (
-              <span
-                key={i}
-                style={{
-                  borderLeft: "2px solid white",
-                  height: "24px",
-                  borderStyle: "dotted",
-                }}
-              />
-            );
-          } else {
-            return (
-              <span
-                key={i}
-                style={{
-                  borderLeft: "2px solid transparent",
-                  height: "24px",
-                }}
-              />
-            );
-          }
-        })}
-      </div>
-    </span>
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      {stops.map((stop, i) => (
-        <span key={i}> {stop[0].toLocaleString()} </span>
-      ))}
-    </div>
-  </div>
-);}
 
 function Legend({ activeLayer, mapLayers, absolute = false }) {
   const { name, description, stops } = activeLayer;
@@ -74,11 +26,56 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
         />
       </div>
       {description && <div className="mb6">
-        <p className="txt-s color-gray">{description}</p>
+        <p className="txt-s color-gray">{description}{JSON.stringify(stops)}</p>
       </div>}
-      {renderLegendKeys(stops)}
+      {renderGradientBar({width: 276, height: 30, max: 1.2})}
     </div>
   )
+}
+
+const renderGradientBar = ({ width, height, min = 0, max = 1 }) => {
+  const data = [
+    { name: "bar", value: max },  // the Bar itself
+    { name: "empty", value: 0 },  // empty bar for ReferenceArea
+  ];
+  height = height * 2;
+
+  return (
+    <BarChart width={width}
+      height={height}
+      data={data}
+      layout="vertical"
+      margin={{ top: 0, left: 0, bottom: 0, right: 0, }}
+    >
+      <XAxis type="number" domain={[0, max]} hide />
+      <YAxis type="category" dataKey="name" hide />
+      <Bar dataKey="value" barSize={height} shape={renderShape} isAnimationActive={false} />
+      <ReferenceArea x1={0} x2={max} y1={"empty"} fill="transparent">
+        <Label value={min} position="insideLeft" fontSize={14} />
+        <Label value={max / 2} position="center" fontSize={14} />
+        <Label value={max} position="insideRight" fontSize={14} />
+      </ReferenceArea>
+    </BarChart>
+  );
+}
+
+const renderShape = ({ height, width, x, y }) => {
+  const minColor = 'rgb(255,233,0)';
+  const maxColor = 'rgb(242,11,11)';
+  const lineX = width / 2;
+
+  return (
+    <svg x={x} y={y}>
+      <defs>
+        <linearGradient id={`legend-gradient`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" style={{ stopColor: minColor }} />
+          <stop offset="100%" style={{ stopColor: maxColor }} />
+        </linearGradient>
+      </defs>
+      <rect width={width} height={height} fill={`url(#legend-gradient)`} />
+      <line x1={lineX} y1={0} x2={lineX} y2={height} stroke="white" strokeDasharray="1 1"/>
+    </svg>
+  );
 }
 
 Legend.propTypes = {
