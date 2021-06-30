@@ -415,15 +415,45 @@ export default [
           const keys = [...new Set([].concat(...multiKeys))]
 
           const prefix = 'to_cos'
+          const snip = prefix.length + 1
 
           return keys.filter(k => k.startsWith(prefix))
               .sort()
               .reduce((metrics, key) => {
             metrics.push({
               id: key,
-              label: key.slice(7), // remove prefix
+              label: key.slice(snip), // remove prefix
               labelFormat: 'anzsic',
               format: 'number',
+            })
+            return metrics
+          }, [])
+        }
+      },
+    ]
+  },
+  {
+    title: 'Business Rental Costs',
+    content: [
+      {
+        generator: (features) => {
+          // Get just the keys of the features' properties.
+          // If there are multiple features, merge all of their keys into one
+          // list.
+          const multiKeys = features.map(f => Object.keys(f.properties))
+          const keys = [...new Set([].concat(...multiKeys))]
+
+          const prefix = 'bsns_rent'
+          const snip = prefix.length + 1
+
+          return keys.filter(k => k.startsWith(prefix))
+              .sort()
+              .reduce((metrics, key) => {
+            metrics.push({
+              id: key,
+              label: key.slice(snip), // remove prefix
+              labelFormat: 'anzsic',
+              format: 'currency',
             })
             return metrics
           }, [])
