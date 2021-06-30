@@ -403,4 +403,32 @@ export default [
       },
     ]
   },
+  {
+    title: 'Turnover vs. Cost of Sales',
+    content: [
+      {
+        generator: (features) => {
+          // Get just the keys of the features' properties.
+          // If there are multiple features, merge all of their keys into one
+          // list.
+          const multiKeys = features.map(f => Object.keys(f.properties))
+          const keys = [...new Set([].concat(...multiKeys))]
+
+          const prefix = 'to_cos'
+
+          return keys.filter(k => k.startsWith(prefix))
+              .sort()
+              .reduce((metrics, key) => {
+            metrics.push({
+              id: key,
+              label: key.slice(7), // remove prefix
+              labelFormat: 'anzsic',
+              format: 'number',
+            })
+            return metrics
+          }, [])
+        }
+      },
+    ]
+  },
 ];
