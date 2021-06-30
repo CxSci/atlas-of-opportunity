@@ -1,6 +1,7 @@
 import * as Constants from "../constants";
 import geojsonURL from "../data/SA_dashboard.geojson";
-import OsiPoiUrl from "../data/OSM_POIs.geojson";
+import osmPOIURL from "../data/OSM_POIs.geojson";
+import anzsicCodes from "../data/anzsic_codes.json";
 
 const mapLayers = {};
 
@@ -61,7 +62,8 @@ mapLayers[Constants.MAP_TYPE.BUSINESSES] = {
 const initialState = {
   geojsonURL,
   features: [], // Fetched asynchronously on app load
-  poiFeatures: [],
+  poiFeatures: [], // "
+  anzsicCodes: anzsicCodes,
   comparisonFeatures: [],
   collapsibleState: {"Demographic Summary": true},
   mapLayers,
@@ -84,7 +86,7 @@ function fetchFeatures() {
 }
 
 function fetchPOI() {
-  return fetch(OsiPoiUrl);
+  return fetch(osmPOIURL);
 }
 
 function loadFeatures() {
