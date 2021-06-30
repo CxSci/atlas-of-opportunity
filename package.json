@@ -15,6 +15,7 @@
     "lru-cache": "^6.0.0",
     "mapbox-gl": "^2.2.0",
     "mathjax-react": "^1.0.6",
+    "popper-max-size-modifier": "^0.2.0",
     "prop-types": "^15.7.2",
     "rc-slider": "^9.7.2",
     "rc-table": "^7.15.1",
