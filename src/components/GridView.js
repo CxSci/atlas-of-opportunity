@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Collapsible from "react-collapsible";
+import CollapsibleSection from "./CollapsibleSection";
 import { useSelector } from "react-redux";
 
 import { getANZSICCodes } from "../redux/getters";
@@ -41,9 +41,9 @@ const GridView = ({comparisonFeatures}) => {
   return (
     <div className="grid-view">
       {propsMapping.map((section) => (
-        <Collapsible trigger={section.title} key={section.title} open={true}>
+        <CollapsibleSection title={section.title} key={section.title}>
           {renderGrid(section)}
-        </Collapsible>
+        </CollapsibleSection>
       ))}
     </div>
   )

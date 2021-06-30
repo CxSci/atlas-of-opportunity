@@ -1,7 +1,7 @@
 import React, {  } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Collapsible from "react-collapsible";
+import CollapsibleSection from "./CollapsibleSection";
 import Table from "rc-table";
 import { useSelector } from "react-redux";
 
@@ -101,9 +101,9 @@ const TableView = ({comparisonFeatures}) => {
         ))}
       </div>
       {propsMapping.map((section) => (
-        <Collapsible trigger={section.title} key={section.title} open={true}>
+        <CollapsibleSection title={section.title} key={section.title}>
           {renderTable(generateMetrics(section.content, comparisonFeatures))}
-        </Collapsible>
+        </CollapsibleSection>
       ))}
     </div>
   )
