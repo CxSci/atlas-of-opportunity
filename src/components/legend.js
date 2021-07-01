@@ -8,6 +8,14 @@ import { BarChart, Bar, XAxis, YAxis, ReferenceArea, Label } from 'recharts';
 
 import "../css/legend.css";
 
+const styles = {
+  description: {
+    fontSize: 12,
+    marginLeft: 2,
+    marginBottom: 8,
+  }
+}
+
 function Legend({ activeLayer, mapLayers, absolute = false }) {
   const { name, description, stops } = activeLayer;
 
@@ -73,9 +81,9 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
           handleSelectionChanged={mapTypeEvent}
         />
       </div>
-      {description && <div className="mb6">
-        <p className="txt-s color-gray">{description}{JSON.stringify(stops)}</p>
-      </div>}
+      {description && 
+        <p style={styles.description}>{description}</p>
+      }
       {(stops && stops.length > 0) && renderGradientBar({width: 276, height: 30})}
     </div>
   )
