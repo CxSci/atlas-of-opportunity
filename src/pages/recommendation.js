@@ -5,7 +5,7 @@ import ModalContainer from '../components/ModalContainer';
 
 const Recommendation = () => {
     return <ModalContainer title="Recommendation Tool">        
-        <RecommendationTool data={RECOMMENDATION_DUMMY_DATA}/>
+        <RecommendationTool formData={RECOMMENDATION_DUMMY_DATA}/>
     </ModalContainer>
 };
 
