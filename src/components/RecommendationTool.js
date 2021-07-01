@@ -8,7 +8,7 @@ import DropdownSelect from './dropdown';
 import TypeaheadSelect from './TypeaheadSelect';
 import { Fragment } from 'react';
 import LozengeButton from './LozengeButton';
-import { Range } from 'rc-slider';
+import Slider, { Range } from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 import '../css/recommendation.css';
@@ -98,6 +98,19 @@ const RecommendationTool = (props) => {
                             {answer}
                         </label>
                     </Fragment>)}</>;
+            case "slider_single":
+                return <>{
+                    <Slider
+                        // Each mark is a step.
+                        step={null}
+                        // Must be in the form { 0: "Foo" }, where 0 is where
+                        // the mark should appear on the slider from 0 to 100.
+                        marks={question.answers}
+                        defaultValue={formState[question.key] ?? 0}
+                        onAfterChange={(value) => {setSliderValue(question.key, value)}}
+                    />
+                }
+                </>
             case "slider_range":
                 return <>{
                     <Range
