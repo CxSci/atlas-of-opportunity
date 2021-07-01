@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import PropTypes from "prop-types"
 import { useCombobox } from "downshift"
 import { usePopper } from "react-popper"
@@ -137,15 +137,16 @@ function TypeaheadSelect({ items, initialSelectedItem, placeholder, handleSelect
       handleSelectionChanged(selectedItem)
       inputRef.current.blur()
     },
-    onInputValueChange: ({ inputValue }) => {
+  })
+
+  useEffect(() => {
       setInputItems(
         items.filter(item =>
           // Allow any single substring match
           item.toLowerCase().indexOf(inputValue.trim().toLowerCase()) !== -1,
         ),
       )
-    },
-  })
+    }, [inputValue, items])
 
   return (
     <div ref={setReferenceElement}>
