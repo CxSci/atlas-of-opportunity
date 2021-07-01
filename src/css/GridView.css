@@ -1,6 +1,8 @@
 .grid-view {
   padding: 0 25px;
   height: max-content;
+  width: 100%;
+  max-width: 1110px;
 }
 
 .grid-view .Collapsible {
@@ -23,7 +25,6 @@
 
 .grid-view .Collapsible__contentInner {
   padding: 5px;
-  width: 1050px;
 }
 
 .grid-container {
