@@ -15,7 +15,6 @@ let gradientId = 0;
 const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.0, options = {} }) => {
   const data = [{
     name: "value1",
-    max: max,
     value: value,
   }];
 
@@ -78,7 +77,7 @@ const RangeBar = ({ width = 150, height = 24, value, min = 0, max = 1.0, options
         shape={renderTriangleShape}
         isAnimationActive={false}
       />
-      <ReferenceArea x1="0" x2={data.max} fill="transparent">
+      <ReferenceArea x1={min} x2={data.value} fill="transparent">
         <Label value={minLabel} position="insideLeft" fontSize={10} fontWeight={500} />
         <Label value={maxLabel} position="insideRight" fontSize={10} fontWeight={500} />
       </ReferenceArea>
