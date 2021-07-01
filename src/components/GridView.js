@@ -15,9 +15,16 @@ const GridView = ({comparisonFeatures}) => {
   const anzsicCodes = useSelector(getANZSICCodes);
 
   const renderGrid = (section) => {
+    const metrics = generateMetrics(section.content, comparisonFeatures);
+  
     return (
       <div className="grid-container">
-        {generateMetrics(section.content, comparisonFeatures).map((metric) => (
+        {metrics.length === 0 &&
+          <div className="grid-item metric" style={{padding: 10}}>
+            No Data
+          </div>
+        }
+        {metrics.map((metric) => (
           <div key={metric.id} className="grid-item metric">
             <div className="grid-item-head">
               <h2>{formatLabel(metric, anzsicCodes)}</h2>

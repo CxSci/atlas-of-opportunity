@@ -68,14 +68,19 @@ const LocationDetails = (props) => {
   return (
     <>
       {props.children}
-      {propsMapping.map((section) => (
-        <CollapsibleSection title={section.title} key={section.title}>
-          {/* Preprocess section.content to expand its generators */}
-          {generateMetrics(section.content, allFeatures).map((metric) => (
-            renderMetric(metric)
-          ))}
-        </CollapsibleSection>
-      ))}
+      {propsMapping.map((section) => {
+        {/* Preprocess section.content to expand its generators */}
+        const metrics = generateMetrics(section.content, allFeatures);
+        
+        return (
+          <CollapsibleSection title={section.title} key={section.title}>
+            {metrics.length === 0 &&
+              <div className="metric" style={{padding: '10px 0'}}>No Data</div>
+            }
+            {metrics.map(renderMetric)}
+          </CollapsibleSection>
+        )}
+      )}
     </>
   )
 }
