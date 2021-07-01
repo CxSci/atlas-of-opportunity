@@ -41,6 +41,19 @@ export const RECOMMENDATION_DUMMY_DATA = [
         key: "anzsic_code",
         answers: [], // Populated from anzsic_code.json in RecommendationTool
       },
+      {
+        type: "slider_single",
+        question: "How many people do you expect to employ, roughly?",
+        key: "employee_count",
+        answers: {
+          0: "0",
+          20: "5",
+          40: "20",
+          60: "50",
+          80: "100",
+          100: "200+"
+        }
+      },
     ]
   },
   {
@@ -48,32 +61,26 @@ export const RECOMMENDATION_DUMMY_DATA = [
     description: "",
     questions: [
       {
-        type:"slider_range",
+        type: "slider_range",
         question: "What is the income range of the customers you would like to reach?",
         key: "customer_income",
         answers: {
           0: "$0",
-          20: "$25,000",
-          40: "$50,000",
-          60: "$75,000",
-          80: "$100,000",
-          100: "$250,000+"
+          20: "$25K",
+          40: "$50K",
+          60: "$75K",
+          80: "$100K",
+          100: "$250K+",
+        },
+        values: {
+          0: 0,
+          20: 25_000,
+          40: 50_000,
+          60: 75_000,
+          80: 100_000,
+          100: 250_000,
         }
       },
-      {
-        type: "checkbox",
-        question: "What characteristics describe your typical customers?",
-        hint: "Select all that apply",
-        key: "characteristics",
-        answers: ["Tourists", "Locals", "One-off Purchases", "Repeat Customers", "Culturally Diverse"]
-      },
-      {
-        type: "checkbox",
-        question: "What's their typical household income?",
-        hint: "Select all that apply",
-        key: "household_income",
-        answers: ["Low", "Medium", "High", "Not Sure"]
-      }
     ]
   },
   {
@@ -81,11 +88,34 @@ export const RECOMMENDATION_DUMMY_DATA = [
     description: "",
     questions: [
       {
-        type: "multiple_choice",
-        question: "What about commercial premises leasing expenses?",
+        type: "slider_single",
+        question: "What is the most you are willing to pay to lease your commercial premises?",
         key: "commercial_premises",
-        answers: ["I have a limited budget", "Willing to look at locations that can justify the rent with profitable business returns.", "Leasing a premises is not a concern for me."]
-      }
+        answers: {
+          0: "$0",
+          11: "$5K",
+          22: "$10K",
+          33: "$20K",
+          44: "$30K",
+          55: "$40K",
+          66: "$50K",
+          77: "$100K",
+          88: "$200K",
+          100: "$500K+"
+        },
+        values: {
+          0: 0,
+          11: 5_000,
+          22: 10_000,
+          33: 20_000,
+          44: 30_000,
+          55: 40_000,
+          66: 50_000,
+          77: 100_000,
+          88: 200_000,
+          100: 500_000,
+        }
+      },
     ]
   }
 ]
