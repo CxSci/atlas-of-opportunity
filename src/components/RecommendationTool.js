@@ -30,14 +30,14 @@ const RecommendationTool = (props) => {
                 result.push(`${code.division_code}: ${code.division_title}`)
             }
             // Create a new subdivision-level entry if needed
-            if (!uniqueSubdivisionCodes.has(code.division_code)) {
+            if (!uniqueSubdivisionCodes.has(code.subdivision_code)) {
                 result.push(`${code.subdivision_code}: ${code.subdivision_title}`)
-                uniqueSubdivisionCodes.add(code.division_code)
+                uniqueSubdivisionCodes.add(code.subdivision_code)
             }
             // Create a new group-level entry if needed
-            if (!uniqueGroupCodes.has(code.division_code)) {
+            if (!uniqueGroupCodes.has(code.group_code)) {
                 result.push(`${code.group_code}: ${code.group_title}`)
-                uniqueGroupCodes.add(code.division_code)
+                uniqueGroupCodes.add(code.group_code)
             }
             // Create a class-level entry
             result.push(`${code.class_code}: ${code.class_title}`)
