@@ -106,7 +106,7 @@ export default [
       },
       {
         id: 'quartile',
-        label: 'Quartile of the Median Income of this SA2 Among all SA2s in South Australia', // too long and shouldn't use the "SA2"
+        label: 'Income Quartile',
         type: 'bar',
         max: 4,
         // format: 'range', // One of 1, 2, 3, or 4
@@ -120,8 +120,11 @@ export default [
       // },
       {
         id: 'occup_diversity',
-        label: 'Diversity of Occupation Types',
+        label: 'Job Resilience',
         format: 'number',
+        type: 'range',
+        min: 1.08, // lowest value amongst existing data
+        max: 3.54, // highest value amongst existing data
       },
       {
         id: 'gini_coefficient_no',
@@ -132,25 +135,25 @@ export default [
       },
       {
         id: 'highest_quartile_pc',
-        label: 'Earners Falling into Highest Income Quartile',
+        label: 'Earners in Highest Income Quartile',
         format: 'percent',
         type: 'bar',
       },
       {
         id: 'third_quartile_pc',
-        label: 'Earners Falling into Third Income Quartile',
+        label: 'Earners in Third Income Quartile',
         format: 'percent',
         type: 'bar',
       },
       {
         id: 'second_quartile_pc',
-        label: 'Earners Falling into Second Income Quartile',
+        label: 'Earners in Second Income Quartile',
         format: 'percent',
         type: 'bar',
       },
       {
         id: 'lowest_quartile_pc',
-        label: 'Earners Falling into Lowest Income Quartile',
+        label: 'Earners in Lowest Income Quartile',
         format: 'percent',
         type: 'bar',
       },
@@ -186,19 +189,19 @@ export default [
         min: 0,
         max: 1.2,
       },
-      {
-        id: 'bridge_diversity',
-        label: 'Social Bridge Diversity', // not Job Resilience?
-        format: 'number',
-        type: 'range',
-        max: 5.0,
-        options: {
-          minLabel: 'MIN',
-          maxLabel: 'MAX',
-          minColor: 'rgb(89,207,245)',
-          maxColor: 'rgb(45,156,219)',
-        },
-      },
+      // {
+      //   id: 'bridge_diversity',
+      //   label: 'Social Bridge Diversity', // not Job Resilience?
+      //   format: 'number',
+      //   type: 'range',
+      //   max: 5.0,
+      //   options: {
+      //     minLabel: 'MIN',
+      //     maxLabel: 'MAX',
+      //     minColor: 'rgb(89,207,245)',
+      //     maxColor: 'rgb(45,156,219)',
+      //   },
+      // },
       // {
       //   id: 'bridge_diversity', label: 'Job Resilience', format: 'number',
       //   desc: 'The ability to adjust to career change as it happens and,by extension, adapt to what the market demands.'
@@ -215,7 +218,7 @@ export default [
       },
       {
         id: 'bsns_growth_rate',
-        label: 'Business Growth Rate',
+        label: 'Relative Business Growth Rate',
         format: 'percent_normalized',
       },
       // {
