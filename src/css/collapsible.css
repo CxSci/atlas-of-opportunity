@@ -25,7 +25,7 @@
   align-items: stretch;
 }
 
-.Collapsible__contentInner .metric div {
+.Collapsible__contentInner .metric {
   font-size: 14px;
 }
 
