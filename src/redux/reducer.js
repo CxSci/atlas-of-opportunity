@@ -7,8 +7,8 @@ const mapLayers = {};
 
 mapLayers[Constants.MAP_TYPE.GROWTH] = {
   key: Constants.MAP_TYPE.GROWTH,
-  name: "Mobility - GDP Growth Potential",
-  description: "",
+  name: "Small Business Decision Support",
+  description: "GDP Growth Potential",
   property: "income_diversity",
   stops: [
     [0, "#fdedc4"],
@@ -53,7 +53,7 @@ mapLayers[Constants.MAP_TYPE.GROWTH] = {
 
 mapLayers[Constants.MAP_TYPE.BUSINESSES] = {
   key: Constants.MAP_TYPE.BUSINESSES,
-  name: "Businesses",
+  name: "Business POIs",
   description: "",
   property: "",
   stops: [],
