@@ -1,3 +1,4 @@
+export const getFeatures = (state) => state.features;
 export const getSelectedFeature = (state) => state.selectedFeature;
 export const getComparisonFeatures = (state) => state.comparisonFeatures;
 export const getComparisonType = (state) => state.comparisonType;
