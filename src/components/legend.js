@@ -10,9 +10,6 @@ import "../css/legend.css";
 
 function Legend({ activeLayer, mapLayers, absolute = false }) {
   const { name, description, stops } = activeLayer;
-  const min = stops[0][0];
-  const max = stops[2][0];
-  const colors = stops.map(x => x[1]);
 
   const mapTypeEvent = (value) => {
     const mapType = Object.keys(mapLayers).find(t => mapLayers[t].name === value)
@@ -20,6 +17,9 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
   };
 
   const renderGradientBar = ({ width, height }) => {
+    const min = stops[0][0];
+    const max = stops[2][0];
+
     const data = [
       { name: "bar", value: max },  // the Bar itself
       { name: "empty", value: 0 },  // empty bar for ReferenceArea
@@ -47,6 +47,7 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
   
   const renderShape = ({ height, width, x, y }) => {
     const lineX = width / 2;
+    const colors = stops.map(x => x[1]);
   
     return (
       <svg x={x} y={y}>
@@ -75,7 +76,7 @@ function Legend({ activeLayer, mapLayers, absolute = false }) {
       {description && <div className="mb6">
         <p className="txt-s color-gray">{description}{JSON.stringify(stops)}</p>
       </div>}
-      {renderGradientBar({width: 276, height: 30})}
+      {(stops && stops.length > 0) && renderGradientBar({width: 276, height: 30})}
     </div>
   )
 }
