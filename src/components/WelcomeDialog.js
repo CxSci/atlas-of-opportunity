@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import SidebarDialog from "./SidebarDialog";
+import { setHamburgerMenuOpen } from "../redux/action-creators";
 
 let WelcomeDialog = class WelcomeDialog extends Component {
 
@@ -28,16 +29,15 @@ let WelcomeDialog = class WelcomeDialog extends Component {
       <SidebarDialog id="welcome">
         <h1 style={title}>Atlas of Opportunity</h1>
         <p style={content}>
-          This project is part of a collaborative research initiative
-          enabled by principal partner BankSA, MIT Connection Science, the
-          South Australian Government and technical partners Optus and
-          DSpark . This research is led by MIT Connection Science, its
-          Adelaide bigdata Living Lab, and local research institutes
-          including University of South Australia and The University of
-          Adelaide.
+          Recent research has revealed a connection between people&apos;s mobility and the economy — areas with diverse community movement patterns are more likely to experience higher economic growth. This version of the Atlas aims to make such insights accessible to small business owners and government planners.
           <br/>
           <br/>
-          <Link to="/about" style={linkStyle}>Read more…</Link>
+          <Link
+            onClick={() => setHamburgerMenuOpen(true)}
+            style={linkStyle}
+          >
+            Read more…
+          </Link>
         </p>
       </SidebarDialog>
     );
