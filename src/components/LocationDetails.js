@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactTooltip from "react-tooltip";
 import { useSelector } from "react-redux";
 
 import { getANZSICCodes } from "../redux/getters";
@@ -12,6 +11,7 @@ import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
 import generateMetrics from "../utils/generateMetrics";
+import TooltipMetric from "./TooltipMetric";
 
 const LocationDetails = (props) => {
   const selectedFeature = props.feature;
@@ -28,14 +28,7 @@ const LocationDetails = (props) => {
     return (
       <div key={metric.id} className="metric">
         <h2 data-tip data-for={metric.id}>{label}</h2>
-        {metric.desc && (
-          <ReactTooltip id={metric.id}>
-            <strong>{label}</strong>
-            <div style={{maxWidth: 400}}>
-              {metric.desc}
-            </div>
-          </ReactTooltip>
-        )}
+        {metric.desc && <TooltipMetric title={label} metric={metric} />}
         {comparisonFts.length ? (
           <MetricDetails featureList={allFeatures} metric={metric} />
         ) : (

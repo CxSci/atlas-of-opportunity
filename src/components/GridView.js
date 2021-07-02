@@ -9,6 +9,7 @@ import { formatLabel } from "../utils/formatValue";
 import propsMapping from "../config/propsMapping";
 import MetricDetails from "./MetricDetails";
 import generateMetrics from "../utils/generateMetrics";
+import TooltipMetric from "./TooltipMetric";
 import "../css/GridView.css"
 
 const GridView = ({comparisonFeatures}) => {
@@ -16,6 +17,7 @@ const GridView = ({comparisonFeatures}) => {
 
   const renderGrid = (section) => {
     const metrics = generateMetrics(section.content, comparisonFeatures);
+    const getTitle = (metric) => formatLabel(metric, anzsicCodes);
   
     return (
       <div className="grid-container">
@@ -27,7 +29,8 @@ const GridView = ({comparisonFeatures}) => {
         {metrics.map((metric) => (
           <div key={metric.id} className="grid-item metric">
             <div className="grid-item-head">
-              <h2>{formatLabel(metric, anzsicCodes)}</h2>
+              <h2 data-tip data-for={metric.id}>{getTitle(metric)}</h2>
+              {metric.desc && <TooltipMetric title={getTitle(metric)} metric={metric} />}
             </div>
             <div className="grid-item-body">
               <MetricDetails featureList={comparisonFeatures} metric={metric} small />

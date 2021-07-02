@@ -12,6 +12,7 @@ import RangeBar from "./charts/RangeBar";
 import SolidBar from "./charts/SolidBar";
 import LineChartMetric from "./charts/LineChartMetric";
 import generateMetrics from "../utils/generateMetrics";
+import TooltipMetric from "./TooltipMetric";
 import "../css/TableView.css"
 
 const { Column } = Table;
@@ -74,6 +75,16 @@ const TableView = ({comparisonFeatures}) => {
       }
     }
 
+    const renderName = (value, record) => {
+      const metric = content[record.id];
+      return (
+        <>
+          <span data-tip data-for={metric.id}>{value}</span>
+          {metric.desc && <TooltipMetric title={value} metric={metric} />}
+        </>
+      )
+    }
+
     return (
       <Table
         data={data}
@@ -82,7 +93,7 @@ const TableView = ({comparisonFeatures}) => {
         rowClassName="table-row"
         style={{width: tableWidth}}
       >
-        <Column dataIndex='regionName' width={nameColumnWidth + colPadding} />
+        <Column dataIndex='regionName' width={nameColumnWidth + colPadding} render={renderName} />
         {columns.map(col => (
           <Column dataIndex={col.dataKey} width={dataColumnWidth + colPadding} key={col.dataKey} render={renderCell} />
         ))}
