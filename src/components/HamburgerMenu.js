@@ -14,10 +14,34 @@ const HamburgerMenu = () => {
 
   const sections = [
     [
-      { url: "/methods", title: "Methods", },
-      { url: "/research", title: "Research", },
-      { url: "/about", title: "About", },
-      { url: "/faq", title: "FAQ", },
+      {
+        url: "/aboutTheAtlas",
+        title: "About the Atlas",
+      },
+      {
+        url: "/aboutTheLab",
+        title: "About the Lab",
+      },
+      {
+        url: "/methods",
+        title: "Methods",
+      },
+      {
+        url: "/research",
+        title: "Research",
+      },
+      {
+        url: "/faq",
+        title: "FAQ",
+      },
+      {
+        url: "/contributors",
+        title: "Contributors",
+      },
+      {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSf-dAa5_0qG5V_cONxR1MXVuhJfpgjp5iIS-ZBtvoMoa3q4-A/viewform",
+        title: "Feedback Survey",
+      },
     ],
     [
       { url: "/recommendation", title: "Recommendation Tool", },
@@ -39,14 +63,23 @@ const HamburgerMenu = () => {
         </div>
         { sections.map((choices, idx) => 
           <div key={idx} className="dropdownSection">
-            { choices.map((choice, idx) =>
-              <Link key={idx}
-                to={choice.url}
-                onClick={toggleMenuOpen}
-              >
-                {choice.title}
-              </Link>
-            )}
+            { choices.map((choice, idx) => (
+               /^https?:\/\//.test(choice.url) ?
+                <a key={idx}
+                  href={choice.url}
+                  onClick={toggleMenuOpen}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {choice.title}
+                </a> :
+                <Link key={idx}
+                  to={choice.url}
+                  onClick={toggleMenuOpen}
+                >
+                  {choice.title}
+                </Link>
+            ))}
           </div>
         )}
       </div>
