@@ -46,17 +46,19 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
   const tickFormatter = (value) => {
     // Note: Change this to use Intl.NumberFormat() some day when more browsers
     //       support it.
-
+    const precision = 3;
+    const frac = precision - 1;
+    const len = precision + 1;
     // Reduce to 3 significant digits.
-    value = Number.parseFloat(value.toPrecision(3))
+    value = Number.parseFloat(value.toPrecision(precision))
 
     // Reduce to 
     if (value > 1e9) {
-      return (value / 1e9).toString() + 'B';
+      return (value / 1e9).toFixed(frac).substr(0, len) + 'B';
     } else if (value > 1e6) {
-      return (value / 1e6).toString() + 'M';
+      return (value / 1e6).toFixed(frac).substr(0, len) + 'M';
     } else if (value > 1e3) {
-      return (value / 1e3).toString() + 'K';
+      return (value / 1e3).toFixed(frac).substr(0, len) + 'K';
     } else {
       return value.toString();
     }
