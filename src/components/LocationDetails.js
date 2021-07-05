@@ -47,7 +47,8 @@ const LocationDetails = (props) => {
     
     switch (metric.type) {
       case 'line-chart': {
-        return <LineChartMetric data={rawValue} width={260} />
+        const series = [{ name: selectedFeature.properties.SA2_NAME16, data: rawValue }];
+        return <LineChartMetric series={series} width={260} />
       }
       case 'range':
         return <RangeBar value={rawValue} min={metric.min} max={metric.max} options={metric.options} width={260} />

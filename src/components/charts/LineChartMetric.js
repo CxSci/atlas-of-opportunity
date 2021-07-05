@@ -81,6 +81,8 @@ const LineChartMetric = ({ width = 260, height = 180, series, data, showLegend }
             contentStyle={{ fontSize: 10, padding: '2px 4px' }}
             labelStyle={{ display: 'none' }}
             itemStyle={{ padding: 0 }}
+            separator=": "
+            formatter={data ? value => ([value, null]) : undefined}
           />
           {showLegend &&
             <Legend
