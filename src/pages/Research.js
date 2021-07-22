@@ -100,9 +100,9 @@ const Research = class Research extends Component {
             <p>(2020). Forthcoming, EPJ Data Science.</p>
           </li>
           <li>
-            <a href={"/papers/gravity-store-sales-prediction.pdf"}>
+            {/*<a href={"/papers/gravity-store-sales-prediction.pdf"}>*/}
               <h3>Gravitational Forecast Reconciliation</h3>
-            </a>
+            {/*</a>*/}
             <p className="pubAuthors">
               Carla F. Silveira Netto, Mohsen Bahrami, Vinicius Brei, Burcin
               Bozkaya, Selim Balcisoy, and Alex Pentland.
