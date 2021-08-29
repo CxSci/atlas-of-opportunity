@@ -180,7 +180,7 @@ const Contributors = () => {
                   <div style={styles.contentText}>
                     { main_contributor.link ?
                       <a style={styles.text} href={main_contributor.link} >{main_contributor.name}</a> :
-                      <p style={styles.text} >{main_contributor.link}</p>
+                      <p style={styles.text} >{main_contributor.name}</p>
                     }
                     <p style={styles.text}><b>{main_contributor.position}</b></p>
                     <p style={styles.text}>{main_contributor.organization}</p>
@@ -208,7 +208,7 @@ const Contributors = () => {
                 <div style={styles.contentText}>
                   { researcher.link ?
                     <a style={styles.text} href={researcher.link} >{researcher.name}</a> :
-                    <p style={styles.text} >{researcher.link}</p>
+                    <p style={styles.text} >{researcher.name}</p>
                   }
                   <p style={styles.text}><b>{researcher.position}</b></p>
                   <p style={styles.text}>{researcher.organization}</p>
@@ -234,7 +234,10 @@ const Contributors = () => {
                   <div style={styles.contentImage}><img src={image[imageName]} alt={developer.name} style={styles.image} /></div> : 
                   <div style={styles.contentIcon}><img src={image["WithoutPhoto"]} alt={developer.name} style={styles.icon} /></div>}
                 <div style={styles.contentText}>
-                  <p style={styles.text} >{developer.name}</p>
+                  { developer.link ?
+                    <a style={styles.text} href={developer.link} >{developer.name}</a> :
+                    <p style={styles.text} >{developer.name}</p>
+                  }
                   <p style={styles.text}><b>{developer.position}</b></p>
                   <p style={styles.text}>{developer.organization}</p>
                 </div>
