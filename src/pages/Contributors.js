@@ -135,7 +135,7 @@ const researchers = [
   },
   {
     name: "Audrey Lin",
-    organization: "Wellesley",
+    organization: "Wellesley College",
   }
 ]
 
@@ -154,11 +154,11 @@ const developers = [
   },
   {
     name: "Miranda Zhu",
-    organization: "Wellesley",
+    organization: "Wellesley College",
   },
   {
     name: "Maita Navarro",
-    organization: "Wellesley",
+    organization: "Wellesley College",
   },
 ]
 
