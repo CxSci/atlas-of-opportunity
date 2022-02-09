@@ -237,6 +237,7 @@ const SearchField = forwardRef(({
   )
 })
 
+SearchField.displayName = "SearchField"
 SearchField.propTypes = {
   geocoderConfig: PropTypes.object,
   localItems: PropTypes.arrayOf(PropTypes.object),

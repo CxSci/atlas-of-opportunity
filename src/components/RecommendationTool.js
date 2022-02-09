@@ -270,7 +270,7 @@ const RecommendationTool = (props) => {
                 </>
             case "typeahead_select":
                 return <TypeaheadSelect
-                    items={(question.key == "anzsic_code") ? anzsicAnswers : question.answers}
+                    items={(question.key === "anzsic_code") ? anzsicAnswers : question.answers}
                     initialSelectedItem={formState[question.key] ?? null}
                     placeholder="Search by business category or ANZSIC code"
                     handleSelectionChanged={value => {setANZSICAnswer(question.key, value)}}
