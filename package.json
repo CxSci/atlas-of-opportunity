@@ -13,7 +13,7 @@
     "@turf/turf": "^6.3.0",
     "downshift": "^6.1.2",
     "lru-cache": "^6.0.0",
-    "mapbox-gl": "^2.2.0",
+    "mapbox-gl": "^2.7.0",
     "mathjax-react": "^1.0.6",
     "popper-max-size-modifier": "^0.2.0",
     "prop-types": "^15.7.2",

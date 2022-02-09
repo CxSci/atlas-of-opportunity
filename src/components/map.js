@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 // Add '!' so production builds work. See: https://docs.mapbox.com/mapbox-gl-js/api/#excluding-gl-js-explicitly-from-transpilation
+// eslint-disable-next-line
 import mapboxgl from "!mapbox-gl";
 import { connect } from "react-redux";
 import {
