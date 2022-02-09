@@ -513,7 +513,7 @@ let Map = class Map extends React.Component {
         (!this.props.selectedFeature || !prevProps.selectedFeature)) ||
       (this.props.comparisonFeatures.length !==
         prevProps.comparisonFeatures.length &&
-        this.props.comparisonFeatures.length == 0)
+        this.props.comparisonFeatures.length === 0)
     ) {
       // Putting a timeout on this lead to flashes of weirdness and halted map animations.
       this.resizeMapPinningNortheast();

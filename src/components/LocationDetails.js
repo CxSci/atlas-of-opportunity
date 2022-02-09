@@ -69,7 +69,7 @@ const LocationDetails = (props) => {
     <>
       {props.children}
       {propsMapping.map((section) => {
-        {/* Preprocess section.content to expand its generators */}
+        /* Preprocess section.content to expand its generators */
         const metrics = generateMetrics(section.content, allFeatures);
         
         return (

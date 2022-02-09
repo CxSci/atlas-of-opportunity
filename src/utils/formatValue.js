@@ -49,6 +49,8 @@ const formatLabel = (metric, codes) => {
       }
       break
     }
+    default:
+      break
   }
   return metric.label
 }

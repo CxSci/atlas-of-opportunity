@@ -12,7 +12,7 @@
  *    generator: function to generate metrics that vary depending on their feature or features
  * }
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-export default [
+const mapping = [
   {
     title: 'Demographic Summary',
     content: [
@@ -305,8 +305,8 @@ export default [
             'travel_accom_rent':  'Travel Accommodation and Rentals',
           }
 
-          Object.keys(categories).map((categoryKey) => {
-            Object.keys(types).map((typeKey) => {
+          Object.keys(categories).forEach((categoryKey) => {
+            Object.keys(types).forEach((typeKey) => {
               // Produces ids like:
               //   trans_avg_spent_index_apparel_dept
               //   trans_trx_count_index_apparel_dept
@@ -382,8 +382,8 @@ export default [
             's': 'Other Services',
           }
 
-          Object.keys(categories).map((categoryKey) => {
-            Object.keys(types).map((typeKey) => {
+          Object.keys(categories).forEach((categoryKey) => {
+            Object.keys(types).forEach((typeKey) => {
               // Produces ids like:
               //   trans_avg_spent_index_apparel_dept
               //   trans_trx_count_index_apparel_dept
@@ -465,3 +465,5 @@ export default [
     ]
   },
 ];
+
+export default mapping;
