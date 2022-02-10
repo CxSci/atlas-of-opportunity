@@ -11,7 +11,7 @@ The Living Lab works to better understand how social interaction and economic be
 Locally via NPM
 
 ```sh
-cd <SAdashboard dir>
+cd frontend
 npm install
 npm start
 
