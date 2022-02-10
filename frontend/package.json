@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --ignore-path ../.gitignore --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.12.1",
