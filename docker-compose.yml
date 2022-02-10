@@ -2,9 +2,9 @@ version: '3'
 
 services:
   dashboard:
-    build: .
+    build: frontend
     volumes:
-      - '.:/usr/src/app'
+      - './frontend:/usr/src/app'
     ports:
       - '3000:3000'
     command: 'sh -c "npm install && npm start"'

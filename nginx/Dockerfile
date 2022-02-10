@@ -1,4 +1,4 @@
-FROM node:12-alpine as build-stage
+FROM node:16-alpine as build-stage
 
 WORKDIR /usr/src/app
 
@@ -6,12 +6,13 @@ WORKDIR /usr/src/app
 # Do this before adding other files so npm install is only re-run on docker
 # image builds when project dependencies have changed, not when just any file
 # has changed.
-COPY package.*json ./
+COPY frontend/package.*json ./
 RUN npm install
 
 # Add the rest of the project
-ADD . .
+ADD frontend/ .
 
+ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
 FROM nginx:1-alpine
