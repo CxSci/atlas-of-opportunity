@@ -1,0 +1,60 @@
+{
+  "name": "dashboard",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "lint": "eslint --ignore-path ../.gitignore --ext .js,.jsx,.ts,.tsx ."
+  },
+  "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.12.1",
+    "@popperjs/core": "^2.9.2",
+    "@turf/turf": "^6.3.0",
+    "downshift": "^6.1.2",
+    "lru-cache": "^6.0.0",
+    "mapbox-gl": "^2.7.0",
+    "mathjax-react": "^1.0.6",
+    "popper-max-size-modifier": "^0.2.0",
+    "prop-types": "^15.7.2",
+    "rc-slider": "^9.7.2",
+    "rc-table": "^7.15.1",
+    "react": "^16.9.0",
+    "react-collapsible": "^2.8.3",
+    "react-dom": "^16.9.0",
+    "react-popper": "^2.2.5",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-tooltip": "^4.2.17",
+    "recharts": "^2.0.9",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "topojson-client": "^3.1.0",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3",
+    "use-debounce": "^6.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "not chrome < 51",
+      "not safari < 10"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
+}
