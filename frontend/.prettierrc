@@ -1,1 +1,9 @@
-{}
+bracketSameLine: true
+printWidth: 120
+semi: false
+singleQuote: true
+tabWidth: 2
+useTabs: false
+jsxSingleQuote: false
+trailingComma: none
+arrowParens: avoid

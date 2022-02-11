@@ -1,40 +1,13 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "no-console": "warn",
-        "curly": "warn"
-    },
-    "settings": {
-        "react": {
-            "pragma": "React",
-            "version": "detect"
-        },
-        "linkComponents": [
-            "Hyperlink",
-            {
-                "name": "Link",
-                "linkAttribute": "to"
-            }
-        ]
-    }
+  "extends": ["react-app"],
+  "rules": {
+    "semi": ["error", "never"],
+    "quotes": ["error", "single", "avoid-escape"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "max-len": ["error", {
+      "code": 120,
+      "tabWidth": 2
+    }],
+    "no-tabs": "error"
+  }
 }
