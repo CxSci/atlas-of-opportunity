@@ -1,13 +1,24 @@
 {
-  "extends": ["react-app"],
+  "extends": ["react-app", "react-app/jest"],
   "rules": {
     "semi": ["error", "never"],
     "quotes": ["error", "single", "avoid-escape"],
     "jsx-quotes": ["error", "prefer-double"],
-    "max-len": ["error", {
-      "code": 120,
-      "tabWidth": 2
-    }],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "tabWidth": 2
+      }
+    ],
     "no-tabs": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }
