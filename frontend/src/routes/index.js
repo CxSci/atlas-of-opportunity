@@ -1,6 +1,6 @@
 // vendors
 import React from 'react'
-import { Navigate, Route, Routes as Switch } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 
 // utils
 import PATH from '../../../frontend/src/utils/path'
