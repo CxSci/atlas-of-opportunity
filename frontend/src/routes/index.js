@@ -35,8 +35,8 @@ function Routes() {
       <Route exact path={PATH.RESEARCH} element={<Research />} />
       <Route exact path={PATH.CONTRIBUTORS} element={<Contributors />} />
 
-      <Route exact path={PATH[404]} element={<NotFound />} />
-      <Route path="*" element={<Navigate to={PATH[404]} />} />
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
     </Switch>
   )
 }
