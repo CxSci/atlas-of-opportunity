@@ -4,7 +4,7 @@ import PATH from '../../utils/path'
 import Faq from './Faq'
 
 export default {
-  title: `routes/${PATH.FAQ}`,
+  title: `routes${PATH.FAQ}`,
   component: Faq,
   argTypes: {}
 }

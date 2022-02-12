@@ -4,7 +4,7 @@ import PATH from '../../utils/path'
 import Dataset from './Dataset'
 
 export default {
-  title: `routes/${PATH.DATASET}`,
+  title: `routes${PATH.DATASET}`,
   component: Dataset,
   argTypes: {}
 }

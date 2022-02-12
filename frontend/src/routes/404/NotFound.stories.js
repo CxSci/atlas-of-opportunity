@@ -1,14 +1,14 @@
 import React from 'react'
 
 import PATH from '../../utils/path'
-import Research from './Research'
+import NotFound from './NotFound'
 
 export default {
-  title: `routes${PATH.RESEARCH}`,
-  component: Research,
+  title: `routes${PATH[404]}`,
+  component: NotFound,
   argTypes: {}
 }
 
-const Template = args => <Research {...args} />
+const Template = args => <NotFound {...args} />
 
 export const Default = Template.bind({})
