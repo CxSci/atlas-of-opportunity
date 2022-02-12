@@ -4,7 +4,7 @@ import PATH from '../../utils/path'
 import GuidedTool from './GuidedTool'
 
 export default {
-  title: `routes/${PATH.GUIDED_TOOL}`,
+  title: `routes${PATH.GUIDED_TOOL}`,
   component: GuidedTool,
   argTypes: {}
 }
