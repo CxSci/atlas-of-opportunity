@@ -1,0 +1,1174 @@
+{
+    "SA2_MAIN16": "401011001",
+    "SA2_5DIG16": "41001",
+    "SA2_NAME16": "Adelaide",
+    "SA3_CODE16": "40101",
+    "SA3_NAME16": "Adelaide City",
+    "SA4_CODE16": "401",
+    "SA4_NAME16": "Adelaide - Central and Hills",
+    "GCC_CODE16": "4GADE",
+    "GCC_NAME16": "Greater Adelaide",
+    "STE_CODE16": "4",
+    "STE_NAME16": "South Australia",
+    "AREASQKM16": 10.4824,
+    "population":
+    [
+        {
+            "gender": "All",
+            "count": 16900
+        },
+        {
+            "gender": "Male",
+            "count": 8446
+        },
+        {
+            "gender": "Female",
+            "count": 8454
+        }
+    ],
+    "popfraction": 0.0098201289400362,
+    "pop_proj":
+    [
+        {
+            "pop": 16285,
+            "year": "2016"
+        },
+        {
+            "pop": 20354,
+            "year": "2021"
+        },
+        {
+            "pop": 22882,
+            "year": "2026"
+        },
+        {
+            "pop": 25849,
+            "year": "2031"
+        },
+        {
+            "pop": 29148,
+            "year": "2036"
+        }
+    ],
+    "median_age":
+    [
+        {
+            "gender": "All",
+            "median_age": 29.4
+        },
+        {
+            "gender": "Male",
+            "median_age": 30.9
+        },
+        {
+            "gender": "Female",
+            "median_age": 28
+        }
+    ],
+    "percentage_persons_aged":
+    [
+        {
+            "bracket": "0-14",
+            "percent": 0.049
+        },
+        {
+            "bracket": "15-64",
+            "percent": 0.851
+        },
+        {
+            "bracket": "65+",
+            "percent": 0.099
+        }
+    ],
+    "wage_earners": 8096,
+    "median_age_of_earners_years": 34,
+    "median_income_aud": 38912,
+    "mean_income_aud": 56151,
+    "accumulate_income_aud": 454598954,
+    "income_quartile": 2,
+    "occup_diversity": 2.94352239505041,
+    "gini_coefficient_no": 0.54,
+    "earners_per_quartile":
+    [
+        {
+            "quartile": "Lowest Quartile",
+            "value": 0.27
+        },
+        {
+            "quartile": "Second Quartile",
+            "value": 0.24
+        },
+        {
+            "quartile": "Third Quartile",
+            "value": 0.22
+        },
+        {
+            "quartile": "Highest Quartile",
+            "value": 0.26
+        }
+    ],
+    "income_share":
+    [
+        {
+            "top": "Top 1%",
+            "value": 0.113
+        },
+        {
+            "top": "Top 5%",
+            "value": 0.267
+        },
+        {
+            "top": "Top 10%",
+            "value": 0.385
+        }
+    ],
+    "income_diversity": 1.21677448907348,
+    "bsns_growth_rate": 0.050221566,
+    "bsns_entries": 1422,
+    "bsns_exits": 1286,
+    "residential_housing_median":
+    [
+        {
+            "rooms": "1BR",
+            "type": "Apartments",
+            "rent": 320
+        },
+        {
+            "rooms": "1BR",
+            "type": "Houses",
+            "rent": 178
+        },
+        {
+            "rooms": "2BR",
+            "type": "Apartments",
+            "rent": 450
+        },
+        {
+            "rooms": "2BR",
+            "type": "Houses",
+            "rent": 440
+        },
+        {
+            "rooms": "3BR",
+            "type": "Apartments",
+            "rent": 525
+        },
+        {
+            "rooms": "3BR",
+            "type": "Houses",
+            "rent": 500
+        },
+        {
+            "rooms": "4BR+",
+            "type": "Apartments",
+            "rent": 700
+        },
+        {
+            "rooms": "4BR+",
+            "type": "Houses",
+            "rent": 475
+        }
+    ],
+    "transactions":
+    [
+        {
+            "category": "Apparel Discount and Department Stores",
+            "normalized_value": 0.131706516,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Apparel Discount and Department Stores",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Auto and Transportation",
+            "normalized_value": 0.04896983,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Auto and Transportation",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Dining Sports and Entertainment",
+            "normalized_value": 0.104414869,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Dining Sports and Entertainment",
+            "normalized_value": 0.925039054,
+            "type": "Count"
+        },
+        {
+            "category": "Hardware Supplies and Homewares",
+            "normalized_value": 0.23539352,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Hardware Supplies and Homewares",
+            "normalized_value": 0.63600904,
+            "type": "Count"
+        },
+        {
+            "category": "Luxury and Speciality Stores",
+            "normalized_value": 0.117604014,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Luxury and Speciality Stores",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Medical and Personal Care",
+            "normalized_value": 0.057665088,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Medical and Personal Care",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Personal Services",
+            "normalized_value": 0.229330803,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Personal Services",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Professional Services",
+            "normalized_value": 0.048710792,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Professional Services",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Retail Food Grocery and Supermarkets",
+            "normalized_value": 0.409697705,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Retail Food Grocery and Supermarkets",
+            "normalized_value": 1,
+            "type": "Count"
+        },
+        {
+            "category": "Trades and Light Manufacturing",
+            "normalized_value": 0.235252008,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Trades and Light Manufacturing",
+            "normalized_value": 0.436547136,
+            "type": "Count"
+        },
+        {
+            "category": "Travel Accommodation and Rentals",
+            "normalized_value": 0.036738239,
+            "type": "Average Spent"
+        },
+        {
+            "category": "Travel Accommodation and Rentals",
+            "normalized_value": 1,
+            "type": "Count"
+        }
+    ],
+    "business_counts":
+    [
+        {
+            "anzsic": "Accommodation and Food Services",
+            "year": "2017",
+            "value": 684
+        },
+        {
+            "anzsic": "Accommodation and Food Services",
+            "year": "2018",
+            "value": 713
+        },
+        {
+            "anzsic": "Accommodation and Food Services",
+            "year": "2019",
+            "value": 723
+        },
+        {
+            "anzsic": "Accommodation and Food Services",
+            "year": "2020 Predicted",
+            "value": 745
+        },
+        {
+            "anzsic": "Health Care and Social Assistance",
+            "year": "2017",
+            "value": 659
+        },
+        {
+            "anzsic": "Health Care and Social Assistance",
+            "year": "2018",
+            "value": 661
+        },
+        {
+            "anzsic": "Health Care and Social Assistance",
+            "year": "2019",
+            "value": 681
+        },
+        {
+            "anzsic": "Health Care and Social Assistance",
+            "year": "2020 Predicted",
+            "value": 689
+        },
+        {
+            "anzsic": "Manufacturing",
+            "year": "2017",
+            "value": 244
+        },
+        {
+            "anzsic": "Manufacturing",
+            "year": "2018",
+            "value": 223
+        },
+        {
+            "anzsic": "Manufacturing",
+            "year": "2019",
+            "value": 217
+        },
+        {
+            "anzsic": "Manufacturing",
+            "year": "2020 Predicted",
+            "value": 200
+        },
+        {
+            "anzsic": "Information Media and Telecommunications",
+            "year": "2017",
+            "value": 112
+        },
+        {
+            "anzsic": "Information Media and Telecommunications",
+            "year": "2018",
+            "value": 116
+        },
+        {
+            "anzsic": "Information Media and Telecommunications",
+            "year": "2019",
+            "value": 113
+        },
+        {
+            "anzsic": "Information Media and Telecommunications",
+            "year": "2020 Predicted",
+            "value": 114
+        },
+        {
+            "anzsic": "Electricity, Gas, Water and Waste Services",
+            "year": "2017",
+            "value": 18
+        },
+        {
+            "anzsic": "Electricity, Gas, Water and Waste Services",
+            "year": "2018",
+            "value": 16
+        },
+        {
+            "anzsic": "Electricity, Gas, Water and Waste Services",
+            "year": "2019",
+            "value": 23
+        },
+        {
+            "anzsic": "Electricity, Gas, Water and Waste Services",
+            "year": "2020 Predicted",
+            "value": 24
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services",
+            "year": "2017",
+            "value": 1802
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services",
+            "year": "2018",
+            "value": 1833
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services",
+            "year": "2019",
+            "value": 1863
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services",
+            "year": "2020 Predicted",
+            "value": 0
+        },
+        {
+            "anzsic": "Arts and Recreation Services",
+            "year": "2017",
+            "value": 82
+        },
+        {
+            "anzsic": "Arts and Recreation Services",
+            "year": "2018",
+            "value": 82
+        },
+        {
+            "anzsic": "Arts and Recreation Services",
+            "year": "2019",
+            "value": 84
+        },
+        {
+            "anzsic": "Arts and Recreation Services",
+            "year": "2020 Predicted",
+            "value": 84
+        },
+        {
+            "anzsic": "Retail Trade",
+            "year": "2017",
+            "value": 497
+        },
+        {
+            "anzsic": "Retail Trade",
+            "year": "2018",
+            "value": 490
+        },
+        {
+            "anzsic": "Retail Trade",
+            "year": "2019",
+            "value": 460
+        },
+        {
+            "anzsic": "Retail Trade",
+            "year": "2020 Predicted",
+            "value": 445
+        },
+        {
+            "anzsic": "Construction",
+            "year": "2017",
+            "value": 671
+        },
+        {
+            "anzsic": "Construction",
+            "year": "2018",
+            "value": 735
+        },
+        {
+            "anzsic": "Construction",
+            "year": "2019",
+            "value": 736
+        },
+        {
+            "anzsic": "Construction",
+            "year": "2020 Predicted",
+            "value": 779
+        },
+        {
+            "anzsic": "Education and Training",
+            "year": "2017",
+            "value": 141
+        },
+        {
+            "anzsic": "Education and Training",
+            "year": "2018",
+            "value": 152
+        },
+        {
+            "anzsic": "Education and Training",
+            "year": "2019",
+            "value": 159
+        },
+        {
+            "anzsic": "Education and Training",
+            "year": "2020 Predicted",
+            "value": 168
+        },
+        {
+            "anzsic": "Public Administration and Safety",
+            "year": "2017",
+            "value": 26
+        },
+        {
+            "anzsic": "Public Administration and Safety",
+            "year": "2018",
+            "value": 24
+        },
+        {
+            "anzsic": "Public Administration and Safety",
+            "year": "2019",
+            "value": 18
+        },
+        {
+            "anzsic": "Public Administration and Safety",
+            "year": "2020 Predicted",
+            "value": 14
+        },
+        {
+            "anzsic": "Transport, Postal and Warehousing",
+            "year": "2017",
+            "value": 117
+        },
+        {
+            "anzsic": "Transport, Postal and Warehousing",
+            "year": "2018",
+            "value": 150
+        },
+        {
+            "anzsic": "Transport, Postal and Warehousing",
+            "year": "2019",
+            "value": 149
+        },
+        {
+            "anzsic": "Transport, Postal and Warehousing",
+            "year": "2020 Predicted",
+            "value": 170
+        },
+        {
+            "anzsic": "Agriculture, Forestry and Fishing",
+            "year": "2017",
+            "value": 198
+        },
+        {
+            "anzsic": "Agriculture, Forestry and Fishing",
+            "year": "2018",
+            "value": 197
+        },
+        {
+            "anzsic": "Agriculture, Forestry and Fishing",
+            "year": "2019",
+            "value": 177
+        },
+        {
+            "anzsic": "Agriculture, Forestry and Fishing",
+            "year": "2020 Predicted",
+            "value": 169
+        },
+        {
+            "anzsic": "Administrative and Support Services",
+            "year": "2017",
+            "value": 334
+        },
+        {
+            "anzsic": "Administrative and Support Services",
+            "year": "2018",
+            "value": 330
+        },
+        {
+            "anzsic": "Administrative and Support Services",
+            "year": "2019",
+            "value": 336
+        },
+        {
+            "anzsic": "Administrative and Support Services",
+            "year": "2020 Predicted",
+            "value": 335
+        },
+        {
+            "anzsic": "Other Services",
+            "year": "2017",
+            "value": 236
+        },
+        {
+            "anzsic": "Other Services",
+            "year": "2018",
+            "value": 256
+        },
+        {
+            "anzsic": "Other Services",
+            "year": "2019",
+            "value": 268
+        },
+        {
+            "anzsic": "Other Services",
+            "year": "2020 Predicted",
+            "value": 285
+        },
+        {
+            "anzsic": "Rental, Hiring and Real Estate Services",
+            "year": "2017",
+            "value": 1768
+        },
+        {
+            "anzsic": "Rental, Hiring and Real Estate Services",
+            "year": "2018",
+            "value": 1838
+        },
+        {
+            "anzsic": "Rental, Hiring and Real Estate Services",
+            "year": "2019",
+            "value": 1881
+        },
+        {
+            "anzsic": "Rental, Hiring and Real Estate Services",
+            "year": "2020 Predicted",
+            "value": 0
+        },
+        {
+            "anzsic": "Mining",
+            "year": "2017",
+            "value": 80
+        },
+        {
+            "anzsic": "Mining",
+            "year": "2018",
+            "value": 72
+        },
+        {
+            "anzsic": "Mining",
+            "year": "2019",
+            "value": 60
+        },
+        {
+            "anzsic": "Mining",
+            "year": "2020 Predicted",
+            "value": 50
+        },
+        {
+            "anzsic": "Wholesale Trade",
+            "year": "2017",
+            "value": 305
+        },
+        {
+            "anzsic": "Wholesale Trade",
+            "year": "2018",
+            "value": 349
+        },
+        {
+            "anzsic": "Wholesale Trade",
+            "year": "2019",
+            "value": 425
+        },
+        {
+            "anzsic": "Wholesale Trade",
+            "year": "2020 Predicted",
+            "value": 479
+        },
+        {
+            "anzsic": "Financial and Insurance Services",
+            "year": "2017",
+            "value": 5776
+        },
+        {
+            "anzsic": "Financial and Insurance Services",
+            "year": "2018",
+            "value": 5532
+        },
+        {
+            "anzsic": "Financial and Insurance Services",
+            "year": "2019",
+            "value": 5348
+        },
+        {
+            "anzsic": "Financial and Insurance Services",
+            "year": "2020 Predicted",
+            "value": 0
+        }
+    ],
+    "to_cos":
+    [
+        {
+            "anzsic": "Food Product Manufacturing",
+            "value": 2.02690533106032
+        },
+        {
+            "anzsic": "Commission-Based Wholesaling",
+            "value": 2.137847690673226
+        },
+        {
+            "anzsic": "Supermarket and Grocery Stores",
+            "value": 1.3183032308654046
+        },
+        {
+            "anzsic": "Other Specialised Food Retailing",
+            "value": 1.9109546601559395
+        },
+        {
+            "anzsic": "Electrical, Electronic and Gas Appliance Retailing",
+            "value": 1.7701454880948573
+        },
+        {
+            "anzsic": "Newspaper and Book Retailing",
+            "value": 1.785314128493633
+        },
+        {
+            "anzsic": "Clothing Retailing",
+            "value": 1.868312590640519
+        },
+        {
+            "anzsic": "Pharmaceutical, Cosmetic and Toiletry Goods Retailing",
+            "value": 1.4326131261696764
+        },
+        {
+            "anzsic": "Other Store-Based Retailing n.e.c.",
+            "value": 2.293143027443379
+        },
+        {
+            "anzsic": "Non-Store Retailing",
+            "value": 1.7547113294481869
+        },
+        {
+            "anzsic": "Accommodation",
+            "value": 7.568328050380529
+        },
+        {
+            "anzsic": "Cafes and Restaurants",
+            "value": 2.58047034195294
+        },
+        {
+            "anzsic": "Takeaway Food Services",
+            "value": 2.658174729663272
+        },
+        {
+            "anzsic": "Other Grocery Wholesaling",
+            "value": 2.115611149242417
+        },
+        {
+            "anzsic": "Pubs, Taverns and Bars",
+            "value": 2.86255252971987
+        },
+        {
+            "anzsic": "Residential Property Operators",
+            "value": 2.7418156579664203
+        },
+        {
+            "anzsic": "Non-Residential Property Operators",
+            "value": 2.5891157136212666
+        },
+        {
+            "anzsic": "Real Estate Services",
+            "value": 4.2496716746169385
+        },
+        {
+            "anzsic": "Engineering Design and Engineering Consulting Services",
+            "value": 3.920193166910113
+        },
+        {
+            "anzsic": "Other Specialised Design Services",
+            "value": 5.195271068304835
+        },
+        {
+            "anzsic": "Accounting Services",
+            "value": 9.820553693036876
+        },
+        {
+            "anzsic": "Management Advice and Related Consulting Services",
+            "value": 5.4099358964847575
+        },
+        {
+            "anzsic": "Computer System Design and Related Services",
+            "value": 5.272737171115326
+        },
+        {
+            "anzsic": "Other Allied Health Services",
+            "value": 7.637528331778262
+        },
+        {
+            "anzsic": "Other Automotive Repair and Maintenance",
+            "value": 2.2910273358890003
+        },
+        {
+            "anzsic": "Hairdressing and Beauty Services",
+            "value": 9.83978602999019
+        },
+        {
+            "anzsic": "Other Auxiliary Finance and Investment Services",
+            "value": 4.3174642881921725
+        },
+        {
+            "anzsic": "Liquor and Tobacco Product Wholesaling",
+            "value": 1.9603455852412637
+        },
+        {
+            "anzsic": "Financial Asset Investing",
+            "value": 2.013547690344021
+        },
+        {
+            "anzsic": "Electrical Services",
+            "value": 3.1309748875052303
+        },
+        {
+            "anzsic": "Carpentry Services",
+            "value": 3.369030413842536
+        },
+        {
+            "anzsic": "Textile, Leather, Clothing and Footwear Manufacturing",
+            "value": 3.2466359660534136
+        },
+        {
+            "anzsic": "Wood Product Manufacturing",
+            "value": 14.67259358251236
+        },
+        {
+            "anzsic": "Machinery and Equipment Manufacturing",
+            "value": 2.788761250862452
+        },
+        {
+            "anzsic": "Furniture and Other Manufacturing",
+            "value": 2.3326772981289348
+        },
+        {
+            "anzsic": "Construction Services",
+            "value": 1.857583965034803
+        },
+        {
+            "anzsic": "Basic Material Wholesaling",
+            "value": 1.3836869633173434
+        },
+        {
+            "anzsic": "Machinery and Equipment Wholesaling",
+            "value": 2.0928530556484333
+        },
+        {
+            "anzsic": "Grocery, Liquor and Tobacco Product Wholesaling",
+            "value": 1.4535546190016513
+        },
+        {
+            "anzsic": "Other Goods Wholesaling",
+            "value": 1.689306577444757
+        },
+        {
+            "anzsic": "Food Retailing",
+            "value": 1.845954539588205
+        },
+        {
+            "anzsic": "Other Store-Based Retailing",
+            "value": 2.000243864028243
+        },
+        {
+            "anzsic": "Food and Beverage Services",
+            "value": 4.060896892706827
+        },
+        {
+            "anzsic": "Rental and Hiring Services (except Real Estate)",
+            "value": 4.399158152293645
+        },
+        {
+            "anzsic": "Bakery Product Manufacturing (Non-factory based)",
+            "value": 3.0918899927985346
+        },
+        {
+            "anzsic": "Plumbing Services",
+            "value": 2.969980861310761
+        },
+        {
+            "anzsic": "Administrative Services",
+            "value": 2.3387545471622837
+        },
+        {
+            "anzsic": "Adult, Community and Other Education",
+            "value": 10.164256070603772
+        },
+        {
+            "anzsic": "Medical and Other Health Care Services",
+            "value": 9.295596972059409
+        },
+        {
+            "anzsic": "Sports and Recreation Activities",
+            "value": 8.182575524592497
+        },
+        {
+            "anzsic": "Repair and Maintenance",
+            "value": 2.7508186919647164
+        },
+        {
+            "anzsic": "Personal and Other Services",
+            "value": 3.902232441651848
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+            "value": 6.139566432617776
+        },
+        {
+            "anzsic": "Wine and Other Alcoholic Beverage Manufacturing",
+            "value": 1.5749044515589252
+        },
+        {
+            "anzsic": "Printing",
+            "value": 3.540736508571192
+        },
+        {
+            "anzsic": "House Construction",
+            "value": 1.6864845799637846
+        },
+        {
+            "anzsic": "Other Residential Building Construction",
+            "value": 1.3778784257400154
+        },
+        {
+            "anzsic": "Non-Residential Building Construction",
+            "value": 1.62093133021183
+        }
+    ],
+    "business_rents":
+    [
+        {
+            "anzsic": "Food Product Manufacturing",
+            "rent": 58732.90881580379
+        },
+        {
+            "anzsic": "Non-Store Retailing",
+            "rent": 33353.99525442112
+        },
+        {
+            "anzsic": "Accommodation",
+            "rent": 261848.9826609321
+        },
+        {
+            "anzsic": "Cafes and Restaurants",
+            "rent": 72185.44675968772
+        },
+        {
+            "anzsic": "Takeaway Food Services",
+            "rent": 60740.01774569503
+        },
+        {
+            "anzsic": "Pubs, Taverns and Bars",
+            "rent": 137261.30884872106
+        },
+        {
+            "anzsic": "Road Freight Transport",
+            "rent": 33197.59319047351
+        },
+        {
+            "anzsic": "Financial Asset Investing",
+            "rent": 38017.37854443129
+        },
+        {
+            "anzsic": "Other Auxiliary Finance and Investment Services",
+            "rent": 34642.993349484925
+        },
+        {
+            "anzsic": "Residential Property Operators",
+            "rent": 53285.97353073624
+        },
+        {
+            "anzsic": "Real Estate Services",
+            "rent": 42496.0994284632
+        },
+        {
+            "anzsic": "Architectural Services",
+            "rent": 33867.24319726672
+        },
+        {
+            "anzsic": "Engineering Design and Engineering Consulting Services",
+            "rent": 46469.08391443979
+        },
+        {
+            "anzsic": "Other Specialised Design Services",
+            "rent": 20573.49868615926
+        },
+        {
+            "anzsic": "Legal Services",
+            "rent": 30690.72235551165
+        },
+        {
+            "anzsic": "Accounting Services",
+            "rent": 46189.36109520906
+        },
+        {
+            "anzsic": "Advertising Services",
+            "rent": 22811.953381361483
+        },
+        {
+            "anzsic": "Management Advice and Related Consulting Services",
+            "rent": 24756.468704827603
+        },
+        {
+            "anzsic": "Other Personal Services n.e.c.",
+            "rent": 11615.87903470172
+        },
+        {
+            "anzsic": "Hairdressing and Beauty Services",
+            "rent": 41445.13278882244
+        },
+        {
+            "anzsic": "Other Automotive Repair and Maintenance",
+            "rent": 26853.544166829088
+        },
+        {
+            "anzsic": "Health and Fitness Centres and Gymnasia Operation",
+            "rent": 45315.04293629047
+        },
+        {
+            "anzsic": "Other Allied Health Services",
+            "rent": 22892.311490556065
+        },
+        {
+            "anzsic": "Other Store-Based Retailing n.e.c.",
+            "rent": 56474.283677820415
+        },
+        {
+            "anzsic": "Physiotherapy Services",
+            "rent": 51161.24129628431
+        },
+        {
+            "anzsic": "Specialist Medical Services",
+            "rent": 38345.32632122182
+        },
+        {
+            "anzsic": "General Practice Medical Services",
+            "rent": 27778.61140442977
+        },
+        {
+            "anzsic": "Arts Education",
+            "rent": 32190.382272195788
+        },
+        {
+            "anzsic": "Building and Other Industrial Cleaning Services",
+            "rent": 17276.74372060563
+        },
+        {
+            "anzsic": "Office Administrative Services",
+            "rent": 78651.65815264847
+        },
+        {
+            "anzsic": "Computer System Design and Related Services",
+            "rent": 35109.1436310904
+        },
+        {
+            "anzsic": "Dental Services",
+            "rent": 38518.20720257184
+        },
+        {
+            "anzsic": "Pharmaceutical, Cosmetic and Toiletry Goods Retailing",
+            "rent": 212159.04961413707
+        },
+        {
+            "anzsic": "Non-Residential Property Operators",
+            "rent": 34396.47880354012
+        },
+        {
+            "anzsic": "Newspaper and Book Retailing",
+            "rent": 67442.37016384494
+        },
+        {
+            "anzsic": "Transport Support Services",
+            "rent": 15922.931100736218
+        },
+        {
+            "anzsic": "Postal and Courier Pick-up and Delivery Services",
+            "rent": 19346.27683297079
+        },
+        {
+            "anzsic": "Other Store-Based Retailing",
+            "rent": 67407.94550473227
+        },
+        {
+            "anzsic": "Food Retailing",
+            "rent": 41199.93744719408
+        },
+        {
+            "anzsic": "Other Goods Wholesaling",
+            "rent": 46406.64878005635
+        },
+        {
+            "anzsic": "Grocery, Liquor and Tobacco Product Wholesaling",
+            "rent": 40411.77282995333
+        },
+        {
+            "anzsic": "Auxiliary Finance and Insurance Services",
+            "rent": 34642.10323998078
+        },
+        {
+            "anzsic": "Machinery and Equipment Wholesaling",
+            "rent": 35287.55257455706
+        },
+        {
+            "anzsic": "Clothing Retailing",
+            "rent": 42693.92345514599
+        },
+        {
+            "anzsic": "Building Construction",
+            "rent": 32127.633452849943
+        },
+        {
+            "anzsic": "Furniture and Other Manufacturing",
+            "rent": 20225.68439394043
+        },
+        {
+            "anzsic": "Machinery and Equipment Manufacturing",
+            "rent": 62964.877498940885
+        },
+        {
+            "anzsic": "Wood Product Manufacturing",
+            "rent": 35910.33941328922
+        },
+        {
+            "anzsic": "Textile, Leather, Clothing and Footwear Manufacturing",
+            "rent": 23931.272609449163
+        },
+        {
+            "anzsic": "Basic Material Wholesaling",
+            "rent": 47988.32343343071
+        },
+        {
+            "anzsic": "Rental and Hiring Services (except Real Estate)",
+            "rent": 23696.06361617147
+        },
+        {
+            "anzsic": "Construction Services",
+            "rent": 14076.129763370622
+        },
+        {
+            "anzsic": "Administrative Services",
+            "rent": 30653.000857396917
+        },
+        {
+            "anzsic": "Professional, Scientific and Technical Services (Except Computer System Design and Related",
+            "rent": 28200.7922749918
+        },
+        {
+            "anzsic": "Electrical, Electronic and Gas Appliance Retailing",
+            "rent": 118511.21346331632
+        },
+        {
+            "anzsic": "Other Specialised Food Retailing",
+            "rent": 59427.02448483387
+        },
+        {
+            "anzsic": "Supermarket and Grocery Stores",
+            "rent": 88174.71843080723
+        },
+        {
+            "anzsic": "Electrical Services",
+            "rent": 32396.551080394354
+        },
+        {
+            "anzsic": "House Construction",
+            "rent": 27660.59378294479
+        },
+        {
+            "anzsic": "Bakery Product Manufacturing (Non-factory based)",
+            "rent": 47824.14190571813
+        },
+        {
+            "anzsic": "Commission-Based Wholesaling",
+            "rent": 22591.34881392889
+        },
+        {
+            "anzsic": "Repair and Maintenance",
+            "rent": 31057.41161645113
+        },
+        {
+            "anzsic": "Creative and Performing Arts Activities",
+            "rent": 28155.78518384352
+        },
+        {
+            "anzsic": "Social Assistance Services",
+            "rent": 47694.063242284086
+        },
+        {
+            "anzsic": "Medical and Other Health Care Services",
+            "rent": 128342.24738167462
+        },
+        {
+            "anzsic": "Adult, Community and Other Education",
+            "rent": 31945.55421603065
+        },
+        {
+            "anzsic": "Personal and Other Services",
+            "rent": 37910.57339901726
+        }
+    ]
+}

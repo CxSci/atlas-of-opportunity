@@ -1,0 +1,454 @@
+{
+    "sections":
+    [
+        {
+            "title": "Demographics",
+            "metrics":
+            [
+                {
+                    "title": "Population",
+                    "key": "population",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "gender"
+                    },
+                    "y":
+                    {
+                        "key": "count",
+                        "format": "number"
+                    }
+                },
+                {
+                    "title": "Fraction of South Australian Population Living in this Region",
+                    "key": "popfraction",
+                    "type": "text",
+                    "format": "number",
+                    "numberFormat":
+                    {
+                        "style": "percent",
+                        "maximumFractionDigits": 20
+                    }
+                },
+                {
+                    "title": "Projected Population",
+                    "key": "pop_proj",
+                    "type": "line",
+                    "x":
+                    {
+                        "key": "year"
+                    },
+                    "y":
+                    {
+                        "key": "pop",
+                        "format": "number"
+                    }
+                },
+                {
+                    "title": "Median Age",
+                    "key": "median_age",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "gender"
+                    },
+                    "y":
+                    {
+                        "key": "median_age",
+                        "format": "number"
+                    }
+                },
+                {
+                    "title": "Resident Age",
+                    "key": "percentage_persons_aged",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "bracket"
+                    },
+                    "y":
+                    {
+                        "key": "percent",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "percent",
+                            "maximumFractionDigits": 20
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Economy",
+            "metrics":
+            [
+                {
+                    "title": "Number of Wage Earners",
+                    "key": "wage_earners",
+                    "type": "text",
+                    "format": "number"
+                },
+                {
+                    "title": "Median Age of Wage Earners",
+                    "key": "median_age_of_earners_years",
+                    "type": "text",
+                    "format": "number"
+                },
+                {
+                    "title": "Median Income",
+                    "key": "median_income_aud",
+                    "type": "text",
+                    "format": "number",
+                    "numberFormat":
+                    {
+                        "style": "currency",
+                        "currency": "AUD"
+                    }
+                },
+                {
+                    "title": "Mean Income",
+                    "key": "mean_income_aud",
+                    "type": "text",
+                    "format": "number",
+                    "numberFormat":
+                    {
+                        "style": "currency",
+                        "currency": "AUD"
+                    }
+                },
+                {
+                    "title": "Accumulate Income",
+                    "key": "accumulate_income_aud",
+                    "type": "text",
+                    "format": "number",
+                    "numberFormat":
+                    {
+                        "style": "currency",
+                        "currency": "AUD"
+                    }
+                },
+                {
+                    "title": "Income Quartile",
+                    "key": "income_quartile",
+                    "type": "simple_bar",
+                    "format": "number",
+                    "min": 0,
+                    "max": 4
+                },
+                {
+                    "title": "Job Resilience",
+                    "key": "occup_diversity",
+                    "type": "simple_range",
+                    "options": {
+                        "style": "gradient"
+                    },
+                    "min": 0,
+                    "max": 3.54
+                },
+                {
+                    "title": "Income Gini Coefficient",
+                    "key": "gini_coefficient_no",
+                    "type": "simple_bar",
+                    "format": "number",
+                    "min": 0,
+                    "max": 1
+                },
+                {
+                    "key": "earners_per_quartile",
+                    "title": "Earners per Quartile",
+                    "type": "simple_bar",
+                    "x":
+                    {
+                        "key": "quartile"
+                    },
+                    "y":
+                    {
+                        "key": "value",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "percent",
+                            "maximumFractionDigits": 20
+                        }
+                    }
+                },
+                {
+                    "key": "income_share",
+                    "title": "Income Share",
+                    "type": "simple_bar",
+                    "x":
+                    {
+                        "key": "quartile"
+                    },
+                    "y":
+                    {
+                        "key": "value",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "percent",
+                            "maximumFractionDigits": 20
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Growth",
+            "metrics":
+            [
+                {
+                    "title": "Relative Business Growth Rate",
+                    "key": "bsns_growth_rate",
+                    "type": "text",
+                    "format": "number",
+                    "numberFormat":
+                    {
+                        "style": "percent",
+                        "maximumFractionDigits": 20
+                    }
+                },
+                {
+                    "title": "Businesses Opened",
+                    "key": "bsns_entries",
+                    "type": "text",
+                    "format": "number"
+                },
+                {
+                    "title": "Businesses Closed",
+                    "key": "bsns_exits",
+                    "type": "text",
+                    "format": "number"
+                },
+                {
+                    "title": "GDP Growth Potential",
+                    "key": "income_diversity",
+                    "type": "simple_range",
+                    "options": {
+                        "style": "gradient"
+                    },
+                    "min": 0,
+                    "max": 1.2
+                }
+            ]
+        },
+        {
+            "title": "Residential Housing",
+            "metrics":
+            [
+                {
+                    "title": "Apartments: Median Weekly Rent",
+                    "key": "residential_housing_median",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "rooms"
+                    },
+                    "y":
+                    {
+                        "key": "rent",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "currency",
+                            "currency": "AUD"
+                        }
+                    },
+                    "filters":
+                    [
+                        {
+                            "key": "type",
+                            "values":
+                            [
+                                "Apartments"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Houses: Median Weekly Rent",
+                    "key": "residential_housing_median",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "rooms"
+                    },
+                    "y":
+                    {
+                        "key": "rent",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "currency",
+                            "currency": "AUD"
+                        }
+                    },
+                    "filters":
+                    [
+                        {
+                            "key": "type",
+                            "values":
+                            [
+                                "Houses"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Financial Transactions",
+            "metrics":
+            [
+                {
+                    "title": "Average Spent",
+                    "key": "transactions",
+                    "type": "simple_range",
+                    "options": {
+                        "style": "solid"
+                    },
+                    "x":
+                    {
+                        "key": "category"
+                    },
+                    "y":
+                    {
+                        "key": "normalized_value",
+                        "min": 0,
+                        "max": 1
+                    },
+                    "filters":
+                    [
+                        {
+                            "key": "type",
+                            "values":
+                            [
+                                "Average Spent"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Count",
+                    "key": "transactions",
+                    "type": "simple_range",
+                    "options": {
+                        "style": "solid"
+                    },
+                    "x":
+                    {
+                        "key": "category"
+                    },
+                    "y":
+                    {
+                        "key": "normalized_value",
+                        "min": 0,
+                        "max": 1
+                    },
+                    "filters":
+                    [
+                        {
+                            "key": "type",
+                            "values":
+                            [
+                                "Count"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Business Counts",
+            "metrics":
+            [
+                {
+                    "key": "business_counts",
+                    "type": "stacked_area",
+                    "x":
+                    {
+                        "key": "year"
+                    },
+                    "y":
+                    {
+                        "key": "value",
+                        "format": "number"
+                    },
+                    "z":
+                    {
+                        "key": "anzsic"
+                    }
+                },
+                {
+                    "key": "business_counts",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "anzsic",
+                        "options": {
+                            "style": "square"
+                        }
+                    },
+                    "y":
+                    {
+                        "key": "value",
+                        "format": "number"
+                    },
+                    "filters":
+                    [
+                        {
+                            "key": "year",
+                            "control": "select",
+                            "title": "Year",
+                            "default_value": "2019"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Turnover vs. Cost of Sales",
+            "metrics":
+            [
+                {
+                    "key": "to_cos",
+                    "type": "text",
+                    "x":
+                    {
+                        "key": "anzsic"
+                    },
+                    "y":
+                    {
+                        "key": "value",
+                        "format": "number"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Business Rental Costs",
+            "metrics":
+            [
+                {
+                    "key": "business_rents",
+                    "type": "simple_bar",
+                    "x":
+                    {
+                        "key": "anzsic"
+                    },
+                    "y":
+                    {
+                        "key": "rent",
+                        "format": "number",
+                        "numberFormat":
+                        {
+                            "style": "currency",
+                            "currency": "AUD"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
