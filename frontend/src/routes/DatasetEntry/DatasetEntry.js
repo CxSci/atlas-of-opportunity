@@ -1,4 +1,3 @@
-import React from 'react'
 import { useParams } from 'react-router'
 import { Box, Typography } from '@mui/material'
 
@@ -9,10 +8,21 @@ import CompareBtn from '../../components/Header/CompareBtn'
 import { DATASETS_MAP } from '../../utils/constants'
 import CompareAddBtn from '../../components/Header/CompareAddBtn'
 import PATH from '../../utils/path'
+import SmallBusinessSupport from 'routes/SmallBusinessSupport'
 
-function DatasetEntry() {
+const getDatasetComponent = datasetId => {
+  switch (datasetId) {
+    case 'small-business-support':
+      return SmallBusinessSupport
+    default:
+      return SmallBusinessSupport
+  }
+}
+
+const DatasetEntry = () => {
   const params = useParams()
   const { datasetId, entryId } = params || {}
+  const DataSetComponent = getDatasetComponent(datasetId)
 
   const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = datasetConfig?.name || ''
@@ -63,7 +73,7 @@ function DatasetEntry() {
           ),
         },
       }}>
-      <div style={{ height: '120vh' }}>DATASET ENTRY page</div>
+      <DataSetComponent />
     </Dashboard>
   )
 }

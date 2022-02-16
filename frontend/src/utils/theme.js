@@ -83,6 +83,13 @@ const initTheme = darkMode =>
           },
         },
       },
+      MuiTypography: {
+        styleOverrides: {
+          gutterBottom: {
+            marginBottom: `1rem`
+          }
+        }
+      },
 
       header: {
         height: '60px',
