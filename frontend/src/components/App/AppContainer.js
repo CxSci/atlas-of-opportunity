@@ -4,9 +4,11 @@ import { Box } from '@mui/material'
 function AppContainer({ children }) {
   return (
     <Box
-      sx={{
-        paddingTop: theme => theme.components.header.height
-      }}>
+      sx={
+        {
+          // paddingTop: theme => theme.components.header.height
+        }
+      }>
       {children}
     </Box>
   )
