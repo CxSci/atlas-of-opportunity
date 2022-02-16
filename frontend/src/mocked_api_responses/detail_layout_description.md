@@ -71,6 +71,7 @@ For example, the following metric object says Median Income represents currency 
 ```
 
 For another example, the following object says the value of each bracket in Resident Age is a percentage which should include up to 2 fractional digits. Given the value `0.421234`, a user in the United States (`en-US`) would see `"42.12%"` while a user in Germany (`de-DE`) would see `"42,12 %"`.
+
 ```json
 {
   "title": "Resident Age",
@@ -100,11 +101,9 @@ Optional configuration for different metric types. Possible keys and values vary
 - `style`
   For metric types with multiple styles. For example, `type === "simple_range"` has `"solid"` and `"gradient"` styles, and `type === "text"` has `"default"` and `"square"` styles.
 
-
 ## x, y, and z
 
-Axes for multi-dimensional metrics. Each details how to find and format their data. Axes can contain their own `key`, `format`, `numberFormat`, `options`, 
-
+Axes for multi-dimensional metrics. Each details how to find and format their data. Axes can contain their own `key`, `format`, `numberFormat`, `options`,
 
 ## filters
 
@@ -125,8 +124,8 @@ Filters for limiting a metric to a subset of its data. Defined as either hardcod
 - `default_value`
   For interactive filters. The default selection, if it exists within the data.
 
-
 For example, these two metrics have the same `key` but each show only one `type`.
+
 ```json
 {
   "title": "Apartments: Median Weekly Rent",
@@ -175,24 +174,22 @@ For example, these two metrics have the same `key` but each show only one `type`
 ```
 
 For another example, this metric has a dropdown menu allowing users to filter by year. It starts with year 2019 selected, if that exists in the data.
+
 ```json
 {
   "key": "business_counts",
   "type": "text",
-  "x":
-  {
+  "x": {
     "key": "anzsic",
     "options": {
       "style": "square"
     }
   },
-  "y":
-  {
+  "y": {
     "key": "value",
     "format": "number"
   },
-  "filters":
-  [
+  "filters": [
     {
       "key": "year",
       "control": "select",
