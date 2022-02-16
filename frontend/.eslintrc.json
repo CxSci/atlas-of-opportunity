@@ -1,11 +1,11 @@
 {
   "extends": ["react-app", "react-app/jest"],
   "rules": {
-    "semi": ["error", "never"],
-    "quotes": ["error", "single", "avoid-escape"],
+    //    "semi": ["error", "never"],
+    //    "quotes": ["error", "prefer-single", "avoid-escape"],
     "jsx-quotes": ["error", "prefer-double"],
     "max-len": [
-      "error",
+      "warn",
       {
         "code": 120,
         "tabWidth": 2
