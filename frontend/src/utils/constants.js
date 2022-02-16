@@ -1,0 +1,1 @@
+export const SHOW_SCROLLED_HEADER_HEIGHT = 50
