@@ -52,7 +52,7 @@
         {
           "title": "Resident Age",
           "key": "percentage_persons_aged",
-          "type": "text",
+          "type": "simple_bar",
           "x": {
             "key": "bracket"
           },
