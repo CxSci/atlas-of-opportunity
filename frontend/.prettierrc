@@ -5,5 +5,5 @@ singleQuote: true
 tabWidth: 2
 useTabs: false
 jsxSingleQuote: false
-trailingComma: none
+trailingComma: all
 arrowParens: avoid
