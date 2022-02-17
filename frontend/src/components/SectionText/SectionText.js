@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import { FormattedNumber } from 'react-intl'
 
 const SectionNumber = ({ value, numberFormat }) => (
-  <Typography variant="fieldValue">
+  <Typography variant="fieldValue" gutterBottom>
     <FormattedNumber value={value} {...numberFormat} />
   </Typography>
 )

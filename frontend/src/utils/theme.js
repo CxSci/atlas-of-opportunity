@@ -10,6 +10,9 @@ const initTheme = darkMode =>
       primary: {
         main: '#3DBEFF',
       },
+      secondary: {
+        main: '#FDD14D'
+      },
 
       ...(!darkMode
         ? {
@@ -47,8 +50,7 @@ const initTheme = darkMode =>
       fieldValue: {
         fontSize: '1.125rem',
         fontWeight: 500,
-        lineHeight: 1.2,
-        marginBottom: `1rem`
+        lineHeight: 1.2
       }
     },
 
