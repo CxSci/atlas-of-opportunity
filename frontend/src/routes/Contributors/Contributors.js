@@ -1,7 +1,12 @@
 import React from 'react'
+import Dashboard from '../../components/Dashboard'
 
 function Contributors() {
-  return <div>CONTRIBUTORS page</div>
+  return (
+    <Dashboard>
+      <div>CONTRIBUTORS page</div>
+    </Dashboard>
+  )
 }
 
 export default Contributors

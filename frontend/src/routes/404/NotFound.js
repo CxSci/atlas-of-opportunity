@@ -1,7 +1,12 @@
 import React from 'react'
+import Dashboard from '../../components/Dashboard'
 
 function NotFound() {
-  return <div>404 Not Found page</div>
+  return (
+    <Dashboard>
+      <div>404 Not Found page</div>
+    </Dashboard>
+  )
 }
 
 export default NotFound
