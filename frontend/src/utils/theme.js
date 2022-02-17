@@ -33,7 +33,24 @@ const initTheme = darkMode =>
           }),
     },
 
-    typography: {},
+    typography: {
+      sectionTitle: {
+        weight: 700,
+        fontSize: `1rem`,
+        lineHeight: 1.2,
+        marginBottom: `0.875rem`
+      },
+      fieldLabel: {
+        fontSize: '0.875rem',
+        lineHeight: '1rem'
+      },
+      fieldValue: {
+        fontSize: '1.125rem',
+        fontWeight: 500,
+        lineHeight: 1.2,
+        marginBottom: `1rem`
+      }
+    },
 
     components: {
       MuiCssBaseline: {
@@ -84,6 +101,13 @@ const initTheme = darkMode =>
         },
       },
       MuiTypography: {
+        defaultProps: {
+          variantMapping: {
+            sectionTitle: 'h6',
+            fieldValue: 'p',
+            fieldLabel: 'p'
+          }
+        },
         styleOverrides: {
           gutterBottom: {
             marginBottom: `1rem`

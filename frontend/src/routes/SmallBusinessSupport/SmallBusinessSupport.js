@@ -23,10 +23,8 @@ const SmallBusinessSupport = () => {
             {section.metrics.map((metric, mIndex) => {
               const SectionComponent = componentMappings[metric.type]
               return (
-                <Box key={mIndex} sx={{ breakInside: 'avoid' }}>
-                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-                    {metric.title}
-                  </Typography>
+                <Box key={mIndex} sx={{ breakInside: 'avoid', mb: 3 }}>
+                  <Typography variant="sectionTitle">{metric.title}</Typography>
                   {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
                 </Box>
               )
