@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import { FormattedNumber } from 'react-intl'
 
 const SectionNumber = ({ value, numberFormat }) => (
-  <Typography variant="body1" gutterBottom sx={{ fontWeight: 500 }}>
+  <Typography variant="fieldValue">
     <FormattedNumber value={value} {...numberFormat} />
   </Typography>
 )
@@ -20,7 +20,7 @@ const SectionText = ({ layout, data }) => {
       <Box>
         {data.map((item, index) => (
           <Box key={index}>
-            <Typography variant="body2">{item[xAxisKey]}</Typography>
+            <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
             {layout.y?.format === 'number' && (
               <SectionNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} />
             )}
