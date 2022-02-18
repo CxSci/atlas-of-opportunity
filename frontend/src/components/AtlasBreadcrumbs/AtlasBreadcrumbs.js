@@ -12,7 +12,7 @@ function AtlasBreadcrumbs({ links = [] }) {
   return (
     <Breadcrumbs aria-label="breadcrumb">
       {(links || []).map(linkItem => (
-        <Link key={linkItem?.text} underline="hover" color="inherit" href={linkItem?.path}>
+        <Link key={linkItem?.text} underline={linkItem?.path ? 'hover' : 'none'} color="inherit" href={linkItem?.path}>
           {linkItem?.text}
         </Link>
       ))}
