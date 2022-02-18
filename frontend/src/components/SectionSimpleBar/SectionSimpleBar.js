@@ -7,7 +7,8 @@ const SectionSimpleBar = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
   if (layout.format === 'number') {
-    const percentage = (data - layout.min) / (layout.max - layout.min || 1)
+    const { min, max } = layout
+    const percentage = (data - min) / (max - min || 1)
     return <SimpleBar value={data} numberFormat={layout.numberFormat} percentage={percentage} />
   }
   if (xAxisKey && yAxisKey) {
