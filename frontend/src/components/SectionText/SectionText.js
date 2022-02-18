@@ -1,18 +1,13 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { FormattedNumber } from 'react-intl'
 
-const SectionNumber = ({ value, numberFormat }) => (
-  <Typography variant="fieldValue" gutterBottom>
-    <FormattedNumber value={value} {...numberFormat} />
-  </Typography>
-)
+import FieldNumber from 'components/FieldNumber'
 
 const SectionText = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
   if (layout.format === 'number') {
-    return <SectionNumber value={data} numberFormat={layout.numberFormat} />
+    return <FieldNumber value={data} numberFormat={layout.numberFormat} />
   }
 
   if (xAxisKey && yAxisKey) {
@@ -22,7 +17,7 @@ const SectionText = ({ layout, data }) => {
           <Box key={index}>
             <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
             {layout.y?.format === 'number' && (
-              <SectionNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} />
+              <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
             )}
           </Box>
         ))}
