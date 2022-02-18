@@ -1,47 +1,23 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useLocation, matchPath, useNavigate, useParams } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import Header from './Header'
-import PATH from '../../utils/path'
-import { DATASETS_MAP, SHOW_SCROLLED_HEADER_HEIGHT } from '../../utils/constants'
+import { SHOW_SCROLLED_HEADER_HEIGHT } from '../../utils/constants'
 
-function HeaderContainer({ toggleSidebar }) {
+function HeaderContainer({ toggleSidebar, config }) {
   // hooks
-  const location = useLocation()
   const navigate = useNavigate()
-  const params = useParams()
 
   // state
   const [pageScrolled, setPageScrolled] = useState(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
 
   // vars
-  const { datasetId, entryId } = params || {}
-  const datasetConfig = DATASETS_MAP?.[datasetId]
-  const datasetName = datasetConfig?.name
-
-  const isExplorePage = location.pathname.includes('/explore')
-  const isDetailPage = matchPath(PATH.DATASET_ENTRY, location.pathname)
-  const isComparePage = location.pathname.includes('/comparison')
-  const searchPlaceholder = datasetConfig?.searchPlaceholder || ''
+  const { backRoute, content, contentScrolled } = useMemo(() => config || {}, [config])
 
   // methods
   const onScroll = useCallback(e => {
     setPageScrolled(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
   }, [])
-
-  const goBack = useCallback(() => {
-    let backRoute = location.pathname
-    const backRouteSplit = backRoute.split('/')
-
-    if (backRouteSplit[backRouteSplit.length - 1] === '') {
-      backRouteSplit.pop()
-    }
-
-    backRouteSplit.pop()
-    backRoute = backRouteSplit.join('/')
-
-    navigate(backRoute)
-  }, [location.pathname, navigate])
 
   // effects
   useEffect(() => {
@@ -53,15 +29,10 @@ function HeaderContainer({ toggleSidebar }) {
     <Header
       toggleSidebar={toggleSidebar}
       scrolled={pageScrolled}
-      showSearch={isExplorePage && !isDetailPage && !isComparePage}
-      searchPlaceholder={searchPlaceholder}
-      isDetailPage={isDetailPage}
-      isExplorePage={isExplorePage}
-      isComparePage={isComparePage}
-      goBack={goBack}
-      datasetId={datasetId}
-      datasetName={datasetName}
-      showBackBtn={isDetailPage || isComparePage}
+      navigate={navigate}
+      backRoute={backRoute}
+      content={content}
+      contentScrolled={contentScrolled}
     />
   )
 }
