@@ -1,13 +1,21 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './Home.scss'
 import PATH from '../../utils/path'
 import AppLogo from 'components/AppLogo'
 import Dashboard from '../../components/Dashboard'
+import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
+import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 
 function Home() {
   return (
-    <Dashboard>
+    <Dashboard
+      headerConfig={{
+        contentScrolled: {
+          left: <AtlasBreadcrumbs links={[homeBreadcrumbLink]} />,
+        },
+      }}>
       <div className="Home">
         <header className="Home__header">
           <AppLogo />
