@@ -6,11 +6,12 @@ export const DATASETS_MAP = {
     searchPlaceholder: 'Search by region or suburb',
     entriesMap: {
       dataset: {
-        name: 'entry 1',
+        name: 'Entry 1',
         path: 'entry-1',
+        headerScrolledLeftContent: 'minimap'
       },
       entry2: {
-        name: 'entry 2',
+        name: 'Entry 2',
         path: 'entry-2',
       },
     },
@@ -20,13 +21,15 @@ export const DATASETS_MAP = {
     searchPlaceholder: 'Search by occupation',
     entriesMap: {
       dataset: {
-        name: 'entry 1',
+        name: 'Entry 1',
         path: 'entry-1',
       },
       entry2: {
-        name: 'entry 2',
+        name: 'Entry 2',
         path: 'entry-2',
       },
     },
   },
 }
+
+

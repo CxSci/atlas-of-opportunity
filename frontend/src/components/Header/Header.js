@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, IconButton } from '@mui/material'
 import { Menu as MenuIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
 
-function Header({ toggleSidebar, scrolled, backRoute, navigate, contentScrolled, content }) {
+function Header({ toggleSidebar, scrolled, backRoute, navigate, contentScrolled, content, leftContainerProps }) {
   return (
     <Box
       position={'fixed'}
@@ -22,7 +22,7 @@ function Header({ toggleSidebar, scrolled, backRoute, navigate, contentScrolled,
       sx={{
         transition: theme => `height ${theme.transitions.duration.short}ms`,
       }}>
-      <Box display={'flex'} alignItems={'center'}>
+      <Box display={'flex'} alignItems={'center'} {...leftContainerProps}>
         {backRoute ? (
           <IconButton aria-label="back" onClick={() => navigate(backRoute)} sx={{ mr: 2 }}>
             <ArrowBackIcon />

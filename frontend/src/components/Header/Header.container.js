@@ -9,10 +9,10 @@ function HeaderContainer({ toggleSidebar, config }) {
   const navigate = useNavigate()
 
   // state
-  const [pageScrolled, setPageScrolled] = useState(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
+  const [pageScrolled, setPageScrolled] = useState(false)
 
   // vars
-  const { backRoute, content, contentScrolled } = useMemo(() => config || {}, [config])
+  const { backRoute, content, contentScrolled, leftContainerProps } = useMemo(() => config || {}, [config])
 
   // methods
   const onScroll = useCallback(e => {
@@ -33,6 +33,7 @@ function HeaderContainer({ toggleSidebar, config }) {
       backRoute={backRoute}
       content={content}
       contentScrolled={contentScrolled}
+      leftContainerProps={leftContainerProps}
     />
   )
 }

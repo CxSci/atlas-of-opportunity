@@ -24,6 +24,7 @@ function Dashboard({ children, headerConfig }) {
 
 Dashboard.propTypes = {
   headerConfig: PropTypes.shape({
+    leftContainerProps: PropTypes.object,
     backRoute: PropTypes.string,
     content: PropTypes.shape({
       left: PropTypes.element,
