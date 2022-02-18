@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router'
+import { Box, Typography } from '@mui/material'
 
 import Dashboard from '../../components/Dashboard'
 import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
@@ -39,8 +40,30 @@ function DatasetEntry() {
           ),
           right: headerRightContent,
         },
+        contentScrolled: {
+          left: (
+            <>
+              {entry?.headerScrolledLeftContent && (
+                <Box
+                  display={'flex'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                  bgcolor={theme => theme.palette.secondary.main}
+                  width={64}
+                  height={64}
+                  fontSize={12}
+                  mr={1.25}
+                  p={0.5}>
+                  Minimap
+                </Box>
+              )}
+
+              <Typography>{entryName}</Typography>
+            </>
+          ),
+        },
       }}>
-      <div>DATASET ENTRY page</div>
+      <div style={{ height: '120vh' }}>DATASET ENTRY page</div>
     </Dashboard>
   )
 }

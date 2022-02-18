@@ -6,6 +6,7 @@ import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { DATASETS_MAP } from '../../utils/constants'
 import PATH from '../../utils/path'
+import { Box, Grid, Typography } from '@mui/material'
 
 function DatasetCompare() {
   const params = useParams()
@@ -15,9 +16,47 @@ function DatasetCompare() {
   const datasetName = datasetConfig?.name || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
 
+  const compareList = [
+    {
+      id: 'Receptionists',
+      name: 'Receptionists',
+    },
+    {
+      id: 'Midwives',
+      name: 'Midwives',
+    },
+    {
+      id: 'Air Conditioning and Refrigeration Mechanics',
+      name: 'Air Conditioning and Refrigeration Mechanics',
+    },
+  ]
+  const compareListWithMinimap = [
+    {
+      id: 'Receptionists',
+      name: 'Receptionists',
+      hasMinimap: true,
+    },
+    {
+      id: 'Midwives',
+      name: 'Midwives',
+      hasMinimap: true,
+    },
+    {
+      id: 'Air Conditioning and Refrigeration Mechanics',
+      name: 'Air Conditioning and Refrigeration Mechanics',
+      hasMinimap: true,
+    },
+    {
+      id: 'Air Conditioning and Refrigeration Mechanics',
+      name: 'Air Conditioning and Refrigeration Mechanics',
+      hasMinimap: true,
+    },
+  ]
+
   return (
     <Dashboard
       headerConfig={{
+        leftContainerProps: { width: '100%' },
         content: {
           left: (
             <AtlasBreadcrumbs
@@ -25,8 +64,38 @@ function DatasetCompare() {
             />
           ),
         },
+        contentScrolled: {
+          left: (
+            <Grid container spacing={2}>
+              {compareListWithMinimap.map((compareItem, index, array) => {
+                const headerColSize = Math.max(12 / array.length, 3)
+
+                return (
+                  <Grid key={compareItem.id} item xs={headerColSize} sx={{ display: 'flex', alignItems: 'center' }}>
+                    {compareItem?.hasMinimap && (
+                      <Box
+                        display={'flex'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        bgcolor={theme => theme.palette.secondary.main}
+                        width={64}
+                        height={64}
+                        fontSize={12}
+                        mr={1.25}
+                        p={0.5}>
+                        Minimap
+                      </Box>
+                    )}
+
+                    <Typography>{compareItem?.name}</Typography>
+                  </Grid>
+                )
+              })}
+            </Grid>
+          ),
+        },
       }}>
-      <div>DATASET COMPARE page</div>
+      <div style={{ height: '120vh' }}>DATASET COMPARE page</div>
     </Dashboard>
   )
 }
