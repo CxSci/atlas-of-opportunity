@@ -12,28 +12,21 @@ function HeaderContainer({ toggleSidebar }) {
   const params = useParams()
 
   // state
-  const [windowScroll, setWindowScroll] = useState(window.scrollY)
+  const [pageScrolled, setPageScrolled] = useState(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
 
   // vars
-  const pageScrolled = useMemo(() => windowScroll > SHOW_SCROLLED_HEADER_HEIGHT, [windowScroll])
   const { datasetId, entryId } = params || {}
-  const isSmallBusinessPage = datasetId === 'small-business'
-  const isOccupationsPage = datasetId === 'occupations'
-  const isExplorePage = location.pathname.includes('/explore')
-  const isDetailPage = matchPath(PATH.DATASET_ENTRY, location.pathname)
-  const isComparePage = location.pathname.includes('/comparison')
-  const searchPlaceholder = isSmallBusinessPage
-    ? 'Search by region or suburb'
-    : isOccupationsPage
-    ? 'Search by occupation'
-    : ''
-
   const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = datasetConfig?.name
 
+  const isExplorePage = location.pathname.includes('/explore')
+  const isDetailPage = matchPath(PATH.DATASET_ENTRY, location.pathname)
+  const isComparePage = location.pathname.includes('/comparison')
+  const searchPlaceholder = datasetConfig?.searchPlaceholder || ''
+
   // methods
   const onScroll = useCallback(e => {
-    setWindowScroll(window.scrollY)
+    setPageScrolled(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
   }, [])
 
   const goBack = useCallback(() => {
@@ -54,7 +47,7 @@ function HeaderContainer({ toggleSidebar }) {
   useEffect(() => {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
-  })
+  }, [onScroll])
 
   return (
     <Header
