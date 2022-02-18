@@ -21,7 +21,7 @@ function HeaderContainer({ toggleSidebar }) {
   const isOccupationsPage = datasetId === 'occupations'
   const isExplorePage = location.pathname.includes('/explore')
   const isDetailPage = matchPath(PATH.DATASET_ENTRY, location.pathname)
-  const isComparePage = location.pathname.includes('/compare')
+  const isComparePage = location.pathname.includes('/comparison')
   const searchPlaceholder = isSmallBusinessPage
     ? 'Search by region or suburb'
     : isOccupationsPage
