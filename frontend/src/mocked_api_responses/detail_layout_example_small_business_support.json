@@ -159,7 +159,7 @@
           "title": "Income Share",
           "type": "simple_bar",
           "x": {
-            "key": "quartile"
+            "key": "top"
           },
           "y": {
             "key": "value",

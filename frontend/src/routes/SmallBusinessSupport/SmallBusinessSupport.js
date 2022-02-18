@@ -1,12 +1,16 @@
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
+
 import SectionText from 'components/SectionText'
+import SectionSimpleBar from 'components/SectionSimpleBar'
+
 import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
 import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
-import Typography from '@mui/material/Typography'
 
 const componentMappings = {
   text: SectionText,
+  simple_bar: SectionSimpleBar,
   line: null
 }
 
@@ -24,7 +28,7 @@ const SmallBusinessSupport = () => {
               const SectionComponent = componentMappings[metric.type]
               return (
                 <Box key={mIndex} sx={{ breakInside: 'avoid', mb: 3 }}>
-                  <Typography variant="sectionTitle">{metric.title}</Typography>
+                  {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
                   {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
                 </Box>
               )

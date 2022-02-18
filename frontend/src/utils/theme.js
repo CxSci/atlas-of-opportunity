@@ -38,19 +38,20 @@ const initTheme = darkMode =>
 
     typography: {
       sectionTitle: {
-        weight: 700,
+        fontWeight: 700,
         fontSize: `1rem`,
         lineHeight: 1.2,
         marginBottom: `0.875rem`
       },
       fieldLabel: {
         fontSize: '0.875rem',
+        marginBottom: '0.25rem',
         lineHeight: '1rem'
       },
       fieldValue: {
         fontSize: '1.125rem',
         fontWeight: 500,
-        lineHeight: 1.2
+        lineHeight: 1.25
       }
     },
 
