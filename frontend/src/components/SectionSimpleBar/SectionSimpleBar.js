@@ -1,7 +1,9 @@
 import Box from '@mui/material/Box'
+import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 
 import SimpleBar from 'components/SimpleBar'
+import { LayoutMetricType } from 'utils/propTypes'
 
 const SectionSimpleBar = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
@@ -14,7 +16,7 @@ const SectionSimpleBar = ({ layout, data }) => {
   if (xAxisKey && yAxisKey) {
     const maxValue = data.reduce(
       (maxValue, item) => (item[yAxisKey] > maxValue ? item[yAxisKey] : maxValue),
-      data.length > 0 ? data[0][yAxisKey] : 1
+      data.length > 0 ? data[0][yAxisKey] : 1,
     )
     return (
       <Box>
@@ -35,6 +37,11 @@ const SectionSimpleBar = ({ layout, data }) => {
   }
 
   return null
+}
+
+SectionSimpleBar.propTypes = {
+  layout: LayoutMetricType,
+  data: PropTypes.any,
 }
 
 export default SectionSimpleBar
