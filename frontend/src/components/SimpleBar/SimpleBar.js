@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
+import PropTypes from 'prop-types'
+
+import { NumberFormatType } from 'utils/propTypes'
 import FieldNumber from 'components/FieldNumber'
 
 const SimpleBar = ({ value, percentage, numberFormat }) => {
@@ -20,6 +23,12 @@ const SimpleBar = ({ value, percentage, numberFormat }) => {
       </Grid>
     </Grid>
   )
+}
+
+SimpleBar.propTypes = {
+  value: PropTypes.number.isRequired,
+  percentage: PropTypes.number,
+  numberFormat: NumberFormatType,
 }
 
 export default SimpleBar

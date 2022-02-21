@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box'
+import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 
+import { LayoutMetricType } from 'utils/propTypes'
 import FieldNumber from 'components/FieldNumber'
 
 const SectionText = ({ layout, data }) => {
@@ -26,6 +28,11 @@ const SectionText = ({ layout, data }) => {
   }
 
   return null
+}
+
+SectionText.propTypes = {
+  layout: LayoutMetricType,
+  data: PropTypes.any,
 }
 
 export default SectionText
