@@ -1,7 +1,12 @@
-import { createTheme } from '@mui/material'
+import { createTheme } from '@mui/material/styles'
 import { grey } from '@mui/material/colors'
 
 const buttonHeight = '38px'
+const borderRadiusRound = '19px'
+const bgLight = '#fff'
+const bgHoverLight = '#f2f2f2'
+const bgDark = '#2D2D2D'
+const bgHoverDark = '#333333'
 
 const initTheme = darkMode =>
   createTheme({
@@ -11,7 +16,7 @@ const initTheme = darkMode =>
         main: '#3DBEFF',
       },
       secondary: {
-        main: '#FDD14D'
+        main: '#FDD14D',
       },
 
       ...(!darkMode
@@ -41,31 +46,26 @@ const initTheme = darkMode =>
         fontWeight: 700,
         fontSize: `1rem`,
         lineHeight: 1.2,
-        marginBottom: `0.875rem`
+        marginBottom: `0.875rem`,
       },
       fieldLabel: {
         fontSize: '0.875rem',
         marginBottom: '0.25rem',
-        lineHeight: '1rem'
+        lineHeight: '1rem',
       },
       fieldValue: {
         fontSize: '1.125rem',
         fontWeight: 500,
-        lineHeight: 1.25
-      }
+        lineHeight: 1.25,
+      },
     },
 
     components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {},
-        },
-      },
       MuiButton: {
         styleOverrides: {
           root: {
             height: buttonHeight,
-            borderRadius: '100px',
+            borderRadius: borderRadiusRound,
             boxShadow: 'none',
             textTransform: 'none',
           },
@@ -78,20 +78,54 @@ const initTheme = darkMode =>
           },
         },
       },
-      MuiInput: {
+      MuiAutocomplete: {
         styleOverrides: {
-          formControl: {
-            height: buttonHeight,
-            backgroundColor: darkMode ? '#fff' : '#F2F2F2',
+          clearIndicator: {
             color: darkMode ? '#666666' : '#2D2D2D',
+          },
+          input: {
+            paddingTop: '0 !important',
+            paddingBottom: '0 !important',
+          },
+          inputRoot: {
+            height: buttonHeight,
+            backgroundColor: `${bgLight} !important`,
+            borderRadius: borderRadiusRound,
+            overflow: 'hidden',
+            paddingTop: '0',
+            paddingBottom: '0',
+            '&:hover': {
+              backgroundColor: `${bgHoverLight} !important`,
+            },
+          },
+          inputFocused: {
+            backgroundColor: 'transparent',
+          },
+          popper: {
+            marginTop: '12px !important',
+          },
+          paper: {
+            borderRadius: borderRadiusRound,
+          },
+          listbox: {
+            backgroundColor: bgLight,
+          },
+          option: {
+            backgroundColor: bgLight,
+            color: darkMode ? '#666666' : '#2D2D2D',
+            '&:hover': {
+              backgroundColor: bgHoverLight,
+            },
           },
         },
       },
-      MuiFormControl: {
+      MuiFilledInput: {
         styleOverrides: {
-          root: {
-            borderRadius: '100px',
-            overflow: 'hidden',
+          input: {
+            paddingTop: '0',
+            paddingBottom: '0',
+            height: buttonHeight,
+            color: darkMode ? '#666666' : '#2D2D2D',
           },
         },
       },
@@ -99,7 +133,6 @@ const initTheme = darkMode =>
         styleOverrides: {
           root: {
             color: darkMode ? '#666666' : '#2D2D2D',
-            paddingLeft: '8px',
           },
         },
       },
@@ -108,14 +141,14 @@ const initTheme = darkMode =>
           variantMapping: {
             sectionTitle: 'h6',
             fieldValue: 'p',
-            fieldLabel: 'p'
-          }
+            fieldLabel: 'p',
+          },
         },
         styleOverrides: {
           gutterBottom: {
-            marginBottom: `1rem`
-          }
-        }
+            marginBottom: '1rem',
+          },
+        },
       },
 
       header: {
