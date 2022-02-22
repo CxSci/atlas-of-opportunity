@@ -2,14 +2,15 @@ import React, { useRef, useState } from 'react'
 import Header from '../Header/Header.container'
 import Sidebar from '../Sidebar'
 import PropTypes from 'prop-types'
+import { Box } from '@mui/material'
 
-function Dashboard({ children, headerConfig }) {
+function Dashboard({ children, headerConfig, sx, ...otherProps }) {
   const containerRef = useRef()
   // TODO: move to Redux store
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <>
+    <Box sx={{ pt: theme => theme.components.header.height, ...(sx || {}) }} {...otherProps}>
       <Header
         config={headerConfig}
         toggleSidebar={open => setSidebarOpen(open)}
@@ -18,11 +19,13 @@ function Dashboard({ children, headerConfig }) {
       <Sidebar open={sidebarOpen} handleClose={() => setSidebarOpen(false)} />
 
       {children}
-    </>
+    </Box>
   )
 }
 
 Dashboard.propTypes = {
+  sx: PropTypes.any,
+  shadowOnScroll: PropTypes.bool,
   headerConfig: PropTypes.shape({
     customScrolledHeight: PropTypes.string,
     leftContainerProps: PropTypes.object,

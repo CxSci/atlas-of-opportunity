@@ -9,6 +9,7 @@ import { DATASETS_MAP } from '../../utils/constants'
 import CompareAddBtn from '../../components/Header/CompareAddBtn'
 import PATH from '../../utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
+import { scrolledHeaderHeight } from '../../utils/theme'
 
 const getDatasetComponent = datasetId => {
   switch (datasetId) {
@@ -42,6 +43,7 @@ const DatasetEntry = () => {
     <Dashboard
       headerConfig={{
         backRoute: datasetRoute,
+        customScrolledHeight: scrolledHeaderHeight,
         content: {
           left: (
             <AtlasBreadcrumbs

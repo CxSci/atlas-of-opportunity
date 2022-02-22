@@ -7,7 +7,7 @@ function CompareBtn(props) {
     <Button variant="contained" color={'primary'} sx={{ color: '#fff', ml: 2 }} {...props}>
       <CompareIcon />
 
-      <Typography component={'span'} sx={{ ml: 1 }}>
+      <Typography component={'span'} fontWeight={700} sx={{ ml: 1 }}>
         Compare
       </Typography>
     </Button>

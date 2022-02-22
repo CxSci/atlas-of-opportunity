@@ -11,7 +11,9 @@ import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBread
 function Home() {
   return (
     <Dashboard
+      sx={{ pt: 0 }}
       headerConfig={{
+        shadowOnScroll: true,
         contentScrolled: {
           left: <AtlasBreadcrumbs links={[homeBreadcrumbLink]} />,
         },
