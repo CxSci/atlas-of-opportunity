@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 
 import SectionText from 'components/SectionText'
 import SectionSimpleBar from 'components/SectionSimpleBar'
+import SectionSimpleRange from 'components/SectionSimpleRange'
 
 import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
 import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
@@ -11,7 +12,8 @@ import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_bus
 const componentMappings = {
   text: SectionText,
   simple_bar: SectionSimpleBar,
-  line: null
+  simple_range: SectionSimpleRange,
+  line: null,
 }
 
 const SmallBusinessSupport = () => {
