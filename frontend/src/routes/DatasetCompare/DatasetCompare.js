@@ -42,8 +42,8 @@ function DatasetCompare() {
       hasMinimap: true,
     },
     {
-      id: 'Air Conditioning and Refrigeration Mechanics',
-      name: 'Air Conditioning and Refrigeration Mechanics',
+      id: 'Air Conditioning',
+      name: 'Air Conditioning',
       hasMinimap: true,
     },
     {
@@ -57,6 +57,7 @@ function DatasetCompare() {
     <Dashboard
       headerConfig={{
         leftContainerProps: { width: '100%' },
+        customScrolledHeight: '100px',
         content: {
           left: (
             <AtlasBreadcrumbs

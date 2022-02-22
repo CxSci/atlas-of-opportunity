@@ -4,11 +4,12 @@ export const DATASETS_MAP = {
   'small-business': {
     name: 'Small Business Support',
     searchPlaceholder: 'Search by region or suburb',
+    darkTheme: true,
     entriesMap: {
       dataset: {
         name: 'Entry 1',
         path: 'entry-1',
-        headerScrolledLeftContent: 'minimap'
+        headerScrolledLeftContent: 'minimap',
       },
       entry2: {
         name: 'Entry 2',
@@ -31,5 +32,3 @@ export const DATASETS_MAP = {
     },
   },
 }
-
-

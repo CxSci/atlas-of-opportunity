@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material'
 import { IntlProvider } from 'react-intl'
@@ -6,19 +6,23 @@ import { IntlProvider } from 'react-intl'
 import Routes from '../../routes'
 import AppContainer from './AppContainer'
 import initTheme from '../../utils/theme'
+import { TempContext } from '../../utils/AppTempContext'
 
 function App() {
-  const darkTheme = true
+  // TODO: move to redux
+  const [darkTheme, setDarkTheme] = useState(false)
   const theme = useMemo(() => initTheme(darkTheme), [darkTheme])
 
   return (
     <IntlProvider locale={navigator.language}>
-      <ThemeProvider theme={theme}>
-        <AppContainer>
-          <Routes />
-        </AppContainer>
+      <ThemeProvider theme={theme} setDarkTheme={setDarkTheme}>
+        <TempContext.Provider value={{ setDarkTheme }}>
+          <AppContainer>
+            <Routes />
+          </AppContainer>
 
-        <CssBaseline />
+          <CssBaseline />
+        </TempContext.Provider>
       </ThemeProvider>
     </IntlProvider>
   )
