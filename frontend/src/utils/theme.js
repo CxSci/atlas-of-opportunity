@@ -5,8 +5,7 @@ const buttonHeight = '38px'
 const borderRadiusRound = '19px'
 const bgLight = '#fff'
 const bgHoverLight = '#f2f2f2'
-const bgDark = '#2D2D2D'
-const bgHoverDark = '#333333'
+export const headerHeight = '60px';
 
 const initTheme = darkMode =>
   createTheme({
@@ -61,6 +60,11 @@ const initTheme = darkMode =>
     },
 
     components: {
+      MuiButtonBase: {
+        defaultProps: {
+          disableRipple: true,
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {
@@ -152,12 +156,13 @@ const initTheme = darkMode =>
       },
 
       header: {
-        height: '60px',
+        height: headerHeight,
         scrolledHeight: '84px',
         paddingX: '14px',
         paddingY: '10px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
-        bgColor: darkMode ? 'rgba(0, 0, 0, 0.1)' : '#fff',
+        bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
+        iconColor: darkMode ? '#4d4d4d' : '#000000',
       },
 
       searchInput: {

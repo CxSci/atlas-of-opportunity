@@ -12,10 +12,13 @@ function HeaderContainer({ toggleSidebar, config }) {
   const [pageScrolled, setPageScrolled] = useState(false)
 
   // vars
-  const { backRoute, content, contentScrolled, leftContainerProps } = useMemo(() => config || {}, [config])
+  const { backRoute, content, contentScrolled, leftContainerProps, customScrolledHeight } = useMemo(
+    () => config || {},
+    [config],
+  )
 
   // methods
-  const onScroll = useCallback(e => {
+  const onScroll = useCallback(() => {
     setPageScrolled(window.scrollY > SHOW_SCROLLED_HEADER_HEIGHT)
   }, [])
 
@@ -23,6 +26,14 @@ function HeaderContainer({ toggleSidebar, config }) {
   useEffect(() => {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
+  }, [onScroll])
+
+  // Call scroll callback on page load to ensure `pageScrolled` is accurate.
+  // Firefox and Safari report `window.scrollY` as 0 on page load and don't fire
+  // an initial scroll event even if the page is already scrolled due to a reload
+  // or a URL hash.
+  useEffect(() => {
+    onScroll()
   }, [onScroll])
 
   return (
@@ -34,6 +45,7 @@ function HeaderContainer({ toggleSidebar, config }) {
       content={content}
       contentScrolled={contentScrolled}
       leftContainerProps={leftContainerProps}
+      customScrolledHeight={customScrolledHeight}
     />
   )
 }
