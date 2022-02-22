@@ -18,6 +18,18 @@ const initTheme = darkMode =>
       secondary: {
         main: '#FDD14D',
       },
+      info: {
+        main: '#2D9CDB',
+      },
+      canary: {
+        main: '#F2F758',
+      },
+      chestnutRose: {
+        main: '#C95F6D',
+      },
+      ultramarine: {
+        main: '#081181',
+      },
 
       ...(!darkMode
         ? {
@@ -173,7 +185,15 @@ const initTheme = darkMode =>
         },
         styleOverrides: {
           gutterBottom: {
-            marginBottom: '1rem',
+            marginBottom: `1rem`,
+          },
+        },
+      },
+
+      MuiLinearProgress: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#F2F2F2',
           },
         },
       },
