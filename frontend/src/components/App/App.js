@@ -4,7 +4,6 @@ import { ThemeProvider } from '@mui/material'
 import { IntlProvider } from 'react-intl'
 
 import Routes from '../../routes'
-import AppContainer from './AppContainer'
 import initTheme from '../../utils/theme'
 import { TempContext } from '../../utils/AppTempContext'
 
@@ -17,9 +16,7 @@ function App() {
     <IntlProvider locale={navigator.language}>
       <ThemeProvider theme={theme} setDarkTheme={setDarkTheme}>
         <TempContext.Provider value={{ setDarkTheme }}>
-          <AppContainer>
-            <Routes />
-          </AppContainer>
+          <Routes />
 
           <CssBaseline />
         </TempContext.Provider>

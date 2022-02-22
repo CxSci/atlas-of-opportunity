@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, IconButton, styled } from '@mui/material'
-import { Menu as MenuIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
+import { ArrowBack as ArrowBackIcon, Menu as MenuIcon } from '@mui/icons-material'
 
 const NavigateButton = styled(IconButton)({
   '&:hover': {
@@ -13,8 +13,9 @@ function Header({
   scrolled,
   backRoute,
   navigate,
-  contentScrolled,
   content,
+  contentScrolled,
+  shadowOnScroll,
   leftContainerProps,
   customScrolledHeight,
 }) {
@@ -28,17 +29,14 @@ function Header({
       display={'flex'}
       alignItems={'center'}
       justifyContent={'space-between'}
-      height={theme =>
-        contentScrolled && scrolled
-          ? customScrolledHeight || theme.components.header['scrolledHeight']
-          : theme.components.header['height']
-      }
+      height={theme => (contentScrolled && scrolled && customScrolledHeight) || theme.components.header['height']}
       px={theme => theme.components.header.paddingX}
       py={theme => theme.components.header.paddingY}
       bgcolor={theme => theme.components.header.bgColor}
-      boxShadow={theme => theme.components.header.boxShadow}
+      boxShadow={theme => (!shadowOnScroll || scrolled) && theme.components.header.boxShadow}
       sx={{
-        transition: theme => `height ${theme.transitions.duration.short}ms`,
+        transition: theme =>
+          `height ${theme.transitions.duration.short}ms, box-shadow ${theme.transitions.duration.short}ms`,
       }}>
       <Box display={'flex'} alignItems={'center'} {...leftContainerProps}>
         <Box component="span" sx={{ mr: 2 }}>

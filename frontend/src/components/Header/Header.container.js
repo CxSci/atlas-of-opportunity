@@ -12,7 +12,7 @@ function HeaderContainer({ toggleSidebar, config }) {
   const [pageScrolled, setPageScrolled] = useState(false)
 
   // vars
-  const { backRoute, content, contentScrolled, leftContainerProps, customScrolledHeight } = useMemo(
+  const { backRoute, content, contentScrolled, leftContainerProps, customScrolledHeight, shadowOnScroll } = useMemo(
     () => config || {},
     [config],
   )
@@ -43,6 +43,7 @@ function HeaderContainer({ toggleSidebar, config }) {
       navigate={navigate}
       backRoute={backRoute}
       content={content}
+      shadowOnScroll={shadowOnScroll}
       contentScrolled={contentScrolled}
       leftContainerProps={leftContainerProps}
       customScrolledHeight={customScrolledHeight}

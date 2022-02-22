@@ -5,7 +5,8 @@ const buttonHeight = '38px'
 const borderRadiusRound = '19px'
 const bgLight = '#fff'
 const bgHoverLight = '#f2f2f2'
-export const headerHeight = '60px';
+export const headerHeight = '60px'
+export const scrolledHeaderHeight = '84px'
 
 const initTheme = darkMode =>
   createTheme({
@@ -66,8 +67,17 @@ const initTheme = darkMode =>
         },
       },
       MuiButton: {
+        defaultProps: {
+          disableElevation: true,
+        },
         styleOverrides: {
+          containedPrimary: {
+            ':hover': {
+              backgroundColor: '#36ABE5',
+            },
+          },
           root: {
+            whiteSpace: 'nowrap',
             height: buttonHeight,
             borderRadius: borderRadiusRound,
             boxShadow: 'none',
@@ -77,6 +87,10 @@ const initTheme = darkMode =>
       },
       MuiBreadcrumbs: {
         styleOverrides: {
+          root: {
+            fontSize: '24px',
+            color: !darkMode && '#333',
+          },
           li: {
             fontWeight: 'bold',
           },
@@ -91,15 +105,24 @@ const initTheme = darkMode =>
             paddingTop: '0 !important',
             paddingBottom: '0 !important',
           },
+          endAdornment: {
+            top: 'initial',
+          },
           inputRoot: {
             height: buttonHeight,
-            backgroundColor: `${bgLight} !important`,
+            backgroundColor: `${darkMode ? bgLight : '#f2f2f2'} !important`,
             borderRadius: borderRadiusRound,
             overflow: 'hidden',
             paddingTop: '0',
             paddingBottom: '0',
             '&:hover': {
               backgroundColor: `${bgHoverLight} !important`,
+            },
+            '&:before': {
+              content: 'none',
+            },
+            '&:after': {
+              content: 'none',
             },
           },
           inputFocused: {
