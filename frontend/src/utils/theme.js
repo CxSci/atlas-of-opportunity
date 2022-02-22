@@ -180,12 +180,13 @@ const initTheme = darkMode =>
 
       header: {
         height: headerHeight,
-        scrolledHeight: '84px',
+        scrolledHeight: scrolledHeaderHeight,
         paddingX: '14px',
         paddingY: '10px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
-        iconColor: darkMode ? '#4d4d4d' : '#000000',
+        iconColor: darkMode ? '#ffffff' : '#4d4d4d',
+        iconHoverColor: darkMode ? '#ffffff' : '#000000',
       },
 
       searchInput: {

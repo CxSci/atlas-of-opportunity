@@ -22,6 +22,9 @@ function Dataset() {
   // effects
   useEffect(() => {
     setDarkTheme(datasetConfig?.darkTheme)
+
+    // reset dark theme value
+    return () => setDarkTheme(false)
   }, [datasetConfig?.darkTheme, setDarkTheme])
 
   return (

@@ -25,7 +25,7 @@ function Dashboard({ children, headerConfig, sx, ...otherProps }) {
 
 Dashboard.propTypes = {
   sx: PropTypes.any,
-  shadowOnScroll: PropTypes.bool,
+  noElevateBeforeScroll: PropTypes.bool,
   headerConfig: PropTypes.shape({
     customScrolledHeight: PropTypes.string,
     leftContainerProps: PropTypes.object,

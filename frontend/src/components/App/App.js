@@ -14,7 +14,7 @@ function App() {
 
   return (
     <IntlProvider locale={navigator.language}>
-      <ThemeProvider theme={theme} setDarkTheme={setDarkTheme}>
+      <ThemeProvider theme={theme}>
         <TempContext.Provider value={{ setDarkTheme }}>
           <Routes />
 
