@@ -15,10 +15,20 @@ function Header({
   navigate,
   content,
   contentScrolled,
-  shadowOnScroll,
+  noElevateBeforeScroll,
   leftContainerProps,
   customScrolledHeight,
 }) {
+  const navigateBtnIconProps = {
+    fontSize: 'large',
+    sx: {
+      color: theme => theme.components.header.iconColor,
+      '&:hover': {
+        color: theme => theme.components.header.iconHoverColor,
+      },
+    },
+  }
+
   return (
     <Box
       position={'fixed'}
@@ -32,21 +42,23 @@ function Header({
       height={theme => (contentScrolled && scrolled && customScrolledHeight) || theme.components.header['height']}
       px={theme => theme.components.header.paddingX}
       py={theme => theme.components.header.paddingY}
-      bgcolor={theme => theme.components.header.bgColor}
-      boxShadow={theme => (!shadowOnScroll || scrolled) && theme.components.header.boxShadow}
+      bgcolor={theme => (!noElevateBeforeScroll || scrolled) && theme.components.header.bgColor}
+      boxShadow={theme => (!noElevateBeforeScroll || scrolled) && theme.components.header.boxShadow}
       sx={{
         transition: theme =>
-          `height ${theme.transitions.duration.short}ms, box-shadow ${theme.transitions.duration.short}ms`,
+          `height ${theme.transitions.duration.short}ms,
+           box-shadow ${theme.transitions.duration.short}ms,
+           background-color ${theme.transitions.duration.short}ms`,
       }}>
       <Box display={'flex'} alignItems={'center'} {...leftContainerProps}>
         <Box component="span" sx={{ mr: 2 }}>
           {backRoute ? (
             <NavigateButton aria-label="back" onClick={() => navigate(backRoute)}>
-              <ArrowBackIcon fontSize="large" sx={{ color: theme => theme.components.header.iconColor }} />
+              <ArrowBackIcon {...navigateBtnIconProps} />
             </NavigateButton>
           ) : (
             <NavigateButton aria-label="menu" onClick={() => toggleSidebar(true)}>
-              <MenuIcon fontSize="large" sx={{ color: theme => theme.components.header.iconColor }} />
+              <MenuIcon {...navigateBtnIconProps} />
             </NavigateButton>
           )}
         </Box>

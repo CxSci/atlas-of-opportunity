@@ -13,7 +13,7 @@ function Home() {
     <Dashboard
       sx={{ pt: 0 }}
       headerConfig={{
-        shadowOnScroll: true,
+        noElevateBeforeScroll: true,
         contentScrolled: {
           left: <AtlasBreadcrumbs links={[homeBreadcrumbLink]} />,
         },
