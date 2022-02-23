@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import LinearProgress from '@mui/material/LinearProgress'
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import PropTypes from 'prop-types'
 
 import { NumberFormatType } from 'utils/propTypes'
@@ -11,7 +11,12 @@ const SimpleBar = ({ value, percentage, numberFormat }) => {
     <Grid container spacing={1} alignItems="center" flexWrap="nowrap">
       <Grid item flex={1}>
         <Box sx={{ position: 'relative', width: `${(percentage || value) * 100}%` }}>
-          <LinearProgress value={100} sx={{ height: 24, borderRadius: 1 }} variant="determinate" color="secondary" />
+          <LinearProgress
+            value={100}
+            sx={{ height: 24, borderRadius: 1, [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 } }}
+            variant="determinate"
+            color="secondary"
+          />
           <Box sx={{ position: 'absolute', left: '100%', top: '50%', ml: 1, transform: 'translateY(-50%)' }}>
             <FieldNumber value={value} numberFormat={numberFormat} />
           </Box>
