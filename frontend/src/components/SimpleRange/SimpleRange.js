@@ -12,7 +12,7 @@ const GradientProgress = styled(LinearProgress)(({ theme, value }) => ({
       display: 'block',
       width: '100%',
       height: '100%',
-      borderRadius: 1,
+      borderRadius: theme.shape.borderRadius,
       transition: 'transform .4s linear',
       transform: `translateX(${100 - value}%)`,
       background: `linear-gradient(270deg, ${theme.palette.canary.main} 0%, ${theme.palette.chestnutRose.main} 50%, ${theme.palette.ultramarine.main} 100%)`, // eslint-disable-line
@@ -26,7 +26,12 @@ const SimpleRange = ({ min, max, value, style, color }) => {
   return (
     <Range
       value={percentage * 100}
-      sx={{ height: 24, borderRadius: 1, [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 } }}
+      sx={{
+        height: 24,
+        borderRadius: 1,
+        [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 },
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
+      }}
       variant="determinate"
       color={color}
     />
