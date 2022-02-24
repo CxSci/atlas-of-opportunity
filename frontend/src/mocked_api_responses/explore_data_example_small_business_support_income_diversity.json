@@ -1,0 +1,698 @@
+[
+    {
+        "id": "401011001",
+        "income_diversity": 1.21
+    },
+    {
+        "id": "401011002",
+        "income_diversity": 1.09
+    },
+    {
+        "id": "401021003",
+        "income_diversity": 0.55
+    },
+    {
+        "id": "401021004",
+        "income_diversity": 0.51
+    },
+    {
+        "id": "401021005",
+        "income_diversity": 0.78
+    },
+    {
+        "id": "401021006",
+        "income_diversity": 0.54
+    },
+    {
+        "id": "401021007",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "401021008",
+        "income_diversity": 0.71
+    },
+    {
+        "id": "401021009",
+        "income_diversity": 0.33
+    },
+    {
+        "id": "401021010",
+        "income_diversity": 0.63
+    },
+    {
+        "id": "401031011",
+        "income_diversity": 0.53
+    },
+    {
+        "id": "401031012",
+        "income_diversity": 0.42
+    },
+    {
+        "id": "401031013",
+        "income_diversity": 0.49
+    },
+    {
+        "id": "401041014",
+        "income_diversity": 0.79
+    },
+    {
+        "id": "401041015",
+        "income_diversity": 0.89
+    },
+    {
+        "id": "401041016",
+        "income_diversity": 0.73
+    },
+    {
+        "id": "401051017",
+        "income_diversity": 0.79
+    },
+    {
+        "id": "401051018",
+        "income_diversity": 0.83
+    },
+    {
+        "id": "401051019",
+        "income_diversity": 0.76
+    },
+    {
+        "id": "401061020",
+        "income_diversity": 0.83
+    },
+    {
+        "id": "401061021",
+        "income_diversity": 0.93
+    },
+    {
+        "id": "401061022",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "401071023",
+        "income_diversity": 0.67
+    },
+    {
+        "id": "401071024",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "402011025",
+        "income_diversity": 0.89
+    },
+    {
+        "id": "402011026",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "402011027",
+        "income_diversity": 0.6
+    },
+    {
+        "id": "402021028",
+        "income_diversity": 0.71
+    },
+    {
+        "id": "402021029",
+        "income_diversity": 0.88
+    },
+    {
+        "id": "402021030",
+        "income_diversity": 1.12
+    },
+    {
+        "id": "402021031",
+        "income_diversity": 0.84
+    },
+    {
+        "id": "402021032",
+        "income_diversity": 0.79
+    },
+    {
+        "id": "402021033",
+        "income_diversity": 0.78
+    },
+    {
+        "id": "402021034",
+        "income_diversity": 1.1
+    },
+    {
+        "id": "402021035",
+        "income_diversity": 1.15
+    },
+    {
+        "id": "402031036",
+        "income_diversity": 0.91
+    },
+    {
+        "id": "402031037",
+        "income_diversity": 0.78
+    },
+    {
+        "id": "402031038",
+        "income_diversity": 0.71
+    },
+    {
+        "id": "402041040",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "402041041",
+        "income_diversity": 0.67
+    },
+    {
+        "id": "402041043",
+        "income_diversity": 0.75
+    },
+    {
+        "id": "402041044",
+        "income_diversity": 0.58
+    },
+    {
+        "id": "402041046",
+        "income_diversity": 1.01
+    },
+    {
+        "id": "402041047",
+        "income_diversity": 0.81
+    },
+    {
+        "id": "402041048",
+        "income_diversity": 0.7
+    },
+    {
+        "id": "402041171",
+        "income_diversity": 1.01
+    },
+    {
+        "id": "402041172",
+        "income_diversity": 0.86
+    },
+    {
+        "id": "402051049",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "402051050",
+        "income_diversity": 0.35
+    },
+    {
+        "id": "402051051",
+        "income_diversity": 1.01
+    },
+    {
+        "id": "402051052",
+        "income_diversity": 1.07
+    },
+    {
+        "id": "402051053",
+        "income_diversity": 0.63
+    },
+    {
+        "id": "402051054",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "402051055",
+        "income_diversity": 0.83
+    },
+    {
+        "id": "403011056",
+        "income_diversity": 0.81
+    },
+    {
+        "id": "403011057",
+        "income_diversity": 0.83
+    },
+    {
+        "id": "403021058",
+        "income_diversity": 0.92
+    },
+    {
+        "id": "403021059",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "403021060",
+        "income_diversity": 1.01
+    },
+    {
+        "id": "403021061",
+        "income_diversity": 0.84
+    },
+    {
+        "id": "403021062",
+        "income_diversity": 0.71
+    },
+    {
+        "id": "403021063",
+        "income_diversity": 0.94
+    },
+    {
+        "id": "403021064",
+        "income_diversity": 0.92
+    },
+    {
+        "id": "403031065",
+        "income_diversity": 0.37
+    },
+    {
+        "id": "403031066",
+        "income_diversity": 1.03
+    },
+    {
+        "id": "403031067",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "403031068",
+        "income_diversity": 0.78
+    },
+    {
+        "id": "403031069",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "403031070",
+        "income_diversity": 0.88
+    },
+    {
+        "id": "403041071",
+        "income_diversity": 0.59
+    },
+    {
+        "id": "403041072",
+        "income_diversity": 0.45
+    },
+    {
+        "id": "403041073",
+        "income_diversity": 0.87
+    },
+    {
+        "id": "403041074",
+        "income_diversity": 0.47
+    },
+    {
+        "id": "403041075",
+        "income_diversity": 0.91
+    },
+    {
+        "id": "403041076",
+        "income_diversity": 0.3
+    },
+    {
+        "id": "403041077",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "403041078",
+        "income_diversity": 0.64
+    },
+    {
+        "id": "403041079",
+        "income_diversity": 0.84
+    },
+    {
+        "id": "403041080",
+        "income_diversity": 0.77
+    },
+    {
+        "id": "403041083",
+        "income_diversity": 0.89
+    },
+    {
+        "id": "403041084",
+        "income_diversity": 0.65
+    },
+    {
+        "id": "403041085",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "403041086",
+        "income_diversity": 0.88
+    },
+    {
+        "id": "403041087",
+        "income_diversity": 0.58
+    },
+    {
+        "id": "403041088",
+        "income_diversity": 0.67
+    },
+    {
+        "id": "403041089",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "404011090",
+        "income_diversity": 1.08
+    },
+    {
+        "id": "404011091",
+        "income_diversity": 0.69
+    },
+    {
+        "id": "404011092",
+        "income_diversity": 0.68
+    },
+    {
+        "id": "404011093",
+        "income_diversity": 0.93
+    },
+    {
+        "id": "404011094",
+        "income_diversity": 1.02
+    },
+    {
+        "id": "404011095",
+        "income_diversity": 0.74
+    },
+    {
+        "id": "404011096",
+        "income_diversity": 0.67
+    },
+    {
+        "id": "404011097",
+        "income_diversity": 1.07
+    },
+    {
+        "id": "404021099",
+        "income_diversity": 0.51
+    },
+    {
+        "id": "404021100",
+        "income_diversity": 0.44
+    },
+    {
+        "id": "404021101",
+        "income_diversity": 1.06
+    },
+    {
+        "id": "404021102",
+        "income_diversity": 1.12
+    },
+    {
+        "id": "404031105",
+        "income_diversity": 0.65
+    },
+    {
+        "id": "404031106",
+        "income_diversity": 0.73
+    },
+    {
+        "id": "404031107",
+        "income_diversity": 0.7
+    },
+    {
+        "id": "404031108",
+        "income_diversity": 0.84
+    },
+    {
+        "id": "404031109",
+        "income_diversity": 0.85
+    },
+    {
+        "id": "405011110",
+        "income_diversity": 0.72
+    },
+    {
+        "id": "405011111",
+        "income_diversity": 0.75
+    },
+    {
+        "id": "405011112",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "405011113",
+        "income_diversity": 0.7
+    },
+    {
+        "id": "405011114",
+        "income_diversity": 0.58
+    },
+    {
+        "id": "405011115",
+        "income_diversity": 0.61
+    },
+    {
+        "id": "405021116",
+        "income_diversity": 0.36
+    },
+    {
+        "id": "405021117",
+        "income_diversity": 0.42
+    },
+    {
+        "id": "405021118",
+        "income_diversity": 0.27
+    },
+    {
+        "id": "405021119",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "405031120",
+        "income_diversity": 0.34
+    },
+    {
+        "id": "405031121",
+        "income_diversity": 0.59
+    },
+    {
+        "id": "405031122",
+        "income_diversity": 0.36
+    },
+    {
+        "id": "405031123",
+        "income_diversity": 0.89
+    },
+    {
+        "id": "405041124",
+        "income_diversity": 0.37
+    },
+    {
+        "id": "405041125",
+        "income_diversity": 0.46
+    },
+    {
+        "id": "405041126",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "405041127",
+        "income_diversity": 0.5
+    },
+    {
+        "id": "405041128",
+        "income_diversity": 0.6
+    },
+    {
+        "id": "406011129",
+        "income_diversity": 0.2
+    },
+    {
+        "id": "406011130",
+        "income_diversity": 0.61
+    },
+    {
+        "id": "406011131",
+        "income_diversity": 0.29
+    },
+    {
+        "id": "406011132",
+        "income_diversity": 0.51
+    },
+    {
+        "id": "406011133",
+        "income_diversity": 0.3
+    },
+    {
+        "id": "406011134",
+        "income_diversity": 0.22
+    },
+    {
+        "id": "406011136",
+        "income_diversity": 0.11
+    },
+    {
+        "id": "406021139",
+        "income_diversity": 0.25
+    },
+    {
+        "id": "406021140",
+        "income_diversity": 0.89
+    },
+    {
+        "id": "406021141",
+        "income_diversity": 0.48
+    },
+    {
+        "id": "406021142",
+        "income_diversity": 0.31
+    },
+    {
+        "id": "406021143",
+        "income_diversity": 0.24
+    },
+    {
+        "id": "407011144",
+        "income_diversity": 0.39
+    },
+    {
+        "id": "407011145",
+        "income_diversity": 0.13
+    },
+    {
+        "id": "407011146",
+        "income_diversity": 0.25
+    },
+    {
+        "id": "407011147",
+        "income_diversity": 0.34
+    },
+    {
+        "id": "407011148",
+        "income_diversity": 0.29
+    },
+    {
+        "id": "407011149",
+        "income_diversity": 0.55
+    },
+    {
+        "id": "407021150",
+        "income_diversity": 0.74
+    },
+    {
+        "id": "407021151",
+        "income_diversity": 0.32
+    },
+    {
+        "id": "407021152",
+        "income_diversity": 0.3
+    },
+    {
+        "id": "407021154",
+        "income_diversity": 0.35
+    },
+    {
+        "id": "407021155",
+        "income_diversity": 0.55
+    },
+    {
+        "id": "407021156",
+        "income_diversity": 0.39
+    },
+    {
+        "id": "407021157",
+        "income_diversity": 0.15
+    },
+    {
+        "id": "407021158",
+        "income_diversity": 0.6
+    },
+    {
+        "id": "407021173",
+        "income_diversity": 0.64
+    },
+    {
+        "id": "407021174",
+        "income_diversity": 0.73
+    },
+    {
+        "id": "407031159",
+        "income_diversity": 0.16
+    },
+    {
+        "id": "407031160",
+        "income_diversity": 0.17
+    },
+    {
+        "id": "407031161",
+        "income_diversity": 0.22
+    },
+    {
+        "id": "407031162",
+        "income_diversity": 0.1
+    },
+    {
+        "id": "407031163",
+        "income_diversity": 0.22
+    },
+    {
+        "id": "407031164",
+        "income_diversity": 0.52
+    },
+    {
+        "id": "407031165",
+        "income_diversity": 0.18
+    },
+    {
+        "id": "407031166",
+        "income_diversity": 0.33
+    },
+    {
+        "id": "407031167",
+        "income_diversity": 0.15
+    },
+    {
+        "id": "407031168",
+        "income_diversity": 0.41
+    },
+    {
+        "id": "407031169",
+        "income_diversity": 0.27
+    },
+    {
+        "id": "407031170",
+        "income_diversity": 0.36
+    },
+    {
+        "id": "402041039",
+        "income_diversity": null
+    },
+    {
+        "id": "402041042",
+        "income_diversity": null
+    },
+    {
+        "id": "403041081",
+        "income_diversity": null
+    },
+    {
+        "id": "403041082",
+        "income_diversity": null
+    },
+    {
+        "id": "404021098",
+        "income_diversity": null
+    },
+    {
+        "id": "404021103",
+        "income_diversity": null
+    },
+    {
+        "id": "404031104",
+        "income_diversity": null
+    },
+    {
+        "id": "406011135",
+        "income_diversity": null
+    },
+    {
+        "id": "406011137",
+        "income_diversity": null
+    },
+    {
+        "id": "406021138",
+        "income_diversity": null
+    },
+    {
+        "id": "497979799",
+        "income_diversity": null
+    },
+    {
+        "id": "499999499",
+        "income_diversity": null
+    }
+]
