@@ -216,6 +216,15 @@ const initTheme = darkMode =>
       sidebar: {
         width: '300px',
       },
+
+      Chart: {
+        axisColor: '#666666',
+        lineColor: '#FDD14D',
+        pointBorderColor: '#999999',
+        axisLabelColor: '#333333',
+        gridColor: '#999999',
+        axisFontSize: '14px',
+      },
     },
   })
 
