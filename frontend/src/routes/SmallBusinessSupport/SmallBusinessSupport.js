@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
+import SectionLine from 'components/SectionLine'
 import SectionText from 'components/SectionText'
 import SectionSimpleBar from 'components/SectionSimpleBar'
 import SectionSimpleRange from 'components/SectionSimpleRange'
@@ -13,7 +14,7 @@ const componentMappings = {
   text: SectionText,
   simple_bar: SectionSimpleBar,
   simple_range: SectionSimpleRange,
-  line: null,
+  line: SectionLine,
 }
 
 const SmallBusinessSupport = () => {

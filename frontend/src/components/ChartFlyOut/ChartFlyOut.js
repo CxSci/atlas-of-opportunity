@@ -6,10 +6,10 @@ import { PropTypes } from 'prop-types'
 
 const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style }) => (
   <g style={{ pointerEvents: 'none' }}>
-    <foreignObject width="100%" height="100%">
+    <foreignObject width="100%" height="100%" style={{ overflow: 'visible' }}>
       <Box sx={{ m: 1, left: x, top: y, position: 'absolute', transform: 'translate(-50%, -100%)' }}>
         <Box sx={{ borderRadius: 1, boxShadow: 3, bgcolor: '#FFFFFF', p: 2, mb: 4 }}>
-          <Grid container alignItems="center" sx={{ mb: 1 }}>
+          <Grid container alignItems="center" sx={{ mb: 1, flexWrap: 'nowrap' }}>
             <Grid item>
               <Box
                 sx={{
@@ -24,7 +24,7 @@ const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style }) => (
               />
             </Grid>
             <Grid item flex={1}>
-              <Typography variant="body2" component="div">
+              <Typography variant="body2" component="div" sx={{ whiteSpace: 'nowrap' }}>
                 {title}
               </Typography>
             </Grid>
