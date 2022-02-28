@@ -5,12 +5,14 @@ import { VictoryAxis, VictoryChart, VictoryLine, VictoryScatter, VictoryTooltip 
 import Box from '@mui/material/Box'
 
 import { nFormatter } from 'utils/helpers'
-import { getChartDomain, useVictoryTheme, useClientSize } from './LineChart.utils'
+import { getLineChartDomain, useVictoryTheme, useClientSize } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
+
+const LINE_CHART_RATIO = 0.75
 
 const LineChart = ({ data, title, xAxisLabel, yAxisLabel }) => {
   const theme = useTheme()
-  const domain = useMemo(() => getChartDomain(data), [data])
+  const domain = useMemo(() => getLineChartDomain(data, LINE_CHART_RATIO), [data])
   const victoryTheme = useVictoryTheme(theme)
 
   const ref = useRef()

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export const getChartDomain = data => {
+export const getLineChartDomain = data => {
   const max = Math.max(...data.map(item => item.y))
   const min = Math.min(0, Math.min(...data.map(item => item.y)))
   const margin = (max - min) * 0.05
@@ -80,12 +80,12 @@ export const useVictoryTheme = theme => {
   )
 }
 
-export const useClientSize = ref => {
+export const useClientSize = (ref, ratio = 0.75) => {
   const [size, setSize] = useState({ width: 600, height: 450 })
   const getClientSize = useCallback(() => {
     setSize({
       width: ref.current?.clientWidth || 600,
-      height: ref.current?.clientWidth * 0.75 || 450,
+      height: ref.current?.clientWidth * ratio || 450,
     })
   }, [])
   useEffect(() => {
