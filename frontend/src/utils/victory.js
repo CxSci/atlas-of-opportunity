@@ -7,6 +7,19 @@ export const getLineChartDomain = data => {
   return [min, max + margin]
 }
 
+export const formatTickNumber = (value, formatNumber, axis) => {
+  if (axis.format === 'number') {
+    const { maximumFractionDigits, minimumIntegerDigits, minimumSignificantDigits, ...numberFormat } =
+      axis.numberFormat || {}
+    return formatNumber(value, {
+      notation: 'compact',
+      compactDisplay: 'short',
+      ...numberFormat,
+    })
+  }
+  return value
+}
+
 export const useVictoryTheme = theme => {
   return useMemo(
     () => ({

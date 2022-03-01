@@ -10,29 +10,34 @@ import {
   VictoryVoronoiContainer,
 } from 'victory'
 import Box from '@mui/material/Box'
-
 import { useIntl } from 'react-intl'
-import { getLineChartDomain, useVictoryTheme, useClientSize } from 'utils/victory'
+
+import { formatTickNumber, getLineChartDomain, useVictoryTheme, useClientSize } from 'utils/victory'
+import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const LINE_CHART_RATIO = 0.75
 
-const LineChart = ({ data, title, xAxisLabel, yAxisLabel }) => {
+const LineChart = ({ data, title, xAxis, yAxis }) => {
   const { formatNumber } = useIntl()
   const theme = useTheme()
   const domain = useMemo(() => getLineChartDomain(data, LINE_CHART_RATIO), [data])
   const victoryTheme = useVictoryTheme(theme)
-
   const ref = useRef()
   const size = useClientSize(ref)
-  const handleTickFormat = useCallback(
+
+  const handleXTickFormat = useCallback(
     t => {
-      return formatNumber(t, {
-        notation: 'compact',
-        compactDisplay: 'short',
-      })
+      return formatTickNumber(t, formatNumber, xAxis)
     },
-    [formatNumber],
+    [formatNumber, xAxis],
+  )
+
+  const handleYTickFormat = useCallback(
+    t => {
+      return formatTickNumber(t, formatNumber, yAxis)
+    },
+    [formatNumber, yAxis],
   )
 
   return (
@@ -48,13 +53,13 @@ const LineChart = ({ data, title, xAxisLabel, yAxisLabel }) => {
             labelComponent={
               <VictoryTooltip
                 constrainToVisibleArea
-                flyoutComponent={<ChartFlyOut title={title} xAxisLabel={xAxisLabel} yAxisLabel={yAxisLabel} />}
+                flyoutComponent={<ChartFlyOut title={title} xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} />}
               />
             }
           />
         }>
-        <VictoryAxis />
-        <VictoryAxis dependentAxis domain={domain} tickFormat={handleTickFormat} />
+        <VictoryAxis tickFormat={handleXTickFormat} />
+        <VictoryAxis dependentAxis domain={domain} tickFormat={handleYTickFormat} />
         <VictoryLine data={data} />
         <VictoryScatter data={data} />
       </VictoryChart>
@@ -70,8 +75,8 @@ LineChart.propTypes = {
     }),
   ),
   title: PropTypes.string.isRequired,
-  xAxisLabel: PropTypes.string.isRequired,
-  yAxisLabel: PropTypes.string.isRequired,
+  xAxis: ChartAxisType.isRequired,
+  yAxis: ChartAxisType.isRequired,
 }
 
 export default LineChart
