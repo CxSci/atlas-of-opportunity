@@ -30,11 +30,13 @@
           "key": "pop_proj",
           "type": "line",
           "x": {
-            "key": "year"
+            "key": "year",
+            "title": "Year"
           },
           "y": {
             "key": "pop",
-            "format": "number"
+            "format": "number",
+            "title": "Population"
           }
         },
         {
