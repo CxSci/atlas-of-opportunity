@@ -26,7 +26,7 @@ const SmallBusinessSupport = () => {
           <Typography variant="h4" gutterBottom>
             <strong>{section.title}</strong>
           </Typography>
-          <Box sx={{ columns: { md: 2 }, mb: 2 }}>
+          <Box sx={{ columns: { md: 2 }, mb: 2, columnGap: 3 }}>
             {section.metrics.map((metric, mIndex) => {
               const SectionComponent = componentMappings[metric.type]
               return (
