@@ -11,8 +11,14 @@ const Template = args => <LineChart {...args} />
 export const Default = Template.bind({})
 Default.args = {
   title: 'Projected Population',
-  xAxisLabel: 'Year',
-  yAxisLabel: 'Population',
+  xAxis: {
+    title: 'Year',
+    format: 'number',
+  },
+  yAxis: {
+    title: 'Population',
+    format: 'number',
+  },
   data: [
     { x: '2016', y: 16285 },
     { x: '2021', y: 20354 },

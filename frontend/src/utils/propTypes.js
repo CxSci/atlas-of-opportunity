@@ -4,6 +4,8 @@ export const NumberFormatType = PropTypes.shape({
   style: PropTypes.string.isRequired,
   currency: PropTypes.string,
   maximumFractionDigits: PropTypes.number,
+  minimumIntegerDigits: PropTypes.number,
+  minimumSignificantDigits: PropTypes.number,
 })
 
 export const LayoutAxisType = PropTypes.shape({
@@ -25,4 +27,10 @@ export const LayoutMetricType = PropTypes.shape({
   filters: PropTypes.array,
   min: PropTypes.number,
   max: PropTypes.number,
+})
+
+export const ChartAxisType = PropTypes.shape({
+  title: PropTypes.string.isRequired,
+  format: PropTypes.string,
+  numberFormat: NumberFormatType,
 })
