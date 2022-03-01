@@ -41,12 +41,14 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
   )
 
   return (
-    <Box
-      ref={ref}
-      sx={{ columns: 1, marginTop: '-50px', '& svg': { overflow: 'visible', position: 'relative', zIndex: 1 } }}>
+    <Box ref={ref} sx={{ columns: 1, '& svg': { overflow: 'visible', position: 'relative', zIndex: 1 } }}>
       <VictoryChart
         {...size}
         theme={victoryTheme}
+        domainPadding={{
+          x: [0, 15],
+          y: [0, 20],
+        }}
         containerComponent={
           <VictoryVoronoiContainer
             labels={() => ' '}

@@ -3,8 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 export const getLineChartDomain = data => {
   const max = Math.max(...data.map(item => item.y))
   const min = Math.min(0, Math.min(...data.map(item => item.y)))
-  const margin = (max - min) * 0.05
-  return [min, max + margin]
+  return [min, max]
 }
 
 export const formatTickNumber = (value, formatNumber, axis) => {
@@ -24,7 +23,6 @@ export const useVictoryTheme = theme => {
   return useMemo(
     () => ({
       line: {
-        padding: 50,
         style: {
           data: {
             stroke: theme.components.Chart.lineColor,
@@ -46,6 +44,10 @@ export const useVictoryTheme = theme => {
         width: 500,
         height: 350,
         fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+        padding: {
+          left: 50,
+          bottom: 50,
+        },
       },
       axis: {
         padding: 50,
