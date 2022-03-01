@@ -87,7 +87,7 @@ export const useClientSize = (ref, ratio = 0.75) => {
       width: ref.current?.clientWidth || 600,
       height: ref.current?.clientWidth * ratio || 450,
     })
-  }, [])
+  }, [ratio, ref])
   useEffect(() => {
     window.addEventListener('resize', getClientSize)
     getClientSize()

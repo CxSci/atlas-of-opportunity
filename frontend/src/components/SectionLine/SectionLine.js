@@ -11,7 +11,7 @@ const SectionLine = ({ layout, data }) => {
     y: item[yAxisKey],
   }))
 
-  return <LineChart data={chartData} title={layout.title} xAxisLabel="Population" yAxisLabel="Year" />
+  return <LineChart data={chartData} title={layout.title} xAxisLabel={layout.x.title} yAxisLabel={layout.y.title} />
 }
 
 SectionLine.propTypes = {
