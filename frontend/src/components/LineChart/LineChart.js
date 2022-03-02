@@ -41,7 +41,13 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
   )
 
   return (
-    <Box ref={ref} sx={{ columns: 1, '& svg': { overflow: 'visible', position: 'relative', zIndex: 1 } }}>
+    <Box
+      ref={ref}
+      sx={{
+        /* Required since tooltip is shown in the right column assuming it has 2 columns inheriting parent's value */
+        columns: 1,
+        '& svg': { overflow: 'visible', position: 'relative', zIndex: 1 },
+      }}>
       <VictoryChart
         {...size}
         theme={victoryTheme}
