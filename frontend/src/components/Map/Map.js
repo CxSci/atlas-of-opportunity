@@ -247,7 +247,7 @@ function Map({ config }) {
 
               const row = data.find(r => r[mapConfig.foreignKey] === e.features[0].id)
               const html = `${row.sa2_name16}<br/>${row[mapConfig.metricKey] ?? 'n/a'}`
-              hoverPopup.setHTML(html).addTo(map).removeClassName('immobile')
+              hoverPopup.setHTML(html).addTo(map.current).removeClassName('immobile')
             }
             hoverPopup.setLngLat(e.lngLat)
             // 1. While the cursor is moving over a region, show a short

@@ -2,25 +2,28 @@ import { styled } from '@mui/material/styles'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import PropTypes from 'prop-types'
 
-const GradientProgress = styled(LinearProgress)(({ theme, value, colorScheme }) => ({
-  [`& .${linearProgressClasses.bar}`]: {
-    overflow: 'hidden',
-    backgroundColor: 'transparent',
-    borderRadius: 1,
-    '&:before': {
-      content: '""',
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderRadius: theme.shape.borderRadius,
-      transition: 'transform .4s linear',
-      transform: `translateX(${100 - value}%)`,
-      background: `linear-gradient(270deg, ${colorScheme?.[0] || theme.palette.canary.main} 0%, ${
-        colorScheme?.[1] || theme.palette.chestnutRose.main
-      } 50%, ${colorScheme?.[2] || theme.palette.ultramarine.main} 100%)`, // eslint-disable-line
+const nonDomPropsList = ['colorScheme']
+const GradientProgress = styled(LinearProgress, { shouldForwardProp: name => !nonDomPropsList.includes(name) })(
+  ({ theme, value, colorScheme }) => ({
+    [`& .${linearProgressClasses.bar}`]: {
+      overflow: 'hidden',
+      backgroundColor: 'transparent',
+      borderRadius: 1,
+      '&:before': {
+        content: '""',
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        borderRadius: theme.shape.borderRadius,
+        transition: 'transform .4s linear',
+        transform: `translateX(${100 - value}%)`,
+        background: `linear-gradient(270deg, ${colorScheme?.[0] || theme.palette.canary.main} 0%, ${
+          colorScheme?.[1] || theme.palette.chestnutRose.main
+        } 50%, ${colorScheme?.[2] || theme.palette.ultramarine.main} 100%)`, // eslint-disable-line
+      },
     },
-  },
-}))
+  }),
+)
 
 const SimpleRange = ({ min, max, value, style, color, colorScheme }) => {
   const Range = style === 'gradient' ? GradientProgress : LinearProgress
@@ -32,7 +35,7 @@ const SimpleRange = ({ min, max, value, style, color, colorScheme }) => {
         height: 24,
         borderRadius: 1,
         [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 },
-        '-webkit-mask-image': '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
+        WebkitMaskImage: '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
       }}
       variant="determinate"
       color={color}
