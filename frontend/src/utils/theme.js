@@ -5,6 +5,7 @@ const buttonHeight = '38px'
 const borderRadiusRound = '19px'
 const bgLight = '#fff'
 const bgHoverLight = '#f2f2f2'
+const darkGrey = '#333333'
 export const headerHeight = '60px'
 export const scrolledHeaderHeight = '84px'
 
@@ -30,12 +31,15 @@ const initTheme = darkMode =>
       ultramarine: {
         main: '#081181',
       },
+      darkGrey: {
+        main: darkGrey,
+      },
 
       ...(!darkMode
         ? {
             // palette values for light mode
             text: {
-              primary: '#333333',
+              primary: darkGrey,
               secondary: grey[800],
             },
             background: { default: '#fff' },
@@ -136,6 +140,7 @@ const initTheme = darkMode =>
             '&:after': {
               content: 'none',
             },
+            color: darkMode ? '#666666' : '#2D2D2D',
           },
           inputFocused: {
             backgroundColor: 'transparent',
@@ -155,16 +160,6 @@ const initTheme = darkMode =>
             '&:hover': {
               backgroundColor: bgHoverLight,
             },
-          },
-        },
-      },
-      MuiFilledInput: {
-        styleOverrides: {
-          input: {
-            paddingTop: '0',
-            paddingBottom: '0',
-            height: buttonHeight,
-            color: darkMode ? '#666666' : '#2D2D2D',
           },
         },
       },
@@ -198,6 +193,39 @@ const initTheme = darkMode =>
         },
       },
 
+      MuiSelect: {
+        styleOverrides: {
+          filled: {
+            color: darkGrey,
+            backgroundColor: '#ffffff',
+            border: '1px solid #999999',
+            borderRadius: '5px',
+            fontWeight: 500,
+            fontSize: '14px',
+            paddingTop: '21px',
+            paddingBottom: '5px',
+            paddingLeft: '11px',
+          },
+          icon: {
+            color: '#999999',
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            color: '#000',
+            backgroundColor: '#fff',
+            border: '1px solid #999999',
+          },
+        },
+      },
+      MuiMenu: {
+        styleOverrides: {
+          root: {},
+        },
+      },
+
       header: {
         height: headerHeight,
         scrolledHeight: scrolledHeaderHeight,
@@ -215,6 +243,10 @@ const initTheme = darkMode =>
 
       sidebar: {
         width: '300px',
+      },
+
+      floatingFilter: {
+        width: 320,
       },
     },
   })

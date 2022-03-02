@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
-import { Box } from '@mui/material'
-
+import { Box, Tooltip } from '@mui/material'
+import { InfoOutlined } from '@mui/icons-material'
+import SimpleRange from '../SimpleRange'
+import Select from '../Select'
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoianVzdGluYW5kZXJzb24iLCJhIjoiY2tjYW10aWpxMXd1eDMwcW83OTkxNHpxNCJ9.fDQRr2Ctj4skAatc3pZ8VA'
@@ -10,7 +12,7 @@ function Map({ config }) {
   const mapContainer = useRef(null)
   const map = useRef(null)
   const clearMapFunctionsList = useRef([])
-  const [selectedMetric, setSelectedMetric] = useState(null)
+  const [selectedMetric, setSelectedMetric] = useState('')
   const [data, setData] = useState([])
   const [mapLoaded, setMapLoaded] = useState(false)
 
@@ -18,6 +20,12 @@ function Map({ config }) {
     () => (config?.metrics || [])?.find(item => item?.id === selectedMetric),
     [config?.metrics, selectedMetric],
   )
+
+  const colorScheme = useMemo(
+    () => metricData?.layers?.[0]?.paint?.default?.fill?.colorScheme || [],
+    [metricData?.layers],
+  )
+  const colorSchemeReversed = useMemo(() => [...colorScheme].reverse(), [colorScheme])
 
   // methods
   const getData = useCallback(async () => {
@@ -317,15 +325,47 @@ function Map({ config }) {
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
       <div ref={mapContainer} id="map" className="map-container" style={{ height: '100%', width: '100%' }} />
 
-      {/* TODO: replace with real floating select block */}
-      <Box position={'absolute'} zIndex={999} bottom={40} left={20} bgcolor={'#fff'} p={1} borderRadius={1}>
-        <select name="metric" onChange={e => setSelectedMetric(e?.target?.value)}>
-          {(config?.metrics || []).map(metric => (
-            <option key={metric?.id} value={metric?.id}>
-              {metric?.title}
-            </option>
-          ))}
-        </select>
+      <Box
+        position={'absolute'}
+        zIndex={999}
+        bottom={38}
+        left={12}
+        bgcolor={'#fff'}
+        p={1.5}
+        borderRadius={1}
+        width={theme => theme.components.floatingFilter.width}>
+        <Box display={'flex'} alignItems={'center'}>
+          <Select
+            value={selectedMetric}
+            onChange={e => setSelectedMetric(e?.target?.value)}
+            options={config?.metrics}
+            labelId="demo-simple-select-filled-label"
+            label="Growth"
+            menuPlacement={'top'}
+            sx={{ mb: 1 }}
+          />
+
+          <Box component={'span'} ml={1.25}>
+            <Tooltip title="Info tooltip" placement={'top'}>
+              <InfoOutlined sx={{ color: '#B3B3B3' }} />
+            </Tooltip>
+          </Box>
+        </Box>
+
+        <div>
+          <SimpleRange value={100} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
+
+          {/* TODO: check if this should be dynamic */}
+          <Box
+            display={'flex'}
+            justifyContent={'space-between'}
+            color={theme => theme.palette.darkGrey.main}
+            fontSize={12}>
+            <span>Low</span>
+            <span>Medium</span>
+            <span>High</span>
+          </Box>
+        </div>
       </Box>
     </Box>
   )
