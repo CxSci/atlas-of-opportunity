@@ -8,7 +8,7 @@ export const getLineChartDomain = data => {
 
 export const formatTickNumber = (value, formatNumber, axis) => {
   if (axis.format === 'number') {
-    const { maximumFractionDigits, minimumIntegerDigits, minimumSignificantDigits, ...numberFormat } =
+    const { minimumFractionDigits, minimumIntegerDigits, minimumSignificantDigits, ...numberFormat } =
       axis.numberFormat || {}
     return formatNumber(value, {
       notation: 'compact',

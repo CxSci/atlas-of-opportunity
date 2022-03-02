@@ -13,7 +13,6 @@ Default.args = {
   title: 'Projected Population',
   xAxis: {
     title: 'Year',
-    format: 'number',
   },
   yAxis: {
     title: 'Population',
