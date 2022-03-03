@@ -1,12 +1,32 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
-import { Box, Tooltip } from '@mui/material'
+import { Box, createStyles, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
+import MapPopupContent from '../MapPopupContent'
+import { buildColorExpression, createMapConfig } from '../../utils/helpers'
+import { MAPBOX_API_KEY } from '../../utils/constants'
 
-mapboxgl.accessToken =
-  'pk.eyJ1IjoianVzdGluYW5kZXJzb24iLCJhIjoiY2tjYW10aWpxMXd1eDMwcW83OTkxNHpxNCJ9.fDQRr2Ctj4skAatc3pZ8VA'
+mapboxgl.accessToken = MAPBOX_API_KEY
+
+const popupClassName = 'floating-popup'
+const popupContainerStyles = createStyles({
+  '.mapboxgl-popup-tip': {
+    display: 'none',
+  },
+
+  '.mapboxgl-popup-content': {
+    padding: '0',
+    background: 'transparent',
+    boxShadow: 'none',
+  },
+
+  [`.${popupClassName}.immobile .mapboxgl-popup-content`]: {
+    background: 'rgba(255, 255, 255, 1.0)',
+  },
+})
 
 function Map({ config }) {
   const mapContainer = useRef(null)
@@ -43,44 +63,128 @@ function Map({ config }) {
     }
   }, [metricData?.data?.url])
 
-  const updateMap = useCallback(() => {
-    if (!metricData || !data?.length || !mapLoaded) return
-    // console.log(map.current)
+  const initMap = useCallback(() => {
+    if (map.current || !config) return // initialize map only once
 
-    let hoverPopupTimeout = null
-    const hoverPopup = new mapboxgl.Popup({
-      anchor: 'top',
-      closeButton: false,
-      closeOnClick: false,
-      className: 'floating-popup',
-      offset: [0, 10],
-      maxWidth: 'none',
+    const { style, bounds, fitBoundsOptions } = config?.options || {}
+
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style,
+      bounds,
+      fitBoundsOptions,
     })
 
-    const buildColorExpression = ({ fill, metricKey, domain, ...options }) => {
-      const result = []
-      switch (fill.default.scale) {
-        case 'step':
-          result.push('step')
-          break
-        case 'linear':
-        default:
-          result.push('interpolate', ['linear'])
-      }
+    map.current.on('load', () => {
+      setMapLoaded(true)
+    })
 
-      result.push(['feature-state', metricKey])
+    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
+  }, [config])
 
-      // Build alternating list of numbers and colors
-      if (fill.default.scale === 'step') {
-        result.push(['to-color', fill.default.colorScheme.shift()])
-      }
-      fill.default.colorScheme.forEach((color, i) => {
-        result.push(domain[i], ['to-color', color])
+  const initPopup = useCallback(
+    ({ mapConfig, layerId, sourceLayer }) => {
+      let hoverPopupTimeout = null
+      let hoveredFeatureId = null
+      let popupExpanded = null
+      const hoverPopup = new mapboxgl.Popup({
+        anchor: 'top',
+        closeButton: false,
+        closeOnClick: false,
+        className: popupClassName,
+        offset: [0, 10],
+        maxWidth: 'none',
       })
-      return result
-    }
 
-    let hoveredFeatureId = null
+      const expandPopup = () => {
+        popupExpanded = true
+        if (hoveredFeatureId === null) {
+          return
+        }
+        const row = data.find(r => r[mapConfig.foreignKey] === hoveredFeatureId)
+
+        const popupNode = document.createElement('div')
+        ReactDOM.render(
+          <MapPopupContent
+            id={row?.id}
+            title={'Title'}
+            metricName={metricData?.title}
+            data={row[mapConfig.metricKey] ?? 0}
+            colorScheme={colorSchemeReversed}
+            addToComparison
+          />,
+          popupNode,
+        )
+
+        hoverPopup.setDOMContent(popupNode).addClassName('immobile')
+      }
+
+      map.current.on('mousemove', layerId, e => {
+        if (e.features.length > 0) {
+          if (hoveredFeatureId !== e.features[0].id) {
+            popupExpanded = false
+            map.current.setFeatureState(
+              { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { hover: false },
+            )
+            hoveredFeatureId = e.features[0].id
+            map.current.setFeatureState(
+              { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { hover: true },
+            )
+
+            const row = data.find(r => r[mapConfig.foreignKey] === e.features[0].id)
+
+            const popupNode = document.createElement('div')
+            ReactDOM.render(
+              <MapPopupContent
+                id={e.features[0].id}
+                title={'Title'}
+                metricName={metricData?.title}
+                data={row[mapConfig.metricKey] ?? 0}
+                colorScheme={colorSchemeReversed}
+              />,
+              popupNode,
+            )
+
+            hoverPopup.setDOMContent(popupNode).addTo(map.current).removeClassName('immobile')
+          }
+
+          !popupExpanded && hoverPopup.setLngLat(e.lngLat)
+          // 1. While the cursor is moving over a region, show a short
+          //    popup which moves with the mouse.
+          //
+          // 2. If the cursor is idle over a region, expand the popup to
+          //    include interactive controls and freeze it in place so
+          //    the user can interact with it. Unfreeze the popup and
+          //    revert to short version if the cursor moves far enough
+          //    outside of it.
+
+          clearTimeout(hoverPopupTimeout)
+          hoverPopupTimeout = setTimeout(expandPopup, 700)
+        }
+      })
+
+      map.current.on('mouseleave', layerId, () => {
+        if (popupExpanded) return
+
+        if (hoveredFeatureId !== null) {
+          popupExpanded = false
+          map.current.setFeatureState(
+            { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+            { hover: false },
+          )
+        }
+        hoverPopup.remove().removeClassName('immobile')
+        hoveredFeatureId = null
+        clearTimeout(hoverPopupTimeout)
+      })
+    },
+    [colorSchemeReversed, data, metricData?.title],
+  )
+
+  const updateMap = useCallback(() => {
+    if (!metricData || !data?.length || !mapLoaded || !map.current) return
 
     const { geometry, layers } = metricData || {}
 
@@ -92,34 +196,7 @@ function Map({ config }) {
       const linesId = `regions-${sourceLayer}-lines`
       const hoverId = `regions-${sourceLayer}-hover-outline`
 
-      let mapConfig = {
-        foreignKey: 'id',
-        metricKey: 'data',
-        type: metricData?.type,
-        domain: layer?.metric?.domain,
-        fill: {
-          default: {
-            scale: layer?.metric?.scale,
-            colorScheme: layer?.paint?.default?.fill?.colorScheme,
-            fallbackColor: layer?.paint?.default?.fill?.fallbackColor,
-            opacity: layer?.paint?.default?.fill?.opacity ?? 1.0,
-          },
-          hover: {
-            opacity: layer?.paint?.hover?.fill?.opacity ?? 1.0,
-          },
-        },
-        outline: {
-          default: {
-            color: layer?.paint?.default?.outline?.color,
-            width: layer?.paint?.default?.outline?.width,
-            opacity: layer?.paint?.default?.outline?.opacity ?? 1.0,
-          },
-          hover: {
-            width: layer?.paint?.hover?.outline?.width ?? 1.0,
-            opacity: layer?.paint?.hover?.outline?.opacity ?? 1.0,
-          },
-        },
-      }
+      const mapConfig = createMapConfig({ metric: metricData, layer })
 
       // TODO: temp - add other types
       if (mapConfig.type !== 'chloropleth') return
@@ -221,92 +298,27 @@ function Map({ config }) {
 
         clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeLayer(hoverId)]
 
-        // TODO: fix popup
-        const expandPopup = html => {
-          if (hoveredFeatureId === null) {
-            return
-          }
-          const row = data.find(r => r[mapConfig.foreignKey] === hoveredFeatureId)
-          html = `${row.sa2_name16} -><br/>${row[mapConfig.metricKey] ?? 'n/a'}`
-          html += '<br/>Add to Comparison'
-          hoverPopup.setHTML(html).addClassName('immobile')
-        }
-
-        map.current.on('mousemove', fillsId, e => {
-          if (e.features.length > 0) {
-            if (hoveredFeatureId !== e.features[0].id) {
-              map.current.setFeatureState(
-                { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
-                { hover: false },
-              )
-              hoveredFeatureId = e.features[0].id
-              map.current.setFeatureState(
-                { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
-                { hover: true },
-              )
-
-              const row = data.find(r => r[mapConfig.foreignKey] === e.features[0].id)
-              const html = `${row.sa2_name16}<br/>${row[mapConfig.metricKey] ?? 'n/a'}`
-              hoverPopup.setHTML(html).addTo(map.current).removeClassName('immobile')
-            }
-            hoverPopup.setLngLat(e.lngLat)
-            // 1. While the cursor is moving over a region, show a short
-            //    popup which moves with the mouse.
-            //
-            // 2. If the cursor is idle over a region, expand the popup to
-            //    include interactive controls and freeze it in place so
-            //    the user can interact with it. Unfreeze the popup and
-            //    revert to short version if the cursor moves far enough
-            //    outside of it.
-            //
-            //    This code doesn't include that freeze/unfreeze bit.
-            clearTimeout(hoverPopupTimeout)
-            hoverPopupTimeout = setTimeout(expandPopup, 700)
-          }
-        })
-
-        map.current.on('mouseleave', fillsId, () => {
-          if (hoveredFeatureId !== null) {
-            map.current.setFeatureState(
-              { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
-              { hover: false },
-            )
-          }
-          hoverPopup.remove().removeClassName('immobile')
-          hoveredFeatureId = null
-          clearTimeout(hoverPopupTimeout)
-        })
+        initPopup({ mapConfig, layerId: fillsId, sourceLayer })
       }
 
       // remove source last as layers should be removed first
       clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeSource(sourceLayer)]
     })
-  }, [data, mapLoaded, metricData])
+  }, [data, initPopup, mapLoaded, metricData])
 
   const cleanMap = useCallback(() => {
-    ;(clearMapFunctionsList.current || []).forEach(func => func())
+    ;(clearMapFunctionsList.current || []).forEach(func => {
+      try {
+        func()
+      } catch (e) {
+        console.log(e)
+      }
+    })
 
     clearMapFunctionsList.current = []
   }, [])
 
   // effects
-  useEffect(() => {
-    if (map.current || !config) return // initialize map only once
-
-    const { style, bounds, fitBoundsOptions } = config?.options || {}
-
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style,
-      bounds,
-      fitBoundsOptions,
-    })
-
-    map.current.on('load', () => {
-      setMapLoaded(true)
-    })
-  }, [config, data, metricData])
-
   useEffect(() => {
     setSelectedMetric(config?.defaultMetric)
   }, [config?.defaultMetric])
@@ -318,11 +330,22 @@ function Map({ config }) {
   }, [cleanMap, updateMap])
 
   useEffect(() => {
+    initMap()
+
+    return () => {
+      map.current?.remove?.()
+      map.current = null
+    }
+  }, [initMap])
+
+  useEffect(() => {
     getData()
   }, [getData])
 
   return (
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
+      <GlobalStyles styles={{ [`.${popupClassName}`]: popupContainerStyles }} />
+
       <div ref={mapContainer} id="map" className="map-container" style={{ height: '100%', width: '100%' }} />
 
       <Box
@@ -353,7 +376,7 @@ function Map({ config }) {
         </Box>
 
         <div>
-          <SimpleRange value={100} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
+          <SimpleRange value={60} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
 
           {/* TODO: check if this should be dynamic */}
           <Box

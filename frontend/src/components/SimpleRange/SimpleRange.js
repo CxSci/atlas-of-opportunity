@@ -25,21 +25,23 @@ const GradientProgress = styled(LinearProgress, { shouldForwardProp: name => !no
   }),
 )
 
-const SimpleRange = ({ min, max, value, style, color, colorScheme }) => {
+const SimpleRange = ({ min, max, value, style, color, colorScheme, height, sx = {}, ...otherProps }) => {
   const Range = style === 'gradient' ? GradientProgress : LinearProgress
   const percentage = Math.min(1, (value - min) / (max - min || 1))
   return (
     <Range
       value={percentage * 100}
       sx={{
-        height: 24,
+        height: height || 24,
         borderRadius: 1,
         [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 },
         WebkitMaskImage: '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
+        ...sx,
       }}
       variant="determinate"
       color={color}
       colorScheme={colorScheme}
+      {...otherProps}
     />
   )
 }
@@ -48,6 +50,8 @@ SimpleRange.propTypes = {
   value: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
+  height: PropTypes.string,
+  sx: PropTypes.object,
   color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'error', 'warning']),
   style: PropTypes.oneOf(['solid', 'gradient']),
   colorScheme: PropTypes.array,
