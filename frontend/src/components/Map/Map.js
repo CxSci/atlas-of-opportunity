@@ -109,7 +109,7 @@ function Map({ config }) {
             id={row?.id}
             title={'Title'}
             metricName={metricData?.title}
-            data={row[mapConfig.metricKey] ?? 0}
+            data={row[mapConfig?.metricKey] ?? 0}
             colorScheme={colorSchemeReversed}
             addToComparison
           />,
@@ -141,7 +141,7 @@ function Map({ config }) {
                 id={e.features[0].id}
                 title={'Title'}
                 metricName={metricData?.title}
-                data={row[mapConfig.metricKey] ?? 0}
+                data={row[mapConfig?.metricKey] ?? 0}
                 colorScheme={colorSchemeReversed}
               />,
               popupNode,
@@ -376,7 +376,7 @@ function Map({ config }) {
         </Box>
 
         <div>
-          <SimpleRange value={60} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
+          <SimpleRange value={100} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
 
           {/* TODO: check if this should be dynamic */}
           <Box

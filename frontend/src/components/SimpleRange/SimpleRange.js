@@ -50,7 +50,7 @@ SimpleRange.propTypes = {
   value: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  height: PropTypes.string,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   sx: PropTypes.object,
   color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'error', 'warning']),
   style: PropTypes.oneOf(['solid', 'gradient']),
