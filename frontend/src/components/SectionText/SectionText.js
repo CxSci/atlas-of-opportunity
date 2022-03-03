@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 
 import { LayoutMetricType } from 'utils/propTypes'
 import FieldNumber from 'components/FieldNumber'
+import ExpandableContainer from 'components/ExpandableContainer'
 
 const SectionText = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
@@ -15,14 +16,18 @@ const SectionText = ({ layout, data }) => {
   if (xAxisKey && yAxisKey) {
     return (
       <Box>
-        {data.map((item, index) => (
-          <Box key={index}>
-            <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
-            {layout.y?.format === 'number' && (
-              <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
-            )}
-          </Box>
-        ))}
+        <ExpandableContainer data={data}>
+          {items =>
+            items.map((item, index) => (
+              <Box key={index}>
+                <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
+                {layout.y?.format === 'number' && (
+                  <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
+                )}
+              </Box>
+            ))
+          }
+        </ExpandableContainer>
       </Box>
     )
   }

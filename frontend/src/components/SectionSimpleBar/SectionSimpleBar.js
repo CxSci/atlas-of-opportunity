@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 
+import ExpandableContainer from 'components/ExpandableContainer'
 import SimpleBar from 'components/SimpleBar'
 import { LayoutMetricType } from 'utils/propTypes'
 
@@ -20,18 +21,22 @@ const SectionSimpleBar = ({ layout, data }) => {
     )
     return (
       <Box>
-        {data.map((item, index) => (
-          <Box key={index} sx={{ mb: 2 }}>
-            <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
-            {layout.y?.format === 'number' && (
-              <SimpleBar
-                value={item[yAxisKey]}
-                percentage={item[yAxisKey] / maxValue}
-                numberFormat={layout.y.numberFormat}
-              />
-            )}
-          </Box>
-        ))}
+        <ExpandableContainer data={data}>
+          {items =>
+            items.map((item, index) => (
+              <Box key={index} sx={{ mb: 2 }}>
+                <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
+                {layout.y?.format === 'number' && (
+                  <SimpleBar
+                    value={item[yAxisKey]}
+                    percentage={item[yAxisKey] / maxValue}
+                    numberFormat={layout.y.numberFormat}
+                  />
+                )}
+              </Box>
+            ))
+          }
+        </ExpandableContainer>
       </Box>
     )
   }
