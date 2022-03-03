@@ -316,9 +316,11 @@
           "key": "business_counts",
           "type": "stacked_area",
           "x": {
+            "title": "Business Count",
             "key": "year"
           },
           "y": {
+            "title": "Year",
             "key": "value",
             "format": "number"
           },

@@ -6,6 +6,7 @@ import SectionLine from 'components/SectionLine'
 import SectionText from 'components/SectionText'
 import SectionSimpleBar from 'components/SectionSimpleBar'
 import SectionSimpleRange from 'components/SectionSimpleRange'
+import SectionStackedArea from 'components/SectionStackedArea'
 
 import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
 import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
@@ -15,6 +16,7 @@ const componentMappings = {
   simple_bar: SectionSimpleBar,
   simple_range: SectionSimpleRange,
   line: SectionLine,
+  stacked_area: SectionStackedArea,
 }
 
 const SmallBusinessSupport = () => {

@@ -1,30 +1,24 @@
 import { useCallback, useMemo, useRef } from 'react'
-import { useTheme } from '@mui/system'
-import {
-  VictoryAxis,
-  VictoryChart,
-  VictoryLine,
-  VictoryScatter,
-  VictoryTooltip,
-  VictoryVoronoiContainer,
-} from 'victory'
 import { useIntl } from 'react-intl'
+import { useTheme } from '@mui/system'
+import { VictoryAxis, VictoryChart, VictoryArea, VictoryStack, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
 import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
-import { formatTickNumber, getLineChartDomain, useVictoryTheme, useClientSize } from 'utils/victory'
 import { ChartAxisType } from 'utils/propTypes'
+import { getStackData, STACK_COLORS, getStackChartDomain } from './StackChart.utils'
+import { formatTickNumber, useVictoryTheme, useClientSize } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
-const LINE_CHART_RATIO = 0.75
-
-const LineChart = ({ data, title, xAxis, yAxis }) => {
-  const { formatNumber } = useIntl()
+const StackChart = ({ data, xAxis, yAxis }) => {
   const theme = useTheme()
-  const domain = useMemo(() => getLineChartDomain(data, LINE_CHART_RATIO), [data])
+  const domain = useMemo(() => getStackChartDomain(data), [data])
   const victoryTheme = useVictoryTheme(theme)
+  const { formatNumber } = useIntl()
+
   const ref = useRef()
   const size = useClientSize(ref)
+  const stackData = useMemo(() => getStackData(data), [data])
 
   const handleXTickFormat = useCallback(
     t => {
@@ -41,12 +35,7 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
   )
 
   return (
-    <Box
-      ref={ref}
-      sx={{
-        /* Required since tooltip is shown in the right column assuming it has 2 columns inheriting parent's value */
-        columns: 1,
-      }}>
+    <Box ref={ref} sx={{ columns: 1 }}>
       <VictoryChart
         {...size}
         theme={victoryTheme}
@@ -60,30 +49,33 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
             labelComponent={
               <VictoryTooltip
                 constrainToVisibleArea
-                flyoutComponent={<ChartFlyOut title={title} xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} />}
+                flyoutComponent={<ChartFlyOut placement="bottom" xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} />}
               />
             }
           />
         }>
         <VictoryAxis tickFormat={handleXTickFormat} />
         <VictoryAxis dependentAxis domain={domain} tickFormat={handleYTickFormat} />
-        <VictoryLine data={data} />
-        <VictoryScatter data={data} />
+        <VictoryStack colorScale={STACK_COLORS}>
+          {stackData.map(item => (
+            <VictoryArea key={item.title} data={item.data} />
+          ))}
+        </VictoryStack>
       </VictoryChart>
     </Box>
   )
 }
 
-LineChart.propTypes = {
+StackChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       y: PropTypes.number.isRequired,
+      z: PropTypes.string,
     }),
   ),
-  title: PropTypes.string.isRequired,
   xAxis: ChartAxisType.isRequired,
   yAxis: ChartAxisType.isRequired,
 }
 
-export default LineChart
+export default StackChart
