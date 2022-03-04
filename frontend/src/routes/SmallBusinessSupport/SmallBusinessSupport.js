@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
+import MetricsContainer from 'components/MetricsContainer'
 import SectionLine from 'components/SectionLine'
 import SectionText from 'components/SectionText'
 import SectionSimpleBar from 'components/SectionSimpleBar'
@@ -28,17 +29,17 @@ const SmallBusinessSupport = () => {
           <Typography variant="h4" gutterBottom>
             <strong>{section.title}</strong>
           </Typography>
-          <Box sx={{ columns: { md: 2 }, mb: 2, columnGap: 3 }}>
-            {section.metrics.map((metric, mIndex) => {
+          <MetricsContainer metrics={section.metrics}>
+            {metric => {
               const SectionComponent = componentMappings[metric.type]
               return (
-                <Box key={mIndex} sx={{ breakInside: 'avoid', mb: 3 }}>
+                <Box sx={{ mb: 3 }}>
                   {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
                   {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
                 </Box>
               )
-            })}
-          </Box>
+            }}
+          </MetricsContainer>
         </Box>
       ))}
     </Container>
