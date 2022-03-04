@@ -41,12 +41,7 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
   )
 
   return (
-    <Box
-      ref={ref}
-      sx={{
-        /* Required since tooltip is shown in the right column assuming it has 2 columns inheriting parent's value */
-        columns: 1,
-      }}>
+    <Box ref={ref}>
       <VictoryChart
         {...size}
         theme={victoryTheme}
