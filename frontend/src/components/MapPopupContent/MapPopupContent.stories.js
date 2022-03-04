@@ -14,6 +14,7 @@ Default.args = {
   title: 'Title',
   metricName: 'Metric name',
   data: 0.75,
-  colorScheme: ['#7f2704', '#fd8d3c', '#fff5eb'],
+  colorScheme: ['#fff5eb', '#fd8d3c', '#7f2704'],
+  colorSchemeDomain: [0, 0.3, 1],
   addToComparison: true,
 }

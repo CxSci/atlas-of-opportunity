@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
 
-function MapPopupContent({ id, title, metricName, data, colorScheme, addToComparison }) {
+function MapPopupContent({ id, title, metricName, data, colorScheme, colorSchemeDomain, addToComparison }) {
   return (
     <Box
       p={1.5}
@@ -25,9 +25,10 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, addToCompar
             value={data}
             min={0}
             max={1}
-            height={14}
+            size={'small'}
             style={'gradient'}
             colorScheme={colorScheme || []}
+            colorSchemeDomain={colorSchemeDomain}
             sx={{ backgroundColor: '#F2F2F2' }}
           />
         </Box>

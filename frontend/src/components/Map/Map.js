@@ -6,7 +6,6 @@ import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
-import { buildColorExpression, createMapConfig } from '../../utils/helpers'
 import { MAPBOX_API_KEY } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
@@ -28,43 +27,43 @@ const popupContainerStyles = createStyles({
   },
 })
 
-function Map({ config }) {
+function Map({ config, hidePopup }) {
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const clearMapFunctionsList = useRef([])
   const [selectedMetric, setSelectedMetric] = useState('')
   const [data, setData] = useState([])
   const [mapLoaded, setMapLoaded] = useState(false)
+  const [metricConfig, setMetricConfig] = useState(null)
+  const [colorScheme, setColorScheme] = useState([])
+  const [layerIds, setLayerIds] = useState([])
+  const [sourceIds, setSourceIds] = useState([])
 
-  const metricData = useMemo(
-    () => (config?.metrics || [])?.find(item => item?.id === selectedMetric),
-    [config?.metrics, selectedMetric],
-  )
-
-  const colorScheme = useMemo(
-    () => metricData?.layers?.[0]?.paint?.default?.fill?.colorScheme || [],
-    [metricData?.layers],
-  )
-  const colorSchemeReversed = useMemo(() => [...colorScheme].reverse(), [colorScheme])
+  const colorSchemeDomain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
 
   // methods
-  const getData = useCallback(async () => {
+  const getData = useCallback(async url => {
     setData([])
-    const url = metricData?.data?.url
-    if (!url) return
+    if (!url) {
+      return
+    }
 
     // TODO: use client instance instead
     try {
-      const res = await fetch(metricData?.data?.url)
+      const res = await fetch(url)
       const json = await res.json()
       setData(json)
     } catch (e) {
       console.error(e)
     }
-  }, [metricData?.data?.url])
+  }, [])
 
   const initMap = useCallback(() => {
-    if (map.current || !config) return // initialize map only once
+    // initialize map only once
+    if (map.current || !config) {
+      return
+    }
+
+    setSelectedMetric(config?.defaultMetric)
 
     const { style, bounds, fitBoundsOptions } = config?.options || {}
 
@@ -83,7 +82,7 @@ function Map({ config }) {
   }, [config])
 
   const initPopup = useCallback(
-    ({ mapConfig, layerId, sourceLayer }) => {
+    ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
       let hoverPopupTimeout = null
       let hoveredFeatureId = null
       let popupExpanded = null
@@ -98,19 +97,17 @@ function Map({ config }) {
 
       const expandPopup = () => {
         popupExpanded = true
-        if (hoveredFeatureId === null) {
-          return
-        }
-        const row = data.find(r => r[mapConfig.foreignKey] === hoveredFeatureId)
+        const row = data.find(r => r[foreignKey] === hoveredFeatureId)
 
         const popupNode = document.createElement('div')
         ReactDOM.render(
           <MapPopupContent
             id={row?.id}
-            title={'Title'}
-            metricName={metricData?.title}
-            data={row[mapConfig?.metricKey] ?? 0}
-            colorScheme={colorSchemeReversed}
+            title={row?.[titleKey]}
+            metricName={metricConfig?.title}
+            data={row?.[metricKey] ?? 0}
+            colorScheme={colorScheme}
+            colorSchemeDomain={colorSchemeDomain}
             addToComparison
           />,
           popupNode,
@@ -133,16 +130,21 @@ function Map({ config }) {
               { hover: true },
             )
 
-            const row = data.find(r => r[mapConfig.foreignKey] === e.features[0].id)
+            if (hidePopup) {
+              return
+            }
+
+            const row = data.find(r => r[foreignKey] === e.features[0].id)
 
             const popupNode = document.createElement('div')
             ReactDOM.render(
               <MapPopupContent
                 id={e.features[0].id}
-                title={'Title'}
-                metricName={metricData?.title}
-                data={row[mapConfig?.metricKey] ?? 0}
-                colorScheme={colorSchemeReversed}
+                title={row?.[titleKey]}
+                metricName={metricConfig?.title}
+                data={row?.[metricKey] ?? 0}
+                colorScheme={colorScheme}
+                colorSchemeDomain={colorSchemeDomain}
               />,
               popupNode,
             )
@@ -166,8 +168,6 @@ function Map({ config }) {
       })
 
       map.current.on('mouseleave', layerId, () => {
-        if (popupExpanded) return
-
         if (hoveredFeatureId !== null) {
           popupExpanded = false
           map.current.setFeatureState(
@@ -175,46 +175,61 @@ function Map({ config }) {
             { hover: false },
           )
         }
+
+        if (popupExpanded) {
+          return
+        }
+
         hoverPopup.remove().removeClassName('immobile')
         hoveredFeatureId = null
         clearTimeout(hoverPopupTimeout)
       })
     },
-    [colorSchemeReversed, data, metricData?.title],
+    [colorScheme, colorSchemeDomain, data, hidePopup, metricConfig?.title],
   )
 
   const updateMap = useCallback(() => {
-    if (!metricData || !data?.length || !mapLoaded || !map.current) return
+    if (!metricConfig || !data?.length || !mapLoaded || !map.current) {
+      return
+    }
 
-    const { geometry, layers } = metricData || {}
+    const layerIds = []
+    const sourceIds = []
+
+    const { geometry, layers } = metricConfig || {}
 
     layers.forEach(layer => {
       const paint = layer?.paint
       const sourceLayer = layer?.sourceLayer
       const beforeId = layer?.beforeId
+      const mapType = metricConfig?.type
+      const titleKey = metricConfig?.geometry?.titleKey
+      const foreignKey = 'id'
+      const metricKey = 'data'
       const fillsId = `regions-${sourceLayer}-fills`
       const linesId = `regions-${sourceLayer}-lines`
       const hoverId = `regions-${sourceLayer}-hover-outline`
 
-      const mapConfig = createMapConfig({ metric: metricData, layer })
-
       // TODO: temp - add other types
-      if (mapConfig.type !== 'chloropleth') return
+      if (mapType !== 'chloropleth') {
+        return
+      }
 
       map.current.addSource(sourceLayer, geometry)
+      sourceIds.push(sourceLayer)
 
       // TODO: refactor
       const mergeData = data => {
         data.forEach(row => {
-          if (row.hasOwnProperty(mapConfig.metricKey) && row[mapConfig.metricKey] !== null) {
+          if (row.hasOwnProperty(metricKey) && row[metricKey] !== null) {
             map.current.setFeatureState(
               {
                 source: sourceLayer,
                 sourceLayer: sourceLayer,
-                id: row[mapConfig.foreignKey],
+                id: row[foreignKey],
               },
               {
-                [mapConfig.metricKey]: row[mapConfig.metricKey],
+                [metricKey]: row[metricKey],
               },
             )
           }
@@ -223,7 +238,7 @@ function Map({ config }) {
       mergeData(data)
 
       if (paint?.default) {
-        paint.default?.fill &&
+        if (paint.default?.fill) {
           map.current.addLayer(
             {
               id: fillsId,
@@ -233,20 +248,23 @@ function Map({ config }) {
               paint: {
                 'fill-color': [
                   'case',
-                  ['!=', ['feature-state', mapConfig.metricKey], null],
-                  buildColorExpression(mapConfig),
-                  ['to-color', mapConfig?.fill?.default?.fallbackColor],
+                  ['!=', ['feature-state', metricKey], null],
+                  buildColorExpression({ paint, layer, metricKey: 'data' }),
+                  ['to-color', paint.default?.fill?.fallbackColor],
                 ],
                 'fill-opacity': [
                   'case',
                   ['to-boolean', ['feature-state', 'hover']],
-                  mapConfig?.fill?.hover?.opacity ?? mapConfig?.fill?.default?.opacity ?? 1.0,
-                  mapConfig?.fill?.default?.opacity ?? 1.0,
+                  paint.hover?.fill?.opacity ?? paint.default?.fill?.opacity ?? 1.0,
+                  paint.default?.fill?.opacity ?? 1.0,
                 ],
               },
             },
             beforeId,
           )
+
+          layerIds.push(fillsId)
+        }
 
         map.current.addLayer(
           {
@@ -255,18 +273,15 @@ function Map({ config }) {
             source: sourceLayer,
             'source-layer': sourceLayer,
             paint: {
-              'line-color': ['to-color', mapConfig?.outline?.default?.color ?? '#000000'],
-              'line-width': mapConfig?.outline?.default?.width ?? 1.0,
-              'line-opacity': mapConfig?.outline?.default?.opacity ?? 1.0,
+              'line-color': ['to-color', paint.default?.outline?.color ?? '#000000'],
+              'line-width': paint.default?.outline?.width ?? 1.0,
+              'line-opacity': paint.default?.outline?.opacity ?? 1.0,
             },
           },
           beforeId,
         )
 
-        paint.default?.fill &&
-          (clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeLayer(fillsId)])
-
-        clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeLayer(linesId)]
+        layerIds.push(linesId)
       }
 
       if (paint?.hover) {
@@ -280,15 +295,12 @@ function Map({ config }) {
             source: sourceLayer,
             'source-layer': sourceLayer,
             paint: {
-              'line-color': [
-                'to-color',
-                mapConfig?.outline?.hover?.color ?? mapConfig?.outline?.default?.color ?? '#000000',
-              ],
-              'line-width': mapConfig?.outline?.hover?.width ?? mapConfig?.outline?.default?.width ?? 1.0,
+              'line-color': ['to-color', paint.hover?.outline?.color ?? paint?.default?.outline?.color ?? '#000000'],
+              'line-width': paint.hover?.outline?.width ?? paint?.default?.outline?.width ?? 1.0,
               'line-opacity': [
                 'case',
                 ['to-boolean', ['feature-state', 'hover']],
-                mapConfig?.outline?.hover?.opacity ?? mapConfig?.outline?.default?.opacity ?? 1.0,
+                paint.hover?.outline?.opacity ?? paint?.default?.outline?.opacity ?? 1.0,
                 0.0,
               ],
             },
@@ -296,33 +308,39 @@ function Map({ config }) {
           beforeId,
         )
 
-        clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeLayer(hoverId)]
+        layerIds.push(hoverId)
 
-        initPopup({ mapConfig, layerId: fillsId, sourceLayer })
+        initPopup({ foreignKey, metricKey, titleKey, layerId: fillsId, sourceLayer })
       }
 
-      // remove source last as layers should be removed first
-      clearMapFunctionsList.current = [...clearMapFunctionsList.current, () => map.current.removeSource(sourceLayer)]
+      setLayerIds(layerIds)
+      setSourceIds(sourceIds)
     })
-  }, [data, initPopup, mapLoaded, metricData])
+  }, [data, initPopup, mapLoaded, metricConfig])
 
   const cleanMap = useCallback(() => {
-    ;(clearMapFunctionsList.current || []).forEach(func => {
-      try {
-        func()
-      } catch (e) {
-        console.log(e)
-      }
+    setLayerIds(layerIds => {
+      layerIds.forEach(id => {
+        const layer = map.current.getLayer(id)
+        if (layer) {
+          map.current.removeLayer(id)
+        }
+      })
+      return []
     })
 
-    clearMapFunctionsList.current = []
+    setSourceIds(sourceIds => {
+      sourceIds.forEach(id => {
+        const source = map.current.getSource(id)
+        if (source) {
+          map.current.removeSource(id)
+        }
+      })
+      return []
+    })
   }, [])
 
   // effects
-  useEffect(() => {
-    setSelectedMetric(config?.defaultMetric)
-  }, [config?.defaultMetric])
-
   useEffect(() => {
     updateMap()
 
@@ -339,18 +357,21 @@ function Map({ config }) {
   }, [initMap])
 
   useEffect(() => {
-    getData()
-  }, [getData])
+    const newMetricConfig = config?.metrics?.find(item => item?.id === selectedMetric) ?? {}
+    const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
+    setMetricConfig(newMetricConfig)
+    setColorScheme(colorScheme)
+    getData(newMetricConfig?.data?.url)
+  }, [config, getData, selectedMetric])
 
   return (
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
       <GlobalStyles styles={{ [`.${popupClassName}`]: popupContainerStyles }} />
 
-      <div ref={mapContainer} id="map" className="map-container" style={{ height: '100%', width: '100%' }} />
+      <div ref={mapContainer} style={{ height: '100%', width: '100%', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)' }} />
 
       <Box
         position={'absolute'}
-        zIndex={999}
         bottom={38}
         left={12}
         bgcolor={'#fff'}
@@ -376,7 +397,14 @@ function Map({ config }) {
         </Box>
 
         <div>
-          <SimpleRange value={100} min={0} max={100} style={'gradient'} colorScheme={colorSchemeReversed || []} />
+          <SimpleRange
+            value={100}
+            min={0}
+            max={100}
+            style={'gradient'}
+            colorScheme={colorScheme || []}
+            colorSchemeDomain={colorSchemeDomain}
+          />
 
           {/* TODO: check if this should be dynamic */}
           <Box
@@ -392,6 +420,39 @@ function Map({ config }) {
       </Box>
     </Box>
   )
+}
+
+/**
+ *
+ * @param paint
+ * @param layer
+ * @param metricKey
+ * @return {*[]}
+ */
+function buildColorExpression({ paint, layer, metricKey }) {
+  const { scale, domain } = layer?.metric || {}
+  const colorScheme = paint.default?.fill?.colorScheme
+  const result = []
+
+  switch (scale) {
+    case 'step':
+      result.push('step')
+      break
+    case 'linear':
+    default:
+      result.push('interpolate', ['linear'])
+  }
+
+  result.push(['feature-state', metricKey])
+
+  // Build alternating list of numbers and colors
+  if (scale === 'step') {
+    result.push(['to-color', colorScheme.shift()])
+  }
+  colorScheme.forEach((color, i) => {
+    result.push(domain[i], ['to-color', color])
+  })
+  return result
 }
 
 export default Map

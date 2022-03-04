@@ -11,7 +11,8 @@
         "tabWidth": 2
       }
     ],
-    "no-tabs": "error"
+    "no-tabs": "error",
+    "curly": "warn"
   },
   "overrides": [
     {
