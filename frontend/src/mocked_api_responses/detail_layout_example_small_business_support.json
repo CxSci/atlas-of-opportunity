@@ -4,6 +4,7 @@
       "title": "Demographics",
       "metrics": [
         {
+          "column": 0,
           "title": "Population",
           "key": "population",
           "type": "text",
@@ -16,6 +17,7 @@
           }
         },
         {
+          "column": 0,
           "title": "Fraction of South Australian Population Living in this Region",
           "key": "popfraction",
           "type": "text",
@@ -26,6 +28,7 @@
           }
         },
         {
+          "column": 0,
           "title": "Projected Population",
           "key": "pop_proj",
           "type": "line",
@@ -40,6 +43,7 @@
           }
         },
         {
+          "column": 1,
           "title": "Median Age",
           "key": "median_age",
           "type": "text",
@@ -52,6 +56,7 @@
           }
         },
         {
+          "column": 1,
           "title": "Resident Age",
           "key": "percentage_persons_aged",
           "type": "simple_bar",
@@ -73,18 +78,21 @@
       "title": "Economy",
       "metrics": [
         {
+          "column": 0,
           "title": "Number of Wage Earners",
           "key": "wage_earners",
           "type": "text",
           "format": "number"
         },
         {
+          "column": 0,
           "title": "Median Age of Wage Earners",
           "key": "median_age_of_earners_years",
           "type": "text",
           "format": "number"
         },
         {
+          "column": 0,
           "title": "Median Income",
           "key": "median_income_aud",
           "type": "text",
@@ -95,6 +103,7 @@
           }
         },
         {
+          "column": 0,
           "title": "Mean Income",
           "key": "mean_income_aud",
           "type": "text",
@@ -105,6 +114,7 @@
           }
         },
         {
+          "column": 0,
           "title": "Accumulate Income",
           "key": "accumulate_income_aud",
           "type": "text",
@@ -115,6 +125,7 @@
           }
         },
         {
+          "column": 0,
           "title": "Income Quartile",
           "key": "income_quartile",
           "type": "simple_bar",
@@ -123,6 +134,7 @@
           "max": 4
         },
         {
+          "column": 0,
           "title": "Job Resilience",
           "key": "occup_diversity",
           "type": "simple_range",
@@ -133,6 +145,7 @@
           "max": 3.54
         },
         {
+          "column": 1,
           "title": "Income Gini Coefficient",
           "key": "gini_coefficient_no",
           "type": "simple_bar",
@@ -141,6 +154,7 @@
           "max": 1
         },
         {
+          "column": 1,
           "key": "earners_per_quartile",
           "title": "Earners per Quartile",
           "type": "simple_bar",
@@ -157,6 +171,7 @@
           }
         },
         {
+          "column": 1,
           "key": "income_share",
           "title": "Income Share",
           "type": "simple_bar",
@@ -178,6 +193,7 @@
       "title": "Growth",
       "metrics": [
         {
+          "column": 0,
           "title": "Relative Business Growth Rate",
           "key": "bsns_growth_rate",
           "type": "text",
@@ -188,18 +204,21 @@
           }
         },
         {
+          "column": 0,
           "title": "Businesses Opened",
           "key": "bsns_entries",
           "type": "text",
           "format": "number"
         },
         {
+          "column": 1,
           "title": "Businesses Closed",
           "key": "bsns_exits",
           "type": "text",
           "format": "number"
         },
         {
+          "column": 1,
           "title": "GDP Growth Potential",
           "key": "income_diversity",
           "type": "simple_range",
@@ -215,6 +234,7 @@
       "title": "Residential Housing",
       "metrics": [
         {
+          "column": 0,
           "title": "Apartments: Median Weekly Rent",
           "key": "residential_housing_median",
           "type": "text",
@@ -237,6 +257,7 @@
           ]
         },
         {
+          "column": 1,
           "title": "Houses: Median Weekly Rent",
           "key": "residential_housing_median",
           "type": "text",
@@ -264,6 +285,7 @@
       "title": "Financial Transactions",
       "metrics": [
         {
+          "column": 0,
           "title": "Average Spent",
           "key": "transactions",
           "type": "simple_range",
@@ -286,6 +308,7 @@
           ]
         },
         {
+          "column": 1,
           "title": "Count",
           "key": "transactions",
           "type": "simple_range",
@@ -313,6 +336,7 @@
       "title": "Business Counts",
       "metrics": [
         {
+          "column": 0,
           "key": "business_counts",
           "type": "stacked_area",
           "x": {
@@ -329,6 +353,7 @@
           }
         },
         {
+          "column": 1,
           "key": "business_counts",
           "type": "text",
           "x": {
@@ -356,6 +381,7 @@
       "title": "Turnover vs. Cost of Sales",
       "metrics": [
         {
+          "column": 0,
           "key": "to_cos",
           "type": "text",
           "x": {
@@ -372,6 +398,7 @@
       "title": "Business Rental Costs",
       "metrics": [
         {
+          "column": 0,
           "key": "business_rents",
           "type": "simple_bar",
           "x": {
