@@ -9,6 +9,7 @@ import ExpandableContainer from 'components/ExpandableContainer'
 const SectionText = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
+
   if (layout.format === 'number') {
     return <FieldNumber value={data} numberFormat={layout.numberFormat} />
   }
@@ -16,7 +17,7 @@ const SectionText = ({ layout, data }) => {
   if (xAxisKey && yAxisKey) {
     return (
       <Box>
-        <ExpandableContainer data={data}>
+        <ExpandableContainer data={data} filters={layout.filters}>
           {items =>
             items.map((item, index) => (
               <Box key={index}>
