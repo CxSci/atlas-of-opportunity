@@ -34,3 +34,10 @@ export const ChartAxisType = PropTypes.shape({
   format: PropTypes.string,
   numberFormat: NumberFormatType,
 })
+
+export const MetricFilterType = PropTypes.shape({
+  key: PropTypes.string,
+  control: PropTypes.oneOf(['select']),
+  title: PropTypes.string,
+  default_value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+})
