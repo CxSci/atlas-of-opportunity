@@ -11,8 +11,7 @@ const Template = args => <SimpleRange {...args} />
 export const WithGradientStyle = Template.bind({})
 WithGradientStyle.args = {
   value: 0.75,
-  min: 0,
-  max: 1,
+  domain: [0, 1],
   style: 'gradient',
 }
 

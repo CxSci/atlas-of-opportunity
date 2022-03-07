@@ -1,13 +1,14 @@
 import React from 'react'
 import { Box, Button, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
 
-function MapPopupContent({ id, title, metricName, data, colorScheme, colorSchemeDomain, addToComparison }) {
+function MapPopupContent({ id, title, metricName, data, colorScheme, domain, expanded }) {
   return (
     <Box
       p={1.5}
-      bgcolor={'#fff'}
+      bgcolor={expanded ? '#fff' : 'rgba(255, 255, 255, 0.9)'}
       color={'#333'}
       borderRadius={'10px'}
       width={200}
@@ -23,18 +24,16 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, colorScheme
         <Box bgcolor={'#F2F2F2'}>
           <SimpleRange
             value={data}
-            min={0}
-            max={1}
             size={'small'}
             style={'gradient'}
             colorScheme={colorScheme || []}
-            colorSchemeDomain={colorSchemeDomain}
+            domain={domain}
             sx={{ backgroundColor: '#F2F2F2' }}
           />
         </Box>
       )}
 
-      {addToComparison && (
+      {expanded && (
         <Button
           variant={'text'}
           disableRipple
@@ -59,6 +58,20 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, colorScheme
       )}
     </Box>
   )
+}
+
+MapPopupContent.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  metricName: PropTypes.string,
+  data: PropTypes.number,
+  colorScheme: PropTypes.array,
+  domain: PropTypes.array,
+  expanded: PropTypes.bool,
+}
+
+MapPopupContent.defaultProps = {
+  domain: [0, 1],
 }
 
 export default MapPopupContent
