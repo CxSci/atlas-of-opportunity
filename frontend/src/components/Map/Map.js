@@ -422,7 +422,7 @@ function Map({ config, hidePopup }) {
         </Box>
 
         <div>
-          <SimpleRange value={1} dommain={[0, 1]} style={'gradient'} colorScheme={colorScheme || []} domain={domain} />
+          <SimpleRange value={Math.max(...domain)} style={'gradient'} colorScheme={colorScheme} domain={domain} />
 
           {/* TODO: check if this should be dynamic */}
           <Box
