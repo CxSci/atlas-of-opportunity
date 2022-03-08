@@ -92,10 +92,12 @@ const initTheme = darkMode =>
               backgroundColor: '#36ABE5',
             },
           },
-          root: {
-            whiteSpace: 'nowrap',
+          contained: {
             height: buttonHeight,
             borderRadius: borderRadiusRound,
+          },
+          root: {
+            whiteSpace: 'nowrap',
             boxShadow: 'none',
             textTransform: 'none',
           },
