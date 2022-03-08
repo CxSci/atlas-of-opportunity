@@ -35,8 +35,8 @@ const GradientProgress = styled(LinearProgress, { shouldForwardProp: name => !no
 
 const SimpleRange = ({ value, style, color, colorScheme, domain, size, sx = {}, ...otherProps }) => {
   const Range = style === 'gradient' ? GradientProgress : LinearProgress
-  const [min, max] = domain
-  const percentage = Math.min(1, (value - min) / (max - min || 1))
+  const scale = d3ScaleLinear().domain(d3Extent(domain)).range([0, 100]).clamp(true)
+  const percentage = scale(value)
   const height = size === 'small' ? 14 : 24
   const gradientProps =
     style === 'gradient'
@@ -48,7 +48,7 @@ const SimpleRange = ({ value, style, color, colorScheme, domain, size, sx = {}, 
 
   return (
     <Range
-      value={percentage * 100}
+      value={percentage}
       sx={{
         height,
         borderRadius: 1,
