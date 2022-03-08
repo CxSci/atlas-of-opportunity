@@ -64,10 +64,12 @@ function Map({ config, hidePopup }) {
 
   const initPopup = useCallback(
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
+      const sourceName = `source_${metricConfig?.id || ''}`
       let hoverPopupTimeout = null
       let hoveredFeatureId = null
       let hoveredAreaTitle = ''
       let popupExpanded = null
+
       const hoverPopup = new mapboxgl.Popup({
         anchor: 'top',
         closeButton: false,
@@ -114,12 +116,12 @@ function Map({ config, hidePopup }) {
           if (hoveredFeatureId !== e.features[0].id) {
             popupExpanded = false
             map.current.setFeatureState(
-              { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
               { hover: false },
             )
             hoveredFeatureId = e.features[0].id
             map.current.setFeatureState(
-              { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
               { hover: true },
             )
 
@@ -178,7 +180,7 @@ function Map({ config, hidePopup }) {
         if (hoveredFeatureId !== null) {
           popupExpanded = false
           map.current.setFeatureState(
-            { source: sourceLayer, sourceLayer: sourceLayer, id: hoveredFeatureId },
+            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
             { hover: false },
           )
         }
@@ -189,7 +191,7 @@ function Map({ config, hidePopup }) {
       }
       onMouseLeaveRef.current = onMouseLeave
     },
-    [colorScheme, domain, data, hidePopup, metricConfig?.title],
+    [metricConfig?.id, metricConfig?.title, data, colorScheme, domain, hidePopup],
   )
 
   const updateMap = useCallback(() => {
@@ -201,15 +203,16 @@ function Map({ config, hidePopup }) {
     const sourceIds = []
 
     const { geometry, layers } = metricConfig || {}
+    const mapType = metricConfig?.type
+    const titleKey = metricConfig?.geometry?.titleKey
+    const foreignKey = 'id'
+    const metricKey = 'data'
+    const sourceName = `source_${metricConfig?.id || ''}`
 
     layers.forEach(layer => {
       const paint = layer?.paint
       const sourceLayer = layer?.sourceLayer
       const beforeId = layer?.beforeId
-      const mapType = metricConfig?.type
-      const titleKey = metricConfig?.geometry?.titleKey
-      const foreignKey = 'id'
-      const metricKey = 'data'
       const fillsId = `regions-${sourceLayer}-fills`
       const linesId = `regions-${sourceLayer}-lines`
       const hoverId = `regions-${sourceLayer}-hover-outline`
@@ -219,8 +222,8 @@ function Map({ config, hidePopup }) {
         return
       }
 
-      map.current.addSource(sourceLayer, geometry)
-      sourceIds.push(sourceLayer)
+      map.current.addSource(sourceName, geometry)
+      sourceIds.push(sourceName)
 
       // TODO: refactor
       const mergeData = data => {
@@ -228,7 +231,7 @@ function Map({ config, hidePopup }) {
           if (row.hasOwnProperty(metricKey) && row[metricKey] !== null) {
             map.current.setFeatureState(
               {
-                source: sourceLayer,
+                source: sourceName,
                 sourceLayer: sourceLayer,
                 id: row[foreignKey],
               },
@@ -247,7 +250,7 @@ function Map({ config, hidePopup }) {
             {
               id: fillsId,
               type: 'fill',
-              source: sourceLayer,
+              source: sourceName,
               'source-layer': sourceLayer,
               paint: {
                 'fill-color': [
@@ -274,7 +277,7 @@ function Map({ config, hidePopup }) {
           {
             id: linesId,
             type: 'line',
-            source: sourceLayer,
+            source: sourceName,
             'source-layer': sourceLayer,
             paint: {
               'line-color': ['to-color', paint.default?.outline?.color ?? '#000000'],
@@ -296,7 +299,7 @@ function Map({ config, hidePopup }) {
           {
             id: hoverId,
             type: 'line',
-            source: sourceLayer,
+            source: sourceName,
             'source-layer': sourceLayer,
             paint: {
               'line-color': ['to-color', paint.hover?.outline?.color ?? paint?.default?.outline?.color ?? '#000000'],
