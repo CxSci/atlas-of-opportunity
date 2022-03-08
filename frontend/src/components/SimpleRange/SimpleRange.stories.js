@@ -12,7 +12,7 @@ export const WithGradientStyle = Template.bind({})
 WithGradientStyle.args = {
   value: 0.75,
   domain: [0, 1],
-  style: 'gradient',
+  variant: 'gradient',
 }
 
 export const WithSolidStyle = Template.bind({})

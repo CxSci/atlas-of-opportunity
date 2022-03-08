@@ -25,7 +25,7 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, domain, exp
           <SimpleRange
             value={data}
             size={'small'}
-            style={'gradient'}
+            variant={'gradient'}
             colorScheme={colorScheme || []}
             domain={domain}
             sx={{ backgroundColor: '#F2F2F2' }}
