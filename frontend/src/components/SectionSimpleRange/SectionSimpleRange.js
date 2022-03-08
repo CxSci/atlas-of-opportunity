@@ -24,7 +24,7 @@ const SectionSimpleRange = ({ layout, data }) => {
                 <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
                 <SimpleRange
                   value={item[yAxisKey]}
-                  domain={[item.min, item.max]}
+                  domain={[layout.y.min, layout.y.max]}
                   style={layout.options.style}
                   color={COLOR_PALETTES[layout.title]}
                 />
