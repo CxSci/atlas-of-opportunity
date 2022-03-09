@@ -10,7 +10,9 @@ export const getDefaultFilterValues = filters => {
 }
 
 export const filterDataByFilterValues = (data, filterValues) => {
-  if (!filterValues || !Object.keys(filterValues).length) return data
+  if (!filterValues || !Object.keys(filterValues).length) {
+    return data
+  }
   return data.filter(item => {
     for (const key of Object.keys(filterValues)) {
       if (item[key] === filterValues[key]) {
