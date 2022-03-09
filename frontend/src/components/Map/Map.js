@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 import { Box, createStyles, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
+import { Portal } from '@mui/base';
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
@@ -31,7 +31,8 @@ const mapGlobalStyles = {
 }
 
 function Map({ config, hidePopup }) {
-  const mapContainer = useRef(null)
+  const mapContainerRef = useRef(null)
+  const popupContainerRef = useRef(null)
   const map = useRef(null)
   const onMouseMoveRef = useRef(null)
   const onMouseLeaveRef = useRef(null)
@@ -42,6 +43,7 @@ function Map({ config, hidePopup }) {
   const [colorScheme, setColorScheme] = useState([])
   const [, setLayerIds] = useState([])
   const [, setSourceIds] = useState([])
+  const [popupData, setPopupData] = useState({})
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
 
@@ -67,7 +69,6 @@ function Map({ config, hidePopup }) {
       const sourceName = `source_${metricConfig?.id || ''}`
       let hoverPopupTimeout = null
       let hoveredFeatureId = null
-      let hoveredAreaTitle = ''
       let popupExpanded = null
 
       const hoverPopup = new mapboxgl.Popup({
@@ -84,24 +85,8 @@ function Map({ config, hidePopup }) {
         if (hoveredFeatureId === null) {
           return
         }
-
-        const row = data.find(r => r[foreignKey] === hoveredFeatureId)
-
-        const popupNode = document.createElement('div')
-        ReactDOM.render(
-          <MapPopupContent
-            id={row?.id}
-            title={hoveredAreaTitle}
-            metricName={metricConfig?.title}
-            data={row?.[metricKey] ?? 0}
-            colorScheme={colorScheme}
-            domain={domain}
-            expanded
-          />,
-          popupNode,
-        )
-
-        hoverPopup.setDOMContent(popupNode).addClassName('immobile')
+        setPopupData(oldData => ({ ...oldData, expanded: true }))
+        hoverPopup.addClassName('immobile')
       }
 
       if (onMouseMoveRef.current) {
@@ -130,23 +115,22 @@ function Map({ config, hidePopup }) {
             }
 
             const title = e.features[0]?.properties?.[titleKey]
-            hoveredAreaTitle = title
             const row = data.find(r => r[foreignKey] === e.features[0].id)
 
-            const popupNode = document.createElement('div')
-            ReactDOM.render(
-              <MapPopupContent
-                id={e.features[0].id}
-                title={title}
-                metricName={metricConfig?.title}
-                data={row?.[metricKey] ?? 0}
-                colorScheme={colorScheme}
-                domain={domain}
-              />,
-              popupNode,
-            )
+            setPopupData({
+              id: e.features[0].id,
+              title,
+              metricName: metricConfig?.title,
+              data: row?.[metricKey] ?? 0,
+              colorScheme,
+              domain,
+            })
 
-            hoverPopup.setDOMContent(popupNode).addTo(map.current).removeClassName('immobile')
+            hoverPopup.removeClassName('immobile')
+            if (!hoverPopup.isOpen()) {
+              hoverPopup.setDOMContent(popupContainerRef.current)
+                .addTo(map.current)
+            }
           }
 
           !popupExpanded && hoverPopup.setLngLat(e.lngLat)
@@ -365,7 +349,7 @@ function Map({ config, hidePopup }) {
     const { style, bounds, fitBoundsOptions } = config?.options || {}
 
     map.current = new mapboxgl.Map({
-      container: mapContainer.current,
+      container: mapContainerRef.current,
       style,
       bounds,
       fitBoundsOptions,
@@ -395,7 +379,11 @@ function Map({ config, hidePopup }) {
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
       <GlobalStyles styles={mapGlobalStyles} />
 
-      <div ref={mapContainer} style={{ height: '100%', width: '100%' }} />
+      <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
+      <div ref={popupContainerRef} />
+      <Portal container={popupContainerRef.current}>
+        <MapPopupContent {...popupData} />
+      </Portal>
 
       <Box
         position={'absolute'}
