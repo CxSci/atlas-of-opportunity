@@ -139,7 +139,7 @@
           "key": "occup_diversity",
           "type": "simple_range",
           "options": {
-            "style": "gradient"
+            "variant": "gradient"
           },
           "min": 0,
           "max": 3.54
@@ -223,7 +223,7 @@
           "key": "income_diversity",
           "type": "simple_range",
           "options": {
-            "style": "gradient"
+            "variant": "gradient"
           },
           "min": 0,
           "max": 1.2
@@ -290,7 +290,7 @@
           "key": "transactions",
           "type": "simple_range",
           "options": {
-            "style": "solid"
+            "variant": "solid"
           },
           "x": {
             "key": "category"
@@ -313,7 +313,7 @@
           "key": "transactions",
           "type": "simple_range",
           "options": {
-            "style": "solid"
+            "variant": "solid"
           },
           "x": {
             "key": "category"
