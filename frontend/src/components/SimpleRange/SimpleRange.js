@@ -1,56 +1,92 @@
 import { styled } from '@mui/material/styles'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
+import { scaleLinear as d3ScaleLinear } from 'd3-scale'
+import { extent as d3Extent } from 'd3-array'
 import PropTypes from 'prop-types'
 
-const GradientProgress = styled(LinearProgress)(({ theme, value }) => ({
-  [`& .${linearProgressClasses.bar}`]: {
-    overflow: 'hidden',
-    backgroundColor: 'transparent',
-    borderRadius: 1,
-    '&:before': {
-      content: '""',
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderRadius: theme.shape.borderRadius,
-      transition: 'transform .4s linear',
-      transform: `translateX(${100 - value}%)`,
-      background: `linear-gradient(270deg, ${theme.palette.canary.main} 0%, ${theme.palette.chestnutRose.main} 50%, ${theme.palette.ultramarine.main} 100%)`, // eslint-disable-line
-    },
-  },
-}))
+function generateGradientString({ colorScheme, domain }) {
+  if (!colorScheme) {
+    // Default to a three part linear gradient.
+    // Note that this domain only affects the color stops of the gradient.
+    // It has no effect on the domain used to scale values, which might not
+    // have three stops.
+    colorScheme = ['#F2F758', '#C95F6D', '#081181']
+    domain = [0, 0.5, 1]
+  } 
+  const scale = d3ScaleLinear().domain(d3Extent(domain)).range([0, 100]).clamp(true)
+  return domain.reduce((str, value, index) => {
+    const color = colorScheme[index]
+    return str + `${index > 0 ? ', ' : ''} ${color} ${scale(value)}%`
+  }, '')
+}
 
-const SimpleRange = ({ min, max, value, style, color }) => {
-  const Range = style === 'gradient' ? GradientProgress : LinearProgress
-  const percentage = Math.min(1, (value - min) / (max - min || 1))
+const nonDomPropsList = ['colorScheme', 'domain']
+const GradientProgress = styled(LinearProgress, { shouldForwardProp: name => !nonDomPropsList.includes(name) })(
+  ({ theme, value, colorScheme, domain }) => ({
+    [`& .${linearProgressClasses.bar}`]: {
+      overflow: 'hidden',
+      backgroundColor: 'transparent',
+      borderRadius: 1,
+      '&:before': {
+        content: '""',
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        borderRadius: theme.shape.borderRadius,
+        transition: 'transform .4s linear',
+        transform: `translateX(${100 - value}%)`,
+        background: `linear-gradient(90deg, ${generateGradientString({ colorScheme, domain })})`, // eslint-disable-line
+      },
+    },
+  }),
+)
+
+const SimpleRange = ({ value, variant, color, colorScheme, domain, size, sx = {}, ...otherProps }) => {
+  const Range = variant === 'gradient' ? GradientProgress : LinearProgress
+  const scale = d3ScaleLinear().domain(d3Extent(domain)).range([0, 100]).clamp(true)
+  const percentage = scale(value)
+  const height = size === 'small' ? 14 : 24
+  const gradientProps =
+    variant === 'gradient'
+      ? {
+          colorScheme,
+          domain,
+        }
+      : {}
+
   return (
     <Range
-      value={percentage * 100}
+      value={percentage}
       sx={{
-        height: 24,
+        height,
         borderRadius: 1,
         [`& .${linearProgressClasses.bar}`]: { borderRadius: 1 },
-        '-webkit-mask-image': '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
+        WebkitMaskImage: '-webkit-radial-gradient(white, black)', // fixes border-radius on safari
+        ...sx,
       }}
       variant="determinate"
       color={color}
+      {...gradientProps}
+      {...otherProps}
     />
   )
 }
 
 SimpleRange.propTypes = {
   value: PropTypes.number.isRequired,
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
+  domain: PropTypes.array,
+  sx: PropTypes.object,
   color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'error', 'warning']),
-  style: PropTypes.oneOf(['solid', 'gradient']),
+  variant: PropTypes.oneOf(['solid', 'gradient']),
+  size: PropTypes.oneOf(['small', 'medium']),
+  colorScheme: PropTypes.array,
 }
 
 SimpleRange.defaultProps = {
-  style: 'solid',
+  variant: 'solid',
+  size: 'medium',
   color: 'primary',
-  min: 0,
-  max: 1,
+  domain: [0, 1],
 }
 
 export default SimpleRange

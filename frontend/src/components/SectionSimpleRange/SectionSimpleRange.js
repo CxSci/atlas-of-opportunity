@@ -11,7 +11,7 @@ const SectionSimpleRange = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
   if (typeof layout.max !== 'undefined' && typeof layout.min !== 'undefined') {
-    return <SimpleRange value={data} min={layout.min} max={layout.max} style={layout.options.style} />
+    return <SimpleRange value={data} domain={[layout.min, layout.max]} variant={layout.options.variant} />
   }
   if (xAxisKey && yAxisKey) {
     const filteredData = filterData(data, layout.filters)
@@ -24,9 +24,8 @@ const SectionSimpleRange = ({ layout, data }) => {
                 <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
                 <SimpleRange
                   value={item[yAxisKey]}
-                  min={item.min}
-                  max={item.max}
-                  style={layout.options.style}
+                  domain={[layout.y.min, layout.y.max]}
+                  variant={layout.options.variant}
                   color={COLOR_PALETTES[layout.title]}
                 />
               </Box>
