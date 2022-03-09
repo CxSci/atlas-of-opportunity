@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { Box, createStyles, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
-import { Portal } from '@mui/base';
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
@@ -43,7 +42,7 @@ function Map({ config, hidePopup }) {
   const [colorScheme, setColorScheme] = useState([])
   const [, setLayerIds] = useState([])
   const [, setSourceIds] = useState([])
-  const [popupData, setPopupData] = useState({})
+  const [popupData, setPopupData] = useState(null)
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
 
@@ -380,11 +379,9 @@ function Map({ config, hidePopup }) {
       <GlobalStyles styles={mapGlobalStyles} />
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef} />
-      <Portal container={popupContainerRef.current}>
-        <MapPopupContent {...popupData} />
-      </Portal>
-
+      <div ref={popupContainerRef}>
+        { popupData && <MapPopupContent {...popupData} /> }
+      </div>
       <Box
         position={'absolute'}
         bottom={38}
