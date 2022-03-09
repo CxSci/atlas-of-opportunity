@@ -4,7 +4,15 @@ import { scaleLinear as d3ScaleLinear } from 'd3-scale'
 import { extent as d3Extent } from 'd3-array'
 import PropTypes from 'prop-types'
 
-function generateGradientString({ colorScheme = [], domain = [] }) {
+function generateGradientString({ colorScheme, domain }) {
+  if (!colorScheme) {
+    // Default to a three part linear gradient.
+    // Note that this domain only affects the color stops of the gradient.
+    // It has no effect on the domain used to scale values, which might not
+    // have three stops.
+    colorScheme = ['#F2F758', '#C95F6D', '#081181']
+    domain = [0, 0.5, 1]
+  } 
   const scale = d3ScaleLinear().domain(d3Extent(domain)).range([0, 100]).clamp(true)
   return domain.reduce((str, value, index) => {
     const color = colorScheme[index]

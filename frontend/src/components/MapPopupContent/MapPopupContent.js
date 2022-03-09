@@ -26,7 +26,7 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, domain, exp
             value={data}
             size={'small'}
             variant={'gradient'}
-            colorScheme={colorScheme || []}
+            colorScheme={colorScheme}
             domain={domain}
           />
         </Box>
