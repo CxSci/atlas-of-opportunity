@@ -2,6 +2,9 @@ export const SHOW_SCROLLED_HEADER_HEIGHT = 20
 
 export const EXPANDABLE_MINIMUM_ITEMS = 5
 
+export const MAP_POPUP_VERTICAL_DISTANCE = 20
+export const MAP_POPUP_HORIZONTAL_DISTANCE = 10
+
 export const DATASETS_MAP = {
   'small-business': {
     name: 'Small Business Support',

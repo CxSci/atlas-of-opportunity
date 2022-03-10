@@ -5,7 +5,7 @@ import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
-import { MAPBOX_API_KEY } from '../../utils/constants'
+import { MAPBOX_API_KEY, MAP_POPUP_HORIZONTAL_DISTANCE, MAP_POPUP_VERTICAL_DISTANCE } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
 
@@ -35,6 +35,9 @@ function Map({ config, hidePopup }) {
   const map = useRef(null)
   const onMouseMoveRef = useRef(null)
   const onMouseLeaveRef = useRef(null)
+  const onMapMoveRef = useRef(null)
+  const onMapClickRef = useRef(null)
+  const onAllMapMouseMoveRef = useRef(null)
   const [selectedMetric, setSelectedMetric] = useState('')
   const [data, setData] = useState([])
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -69,13 +72,14 @@ function Map({ config, hidePopup }) {
       let hoverPopupTimeout = null
       let hoveredFeatureId = null
       let popupExpanded = null
+      const popupOffsetY = 10
 
       const hoverPopup = new mapboxgl.Popup({
         anchor: 'top',
         closeButton: false,
         closeOnClick: false,
         className: popupClassName,
-        offset: [0, 10],
+        offset: [0, popupOffsetY],
         maxWidth: 'none',
       })
 
@@ -88,6 +92,7 @@ function Map({ config, hidePopup }) {
         hoverPopup.addClassName('immobile')
       }
 
+      // mouse move event
       if (onMouseMoveRef.current) {
         map.current.off('mousemove', layerId, onMouseMoveRef.current)
         onMouseMoveRef.current = null
@@ -127,12 +132,13 @@ function Map({ config, hidePopup }) {
 
             hoverPopup.removeClassName('immobile')
             if (!hoverPopup.isOpen()) {
-              hoverPopup.setDOMContent(popupContainerRef.current)
-                .addTo(map.current)
+              hoverPopup.setDOMContent(popupContainerRef.current).addTo(map.current)
             }
           }
 
-          !popupExpanded && hoverPopup.setLngLat(e.lngLat)
+          if (!popupExpanded) {
+            hoverPopup.setLngLat(e.lngLat)
+          }
           // 1. While the cursor is moving over a region, show a short
           //    popup which moves with the mouse.
           //
@@ -148,6 +154,41 @@ function Map({ config, hidePopup }) {
       }
       onMouseMoveRef.current = onMouseMove
 
+      // whole map mouse move event
+      if (onAllMapMouseMoveRef.current) {
+        map.current.off('mousemove', onAllMapMouseMoveRef.current)
+        onAllMapMouseMoveRef.current = null
+      }
+
+      map.current.on('mousemove', onAllMapMouseMove)
+
+      function onAllMapMouseMove(e) {
+        if (!popupExpanded) {
+          return
+        }
+
+        const { x: pointerX, y: pointerY } = e?.point || {}
+        const popupElement = hoverPopup.getElement()
+        const popupRect = popupElement?.getBoundingClientRect?.()
+        const offsetY = MAP_POPUP_VERTICAL_DISTANCE
+        const offsetX = MAP_POPUP_HORIZONTAL_DISTANCE
+
+        const movedAwayFromPopup =
+          pointerY < popupRect?.top - offsetY - popupOffsetY ||
+          pointerY > popupRect?.bottom + offsetY ||
+          pointerX < popupRect?.left - offsetX ||
+          pointerX > popupRect?.right + offsetX
+
+        if (movedAwayFromPopup) {
+          hoveredFeatureId = null
+          popupExpanded = false
+          setPopupData(oldData => ({ ...oldData, expanded: false }))
+          hoverPopup.remove()
+        }
+      }
+      onAllMapMouseMoveRef.current = onAllMapMouseMove
+
+      // mouse leave event
       if (onMouseLeaveRef.current) {
         map.current.off('mouseleave', layerId, onMouseLeaveRef.current)
         onMouseLeaveRef.current = null
@@ -173,6 +214,38 @@ function Map({ config, hidePopup }) {
         clearTimeout(hoverPopupTimeout)
       }
       onMouseLeaveRef.current = onMouseLeave
+
+      // map move event
+      if (onMapMoveRef.current) {
+        map.current.off('mouseleave', layerId, onMapMoveRef.current)
+        onMapMoveRef.current = null
+      }
+
+      map.current.on('move', layerId, onMapMove)
+
+      function onMapMove() {
+        clearTimeout(hoverPopupTimeout)
+        hoverPopupTimeout = setTimeout(expandPopup, 700)
+      }
+      onMapMoveRef.current = onMapMove
+
+      // map click event
+      if (onMapClickRef.current) {
+        map.current.off('mouseleave', layerId, onMapClickRef.current)
+        onMapClickRef.current = null
+      }
+
+      map.current.on('click', layerId, onMapClick)
+
+      function onMapClick(e) {
+        const feature = e.features[0]
+        const row = data.find(r => r[foreignKey] === feature?.id)
+
+        if (row) {
+          expandPopup()
+        }
+      }
+      onMapClickRef.current = onMapMove
     },
     [metricConfig?.id, metricConfig?.title, data, colorScheme, domain, hidePopup],
   )
@@ -379,9 +452,7 @@ function Map({ config, hidePopup }) {
       <GlobalStyles styles={mapGlobalStyles} />
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef}>
-        { popupData && <MapPopupContent {...popupData} /> }
-      </div>
+      <div ref={popupContainerRef}>{popupData && <MapPopupContent {...popupData} />}</div>
       <Box
         position={'absolute'}
         bottom={38}
