@@ -1,37 +1,46 @@
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
+import PropTypes from 'prop-types'
 import { useCallback, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { slugify } from 'utils/helpers'
 import useScrollSpy from 'utils/scrollSpy'
 
-export const SectionNavs = ({ sections }) => {
+export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
   const location = useLocation()
   const [locationHash, setLocationHash] = useState(location.hash)
 
-  const handleScroll = useCallback(element => {
-    const hash = `#${element.id}`
-    window.history.pushState(null, null, hash)
-    setLocationHash(hash)
-  }, [])
+  const handleScroll = useCallback(
+    element => {
+      const hash = `#${element.id}`
+      if (hashChangeOnScroll) {
+        window.history.pushState(null, null, hash)
+      }
+      setLocationHash(hash)
+    },
+    [hashChangeOnScroll],
+  )
 
   const handleNav = useCallback(event => {
     event.preventDefault()
-    const hash = event.target.href.split('#')[1]
-    const elem = document.getElementById(hash)
+    const id = event.target.href.split('#')[1]
+    const hash = `#${id}`
+    const elem = document.getElementById(id)
     elem.scrollIntoView({ behavior: 'smooth' })
-    setLocationHash(`#${hash}`)
+    window.history.pushState(null, null, hash)
+    setLocationHash(hash)
   }, [])
 
   useScrollSpy({ onScroll: handleScroll })
 
   return (
-    <Box sx={{ position: 'fixed', width: '100%', zIndex: 'appBar' }}>
+    <Box sx={{ position: 'sticky', top: 80, width: '100%', zIndex: 'appBar' }}>
       <Box
         sx={{
           display: 'flex',
           bgcolor: 'background.default',
+          whiteSpace: 'nowrap',
         }}>
         {sections.map((section, index) => {
           const sectionHash = `#${slugify(section.title)}`
@@ -61,4 +70,13 @@ export const SectionNavs = ({ sections }) => {
   )
 }
 
-export default SectionNavs
+SectionNavbar.propTypes = {
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }),
+  ),
+  hashChangeOnScroll: PropTypes.bool,
+}
+
+export default SectionNavbar
