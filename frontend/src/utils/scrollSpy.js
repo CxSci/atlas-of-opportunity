@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 
-const isInViewPort = element => {
-  const rect = element.getBoundingClientRect()
-  if (rect.top <= window.innerHeight / 2 || Math.round(rect.bottom) <= window.innerHeight) {
+const isInViewPort = (idEl, containerEl) => {
+  const idRect = idEl.getBoundingClientRect()
+  const containerRect = containerEl.getBoundingClientRect()
+  if (idRect.top <= window.innerHeight / 2 || Math.round(containerRect.bottom) <= window.innerHeight) {
     return true
   } else {
     return false
@@ -64,8 +65,12 @@ export const useScrollSpy = ({ onScroll }) => {
       const scrollables = document.querySelectorAll('[data-scrollspy]')
       let targetEl = null
       scrollables.forEach(scrollable => {
-        if (isInViewPort(scrollable) && userScroll) {
-          targetEl = scrollable
+        if (userScroll) {
+          const elId = scrollable.getAttribute('data-scrollspy')
+          const element = document.getElementById(elId)
+          if (isInViewPort(element, scrollable)) {
+            targetEl = element
+          }
         }
       })
       if (targetEl) {

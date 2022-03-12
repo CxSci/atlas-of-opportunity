@@ -1,10 +1,11 @@
 import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import HeaderContext from 'contexts/HeaderContext'
 import PropTypes from 'prop-types'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Container, useTheme } from '@mui/material'
+import { useTheme } from '@mui/material'
 
 import { slugify } from 'utils/helpers'
 import useScrollSpy from 'utils/scrollSpy'
@@ -61,12 +62,13 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
     <Box
       ref={ref}
       sx={{
+        height: `${theme.components.SectionNavbar.height}px`,
         position: 'sticky',
         top: navbarTop,
         zIndex: 'appBar',
-        bgcolor: 'background.default',
+        bgcolor: theme.components.SectionNavbar.bgColor,
         borderTop: isSticky ? 1 : 0,
-        borderTopColor: theme.components.header.borderColor,
+        borderTopColor: theme.components.SectionNavbar.borderColor,
         boxShadow: isSticky ? theme.components.header.boxShadow : undefined,
       }}>
       <Container>
