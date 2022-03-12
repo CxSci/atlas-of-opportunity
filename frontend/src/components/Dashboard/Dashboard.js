@@ -3,6 +3,8 @@ import Header from '../Header/Header.container'
 import Sidebar from '../Sidebar'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/material'
+import { HeaderConfigType } from 'utils/propTypes'
+import { HeaderContextProvider } from 'contexts/HeaderContext'
 
 function Dashboard({ children, headerConfig, sx, ...otherProps }) {
   const containerRef = useRef()
@@ -11,14 +13,16 @@ function Dashboard({ children, headerConfig, sx, ...otherProps }) {
 
   return (
     <Box sx={{ pt: theme => theme.components.header.height, ...(sx || {}) }} {...otherProps}>
-      <Header
-        config={headerConfig}
-        toggleSidebar={open => setSidebarOpen(open)}
-        parentElement={containerRef?.current}
-      />
-      <Sidebar open={sidebarOpen} handleClose={() => setSidebarOpen(false)} />
+      <HeaderContextProvider headerConfig={headerConfig}>
+        <Header
+          config={headerConfig}
+          toggleSidebar={open => setSidebarOpen(open)}
+          parentElement={containerRef?.current}
+        />
+        <Sidebar open={sidebarOpen} handleClose={() => setSidebarOpen(false)} />
 
-      {children}
+        {children}
+      </HeaderContextProvider>
     </Box>
   )
 }
@@ -26,21 +30,7 @@ function Dashboard({ children, headerConfig, sx, ...otherProps }) {
 Dashboard.propTypes = {
   sx: PropTypes.any,
   noElevateBeforeScroll: PropTypes.bool,
-  headerConfig: PropTypes.shape({
-    customScrolledHeight: PropTypes.string,
-    leftContainerProps: PropTypes.object,
-    backRoute: PropTypes.string,
-    content: PropTypes.shape({
-      left: PropTypes.element,
-      center: PropTypes.element,
-      right: PropTypes.element,
-    }),
-    contentScrolled: PropTypes.shape({
-      left: PropTypes.element,
-      center: PropTypes.element,
-      right: PropTypes.element,
-    }),
-  }),
+  headerConfig: HeaderConfigType,
 }
 
 export default Dashboard

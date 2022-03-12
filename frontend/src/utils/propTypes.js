@@ -41,3 +41,19 @@ export const MetricFilterType = PropTypes.shape({
   title: PropTypes.string,
   default_value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 })
+
+export const HeaderConfigType = PropTypes.shape({
+  customScrolledHeight: PropTypes.string,
+  leftContainerProps: PropTypes.object,
+  backRoute: PropTypes.string,
+  content: PropTypes.shape({
+    left: PropTypes.element,
+    center: PropTypes.element,
+    right: PropTypes.element,
+  }),
+  contentScrolled: PropTypes.shape({
+    left: PropTypes.element,
+    center: PropTypes.element,
+    right: PropTypes.element,
+  }),
+})
