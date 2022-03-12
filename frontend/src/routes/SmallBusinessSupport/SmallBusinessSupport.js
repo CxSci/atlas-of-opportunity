@@ -3,7 +3,7 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
 import MetricsContainer from 'components/MetricsContainer'
-import SectionNavs from 'components/SectionNavs'
+import SectionNavbar from 'components/SectionNavbar'
 import SectionLine from 'components/SectionLine'
 import SectionText from 'components/SectionText'
 import SectionSimpleBar from 'components/SectionSimpleBar'
@@ -26,7 +26,7 @@ const SmallBusinessSupport = () => {
   const { sections } = sectionsLayout
   return (
     <Container sx={{ mt: 3 }}>
-      <SectionNavs sections={sections} />
+      <SectionNavbar sections={sections} />
       {sections.map((section, index) => (
         <Box key={index} sx={{ pt: 5 }} id={slugify(section.title)} data-scrollspy>
           <Typography variant="h4" gutterBottom>
