@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  postgis:
+    build: .
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgis:/var/lib/postgresql/data
+      - ./:/data:ro
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dashboard
+
+  psql_cli:
+    build: .
+    profiles:
+      - psql_cli
+    environment:
+      PGPASSWORD: postgres
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      - postgis
+    command: ["psql", "-h", "postgis", "-d", "dashboard", "-U", "postgres"]
+
+volumes:
+  postgis: {}
