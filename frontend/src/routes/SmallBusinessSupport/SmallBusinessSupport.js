@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
+import Anchor from 'components/Anchor'
 import MetricsContainer from 'components/MetricsContainer'
 import SectionNavbar from 'components/SectionNavbar'
 import SectionLine from 'components/SectionLine'
@@ -34,24 +35,28 @@ const SmallBusinessSupport = () => {
       </Container>
       <SectionNavbar sections={sections} />
       <Container>
-        {sections.map((section, index) => (
-          <Box key={index} sx={{ pt: 5 }} id={slugify(section.title)} data-scrollspy>
-            <Typography variant="h4" gutterBottom>
-              <strong>{section.title}</strong>
-            </Typography>
-            <MetricsContainer metrics={section.metrics}>
-              {metric => {
-                const SectionComponent = componentMappings[metric.type]
-                return (
-                  <Box sx={{ mb: 3 }}>
-                    {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
-                    {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
-                  </Box>
-                )
-              }}
-            </MetricsContainer>
-          </Box>
-        ))}
+        {sections.map((section, index) => {
+          const sectionId = slugify(section.title)
+          return (
+            <Box key={index} sx={{ my: 4 }} data-scrollspy={sectionId}>
+              <Anchor htmlId={sectionId} />
+              <Typography variant="h4" gutterBottom>
+                <strong>{section.title}</strong>
+              </Typography>
+              <MetricsContainer metrics={section.metrics}>
+                {metric => {
+                  const SectionComponent = componentMappings[metric.type]
+                  return (
+                    <Box sx={{ mb: 3 }}>
+                      {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
+                      {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
+                    </Box>
+                  )
+                }}
+              </MetricsContainer>
+            </Box>
+          )
+        })}
       </Container>
     </Box>
   )
