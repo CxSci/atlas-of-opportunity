@@ -25,27 +25,35 @@ const componentMappings = {
 const SmallBusinessSupport = () => {
   const { sections } = sectionsLayout
   return (
-    <Container sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3 }}>
+      <Container>
+        <Typography variant="h1" gutterBottom>
+          Adelaide
+        </Typography>
+        <Box sx={{ height: 400, backgroundColor: 'lightGray' }} mb={4} />
+      </Container>
       <SectionNavbar sections={sections} />
-      {sections.map((section, index) => (
-        <Box key={index} sx={{ pt: 5 }} id={slugify(section.title)} data-scrollspy>
-          <Typography variant="h4" gutterBottom>
-            <strong>{section.title}</strong>
-          </Typography>
-          <MetricsContainer metrics={section.metrics}>
-            {metric => {
-              const SectionComponent = componentMappings[metric.type]
-              return (
-                <Box sx={{ mb: 3 }}>
-                  {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
-                  {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
-                </Box>
-              )
-            }}
-          </MetricsContainer>
-        </Box>
-      ))}
-    </Container>
+      <Container>
+        {sections.map((section, index) => (
+          <Box key={index} sx={{ pt: 5 }} id={slugify(section.title)} data-scrollspy>
+            <Typography variant="h4" gutterBottom>
+              <strong>{section.title}</strong>
+            </Typography>
+            <MetricsContainer metrics={section.metrics}>
+              {metric => {
+                const SectionComponent = componentMappings[metric.type]
+                return (
+                  <Box sx={{ mb: 3 }}>
+                    {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
+                    {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
+                  </Box>
+                )
+              }}
+            </MetricsContainer>
+          </Box>
+        ))}
+      </Container>
+    </Box>
   )
 }
 

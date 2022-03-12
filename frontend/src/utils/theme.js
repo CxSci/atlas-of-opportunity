@@ -237,6 +237,7 @@ const initTheme = darkMode =>
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
         iconColor: darkMode ? '#ffffff' : '#4d4d4d',
         iconHoverColor: darkMode ? '#ffffff' : '#000000',
+        borderColor: '#CCCCCC',
       },
 
       searchInput: {
