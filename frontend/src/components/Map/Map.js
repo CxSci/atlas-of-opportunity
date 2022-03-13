@@ -5,7 +5,7 @@ import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
-import { MAPBOX_API_KEY, MAP_POPUP_HORIZONTAL_DISTANCE, MAP_POPUP_VERTICAL_DISTANCE } from '../../utils/constants'
+import { MAPBOX_API_KEY } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
 
@@ -84,6 +84,11 @@ function Map({ config, hidePopup }) {
       })
 
       const expandPopup = () => {
+        const popupElement = hoverPopup.getElement()
+        if (!popupElement) {
+          return
+        }
+
         popupExpanded = true
         if (hoveredFeatureId === null) {
           return
@@ -102,7 +107,7 @@ function Map({ config, hidePopup }) {
 
       function onMouseMove(e) {
         if (e?.features?.length > 0) {
-          if (hoveredFeatureId !== e.features[0].id) {
+          if (hoveredFeatureId !== e.features[0].id && !popupExpanded) {
             popupExpanded = false
             map.current.setFeatureState(
               { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
@@ -170,14 +175,14 @@ function Map({ config, hidePopup }) {
         const { x: pointerX, y: pointerY } = e?.point || {}
         const popupElement = hoverPopup.getElement()
         const popupRect = popupElement?.getBoundingClientRect?.()
-        const offsetY = MAP_POPUP_VERTICAL_DISTANCE
-        const offsetX = MAP_POPUP_HORIZONTAL_DISTANCE
+        const offsetTop = 20
+        const offsetSides = 10
 
         const movedAwayFromPopup =
-          pointerY < popupRect?.top - offsetY - popupOffsetY ||
-          pointerY > popupRect?.bottom + offsetY ||
-          pointerX < popupRect?.left - offsetX ||
-          pointerX > popupRect?.right + offsetX
+          pointerY < popupRect?.top - offsetTop ||
+          pointerY > popupRect?.bottom + offsetSides ||
+          pointerX < popupRect?.left - offsetSides ||
+          pointerX > popupRect?.right + offsetSides
 
         if (movedAwayFromPopup) {
           hoveredFeatureId = null
