@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider } from '@mui/material'
+import { Container, ThemeProvider } from '@mui/material'
 
 import Anchor from '../Anchor'
 import SectionNavbar from './SectionNavbar'
@@ -22,15 +22,17 @@ const Template = args => {
       <HeaderContextProvider headerConfig={{ customScrolledHeight }}>
         <div style={{ paddingTop: top }}>
           <SectionNavbar {...args} />
-          {args.sections.map((section, index) => {
-            const sectionId = slugify(section.title)
-            return (
-              <div key={index} data-scrollspy={sectionId} style={{ height: '90vh' }}>
-                <Anchor htmlId={sectionId} />
-                <h2>{section.title}</h2>
-              </div>
-            )
-          })}
+          <Container>
+            {args.sections.map((section, index) => {
+              const sectionId = slugify(section.title)
+              return (
+                <div key={index} data-scrollspy={sectionId} style={{ height: '90vh' }}>
+                  <Anchor htmlId={sectionId} />
+                  <h2>{section.title}</h2>
+                </div>
+              )
+            })}
+          </Container>
         </div>
       </HeaderContextProvider>
     </ThemeProvider>
