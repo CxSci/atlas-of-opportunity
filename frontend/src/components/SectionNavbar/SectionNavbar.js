@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom'
 import { useTheme } from '@mui/material'
 
 import { slugify } from 'utils/helpers'
+import SimpleCarousel from 'components/SimpleCarousel'
 import useScrollSpy from 'utils/scrollSpy'
 
 export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
@@ -74,35 +75,42 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
         boxShadow: isSticky ? theme.components.header.boxShadow : undefined,
       }}>
       <Container>
-        <Box
-          sx={{
-            display: 'flex',
-            whiteSpace: 'nowrap',
-          }}>
+        <SimpleCarousel value={locationHash}>
           {sections.map((section, index) => {
             const sectionHash = `#${slugify(section.title)}`
             const active = locationHash === sectionHash
             return (
-              <Link
-                href={sectionHash}
+              <SimpleCarousel.Item
                 key={index}
-                underline="hover"
-                onClick={handleNav}
+                value={sectionHash}
                 sx={{
-                  display: 'block',
-                  px: 0,
-                  py: 1,
                   mx: 2,
-                  minWidth: 0,
-                  maxWidth: 'auto',
-                  fontWeight: active ? 700 : 400,
-                  color: 'text.primary',
+                  '&:first-of-type': {
+                    ml: 0,
+                  },
+                  '&:last-of-type': {
+                    mr: 0,
+                  },
                 }}>
-                {section.title}
-              </Link>
+                <Link
+                  href={sectionHash}
+                  underline="hover"
+                  onClick={handleNav}
+                  sx={{
+                    display: 'block',
+                    px: 0,
+                    py: 1,
+                    minWidth: 0,
+                    maxWidth: 'auto',
+                    fontWeight: active ? 700 : 400,
+                    color: 'text.primary',
+                  }}>
+                  {section.title}
+                </Link>
+              </SimpleCarousel.Item>
             )
           })}
-        </Box>
+        </SimpleCarousel>
       </Container>
     </Box>
   )
