@@ -6,7 +6,16 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 
-const SCROLL_VALUE = 100
+const getOuterWidth = element => {
+  const style = window.getComputedStyle(element)
+  return (
+    parseFloat(style.marginLeft) +
+    parseFloat(style.marginRight) +
+    parseFloat(style.borderLeftWidth) +
+    parseFloat(style.borderRightWidth) +
+    element.clientWidth
+  )
+}
 
 export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
   return (
@@ -22,27 +31,39 @@ export const SimpleCarousel = ({ children, value }) => {
   const innerRef = useRef(null)
   const childrenArray = useMemo(() => (Array.isArray(children) ? children : [children]), [children])
   const [scrollPos, setScrollPos] = useState(0)
-  const [showArrows, setShowArrows] = useState(false)
   const [containerHeight, setContainerHeight] = useState(0)
+  const [scrollSize, setScrollSize] = useState(0)
+  const showArrows = scrollSize > 0
 
   const handleLeft = useCallback(() => {
-    setScrollPos(scrollPos => Math.max(scrollPos - SCROLL_VALUE, 0))
+    setScrollPos(scrollPos => {
+      const idx = itemRef.current.findIndex(el => {
+        return el.offsetLeft >= scrollPos
+      })
+      const newPos = idx === 0 ? 0 : itemRef.current[idx - 1].offsetLeft
+      return Math.max(newPos, 0)
+    })
   }, [])
 
   const handleRight = useCallback(() => {
-    const scrollSize = innerRef.current.clientWidth - containerRef.current.clientWidth
-    setScrollPos(scrollPos => Math.min(scrollPos + SCROLL_VALUE, scrollSize))
-  }, [])
+    setScrollPos(scrollPos => {
+      const idx = itemRef.current.findIndex(el => {
+        return el.offsetLeft <= scrollPos && el.offsetLeft + getOuterWidth(el) > scrollPos
+      })
+      const newPos = idx + 1 === itemRef.current.length ? scrollSize : itemRef.current[idx + 1].offsetLeft
+      return Math.min(newPos, scrollSize)
+    })
+  }, [scrollSize])
 
   useEffect(() => {
     const setDimensions = () => {
       setContainerHeight(innerRef.current.clientHeight)
-      setShowArrows(containerRef.current.clientWidth < innerRef.current.clientWidth)
+      setScrollSize(Math.max(0, innerRef.current?.clientWidth - containerRef.current?.clientWidth))
     }
     setDimensions()
     window.addEventListener('resize', setDimensions)
     return () => window.removeEventListener('resize', setDimensions)
-  }, [])
+  }, [showArrows])
 
   useEffect(() => {
     innerRef.current.style.left = `${-scrollPos}px`
@@ -67,8 +88,8 @@ export const SimpleCarousel = ({ children, value }) => {
     <Grid container alignItems="center">
       {showArrows && (
         <Grid item>
-          <IconButton onClick={handleLeft}>
-            <ArrowLeft />
+          <IconButton onClick={handleLeft} disabled={scrollPos === 0}>
+            <ArrowLeft fontSize="small" />
           </IconButton>
         </Grid>
       )}
@@ -96,8 +117,8 @@ export const SimpleCarousel = ({ children, value }) => {
       </Grid>
       {showArrows && (
         <Grid item>
-          <IconButton onClick={handleRight}>
-            <ArrowRight />
+          <IconButton onClick={handleRight} disabled={scrollPos === scrollSize}>
+            <ArrowRight fontSize="small" />
           </IconButton>
         </Grid>
       )}
