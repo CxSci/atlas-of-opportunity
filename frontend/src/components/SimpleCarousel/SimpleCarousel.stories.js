@@ -31,7 +31,7 @@ const Template = args => {
                   mr: 0,
                 },
               }}>
-              <Box sx={{ border: 1 }} onClick={() => setValue(item.value)}>
+              <Box sx={{ border: 1, px: 2 }} onClick={() => setValue(item.value)}>
                 {item.value}
               </Box>
             </SimpleCarousel.Item>
