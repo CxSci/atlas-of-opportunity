@@ -6,16 +6,7 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 
-const getOuterWidth = element => {
-  const style = window.getComputedStyle(element)
-  return (
-    parseFloat(style.marginLeft) +
-    parseFloat(style.marginRight) +
-    parseFloat(style.borderLeftWidth) +
-    parseFloat(style.borderRightWidth) +
-    element.clientWidth
-  )
-}
+import { getOuterWidth } from './SimpleCarousel.utils'
 
 export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
   return (
