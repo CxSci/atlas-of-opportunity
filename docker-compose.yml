@@ -8,3 +8,33 @@ services:
     ports:
       - '3000:3000'
     command: 'sh -c "npm install && npm start"'
+
+  postgis:
+    build: data
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgis:/var/lib/postgresql/data
+      - ./data:/data:ro
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dashboard
+
+  psql:
+    build: data
+    profiles:
+      - psql
+    environment:
+      PGHOST: postgis
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: dashboard
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      - postgis
+    command: ["psql"]
+
+volumes:
+  postgis: {}
