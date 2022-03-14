@@ -1,0 +1,6 @@
+# Used by dashboard dev builds
+.git
+.github
+build
+node_modules
+npm-debug.log

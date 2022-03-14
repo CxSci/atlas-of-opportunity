@@ -6,8 +6,9 @@ WORKDIR /usr/src/app
 # Do this before adding other files so npm install is only re-run on docker
 # image builds when project dependencies have changed, not when just any file
 # has changed.
-COPY frontend/package.*json ./
-RUN npm install
+COPY frontend/package*.json ./
+ENV NODE_ENV "production"
+RUN npm clean-install --ignore-scripts
 
 # Add the rest of the project
 ADD frontend/ .
