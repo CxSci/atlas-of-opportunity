@@ -1,4 +1,6 @@
-.git
-.github
-node_modules
-npm-debug.log
+# Used by dashboard prod builds
+backend
+data
+frontend/build
+frontend/node_modules
+frontend/npm-debug.log
