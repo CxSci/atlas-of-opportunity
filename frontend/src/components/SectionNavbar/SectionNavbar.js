@@ -35,7 +35,9 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
     const id = event.target.href.split('#')[1]
     const hash = `#${id}`
     const elem = document.getElementById(id)
-    elem.scrollIntoView({ behavior: 'smooth' })
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' })
+    }
     window.history.pushState(null, null, hash)
     setLocationHash(hash)
   }, [])

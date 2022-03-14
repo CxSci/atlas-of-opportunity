@@ -7,8 +7,8 @@ import HeaderContext from 'contexts/HeaderContext'
 const Anchor = ({ htmlId }) => {
   const theme = useTheme()
   const headerContext = useContext(HeaderContext)
-  const navbarTop = parseFloat(headerContext.customScrolledHeight || theme.components.header.scrolledHeight)
-  const top = navbarTop + theme.components.SectionNavbar.height + parseFloat(theme.spacing(2))
+  const navbarTop = parseFloat(headerContext.customScrolledHeight || theme.components?.header?.scrolledHeight || 0)
+  const top = navbarTop + (theme.components?.SectionNavbar?.height || 0) + parseFloat(theme.spacing(2))
 
   return (
     <Box
