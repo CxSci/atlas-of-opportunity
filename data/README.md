@@ -115,4 +115,6 @@ TODO: Explain that each region folder needs a docker-entrypoint-scripts folder w
 
 The PostGIS database can be run by itself without the rest of the Atlas by running `docker-compose up` in this folder.
 
+Inspect the database by running `docker-compose run --rm psql`.
+
 TODO: Turn this into a profile of the main docker-compose.yml instead of a separate one in this data folder.
