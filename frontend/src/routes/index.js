@@ -3,7 +3,7 @@ import React from 'react'
 import { Route, Routes as Switch } from 'react-router-dom'
 
 // utils
-import PATH from '../../../frontend/src/utils/path'
+import PATH from '../utils/path'
 
 // pages
 import Home from './Home'
