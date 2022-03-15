@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material'
 
 import { slugify } from 'utils/helpers'
 import SimpleCarousel from 'components/SimpleCarousel'
+import { scrollIntoView } from 'utils/animateScroll'
 import useScrollSpy from 'utils/scrollSpy'
 
 export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
@@ -37,7 +38,7 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
     const hash = `#${id}`
     const elem = document.getElementById(id)
     if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' })
+      scrollIntoView(elem)
     }
     window.history.pushState(null, null, hash)
     setLocationHash(hash)
