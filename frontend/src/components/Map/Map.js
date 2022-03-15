@@ -106,8 +106,8 @@ function Map({ config, hidePopup }) {
       map.current.on('mousemove', layerId, onMouseMove)
 
       function onMouseMove(e) {
-        if (e?.features?.length > 0) {
-          if (hoveredFeatureId !== e.features[0].id && !popupExpanded) {
+        if (e?.features?.length > 0 && !popupExpanded) {
+          if (hoveredFeatureId !== e.features[0].id) {
             popupExpanded = false
             map.current.setFeatureState(
               { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
@@ -141,9 +141,8 @@ function Map({ config, hidePopup }) {
             }
           }
 
-          if (!popupExpanded) {
-            hoverPopup.setLngLat(e.lngLat)
-          }
+          hoverPopup.setLngLat(e.lngLat)
+
           // 1. While the cursor is moving over a region, show a short
           //    popup which moves with the mouse.
           //
