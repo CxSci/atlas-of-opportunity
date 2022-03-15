@@ -30,9 +30,9 @@ export const SimpleCarousel = ({ children, value }) => {
     const containerWidth = containerRef.current.clientWidth
     setScrollPos(scrollPos => {
       const idx = itemRef.current.findIndex(el => {
-        return el.offsetLeft <= scrollPos && el.offsetLeft + el.clientWidth > scrollPos
+        return el.offsetLeft - ARROW_SIZE <= scrollPos && el.offsetLeft + el.clientWidth - ARROW_SIZE > scrollPos
       })
-      const item = itemRef.current[idx]
+      const item = itemRef.current[idx < 0 ? 0 : idx]
       const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
       return Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0)
     })
