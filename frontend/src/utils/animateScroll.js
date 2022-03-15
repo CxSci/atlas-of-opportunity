@@ -6,7 +6,9 @@ export const animateScroll = (fromPos, toPos, containerEl, axis = 'Y') => {
   const deltaPos = toPos - fromPos
   const duration = parseInt(Math.sqrt(Math.abs(deltaPos)))
 
-  let animationId
+  const ret = {
+    requestID: null,
+  }
   let step = 0
   let percent = 0
 
@@ -19,15 +21,16 @@ export const animateScroll = (fromPos, toPos, containerEl, axis = 'Y') => {
       containerEl.scrollTo(0, fromPos + deltaPos * percent)
     }
     if (step < duration) {
-      animationId = requestAnimationFrame(easedAnimate)
+      ret.requestID = requestAnimationFrame(easedAnimate)
     }
   }
 
-  animationId = requestAnimationFrame(easedAnimate)
+  ret.requestID = requestAnimationFrame(easedAnimate)
+  return ret
 }
 
 export const scrollIntoView = element => {
   const fromPos = window.scrollY
   const toPos = element.offsetTop
-  animateScroll(fromPos, toPos, window, 'Y')
+  return animateScroll(fromPos, toPos, window, 'Y')
 }
