@@ -53,7 +53,7 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
       },
       {
         threshold: [1],
-        rootMargin: `-${navbarTop + 1}px 0px 0px 0px`,
+        rootMargin: `-${navbarTop + 1}px 100% 0px 100%`,
       },
     )
     observer.observe(cachedRef)
