@@ -5,6 +5,8 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 
+import { animateScroll } from '../../utils/animateScroll'
+
 const ARROW_SIZE = 36
 
 export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
@@ -18,7 +20,6 @@ export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
 export const SimpleCarousel = ({ children, value }) => {
   const itemRef = useRef([])
   const containerRef = useRef(null)
-  const innerRef = useRef(null)
   const childrenArray = useMemo(() => (Array.isArray(children) ? children : [children]), [children])
   const [scrollPos, setScrollPos] = useState(0)
   const [containerHeight, setContainerHeight] = useState(0)
@@ -50,8 +51,8 @@ export const SimpleCarousel = ({ children, value }) => {
 
   useEffect(() => {
     const setDimensions = () => {
-      setContainerHeight(innerRef.current.clientHeight)
-      setScrollSize(Math.max(0, innerRef.current?.clientWidth - containerRef.current?.clientWidth))
+      setContainerHeight(containerRef.current.clientHeight)
+      setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
     }
     setDimensions()
     window.addEventListener('resize', setDimensions)
@@ -59,12 +60,13 @@ export const SimpleCarousel = ({ children, value }) => {
   }, [showArrows])
 
   useEffect(() => {
-    innerRef.current.style.left = `-${scrollPos}px`
+    const prevScrollPos = containerRef.current.scrollLeft
+    animateScroll(prevScrollPos, scrollPos, containerRef.current, 'X')
   }, [scrollPos])
 
   useEffect(() => {
     const containerWidth = containerRef.current.clientWidth
-    const scrollPos = -innerRef.current.offsetLeft
+    const scrollPos = containerRef.current.scrollLeft
     const valueIndex = childrenArray.findIndex(child => child.props.value === value)
     const item = itemRef.current[valueIndex]
     const itemWidth = item.clientWidth
@@ -104,28 +106,20 @@ export const SimpleCarousel = ({ children, value }) => {
       )}
       <Box
         sx={{
+          whiteSpace: 'nowrap',
+          verticalAlign: 'middle',
           overflow: 'hidden',
           overflowX: 'scroll',
           scrollbarWidth: 'none',
           '&::-webkit-scrollbar': { display: 'none' },
         }}
-        ref={containerRef}
-        style={{ height: containerHeight }}>
-        <Box
-          sx={{
-            whiteSpace: 'nowrap',
-            verticalAlign: 'middle',
-            position: 'absolute',
-            transition: 'left ease-in-out 0.2s',
-          }}
-          ref={innerRef}>
-          {childrenArray.map((child, index) =>
-            cloneElement(child, {
-              ref: el => (itemRef.current[index] = el),
-              key: child.key || index,
-            }),
-          )}
-        </Box>
+        ref={containerRef}>
+        {childrenArray.map((child, index) =>
+          cloneElement(child, {
+            ref: el => (itemRef.current[index] = el),
+            key: child.key || index,
+          }),
+        )}
       </Box>
       {showArrows && scrollPos < scrollSize && (
         <Box
