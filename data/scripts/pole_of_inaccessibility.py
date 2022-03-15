@@ -3,6 +3,7 @@
 # results than relying on the centroid methods of PostGIS or Turf.
 
 
+import argparse
 from multiprocessing import Pool, cpu_count
 
 import geopandas as gpd
@@ -43,7 +44,7 @@ def applyParallel(dfGrouped, func, tqdm_args={}):
     return pd.concat(ret_list)
 
 
-def main():
+def main(args):
     # TODO: take the database password and the name of the table and its
     #       geometry column as input.
 
@@ -52,9 +53,8 @@ def main():
         "postgresql://postgres:postgres@localhost:5432/dashboard"
     )
     engine = create_engine(db_connection_url)
-    in_table = "sa2_2016_aust"
-    out_table = f"{in_table}_with_poles"
-    query = f"select * from {in_table}"
+    table = args.table
+    query = f"select * from {table}"
     try:
         df = gpd.read_postgis(query, engine)
     except ProgrammingError as e:
@@ -79,7 +79,7 @@ def main():
 
     print("Writing new table to db...")
     try:
-        df.to_postgis(out_table, engine, index=True, if_exists="replace")
+        df.to_postgis(table, engine, index=True, if_exists="replace")
     except ProgrammingError as e:
         print(e)
         exit(1)
@@ -88,7 +88,7 @@ def main():
         # Remove empty geometries used to make to_postgis work.
         conn.execute(
             text(
-                f"""update {out_table}
+                f"""update {table}
                 set pole_of_inaccessibility = NULL
                 where pole_of_inaccessibility = 'GEOMETRYCOLLECTION EMPTY';
             """
@@ -96,7 +96,7 @@ def main():
         )
         conn.execute(
             text(
-                f"""alter table {out_table}
+                f"""alter table {table}
                 alter column pole_of_inaccessibility
                     type geometry(Point,4326)
                         using ST_SetSRID(ST_GeomFromText(
@@ -108,4 +108,19 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Create a copy of the specified table with an additional column, "
+            "`pole_of_inaccessibility`, defined as the point inside of each "
+            "region furthest from any edge. Useful for positioning labels "
+            "and symbols on complex regions."
+        )
+    )
+    parser.add_argument(
+        "table",
+        type=str,
+        help="The name of the table to copy",
+    )
+    args = parser.parse_args()
+    main(args)
