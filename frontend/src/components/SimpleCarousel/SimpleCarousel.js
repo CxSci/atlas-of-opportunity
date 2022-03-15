@@ -69,12 +69,14 @@ export const SimpleCarousel = ({ children, value }) => {
     const scrollPos = containerRef.current.scrollLeft
     const valueIndex = childrenArray.findIndex(child => child.props.value === value)
     const item = itemRef.current[valueIndex]
-    const itemWidth = item.clientWidth
-    const itemCount = itemRef.current.length
 
     if (!item) {
       return
     }
+
+    const itemWidth = item.clientWidth
+    const itemCount = itemRef.current.length
+
     if (valueIndex === 0 && item.offsetLeft - scrollPos < 0) {
       setScrollPos(item.offsetLeft)
     } else if (valueIndex > 0 && item.offsetLeft - ARROW_SIZE - scrollPos < 0) {
