@@ -33,7 +33,7 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
 
   const handleNav = useCallback(event => {
     event.preventDefault()
-    const id = event.target.href.split('#')[1]
+    const id = event.currentTarget.href.split('#')[1]
     const hash = `#${id}`
     const elem = document.getElementById(id)
     if (elem) {
@@ -84,7 +84,7 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
                 key={index}
                 value={sectionHash}
                 sx={{
-                  mx: 2,
+                  mx: 1,
                   '&:first-of-type': {
                     ml: 0,
                   },
@@ -99,13 +99,18 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
                   sx={{
                     display: 'block',
                     px: 0,
-                    py: 1,
+                    my: 1,
                     minWidth: 0,
                     maxWidth: 'auto',
-                    fontWeight: active ? 700 : 400,
                     color: 'text.primary',
+                    position: 'relative',
                   }}>
-                  {section.title}
+                  <Box component="span" sx={{ visibility: 'hidden', fontWeight: 700 }} role="none">
+                    {section.title}
+                  </Box>
+                  <Box component="span" sx={{ position: 'absolute', left: 0, top: 0, fontWeight: active ? 700 : 400 }}>
+                    {section.title}
+                  </Box>
                 </Link>
               </SimpleCarousel.Item>
             )

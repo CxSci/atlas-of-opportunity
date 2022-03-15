@@ -2,11 +2,10 @@ import { cloneElement, forwardRef, useCallback, useEffect, useMemo, useRef, useS
 import ArrowLeft from '@mui/icons-material/ArrowBackIosOutlined'
 import ArrowRight from '@mui/icons-material/ArrowForwardIosOutlined'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 
-import { getOuterWidth } from './SimpleCarousel.utils'
+const ARROW_SIZE = 36
 
 export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
   return (
@@ -27,22 +26,25 @@ export const SimpleCarousel = ({ children, value }) => {
   const showArrows = scrollSize > 0
 
   const handleLeft = useCallback(() => {
+    const containerWidth = containerRef.current.clientWidth
     setScrollPos(scrollPos => {
       const idx = itemRef.current.findIndex(el => {
-        return el.offsetLeft >= scrollPos
+        return el.offsetLeft <= scrollPos && el.offsetLeft + el.clientWidth > scrollPos
       })
-      const newPos = idx === 0 ? 0 : itemRef.current[idx - 1].offsetLeft
-      return Math.max(newPos, 0)
+      const item = itemRef.current[idx]
+      const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
+      return Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0)
     })
   }, [])
 
   const handleRight = useCallback(() => {
+    const containerWidth = containerRef.current.clientWidth
     setScrollPos(scrollPos => {
       const idx = itemRef.current.findIndex(el => {
-        return el.offsetLeft <= scrollPos && el.offsetLeft + getOuterWidth(el) > scrollPos
+        return el.offsetLeft + el.clientWidth - scrollPos > containerWidth
       })
-      const newPos = idx + 1 === itemRef.current.length ? scrollSize : itemRef.current[idx + 1].offsetLeft
-      return Math.min(newPos, scrollSize)
+      const newPos = idx < 0 ? scrollSize : itemRef.current[idx].offsetLeft
+      return Math.min(newPos - ARROW_SIZE, scrollSize)
     })
   }, [scrollSize])
 
@@ -57,7 +59,7 @@ export const SimpleCarousel = ({ children, value }) => {
   }, [showArrows])
 
   useEffect(() => {
-    innerRef.current.style.left = `${-scrollPos}px`
+    innerRef.current.style.left = `-${scrollPos}px`
   }, [scrollPos])
 
   useEffect(() => {
@@ -65,29 +67,48 @@ export const SimpleCarousel = ({ children, value }) => {
     const scrollPos = -innerRef.current.offsetLeft
     const valueIndex = childrenArray.findIndex(child => child.props.value === value)
     const item = itemRef.current[valueIndex]
+    const itemWidth = item.clientWidth
+    const itemCount = itemRef.current.length
+
     if (!item) {
       return
     }
-    if (item.offsetLeft - scrollPos < 0) {
+    if (valueIndex === 0 && item.offsetLeft - scrollPos < 0) {
       setScrollPos(item.offsetLeft)
-    } else if (item.offsetLeft + item.clientWidth - scrollPos > containerWidth) {
-      setScrollPos(item.offsetLeft + item.clientWidth - containerWidth)
+    } else if (valueIndex > 0 && item.offsetLeft - ARROW_SIZE - scrollPos < 0) {
+      setScrollPos(item.offsetLeft - ARROW_SIZE)
+    } else if (valueIndex + 1 < itemCount && item.offsetLeft + itemWidth - scrollPos > containerWidth - ARROW_SIZE) {
+      setScrollPos(item.offsetLeft + itemWidth - containerWidth + ARROW_SIZE)
+    } else if (item.offsetLeft + itemWidth - scrollPos > containerWidth) {
+      setScrollPos(item.offsetLeft + itemWidth - containerWidth)
+    } else if (scrollPos > scrollSize) {
+      setScrollPos(scrollSize)
     }
-  }, [childrenArray, value])
+  }, [childrenArray, value, scrollSize])
 
   return (
-    <Grid container alignItems="center">
-      {showArrows && (
-        <Grid item>
-          <IconButton onClick={handleLeft} disabled={scrollPos === 0}>
+    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+      {showArrows && scrollPos !== 0 && (
+        <Box
+          sx={{
+            position: 'absolute',
+            left: 0,
+            top: (containerHeight - ARROW_SIZE) / 2,
+            zIndex: 1,
+            bgcolor: 'background.default',
+          }}>
+          <IconButton onClick={handleLeft}>
             <ArrowLeft fontSize="small" />
           </IconButton>
-        </Grid>
+        </Box>
       )}
-      <Grid
-        item
-        xs
-        sx={{ position: 'relative', overflow: 'hidden' }}
+      <Box
+        sx={{
+          overflow: 'hidden',
+          overflowX: 'scroll',
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': { display: 'none' },
+        }}
         ref={containerRef}
         style={{ height: containerHeight }}>
         <Box
@@ -105,15 +126,22 @@ export const SimpleCarousel = ({ children, value }) => {
             }),
           )}
         </Box>
-      </Grid>
-      {showArrows && (
-        <Grid item>
-          <IconButton onClick={handleRight} disabled={scrollPos === scrollSize}>
+      </Box>
+      {showArrows && scrollPos < scrollSize && (
+        <Box
+          sx={{
+            position: 'absolute',
+            right: 0,
+            top: (containerHeight - ARROW_SIZE) / 2,
+            zIndex: 1,
+            bgcolor: 'background.default',
+          }}>
+          <IconButton onClick={handleRight}>
             <ArrowRight fontSize="small" />
           </IconButton>
-        </Grid>
+        </Box>
       )}
-    </Grid>
+    </Box>
   )
 }
 
