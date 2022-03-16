@@ -2,11 +2,14 @@ const easeInOut = x => (x < 0.5 ? 2 * x * x : -1 + (4 - 2 * x) * x)
 
 const requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame
 
-export const animateScroll = (containerEl, toPos, axis = 'Y') => {
-  const fromPos = axis.toLowerCase() === 'x' ? containerEl.scrollLeft : containerEl.scrollY
-  const deltaPos = toPos - fromPos
-  const duration = parseInt(Math.sqrt(Math.abs(deltaPos)))
-
+export const animateScroll = (containerEl, to) => {
+  const fromPosX = containerEl.scrollLeft || 0
+  const fromPosY = containerEl.scrollY || 0
+  const toPosX = to.x ?? fromPosX
+  const toPosY = to.y ?? fromPosY
+  const deltaPosX = toPosX - fromPosX
+  const deltaPosY = toPosY - fromPosY
+  const duration = parseInt(Math.sqrt(Math.max(Math.abs(deltaPosX), Math.abs(deltaPosY))))
   const ret = {
     requestID: null,
   }
@@ -16,13 +19,11 @@ export const animateScroll = (containerEl, toPos, axis = 'Y') => {
   const easedAnimate = () => {
     step++
     percent = easeInOut(step / duration)
-    if (axis.toLocaleLowerCase() === 'x') {
-      containerEl.scrollTo(fromPos + deltaPos * percent, 0)
-    } else {
-      containerEl.scrollTo(0, fromPos + deltaPos * percent)
-    }
     if (step < duration) {
+      containerEl.scrollTo(fromPosX + deltaPosX * percent, fromPosY + deltaPosY * percent)
       ret.requestID = requestAnimationFrame(easedAnimate)
+    } else {
+      containerEl.scrollTo(toPosX, toPosY)
     }
   }
 
@@ -32,5 +33,5 @@ export const animateScroll = (containerEl, toPos, axis = 'Y') => {
 
 export const scrollIntoView = element => {
   const toPos = element.offsetTop
-  return animateScroll(window, toPos, 'Y')
+  return animateScroll(window, { y: toPos })
 }
