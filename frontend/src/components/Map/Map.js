@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
-import { Box, createStyles, GlobalStyles, Tooltip } from '@mui/material'
+import { Box, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
@@ -10,7 +10,7 @@ import { MAPBOX_API_KEY } from '../../utils/constants'
 mapboxgl.accessToken = MAPBOX_API_KEY
 
 const popupClassName = 'floating-popup'
-const popupContainerStyles = createStyles({
+const popupContainerStyles = {
   '.mapboxgl-popup-tip': {
     display: 'none',
   },
@@ -24,7 +24,7 @@ const popupContainerStyles = createStyles({
   '&:not(.immobile) .mapboxgl-popup-content': {
     pointerEvents: 'none',
   },
-})
+}
 const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
