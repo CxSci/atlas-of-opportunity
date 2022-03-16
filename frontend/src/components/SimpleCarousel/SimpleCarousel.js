@@ -41,7 +41,7 @@ export const SimpleCarousel = ({ children, value }) => {
     const item = itemRef.current[idx < 0 ? 0 : idx]
     const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
     animateScroll(containerRef.current, { x: Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0) })
-  }, [scrollPos])
+  }, [scrollPos, animateScroll])
 
   const handleRight = useCallback(() => {
     const containerWidth = containerRef.current.clientWidth
@@ -50,7 +50,7 @@ export const SimpleCarousel = ({ children, value }) => {
     })
     const newPos = idx < 0 ? scrollSize : itemRef.current[idx].offsetLeft
     animateScroll(containerRef.current, { x: Math.min(newPos - ARROW_SIZE, scrollSize) })
-  }, [scrollPos, scrollSize])
+  }, [scrollPos, scrollSize, animateScroll])
 
   useEffect(() => {
     const containerEl = containerRef.current
@@ -100,7 +100,7 @@ export const SimpleCarousel = ({ children, value }) => {
       return
     }
     animateScroll(containerRef.current, { x: newPos })
-  }, [childrenArray, value, scrollSize])
+  }, [childrenArray, value, scrollSize, animateScroll])
 
   return (
     <Box sx={{ position: 'relative', overflow: 'hidden' }}>
