@@ -28,42 +28,39 @@ export const SimpleCarousel = ({ children, value }) => {
 
   const handleLeft = useCallback(() => {
     const containerWidth = containerRef.current.clientWidth
-    setScrollPos(scrollPos => {
-      const idx = itemRef.current.findIndex(el => {
-        return el.offsetLeft - ARROW_SIZE <= scrollPos && el.offsetLeft + el.clientWidth - ARROW_SIZE > scrollPos
-      })
-      const item = itemRef.current[idx < 0 ? 0 : idx]
-      const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
-      return Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0)
+    const idx = itemRef.current.findIndex(el => {
+      return el.offsetLeft - ARROW_SIZE <= scrollPos && el.offsetLeft + el.clientWidth - ARROW_SIZE > scrollPos
     })
-  }, [])
+    const item = itemRef.current[idx < 0 ? 0 : idx]
+    const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
+    animateScroll(containerRef.current, Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0), 'X')
+  }, [scrollPos])
 
   const handleRight = useCallback(() => {
     const containerWidth = containerRef.current.clientWidth
-    setScrollPos(scrollPos => {
-      const idx = itemRef.current.findIndex(el => {
-        return el.offsetLeft + el.clientWidth - scrollPos > containerWidth
-      })
-      const newPos = idx < 0 ? scrollSize : itemRef.current[idx].offsetLeft
-      return Math.min(newPos - ARROW_SIZE, scrollSize)
+    const idx = itemRef.current.findIndex(el => {
+      return el.offsetLeft + el.clientWidth - scrollPos > containerWidth
     })
-  }, [scrollSize])
+    const newPos = idx < 0 ? scrollSize : itemRef.current[idx].offsetLeft
+    animateScroll(containerRef.current, Math.min(newPos - ARROW_SIZE, scrollSize), 'X')
+  }, [scrollPos, scrollSize])
 
   useEffect(() => {
     const setDimensions = () => {
       setContainerHeight(containerRef.current.clientHeight)
-      console.log(containerRef.current?.scrollWidth, containerRef.current?.clientWidth)
       setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
+    }
+    const handleScroll = () => {
+      setScrollPos(containerRef.current.scrollLeft)
     }
     setDimensions()
     window.addEventListener('resize', setDimensions)
-    return () => window.removeEventListener('resize', setDimensions)
+    containerRef.current.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('resize', setDimensions)
+      containerRef.current.removeEventListener('scroll', handleScroll)
+    }
   }, [showArrows])
-
-  useEffect(() => {
-    const prevScrollPos = containerRef.current.scrollLeft
-    animateScroll(prevScrollPos, scrollPos, containerRef.current, 'X')
-  }, [scrollPos])
 
   useEffect(() => {
     const containerWidth = containerRef.current.clientWidth
@@ -77,17 +74,21 @@ export const SimpleCarousel = ({ children, value }) => {
 
     const itemWidth = item.clientWidth
     const itemCount = itemRef.current.length
+    let newPos
 
     if (valueIndex === 0 && item.offsetLeft - scrollPos < 0) {
-      setScrollPos(item.offsetLeft)
+      newPos = item.offsetLeft
     } else if (valueIndex > 0 && item.offsetLeft - ARROW_SIZE - scrollPos < 0) {
-      setScrollPos(item.offsetLeft - ARROW_SIZE)
+      newPos = item.offsetLeft - ARROW_SIZE
     } else if (valueIndex + 1 < itemCount && item.offsetLeft + itemWidth - scrollPos > containerWidth - ARROW_SIZE) {
-      setScrollPos(item.offsetLeft + itemWidth - containerWidth + ARROW_SIZE)
+      newPos = item.offsetLeft + itemWidth - containerWidth + ARROW_SIZE
     } else if (item.offsetLeft + itemWidth - scrollPos > containerWidth) {
       const newScrollPos = item.offsetLeft + itemWidth - containerWidth
-      setScrollPos(newScrollPos + 1 >= scrollSize ? scrollSize : newScrollPos)
+      newPos = newScrollPos + 1 >= scrollSize ? scrollSize : newScrollPos
+    } else {
+      return
     }
+    animateScroll(containerRef.current, newPos, 'X')
   }, [childrenArray, value, scrollSize])
 
   return (

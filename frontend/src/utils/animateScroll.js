@@ -2,7 +2,8 @@ const easeInOut = x => (x < 0.5 ? 2 * x * x : -1 + (4 - 2 * x) * x)
 
 const requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame
 
-export const animateScroll = (fromPos, toPos, containerEl, axis = 'Y') => {
+export const animateScroll = (containerEl, toPos, axis = 'Y') => {
+  const fromPos = axis.toLowerCase() === 'x' ? containerEl.scrollLeft : containerEl.scrollY
   const deltaPos = toPos - fromPos
   const duration = parseInt(Math.sqrt(Math.abs(deltaPos)))
 
@@ -30,7 +31,6 @@ export const animateScroll = (fromPos, toPos, containerEl, axis = 'Y') => {
 }
 
 export const scrollIntoView = element => {
-  const fromPos = window.scrollY
   const toPos = element.offsetTop
-  return animateScroll(fromPos, toPos, window, 'Y')
+  return animateScroll(window, toPos, 'Y')
 }
