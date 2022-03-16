@@ -79,7 +79,7 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
         <SimpleCarousel value={locationHash}>
           {sections.map((section, index) => {
             const sectionHash = `#${slugify(section.title)}`
-            const active = locationHash === sectionHash
+            const active = locationHash === sectionHash || (!locationHash && index === 0)
             return (
               <SimpleCarousel.Item
                 key={index}
