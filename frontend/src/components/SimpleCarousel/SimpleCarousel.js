@@ -52,6 +52,7 @@ export const SimpleCarousel = ({ children, value }) => {
   useEffect(() => {
     const setDimensions = () => {
       setContainerHeight(containerRef.current.clientHeight)
+      console.log(containerRef.current?.scrollWidth, containerRef.current?.clientWidth)
       setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
     }
     setDimensions()
@@ -84,9 +85,8 @@ export const SimpleCarousel = ({ children, value }) => {
     } else if (valueIndex + 1 < itemCount && item.offsetLeft + itemWidth - scrollPos > containerWidth - ARROW_SIZE) {
       setScrollPos(item.offsetLeft + itemWidth - containerWidth + ARROW_SIZE)
     } else if (item.offsetLeft + itemWidth - scrollPos > containerWidth) {
-      setScrollPos(item.offsetLeft + itemWidth - containerWidth)
-    } else if (scrollPos > scrollSize) {
-      setScrollPos(scrollSize)
+      const newScrollPos = item.offsetLeft + itemWidth - containerWidth
+      setScrollPos(newScrollPos + 1 >= scrollSize ? scrollSize : newScrollPos)
     }
   }, [childrenArray, value, scrollSize])
 
