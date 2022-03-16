@@ -21,13 +21,15 @@ export const animateScroll = (containerEl, to) => {
     percent = easeInOut(step / duration)
     if (step < duration) {
       containerEl.scrollTo(fromPosX + deltaPosX * percent, fromPosY + deltaPosY * percent)
-      ret.requestID = requestAnimationFrame(easedAnimate)
+      window.SA_rafScrollId = ret.requestID = requestAnimationFrame(easedAnimate)
     } else {
       containerEl.scrollTo(toPosX, toPosY)
     }
   }
-
-  ret.requestID = requestAnimationFrame(easedAnimate)
+  if (window.SA_rafScrollId) {
+    cancelAnimationFrame(window.SA_rafScrollId)
+  }
+  window.SA_rafScrollId = ret.requestID = requestAnimationFrame(easedAnimate)
   return ret
 }
 
