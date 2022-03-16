@@ -93,7 +93,7 @@ export const SimpleCarousel = ({ children, value }) => {
 
   return (
     <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-      {showArrows && scrollPos !== 0 && (
+      {showArrows && scrollPos > 0 && (
         <Box
           sx={{
             position: 'absolute',
