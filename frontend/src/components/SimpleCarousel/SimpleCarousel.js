@@ -33,7 +33,8 @@ export const SimpleCarousel = ({ children, value }) => {
     })
     const item = itemRef.current[idx < 0 ? 0 : idx]
     const newPos = idx === 0 ? 0 : item.offsetLeft + item.clientWidth - containerWidth
-    animateScroll(containerRef.current, Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0), 'X')
+    console.log({ newPos }, Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0))
+    animateScroll(containerRef.current, { x: Math.max(newPos + (newPos > 0 ? ARROW_SIZE : 0), 0) })
   }, [scrollPos])
 
   const handleRight = useCallback(() => {
@@ -42,7 +43,7 @@ export const SimpleCarousel = ({ children, value }) => {
       return el.offsetLeft + el.clientWidth - scrollPos > containerWidth
     })
     const newPos = idx < 0 ? scrollSize : itemRef.current[idx].offsetLeft
-    animateScroll(containerRef.current, Math.min(newPos - ARROW_SIZE, scrollSize), 'X')
+    animateScroll(containerRef.current, { x: Math.min(newPos - ARROW_SIZE, scrollSize) })
   }, [scrollPos, scrollSize])
 
   useEffect(() => {
@@ -52,11 +53,13 @@ export const SimpleCarousel = ({ children, value }) => {
     }
     const handleScroll = () => {
       setScrollPos(containerRef.current.scrollLeft)
-      setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
     }
     window.addEventListener('resize', setDimensions)
     containerRef.current.addEventListener('scroll', handleScroll)
     setDimensions()
+    document.fonts.ready.then(() => {
+      setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
+    })
     return () => {
       window.removeEventListener('resize', setDimensions)
       containerRef.current.removeEventListener('scroll', handleScroll)
@@ -89,7 +92,7 @@ export const SimpleCarousel = ({ children, value }) => {
     } else {
       return
     }
-    animateScroll(containerRef.current, newPos, 'X')
+    animateScroll(containerRef.current, { x: newPos })
   }, [childrenArray, value, scrollSize])
 
   return (
