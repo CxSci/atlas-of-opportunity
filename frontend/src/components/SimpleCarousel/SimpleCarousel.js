@@ -52,10 +52,11 @@ export const SimpleCarousel = ({ children, value }) => {
     }
     const handleScroll = () => {
       setScrollPos(containerRef.current.scrollLeft)
+      setScrollSize(containerRef.current?.scrollWidth - containerRef.current?.clientWidth)
     }
-    setDimensions()
     window.addEventListener('resize', setDimensions)
     containerRef.current.addEventListener('scroll', handleScroll)
+    setDimensions()
     return () => {
       window.removeEventListener('resize', setDimensions)
       containerRef.current.removeEventListener('scroll', handleScroll)
