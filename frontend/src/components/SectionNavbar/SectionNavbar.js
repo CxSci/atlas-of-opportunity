@@ -14,6 +14,7 @@ import useScrollSpy from 'utils/scrollSpy'
 
 export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
   const location = useLocation()
+  const cancelScrollRef = useRef(null)
   const [locationHash, setLocationHash] = useState(location.hash)
   const [isSticky, setIsSticky] = useState(false)
   const headerContext = useContext(HeaderContext)
@@ -38,7 +39,8 @@ export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
     const hash = `#${id}`
     const elem = document.getElementById(id)
     if (elem) {
-      scrollIntoView(elem)
+      cancelScrollRef.current?.cancel()
+      cancelScrollRef.current = scrollIntoView(elem)
     }
     window.history.pushState(null, null, hash)
     setLocationHash(hash)

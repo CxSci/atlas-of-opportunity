@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 
-import { animateScroll } from '../../utils/animateScroll'
+import { animateScroll } from 'utils/animateScroll'
 
 const ARROW_SIZE = 36
 
@@ -17,14 +17,21 @@ export const SimpleCarouselItem = forwardRef(({ children, sx }, ref) => {
   )
 })
 
+const createAnimateScrollWithRef = ref => (element, to) => {
+  ref.current?.cancel()
+  ref.current = animateScroll(element, to)
+}
+
 export const SimpleCarousel = ({ children, value }) => {
   const itemRef = useRef([])
   const containerRef = useRef(null)
+  const cancelScrollRef = useRef(null)
   const childrenArray = useMemo(() => (Array.isArray(children) ? children : [children]), [children])
   const [scrollPos, setScrollPos] = useState(0)
   const [containerHeight, setContainerHeight] = useState(0)
   const [scrollSize, setScrollSize] = useState(0)
   const showArrows = scrollSize > 0
+  const animateScroll = useMemo(() => createAnimateScrollWithRef(cancelScrollRef), [])
 
   const handleLeft = useCallback(() => {
     const containerWidth = containerRef.current.clientWidth
