@@ -7,7 +7,7 @@ import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import SearchInput from '../../components/Header/SearchInput'
 import CompareBtn from '../../components/Header/CompareBtn'
-import { TempContext } from '../../utils/AppTempContext'
+import { TempContext } from '../../contexts/AppTempContext'
 import Map from '../../components/Map/'
 import smallBusinessSupportData from 'mocked_api_responses/explore_layout_small_business_support.json'
 
