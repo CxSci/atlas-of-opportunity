@@ -429,6 +429,12 @@ function Map({ config, hidePopup }) {
       style,
       bounds,
       fitBoundsOptions,
+      // Track and control map location via the location hash.
+      // e.g. #map={zoom}/{lat}/{lng}/{bearing}/{pitch}
+      //
+      // Uses a query parameter style. `map` is reserved for this, but other
+      // parameters can be added, e.g. #map=...&foo=bar.
+      hash: 'map',
     })
 
     map.current.on('load', () => {
