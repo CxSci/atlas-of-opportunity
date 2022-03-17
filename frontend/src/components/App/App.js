@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl'
 
 import Routes from '../../routes'
 import initTheme from '../../utils/theme'
-import { TempContext } from '../../utils/AppTempContext'
+import { TempContext } from '../../contexts/AppTempContext'
 
 function App() {
   // TODO: move to redux

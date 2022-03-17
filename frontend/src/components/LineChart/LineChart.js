@@ -12,7 +12,8 @@ import { useIntl } from 'react-intl'
 import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
-import { formatTickNumber, getLineChartDomain, useVictoryTheme, useClientSize } from 'utils/victory'
+import { useVictoryTheme, useClientSize } from 'hooks/victory'
+import { formatTickNumber, getLineChartDomain } from 'utils/victory'
 import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 

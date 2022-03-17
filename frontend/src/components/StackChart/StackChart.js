@@ -7,7 +7,8 @@ import PropTypes from 'prop-types'
 
 import { ChartAxisType } from 'utils/propTypes'
 import { getStackData, STACK_COLORS, getStackChartDomain } from './StackChart.utils'
-import { formatTickNumber, useVictoryTheme, useClientSize } from 'utils/victory'
+import { useVictoryTheme, useClientSize } from 'hooks/victory'
+import { formatTickNumber } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const StackChart = ({ data, xAxis, yAxis }) => {

@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material'
 import { slugify } from 'utils/helpers'
 import SimpleCarousel from 'components/SimpleCarousel'
 import { scrollIntoView } from 'utils/animateScroll'
-import useScrollSpy from 'utils/scrollSpy'
+import useScrollSpy from 'hooks/scrollSpy'
 
 export const SectionNavbar = ({ sections, hashChangeOnScroll }) => {
   const location = useLocation()
