@@ -1,19 +1,29 @@
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 
 import Anchor from 'components/Anchor'
 import MetricsContainer from 'components/MetricsContainer'
-import SectionNavbar from 'components/SectionNavbar'
 import SectionLine from 'components/SectionLine'
-import SectionText from 'components/SectionText'
+import SectionNavbar from 'components/SectionNavbar'
 import SectionSimpleBar from 'components/SectionSimpleBar'
 import SectionSimpleRange from 'components/SectionSimpleRange'
 import SectionStackedArea from 'components/SectionStackedArea'
+import SectionText from 'components/SectionText'
+import Spinner from 'components/Spinner'
 import { slugify } from 'utils/helpers'
+// import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
+// import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
 
-import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
-import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
+//mock api
+import {
+  getSmallBusinessDataLayout,
+  getSmallBusinessDataDetail,
+  smallBusinessDataLayoutSelector,
+  smallBusinessDataDetailSelector,
+} from 'store/modules/smallBusiness'
 
 const componentMappings = {
   text: SectionText,
@@ -24,7 +34,19 @@ const componentMappings = {
 }
 
 const SmallBusinessSupport = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => dispatch(getSmallBusinessDataLayout()), [dispatch])
+  useEffect(() => dispatch(getSmallBusinessDataDetail()), [dispatch])
+
+  const sectionsData = useSelector(smallBusinessDataDetailSelector)
+  const sectionsLayout = useSelector(smallBusinessDataLayoutSelector)
+
+  if (!sectionsLayout || !sectionsData) {
+    return <Spinner />
+  }
   const { sections } = sectionsLayout
+
   return (
     <Box sx={{ mt: 3 }}>
       <Container>
