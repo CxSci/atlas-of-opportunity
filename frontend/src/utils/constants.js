@@ -37,3 +37,5 @@ export const DATASETS_MAP = {
 
 export const MAPBOX_API_KEY =
   'pk.eyJ1IjoianVzdGluYW5kZXJzb24iLCJhIjoiY2tjYW10aWpxMXd1eDMwcW83OTkxNHpxNCJ9.fDQRr2Ctj4skAatc3pZ8VA'
+
+export const API_BASE = process.env.REACT_APP_API_BASE || '/'
