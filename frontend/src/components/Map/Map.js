@@ -184,6 +184,11 @@ function Map({ config, hidePopup }) {
           pointerX > popupRect?.right + offsetSides
 
         if (movedAwayFromPopup) {
+          map.current.setFeatureState(
+            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
+            { hover: false },
+          )
+
           hoveredFeatureId = null
           popupExpanded = false
           setPopupData(oldData => ({ ...oldData, expanded: false }))
