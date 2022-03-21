@@ -3,3 +3,4 @@ import * as types from './types'
 
 export const getSmallBusinessDataLayout = createAction(types.GET_SMALL_BUSINESS_DATA_LAYOUT)
 export const getSmallBusinessDataDetail = createAction(types.GET_SMALL_BUSINESS_DATA_DETAIL)
+export const getSmallBusinessSupportData = createAction(types.GET_SMALL_BUSINESS_SUPPORT_DATA)
