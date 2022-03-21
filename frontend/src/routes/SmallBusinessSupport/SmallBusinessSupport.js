@@ -14,10 +14,6 @@ import SectionStackedArea from 'components/SectionStackedArea'
 import SectionText from 'components/SectionText'
 import Spinner from 'components/Spinner'
 import { slugify } from 'utils/helpers'
-// import sectionsData from 'mocked_api_responses/detail_data_example_small_business_support_adelaide.json'
-// import sectionsLayout from 'mocked_api_responses/detail_layout_example_small_business_support.json'
-
-//mock api
 import {
   getSmallBusinessDataLayout,
   getSmallBusinessDataDetail,
