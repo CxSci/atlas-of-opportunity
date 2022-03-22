@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  api:
+    build: backend
+    depends_on:
+      - postgis
+    environment:
+      PGHOST: postgis
+      PGUSER: djangouser
+      PGPASSWORD: djangopassword
+      PGDATABASE: django
+    ports:
+      - '8000:8000'
+    restart: always
+
   dashboard:
     build: frontend
     volumes:
@@ -11,37 +24,23 @@ services:
 
   postgis:
     build: data
-    restart: always
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgis:/var/lib/postgresql/data
-      - ./data/datasets:/datasets:ro
-
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dashboard
       DJANGO_DB: django
       DJANGO_USER: djangouser
       DJANGO_PASSWORD: djangopassword
-
-  psql:
-    build: data
-    profiles:
-      - psql
-    environment:
-      PGHOST: postgis
-      PGUSER: postgres
-      PGPASSWORD: postgres
-      PGDATABASE: dashboard
+    ports:
+      - '5432:5432'
+    restart: always
     volumes:
-      - ./data:/data:ro
-    depends_on:
-      - postgis
-    entrypoint: ["psql"]
+      - postgis:/var/lib/postgresql/data
+      - ./data/datasets:/datasets:ro
 
   postprocessor:
     build: data/postprocessor
+    depends_on:
+      - postgis
     environment:
       PGHOST: postgis
       PGUSER: postgres
@@ -50,8 +49,21 @@ services:
     volumes:
       - ./data/datasets:/datasets:ro
       - ./data/postprocessor/scripts:/scripts:ro
+
+  psql:
+    build: data
     depends_on:
       - postgis
+    entrypoint: ["psql"]
+    environment:
+      PGHOST: postgis
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: dashboard
+    profiles:
+      - psql
+    volumes:
+      - ./data:/data:ro
 
 volumes:
   postgis: {}
