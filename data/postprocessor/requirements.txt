@@ -1,0 +1,7 @@
+geopandas==0.10.2
+GeoAlchemy2==0.10.2
+pandas==1.4.1
+psycopg2==2.9.3
+Shapely==1.8.1.post1
+SQLAlchemy==1.4.32
+tqdm==4.63.0
