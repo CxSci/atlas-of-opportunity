@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS SA2_info_for_dashboard (
 );
 
 COPY sa2_info_for_dashboard
-    FROM '/data/south_australia/sources/SA2_info_for_dashboard.csv'
+    FROM '/datasets/south_australia/sources/SA2_info_for_dashboard.csv'
     DELIMITER ','
     NULL 'NA'
     CSV
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS abr_business_count_by_division (
 );
 
 COPY abr_business_count_by_division
-    FROM '/data/south_australia/sources/abr_business_count_by_division.csv'
+    FROM '/datasets/south_australia/sources/abr_business_count_by_division.csv'
     DELIMITER ','
     CSV
     HEADER;
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS RENT_SA2_ANZSIC_output (
 );
 
 COPY RENT_SA2_ANZSIC_output
-    FROM '/data/south_australia/sources/datalab_SA2_ANZSIC_output/RENT_SA2_ANZSIC_output.csv'
+    FROM '/datasets/south_australia/sources/datalab_SA2_ANZSIC_output/RENT_SA2_ANZSIC_output.csv'
     DELIMITER ','
     CSV
     HEADER;
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS sa2_housing_prices_weekly_2021 (
 );
 
 COPY sa2_housing_prices_weekly_2021
-    FROM '/data/south_australia/sources/sa2_housing_prices_weekly_2021.csv'
+    FROM '/datasets/south_australia/sources/sa2_housing_prices_weekly_2021.csv'
     DELIMITER ','
     NULL 'NA'
     CSV
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS SA2_output (
 );
 
 COPY SA2_output
-    FROM '/data/south_australia/sources/datalab_SA2_ANZSIC_output/SA2_output.csv'
+    FROM '/datasets/south_australia/sources/datalab_SA2_ANZSIC_output/SA2_output.csv'
     DELIMITER ','
     CSV
     HEADER;
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS sa2_population_and_projection (
 );
 
 COPY sa2_population_and_projection
-    FROM '/data/south_australia/sources/sa2_population_and_projection.csv'
+    FROM '/datasets/south_australia/sources/sa2_population_and_projection.csv'
     DELIMITER ','
     CSV
     HEADER;
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS TOvsCOS_SA2_ANZSIC_output (
 );
 
 COPY TOvsCOS_SA2_ANZSIC_output
-    FROM '/data/south_australia/sources/datalab_SA2_ANZSIC_output/TOvsCOS_SA2_ANZSIC_output.csv'
+    FROM '/datasets/south_australia/sources/datalab_SA2_ANZSIC_output/TOvsCOS_SA2_ANZSIC_output.csv'
     DELIMITER ','
     CSV
     HEADER;
@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS transaction_indices (
 );
 
 COPY transaction_indices
-    FROM '/data/south_australia/sources/transaction_indices.csv'
+    FROM '/datasets/south_australia/sources/transaction_indices.csv'
     DELIMITER ','
     CSV
     HEADER;
