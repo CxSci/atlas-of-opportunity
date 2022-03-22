@@ -16,8 +16,7 @@ services:
       - '5432:5432'
     volumes:
       - postgis:/var/lib/postgresql/data
-      - ./data:/data:ro
-      - ./data/south_australia/docker-entrypoint-scripts:/docker-entrypoint-initdb.d/south_australia:ro
+      - ./data/datasets:/datasets:ro
 
     environment:
       POSTGRES_PASSWORD: postgres
@@ -36,7 +35,7 @@ services:
       - ./data:/data:ro
     depends_on:
       - postgis
-    command: ["psql"]
+    entrypoint: ["psql"]
 
 volumes:
   postgis: {}

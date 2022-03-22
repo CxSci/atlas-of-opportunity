@@ -2,7 +2,7 @@
 
 # Execute docker entrypoint scripts in subdirectories
 
-find /docker-entrypoint-initdb.d -mindepth 2 -type f -print0 | while read -d $'\0' f; do
+find /datasets/*/postgis-entrypoint-scripts -type f -print0 | while read -d $'\0' f; do
   case "$f" in
     *.sh)
       if [ -x "$f" ]; then

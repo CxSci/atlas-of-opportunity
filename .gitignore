@@ -44,6 +44,6 @@ yarn-error.log*
 
 # Datasets
 
-/data/south_australia/sources/1270055001_sa1_2016_aust_shape
-/data/south_australia/sources/1270055001_sa2_2016_aust_shape
-/data/south_australia/sources/**.geojson
+/data/datasets/south_australia/sources/1270055001_sa1_2016_aust_shape
+/data/datasets/south_australia/sources/1270055001_sa2_2016_aust_shape
+/data/datasets/south_australia/sources/**.geojson
