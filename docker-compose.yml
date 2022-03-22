@@ -21,6 +21,9 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dashboard
+      DJANGO_DB: django
+      DJANGO_USER: djangouser
+      DJANGO_PASSWORD: djangopassword
 
   psql:
     build: data
