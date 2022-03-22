@@ -37,5 +37,18 @@ services:
       - postgis
     entrypoint: ["psql"]
 
+  postprocessor:
+    build: data/postprocessor
+    environment:
+      PGHOST: postgis
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: dashboard
+    volumes:
+      - ./data/datasets:/datasets:ro
+      - ./data/postprocessor/scripts:/scripts:ro
+    depends_on:
+      - postgis
+
 volumes:
   postgis: {}

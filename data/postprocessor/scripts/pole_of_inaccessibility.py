@@ -1,10 +1,12 @@
-# Use shapely.ops.polylabel to find the pole of inaccessibility for each
-# feature and then create a new table with that as a column. Gives better
-# results than relying on the centroid methods of PostGIS or Turf.
+# Uses shapely.ops.polylabel to find the pole of inaccessibility for each
+# feature and then creates a new table with that as a column. Gives better
+# results than relying on the centroid functions of PostGIS or Turf.
 
 
 import argparse
 from multiprocessing import Pool, cpu_count
+from os import environ
+import sys
 
 import geopandas as gpd
 import pandas as pd
@@ -28,44 +30,61 @@ def find_pole_of_inaccessibility(feature):
     return polylabel(feature, tolerance=0.001).wkt
 
 
-def pole_for_dataframe(df):
-    feature = df["geom"].item()
+def add_pole_from_column(args):
+    df = args[0]
+    column = args[1]["column"]
+    feature = df[column].item()
     df["pole_of_inaccessibility"] = find_pole_of_inaccessibility(feature)
     return df
 
 
-def applyParallel(dfGrouped, func, tqdm_args={}):
+def apply_parallel(df, func, func_args=None, tqdm_args=None):
+    """A parallelized df.apply() with a progress bar.
+
+    Expects a grouped pandas.Dataframe, the function to apply, any extra args
+    to be passed along with the dataframe, and an args dict for tqdm.
+    """
     with Pool(cpu_count()) as p:
+        # Pack func_args into the iterable's result as a tuple to make a
+        # lower-memory version of Pool's starmap.
         ret_list = list(
             tqdm(
-                p.imap(func, [group for name, group in dfGrouped]), **tqdm_args
+                p.imap(func, [(group, func_args) for name, group in df]),
+                **tqdm_args,
             )
         )
     return pd.concat(ret_list)
 
 
 def main(args):
-    # TODO: take the database password and the name of the table and its
-    #       geometry column as input.
-
     print("Loading table from db...")
+    # Gather PostGIS connection details from environment variables
     db_connection_url = (
-        "postgresql://postgres:postgres@localhost:5432/dashboard"
+        "postgresql://{user}:{password}@{host}:{port}/{dbname}".format(
+            host=environ.get("PGHOST", environ.get("PGHOSTADDR", "localhost")),
+            port=environ.get("PGPORT", 5432),
+            dbname=environ["PGDATABASE"],
+            user=environ["PGUSER"],
+            password=environ["PGPASSWORD"],
+        )
     )
     engine = create_engine(db_connection_url)
     table = args.table
+    index_column = args.index
+    geom_column = args.geom
     query = f"select * from {table}"
     try:
         df = gpd.read_postgis(query, engine)
     except ProgrammingError as e:
         print(e)
-        exit(1)
+        sys.exit(1)
 
-        df.set_index("sa2_main16", inplace=True)
+        df.set_index(index_column, inplace=True)
 
-    df = applyParallel(
+    df = apply_parallel(
         df.groupby(df.index),
-        pole_for_dataframe,
+        add_pole_from_column,
+        func_args={"column": geom_column},
         tqdm_args={
             "total": len(df),
             "desc": "Computing poles of inaccessibility...",
@@ -73,16 +92,18 @@ def main(args):
     )
 
     # GeoPandas' `to_postgis` chokes on None values, so we replace Nones with
-    # empty GeometryCollections here for the transfer and then remove them in
-    # PostGIS below.
-    df["geom"] = df["geom"].apply(lambda x: x if x else GeometryCollection())
+    # empty GeometryCollections here for the transfer and then turn them into
+    # nulls in PostGIS below.
+    df[geom_column] = df[geom_column].apply(
+        lambda x: x if x else GeometryCollection()
+    )
 
     print("Writing new table to db...")
     try:
         df.to_postgis(table, engine, index=True, if_exists="replace")
     except ProgrammingError as e:
         print(e)
-        exit(1)
+        sys.exit(1)
 
     with engine.connect() as conn:
         # Remove empty geometries used to make to_postgis work.
@@ -91,7 +112,7 @@ def main(args):
                 f"""update {table}
                 set pole_of_inaccessibility = NULL
                 where pole_of_inaccessibility = 'GEOMETRYCOLLECTION EMPTY';
-            """
+                """
             )
         )
         conn.execute(
@@ -102,25 +123,37 @@ def main(args):
                         using ST_SetSRID(ST_GeomFromText(
                             NULLIF(pole_of_inaccessibility, 'GEOMETRYCOLLECTION EMPTY')),
                             4326);
-            """  # noqa
+                """  # noqa
             )
         )
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description=(
-            "Create a copy of the specified table with an additional column, "
-            "`pole_of_inaccessibility`, defined as the point inside of each "
-            "region furthest from any edge. Useful for positioning labels "
-            "and symbols on complex regions."
+            "Adds a `pole_of_inaccessibility` column to the specified table, "
+            "defined as the interior point furthest from any edge. Expensive "
+            "to compute but useful for positioning labels and symbols on "
+            "complex shapes."
         )
     )
     parser.add_argument(
-        "table",
+        "--table",
         type=str,
+        required=True,
         help="The name of the table to copy",
     )
-    args = parser.parse_args()
-    main(args)
+    parser.add_argument(
+        "--index",
+        type=str,
+        required=True,
+        help="The name of the table's primary key column",
+    )
+    parser.add_argument(
+        "--geom",
+        type=str,
+        default="geom",
+        help="The name of the table's geometry column",
+    )
+    parsed_args = parser.parse_args()
+    main(parsed_args)
