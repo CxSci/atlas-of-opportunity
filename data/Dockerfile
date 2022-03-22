@@ -7,6 +7,4 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/cache/apt/lists
 
-# Recursive init script for adding datasets under /data/datasets/.
-# Prefixed with "20_" so it comes after the postgis docker image's 10_postgis.sh.
-ADD ./scripts/init.sh /docker-entrypoint-initdb.d/20_init.sh
+ADD ./scripts/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d/

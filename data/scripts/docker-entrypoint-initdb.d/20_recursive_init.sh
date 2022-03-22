@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# Execute docker entrypoint scripts in subdirectories
+# Executes docker entrypoint scripts in subdirectories.
+#
+# Prefixed with "20_" so this runs after PostGIS's 10_postgis.sh.
 
 find /datasets/*/postgis-entrypoint-scripts -type f -print0 | while read -d $'\0' f; do
   case "$f" in
