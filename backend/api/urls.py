@@ -15,6 +15,11 @@ urlpatterns = [
         name="explore-metric-detail"
     ),
     path(
+        "datasets/<slug:dataset>/detail/<str:pk>/",
+        views.DetailView.as_view(),
+        name="dataset-detail"
+    ),
+    path(
         "api-auth/", include("rest_framework.urls", namespace="rest_framework")
     ),
 ]
