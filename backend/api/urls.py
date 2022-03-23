@@ -10,6 +10,11 @@ router.register(r"datasets", views.DatasetViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path(
+        "datasets/<slug:dataset>/metrics/<slug:metric>/",
+        views.ExploreMetricView.as_view(),
+        name="explore-metric-detail"
+    ),
+    path(
         "api-auth/", include("rest_framework.urls", namespace="rest_framework")
     ),
 ]
