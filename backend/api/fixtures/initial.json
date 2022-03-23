@@ -15,7 +15,7 @@
                         "id": "income_diversity",
                         "data":
                         {
-                            "url": "http://localhost:8000/datasets/small-business-support/data/income_diversity.json",
+                            "url": "http://localhost:8000/datasets/small-business-support/metrics/income_diversity/",
                             "type": "json"
                         },
                         "type": "chloropleth",

@@ -80,10 +80,21 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': environ.get('PGHOST', 'localhost'),
         'PORT': environ.get('PGPORT', 5432),
-        'NAME': environ.get('PGDATABASE', 'django'),
+        'NAME': environ.get('DJANGO_DATABASE', 'django'),
         'USER': environ.get('PGUSER', 'djangouser'),
         'PASSWORD': environ.get('PGPASSWORD', 'djangopassword'),
     }
+}
+
+
+# Connection details for the dashboard PostGIS database
+
+DASHBOARD_DATABASE = {
+    'HOST': environ.get('PGHOST', 'localhost'),
+    'PORT': environ.get('PGPORT', 5432),
+    'NAME': environ.get('PGDATABASE', 'dashboard'),
+    'USER': environ.get('PGUSER', 'djangouser'),
+    'PASSWORD': environ.get('PGPASSWORD', 'djangopassword'),
 }
 
 

@@ -9,7 +9,8 @@ services:
       PGHOST: postgis
       PGUSER: djangouser
       PGPASSWORD: djangopassword
-      PGDATABASE: django
+      PGDATABASE: dashboard
+      DJANGO_DATABASE: django
     ports:
       - '8000:8000'
     restart: always
