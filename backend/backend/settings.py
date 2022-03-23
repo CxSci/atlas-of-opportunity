@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +81,8 @@ DATABASES = {
         'HOST': environ.get('PGHOST', 'localhost'),
         'PORT': environ.get('PGPORT', 5432),
         'NAME': environ.get('PGDATABASE', 'django'),
-        'USER': environ.get('PGUSER', 'postgres'),
-        'PASSWORD': environ.get('PGPASSWORD', 'postgres'),
+        'USER': environ.get('PGUSER', 'djangouser'),
+        'PASSWORD': environ.get('PGPASSWORD', 'djangopassword'),
     }
 }
 
