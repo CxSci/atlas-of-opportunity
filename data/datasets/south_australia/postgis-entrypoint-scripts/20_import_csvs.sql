@@ -301,3 +301,20 @@ COPY transaction_indices
 ALTER TABLE transaction_indices
     DROP COLUMN tmp_index
 ;
+
+
+
+
+
+\qecho Importing anzsic_codes_flattened.csv...
+CREATE TABLE IF NOT EXISTS anzsic_codes_flattened (
+    type text,
+    title text,
+    code text
+);
+
+COPY anzsic_codes_flattened
+    FROM '/datasets/south_australia/sources/anzsic_codes_flattened.csv'
+    DELIMITER ','
+    CSV
+    HEADER;

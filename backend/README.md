@@ -47,5 +47,9 @@ ALTER ROLE djangouser SET client_encoding TO 'utf8';
 ALTER ROLE djangouser SET default_transaction_isolation TO 'read committed';
 ALTER ROLE djangouser SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE django TO djangouser;
+GRANT USAGE ON SCHEMA public TO djangouser;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO djangouser;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO djangouser;
+GRANT CONNECT ON DATABASE dashboard TO djangouser;
 EOF
 ```
