@@ -6,22 +6,21 @@ services:
     depends_on:
       - postgis
     environment:
-      PGHOST: postgis
-      PGUSER: djangouser
-      PGPASSWORD: djangopassword
-      PGDATABASE: dashboard
-      DJANGO_DATABASE: django
+      DEBUG: 'True'
+      DJANGO_DB_HOST: postgis
+      DASHBOARD_DB_HOST: postgis
     ports:
       - '8000:8000'
-    restart: always
+    volumes:
+      - './backend:/usr/src/app'
 
   dashboard:
     build: frontend
-    volumes:
-      - './frontend:/usr/src/app'
+    command: 'sh -c "npm install && npm start"'
     ports:
       - '3000:3000'
-    command: 'sh -c "npm install && npm start"'
+    volumes:
+      - './frontend:/usr/src/app'
 
   postgis:
     build: data
@@ -64,7 +63,7 @@ services:
     profiles:
       - psql
     volumes:
-      - ./data:/data:ro
+      - ./data/datasets:/data/datasets:ro
 
 volumes:
   postgis: {}
