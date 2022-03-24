@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 """Wait for a truthy PostgreSQL statement to be successful"""
 import argparse
 from os import environ
@@ -8,11 +10,11 @@ import psycopg2
 def main(args):
     dbname = args.database
     params = {
-        "host": environ.get("PGHOST", environ.get("PGHOSTADDR", "localhost")),
-        "port": environ.get("PGPORT", 5432),
-        "dbname": dbname if dbname else environ["PGDATABASE"],
-        "user": environ["PGUSER"],
-        "password": environ["PGPASSWORD"],
+        "host": environ.get("DASHBOARD_DB_HOST", "localhost"),
+        "port": environ.get("DASHBOARD_DB_PORT", 5432),
+        "dbname": dbname if dbname else environ["DASHBOARD_DB_NAME"],
+        "user": environ["DASHBOARD_DB_USER"],
+        "password": environ["DASHBOARD_DB_PASSWORD"],
     }
 
     try:
@@ -42,6 +44,7 @@ if __name__ == "__main__":
         help="The truthy SQL statement to attempt to execute",
     )
     parsed_args = parser.parse_args()
+    print("Waiting for database to be ready...")
     while not main(parsed_args):
         sleep(5)
     print("Database ready")

@@ -12,8 +12,8 @@ ADD . .
 
 EXPOSE 8000
 
-RUN chmod +x scripts/entrypoint.sh
-RUN chown django scripts/entrypoint.sh
+RUN chmod +x scripts/*
+RUN chown django scripts/*
 
 USER django
 

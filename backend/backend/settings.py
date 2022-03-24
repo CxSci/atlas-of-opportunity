@@ -9,8 +9,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from os import environ
+import os
 from pathlib import Path
+
+import environ
+
+
+# Set env casting and default values
+env = environ.Env(
+    # Default to non-debug production mode
+    DEBUG=(bool, False),
+    CORS_ALLOWED_ORIGINS=(list, []),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,11 +29,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7!r*iop#=vfg9&icptj*&54b@wcvats1kmfxed#hiyahroi^-u"  # noqa: E501
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#
+# DEBUG may only come from an env variable, not a dotenv file.
+DEBUG = env("DEBUG")
+
+# env order of precedence:
+# - existing env variables
+# - .env.*.local
+# - .env.local
+# - .env.*
+# - .env
+if DEBUG:
+    env.read_env(os.path.join(BASE_DIR, ".env.development.local"))
+else:
+    env.read_env(os.path.join(BASE_DIR, ".env.production.local"))
+env.read_env(os.path.join(BASE_DIR, ".env.local"))
+if DEBUG:
+    env.read_env(os.path.join(BASE_DIR, ".env.development"))
+else:
+    env.read_env(os.path.join(BASE_DIR, ".env.production"))
+env.read_env(os.path.join(BASE_DIR, ".env"))
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env(
+    "SECRET_KEY", default=("insecure" if DEBUG else environ.Env.NOTSET)
+)
+
 
 ALLOWED_HOSTS = []
 
@@ -80,11 +112,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": environ.get("PGHOST", "localhost"),
-        "PORT": environ.get("PGPORT", 5432),
-        "NAME": environ.get("DJANGO_DATABASE", "django"),
-        "USER": environ.get("PGUSER", "djangouser"),
-        "PASSWORD": environ.get("PGPASSWORD", "djangopassword"),
+        "HOST": env("DJANGO_DB_HOST"),
+        "PORT": env("DJANGO_DB_PORT"),
+        "NAME": env("DJANGO_DB_NAME"),
+        "USER": env("DJANGO_DB_USER"),
+        "PASSWORD": env("DJANGO_DB_PASSWORD"),
     }
 }
 
@@ -92,11 +124,11 @@ DATABASES = {
 # Connection details for the dashboard PostGIS database
 
 DASHBOARD_DATABASE = {
-    "HOST": environ.get("PGHOST", "localhost"),
-    "PORT": environ.get("PGPORT", 5432),
-    "NAME": environ.get("PGDATABASE", "dashboard"),
-    "USER": environ.get("PGUSER", "djangouser"),
-    "PASSWORD": environ.get("PGPASSWORD", "djangopassword"),
+    "HOST": env("DASHBOARD_DB_HOST"),
+    "PORT": env("DASHBOARD_DB_PORT"),
+    "NAME": env("DASHBOARD_DB_NAME"),
+    "USER": env("DASHBOARD_DB_USER"),
+    "PASSWORD": env("DASHBOARD_DB_PASSWORD"),
 }
 
 
@@ -105,16 +137,16 @@ DASHBOARD_DATABASE = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa: E501
     },
 ]
 
@@ -144,7 +176,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # API
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+# env expects a comma delimited list like
+# CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS")

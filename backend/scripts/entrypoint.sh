@@ -2,7 +2,8 @@
 
 # Wait until postgis service is running and postprocessor service has finished
 # successfully.
-python3 scripts/wait_for_postgresql.py --database dashboard \
+scripts/dotenv.sh \
+    python3 scripts/wait_for_postgresql.py \
     "SELECT to_regclass('public.dashboard_postprocessor');"
 
 echo "Starting api service..."
