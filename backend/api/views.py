@@ -1,13 +1,13 @@
-from backend.settings import DASHBOARD_DATABASE
 from itertools import chain
+
+import psycopg2 as pg
 from rest_framework import permissions, views, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
 from api.models import Dataset
 from api.serializers import DatasetSerializer
-
-import psycopg2 as pg
+from backend.settings import DASHBOARD_DATABASE
 
 
 def execute_sql(conn, sql, many=True):

@@ -14,7 +14,6 @@ from pathlib import Path
 
 import environ
 
-
 # Set env casting and default values
 env = environ.Env(
     # Default to non-debug production mode

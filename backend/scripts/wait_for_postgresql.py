@@ -4,6 +4,7 @@
 import argparse
 from os import environ
 from time import sleep
+
 import psycopg2
 
 
