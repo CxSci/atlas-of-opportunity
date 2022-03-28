@@ -1,10 +1,21 @@
 import React from 'react'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, styled, Typography } from '@mui/material'
+import { ChevronRight } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
+import PATH from '../../utils/path'
+import { iconColor } from '../../utils/theme'
 
-function MapPopupContent({ id, title, metricName, data, colorScheme, domain, expanded }) {
+const StyledTitleLink = styled(Link)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  textDecoration: 'none',
+  marginBottom: '8px',
+})
+
+function MapPopupContent({ id, datasetId, title, metricName, data, colorScheme, domain, expanded }) {
   return (
     <Box
       p={1.5}
@@ -13,9 +24,14 @@ function MapPopupContent({ id, title, metricName, data, colorScheme, domain, exp
       borderRadius={'10px'}
       width={200}
       boxShadow={'0px 2px 4px rgba(0, 0, 0, 0.25)'}>
-      <Typography fontSize={18} fontWeight={500} color={'#000'} mb={'8px'}>
-        {title}
-      </Typography>
+      <StyledTitleLink to={`${PATH.DATASET_ENTRY.replace(':datasetId', datasetId).replace(':entryId', id)}`}>
+        <Typography fontSize={18} fontWeight={500} color={'#000'}>
+          {title}
+        </Typography>
+
+        <ChevronRight sx={{ position: 'relative', left: '8px', color: iconColor }} />
+      </StyledTitleLink>
+
       <Typography fontSize={14} mb={0.5}>
         {metricName}
       </Typography>

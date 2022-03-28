@@ -29,7 +29,7 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup }) {
+function Map({ config, hidePopup, datasetId }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const map = useRef(null)
@@ -467,7 +467,7 @@ function Map({ config, hidePopup }) {
       <GlobalStyles styles={mapGlobalStyles} />
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef}>{popupData && <MapPopupContent {...popupData} />}</div>
+      <div ref={popupContainerRef}>{popupData && <MapPopupContent datasetId={datasetId} {...popupData} />}</div>
       <Box
         position={'absolute'}
         bottom={38}
