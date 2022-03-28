@@ -34,13 +34,13 @@ function Home() {
 
           <ul>
             <li>
-              <Link to={'/explore/small-business'}>Small business support</Link>
+              <Link to={'/explore/small-business-support'}>Small business support</Link>
             </li>
             <li>
               <Link to={'/explore/occupations'}>Occupations</Link>
             </li>
             <li>
-              <Link to={'/explore/small-business/dataset'}>Small business DATASET_ENTRY</Link>
+              <Link to={'/explore/small-business-support/401011001'}>Small business DATASET_ENTRY</Link>
             </li>
             <li>
               <Link to={'/explore/occupations/dataset'}>Occupations DATASET_ENTRY</Link>

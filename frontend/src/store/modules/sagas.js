@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects'
 
-import { saga as smallBuiness } from './smallBusiness'
+import { saga as datasetSaga } from './dataset'
 
 export default function* rootSaga() {
-  yield all([smallBuiness()])
+  yield all([datasetSaga()])
 }
