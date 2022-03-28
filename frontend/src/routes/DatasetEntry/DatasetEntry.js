@@ -1,17 +1,20 @@
-import { useParams } from 'react-router'
 import { Box, Typography } from '@mui/material'
+import { useEffect } from 'react'
+import { useParams } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
 
-import Dashboard from '../../components/Dashboard'
-import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
-import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
-import CompareBtn from '../../components/Header/CompareBtn'
-import { DATASETS_MAP } from '../../utils/constants'
-import CompareAddBtn from '../../components/Header/CompareAddBtn'
-import PATH from '../../utils/path'
+import { DATASETS_MAP } from 'utils/constants'
+import { getDatasetDetailData, datasetDetailDataSelector, createDetailLayoutSelector } from 'store/modules/dataset'
+import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
+import { scrolledHeaderHeight } from 'utils/theme'
+import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
+import CompareAddBtn from 'components/Header/CompareAddBtn'
+import CompareBtn from 'components/Header/CompareBtn'
+import Dashboard from 'components/Dashboard'
+import PATH from 'utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
-import { scrolledHeaderHeight } from '../../utils/theme'
 
-const getDatasetComponent = datasetId => {
+const getDatasetEntryComponent = datasetId => {
   switch (datasetId) {
     case 'small-business-support':
       return SmallBusinessSupport
@@ -22,14 +25,29 @@ const getDatasetComponent = datasetId => {
 
 const DatasetEntry = () => {
   const params = useParams()
+  const dispatch = useDispatch()
   const { datasetId, entryId } = params || {}
-  const DataSetComponent = getDatasetComponent(datasetId)
+  const DatasetEntryComponent = getDatasetEntryComponent(datasetId)
+
+  const sectionsData = useSelector(datasetDetailDataSelector)
+  const sectionsLayout = useSelector(createDetailLayoutSelector(datasetId))
 
   const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = datasetConfig?.name || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
   const entry = datasetConfig?.entriesMap?.[entryId]
   const entryName = entry?.name || ''
+
+  useEffect(
+    () =>
+      dispatch(
+        getDatasetDetailData({
+          datasetId,
+          entryId,
+        }),
+      ),
+    [dispatch, datasetId, entryId],
+  )
 
   const headerRightContent = (
     <>
@@ -75,7 +93,7 @@ const DatasetEntry = () => {
           ),
         },
       }}>
-      <DataSetComponent />
+      <DatasetEntryComponent sectionsData={sectionsData} sectionsLayout={sectionsLayout} />
     </Dashboard>
   )
 }

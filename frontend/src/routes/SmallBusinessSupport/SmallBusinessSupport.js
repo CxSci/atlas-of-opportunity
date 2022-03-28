@@ -1,8 +1,7 @@
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
+import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
 
 import Anchor from 'components/Anchor'
 import MetricsContainer from 'components/MetricsContainer'
@@ -14,12 +13,6 @@ import SectionStackedArea from 'components/SectionStackedArea'
 import SectionText from 'components/SectionText'
 import Spinner from 'components/Spinner'
 import { slugify } from 'utils/helpers'
-import {
-  getSmallBusinessDataLayout,
-  getSmallBusinessDataDetail,
-  smallBusinessDataLayoutSelector,
-  smallBusinessDataDetailSelector,
-} from 'store/modules/smallBusiness'
 
 const componentMappings = {
   text: SectionText,
@@ -29,15 +22,7 @@ const componentMappings = {
   stacked_area: SectionStackedArea,
 }
 
-const SmallBusinessSupport = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => dispatch(getSmallBusinessDataLayout()), [dispatch])
-  useEffect(() => dispatch(getSmallBusinessDataDetail()), [dispatch])
-
-  const sectionsData = useSelector(smallBusinessDataDetailSelector)
-  const sectionsLayout = useSelector(smallBusinessDataLayoutSelector)
-
+const SmallBusinessSupport = ({ sectionsData, sectionsLayout }) => {
   if (!sectionsLayout || !sectionsData) {
     return <Spinner />
   }
@@ -78,6 +63,11 @@ const SmallBusinessSupport = () => {
       </Container>
     </Box>
   )
+}
+
+SmallBusinessSupport.propTypes = {
+  sectionsData: PropTypes.object,
+  sectionsLayout: PropTypes.object,
 }
 
 export default SmallBusinessSupport

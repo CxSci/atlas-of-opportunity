@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 
 import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
@@ -8,17 +8,15 @@ import Dashboard from '../../components/Dashboard'
 import Map from '../../components/Map/'
 import SearchInput from '../../components/Header/SearchInput'
 import { DATASETS_MAP } from '../../utils/constants'
-import { getSmallBusinessSupportData, smallBusinessSupportDataSelector } from 'store/modules/smallBusiness'
+import { createExploreLayoutSelector } from 'store/modules/dataset'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { TempContext } from '../../contexts/AppTempContext'
 
 function Dataset() {
-  const dispatch = useDispatch()
   const params = useParams()
   const { datasetId } = params || {}
-  // TODO: temp
   const { setDarkTheme } = useContext(TempContext)
-  const data = useSelector(smallBusinessSupportDataSelector)
+  const data = useSelector(createExploreLayoutSelector(datasetId))
   const DataSetComponent = getDatasetComponent(data?.type)
   const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = data?.title || ''
@@ -31,8 +29,6 @@ function Dataset() {
     // reset dark theme value
     return () => setDarkTheme(false)
   }, [datasetConfig?.darkTheme, setDarkTheme])
-
-  useEffect(() => dispatch(getSmallBusinessSupportData()), [dispatch])
 
   return (
     <Dashboard
