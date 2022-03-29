@@ -8,7 +8,7 @@ import Dashboard from '../../components/Dashboard'
 import Map from '../../components/Map/'
 import SearchInput from '../../components/Header/SearchInput'
 import { DATASETS_MAP } from '../../utils/constants'
-import { createExploreLayoutSelector } from 'store/modules/dataset'
+import { createDataSetSelector } from 'store/modules/dataset'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { TempContext } from '../../contexts/AppTempContext'
 
@@ -16,10 +16,11 @@ function Dataset() {
   const params = useParams()
   const { datasetId } = params || {}
   const { setDarkTheme } = useContext(TempContext)
-  const data = useSelector(createExploreLayoutSelector(datasetId))
+  const dataset = useSelector(createDataSetSelector(datasetId))
+  const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
   const datasetConfig = DATASETS_MAP?.[datasetId]
-  const datasetName = data?.title || ''
+  const datasetName = dataset?.title || ''
   const searchPlaceholder = datasetConfig?.searchPlaceholder || ''
 
   // effects
