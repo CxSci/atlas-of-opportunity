@@ -32,8 +32,8 @@ def search_dataset(request, dataset=None):
     query = request.query_params.get("q", None)
 
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
-                **DASHBOARD_DATABASE
-            )
+        **DASHBOARD_DATABASE
+    )
     conn = pg.connect(dsn)
     sql = """with t as (
                 select sa2_main16, sa2_name16,
@@ -46,7 +46,79 @@ def search_dataset(request, dataset=None):
                 array[ST_XMin(bbox), ST_YMin(bbox),
                       ST_XMax(bbox), ST_YMax(bbox)] as bbox
             from t"""
-    result = execute_sql(conn, sql, params=(query, ))
+    result = execute_sql(conn, sql, params=(query,))
+    conn.close()
+
+    return Response(result)
+
+
+@api_view()
+def geometry_for_ids(request, dataset=None):
+    # The feature IDs to include
+    feature_ids = request.query_params.get("ids", None)
+    include_neighbors = request.query_params.get("include_neighbors", None)
+
+    if not feature_ids:
+        return Response({"error": "Need at least 1 feature id in `ids`"}, 400)
+
+    include_neighbors = True if include_neighbors == "true" else False
+
+    # ignore more than one feature_id for now
+    feature_id = feature_ids.split(" ")[0]
+
+    dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+        **DASHBOARD_DATABASE
+    )
+    conn = pg.connect(dsn)
+
+    if include_neighbors:
+        sql = """with a as (
+                     select Box2D(geom) as bbox
+                     from sa2_2016_aust
+                     where sa2_main16=%s
+                 ),
+                 b as (
+                     select ST_MakeEnvelope(
+                     (ST_XMin(bbox) - 3 * (ST_XMax(bbox) - ST_XMin(bbox))),
+                     (ST_YMin(bbox) - 2 * (ST_YMax(bbox) - ST_YMin(bbox))),
+                     (ST_XMax(bbox) - 3 * (ST_XMin(bbox) - ST_XMax(bbox))),
+                     (ST_YMax(bbox) - 2 * (ST_YMin(bbox) - ST_YMax(bbox))),
+                     4283) as clipbox
+                     from a
+                 )
+                 select json_build_object(
+                     'type', 'FeatureCollection',
+                     'features', json_agg(
+                         json_build_object(
+                             'type',       'Feature',
+                             'id',         sa2_main16,
+                             'geometry',   ST_AsGeoJSON(ST_Transform(
+                                 ST_SimplifyPreserveTopology(
+                                     ST_ClipByBox2D(geom, clipbox), 0.0001),
+                                     4326), 6)::json,
+                             'properties', json_build_object()
+                         )
+                     )
+                 ) as data
+                 from sa2_2016_aust, b
+                 where ST_Intersects(b.clipbox::geography, geom::geography)"""
+    else:
+        sql = """select json_build_object(
+                    'type', 'FeatureCollection',
+                    'features', json_agg(
+                        json_build_object(
+                            'type',       'Feature',
+                            'id',         sa2_main16,
+                            'geometry',   ST_AsGeoJSON(ST_Transform(
+                                ST_SimplifyPreserveTopology(
+                                    geom, 0.0001), 4326), 6)::json,
+                            'properties', json_build_object()
+                        )
+                    )
+                ) as data
+                from sa2_2016_aust
+                where sa2_main16=%s"""
+    result = execute_sql(conn, sql, params=(feature_id,))
     conn.close()
 
     return Response(result)
@@ -361,7 +433,11 @@ class DetailView(views.APIView):
         result["_atlas_title"] = result["sa2_name16"]
         result["_atlas_header_image"] = {
             "type": "geojson",
-            "url": "http://localhost:8000/datasets/small-business-support/geometry?ids=401011001&include_context=true&format=geojson"  # noqa: E501
+            "url": (
+                "http://localhost:8000/datasets/small-business-support/"
+                f"geometry?ids={result['sa2_main16']}&include_neighbors=true"
+                "&format=geojson"
+            ),
         }
 
         conn.close()

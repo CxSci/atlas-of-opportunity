@@ -16,6 +16,11 @@ urlpatterns = [
         name="dataset-search",
     ),
     path(
+        "datasets/<slug:dataset>/geometry/",
+        views.geometry_for_ids,
+        name="dataset-geometry",
+    ),
+    path(
         "datasets/<slug:dataset>/metrics/<slug:metric>/",
         views.ExploreMetricView.as_view(),
         name="explore-metric-detail",
