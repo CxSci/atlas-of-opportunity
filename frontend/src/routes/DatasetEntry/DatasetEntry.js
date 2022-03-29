@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { DATASETS_MAP } from 'utils/constants'
-import { getDatasetDetailData, datasetDetailDataSelector, createDetailLayoutSelector } from 'store/modules/dataset'
+import { getDatasetDetailData, datasetDetailDataSelector, createDataSetSelector } from 'store/modules/dataset'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { scrolledHeaderHeight } from 'utils/theme'
 import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
@@ -29,11 +29,11 @@ const DatasetEntry = () => {
   const { datasetId, entryId } = params || {}
   const DatasetEntryComponent = getDatasetEntryComponent(datasetId)
 
+  const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
-  const sectionsLayout = useSelector(createDetailLayoutSelector(datasetId))
-
+  const sectionsLayout = dataset?.detailLayout
   const datasetConfig = DATASETS_MAP?.[datasetId]
-  const datasetName = datasetConfig?.name || ''
+  const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
   const entry = datasetConfig?.entriesMap?.[entryId]
   const entryName = entry?.name || ''
@@ -65,7 +65,7 @@ const DatasetEntry = () => {
         content: {
           left: (
             <AtlasBreadcrumbs
-              links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }, { text: entryName }]}
+              links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }, { text: sectionsLayout?.title }]}
             />
           ),
           right: headerRightContent,

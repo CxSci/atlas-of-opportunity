@@ -3,7 +3,7 @@ export const SHOW_SCROLLED_HEADER_HEIGHT = 20
 export const EXPANDABLE_MINIMUM_ITEMS = 5
 
 export const DATASETS_MAP = {
-  'small-business': {
+  'small-business-support': {
     name: 'Small Business Support',
     searchPlaceholder: 'Search by region or suburb',
     darkTheme: true,
@@ -35,7 +35,6 @@ export const DATASETS_MAP = {
   },
 }
 
-export const MAPBOX_API_KEY =
-  'pk.eyJ1IjoianVzdGluYW5kZXJzb24iLCJhIjoiY2tjYW10aWpxMXd1eDMwcW83OTkxNHpxNCJ9.fDQRr2Ctj4skAatc3pZ8VA'
+export const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOX_API_KEY
 
-export const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:8000/'
+export const API_BASE = process.env.REACT_APP_API_BASE

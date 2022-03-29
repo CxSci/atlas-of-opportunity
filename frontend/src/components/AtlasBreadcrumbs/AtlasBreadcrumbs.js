@@ -11,12 +11,8 @@ export const homeBreadcrumbLink = {
 function AtlasBreadcrumbs({ links = [] }) {
   return (
     <Breadcrumbs aria-label="breadcrumb">
-      {(links || []).map(linkItem => (
-        <Link
-          key={linkItem?.text}
-          underline={linkItem?.path ? 'hover' : 'none'}
-          color="inherit"
-          href={linkItem?.path}>
+      {(links || []).map((linkItem, index) => (
+        <Link key={index} underline={linkItem?.path ? 'hover' : 'none'} color="inherit" href={linkItem?.path}>
           {linkItem?.text}
         </Link>
       ))}
