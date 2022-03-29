@@ -81,6 +81,7 @@ function Map({ config, hidePopup, datasetId }) {
         className: popupClassName,
         offset: [0, popupOffsetY],
         maxWidth: 'none',
+        focusAfterOpen: false,
       })
 
       const expandPopup = () => {
@@ -451,6 +452,9 @@ function Map({ config, hidePopup, datasetId }) {
     return () => {
       map.current?.remove?.()
       map.current = null
+      
+      // resets map's location hash
+      window.history.replaceState(null, null, ' ')
     }
   }, [config])
 

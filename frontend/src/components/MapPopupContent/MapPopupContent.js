@@ -38,13 +38,7 @@ function MapPopupContent({ id, datasetId, title, metricName, data, colorScheme, 
 
       {data > 0 && (
         <Box>
-          <SimpleRange
-            value={data}
-            size={'small'}
-            variant={'gradient'}
-            colorScheme={colorScheme}
-            domain={domain}
-          />
+          <SimpleRange value={data} size={'small'} variant={'gradient'} colorScheme={colorScheme} domain={domain} />
         </Box>
       )}
 
