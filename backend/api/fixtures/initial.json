@@ -8,7 +8,9 @@
             "description": "",
             "explore_layout":
             {
+                "theme": "dark",
                 "type": "map",
+                "searchPlaceholder": "Search by region or suburb",
                 "metrics":
                 [
                     {
@@ -183,6 +185,8 @@
             },
             "detail_layout":
             {
+                "theme": "light",
+                "hasHeaderImage": true,
                 "sections":
                 [
                     {
@@ -213,7 +217,7 @@
                                 "numberFormat":
                                 {
                                     "style": "percent",
-                                    "maximumFractionDigits": 20
+                                    "maximumFractionDigits": 2
                                 }
                             },
                             {
@@ -260,7 +264,7 @@
                                     "numberFormat":
                                     {
                                         "style": "percent",
-                                        "maximumFractionDigits": 20
+                                        "maximumFractionDigits": 2
                                     }
                                 },
                                 "key": "percentage_persons_aged",
@@ -366,7 +370,7 @@
                                     "numberFormat":
                                     {
                                         "style": "percent",
-                                        "maximumFractionDigits": 20
+                                        "maximumFractionDigits": 2
                                     }
                                 },
                                 "key": "earners_per_quartile",
@@ -386,7 +390,7 @@
                                     "numberFormat":
                                     {
                                         "style": "percent",
-                                        "maximumFractionDigits": 20
+                                        "maximumFractionDigits": 2
                                     }
                                 },
                                 "key": "income_share",
@@ -409,7 +413,7 @@
                                 "numberFormat":
                                 {
                                     "style": "percent",
-                                    "maximumFractionDigits": 20
+                                    "maximumFractionDigits": 2
                                 }
                             },
                             {
