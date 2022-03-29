@@ -320,7 +320,6 @@ class DetailView(views.APIView):
             f"where sa2_code_16='{pk}' order by title"
         )
         rows = execute_sql(conn, bsns_rents, many=True)
-        print(rows[0])
         result.update(
             {
                 "business_rents": (
@@ -332,6 +331,12 @@ class DetailView(views.APIView):
                 )
             }
         )
+
+        result["_atlas_title"] = result["sa2_name16"]
+        result["_atlas_header_image"] = {
+            "type": "geojson",
+            "url": "http://localhost:8000/datasets/small-business-support/geometry?ids=401011001&include_context=true&format=geojson"  # noqa: E501
+        }
 
         conn.close()
         return Response(result)
