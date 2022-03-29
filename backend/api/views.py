@@ -2,6 +2,7 @@ from itertools import chain
 
 import psycopg2 as pg
 from rest_framework import permissions, views, viewsets
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
@@ -10,9 +11,9 @@ from api.serializers import DatasetSerializer
 from backend.settings import DASHBOARD_DATABASE
 
 
-def execute_sql(conn, sql, many=True):
+def execute_sql(conn, sql, params=None, many=True):
     with conn.cursor(cursor_factory=pg.extras.RealDictCursor) as cur:
-        cur.execute(sql)
+        cur.execute(sql, params)
         if many:
             return cur.fetchall()
         else:
@@ -24,6 +25,31 @@ class DatasetViewSet(viewsets.ModelViewSet):
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+@api_view()
+def search_dataset(request, dataset=None):
+    query = request.query_params.get("q", None)
+
+    dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+                **DASHBOARD_DATABASE
+            )
+    conn = pg.connect(dsn)
+    sql = """with t as (
+                select sa2_main16, sa2_name16,
+                    Box2D(ST_Transform(geom, 4326)) as bbox
+                from sa2_2016_aust
+                where ste_name16='South Australia'
+                and to_tsvector(sa2_name16) @@ plainto_tsquery(%s)
+            )
+            select sa2_main16 as id, sa2_name16 as title,
+                array[ST_XMin(bbox), ST_YMin(bbox),
+                      ST_XMax(bbox), ST_YMax(bbox)] as bbox
+            from t"""
+    result = execute_sql(conn, sql, params=(query, ))
+    conn.close()
+
+    return Response(result)
 
 
 class ExploreMetricView(views.APIView):
