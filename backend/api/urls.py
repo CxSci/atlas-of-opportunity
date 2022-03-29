@@ -11,6 +11,11 @@ router.register(r"datasets", views.DatasetViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path(
+        "datasets/<slug:dataset>/search/",
+        views.search_dataset,
+        name="dataset-search",
+    ),
+    path(
         "datasets/<slug:dataset>/metrics/<slug:metric>/",
         views.ExploreMetricView.as_view(),
         name="explore-metric-detail",
