@@ -16,9 +16,11 @@ if [[ $(psql -A -t -c "$CHECK_SQL") != "$SENTINEL" ]]; then
   # - Look in subdirectories
   find /datasets/*/postprocessor-entrypoint-scripts -type f -print0 | while read -d $'\0' f; do
     case "$f" in
-      *.sh)    echo "$0: running $f"; sh "$f" ;;
-      *.py)    echo "$0: running $f"; python3 "$f"; echo ;;
-      *)       echo "$0: ignoring $f" ;;
+      *.sh)     echo "$0: running $f"; sh "$f" ;;
+      *.sql)    echo "$0: running $f"; psql -f "$f"; echo ;;
+      *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | psql; echo ;;
+      *.py)     echo "$0: running $f"; python3 "$f"; echo ;;
+      *)        echo "$0: ignoring $f" ;;
     esac
     echo
   done
