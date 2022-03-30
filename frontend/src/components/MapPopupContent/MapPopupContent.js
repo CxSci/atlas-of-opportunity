@@ -29,7 +29,15 @@ function MapPopupContent({ id, datasetId, title, metricName, data, colorScheme, 
           {title}
         </Typography>
 
-        <ChevronRight sx={{ position: 'relative', left: '8px', color: iconColor }} />
+        <ChevronRight
+          sx={{
+            position: 'relative',
+            left: '8px',
+            color: iconColor,
+            opacity: expanded ? 1 : 0,
+            transition: theme => `opacity ${theme.transitions.duration.short}ms`,
+          }}
+        />
       </StyledTitleLink>
 
       <Typography fontSize={14} mb={0.5}>
