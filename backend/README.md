@@ -15,7 +15,7 @@ Locally:
 python3 -m venv venv
 source venv/bin/activate
 pip install -U pip
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 ## Run the backend service
@@ -31,6 +31,7 @@ Locally:
 
 ```shell
 source venv/bin/activate
+export DEBUG=True
 python3 manage.py migrate --noinput && \
 python3 manage.py loaddata initial.json --app api --format json && \
 python3 manage.py runserver
