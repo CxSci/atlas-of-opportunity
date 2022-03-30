@@ -29,7 +29,7 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup }) {
+function Map({ config, hidePopup, datasetId }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const map = useRef(null)
@@ -81,6 +81,7 @@ function Map({ config, hidePopup }) {
         className: popupClassName,
         offset: [0, popupOffsetY],
         maxWidth: 'none',
+        focusAfterOpen: false,
       })
 
       const expandPopup = () => {
@@ -451,6 +452,9 @@ function Map({ config, hidePopup }) {
     return () => {
       map.current?.remove?.()
       map.current = null
+      
+      // resets map's location hash
+      window.history.replaceState(null, null, ' ')
     }
   }, [config])
 
@@ -467,7 +471,7 @@ function Map({ config, hidePopup }) {
       <GlobalStyles styles={mapGlobalStyles} />
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef}>{popupData && <MapPopupContent {...popupData} />}</div>
+      <div ref={popupContainerRef}>{popupData && <MapPopupContent datasetId={datasetId} {...popupData} />}</div>
       <Box
         position={'absolute'}
         bottom={38}

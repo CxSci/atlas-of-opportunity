@@ -6,6 +6,7 @@ const borderRadiusRound = '19px'
 const bgLight = '#fff'
 const bgHoverLight = '#f2f2f2'
 const darkGrey = '#333333'
+export const iconColor = '#4d4d4d'
 export const headerHeight = '60px'
 export const scrolledHeaderHeight = '84px'
 
@@ -235,7 +236,7 @@ const initTheme = darkMode =>
         paddingY: '10px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
-        iconColor: darkMode ? '#ffffff' : '#4d4d4d',
+        iconColor: darkMode ? '#ffffff' : iconColor,
         iconHoverColor: darkMode ? '#ffffff' : '#000000',
       },
       SectionNavbar: {

@@ -47,7 +47,7 @@ function Dataset() {
         },
       }}>
       <div>
-        <DataSetComponent config={data} />
+        <DataSetComponent config={data} datasetId={datasetId} />
       </div>
     </Dashboard>
   )
