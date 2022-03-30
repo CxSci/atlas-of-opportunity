@@ -440,6 +440,8 @@ function Map({ config, hidePopup, datasetId }) {
       //
       // Uses a query parameter style. `map` is reserved for this, but other
       // parameters can be added, e.g. #map=...&foo=bar.
+      //
+      // Note: See comment below about a known bug related to hash: 'map'.
       hash: 'map',
     })
 
@@ -450,9 +452,16 @@ function Map({ config, hidePopup, datasetId }) {
     map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
 
     return () => {
+      // There's a known bug with `hash: 'map'` where it updates the location
+      // hash one last time after being removed here. That means any
+      // react-router `<Link>` from here to another page would end up with an
+      // extra hash set like `#map=5.09/-32.2/135`. The `replaceState``call
+      // below is necessary to prevent that, though it also removes the hash
+      // fragment from any link on this page.
+      // See https://github.com/mapbox/mapbox-gl-js/issues/11409.
       map.current?.remove?.()
       map.current = null
-      
+
       // resets map's location hash
       window.history.replaceState(null, null, ' ')
     }
