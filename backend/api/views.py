@@ -36,16 +36,19 @@ def search_dataset(request, dataset=None):
     )
     conn = pg.connect(dsn)
     # TODO: This should also incorporate results from Mapbox's Search API.
-    sql = """with t as (
-                select sa2_main16, sa2_name16,
+    sql = """
+        with t as (
+                select sa2_main16, sa2_name16, pole_of_inaccessibility,
                     Box2D(ST_Transform(geom, 4326)) as bbox
                 from sa2_2016_aust
                 where ste_name16='South Australia'
-                and to_tsvector(sa2_name16) @@ plainto_tsquery(%s)
+                and to_tsvector(sa2_name16) @@ plainto_tsquery('Adelaide')
             )
             select sa2_main16 as id, sa2_name16 as title,
                 array[ST_XMin(bbox), ST_YMin(bbox),
-                      ST_XMax(bbox), ST_YMax(bbox)] as bbox
+                      ST_XMax(bbox), ST_YMax(bbox)] as bbox,
+            array[ST_X(pole_of_inaccessibility),
+                  ST_Y(pole_of_inaccessibility)] as pole_of_inaccessibility
             from t"""
     result = execute_sql(conn, sql, params=(query,))
     conn.close()
@@ -131,7 +134,7 @@ def geometry_for_ids(request, dataset=None):
     result = execute_sql(conn, sql, params=(feature_id,))
     conn.close()
 
-    return Response(result[0]['data'])
+    return Response(result[0]["data"])
 
 
 class ExploreMetricView(views.APIView):
