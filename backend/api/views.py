@@ -35,6 +35,7 @@ def search_dataset(request, dataset=None):
         **DASHBOARD_DATABASE
     )
     conn = pg.connect(dsn)
+    # TODO: This should also incorporate results from Mapbox's Search API.
     sql = """with t as (
                 select sa2_main16, sa2_name16,
                     Box2D(ST_Transform(geom, 4326)) as bbox
@@ -63,7 +64,7 @@ def geometry_for_ids(request, dataset=None):
 
     include_neighbors = True if include_neighbors == "true" else False
 
-    # ignore more than one feature_id for now
+    # TODO: Support requests for multiple ids
     feature_id = feature_ids.split(" ")[0]
 
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
@@ -72,6 +73,15 @@ def geometry_for_ids(request, dataset=None):
     conn = pg.connect(dsn)
 
     if include_neighbors:
+        # TODO: This search is inefficient and uses the wrong bounding box, but
+        # it's sufficient for a first past.
+        #
+        # clipbox should be a square with its side length based on the longest
+        # side of bbox.
+        #
+        # It would also be good to include a bbox on the FeatureCollection
+        # which fits the requested ids in order to simplify figuring that out
+        # in the frontend.
         sql = """with a as (
                      select Box2D(geom) as bbox
                      from sa2_2016_aust
@@ -121,7 +131,7 @@ def geometry_for_ids(request, dataset=None):
     result = execute_sql(conn, sql, params=(feature_id,))
     conn.close()
 
-    return Response(result)
+    return Response(result[0]['data'])
 
 
 class ExploreMetricView(views.APIView):
@@ -436,7 +446,7 @@ class DetailView(views.APIView):
             "url": (
                 "http://localhost:8000/datasets/small-business-support/"
                 f"geometry?ids={result['sa2_main16']}&include_neighbors=true"
-                "&format=geojson"
+                "&format=json"
             ),
         }
 
