@@ -81,7 +81,12 @@ def geometry_for_ids(request, dataset=None):
         # ratios from 1:1 to 5:2.
         sql = """
             with a as (
-                select bbox, simplify_precision, bbox_array
+                select bbox,
+                    case
+                        when (width) <= 3 then 0
+                        when (width) between 3 and 9 then 0.005
+                        when (width) >= 9 then 0.01
+                    end simplify_precision
                 from sa2_2016_aust,
                 lateral (select ST_SetSRID(
                     mitcxi_scaled_bbox(
@@ -89,15 +94,7 @@ def geometry_for_ids(request, dataset=None):
                     ),
                     ST_SRID(geom)
                 ) as bbox) b,
-                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) c,
-                lateral (select case
-                    when (width) <= 3 then 0
-                    when (width) between 3 and 9 then 0.005
-                    when (width) >= 9 then 0.01
-                end simplify_precision) d,
-                lateral (select array[
-                    ST_XMin(bbox), ST_YMin(bbox), ST_XMax(bbox), ST_YMax(bbox)
-                ] as bbox_array) e
+                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) c
                 where sa2_main16=%s
                 limit 1
             ),
@@ -108,42 +105,39 @@ def geometry_for_ids(request, dataset=None):
                         'id',         sa2_main16,
                         'geometry',   ST_AsGeoJSON(ST_Transform(
                             ST_SimplifyPreserveTopology(
-                                ST_ClipByBox2D(geom, a.bbox),
-                                a.simplify_precision
+                                ST_ClipByBox2D(geom, bbox),
+                                simplify_precision
                             ), 4326), 6)::json,
                         'properties', json_build_object()
                     )
                 ) as features
                 from sa2_2016_aust, a
                 where ste_name16='South Australia'
-                and a.bbox && sa2_2016_aust.geom
+                and bbox && geom
             )
             select json_build_object(
                 'type', 'FeatureCollection',
-                'bbox', a.bbox_array,
-                'features', f.features
+                'bbox', mitcxi_asArray(bbox),
+                'features', features
             ) as data
             from a, f"""
     else:
         # Return only the requested feature.
         sql = """
             with a as (
-                select bbox, simplify_precision, bbox_array, geom, sa2_main16
+                select sa2_main16, bbox, geom, 
+                    case
+                        when (width) <= 3 then 0
+                        when (width) between 3 and 9 then 0.005
+                        when (width) >= 9 then 0.01
+                    end simplify_precision
                 from sa2_2016_aust,
                 lateral (
                     select ST_SetSRID(
                         mitcxi_escribed_square_bbox(Box2D(geom)),
                     ST_SRID(geom)
                 ) as bbox) b,
-                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) w,
-                lateral (select case
-                    when (width) <= 3 then 0
-                    when (width) between 3 and 9 then 0.005
-                    when (width) >= 9 then 0.01
-                end simplify_precision) c,
-                lateral (select array[
-                    ST_XMin(bbox), ST_YMin(bbox), ST_XMax(bbox), ST_YMax(bbox)
-                ] as bbox_array) d
+                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) w
                 where sa2_main16=%s
                 limit 1
             ),
@@ -163,10 +157,11 @@ def geometry_for_ids(request, dataset=None):
             )
             select json_build_object(
                 'type', 'FeatureCollection',
-                'bbox', a.bbox_array,
-                'features', f.features
+                'bbox', mitcxi_asArray(bbox),
+                'features', features
             ) as data
-            from a, f"""
+            from a, f
+        """
     result = execute_sql(conn, sql, params=(feature_id,))
     conn.close()
 
