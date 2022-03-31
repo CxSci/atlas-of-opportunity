@@ -1,9 +1,8 @@
-import { Box, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { Box, Typography, ThemeProvider } from '@mui/material'
+import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { DATASETS_MAP } from 'utils/constants'
 import { getDatasetDetailData, datasetDetailDataSelector, createDataSetSelector } from 'store/modules/dataset'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { scrolledHeaderHeight } from 'utils/theme'
@@ -13,6 +12,7 @@ import CompareBtn from 'components/Header/CompareBtn'
 import Dashboard from 'components/Dashboard'
 import PATH from 'utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
+import initTheme from 'utils/theme'
 
 const getDatasetEntryComponent = datasetId => {
   switch (datasetId) {
@@ -32,11 +32,10 @@ const DatasetEntry = () => {
   const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
   const sectionsLayout = dataset?.detailLayout
-  const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
-  const entry = datasetConfig?.entriesMap?.[entryId]
-  const entryName = entry?.name || ''
+  const entryName = sectionsData?._atlas_title || ''
+  const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
 
   useEffect(
     () =>
@@ -58,43 +57,41 @@ const DatasetEntry = () => {
   )
 
   return (
-    <Dashboard
-      headerConfig={{
-        backRoute: datasetRoute,
-        customScrolledHeight: scrolledHeaderHeight,
-        content: {
-          left: (
-            <AtlasBreadcrumbs
-              links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }, { text: sectionsLayout?.title }]}
-            />
-          ),
-          right: headerRightContent,
-        },
-        contentScrolled: {
-          left: (
-            <>
-              {entry?.headerScrolledLeftContent && (
-                <Box
-                  display={'flex'}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                  bgcolor={theme => theme.palette.secondary.main}
-                  width={64}
-                  height={64}
-                  fontSize={12}
-                  mr={1.25}
-                  p={0.5}>
-                  Minimap
-                </Box>
-              )}
+    <ThemeProvider theme={theme}>
+      <Dashboard
+        headerConfig={{
+          backRoute: datasetRoute,
+          customScrolledHeight: scrolledHeaderHeight,
+          content: {
+            left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }]} />,
+            right: headerRightContent,
+          },
+          contentScrolled: {
+            left: (
+              <>
+                {sectionsData?._atlas_header_image && (
+                  <Box
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    bgcolor={theme => theme.palette.secondary.main}
+                    width={64}
+                    height={64}
+                    fontSize={12}
+                    mr={1.25}
+                    p={0.5}>
+                    Minimap
+                  </Box>
+                )}
 
-              <Typography>{entryName}</Typography>
-            </>
-          ),
-        },
-      }}>
-      <DatasetEntryComponent sectionsData={sectionsData} sectionsLayout={sectionsLayout} />
-    </Dashboard>
+                <Typography>{entryName}</Typography>
+              </>
+            ),
+          },
+        }}>
+        <DatasetEntryComponent sectionsData={sectionsData} sectionsLayout={sectionsLayout} />
+      </Dashboard>
+    </ThemeProvider>
   )
 }
 

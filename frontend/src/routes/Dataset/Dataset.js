@@ -1,55 +1,48 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
+import { ThemeProvider } from '@mui/material'
 
-import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
-import CompareBtn from '../../components/Header/CompareBtn'
-import Dashboard from '../../components/Dashboard'
-import Map from '../../components/Map/'
-import SearchInput from '../../components/Header/SearchInput'
-import { DATASETS_MAP } from '../../utils/constants'
+import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
+import CompareBtn from 'components/Header/CompareBtn'
+import Dashboard from 'components/Dashboard'
+import Map from 'components/Map/'
+import SearchInput from 'components/Header/SearchInput'
 import { createDataSetSelector } from 'store/modules/dataset'
-import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
-import { TempContext } from '../../contexts/AppTempContext'
+import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
+import initTheme from 'utils/theme'
 
 function Dataset() {
   const params = useParams()
   const { datasetId } = params || {}
-  const { setDarkTheme } = useContext(TempContext)
   const dataset = useSelector(createDataSetSelector(datasetId))
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
-  const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = dataset?.title || ''
-  const searchPlaceholder = datasetConfig?.searchPlaceholder || ''
-
-  // effects
-  useEffect(() => {
-    setDarkTheme(datasetConfig?.darkTheme)
-
-    // reset dark theme value
-    return () => setDarkTheme(false)
-  }, [datasetConfig?.darkTheme, setDarkTheme])
+  const searchPlaceholder = data?.searchPlaceholder || ''
+  const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
 
   return (
-    <Dashboard
-      headerConfig={{
-        searchPlaceholder,
-        content: {
-          left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName }]} />,
-          right: (
-            <>
-              <SearchInput placeholder={searchPlaceholder} />
+    <ThemeProvider theme={theme}>
+      <Dashboard
+        headerConfig={{
+          searchPlaceholder,
+          content: {
+            left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName }]} />,
+            right: (
+              <>
+                <SearchInput placeholder={searchPlaceholder} />
 
-              <CompareBtn />
-            </>
-          ),
-        },
-      }}>
-      <div>
-        <DataSetComponent config={data} datasetId={datasetId} />
-      </div>
-    </Dashboard>
+                <CompareBtn />
+              </>
+            ),
+          },
+        }}>
+        <div>
+          <DataSetComponent config={data} datasetId={datasetId} />
+        </div>
+      </Dashboard>
+    </ThemeProvider>
   )
 }
 
