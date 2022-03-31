@@ -86,6 +86,7 @@ def search_dataset(request, dataset=None):
                 "table": "sa2_2016_aust"
             }
     """
+    # TODO: Make the local name search do substrings matching
     sql = f"""
         select sa2_main16 as id, sa2_name16 as title,
             mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
@@ -219,8 +220,10 @@ def geometry_for_ids(request, dataset=None):
             ) as data
             from a, f
         """
-    result = execute_sql(conn, sql, params=(feature_id,))
-    conn.close()
+    try:
+        result = execute_sql(conn, sql, params=(feature_ids,))
+    finally:
+        conn.close()
 
     return Response(result[0]["data"])
 
@@ -251,8 +254,10 @@ class ExploreMetricView(views.APIView):
                 **params
             )
         )
-        result = execute_sql(conn, sql)
-        conn.close()
+        try:
+            result = execute_sql(conn, sql)
+        finally:
+            conn.close()
         return Response(result)
 
 
