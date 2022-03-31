@@ -1,3 +1,5 @@
+import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import { createTheme } from '@mui/material/styles'
 import { grey } from '@mui/material/colors'
 
@@ -9,6 +11,12 @@ const darkGrey = '#333333'
 export const iconColor = '#4d4d4d'
 export const headerHeight = '60px'
 export const scrolledHeaderHeight = '84px'
+
+const LinkBehavior = React.forwardRef((props, ref) => {
+  const { href, to, ...other } = props
+  // Map href (MUI) -> to (react-router)
+  return <RouterLink ref={ref} to={to || href || '#'} {...other} />
+})
 
 const initTheme = mode => {
   const darkMode = mode === 'dark'
@@ -79,8 +87,14 @@ const initTheme = mode => {
     },
 
     components: {
+      MuiLink: {
+        defaultProps: {
+          component: LinkBehavior,
+        },
+      },
       MuiButtonBase: {
         defaultProps: {
+          LinkComponent: LinkBehavior,
           disableRipple: true,
         },
       },
