@@ -39,18 +39,16 @@ python3 manage.py runserver
 
 ## Reset the backend's django database
 
+Via Docker Compose (recommended):
+
+TODO: Include docker-compose instructions here.
+
+Locally:
+
 ```shell
-# Run from repository root
-docker-compose run --rm psql << EOF
-DROP DATABASE django;
-CREATE DATABASE django;
-ALTER ROLE djangouser SET client_encoding TO 'utf8';
-ALTER ROLE djangouser SET default_transaction_isolation TO 'read committed';
-ALTER ROLE djangouser SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE django TO djangouser;
-GRANT USAGE ON SCHEMA public TO djangouser;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO djangouser;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO djangouser;
-GRANT CONNECT ON DATABASE dashboard TO djangouser;
-EOF
+source venv/bin/activate
+export DEBUG=True
+python3 manage.py flush --noinput && \
+python3 manage.py migrate --noinput && \
+python3 manage.py loaddata initial.json --app api --format json
 ```
