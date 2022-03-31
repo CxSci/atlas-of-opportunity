@@ -10,10 +10,11 @@ export const iconColor = '#4d4d4d'
 export const headerHeight = '60px'
 export const scrolledHeaderHeight = '84px'
 
-const initTheme = darkMode =>
-  createTheme({
+const initTheme = mode => {
+  const darkMode = mode === 'dark'
+  return createTheme({
     palette: {
-      mode: darkMode ? 'dark' : 'light',
+      mode,
       primary: {
         main: '#3DBEFF',
       },
@@ -266,5 +267,6 @@ const initTheme = darkMode =>
       },
     },
   })
+}
 
 export default initTheme

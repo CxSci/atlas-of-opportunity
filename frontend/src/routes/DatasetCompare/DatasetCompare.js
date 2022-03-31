@@ -1,19 +1,20 @@
 import React from 'react'
 import { useParams } from 'react-router'
+import { useSelector } from 'react-redux'
+import { Box, Grid, Typography } from '@mui/material'
 
 import Dashboard from '../../components/Dashboard'
 import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
-import { DATASETS_MAP } from '../../utils/constants'
 import PATH from '../../utils/path'
-import { Box, Grid, Typography } from '@mui/material'
+import { createDataSetSelector } from 'store/modules/dataset'
 
 function DatasetCompare() {
   const params = useParams()
   const { datasetId } = params || {}
 
-  const datasetConfig = DATASETS_MAP?.[datasetId]
-  const datasetName = datasetConfig?.name || ''
+  const dataset = useSelector(createDataSetSelector(datasetId))
+  const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
 
   const compareList = [

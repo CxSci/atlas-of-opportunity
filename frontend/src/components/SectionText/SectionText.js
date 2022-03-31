@@ -11,7 +11,7 @@ const SectionText = ({ layout, data }) => {
   const yAxisKey = layout.y?.key
 
   if (layout.format === 'number') {
-    return <FieldNumber value={data} numberFormat={layout.numberFormat} />
+    return <FieldNumber value={data || 0} numberFormat={layout.numberFormat} />
   }
 
   if (xAxisKey && yAxisKey) {
@@ -23,7 +23,7 @@ const SectionText = ({ layout, data }) => {
               <Box key={index}>
                 <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
                 {layout.y?.format === 'number' && (
-                  <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
+                  <FieldNumber value={item[yAxisKey] || 0} numberFormat={layout.y.numberFormat} gutterBottom />
                 )}
               </Box>
             ))
