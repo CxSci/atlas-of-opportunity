@@ -38,18 +38,18 @@ def search_dataset(request, dataset=None):
     # TODO: This should also incorporate results from Mapbox's Search API.
     sql = """
         with t as (
-                select sa2_main16, sa2_name16, pole_of_inaccessibility,
-                    Box2D(ST_Transform(geom, 4326)) as bbox
-                from sa2_2016_aust
-                where ste_name16='South Australia'
-                and to_tsvector(sa2_name16) @@ plainto_tsquery('Adelaide')
-            )
-            select sa2_main16 as id, sa2_name16 as title,
-                array[ST_XMin(bbox), ST_YMin(bbox),
-                      ST_XMax(bbox), ST_YMax(bbox)] as bbox,
+            select sa2_main16, sa2_name16, pole_of_inaccessibility,
+                Box2D(ST_Transform(geom, 4326)) as bbox
+            from sa2_2016_aust
+            where ste_name16='South Australia'
+            and to_tsvector(sa2_name16) @@ plainto_tsquery('Adelaide')
+        )
+        select sa2_main16 as id, sa2_name16 as title,
+            array[ST_XMin(bbox), ST_YMin(bbox),
+                  ST_XMax(bbox), ST_YMax(bbox)] as bbox,
             array[ST_X(pole_of_inaccessibility),
                   ST_Y(pole_of_inaccessibility)] as pole_of_inaccessibility
-            from t"""
+        from t"""
     result = execute_sql(conn, sql, params=(query,))
     conn.close()
 
@@ -76,61 +76,97 @@ def geometry_for_ids(request, dataset=None):
     conn = pg.connect(dsn)
 
     if include_neighbors:
-        # TODO: This search is inefficient and uses the wrong bounding box, but
-        # it's sufficient for a first past.
-        #
-        # clipbox should be a square with its side length based on the longest
-        # side of bbox.
-        #
-        # It would also be good to include a bbox on the FeatureCollection
-        # which fits the requested ids in order to simplify figuring that out
-        # in the frontend.
-        sql = """with a as (
-                     select Box2D(geom) as bbox
-                     from sa2_2016_aust
-                     where sa2_main16=%s
-                 ),
-                 b as (
-                     select ST_MakeEnvelope(
-                     (ST_XMin(bbox) - 3 * (ST_XMax(bbox) - ST_XMin(bbox))),
-                     (ST_YMin(bbox) - 2 * (ST_YMax(bbox) - ST_YMin(bbox))),
-                     (ST_XMax(bbox) - 3 * (ST_XMin(bbox) - ST_XMax(bbox))),
-                     (ST_YMax(bbox) - 2 * (ST_YMin(bbox) - ST_YMax(bbox))),
-                     4283) as clipbox
-                     from a
-                 )
-                 select json_build_object(
-                     'type', 'FeatureCollection',
-                     'features', json_agg(
-                         json_build_object(
-                             'type',       'Feature',
-                             'id',         sa2_main16,
-                             'geometry',   ST_AsGeoJSON(ST_Transform(
-                                 ST_SimplifyPreserveTopology(
-                                     ST_ClipByBox2D(geom, clipbox), 0.0001),
-                                     4326), 6)::json,
-                             'properties', json_build_object()
-                         )
-                     )
-                 ) as data
-                 from sa2_2016_aust, b
-                 where ST_Intersects(b.clipbox::geography, geom::geography)"""
-    else:
-        sql = """select json_build_object(
-                    'type', 'FeatureCollection',
-                    'features', json_agg(
-                        json_build_object(
-                            'type',       'Feature',
-                            'id',         sa2_main16,
-                            'geometry',   ST_AsGeoJSON(ST_Transform(
-                                ST_SimplifyPreserveTopology(
-                                    geom, 0.0001), 4326), 6)::json,
-                            'properties', json_build_object()
-                        )
+        # Return all features in an area 5 times as wide and 2 times as tall as
+        # the requested feature's longest dimension. Suitable for display at w:h
+        # ratios from 1:1 to 5:2.
+        sql = """
+            with a as (
+                select bbox, simplify_precision, bbox_array
+                from sa2_2016_aust,
+                lateral (select ST_SetSRID(
+                    mitcxi_scaled_bbox(
+                        mitcxi_escribed_square_bbox(Box2D(geom)), 5, 2
+                    ),
+                    ST_SRID(geom)
+                ) as bbox) b,
+                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) c,
+                lateral (select case
+                    when (width) <= 3 then 0
+                    when (width) between 3 and 9 then 0.005
+                    when (width) >= 9 then 0.01
+                end simplify_precision) d,
+                lateral (select array[
+                    ST_XMin(bbox), ST_YMin(bbox), ST_XMax(bbox), ST_YMax(bbox)
+                ] as bbox_array) e
+                where sa2_main16=%s
+                limit 1
+            ),
+            f as (
+                select json_agg(
+                    json_build_object(
+                        'type',       'Feature',
+                        'id',         sa2_main16,
+                        'geometry',   ST_AsGeoJSON(ST_Transform(
+                            ST_SimplifyPreserveTopology(
+                                ST_ClipByBox2D(geom, a.bbox),
+                                a.simplify_precision
+                            ), 4326), 6)::json,
+                        'properties', json_build_object()
                     )
-                ) as data
-                from sa2_2016_aust
-                where sa2_main16=%s"""
+                ) as features
+                from sa2_2016_aust, a
+                where ste_name16='South Australia'
+                and a.bbox && sa2_2016_aust.geom
+            )
+            select json_build_object(
+                'type', 'FeatureCollection',
+                'bbox', a.bbox_array,
+                'features', f.features
+            ) as data
+            from a, f"""
+    else:
+        # Return only the requested feature.
+        sql = """
+            with a as (
+                select bbox, simplify_precision, bbox_array, geom, sa2_main16
+                from sa2_2016_aust,
+                lateral (
+                    select ST_SetSRID(
+                        mitcxi_escribed_square_bbox(Box2D(geom)),
+                    ST_SRID(geom)
+                ) as bbox) b,
+                lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) w,
+                lateral (select case
+                    when (width) <= 3 then 0
+                    when (width) between 3 and 9 then 0.005
+                    when (width) >= 9 then 0.01
+                end simplify_precision) c,
+                lateral (select array[
+                    ST_XMin(bbox), ST_YMin(bbox), ST_XMax(bbox), ST_YMax(bbox)
+                ] as bbox_array) d
+                where sa2_main16=%s
+                limit 1
+            ),
+            f as (
+                select json_agg(
+                    json_build_object(
+                        'type',       'Feature',
+                        'id',         sa2_main16,
+                        'geometry',   ST_AsGeoJSON(ST_Transform(
+                            ST_SimplifyPreserveTopology(
+                                geom, simplify_precision
+                            ), 4326), 6)::json,
+                        'properties', json_build_object()
+                    )
+                ) as features
+                from a
+            )
+            select json_build_object(
+                'type', 'FeatureCollection',
+                'bbox', a.bbox_array,
+                'features', f.features
+            ) as data
+            from a, f"""
     result = execute_sql(conn, sql, params=(feature_id,))
     conn.close()
 
