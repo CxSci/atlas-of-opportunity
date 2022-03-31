@@ -86,3 +86,67 @@ ALTER FUNCTION public.mitcxi_scaled_bbox(box2d, numeric, numeric)
 
 COMMENT ON FUNCTION public.mitcxi_scaled_bbox(box2d, numeric, numeric)
     IS 'Returns a box2d with the same center as in_bbox but scaled in size';
+
+
+
+-- FUNCTION: public.mitcxi_asarray(box2d)
+
+-- DROP FUNCTION IF EXISTS public.mitcxi_asarray(box2d);
+
+CREATE OR REPLACE FUNCTION public.mitcxi_asarray(
+    bbox box2d)
+    RETURNS double precision[]
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    return array[
+      ST_XMin(bbox), ST_YMin(bbox),
+      ST_XMax(bbox), ST_YMax(bbox)
+    ];
+END;
+$BODY$;
+
+ALTER FUNCTION public.mitcxi_asarray(box2d)
+    OWNER TO postgres;
+
+COMMENT ON FUNCTION public.mitcxi_asarray(box2d)
+    IS 'Returns a flat array like { xmin, ymin, xmax, ymax } for a given box2d';
+
+
+
+-- FUNCTION: public.mitcxi_asarray(geometry)
+
+-- DROP FUNCTION IF EXISTS public.mitcxi_asarray(geometry);
+
+CREATE OR REPLACE FUNCTION public.mitcxi_asarray(
+    g geometry)
+    RETURNS double precision[]
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    RETURN CASE
+        WHEN ST_GeometryType(g) = 'ST_Point' THEN
+           array[
+              ST_X(g),
+              ST_Y(g)
+          ]
+        WHEN ST_GeometryType(g) = 'ST_Polygon' THEN
+            array[
+                ST_XMin(g), ST_YMin(g),
+                ST_XMax(g), ST_YMax(g)
+            ]
+        ELSE
+          array[]::double precision[]
+    END;
+END;
+$BODY$;
+
+ALTER FUNCTION public.mitcxi_asarray(geometry)
+    OWNER TO postgres;
+
+COMMENT ON FUNCTION public.mitcxi_asarray(geometry)
+    IS 'Returns a flat array like { x, y } for a given point. Returns a flat array like { xmin, ymin, xmax, ymax } for other types of geometry.';
