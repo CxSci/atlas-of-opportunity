@@ -297,144 +297,147 @@ class DetailView(views.APIView):
             f"where sa2_code='{pk}'"
         )
         row = execute_sql(conn, basic_info, many=False)
-        result.update(
-            {
-                "population": [
-                    {"gender": "All", "count": row["persons_num"]},
-                    {"gender": "Male", "count": row["males_num"]},
-                    {"gender": "Female", "count": row["females_num"]},
-                ],
-                "popfraction": row["popfraction"],
-                "median_age": [
-                    {"gender": "All", "median_age": row["median_persons_age"]},
-                    {"gender": "Male", "median_age": row["median_male_age"]},
-                    {
-                        "gender": "Female",
-                        "median_age": row["median_female_age"],
-                    },
-                ],
-                "percentage_persons_aged": [
-                    {
-                        "bracket": "0-14",
-                        "percent": row["percentage_person_aged_0_14"],
-                    },
-                    {
-                        "bracket": "15-64",
-                        "percent": row["percentage_person_aged_15_64"],
-                    },
-                    {
-                        "bracket": "65+",
-                        "percent": row["percentage_person_aged_65_plus"],
-                    },
-                ],
-                "wage_earners": row["earners_persons"],
-                "median_age_of_earners_years": row[
-                    "median_age_of_earners_years"
-                ],
-                "median_income_aud": row["median_aud"],
-                "mean_income_aud": row["mean_aud"],
-                "accumulate_income_aud": row["income_aud"],
-                "income_quartile": row["quartile"],
-                "occup_diversity": row["occup_diversity"],
-                "gini_coefficient_no": row["gini_coefficient_no"],
-                "earners_per_quartile": [
-                    {
-                        "quartile": "Lowest Quartile",
-                        "value": row["lowest_quartile_pc"],
-                    },
-                    {
-                        "quartile": "Second Quartile",
-                        "value": row["second_quartile_pc"],
-                    },
-                    {
-                        "quartile": "Third Quartile",
-                        "value": row["third_quartile_pc"],
-                    },
-                    {
-                        "quartile": "Highest Quartile",
-                        "value": row["highest_quartile_pc"],
-                    },
-                ],
-                "income_share": [
-                    {"top": "Top 1%", "value": row["income_share_top_1pc"]},
-                    {"top": "Top 5%", "value": row["income_share_top_5pc"]},
-                    {"top": "Top 10%", "value": row["income_share_top_10pc"]},
-                ],
-                "income_diversity": row["income_diversity"],
-                "bsns_growth_rate": row["bsns_growth_rate"],
-                "bsns_entries": row["bsns_entries"],
-                "bsns_exits": row["bsns_exits"],
-            }
-        )
+        if row:
+            result.update(
+                {
+                    "population": [
+                        {"gender": "All", "count": row["persons_num"]},
+                        {"gender": "Male", "count": row["males_num"]},
+                        {"gender": "Female", "count": row["females_num"]},
+                    ],
+                    "popfraction": row["popfraction"],
+                    "median_age": [
+                        {"gender": "All", "median_age": row["median_persons_age"]},
+                        {"gender": "Male", "median_age": row["median_male_age"]},
+                        {
+                            "gender": "Female",
+                            "median_age": row["median_female_age"],
+                        },
+                    ],
+                    "percentage_persons_aged": [
+                        {
+                            "bracket": "0-14",
+                            "percent": row["percentage_person_aged_0_14"],
+                        },
+                        {
+                            "bracket": "15-64",
+                            "percent": row["percentage_person_aged_15_64"],
+                        },
+                        {
+                            "bracket": "65+",
+                            "percent": row["percentage_person_aged_65_plus"],
+                        },
+                    ],
+                    "wage_earners": row["earners_persons"],
+                    "median_age_of_earners_years": row[
+                        "median_age_of_earners_years"
+                    ],
+                    "median_income_aud": row["median_aud"],
+                    "mean_income_aud": row["mean_aud"],
+                    "accumulate_income_aud": row["income_aud"],
+                    "income_quartile": row["quartile"],
+                    "occup_diversity": row["occup_diversity"],
+                    "gini_coefficient_no": row["gini_coefficient_no"],
+                    "earners_per_quartile": [
+                        {
+                            "quartile": "Lowest Quartile",
+                            "value": row["lowest_quartile_pc"],
+                        },
+                        {
+                            "quartile": "Second Quartile",
+                            "value": row["second_quartile_pc"],
+                        },
+                        {
+                            "quartile": "Third Quartile",
+                            "value": row["third_quartile_pc"],
+                        },
+                        {
+                            "quartile": "Highest Quartile",
+                            "value": row["highest_quartile_pc"],
+                        },
+                    ],
+                    "income_share": [
+                        {"top": "Top 1%", "value": row["income_share_top_1pc"]},
+                        {"top": "Top 5%", "value": row["income_share_top_5pc"]},
+                        {"top": "Top 10%", "value": row["income_share_top_10pc"]},
+                    ],
+                    "income_diversity": row["income_diversity"],
+                    "bsns_growth_rate": row["bsns_growth_rate"],
+                    "bsns_entries": row["bsns_entries"],
+                    "bsns_exits": row["bsns_exits"],
+                }
+            )
 
         pop_proj = (
             "select * from sa2_population_and_projection "
             f"where sa2_main16='{pk}'"
         )
         row = execute_sql(conn, pop_proj, many=False)
-        result.update(
-            {
-                "pop_proj": [
-                    {"pop": row["yr_2016"], "year": "2016"},
-                    {"pop": row["yr_2021"], "year": "2021"},
-                    {"pop": row["yr_2026"], "year": "2026"},
-                    {"pop": row["yr_2031"], "year": "2031"},
-                    {"pop": row["yr_2036"], "year": "2036"},
-                ],
-            }
-        )
+        if row:
+            result.update(
+                {
+                    "pop_proj": [
+                        {"pop": row["yr_2016"], "year": "2016"},
+                        {"pop": row["yr_2021"], "year": "2021"},
+                        {"pop": row["yr_2026"], "year": "2026"},
+                        {"pop": row["yr_2031"], "year": "2031"},
+                        {"pop": row["yr_2036"], "year": "2036"},
+                    ],
+                }
+            )
 
         housing = (
             "select * from sa2_housing_prices_weekly_2021 "
             f"where sa2code='{pk}'"
         )
         row = execute_sql(conn, housing, many=False)
-        result.update(
-            {
-                "residential_housing_median": [
-                    {
-                        "rooms": "1BR",
-                        "type": "Apartments",
-                        "rent": row["median_1br_apt"],
-                    },
-                    {
-                        "rooms": "1BR",
-                        "type": "Houses",
-                        "rent": row["median_1br_h"],
-                    },
-                    {
-                        "rooms": "2BR",
-                        "type": "Apartments",
-                        "rent": row["median_2br_apt"],
-                    },
-                    {
-                        "rooms": "2BR",
-                        "type": "Houses",
-                        "rent": row["median_2br_h"],
-                    },
-                    {
-                        "rooms": "3BR",
-                        "type": "Apartments",
-                        "rent": row["median_3br_apt"],
-                    },
-                    {
-                        "rooms": "3BR",
-                        "type": "Houses",
-                        "rent": row["median_3br_h"],
-                    },
-                    {
-                        "rooms": "4BR+",
-                        "type": "Apartments",
-                        "rent": row["median_4above_apt"],
-                    },
-                    {
-                        "rooms": "4BR+",
-                        "type": "Houses",
-                        "rent": row["median_4above_h"],
-                    },
-                ]
-            }
-        )
+        if row:
+            result.update(
+                {
+                    "residential_housing_median": [
+                        {
+                            "rooms": "1BR",
+                            "type": "Apartments",
+                            "rent": row["median_1br_apt"],
+                        },
+                        {
+                            "rooms": "1BR",
+                            "type": "Houses",
+                            "rent": row["median_1br_h"],
+                        },
+                        {
+                            "rooms": "2BR",
+                            "type": "Apartments",
+                            "rent": row["median_2br_apt"],
+                        },
+                        {
+                            "rooms": "2BR",
+                            "type": "Houses",
+                            "rent": row["median_2br_h"],
+                        },
+                        {
+                            "rooms": "3BR",
+                            "type": "Apartments",
+                            "rent": row["median_3br_apt"],
+                        },
+                        {
+                            "rooms": "3BR",
+                            "type": "Houses",
+                            "rent": row["median_3br_h"],
+                        },
+                        {
+                            "rooms": "4BR+",
+                            "type": "Apartments",
+                            "rent": row["median_4above_apt"],
+                        },
+                        {
+                            "rooms": "4BR+",
+                            "type": "Houses",
+                            "rent": row["median_4above_h"],
+                        },
+                    ]
+                }
+            )
 
         transactions = (
             "select * from transaction_indices "
