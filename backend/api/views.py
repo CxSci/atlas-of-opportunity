@@ -1,6 +1,7 @@
 from itertools import chain
 
 import psycopg2 as pg
+from django.conf import settings
 from rest_framework import permissions, views, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
@@ -8,7 +9,6 @@ from rest_framework.response import Response
 
 from api.models import Dataset
 from api.serializers import DatasetSerializer
-from backend.settings import DASHBOARD_DATABASE
 
 
 def execute_sql(conn, sql, params=None, many=True):
@@ -32,7 +32,7 @@ def search_dataset(request, dataset=None):
     query = request.query_params.get("q", None)
 
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
-        **DASHBOARD_DATABASE
+        **settings.DASHBOARD_DATABASE
     )
     conn = pg.connect(dsn)
     # TODO: This should also incorporate results from Mapbox's Search API.
@@ -71,7 +71,7 @@ def geometry_for_ids(request, dataset=None):
     feature_id = feature_ids.split(" ")[0]
 
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
-        **DASHBOARD_DATABASE
+        **settings.DASHBOARD_DATABASE
     )
     conn = pg.connect(dsn)
 
@@ -173,7 +173,7 @@ class ExploreMetricView(views.APIView):
 
     def get(self, request, dataset=None, metric=None, format=None):
         dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
-            **DASHBOARD_DATABASE
+            **settings.DASHBOARD_DATABASE
         )
 
         sqls = {
@@ -204,7 +204,7 @@ class DetailView(views.APIView):
 
     def get(self, request, dataset=None, pk=None, format=None):
         dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
-            **DASHBOARD_DATABASE
+            **settings.DASHBOARD_DATABASE
         )
 
         conn = pg.connect(dsn)
