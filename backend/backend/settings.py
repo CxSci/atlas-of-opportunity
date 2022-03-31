@@ -178,3 +178,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # env expects a comma delimited list like
 # CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS")
+
+
+# Third party APIs
+
+MAPBOX_ACCESS_TOKEN = env("MAPBOX_ACCESS_TOKEN")
