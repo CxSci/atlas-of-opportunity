@@ -1,6 +1,7 @@
 from itertools import chain
 
 import psycopg2 as pg
+import requests
 from django.conf import settings
 from rest_framework import permissions, views, viewsets
 from rest_framework.decorators import api_view
@@ -29,29 +30,85 @@ class DatasetViewSet(viewsets.ModelViewSet):
 
 @api_view()
 def search_dataset(request, dataset=None):
+    # `query` can't be longer than 256 characters or more than 20 tokens
+    # This doesn't help with non-Latin character sets as Mapbox tokenizes
+    # each CJK character separately, e.g. "菜食主義者" counts as 5 tokens.
     query = request.query_params.get("q", None)
+    query = ' '.join(query[:256].split()[:20])
 
+    # `language` is the user's desired display language. It affects the
+    # subtitle derived from the Mapbox Geocoding API. It should come from a
+    # browser's `navigator.languages[0]`.
+    language = request.query_params.get('language', None)
+
+    # First, get Mapbox Geocoding API results
+    # TODO: Fetch `country`, `bbox`, and `types` from the Dataset
+    payload = {
+        "access_token": settings.MAPBOX_ACCESS_TOKEN,
+        "autocomplete": "true",
+        "country": ["au"],
+        "bbox": [129.001337, -38.062603, 141.002956, -25.996146],
+        "limit": 5,
+        "types": ["postcode", "district", "place", "locality"],
+    }
+    if language:
+        payload['language'] = language
+    payload = {
+        k: v if not isinstance(v, list) else ','.join(str(f) for f in v)
+        for k, v in payload.items()
+    }
+    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{query}.json"
+    r = requests.get(url, params=payload)
+    if r.status_code == 422:
+        print(r.json()['message'])
+    features = r.json().get('features', None)
+    geocoded_table = ','.join(
+        f"('{f['place_name']}', {f['relevance']}, "
+        f"ST_Point({f['center'][0]}, {f['center'][1]}, 4326))"
+        for f in features)
+
+    # Second, find the regions which either contain those geocoded results's
+    # center coordinates or have names containing the query term, sorting 
+    # local name matches higher than geocoded results and sorting geocoding
+    # results by the Mapbox Geocoding API's `relevance` property.
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
         **settings.DASHBOARD_DATABASE
     )
     conn = pg.connect(dsn)
-    # TODO: This should also incorporate results from Mapbox's Search API.
-    sql = """
-        with t as (
-            select sa2_main16, sa2_name16, pole_of_inaccessibility,
-                Box2D(ST_Transform(geom, 4326)) as bbox
-            from sa2_2016_aust
-            where ste_name16='South Australia'
-            and to_tsvector(sa2_name16) @@ plainto_tsquery('Adelaide')
-        )
+    # TODO: Parameterize this SQL statement to make it dataset agnostic
+    """
+            {
+                "id": "sa2_main16",
+                "title": "sa2_name16",
+                "geom": "geom",
+                "extra_where_condition": "ste_name16='South Australia'",
+                "subtitle_default": "SA2 Region",
+                "table": "sa2_2016_aust"
+            }
+    """
+    sql = f"""
         select sa2_main16 as id, sa2_name16 as title,
-            array[ST_XMin(bbox), ST_YMin(bbox),
-                  ST_XMax(bbox), ST_YMax(bbox)] as bbox,
-            array[ST_X(pole_of_inaccessibility),
-                  ST_Y(pole_of_inaccessibility)] as pole_of_inaccessibility
-        from t"""
-    result = execute_sql(conn, sql, params=(query,))
-    conn.close()
+            mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
+            mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
+            place_name as subtitle, relevance
+        from (values {geocoded_table}) as a (place_name, relevance, center),
+            sa2_2016_aust
+        where ste_name16='South Australia' and
+            ST_Intersects(geom, ST_Transform(center, ST_SRID(geom)))
+        union all
+        select sa2_main16 as id, sa2_name16 as title, 
+            mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
+            mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
+            'SA2 Region' as subtitle, 2 as relevance
+        from sa2_2016_aust
+        where ste_name16='South Australia' and
+            to_tsvector(sa2_name16) @@ plainto_tsquery(%s)
+        order by relevance desc, title
+    """
+    try:
+        result = execute_sql(conn, sql, params=(query,))
+    finally:
+        conn.close()
 
     return Response(result)
 
