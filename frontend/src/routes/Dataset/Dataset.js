@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useMemo, useCallback, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { ThemeProvider } from '@mui/material'
 
@@ -9,18 +9,26 @@ import Dashboard from 'components/Dashboard'
 import Map from 'components/Map/'
 import SearchInput from 'components/Header/SearchInput'
 import { createDataSetSelector } from 'store/modules/dataset'
+import { getSearchList } from 'store/modules/search'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import initTheme from 'utils/theme'
 
 function Dataset() {
+  const dispatch = useDispatch()
   const params = useParams()
   const { datasetId } = params || {}
   const dataset = useSelector(createDataSetSelector(datasetId))
+  const [selectedSearchResult, setSelectedSearchResult] = useState(null)
+
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
   const datasetName = dataset?.title || ''
   const searchPlaceholder = data?.searchPlaceholder || ''
   const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
+
+  const handleSearchChange = useCallback(e => {
+    dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,7 +39,7 @@ function Dataset() {
             left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName }]} />,
             right: (
               <>
-                <SearchInput placeholder={searchPlaceholder} />
+                <SearchInput placeholder={searchPlaceholder} onChange={handleSearchChange} />
 
                 <CompareBtn />
               </>
@@ -39,7 +47,7 @@ function Dataset() {
           },
         }}>
         <div>
-          <DataSetComponent config={data} datasetId={datasetId} />
+          <DataSetComponent config={data} datasetId={datasetId} selectedSearchResult={selectedSearchResult} />
         </div>
       </Dashboard>
     </ThemeProvider>
