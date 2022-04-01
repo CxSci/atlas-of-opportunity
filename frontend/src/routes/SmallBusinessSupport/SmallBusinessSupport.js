@@ -27,12 +27,13 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout }) => {
     return <Spinner />
   }
   const { sections } = sectionsLayout
+  console.log({ sectionsData })
 
   return (
     <Box sx={{ mt: 3 }}>
       <Container>
         <Typography variant="h1" gutterBottom>
-          Adelaide
+          {sectionsData?._atlas_title}
         </Typography>
         <Box sx={{ height: 400, backgroundColor: 'lightGray' }} mb={4} />
       </Container>
