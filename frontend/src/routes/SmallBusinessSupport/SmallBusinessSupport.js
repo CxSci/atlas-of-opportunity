@@ -27,7 +27,6 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout }) => {
     return <Spinner />
   }
   const { sections } = sectionsLayout
-  console.log({ sectionsData })
 
   return (
     <Box sx={{ mt: 3 }}>
