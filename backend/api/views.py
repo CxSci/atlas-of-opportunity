@@ -33,13 +33,13 @@ def search_dataset(request, dataset=None):
     # `query` can't be longer than 256 characters or more than 20 tokens
     # This doesn't help with non-Latin character sets as Mapbox tokenizes
     # each CJK character separately, e.g. "菜食主義者" counts as 5 tokens.
-    query = request.query_params.get("q", None)
-    query = ' '.join(query[:256].split()[:20])
+    query = request.query_params.get("q", "")
+    query = " ".join(query[:256].split()[:20])
 
     # `language` is the user's desired display language. It affects the
     # subtitle derived from the Mapbox Geocoding API. It should come from a
     # browser's `navigator.languages[0]`.
-    language = request.query_params.get('language', None)
+    language = request.query_params.get("language", None)
 
     # First, get Mapbox Geocoding API results
     # TODO: Fetch `country`, `bbox`, and `types` from the Dataset
@@ -52,23 +52,26 @@ def search_dataset(request, dataset=None):
         "types": ["postcode", "district", "place", "locality"],
     }
     if language:
-        payload['language'] = language
+        payload["language"] = language
     payload = {
-        k: v if not isinstance(v, list) else ','.join(str(f) for f in v)
+        k: v if not isinstance(v, list) else ",".join(str(f) for f in v)
         for k, v in payload.items()
     }
     url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{query}.json"
     r = requests.get(url, params=payload)
-    if r.status_code == 422:
-        print(r.json()['message'])
-    features = r.json().get('features', None)
-    geocoded_table = ','.join(
+    if r.status_code == 200:
+        features = r.json().get("features", None)
+    else:
+        print(r.json().get("message", None))
+        features = []
+    geocoded_table = ",".join(
         f"('{f['place_name']}', {f['relevance']}, "
         f"ST_Point({f['center'][0]}, {f['center'][1]}, 4326))"
-        for f in features)
+        for f in features
+    )
 
     # Second, find the regions which either contain those geocoded results's
-    # center coordinates or have names containing the query term, sorting 
+    # center coordinates or have names containing the query term, sorting
     # local name matches higher than geocoded results and sorting geocoding
     # results by the Mapbox Geocoding API's `relevance` property.
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
@@ -87,16 +90,7 @@ def search_dataset(request, dataset=None):
             }
     """
     # TODO: Make the local name search do substrings matching
-    sql = f"""
-        select sa2_main16 as id, sa2_name16 as title,
-            mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
-            mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
-            place_name as subtitle, relevance
-        from (values {geocoded_table}) as a (place_name, relevance, center),
-            sa2_2016_aust
-        where ste_name16='South Australia' and
-            ST_Intersects(geom, ST_Transform(center, ST_SRID(geom)))
-        union all
+    sql = """
         select sa2_main16 as id, sa2_name16 as title, 
             mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
             mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
@@ -106,6 +100,20 @@ def search_dataset(request, dataset=None):
             to_tsvector(sa2_name16) @@ plainto_tsquery(%s)
         order by relevance desc, title
     """
+    # Skip looking up geocoded results if there are none
+    if geocoded_table:
+        sql = f"""
+            select sa2_main16 as id, sa2_name16 as title,
+                mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
+                mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
+                place_name as subtitle, relevance
+            from (values {geocoded_table}) as a (place_name, relevance, center),
+                sa2_2016_aust
+            where ste_name16='South Australia' and
+                ST_Intersects(geom, ST_Transform(center, ST_SRID(geom)))
+            union all
+            {sql}
+        """
     try:
         result = execute_sql(conn, sql, params=(query,))
     finally:
@@ -307,8 +315,14 @@ class DetailView(views.APIView):
                     ],
                     "popfraction": row["popfraction"],
                     "median_age": [
-                        {"gender": "All", "median_age": row["median_persons_age"]},
-                        {"gender": "Male", "median_age": row["median_male_age"]},
+                        {
+                            "gender": "All",
+                            "median_age": row["median_persons_age"],
+                        },
+                        {
+                            "gender": "Male",
+                            "median_age": row["median_male_age"],
+                        },
                         {
                             "gender": "Female",
                             "median_age": row["median_female_age"],
@@ -359,7 +373,10 @@ class DetailView(views.APIView):
                     "income_share": [
                         {"top": "Top 1%", "value": row["income_share_top_1pc"]},
                         {"top": "Top 5%", "value": row["income_share_top_5pc"]},
-                        {"top": "Top 10%", "value": row["income_share_top_10pc"]},
+                        {
+                            "top": "Top 10%",
+                            "value": row["income_share_top_10pc"],
+                        },
                     ],
                     "income_diversity": row["income_diversity"],
                     "bsns_growth_rate": row["bsns_growth_rate"],
