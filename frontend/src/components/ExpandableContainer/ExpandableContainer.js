@@ -42,7 +42,7 @@ const ExpandableContainer = ({ data, filters, children }) => {
       {children(truncatedData)}
       {expandable && (
         <Link underline="hover" href="#" onClick={handleToggle}>
-          {expanded ? 'Show Less' : 'Show More'}
+          <b>{expanded ? 'Show Less' : 'Show More'}</b>
         </Link>
       )}
     </Box>
