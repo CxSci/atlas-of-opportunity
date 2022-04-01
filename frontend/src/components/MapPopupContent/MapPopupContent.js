@@ -1,7 +1,6 @@
 import React from 'react'
-import { Box, Button, styled, Typography } from '@mui/material'
+import { Box, Button, styled, Typography, Link } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@mui/material'
 
 import './Home.scss'
 import PATH from '../../utils/path'
@@ -32,7 +32,7 @@ function Home() {
 
           <p>Temp router links</p>
 
-          <ul>
+          <ul style={{ paddingLeft: 0 }}>
             <li>
               <Link to={'/explore/small-business-support'}>Small business support</Link>
             </li>
