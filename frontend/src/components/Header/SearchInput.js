@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { Autocomplete, InputAdornment, TextField } from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
+import { searchListSelector } from '../../store/modules/search'
 
-function SearchInput({ placeholder }) {
-  const options = [
-    { label: 'The Godfather', id: 1 },
-    { label: 'Pulp Fiction', id: 2 },
-  ]
+function SearchInput({ placeholder, onChange = () => null }) {
+  const changeTimeoutRef = useRef(0)
+
+  const options = useSelector(searchListSelector)
+  console.log(searchListSelector)
+  console.log(options)
+
+  const handleChange = e => {
+    clearTimeout(changeTimeoutRef.current)
+
+    changeTimeoutRef.current = setTimeout(() => {
+      onChange(e)
+    }, 500)
+  }
 
   return (
     <Autocomplete
@@ -20,6 +31,7 @@ function SearchInput({ placeholder }) {
           {...params}
           sx={{ width: theme => theme.components.searchInput.width }}
           variant={'filled'}
+          onChange={handleChange}
           InputProps={{
             ...params.InputProps,
             placeholder,

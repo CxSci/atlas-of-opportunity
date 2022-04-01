@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 
 import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
@@ -11,8 +11,10 @@ import { DATASETS_MAP } from '../../utils/constants'
 import { createDataSetSelector } from 'store/modules/dataset'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { TempContext } from '../../contexts/AppTempContext'
+import { getSearchList } from '../../store/modules/search'
 
 function Dataset() {
+  const dispatch = useDispatch()
   const params = useParams()
   const { datasetId } = params || {}
   const { setDarkTheme } = useContext(TempContext)
@@ -22,6 +24,12 @@ function Dataset() {
   const datasetConfig = DATASETS_MAP?.[datasetId]
   const datasetName = dataset?.title || ''
   const searchPlaceholder = datasetConfig?.searchPlaceholder || ''
+
+  const [selectedSearchResult, setSelectedSearchResult] = useState(null)
+
+  const handleSearchChange = useCallback(e => {
+    dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
+  }, [])
 
   // effects
   useEffect(() => {
@@ -39,7 +47,7 @@ function Dataset() {
           left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName }]} />,
           right: (
             <>
-              <SearchInput placeholder={searchPlaceholder} />
+              <SearchInput placeholder={searchPlaceholder} onChange={handleSearchChange} />
 
               <CompareBtn />
             </>
@@ -47,7 +55,7 @@ function Dataset() {
         },
       }}>
       <div>
-        <DataSetComponent config={data} datasetId={datasetId} />
+        <DataSetComponent config={data} datasetId={datasetId} selectedSearchResult={selectedSearchResult} />
       </div>
     </Dashboard>
   )
