@@ -70,7 +70,7 @@ const createApiCallSaga = ({
           ...(customHeaders ? customHeaders : {}),
         },
         data,
-        params: allowedParamKeys ? fp.pick(queryParams, allowedParamKeys) : queryParams,
+        params: allowedParamKeys ? fp.pick(allowedParamKeys, queryParams) : queryParams,
         baseURL: API_BASE,
       })
 
