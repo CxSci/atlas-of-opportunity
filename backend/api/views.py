@@ -229,11 +229,14 @@ def geometry_for_ids(request, dataset=None):
             from a, f
         """
     try:
-        result = execute_sql(conn, sql, params=(feature_ids,))
+        result = execute_sql(conn, sql, params=(feature_id,))
+        data = result[0]["data"]
+    except IndexError:
+        raise NotFound()
     finally:
         conn.close()
 
-    return Response(result[0]["data"])
+    return Response(data)
 
 
 class ExploreMetricView(views.APIView):
