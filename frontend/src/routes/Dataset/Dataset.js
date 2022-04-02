@@ -28,10 +28,12 @@ function Dataset() {
   const [selectedSearchResult, setSelectedSearchResult] = useState(null)
   const [highlightedSearchResult, setHighlightedSearchResult] = useState(null)
 
-  const handleSearchChange = useCallback(e => {
-    // TODO: 'small-business' -> datasetId
-    dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
-  }, [])
+  const handleSearchChange = useCallback(
+    e => {
+      dispatch(getSearchList({ datasetId, params: { q: e?.target?.value } }))
+    },
+    [datasetId],
+  )
 
   // effects
   useEffect(() => {
