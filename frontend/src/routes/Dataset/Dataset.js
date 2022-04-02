@@ -27,10 +27,12 @@ function Dataset() {
   const searchPlaceholder = data?.searchPlaceholder || ''
   const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
 
-  const handleSearchChange = useCallback(e => {
-    // TODO: 'small-business' -> datasetId
-    dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
-  }, [])
+  const handleSearchChange = useCallback(
+    e => {
+      dispatch(getSearchList({ datasetId, params: { q: e?.target?.value } }))
+    },
+    [datasetId],
+  )
 
   return (
     <ThemeProvider theme={theme}>
