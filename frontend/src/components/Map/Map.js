@@ -29,9 +29,10 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup, datasetId }) {
+function Map({ config, hidePopup, datasetId, selectedSearchResult, highlightedSearchResult }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
+  const hoverPopupRef = useRef(null)
   const map = useRef(null)
   const onMouseMoveRef = useRef(null)
   const onMouseLeaveRef = useRef(null)
@@ -83,6 +84,8 @@ function Map({ config, hidePopup, datasetId }) {
         maxWidth: 'none',
         focusAfterOpen: false,
       })
+
+      hoverPopupRef.current = hoverPopup
 
       const expandPopup = () => {
         const popupElement = hoverPopup.getElement()
@@ -413,6 +416,49 @@ function Map({ config, hidePopup, datasetId }) {
     })
   }, [])
 
+  const showPopupForSearchResult = useCallback(
+    ({ option, expandPopup = false, fitBounds = false }) => {
+      const { bbox: bounds, id: featureId } = option || {}
+
+      if (!map.current || !bounds?.length) {
+        return
+      }
+
+      const popupLng = (bounds[0] + bounds[2]) / 2
+      const popupLat = (bounds[1] + bounds[3]) / 2
+      const titleKey = metricConfig?.geometry?.titleKey
+      const row = data.find(r => r?.id === featureId)
+
+      if (fitBounds) {
+        map.current.fitBounds(bounds)
+      }
+
+      const sourceLayer = metricConfig?.layers?.[0]?.sourceLayer
+      const fillsId = `regions-${sourceLayer}-fills`
+      const popupPoint = map.current.project([popupLng, popupLat])
+      const features = map.current.queryRenderedFeatures(popupPoint, { layers: [fillsId] })
+      const title = features?.[0]?.properties?.[titleKey]
+
+      setPopupData({
+        id: featureId,
+        title,
+        metricName: metricConfig?.title,
+        data: row?.data ?? 0,
+        colorScheme,
+        domain,
+        expanded: Boolean(expandPopup),
+      })
+
+      hoverPopupRef.current.setLngLat({ lng: popupLng, lat: popupLat })
+      hoverPopupRef.current.setDOMContent(popupContainerRef.current).addTo(map.current)
+
+      if (expandPopup) {
+        hoverPopupRef.current.addClassName('immobile')
+      }
+    },
+    [data, metricConfig],
+  )
+
   // effects
   useEffect(() => {
     updateMap()
@@ -474,6 +520,14 @@ function Map({ config, hidePopup, datasetId }) {
     setColorScheme(colorScheme)
     getData(newMetricConfig?.data?.url)
   }, [config, getData, selectedMetric])
+
+  useEffect(() => {
+    showPopupForSearchResult({ option: selectedSearchResult, expandPopup: true, fitBounds: true })
+  }, [selectedSearchResult, showPopupForSearchResult])
+
+  useEffect(() => {
+    showPopupForSearchResult({ option: highlightedSearchResult })
+  }, [highlightedSearchResult, showPopupForSearchResult])
 
   return (
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
