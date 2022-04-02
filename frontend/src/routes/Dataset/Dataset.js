@@ -28,7 +28,7 @@ function Dataset() {
   const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
 
   const handleSearchChange = useCallback(e => {
-    // TODO: 'small-business' -> dataset?.id
+    // TODO: 'small-business' -> datasetId
     dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
   }, [])
 
