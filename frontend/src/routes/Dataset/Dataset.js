@@ -19,6 +19,7 @@ function Dataset() {
   const { datasetId } = params || {}
   const dataset = useSelector(createDataSetSelector(datasetId))
   const [selectedSearchResult, setSelectedSearchResult] = useState(null)
+  const [highlightedSearchResult, setHighlightedSearchResult] = useState(null)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -27,6 +28,7 @@ function Dataset() {
   const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
 
   const handleSearchChange = useCallback(e => {
+    // TODO: 'small-business' -> dataset?.id
     dispatch(getSearchList({ datasetId: 'small-business', params: { q: e?.target?.value } }))
   }, [])
 
@@ -39,7 +41,12 @@ function Dataset() {
             left: <AtlasBreadcrumbs links={[homeBreadcrumbLink, { text: datasetName }]} />,
             right: (
               <>
-                <SearchInput placeholder={searchPlaceholder} onChange={handleSearchChange} />
+                <SearchInput
+                  placeholder={searchPlaceholder}
+                  onChange={handleSearchChange}
+                  onSelect={setSelectedSearchResult}
+                  onHighlightChange={setHighlightedSearchResult}
+                />
 
                 <CompareBtn />
               </>
@@ -47,7 +54,12 @@ function Dataset() {
           },
         }}>
         <div>
-          <DataSetComponent config={data} datasetId={datasetId} selectedSearchResult={selectedSearchResult} />
+          <DataSetComponent
+            config={data}
+            datasetId={datasetId}
+            selectedSearchResult={selectedSearchResult}
+            highlightedSearchResult={highlightedSearchResult}
+          />
         </div>
       </Dashboard>
     </ThemeProvider>

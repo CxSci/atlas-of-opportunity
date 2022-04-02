@@ -167,6 +167,7 @@ const initTheme = mode => {
             marginTop: '12px !important',
           },
           paper: {
+            border: 'none',
             borderRadius: borderRadiusRound,
           },
           listbox: {
@@ -176,7 +177,10 @@ const initTheme = mode => {
             backgroundColor: bgLight,
             color: darkMode ? '#666666' : '#2D2D2D',
             '&:hover': {
-              backgroundColor: bgHoverLight,
+              backgroundColor: `${bgHoverLight} !important`,
+            },
+            '&.Mui-focused': {
+              backgroundColor: `${bgHoverLight} !important`,
             },
           },
         },
