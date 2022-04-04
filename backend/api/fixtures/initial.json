@@ -212,7 +212,7 @@
             "title": "Economy",
             "metrics": [
               {
-                "key": "wage_earners",
+                "key": "earners_persons",
                 "type": "text",
                 "title": "Number of Wage Earners",
                 "column": 0,
@@ -226,7 +226,7 @@
                 "format": "number"
               },
               {
-                "key": "median_income_aud",
+                "key": "median_aud",
                 "type": "text",
                 "title": "Median Income",
                 "column": 0,
@@ -237,7 +237,7 @@
                 }
               },
               {
-                "key": "mean_income_aud",
+                "key": "mean_aud",
                 "type": "text",
                 "title": "Mean Income",
                 "column": 0,
@@ -248,7 +248,7 @@
                 }
               },
               {
-                "key": "accumulate_income_aud",
+                "key": "income_aud",
                 "type": "text",
                 "title": "Accumulate Income",
                 "column": 0,
@@ -259,7 +259,7 @@
                 }
               },
               {
-                "key": "income_quartile",
+                "key": "quartile",
                 "max": 4,
                 "min": 0,
                 "type": "simple_bar",
@@ -420,7 +420,7 @@
             "metrics": [
               {
                 "x": {
-                  "key": "category"
+                  "key": "mcc"
                 },
                 "y": {
                   "key": "normalized_value",
@@ -443,7 +443,7 @@
               },
               {
                 "x": {
-                  "key": "category"
+                  "key": "mcc"
                 },
                 "y": {
                   "key": "normalized_value",
@@ -480,7 +480,7 @@
                   "format": "number"
                 },
                 "z": {
-                  "key": "anzsic"
+                  "key": "title"
                 },
                 "key": "business_counts",
                 "type": "stacked_area",
@@ -488,7 +488,7 @@
               },
               {
                 "x": {
-                  "key": "anzsic",
+                  "key": "title",
                   "options": {
                     "style": "square"
                   }
@@ -516,7 +516,7 @@
             "metrics": [
               {
                 "x": {
-                  "key": "anzsic"
+                  "key": "title"
                 },
                 "y": {
                   "key": "value",
@@ -533,10 +533,10 @@
             "metrics": [
               {
                 "x": {
-                  "key": "anzsic"
+                  "key": "title"
                 },
                 "y": {
-                  "key": "rent",
+                  "key": "value",
                   "format": "number",
                   "numberFormat": {
                     "style": "currency",

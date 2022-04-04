@@ -2,10 +2,7 @@
 CREATE TABLE IF NOT EXISTS SA2_info_for_dashboard (
     -- The first, third, and fourth columns are superfluous indexes and can be
     -- dropped after import.
-    tmp_index text,
     SA2_code text not null,
-    tmp_X text,
-    tmp_X1 text,
     state_name text,
     state_code text,
     sa2_name16 text,
@@ -75,15 +72,8 @@ CREATE TABLE IF NOT EXISTS SA2_info_for_dashboard (
 COPY sa2_info_for_dashboard
     FROM '/datasets/south_australia/sources/SA2_info_for_dashboard.csv'
     DELIMITER ','
-    NULL 'NA'
     CSV
     HEADER;
-
-ALTER TABLE SA2_info_for_dashboard
-    DROP COLUMN tmp_index,
-    DROP COLUMN tmp_X,
-    DROP COLUMN tmp_X1
-;
 
 
 
@@ -306,15 +296,15 @@ ALTER TABLE transaction_indices
 
 
 
-\qecho Importing anzsic_codes_flattened.csv...
-CREATE TABLE IF NOT EXISTS anzsic_codes_flattened (
+\qecho Importing anzsic_codes.csv...
+CREATE TABLE IF NOT EXISTS anzsic_codes (
     type text,
     title text,
     code text
 );
 
-COPY anzsic_codes_flattened
-    FROM '/datasets/south_australia/sources/anzsic_codes_flattened.csv'
+COPY anzsic_codes
+    FROM '/datasets/south_australia/sources/anzsic_codes.csv'
     DELIMITER ','
     CSV
     HEADER;
