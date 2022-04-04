@@ -174,13 +174,42 @@ def search_dataset(request, dataset=None):
     if r.status_code == 200:
         features = r.json().get("features", None)
     else:
-        print("Mapbox Geocoding call failed. " + r.json().get("message", None))
+        print("Mapbox Geocoding call failed. Reason: " + r.json().get("message", None))
         features = []
-    geocoded_table = ",".join(
-        f"('{f['place_name']}', {f['relevance']}, "
-        f"ST_Point({f['center'][0]}, {f['center'][1]}, 4326))"
-        for f in features
-    )
+
+    if features:
+        geocode_result = sql_comma_join(
+            sql.SQL("({row})").format(
+                row=sql_comma_join([
+                    sql.Literal(f['place_name']),
+                    sql.Literal(f['relevance']),
+                    sql.SQL(f"ST_Point({f['center'][0]}, {f['center'][1]}, 4326)"),
+                ])
+            )
+            for f in features
+        )
+
+        sql_query = sql.SQL("""
+        select {id_col} as id, {title_col} as title,
+            mitcxi_asArray(Box2D(ST_Transform({geom_col}, 4326))) as bbox,
+                mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
+                place_name as subtitle, relevance
+            from (values {geocode_result}) as a (place_name, relevance, center),
+                {table}
+            where ste_name16='South Australia' and
+                ST_Intersects(
+                    {geom_col}, ST_Transform(center, ST_SRID({geom_col}))
+                )
+            union all
+        """).format(
+            id_col=sql.Identifier("sa2_main16"),
+            title_col=sql.Identifier("sa2_name16"),
+            geom_col=sql.Identifier("geom"),
+            geocode_result=geocode_result,
+            table=sql.Identifier("sa2_2016_aust"),
+        )
+    else:
+        sql_query = sql.SQL()
 
     # Second, find the regions which either contain those geocoded results's
     # center coordinates or have names containing the query term, sorting
@@ -190,44 +219,40 @@ def search_dataset(request, dataset=None):
         **settings.DASHBOARD_DATABASE
     )
     conn = pg.connect(dsn)
-    # TODO: Parameterize this SQL statement to make it dataset agnostic
-    """
-            {
-                "id": "sa2_main16",
-                "title": "sa2_name16",
-                "geom": "geom",
-                "extra_where_condition": "ste_name16='South Australia'",
-                "subtitle_default": "SA2 Region",
-                "table": "sa2_2016_aust"
-            }
-    """
-    # TODO: Make the local name search do substrings matching
-    query = """
-        select sa2_main16 as id, sa2_name16 as title, 
-            mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
+    # Search shapefile table, promoting results as:
+    # 1. Exact title match
+    # 2. Title starts with query
+    # 3. Any word following a space or hyphen starts with query
+    # 4. Title contains query
+    # 5. Any Mapbox Geocoding API results
+    #
+    # TODO: Split `ste_name16='South Australia'` bit of WHERE clause out to
+    #       a sql.SQL-style Composable.
+    sql_query += sql.SQL("""
+        select {id_col} as id, {title_col} as title, 
+            mitcxi_asArray(Box2D(ST_Transform({geom_col}, 4326))) as bbox,
             mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
-            'SA2 Region' as subtitle, 2 as relevance
-        from sa2_2016_aust
+            {default_subtitle} as subtitle,
+            1 +
+            ({title_col} ~* ('^'||%(query)s||'$'))::int * 10 +
+            ({title_col} ~* ('^'||%(query)s))::int +
+            ({title_col} ~* ('[ -]'%(query)s))::int +
+            ({title_col} ~* (%(query)s))::int as relevance
+        from {table}
         where ste_name16='South Australia' and
-            to_tsvector(sa2_name16) @@ plainto_tsquery(%s)
+            not ST_IsEmpty({geom_col}) and
+            {title_col} ~* %(query)s
         order by relevance desc, title
-    """
-    # Skip looking up geocoded results if there are none
-    if geocoded_table:
-        query = f"""
-            select sa2_main16 as id, sa2_name16 as title,
-                mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
-                mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
-                place_name as subtitle, relevance
-            from (values {geocoded_table}) as a (place_name, relevance, center),
-                sa2_2016_aust
-            where ste_name16='South Australia' and
-                ST_Intersects(geom, ST_Transform(center, ST_SRID(geom)))
-            union all
-            {query}
-        """
+    """).format(
+        id_col=sql.Identifier("sa2_main16"),
+        title_col=sql.Identifier("sa2_name16"),
+        geom_col=sql.Identifier("geom"),
+        default_subtitle=sql.Literal("SA2 Region"),
+        table=sql.Identifier("sa2_2016_aust"),
+    )
+
     try:
-        result = execute_sql(conn, query, params=(query,))
+        result = execute_sql(conn, sql_query, params={"query": query})
     finally:
         conn.close()
 
