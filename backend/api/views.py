@@ -1,8 +1,7 @@
-from itertools import chain
-
 import psycopg2 as pg
 import requests
 from django.conf import settings
+from psycopg2 import sql
 from rest_framework import permissions, views, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
@@ -12,14 +11,127 @@ from api.models import Dataset
 from api.serializers import DatasetSerializer
 
 
-def execute_sql(conn, sql, params=None, many=True):
+def execute_sql(conn, query, params=None, many=True):
     with conn.cursor(cursor_factory=pg.extras.RealDictCursor) as cur:
-        cur.execute(sql, params)
+        cur.execute(query, params)
         if many:
             return cur.fetchall()
         else:
             return cur.fetchone()
     return None
+
+
+def sql_comma_join(sql_composable):
+    return sql.SQL(", ").join(sql_composable)
+
+
+def escaped_sql_literal(s):
+    # Necessary to support generating VALUES tuples like `('Top 1%')`.
+    #
+    # https://www.psycopg.org/docs/usage.html#passing-parameters-to-sql-queries
+    # "When parameters are used, in order to include a literal % in the query
+    # you can use the %% string"
+    if isinstance(s, str):
+        s = s.replace("%", "%%")
+    return sql.Literal(s)
+
+
+def build_melted_select_statement(
+    table_name,
+    var_names,
+    value_vars,
+    primary_key,
+    id_vars=None,
+    join_vars=None,
+    value_name="value",
+    **kwargs,
+):
+    """Returns a composed query for melting/unpivoting wide tables.
+
+    Can turn tables like:
+
+    | id | foo | bar | baz |
+    |  0 |   a |   A |   i |
+    |  1 |   b |   B |  ii |
+
+    Into tables like:
+
+    | id | type | value |
+    |  0 |  foo |     a |
+    |  1 |  foo |     b |
+    |  0 |  bar |     A |
+    |  1 |  bar |     B |
+    |  0 |  baz |     i |
+    |  1 |  baz |    ii |
+
+    Produces SQL queries like:
+
+    select type, value
+    from sa2_info_for_dashboard
+        cross join lateral (
+            values
+            ('foo', 'All', persons_num),
+            ('bar', 'Male', males_num),
+            ('baz', 'Female', females_num)
+        ) v(column_name, type, value)
+    where sa2_code='401011001'
+    """
+    select_columns = []
+    if id_vars:
+        select_columns += [sql.Identifier(table_name, c) for c in id_vars]
+    # TODO: add support for multiple joins and multiple columns to join each on
+    if join_vars:
+        select_columns += [
+            sql.Identifier(join_vars["target_join_table"], c)
+            for c in join_vars["target_select_columns"]
+        ]
+    select_columns += [sql.Identifier("v", c) for c in var_names + [value_name]]
+    select_columns = sql_comma_join(select_columns)
+    values = []
+    for i, value_var in enumerate(value_vars):
+        literals = [i, value_var["column"]] + value_var["replacements"]
+        values += sql.Composed(
+            [
+                sql.SQL("({value_var})").format(
+                    value_var=sql_comma_join(
+                        [sql.Identifier(value_var["column"])]
+                        + [escaped_sql_literal(s) for s in literals]
+                    )
+                )
+            ]
+        )
+
+    query = sql.SQL("SELECT {select} FROM {table}").format(
+        select=select_columns,
+        table=sql.Identifier(table_name),
+    )
+    if join_vars:
+        query += sql.SQL(
+            "LEFT OUTER JOIN {join_table} "
+            "ON {source_join_column}={target_join_column} "
+        ).format(
+            join_table=sql.Identifier(join_vars["target_join_table"]),
+            source_join_column=sql.Identifier(
+                table_name, join_vars["source_join_column"]
+            ),
+            target_join_column=sql.Identifier(
+                join_vars["target_join_table"], join_vars["target_join_column"]
+            ),
+        )
+    query += sql.SQL(
+        "CROSS JOIN LATERAL (VALUES {values}) v({columns}) "
+        "WHERE {primary_key}=%(pk)s ORDER BY i"
+    ).format(
+        values=sql_comma_join(values),
+        columns=sql_comma_join(
+            [
+                sql.Identifier(c)
+                for c in [value_name, "i", "variable"] + var_names
+            ]
+        ),
+        primary_key=sql.Identifier(primary_key),
+    )
+    return query
 
 
 class DatasetViewSet(viewsets.ModelViewSet):
@@ -62,7 +174,7 @@ def search_dataset(request, dataset=None):
     if r.status_code == 200:
         features = r.json().get("features", None)
     else:
-        print(r.json().get("message", None))
+        print("Mapbox Geocoding call failed. " + r.json().get("message", None))
         features = []
     geocoded_table = ",".join(
         f"('{f['place_name']}', {f['relevance']}, "
@@ -90,7 +202,7 @@ def search_dataset(request, dataset=None):
             }
     """
     # TODO: Make the local name search do substrings matching
-    sql = """
+    query = """
         select sa2_main16 as id, sa2_name16 as title, 
             mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
             mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
@@ -102,7 +214,7 @@ def search_dataset(request, dataset=None):
     """
     # Skip looking up geocoded results if there are none
     if geocoded_table:
-        sql = f"""
+        query = f"""
             select sa2_main16 as id, sa2_name16 as title,
                 mitcxi_asArray(Box2D(ST_Transform(geom, 4326))) as bbox,
                 mitcxi_asArray(pole_of_inaccessibility) as pole_of_inaccessibility,
@@ -112,10 +224,10 @@ def search_dataset(request, dataset=None):
             where ste_name16='South Australia' and
                 ST_Intersects(geom, ST_Transform(center, ST_SRID(geom)))
             union all
-            {sql}
+            {query}
         """
     try:
-        result = execute_sql(conn, sql, params=(query,))
+        result = execute_sql(conn, query, params=(query,))
     finally:
         conn.close()
 
@@ -145,7 +257,7 @@ def geometry_for_ids(request, dataset=None):
         # Return all features in an area 5 times as wide and 2 times as tall as
         # the requested feature's longest dimension. Suitable for display at w:h
         # ratios from 1:1 to 5:2.
-        sql = """
+        query = """
             with a as (
                 select bbox,
                     case
@@ -189,7 +301,7 @@ def geometry_for_ids(request, dataset=None):
             from a, f"""
     else:
         # Return only the requested feature.
-        sql = """
+        query = """
             with a as (
                 select sa2_main16, bbox, geom, 
                     case
@@ -229,7 +341,7 @@ def geometry_for_ids(request, dataset=None):
             from a, f
         """
     try:
-        result = execute_sql(conn, sql, params=(feature_id,))
+        result = execute_sql(conn, query, params=(feature_id,))
         data = result[0]["data"]
     except IndexError:
         raise NotFound()
@@ -260,13 +372,13 @@ class ExploreMetricView(views.APIView):
         params = sqls.get(dataset, None).get(metric, None)
 
         conn = pg.connect(dsn)
-        sql = (
+        query = (
             "select {primary_key} as id, {metric} as data from {table}".format(
                 **params
             )
         )
         try:
-            result = execute_sql(conn, sql)
+            result = execute_sql(conn, query)
         finally:
             conn.close()
         return Response(result)
@@ -282,282 +394,360 @@ class DetailView(views.APIView):
 
         conn = pg.connect(dsn)
 
-        shapefile_info = (
+        # Shapefile info
+        query = (
             "select SA2_MAIN16, SA2_5DIG16, SA2_NAME16, SA3_CODE16, "
             "SA3_NAME16, SA4_CODE16, SA4_NAME16, GCC_CODE16, GCC_NAME16, "
             "STE_CODE16, STE_NAME16, AREASQKM16 "
             f"from sa2_2016_aust where SA2_MAIN16='{pk}'"
         )
-        row = execute_sql(conn, shapefile_info, many=False)
+        row = execute_sql(conn, query, many=False)
         if not row:
             raise NotFound()
         result = dict(row)
 
-        basic_info = (
-            "select popfraction, persons_num, males_num, females_num, "
-            "median_persons_age, median_male_age, median_female_age, "
-            "percentage_person_aged_0_14, percentage_person_aged_15_64, "
-            "percentage_person_aged_65_plus, earners_persons, "
-            "median_age_of_earners_years, median_aud, mean_aud, income_aud, "
-            "quartile, occup_diversity, gini_coefficient_no, "
-            "lowest_quartile_pc, second_quartile_pc, third_quartile_pc, "
-            "highest_quartile_pc, income_share_top_1pc, income_share_top_5pc, "
-            "income_share_top_10pc, income_diversity, bsns_growth_rate, "
-            "bsns_entries, bsns_exits "
+        # Basic info
+        query = (
+            "select popfraction, earners_persons, median_age_of_earners_years, "
+            "quartile, occup_diversity, gini_coefficient_no, income_diversity, "
+            "bsns_growth_rate, bsns_entries, bsns_exits "
             "from sa2_info_for_dashboard "
-            f"where sa2_code='{pk}'"
+            "where sa2_code=%(pk)s"
         )
-        row = execute_sql(conn, basic_info, many=False)
+        row = execute_sql(conn, query, params={"pk": pk}, many=False)
         if row:
-            result.update(
-                {
-                    "population": [
-                        {"gender": "All", "count": row["persons_num"]},
-                        {"gender": "Male", "count": row["males_num"]},
-                        {"gender": "Female", "count": row["females_num"]},
-                    ],
-                    "popfraction": row["popfraction"],
-                    "median_age": [
-                        {
-                            "gender": "All",
-                            "median_age": row["median_persons_age"],
-                        },
-                        {
-                            "gender": "Male",
-                            "median_age": row["median_male_age"],
-                        },
-                        {
-                            "gender": "Female",
-                            "median_age": row["median_female_age"],
-                        },
-                    ],
-                    "percentage_persons_aged": [
-                        {
-                            "bracket": "0-14",
-                            "percent": row["percentage_person_aged_0_14"],
-                        },
-                        {
-                            "bracket": "15-64",
-                            "percent": row["percentage_person_aged_15_64"],
-                        },
-                        {
-                            "bracket": "65+",
-                            "percent": row["percentage_person_aged_65_plus"],
-                        },
-                    ],
-                    "wage_earners": row["earners_persons"],
-                    "median_age_of_earners_years": row[
-                        "median_age_of_earners_years"
-                    ],
-                    "median_income_aud": row["median_aud"],
-                    "mean_income_aud": row["mean_aud"],
-                    "accumulate_income_aud": row["income_aud"],
-                    "income_quartile": row["quartile"],
-                    "occup_diversity": row["occup_diversity"],
-                    "gini_coefficient_no": row["gini_coefficient_no"],
-                    "earners_per_quartile": [
-                        {
-                            "quartile": "Lowest Quartile",
-                            "value": row["lowest_quartile_pc"],
-                        },
-                        {
-                            "quartile": "Second Quartile",
-                            "value": row["second_quartile_pc"],
-                        },
-                        {
-                            "quartile": "Third Quartile",
-                            "value": row["third_quartile_pc"],
-                        },
-                        {
-                            "quartile": "Highest Quartile",
-                            "value": row["highest_quartile_pc"],
-                        },
-                    ],
-                    "income_share": [
-                        {"top": "Top 1%", "value": row["income_share_top_1pc"]},
-                        {"top": "Top 5%", "value": row["income_share_top_5pc"]},
-                        {
-                            "top": "Top 10%",
-                            "value": row["income_share_top_10pc"],
-                        },
-                    ],
-                    "income_diversity": row["income_diversity"],
-                    "bsns_growth_rate": row["bsns_growth_rate"],
-                    "bsns_entries": row["bsns_entries"],
-                    "bsns_exits": row["bsns_exits"],
-                }
-            )
+            result.update(row)
 
-        pop_proj = (
-            "select * from sa2_population_and_projection "
-            f"where sa2_main16='{pk}'"
-        )
-        row = execute_sql(conn, pop_proj, many=False)
+        # Population
+        config = {
+            "table_name": "sa2_info_for_dashboard",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "value_name": "count",
+            "var_names": ["gender"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "persons_num",
+                    "replacements": ["All"],
+                },
+                {
+                    "column": "males_num",
+                    "replacements": ["Male"],
+                },
+                {
+                    "column": "females_num",
+                    "replacements": ["Female"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"population": rows})
+
+        # Median Age
+        config = {
+            "table_name": "sa2_info_for_dashboard",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "value_name": "median_age",
+            "var_names": ["gender"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "median_persons_age",
+                    "replacements": ["All"],
+                },
+                {
+                    "column": "median_male_age",
+                    "replacements": ["Male"],
+                },
+                {
+                    "column": "median_female_age",
+                    "replacements": ["Female"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"median_age": rows})
+
+        # Percent Persons Aged
+        config = {
+            "table_name": "sa2_info_for_dashboard",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "value_name": "percent",
+            "var_names": ["bracket"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "percentage_person_aged_0_14",
+                    "replacements": ["0-14"],
+                },
+                {
+                    "column": "percentage_person_aged_15_64",
+                    "replacements": ["15-64"],
+                },
+                {
+                    "column": "percentage_person_aged_65_plus",
+                    "replacements": ["65+"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"percentage_persons_aged": rows})
+
+        # Income Quartile
+        config = {
+            "table_name": "sa2_info_for_dashboard",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "value_name": "value",
+            "var_names": ["quartile"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "lowest_quartile_pc",
+                    "replacements": ["Lowest Quartile"],
+                },
+                {
+                    "column": "second_quartile_pc",
+                    "replacements": ["Second Quartile"],
+                },
+                {
+                    "column": "third_quartile_pc",
+                    "replacements": ["Third Quartile"],
+                },
+                {
+                    "column": "highest_quartile_pc",
+                    "replacements": ["Highest Quartile"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"earners_per_quartile": rows})
+
+        # Income Share
+        config = {
+            "table_name": "sa2_info_for_dashboard",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "value_name": "value",
+            "var_names": ["top"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "income_share_top_1pc",
+                    "replacements": ["Top 1%"],
+                },
+                {
+                    "column": "income_share_top_5pc",
+                    "replacements": ["Top 5%"],
+                },
+                {
+                    "column": "income_share_top_10pc",
+                    "replacements": ["Top 10%"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"income_share": rows})
+
+        # Projected Population
+        config = {
+            "table_name": "sa2_population_and_projection",
+            "primary_key": "sa2_main16",
+            "id_vars": None,
+            "value_name": "pop",
+            "var_names": ["year"],
+            "order_by": [{"column": "year", "direction": "asc"}],
+            "value_vars": [
+                {
+                    "column": "yr_2016",
+                    "replacements": ["2016"],
+                },
+                {
+                    "column": "yr_2021",
+                    "replacements": ["2021"],
+                },
+                {
+                    "column": "yr_2026",
+                    "replacements": ["2026"],
+                },
+                {
+                    "column": "yr_2031",
+                    "replacements": ["2031"],
+                },
+                {
+                    "column": "yr_2036",
+                    "replacements": ["2036"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"pop_proj": rows})
+
+        # Residential Housing
+        config = {
+            "table_name": "sa2_housing_prices_weekly_2021",
+            "primary_key": "sa2code",
+            "id_vars": None,
+            "value_name": "rent",
+            "var_names": ["rooms", "type"],
+            "value_vars": [
+                {
+                    "column": "median_1br_apt",
+                    "replacements": ["1BR", "Apartments"],
+                },
+                {
+                    "column": "median_1br_h",
+                    "replacements": ["1BR", "Houses"],
+                },
+                {
+                    "column": "median_2br_apt",
+                    "replacements": ["2BR", "Apartments"],
+                },
+                {
+                    "column": "median_2br_h",
+                    "replacements": ["2BR", "Houses"],
+                },
+                {
+                    "column": "median_3br_apt",
+                    "replacements": ["3BR", "Apartments"],
+                },
+                {
+                    "column": "median_3br_h",
+                    "replacements": ["3BR", "Houses"],
+                },
+                {
+                    "column": "median_4above_apt",
+                    "replacements": ["4BR+", "Apartments"],
+                },
+                {
+                    "column": "median_4above_h",
+                    "replacements": ["4BR+", "Houses"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        row = execute_sql(conn, query, params={"pk": pk}, many=True)
         if row:
-            result.update(
+            result.update({"residential_housing_median": row})
+
+        # Financial Transactions
+        config = {
+            "table_name": "transaction_indices",
+            "primary_key": "target_sa2",
+            "id_vars": ["mcc"],
+            "value_name": "normalized_value",
+            "var_names": ["type"],
+            "order_by": [{"column": "mcc", "direction": "asc"}],
+            "value_vars": [
                 {
-                    "pop_proj": [
-                        {"pop": row["yr_2016"], "year": "2016"},
-                        {"pop": row["yr_2021"], "year": "2021"},
-                        {"pop": row["yr_2026"], "year": "2026"},
-                        {"pop": row["yr_2031"], "year": "2031"},
-                        {"pop": row["yr_2036"], "year": "2036"},
-                    ],
-                }
-            )
-
-        housing = (
-            "select * from sa2_housing_prices_weekly_2021 "
-            f"where sa2code='{pk}'"
-        )
-        row = execute_sql(conn, housing, many=False)
-        if row:
-            result.update(
+                    "column": "avg_spent_index",
+                    "replacements": ["Average Spent"],
+                },
                 {
-                    "residential_housing_median": [
-                        {
-                            "rooms": "1BR",
-                            "type": "Apartments",
-                            "rent": row["median_1br_apt"],
-                        },
-                        {
-                            "rooms": "1BR",
-                            "type": "Houses",
-                            "rent": row["median_1br_h"],
-                        },
-                        {
-                            "rooms": "2BR",
-                            "type": "Apartments",
-                            "rent": row["median_2br_apt"],
-                        },
-                        {
-                            "rooms": "2BR",
-                            "type": "Houses",
-                            "rent": row["median_2br_h"],
-                        },
-                        {
-                            "rooms": "3BR",
-                            "type": "Apartments",
-                            "rent": row["median_3br_apt"],
-                        },
-                        {
-                            "rooms": "3BR",
-                            "type": "Houses",
-                            "rent": row["median_3br_h"],
-                        },
-                        {
-                            "rooms": "4BR+",
-                            "type": "Apartments",
-                            "rent": row["median_4above_apt"],
-                        },
-                        {
-                            "rooms": "4BR+",
-                            "type": "Houses",
-                            "rent": row["median_4above_h"],
-                        },
-                    ]
-                }
-            )
+                    "column": "trx_count_index",
+                    "replacements": ["Count"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"transactions": rows})
 
-        transactions = (
-            "select * from transaction_indices "
-            f"where target_sa2='{pk}' order by mcc"
-        )
-        rows = execute_sql(conn, transactions, many=True)
-        result.update(
-            {
-                "transactions": chain.from_iterable(
-                    (
-                        [
-                            {
-                                "category": r["mcc"],
-                                "normalized_value": r["avg_spent_index"],
-                                "type": "Average Spent",
-                            },
-                            {
-                                "category": r["mcc"],
-                                "normalized_value": r["trx_count_index"],
-                                "type": "Count",
-                            },
-                        ]
-                        for r in rows
-                    )
-                )
-            }
-        )
+        # Business Counts
+        config = {
+            "table_name": "abr_business_count_by_division",
+            "primary_key": "sa2_code",
+            "id_vars": None,
+            "join_vars": {
+                "target_join_table": "anzsic_codes",
+                "target_join_column": "code",
+                "source_join_column": "industry_division_code",
+                "target_select_columns": ["title"],
+            },
+            "value_name": "value",
+            "var_names": ["year"],
+            "order_by": None,  # Defaults to the order of value_vars
+            "value_vars": [
+                {
+                    "column": "total_2017",
+                    "replacements": ["2017"],
+                },
+                {
+                    "column": "total_2018",
+                    "replacements": ["2018"],
+                },
+                {
+                    "column": "total_2019",
+                    "replacements": ["2019"],
+                },
+                {
+                    "column": "predicted_total_2020",
+                    "replacements": ["2020 Predicted"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"business_counts": rows})
 
-        bsns_counts = (
-            "select * from abr_business_count_by_division "
-            f"where sa2_code='{pk}' order by industry_division_label"
-        )
-        rows = execute_sql(conn, bsns_counts, many=True)
-        result.update(
-            {
-                "business_counts": chain.from_iterable(
-                    (
-                        [
-                            {
-                                "anzsic": r["industry_division_label"],
-                                "year": "2017",
-                                "value": r["total_2017"],
-                            },
-                            {
-                                "anzsic": r["industry_division_label"],
-                                "year": "2018",
-                                "value": r["total_2018"],
-                            },
-                            {
-                                "anzsic": r["industry_division_label"],
-                                "year": "2019",
-                                "value": r["total_2019"],
-                            },
-                            {
-                                "anzsic": r["industry_division_label"],
-                                "year": "2020 Predicted",
-                                "value": r["predicted_total_2020"],
-                            },
-                        ]
-                        for r in rows
-                    )
-                )
-            }
-        )
+        # Turnover vs Cost of Sales
+        config = {
+            "table_name": "tovscos_sa2_anzsic_output",
+            "primary_key": "sa2_code_16",
+            "id_vars": None,
+            "join_vars": {
+                "target_join_table": "anzsic_codes",
+                "target_join_column": "code",
+                "source_join_column": "anzsic",
+                "target_select_columns": ["title"],
+            },
+            "value_name": "value",
+            "var_names": ["type"],
+            "order_by": [{"column": "title", "direction": "asc"}],
+            "value_vars": [
+                {
+                    "column": "mean",
+                    "replacements": ["mean"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"to_cos": rows})
 
-        tovscos = (
-            "select * from tovscos_sa2_anzsic_output "
-            "inner join anzsic_codes_flattened on code=anzsic "
-            f"where sa2_code_16='{pk}' order by title"
-        )
-        rows = execute_sql(conn, tovscos, many=True)
-        result.update(
-            {
-                "to_cos": (
-                    {
-                        "anzsic": r["title"],
-                        "value": r["mean"],
-                    }
-                    for r in rows
-                )
-            }
-        )
-
-        bsns_rents = (
-            "select * from rent_sa2_anzsic_output "
-            "inner join anzsic_codes_flattened on code=anzsic "
-            f"where sa2_code_16='{pk}' order by title"
-        )
-        rows = execute_sql(conn, bsns_rents, many=True)
-        result.update(
-            {
-                "business_rents": (
-                    {
-                        "anzsic": r["title"],
-                        "rent": r["mean"],
-                    }
-                    for r in rows
-                )
-            }
-        )
+        # Business Rents
+        config = {
+            "table_name": "rent_sa2_anzsic_output",
+            "primary_key": "sa2_code_16",
+            "id_vars": None,
+            "join_vars": {
+                "target_join_table": "anzsic_codes",
+                "target_join_column": "code",
+                "source_join_column": "anzsic",
+                "target_select_columns": ["title"],
+            },
+            "value_name": "value",
+            "var_names": ["type"],
+            "order_by": [{"column": "title", "direction": "asc"}],
+            "value_vars": [
+                {
+                    "column": "mean",
+                    "replacements": ["mean"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"business_rents": rows})
 
         result["_atlas_title"] = result["sa2_name16"]
         result["_atlas_header_image"] = {
