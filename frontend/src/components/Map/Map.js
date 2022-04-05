@@ -430,7 +430,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
       const row = data.find(r => r?.id === featureId)
 
       if (fitBounds) {
-        map.current.fitBounds(bounds)
+        map.current.fitBounds(bounds, { padding: 200 })
       }
 
       const sourceLayer = metricConfig?.layers?.[0]?.sourceLayer

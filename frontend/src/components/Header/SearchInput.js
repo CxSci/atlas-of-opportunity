@@ -73,6 +73,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       renderOption={(props, option) => (
         <Box
           {...props}
+          key={option?.id + option?.subtitle}
           data-feature-id={option?.id}
           onMouseEnter={handleOptionMouseEnter}
           sx={{ display: 'block !important' }}>
