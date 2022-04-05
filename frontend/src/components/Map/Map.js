@@ -425,18 +425,12 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
       }
 
       const [popupLng, popupLat] = poleOfInaccessibility
-      const titleKey = metricConfig?.geometry?.titleKey
       const row = data.find(r => r?.id === featureId)
+      const title = option?.title
 
       if (fitBounds) {
         map.current.fitBounds(bounds, { padding: 200 })
       }
-
-      const sourceLayer = metricConfig?.layers?.[0]?.sourceLayer
-      const fillsId = `regions-${sourceLayer}-fills`
-      const popupPoint = map.current.project([popupLng, popupLat])
-      const features = map.current.queryRenderedFeatures(popupPoint, { layers: [fillsId] })
-      const title = features?.[0]?.properties?.[titleKey]
 
       setPopupData({
         id: featureId,
@@ -455,7 +449,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         hoverPopupRef.current.addClassName('immobile')
       }
     },
-    [colorScheme, data, domain, metricConfig?.geometry?.titleKey, metricConfig?.layers, metricConfig?.title],
+    [colorScheme, data, domain, metricConfig?.title],
   )
 
   // effects
