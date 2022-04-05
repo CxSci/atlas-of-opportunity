@@ -29,7 +29,7 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup, datasetId, selectedSearchResult, highlightedSearchResult }) {
+function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const hoverPopupRef = useRef(null)
@@ -416,7 +416,7 @@ function Map({ config, hidePopup, datasetId, selectedSearchResult, highlightedSe
     })
   }, [])
 
-  const showPopupForSearchResult = useCallback(
+  const showPopupForFeature = useCallback(
     ({ option, expandPopup = false, fitBounds = false }) => {
       const { bbox: bounds, id: featureId } = option || {}
 
@@ -522,12 +522,12 @@ function Map({ config, hidePopup, datasetId, selectedSearchResult, highlightedSe
   }, [config, getData, selectedMetric])
 
   useEffect(() => {
-    showPopupForSearchResult({ option: selectedSearchResult, expandPopup: true, fitBounds: true })
-  }, [selectedSearchResult, showPopupForSearchResult])
+    showPopupForFeature({ option: selectedFeature, expandPopup: true, fitBounds: true })
+  }, [selectedFeature, showPopupForFeature])
 
   useEffect(() => {
-    showPopupForSearchResult({ option: highlightedSearchResult })
-  }, [highlightedSearchResult, showPopupForSearchResult])
+    showPopupForFeature({ option: highlightedFeature })
+  }, [highlightedFeature, showPopupForFeature])
 
   return (
     <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
