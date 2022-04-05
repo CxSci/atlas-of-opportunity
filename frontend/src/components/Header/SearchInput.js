@@ -63,6 +63,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       id="search-input-autocomplete"
       clearIcon={<CloseIcon />}
       options={options || []}
+      filterOptions={x => x}
       getOptionLabel={item => item?.title}
       value={selected}
       onChange={(event, val) => {
