@@ -19,36 +19,11 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
     }, 500)
   }
 
-  const handleInputKeyDown = useCallback(
-    e => {
-      if ([38, 40].includes(e?.keyCode)) {
-        const optionNodesList = document.querySelectorAll('.MuiAutocomplete-popper [data-feature-id]')
-        const prevFocusedNode = document.querySelector('.MuiAutocomplete-popper .Mui-focused[data-feature-id]')
-        const prevFocusedIndex = +prevFocusedNode?.dataset?.optionIndex
-
-        let nextIndex = prevFocusedIndex + (e?.keyCode === 38 ? -1 : 1)
-        if (nextIndex === -1) {
-          nextIndex = optionNodesList.length - 1
-        } else if (nextIndex === optionNodesList.length) {
-          nextIndex = 0
-        }
-
-        const nextOptionNode = [...optionNodesList].find(node => +node?.dataset?.optionIndex === nextIndex)
-        const nextOption = options?.find(item => item?.id === nextOptionNode?.dataset?.featureId)
-
-        onHighlightChange(nextOption)
-      }
-    },
-    [options, onHighlightChange],
-  )
-
-  const handleOptionMouseEnter = useCallback(
-    e => {
-      const featureId = e?.target?.dataset?.featureId
-      const option = options?.find(item => item?.id === featureId)
+  const handleHighlightChange = useCallback(
+    (event, option) => {
       onHighlightChange(option)
     },
-    [options, onHighlightChange],
+    [onHighlightChange],
   )
 
   useEffect(() => {
@@ -60,6 +35,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       freeSolo
       autoHighlight
       blurOnSelect
+      onHighlightChange={handleHighlightChange}
       id="search-input-autocomplete"
       clearIcon={<CloseIcon />}
       options={options || []}
@@ -72,11 +48,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       inputValue={inputValue || ''}
       onInputChange={handleChange}
       renderOption={(props, option) => (
-        <Stack
-          {...props}
-          key={option?.id + option?.subtitle}
-          data-feature-id={option?.id}
-          onMouseEnter={handleOptionMouseEnter}>
+        <Stack {...props} key={option?.id + option?.subtitle}>
           <Typography fontWeight={500} sx={{ color: '#000' }}>
             {option?.title}
           </Typography>
@@ -91,7 +63,6 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
           {...params}
           sx={{ width: theme => theme.components.searchInput.width }}
           variant={'filled'}
-          onKeyDown={handleInputKeyDown}
           onChange={handleChange}
           InputProps={{
             ...params.InputProps,
