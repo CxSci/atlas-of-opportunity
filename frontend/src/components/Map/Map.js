@@ -418,14 +418,13 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
   const showPopupForFeature = useCallback(
     ({ option, expandPopup = false, fitBounds = false }) => {
-      const { bbox: bounds, id: featureId } = option || {}
+      const { bbox: bounds, id: featureId, pole_of_inaccessibility: poleOfInaccessibility = [] } = option || {}
 
       if (!map.current || !bounds?.length) {
         return
       }
 
-      const popupLng = (bounds[0] + bounds[2]) / 2
-      const popupLat = (bounds[1] + bounds[3]) / 2
+      const [popupLng, popupLat] = poleOfInaccessibility
       const titleKey = metricConfig?.geometry?.titleKey
       const row = data.find(r => r?.id === featureId)
 
