@@ -455,7 +455,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         hoverPopupRef.current.addClassName('immobile')
       }
     },
-    [data, metricConfig],
+    [colorScheme, data, domain, metricConfig?.geometry?.titleKey, metricConfig?.layers, metricConfig?.title],
   )
 
   // effects
