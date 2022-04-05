@@ -10,6 +10,7 @@ import Map from 'components/Map/'
 import SearchInput from 'components/Header/SearchInput'
 import { createDataSetSelector } from 'store/modules/dataset'
 import { getSearchList } from 'store/modules/search'
+import { setApiData } from '../../store/modules/api'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import initTheme from 'utils/theme'
 
@@ -28,8 +29,13 @@ function Dataset() {
   const theme = useMemo(() => initTheme(data?.theme), [data?.theme])
 
   const handleSearchChange = useCallback(
-    e => {
-      dispatch(getSearchList({ datasetId, params: { q: e?.target?.value } }))
+    value => {
+      if (!value) {
+        dispatch(setApiData({ data: [], selectorKey: 'searchList' }))
+        return
+      }
+
+      dispatch(getSearchList({ datasetId, params: { q: value } }))
     },
     [dispatch, datasetId],
   )

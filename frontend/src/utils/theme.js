@@ -132,6 +132,12 @@ const initTheme = mode => {
       },
       MuiAutocomplete: {
         styleOverrides: {
+          popupIndicator: {
+            display: 'none',
+          },
+          noOptions: {
+            display: 'none',
+          },
           clearIndicator: {
             color: darkMode ? '#666666' : '#2D2D2D',
           },

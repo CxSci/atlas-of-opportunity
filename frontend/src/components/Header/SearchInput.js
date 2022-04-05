@@ -3,20 +3,16 @@ import { useSelector } from 'react-redux'
 import { Autocomplete, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
 import { searchListSelector } from '../../store/modules/search'
+import debounce from 'lodash/debounce'
 
 function SearchInput({ placeholder, onChange = () => null, onSelect = () => null, onHighlightChange }) {
   const [inputValue, setInputValue] = useState('')
   const [selected, setSelected] = useState(null)
-  const changeTimeoutRef = useRef(0)
+  const debouncedFuncRef = useRef(null)
   const options = useSelector(searchListSelector)
 
   const handleChange = e => {
-    clearTimeout(changeTimeoutRef.current)
     setInputValue(e?.target?.value)
-
-    changeTimeoutRef.current = setTimeout(() => {
-      onChange(e)
-    }, 500)
   }
 
   const handleHighlightChange = useCallback(
@@ -30,9 +26,33 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
     onSelect(selected)
   }, [onSelect, selected])
 
+  const handleKeyPress = useCallback(
+    e => {
+      if (e?.keyCode === 13) {
+        if (debouncedFuncRef.current?.cancel) {
+          debouncedFuncRef.current.cancel()
+        }
+
+        onChange(e?.target?.value)
+      }
+    },
+    [onChange],
+  )
+
+  useEffect(() => {
+    const debouncedFunc = debounce(() => {
+      onChange(inputValue)
+    }, 500)
+    debouncedFuncRef.current = debouncedFunc
+
+    debouncedFunc()
+    return () => {
+      debouncedFunc.cancel()
+    }
+  }, [inputValue, onChange])
+
   return (
     <Autocomplete
-      freeSolo
       autoHighlight
       blurOnSelect
       onHighlightChange={handleHighlightChange}
@@ -40,11 +60,12 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       clearIcon={<CloseIcon />}
       options={options || []}
       filterOptions={x => x}
-      getOptionLabel={item => item?.title}
+      getOptionLabel={item => item?.title || ''}
       value={selected}
       onChange={(event, val) => {
         setSelected(val)
       }}
+      onKeyDown={handleKeyPress}
       inputValue={inputValue || ''}
       onInputChange={handleChange}
       renderOption={(props, option) => (
