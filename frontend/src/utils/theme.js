@@ -171,17 +171,16 @@ const initTheme = mode => {
             borderRadius: borderRadiusRound,
           },
           listbox: {
-            backgroundColor: bgLight,
+            '& .MuiAutocomplete-option': {
+              alignItems: 'flex-start',
+
+              '&:hover, &.Mui-focused': {
+                backgroundColor: `${bgHoverLight}`,
+              },
+            },
           },
           option: {
-            backgroundColor: bgLight,
             color: darkMode ? '#666666' : '#2D2D2D',
-            '&:hover': {
-              backgroundColor: `${bgHoverLight} !important`,
-            },
-            '&.Mui-focused': {
-              backgroundColor: `${bgHoverLight} !important`,
-            },
           },
         },
       },

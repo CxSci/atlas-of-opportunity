@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Autocomplete, Box, InputAdornment, TextField, Typography } from '@mui/material'
+import { Autocomplete, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
 import { searchListSelector } from '../../store/modules/search'
 
@@ -72,12 +72,11 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       inputValue={inputValue || ''}
       onInputChange={handleChange}
       renderOption={(props, option) => (
-        <Box
+        <Stack
           {...props}
           key={option?.id + option?.subtitle}
           data-feature-id={option?.id}
-          onMouseEnter={handleOptionMouseEnter}
-          sx={{ display: 'block !important' }}>
+          onMouseEnter={handleOptionMouseEnter}>
           <Typography fontWeight={500} sx={{ color: '#000' }}>
             {option?.title}
           </Typography>
@@ -85,7 +84,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
           <Typography fontSize={'0.875rem'} sx={{ color: theme => theme.palette.darkGrey.main }}>
             {option?.subtitle}
           </Typography>
-        </Box>
+        </Stack>
       )}
       renderInput={params => (
         <TextField
