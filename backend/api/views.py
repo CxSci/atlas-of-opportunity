@@ -434,6 +434,7 @@ class DetailView(views.APIView):
         # Basic info
         query = (
             "select popfraction, earners_persons, median_age_of_earners_years, "
+            "median_aud, mean_aud, income_aud, "
             "quartile, occup_diversity, gini_coefficient_no, income_diversity, "
             "bsns_growth_rate, bsns_entries, bsns_exits "
             "from sa2_info_for_dashboard "
