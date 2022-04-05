@@ -31,7 +31,7 @@ function Dataset() {
     e => {
       dispatch(getSearchList({ datasetId, params: { q: e?.target?.value } }))
     },
-    [datasetId],
+    [dispatch, datasetId],
   )
 
   return (
