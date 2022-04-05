@@ -18,8 +18,8 @@ function Dataset() {
   const params = useParams()
   const { datasetId } = params || {}
   const dataset = useSelector(createDataSetSelector(datasetId))
-  const [selectedSearchResult, setSelectedSearchResult] = useState(null)
-  const [highlightedSearchResult, setHighlightedSearchResult] = useState(null)
+  const [selectedFeature, setSelectedFeature] = useState(null)
+  const [highlightedFeature, setHighlightedFeature] = useState(null)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -46,8 +46,8 @@ function Dataset() {
                 <SearchInput
                   placeholder={searchPlaceholder}
                   onChange={handleSearchChange}
-                  onSelect={setSelectedSearchResult}
-                  onHighlightChange={setHighlightedSearchResult}
+                  onSelect={setSelectedFeature}
+                  onHighlightChange={setHighlightedFeature}
                 />
 
                 <CompareBtn />
@@ -59,8 +59,8 @@ function Dataset() {
           <DataSetComponent
             config={data}
             datasetId={datasetId}
-            selectedSearchResult={selectedSearchResult}
-            highlightedSearchResult={highlightedSearchResult}
+            selectedFeature={selectedFeature}
+            highlightedFeature={highlightedFeature}
           />
         </div>
       </Dashboard>
