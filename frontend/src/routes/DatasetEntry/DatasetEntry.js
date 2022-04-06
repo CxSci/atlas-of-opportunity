@@ -3,13 +3,20 @@ import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getDatasetDetailData, datasetDetailDataSelector, createDataSetSelector } from 'store/modules/dataset'
+import {
+  getDatasetDetailData,
+  getDatasetGeoJSON,
+  datasetDetailDataSelector,
+  createDataSetSelector,
+  datasetGeoJSONSelector,
+} from 'store/modules/dataset'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { scrolledHeaderHeight } from 'utils/theme'
 import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
 import CompareAddBtn from 'components/Header/CompareAddBtn'
 import CompareBtn from 'components/Header/CompareBtn'
 import Dashboard from 'components/Dashboard'
+import StaticMap from 'components/StaticMap'
 import PATH from 'utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
 import initTheme from 'utils/theme'
@@ -31,6 +38,8 @@ const DatasetEntry = () => {
 
   const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
+  const datasetGeoJSON = useSelector(datasetGeoJSONSelector)
+
   const sectionsLayout = dataset?.detailLayout
   const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
@@ -47,6 +56,19 @@ const DatasetEntry = () => {
       ),
     [dispatch, datasetId, entryId],
   )
+
+  useEffect(() => {
+    dispatch(
+      getDatasetGeoJSON({
+        datasetId,
+        params: {
+          ids: entryId,
+          include_neighbors: true,
+          format: 'json',
+        },
+      }),
+    )
+  }, [dispatch, datasetId, entryId])
 
   const headerRightContent = (
     <>
@@ -70,26 +92,21 @@ const DatasetEntry = () => {
             left: (
               <>
                 {sectionsData?._atlas_header_image && (
-                  <Box
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    bgcolor={theme => theme.palette.secondary.main}
-                    width={64}
-                    height={64}
-                    fontSize={12}
-                    mr={1.25}
-                    p={0.5}>
-                    Minimap
+                  <Box sx={{ width: 64 }}>
+                    <StaticMap square areaId={entryId} geoJSON={datasetGeoJSON} />
                   </Box>
                 )}
-
                 <Typography>{entryName}</Typography>
               </>
             ),
           },
         }}>
-        <DatasetEntryComponent sectionsData={sectionsData} sectionsLayout={sectionsLayout} />
+        <DatasetEntryComponent
+          sectionsData={sectionsData}
+          sectionsLayout={sectionsLayout}
+          entryId={entryId}
+          geoJSON={datasetGeoJSON}
+        />
       </Dashboard>
     </ThemeProvider>
   )

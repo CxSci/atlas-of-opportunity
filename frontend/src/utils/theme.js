@@ -279,6 +279,15 @@ const initTheme = mode => {
         gridColor: '#999999',
         axisFontSize: '14px',
       },
+      StaticMap: {
+        background: '#0a1216',
+        selectedBgColor: '#ff8e3c',
+        selectedBorderColor: '#ff8e3c',
+        selectedBgOpacity: 0.6,
+        otherBgColor: '#1c2636',
+        otherBorderColor: '#565A61',
+        strokeWidth: 2,
+      },
     },
   })
 }

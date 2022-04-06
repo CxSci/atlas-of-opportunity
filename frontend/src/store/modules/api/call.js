@@ -50,7 +50,7 @@ const createApiCallSaga = ({
     const requestSelectorKey =
       typeof requestSelectorKeyOrFunc === 'function' ? requestSelectorKeyOrFunc(payload) : requestSelectorKeyOrFunc
     const selectorKey = typeof selectorKeyOrFunc === 'function' ? selectorKeyOrFunc(payload) : selectorKeyOrFunc
-    const reqFootprint = footprintKeys ? fp.pick(payload, footprintKeys) : null
+    const reqFootprint = footprintKeys ? fp.pick(footprintKeys, payload) : null
 
     try {
       if (pending) {
@@ -70,7 +70,7 @@ const createApiCallSaga = ({
           ...(customHeaders ? customHeaders : {}),
         },
         data,
-        params: allowedParamKeys ? fp.pick(queryParams, allowedParamKeys) : queryParams,
+        params: allowedParamKeys ? fp.pick(allowedParamKeys, queryParams) : queryParams,
         baseURL: API_BASE,
       })
 
