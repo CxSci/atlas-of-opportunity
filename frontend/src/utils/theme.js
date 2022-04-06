@@ -177,6 +177,8 @@ const initTheme = mode => {
             borderRadius: borderRadiusRound,
           },
           listbox: {
+            borderRadius: borderRadiusRound,
+
             '& .MuiAutocomplete-option': {
               alignItems: 'flex-start',
 
