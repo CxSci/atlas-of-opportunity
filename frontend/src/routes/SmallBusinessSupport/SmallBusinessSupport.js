@@ -1,3 +1,4 @@
+import React from 'react'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import PropTypes from 'prop-types'
@@ -12,6 +13,7 @@ import SectionSimpleRange from 'components/SectionSimpleRange'
 import SectionStackedArea from 'components/SectionStackedArea'
 import SectionText from 'components/SectionText'
 import Spinner from 'components/Spinner'
+import StaticMap from 'components/StaticMap'
 import { slugify } from 'utils/helpers'
 
 const componentMappings = {
@@ -22,7 +24,7 @@ const componentMappings = {
   stacked_area: SectionStackedArea,
 }
 
-const SmallBusinessSupport = ({ sectionsData, sectionsLayout }) => {
+const SmallBusinessSupport = ({ sectionsData, sectionsLayout, entryId, geoJSON }) => {
   if (!sectionsLayout || !sectionsData) {
     return <Spinner />
   }
@@ -34,7 +36,7 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout }) => {
         <Typography variant="h1" gutterBottom>
           {sectionsData?._atlas_title}
         </Typography>
-        <Box sx={{ height: 400, backgroundColor: 'lightGray' }} mb={4} />
+        <StaticMap height={400} square={false} geoJSON={geoJSON} areaId={entryId} />
       </Container>
       <SectionNavbar sections={sections} />
       <Container>
