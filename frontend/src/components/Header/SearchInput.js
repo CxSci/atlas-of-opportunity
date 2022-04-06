@@ -1,19 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Autocomplete, InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import debounce from 'lodash/debounce'
+import { Autocomplete, CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
 import { searchListSelector } from '../../store/modules/search'
-import debounce from 'lodash/debounce'
+import { isRequestPending } from '../../store/modules/api'
 
 function SearchInput({ placeholder, onChange = () => null, onSelect = () => null, onHighlightChange }) {
   const [inputValue, setInputValue] = useState('')
   const [selected, setSelected] = useState(null)
-  const debouncedFuncRef = useRef(null)
   const options = useSelector(searchListSelector)
-
-  const handleChange = e => {
-    setInputValue(e?.target?.value)
-  }
+  const isLoading = useSelector(isRequestPending('searchList', 'get'))
 
   const handleHighlightChange = useCallback(
     (event, option) => {
@@ -22,34 +19,23 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
     [onHighlightChange],
   )
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedOnChange = useCallback(debounce(onChange, 500), [onChange])
+
   useEffect(() => {
     onSelect(selected)
   }, [onSelect, selected])
 
-  const handleKeyPress = useCallback(
-    e => {
-      if (e?.keyCode === 13) {
-        if (debouncedFuncRef.current?.cancel) {
-          debouncedFuncRef.current.cancel()
-        }
-
-        onChange(e?.target?.value)
-      }
-    },
-    [onChange],
-  )
+  useEffect(() => {
+    debouncedOnChange(inputValue)
+  }, [debouncedOnChange, inputValue])
 
   useEffect(() => {
-    const debouncedFunc = debounce(() => {
-      onChange(inputValue)
-    }, 500)
-    debouncedFuncRef.current = debouncedFunc
-
-    debouncedFunc()
     return () => {
-      debouncedFunc.cancel()
+      debouncedOnChange.cancel()
     }
-  }, [inputValue, onChange])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Autocomplete
@@ -65,9 +51,8 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       onChange={(event, val) => {
         setSelected(val)
       }}
-      onKeyDown={handleKeyPress}
+      noOptionsText="No results"
       inputValue={inputValue || ''}
-      onInputChange={handleChange}
       renderOption={(props, option) => (
         <Stack {...props} key={option?.id + option?.subtitle}>
           <Typography fontWeight={500} sx={{ color: '#000' }}>
@@ -84,7 +69,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
           {...params}
           sx={{ width: theme => theme.components.searchInput.width }}
           variant={'filled'}
-          onChange={handleChange}
+          onChange={event => setInputValue(event?.target?.value)}
           InputProps={{
             ...params.InputProps,
             placeholder,
@@ -93,6 +78,8 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
                 <SearchIcon />
               </InputAdornment>
             ),
+            endAdornment: isLoading ? <CircularProgress color="inherit" size={20} /> : null,
+            sx: { paddingRight: '14px !important' },
           }}
         />
       )}

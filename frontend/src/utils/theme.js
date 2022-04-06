@@ -136,7 +136,7 @@ const initTheme = mode => {
             display: 'none',
           },
           noOptions: {
-            display: 'none',
+            color: darkMode ? '#666666' : '#2D2D2D',
           },
           clearIndicator: {
             color: darkMode ? '#666666' : '#2D2D2D',
