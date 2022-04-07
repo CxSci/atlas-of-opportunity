@@ -168,10 +168,10 @@ const initTheme = mode => {
           },
           paper: {
             border: 'none',
-            borderRadius: borderRadiusRound,
+            borderRadius: '5px',
           },
           listbox: {
-            borderRadius: borderRadiusRound,
+            borderRadius: '5px',
 
             '& .MuiAutocomplete-option': {
               alignItems: 'flex-start',
