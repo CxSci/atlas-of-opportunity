@@ -29,7 +29,7 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
 
   useEffect(() => {
     const handleResize = () => setSize(generateSize(ref, square, mapHeight))
-    handleResize()
+    setTimeout(() => handleResize(), 0)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [square, mapHeight])
@@ -55,16 +55,18 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
       }}>
       {shouldRenderMap && (
         <svg width={'100%'} height={'100%'}>
-          {geoJSON?.features.map((d, idx) => (
-            <path
-              key={'path' + idx}
-              d={pathGenerator(d)}
-              fill={d.id === areaId ? selectedBgColor : otherBgColor}
-              stroke={d.id === areaId ? selectedBorderColor : otherBorderColor}
-              fillOpacity={d.id === areaId ? selectedBgOpacity : 1}
-              strokeWidth={strokeWidth}
-            />
-          ))}
+          <g fill={otherBgColor} stroke={otherBorderColor} fillOpacity={1} strokeWidth={strokeWidth}>
+            {geoJSON?.features.map((d, idx) =>
+              d.id !== areaId ? <path key={'path' + idx} d={pathGenerator(d)} /> : null,
+            )}
+          </g>
+          <g
+            fill={selectedBgColor}
+            stroke={selectedBorderColor}
+            fillOpacity={selectedBgOpacity}
+            strokeWidth={strokeWidth}>
+            <path d={pathGenerator(geoJSON?.features.find(d => d.id === areaId))} />
+          </g>
         </svg>
       )}
     </Box>
