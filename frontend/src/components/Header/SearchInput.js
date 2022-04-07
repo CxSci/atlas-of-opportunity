@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import debounce from 'lodash/debounce'
-import { Autocomplete, CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import { Autocomplete, CircularProgress, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
 import { searchListSelector } from '../../store/modules/search'
 import { isRequestPending } from '../../store/modules/api'
@@ -88,8 +88,23 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
                 <SearchIcon />
               </InputAdornment>
             ),
-            endAdornment: isLoading ? <CircularProgress color="inherit" size={20} /> : null,
-            sx: { paddingRight: '14px !important' },
+            endAdornment: (
+              <React.Fragment>
+                {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+
+                {inputValue && (
+                  <IconButton
+                    onClick={() => setInputValue('')}
+                    sx={{
+                      color: theme => theme.components.autocompleteClearIcon.color,
+                      position: 'absolute',
+                      right: '2px',
+                    }}>
+                    <CloseIcon />
+                  </IconButton>
+                )}
+              </React.Fragment>
+            ),
           }}
         />
       )}
