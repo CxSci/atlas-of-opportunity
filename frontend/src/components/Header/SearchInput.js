@@ -7,9 +7,13 @@ import { searchListSelector } from '../../store/modules/search'
 import { isRequestPending } from '../../store/modules/api'
 
 function SearchInput({ placeholder, onChange = () => null, onSelect = () => null, onHighlightChange }) {
+  const [focused, setFocused] = useState(false)
   const [inputValue, setInputValue] = useState('')
+  const [inputChanged, setInputChanged] = useState(false)
   const options = useSelector(searchListSelector)
   const isLoading = useSelector(isRequestPending('searchList', 'get'))
+
+  const open = Boolean(focused && !(inputChanged && !options?.length) && inputValue)
 
   const handleHighlightChange = useCallback(
     (event, option) => {
@@ -32,10 +36,21 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    setInputChanged(true)
+  }, [inputValue])
+
+  useEffect(() => {
+    if (isLoading === false) {
+      setInputChanged(false)
+    }
+  }, [isLoading])
+
   return (
     <Autocomplete
       autoHighlight
       blurOnSelect
+      open={open}
       onHighlightChange={handleHighlightChange}
       id="search-input-autocomplete"
       clearIcon={<CloseIcon />}
@@ -63,6 +78,8 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
           sx={{ width: theme => theme.components.searchInput.width }}
           variant={'filled'}
           onChange={event => setInputValue(event?.target?.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           InputProps={{
             ...params.InputProps,
             placeholder,
