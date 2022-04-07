@@ -8,7 +8,6 @@ import { isRequestPending } from '../../store/modules/api'
 
 function SearchInput({ placeholder, onChange = () => null, onSelect = () => null, onHighlightChange }) {
   const [inputValue, setInputValue] = useState('')
-  const [selected, setSelected] = useState(null)
   const options = useSelector(searchListSelector)
   const isLoading = useSelector(isRequestPending('searchList', 'get'))
 
@@ -21,10 +20,6 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedOnChange = useCallback(debounce(onChange, 500), [onChange])
-
-  useEffect(() => {
-    onSelect(selected)
-  }, [onSelect, selected])
 
   useEffect(() => {
     debouncedOnChange(inputValue)
@@ -47,10 +42,8 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       options={options || []}
       filterOptions={x => x}
       getOptionLabel={item => item?.title || ''}
-      value={selected}
-      onChange={(event, val) => {
-        setSelected(val)
-      }}
+      value={null}
+      onChange={(event, val) => onSelect(val)}
       noOptionsText="No results"
       inputValue={inputValue || ''}
       renderOption={(props, option) => (
