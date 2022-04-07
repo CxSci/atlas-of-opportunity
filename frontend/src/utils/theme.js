@@ -138,15 +138,9 @@ const initTheme = mode => {
           noOptions: {
             color: darkMode ? '#666666' : '#2D2D2D',
           },
-          clearIndicator: {
-            color: darkMode ? '#666666' : '#2D2D2D',
-          },
           input: {
             paddingTop: '0 !important',
             paddingBottom: '0 !important',
-          },
-          endAdornment: {
-            top: 'initial',
           },
           inputRoot: {
             height: buttonHeight,
@@ -282,6 +276,11 @@ const initTheme = mode => {
       floatingFilter: {
         width: 320,
       },
+
+      autocompleteClearIcon: {
+        color: darkMode ? '#666666' : '#2D2D2D',
+      },
+
       Chart: {
         axisColor: '#666666',
         lineColor: '#FDD14D',
