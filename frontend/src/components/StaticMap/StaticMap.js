@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useCallback, useMemo, useRef, useState } from 'react'
 import { generateSize, getScaleTranslation } from './StaticMap.utils'
 import { geoMercator, geoPath } from 'd3-geo'
 import { useTheme } from '@mui/system'
@@ -27,12 +27,22 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
     [geoJSON, areaId],
   )
 
+  const handleResize = useCallback(() => setSize(generateSize(ref, square, mapHeight)), [mapHeight, square])
+
+  const getRef = useCallback(
+    node => {
+      if (node) {
+        ref.current = node
+        handleResize()
+      }
+    },
+    [handleResize],
+  )
+
   useEffect(() => {
-    const handleResize = () => setSize(generateSize(ref, square, mapHeight))
-    setTimeout(() => handleResize(), 0)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [square, mapHeight])
+  }, [square, mapHeight, handleResize])
 
   if (!geoJSON) {
     return null
@@ -47,7 +57,7 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
 
   return (
     <Box
-      ref={ref}
+      ref={getRef}
       sx={{
         overflow: 'hidden',
         background,
