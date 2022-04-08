@@ -53,7 +53,6 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       open={open}
       onHighlightChange={handleHighlightChange}
       id="search-input-autocomplete"
-      clearIcon={<CloseIcon />}
       options={options || []}
       filterOptions={x => x}
       getOptionLabel={item => item?.title || ''}
