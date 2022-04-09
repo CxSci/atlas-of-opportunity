@@ -209,7 +209,7 @@ def search_dataset(request, dataset=None):
             table=sql.Identifier("sa2_2016_aust"),
         )
     else:
-        sql_query = sql.SQL()
+        sql_query = sql.SQL("")
 
     # Second, find the regions which either contain those geocoded results's
     # center coordinates or have names containing the query term, sorting
