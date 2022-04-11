@@ -432,17 +432,34 @@ class ExploreMetricView(views.APIView):
                     "primary_key": "sa2_code",
                     "metric": "quartile",
                 },
+            },
+            "new_york": {
+                "median_house_income": {
+                    "query": """
+                        select census_block_group as id,
+                            median_house_income as data
+                        from census_attributes
+                        inner join tl_2019_36_bg
+                        on census_attributes.census_block_group=tl_2019_36_bg.geoid
+                        where countyfp in ('005', '047', '061', '081', '085')
+                        and median_house_income is not null
+                    """,
+                }
             }
         }
 
         params = sqls.get(dataset, None).get(metric, None)
 
-        conn = pg.connect(dsn)
-        query = (
-            "select {primary_key} as id, {metric} as data from {table}".format(
-                **params
+        query = params.get("query", None)
+        if not query:
+            query = (
+                "select {primary_key} as id, {metric} as data "
+                "from {table}".format(
+                    **params
+                )
             )
-        )
+
+        conn = pg.connect(dsn)
         try:
             result = execute_sql(conn, query)
         finally:
