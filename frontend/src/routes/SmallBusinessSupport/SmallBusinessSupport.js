@@ -1,8 +1,9 @@
 import React from 'react'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
-import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
+import Skeleton from '@mui/material/Skeleton'
+import PropTypes from 'prop-types'
 
 import Anchor from 'components/Anchor'
 import MetricsContainer from 'components/MetricsContainer'
@@ -25,16 +26,15 @@ const componentMappings = {
 }
 
 const SmallBusinessSupport = ({ sectionsData, sectionsLayout, entryId, geoJSON }) => {
-  if (!sectionsLayout || !sectionsData) {
+  if (!sectionsLayout) {
     return <Spinner />
   }
   const { sections } = sectionsLayout
-
   return (
     <Box sx={{ mt: 3 }}>
       <Container>
         <Typography variant="h1" gutterBottom>
-          {sectionsData?._atlas_title}
+          {sectionsData ? sectionsData._atlas_title : <Skeleton />}
         </Typography>
         <StaticMap height={400} square={false} geoJSON={geoJSON} areaId={entryId} />
       </Container>
@@ -54,7 +54,9 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout, entryId, geoJSON }
                   return (
                     <Box sx={{ mb: 3 }}>
                       {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
-                      {SectionComponent && <SectionComponent layout={metric} data={sectionsData[metric.key]} />}
+                      {SectionComponent && (
+                        <SectionComponent layout={metric} data={sectionsData ? sectionsData[metric.key] : null} />
+                      )}
                     </Box>
                   )
                 }}

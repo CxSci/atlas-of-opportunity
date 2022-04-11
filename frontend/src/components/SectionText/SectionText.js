@@ -1,22 +1,37 @@
+import React, { useRef } from 'react'
 import Box from '@mui/material/Box'
-import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
+import Skeleton from '@mui/material/Skeleton'
+import PropTypes from 'prop-types'
 
-import { LayoutMetricType } from 'utils/propTypes'
 import FieldNumber from 'components/FieldNumber'
 import ExpandableContainer from 'components/ExpandableContainer'
+import { LayoutMetricType } from 'utils/propTypes'
+import { useClientSize } from 'hooks/victory'
 
 const SectionText = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
+  const ref = useRef()
+  const defaultContainerWidth = 500
+  const defaultContainerHeight = 300
+  const size = useClientSize(ref, defaultContainerWidth, defaultContainerHeight, 0.6)
 
-  if (layout.format === 'number') {
-    return <FieldNumber value={data || 0} numberFormat={layout.numberFormat} />
+  if (!layout) {
+    return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
   }
 
-  if (xAxisKey && yAxisKey) {
+  if (layout.format === 'number') {
+    if (data) {
+      return <FieldNumber value={data || 0} numberFormat={layout.numberFormat} />
+    } else {
+      return <Skeleton variant="text" />
+    }
+  }
+
+  if (xAxisKey && yAxisKey && data) {
     return (
-      <Box>
+      <Box ref={ref}>
         <ExpandableContainer data={data} filters={layout.filters}>
           {items =>
             items.map((item, index) => (
@@ -31,9 +46,9 @@ const SectionText = ({ layout, data }) => {
         </ExpandableContainer>
       </Box>
     )
+  } else {
+    return <Skeleton variant="rectangular" {...size} sx={{ borderRadius: 1 }} />
   }
-
-  return null
 }
 
 SectionText.propTypes = {

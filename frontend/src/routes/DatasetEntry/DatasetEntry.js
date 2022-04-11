@@ -10,6 +10,7 @@ import {
   createDataSetSelector,
   datasetGeoJSONSelector,
 } from 'store/modules/dataset'
+import { setApiData } from 'store/modules/api'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import { scrolledHeaderHeight } from 'utils/theme'
 import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
@@ -46,16 +47,15 @@ const DatasetEntry = () => {
   const entryName = sectionsData?._atlas_title || ''
   const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
 
-  useEffect(
-    () =>
-      dispatch(
-        getDatasetDetailData({
-          datasetId,
-          entryId,
-        }),
-      ),
-    [dispatch, datasetId, entryId],
-  )
+  useEffect(() => {
+    dispatch(
+      getDatasetDetailData({
+        datasetId,
+        entryId,
+      }),
+    )
+    return dispatch(setApiData({ selectorKey: 'datasetDetailData', data: null }))
+  }, [dispatch, datasetId, entryId])
 
   useEffect(() => {
     dispatch(
@@ -68,6 +68,7 @@ const DatasetEntry = () => {
         },
       }),
     )
+    return dispatch(setApiData({ selectorKey: 'datasetGeoJSON', data: null }))
   }, [dispatch, datasetId, entryId])
 
   const headerRightContent = (
