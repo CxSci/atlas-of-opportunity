@@ -1,26 +1,43 @@
+import React, { useRef } from 'react'
 import Box from '@mui/material/Box'
-import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
+import Skeleton from '@mui/material/Skeleton'
+import PropTypes from 'prop-types'
 
 import ExpandableContainer from 'components/ExpandableContainer'
 import SimpleBar from 'components/SimpleBar'
 import { LayoutMetricType } from 'utils/propTypes'
+import { useClientSize } from 'hooks/victory'
 
 const SectionSimpleBar = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
+  const ref = useRef()
+  const defaultContainerWidth = 500
+  const defaultContainerHeight = 250
+  const size = useClientSize(ref, defaultContainerWidth, defaultContainerHeight, 0.5)
+
+  if (!layout) {
+    return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
+  }
+
   if (layout.format === 'number') {
     const { min, max } = layout
-    const percentage = (data - min) / (max - min || 1)
-    return <SimpleBar value={data} numberFormat={layout.numberFormat} percentage={percentage} />
+    if (data) {
+      const percentage = (data - min) / (max - min || 1)
+      return <SimpleBar value={data} numberFormat={layout.numberFormat} percentage={percentage} />
+    } else {
+      return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
+    }
   }
-  if (xAxisKey && yAxisKey) {
+
+  if (xAxisKey && yAxisKey && data) {
     const maxValue = data.reduce(
       (maxValue, item) => (item[yAxisKey] > maxValue ? item[yAxisKey] : maxValue),
       data.length > 0 ? data[0][yAxisKey] : 1,
     )
     return (
-      <Box>
+      <Box ref={ref}>
         <ExpandableContainer data={data}>
           {items =>
             items.map((item, index) => (
@@ -39,9 +56,9 @@ const SectionSimpleBar = ({ layout, data }) => {
         </ExpandableContainer>
       </Box>
     )
+  } else {
+    return <Skeleton variant="rectangular" {...size} sx={{ borderRadius: 1 }} />
   }
-
-  return null
 }
 
 SectionSimpleBar.propTypes = {

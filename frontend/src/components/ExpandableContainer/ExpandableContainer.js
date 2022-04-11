@@ -50,7 +50,7 @@ const ExpandableContainer = ({ data, filters, children }) => {
 }
 
 ExpandableContainer.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   children: PropTypes.func.isRequired,
 }
 
