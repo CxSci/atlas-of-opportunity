@@ -715,13 +715,13 @@
         "searchPlaceholder": "Search by id or suburb",
         "metrics": [
           {
-            "id": "income_diversity",
+            "id": "median_house_income",
             "data": {
-              "url": "http://localhost:8000/datasets/small-business-support/metrics/income_diversity/",
+              "url": "http://localhost:8000/datasets/new_york/metrics/median_house_income/",
               "type": "json"
             },
             "type": "chloropleth",
-            "title": "GDP Growth Potential",
+            "title": "Median Household Income",
             "layers": [
               {
                 "paint": {
@@ -733,31 +733,37 @@
                   },
                   "default": {
                     "fill": {
-                      "colorScheme": ["#fff5eb", "#fd8d3c", "#7f2704"],
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
                       "fallbackColor": "#555555"
                     },
                     "outline": {
                       "color": "#ffffff",
                       "width": 1.2,
-                      "opacity": 0.5
+                      "opacity": 0.2
                     }
                   }
                 },
                 "metric": {
                   "type": "simple_range",
                   "scale": "linear",
-                  "title": "GDP Growth Potential",
-                  "domain": [0, 0.6, 1.2]
+                  "title": "Median Household Income",
+                  "domain": [0, 50000, 100000, 150000, 200000]
                 },
                 "beforeId": "poi-label",
-                "sourceLayer": "sa2_2016_aust"
+                "sourceLayer": "ny_boroughs_cbg_land_data-83xo1d"
               }
             ],
             "geometry": {
-              "url": "mapbox://justinanderson.sa_2016_aust",
+              "url": "mapbox://justinanderson.1f6g1wfv",
               "type": "vector",
-              "titleKey": "SA2_NAME16",
-              "promoteId": "SA2_MAIN16"
+              "titleKey": "census_block_group",
+              "promoteId": "census_block_group"
             }
           },
           {
@@ -820,8 +826,8 @@
         "options": {
           "style": "mapbox://styles/justinanderson/ckzrzxt0s000c14k55o20zjbk",
           "bounds": [
-            [129, -38],
-            [141, -26]
+            [-74.255713, 40.496044],
+            [-73.700009, 40.915282]
           ],
           "fitBoundsOptions": {
             "padding": {
@@ -832,7 +838,7 @@
             }
           }
         },
-        "defaultMetric": "income_diversity"
+        "defaultMetric": "median_house_income"
       },
       "detail_layout": {
         "theme": "light",
