@@ -273,6 +273,30 @@ def geometry_for_ids(request, dataset=None):
     # TODO: Support requests for multiple ids
     feature_id = feature_ids.split(" ")[0]
 
+    if dataset == 'small-business-support':
+        params = {
+            "table": "sa2_2016_aust",
+            "geom_col": "geom",
+            "pk_col": "sa2_main16",
+            "where": "ste_name16='South Australia'",
+        }
+    elif dataset == 'new_york':
+        params = {
+            "table": "tl_2019_36_bg",
+            "geom_col": "geom",
+            "pk_col": "geoid",
+            # 005 -- Bronx County (Bronx)
+            # 047 -- Kings County (Brooklyn)
+            # 061 -- New York County (Manhattan)
+            # 081 -- Queens County (Queens)
+            # 085 -- Richmond County (Staten Island)
+            "where": "countyfp in ('005', '047', '061', '081', '085')",
+        }
+    else:
+        raise NotFound()
+
+    params.update({"feature_id": feature_id})
+
     dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
         **settings.DASHBOARD_DATABASE
     )
@@ -282,7 +306,7 @@ def geometry_for_ids(request, dataset=None):
         # Return all features in an area 5 times as wide and 2 times as tall as
         # the requested feature's longest dimension. Suitable for display at w:h
         # ratios from 1:1 to 5:2.
-        query = """
+        query = f"""
             with a as (
                 select bbox,
                     case
@@ -290,33 +314,35 @@ def geometry_for_ids(request, dataset=None):
                         when (width) between 3 and 9 then 0.005
                         when (width) >= 9 then 0.01
                     end simplify_precision
-                from sa2_2016_aust,
+                from {params["table"]},
                 lateral (select ST_SetSRID(
                     mitcxi_scaled_bbox(
-                        mitcxi_escribed_square_bbox(Box2D(geom)), 5, 2
+                        mitcxi_escribed_square_bbox(
+                            Box2D({params["geom_col"]})
+                        ), 5, 2
                     ),
-                    ST_SRID(geom)
+                    ST_SRID({params["geom_col"]})
                 ) as bbox) b,
                 lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) c
-                where sa2_main16=%s
+                where {params["pk_col"]}=%s
                 limit 1
             ),
             f as (
                 select json_agg(
                     json_build_object(
                         'type',       'Feature',
-                        'id',         sa2_main16,
+                        'id',         {params["pk_col"]},
                         'geometry',   ST_AsGeoJSON(ST_Transform(
                             ST_SimplifyPreserveTopology(
-                                ST_ClipByBox2D(geom, bbox),
+                                ST_ClipByBox2D({params["geom_col"]}, bbox),
                                 simplify_precision
                             ), 4326), 6)::json,
                         'properties', json_build_object()
                     )
                 ) as features
-                from sa2_2016_aust, a
-                where ste_name16='South Australia'
-                and bbox && geom
+                from {params["table"]}, a
+                where {params["where"]}
+                and bbox && {params["geom_col"]}
             )
             select json_build_object(
                 'type', 'FeatureCollection',
@@ -326,32 +352,32 @@ def geometry_for_ids(request, dataset=None):
             from a, f"""
     else:
         # Return only the requested feature.
-        query = """
+        query = f"""
             with a as (
-                select sa2_main16, bbox, geom, 
+                select {params["pk_col"]}, bbox, {params["geom_col"]}, 
                     case
                         when (width) <= 3 then 0
                         when (width) between 3 and 9 then 0.005
                         when (width) >= 9 then 0.01
                     end simplify_precision
-                from sa2_2016_aust,
+                from {params["table"]},
                 lateral (
                     select ST_SetSRID(
-                        mitcxi_escribed_square_bbox(Box2D(geom)),
-                    ST_SRID(geom)
+                        mitcxi_escribed_square_bbox(Box2D({params["geom_col"]})),
+                    ST_SRID({params["geom_col"]})
                 ) as bbox) b,
                 lateral (select ST_XMax(bbox) - ST_XMin(bbox) as width) w
-                where sa2_main16=%s
+                where {params["pk_col"]}=%s
                 limit 1
             ),
             f as (
                 select json_agg(
                     json_build_object(
                         'type',       'Feature',
-                        'id',         sa2_main16,
+                        'id',         {params["pk_col"]},
                         'geometry',   ST_AsGeoJSON(ST_Transform(
                             ST_SimplifyPreserveTopology(
-                                geom, simplify_precision
+                                {params["geom_col"]}, simplify_precision
                             ), 4326), 6)::json,
                         'properties', json_build_object()
                     )
@@ -427,7 +453,7 @@ class ExploreMetricView(views.APIView):
 class DetailView(views.APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def get(self, request, dataset=None, pk=None, format=None):
+    def get_south_australia(self, request, pk=None, format=None):
         dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
             **settings.DASHBOARD_DATABASE
         )
@@ -802,3 +828,168 @@ class DetailView(views.APIView):
 
         conn.close()
         return Response(result)
+
+    def get_new_york(self, request, pk=None, format=None):
+        dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+            **settings.DASHBOARD_DATABASE
+        )
+
+        conn = pg.connect(dsn)
+
+        # Shapefile info
+        query = (
+            "select gid, statefp, countyfp, tractce, blkgrpce, geoid, "
+            "namelsad, mtfcc, funcstat, aland, awater, intptlat, intptlon, "
+            "x, y "
+            "from tl_2019_36_bg where geoid=%(pk)s"
+        )
+        row = execute_sql(conn, query, params={"pk": pk}, many=False)
+        if not row:
+            raise NotFound()
+        result = dict(row)
+
+        # Basic info
+        query = (
+            "select census_block_group, median_house_income, "
+            "agg_household_income, per_capita_income, median_age "
+            "from census_attributes "
+            "where census_block_group=%(pk)s"
+        )
+        row = execute_sql(conn, query, params={"pk": pk}, many=False)
+        if row:
+            result.update(row)
+
+        # Population by Race
+        config = {
+            "table_name": "census_attributes",
+            "primary_key": "census_block_group",
+            "id_vars": None,
+            "value_name": "value",
+            "var_names": ["race"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "white_population",
+                    "replacements": ["White"],
+                },
+                {
+                    "column": "black_population",
+                    "replacements": ["Black"],
+                },
+                {
+                    "column": "asian_population",
+                    "replacements": ["Asian"],
+                },
+                {
+                    "column": "hispanic_population",
+                    "replacements": ["Hispanic"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"population_by_race": rows})
+
+        # Population by Education
+        config = {
+            "table_name": "census_attributes",
+            "primary_key": "census_block_group",
+            "id_vars": None,
+            "value_name": "value",
+            "var_names": ["education"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "edu_bachelors",
+                    "replacements": ["Bachelor's"],
+                },
+                {
+                    "column": "edu_masters",
+                    "replacements": ["Master's"],
+                },
+                {
+                    "column": "edu_professional_prog",
+                    "replacements": ["Professional Program"],
+                },
+                {
+                    "column": "edu_phd",
+                    "replacements": ["PhD"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"population_by_education": rows})
+
+        # Population by Age Bracket
+        config = {
+            "table_name": "census_attributes",
+            "primary_key": "census_block_group",
+            "id_vars": None,
+            "value_name": "count",
+            "var_names": ["bracket"],
+            "order_by": None,
+            "value_vars": [
+                {
+                    "column": "t_0_10",
+                    "replacements": ["0 - 10"],
+                },
+                {
+                    "column": "t_10_14",
+                    "replacements": ["10 - 14"],
+                },
+                {
+                    "column": "t_15_19",
+                    "replacements": ["15 - 19"],
+                },
+                {
+                    "column": "t_20_24",
+                    "replacements": ["20 - 24"],
+                },
+                {
+                    "column": "t_25_29",
+                    "replacements": ["25 - 29"],
+                },
+                {
+                    "column": "t_30_24",  # TODO: check if this should instead be 30 - 34
+                    "replacements": ["30 - 24"],
+                },
+                {
+                    "column": "t_35_44",
+                    "replacements": ["35 - 44"],
+                },
+                {
+                    "column": "t_45_59",
+                    "replacements": ["45 - 59"],
+                },
+                {
+                    "column": "t_60_80",
+                    "replacements": ["60 - 80"],
+                },
+            ],
+        }
+        query = build_melted_select_statement(**config)
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"population_by_age": rows})
+
+        result["_atlas_title"] = result["geoid"]
+        result["_atlas_header_image"] = {
+            "type": "geojson",
+            "url": (
+                "http://localhost:8000/datasets/new_york/"
+                f"geometry?ids={result['geoid']}&include_neighbors=true"
+                "&format=json"
+            ),
+        }
+
+        conn.close()
+        return Response(result)
+
+    def get(self, request, dataset=None, pk=None, format=None):
+        if dataset == 'small-business-support':
+            result = self.get_south_australia(request, pk, format)
+        elif dataset == 'new_york':
+            result = self.get_new_york(request, pk, format)
+        else:
+            raise NotFound()
+        return result
