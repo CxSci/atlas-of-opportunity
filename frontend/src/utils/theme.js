@@ -103,9 +103,18 @@ const initTheme = mode => {
           disableElevation: true,
         },
         styleOverrides: {
+          text: {
+            ':disabled': {
+              color: '#666666',
+            },
+          },
           containedPrimary: {
             ':hover': {
               backgroundColor: '#36ABE5',
+            },
+            ':disabled': {
+              backgroundColor: '#999999',
+              color: '#fff',
             },
           },
           contained: {
@@ -248,6 +257,11 @@ const initTheme = mode => {
           root: {},
         },
       },
+      MuiDivider: {
+        defaultProps: {
+          color: '#ccc',
+        },
+      },
 
       header: {
         height: headerHeight,
@@ -259,6 +273,14 @@ const initTheme = mode => {
         iconColor: darkMode ? '#ffffff' : iconColor,
         iconHoverColor: darkMode ? '#ffffff' : '#000000',
       },
+
+      comparisonMenu: {
+        width: '300px',
+        bgColor: '#fff',
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '10px',
+      },
+
       SectionNavbar: {
         height: 40,
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 1)',

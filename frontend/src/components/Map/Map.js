@@ -32,7 +32,7 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature }) {
+function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature, comparisonList, addToComparison }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const hoverPopupRef = useRef(null)
@@ -239,9 +239,8 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
       function onMapClick(e) {
         const feature = e.features[0]
-        const row = data.find(r => r[foreignKey] === feature?.id)
 
-        if (row) {
+        if (feature) {
           expandPopup()
         }
       }
@@ -532,7 +531,17 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
       <GlobalStyles styles={mapGlobalStyles} />
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef}>{popupData && <MapPopupContent datasetId={datasetId} {...popupData} />}</div>
+      <div ref={popupContainerRef}>
+        {popupData && (
+          <MapPopupContent
+            datasetId={datasetId}
+            comparisonList={comparisonList}
+            addToComparison={addToComparison}
+            {...popupData}
+          />
+        )}
+      </div>
+
       <Box
         position={'absolute'}
         bottom={38}

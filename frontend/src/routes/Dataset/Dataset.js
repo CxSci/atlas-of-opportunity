@@ -13,6 +13,7 @@ import { getSearchList } from 'store/modules/search'
 import { setApiData } from '../../store/modules/api'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import initTheme from 'utils/theme'
+import useCompareList from 'hooks/useCompareList'
 
 function Dataset() {
   const dispatch = useDispatch()
@@ -21,6 +22,7 @@ function Dataset() {
   const dataset = useSelector(createDataSetSelector(datasetId))
   const [selectedFeature, setSelectedFeature] = useState(null)
   const [highlightedFeature, setHighlightedFeature] = useState(null)
+  const { comparisonList, addToComparison, removeFromComparison } = useCompareList(datasetId)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -56,7 +58,7 @@ function Dataset() {
                   onHighlightChange={setHighlightedFeature}
                 />
 
-                <CompareBtn />
+                <CompareBtn comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
               </>
             ),
           },
@@ -67,6 +69,8 @@ function Dataset() {
             datasetId={datasetId}
             selectedFeature={selectedFeature}
             highlightedFeature={highlightedFeature}
+            comparisonList={comparisonList}
+            addToComparison={addToComparison}
           />
         </div>
       </Dashboard>
