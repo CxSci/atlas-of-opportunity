@@ -22,6 +22,8 @@ import StaticMap from 'components/StaticMap'
 import PATH from 'utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
 import initTheme from 'utils/theme'
+import useCompareList from 'hooks/useCompareList'
+import { MAX_COMPARE_COUNT } from 'utils/constants'
 
 const getDatasetEntryComponent = datasetId => {
   switch (datasetId) {
@@ -37,6 +39,7 @@ const DatasetEntry = () => {
   const dispatch = useDispatch()
   const { datasetId, entryId } = params || {}
   const DatasetEntryComponent = getDatasetEntryComponent(datasetId)
+  const { comparisonList, addToComparison, removeFromComparison } = useCompareList(datasetId)
 
   const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
@@ -47,6 +50,8 @@ const DatasetEntry = () => {
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
   const entryName = sectionsData?._atlas_title
   const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
+  const disableAddToComparison =
+    comparisonList?.length >= MAX_COMPARE_COUNT || Boolean(comparisonList.find(item => item?.id === entryId))
 
   useEffect(() => {
     dispatch(
@@ -74,9 +79,12 @@ const DatasetEntry = () => {
 
   const headerRightContent = (
     <>
-      <CompareAddBtn onClick={() => console.log(entryId)} />
+      <CompareAddBtn
+        onClick={() => addToComparison({ id: entryId, title: sectionsData?._atlas_title, data: {} })}
+        disabled={disableAddToComparison}
+      />
 
-      <CompareBtn />
+      <CompareBtn comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
     </>
   )
 

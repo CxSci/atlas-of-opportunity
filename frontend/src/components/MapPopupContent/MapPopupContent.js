@@ -4,8 +4,9 @@ import { ChevronRight } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
-import PATH from '../../utils/path'
-import { iconColor } from '../../utils/theme'
+import PATH from 'utils/path'
+import { iconColor } from 'utils/theme'
+import { MAX_COMPARE_COUNT } from 'utils/constants'
 
 const StyledTitleLink = styled(Link)({
   display: 'flex',
@@ -14,7 +15,21 @@ const StyledTitleLink = styled(Link)({
   marginBottom: '8px',
 })
 
-function MapPopupContent({ id, datasetId, title, metricName, data, colorScheme, domain, expanded }) {
+function MapPopupContent({
+  id,
+  datasetId,
+  title,
+  metricName,
+  data,
+  colorScheme,
+  domain,
+  expanded,
+  comparisonList,
+  addToComparison,
+}) {
+  const disableAddToComparison =
+    comparisonList?.length >= MAX_COMPARE_COUNT || Boolean(comparisonList.find(item => item?.id === id))
+
   return (
     <Box
       p={1.5}
@@ -63,7 +78,8 @@ function MapPopupContent({ id, datasetId, title, metricName, data, colorScheme, 
               backgroundColor: 'transparent',
             },
           }}
-          onClick={() => console.log(id)}>
+          onClick={() => addToComparison({ id, title, data })}
+          disabled={disableAddToComparison}>
           <CompareIconPlus size={22} />
 
           <Typography component={'span'} fontWeight={500} fontSize={14} sx={{ ml: 1 }}>
