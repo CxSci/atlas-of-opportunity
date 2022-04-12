@@ -1,6 +1,9 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useCallback, useRef } from 'react'
 import { Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { Delete } from '@mui/icons-material'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCompareMenuOpen } from '../../store/modules/compare'
+import useOutsideClick from '../../hooks/useOutsideClick'
 
 // TODO: replace with real <Map mini={true} />
 const MiniMap = () => (
@@ -17,8 +20,20 @@ const MiniMap = () => (
 )
 
 function ComparisonMenu({ comparisonList, removeFromComparison }) {
+  const dispatch = useDispatch()
+  const containerRef = useRef()
+  const compareMenuOpen = useSelector(state => state.compare?.menuOpen)
+  const closeCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(false)), [dispatch])
+
+  useOutsideClick(containerRef, closeCompareMenuOpen)
+
+  if (!compareMenuOpen) {
+    return null
+  }
+
   return (
     <Box
+      ref={containerRef}
       component={Stack}
       position={'absolute'}
       right={theme => theme.components.header.paddingX}

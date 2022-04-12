@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Box, Button, styled, Typography, Link } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
 import PATH from 'utils/path'
 import { iconColor } from 'utils/theme'
 import { MAX_COMPARE_COUNT } from 'utils/constants'
+import { setCompareMenuOpen } from '../../store/modules/compare'
 
 const StyledTitleLink = styled(Link)({
   display: 'flex',
@@ -27,8 +29,17 @@ function MapPopupContent({
   comparisonList,
   addToComparison,
 }) {
+  const dispatch = useDispatch()
+
   const disableAddToComparison =
     comparisonList?.length >= MAX_COMPARE_COUNT || Boolean(comparisonList.find(item => item?.id === id))
+
+  const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
+
+  const handleAddToComparison = useCallback(() => {
+    addToComparison({ id, title, data })
+    openCompareMenuOpen()
+  }, [addToComparison, data, id, openCompareMenuOpen, title])
 
   return (
     <Box
@@ -78,7 +89,7 @@ function MapPopupContent({
               backgroundColor: 'transparent',
             },
           }}
-          onClick={() => addToComparison({ id, title, data })}
+          onClick={handleAddToComparison}
           disabled={disableAddToComparison}>
           <CompareIconPlus size={22} />
 
