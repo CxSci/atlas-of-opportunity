@@ -750,30 +750,30 @@
                   }
                 },
                 "metric": {
-                  "type": "simple_range",
+                  "type": "simple_bar",
                   "scale": "linear",
                   "title": "Median Household Income",
                   "domain": [0, 50000, 100000, 150000, 200000]
                 },
                 "beforeId": "poi-label",
-                "sourceLayer": "ny_boroughs_cbg_land_data-83xo1d"
+                "sourceLayer": "ny_boroughs_cbg_land_geoid-czl79f"
               }
             ],
             "geometry": {
-              "url": "mapbox://justinanderson.1f6g1wfv",
+              "url": "mapbox://justinanderson.9r0e7kx6",
               "type": "vector",
-              "titleKey": "census_block_group",
-              "promoteId": "census_block_group"
+              "titleKey": "geoid",
+              "promoteId": "geoid"
             }
           },
           {
-            "id": "population",
+            "id": "per_capita_income",
             "data": {
-              "url": "https://gist.githubusercontent.com/justinanderson/e4f894b5ab6ae5b5ee408c182ac1ff42/raw/088fcd8dfdd503dc7a116149b49b5b0f17129381/population.json",
+              "url": "http://localhost:8000/datasets/new_york/metrics/per_capita_income/",
               "type": "json"
             },
-            "type": "circle",
-            "title": "Population",
+            "type": "chloropleth",
+            "title": "Per Capita Income",
             "layers": [
               {
                 "paint": {
@@ -785,41 +785,141 @@
                   },
                   "default": {
                     "fill": {
-                      "colorScheme": ["#fff5eb", "#fd8d3c", "#7f2704"],
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
                       "fallbackColor": "#555555"
                     },
                     "outline": {
                       "color": "#ffffff",
                       "width": 1.2,
-                      "opacity": 0.5
+                      "opacity": 0.2
                     }
                   }
                 },
                 "metric": {
-                  "key": "count",
-                  "type": "text",
-                  "title": "Female Population",
-                  "format": "number",
-                  "filters": [
-                    {
-                      "key": "gender",
-                      "values": ["female"]
-                    }
-                  ]
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Per Capita Income",
+                  "domain": [0, 50000, 100000, 150000, 200000]
                 },
                 "beforeId": "poi-label",
-                "sourceLayer": "sa2_2016_aust"
+                "sourceLayer": "ny_boroughs_cbg_land_geoid-czl79f"
               }
             ],
-            "points": {
-              "url": "https://gist.githubusercontent.com/justinanderson/e4f894b5ab6ae5b5ee408c182ac1ff42/raw/088fcd8dfdd503dc7a116149b49b5b0f17129381/points.geojson",
-              "type": "geojson"
-            },
             "geometry": {
-              "url": "mapbox://justinanderson.sa_2016_aust",
+              "url": "mapbox://justinanderson.9r0e7kx6",
               "type": "vector",
-              "titleKey": "SA2_NAME16",
-              "promoteId": "SA2_MAIN16"
+              "titleKey": "geoid",
+              "promoteId": "geoid"
+            }
+          },
+          {
+            "id": "agg_household_income",
+            "data": {
+              "url": "http://localhost:8000/datasets/new_york/metrics/agg_household_income/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Aggregate Household Income",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.2
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Aggregate Household Income",
+                  "domain": [0, 50000000, 100000000, 150000000, 200000000.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "ny_boroughs_cbg_land_geoid-czl79f"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.9r0e7kx6",
+              "type": "vector",
+              "titleKey": "geoid",
+              "promoteId": "geoid"
+            }
+          },
+          {
+            "id": "median_age",
+            "data": {
+              "url": "http://localhost:8000/datasets/new_york/metrics/median_age/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Median Age",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "rgb(35, 23, 27)",
+                        "rgb(38, 188, 225)",
+                        "rgb(149, 251, 81)",
+                        "rgb(255, 130, 29)",
+                        "rgb(144, 12, 0)"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.2
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Median Age",
+                  "domain": [0, 25, 50, 75, 100]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "ny_boroughs_cbg_land_geoid-czl79f"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.9r0e7kx6",
+              "type": "vector",
+              "titleKey": "geoid",
+              "promoteId": "geoid"
             }
           }
         ],

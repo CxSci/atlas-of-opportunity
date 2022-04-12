@@ -444,7 +444,40 @@ class ExploreMetricView(views.APIView):
                         where countyfp in ('005', '047', '061', '081', '085')
                         and median_house_income is not null
                     """,
-                }
+                },
+                "per_capita_income": {
+                    "query": """
+                        select census_block_group as id,
+                            per_capita_income as data
+                        from census_attributes
+                        inner join tl_2019_36_bg
+                        on census_attributes.census_block_group=tl_2019_36_bg.geoid
+                        where countyfp in ('005', '047', '061', '081', '085')
+                        and per_capita_income is not null
+                    """,
+                },
+                "agg_household_income": {
+                    "query": """
+                        select census_block_group as id,
+                            agg_household_income as data
+                        from census_attributes
+                        inner join tl_2019_36_bg
+                        on census_attributes.census_block_group=tl_2019_36_bg.geoid
+                        where countyfp in ('005', '047', '061', '081', '085')
+                        and agg_household_income is not null
+                    """,
+                },
+                "median_age": {
+                    "query": """
+                        select census_block_group as id,
+                            median_age as data
+                        from census_attributes
+                        inner join tl_2019_36_bg
+                        on census_attributes.census_block_group=tl_2019_36_bg.geoid
+                        where countyfp in ('005', '047', '061', '081', '085')
+                        and median_age is not null
+                    """,
+                },
             }
         }
 
