@@ -1,5 +1,5 @@
 import { Box, Typography, ThemeProvider } from '@mui/material'
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import Skeleton from '@mui/material/Skeleton'
@@ -24,6 +24,7 @@ import SmallBusinessSupport from 'routes/SmallBusinessSupport'
 import initTheme from 'utils/theme'
 import useCompareList from 'hooks/useCompareList'
 import { MAX_COMPARE_COUNT } from 'utils/constants'
+import { setCompareMenuOpen } from 'store/modules/compare'
 
 const getDatasetEntryComponent = datasetId => {
   switch (datasetId) {
@@ -52,6 +53,12 @@ const DatasetEntry = () => {
   const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
   const disableAddToComparison =
     comparisonList?.length >= MAX_COMPARE_COUNT || Boolean(comparisonList.find(item => item?.id === entryId))
+  const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
+
+  const handleAddToComparison = useCallback(() => {
+    addToComparison({ id: entryId, title: sectionsData?._atlas_title, data: {} })
+    openCompareMenuOpen()
+  }, [addToComparison, entryId, openCompareMenuOpen, sectionsData?._atlas_title])
 
   useEffect(() => {
     dispatch(
@@ -79,10 +86,7 @@ const DatasetEntry = () => {
 
   const headerRightContent = (
     <>
-      <CompareAddBtn
-        onClick={() => addToComparison({ id: entryId, title: sectionsData?._atlas_title, data: {} })}
-        disabled={disableAddToComparison}
-      />
+      <CompareAddBtn onClick={handleAddToComparison} disabled={disableAddToComparison} />
 
       <CompareBtn comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
     </>
