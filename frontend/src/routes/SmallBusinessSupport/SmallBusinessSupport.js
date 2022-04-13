@@ -36,7 +36,11 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout, entryId, geoJSON }
         <Typography variant="h1" gutterBottom>
           {sectionsData ? sectionsData._atlas_title : <Skeleton />}
         </Typography>
-        <StaticMap height={400} square={false} geoJSON={geoJSON} areaId={entryId} />
+        {geoJSON ? (
+          <StaticMap height={400} square={false} geoJSON={geoJSON} areaId={entryId} />
+        ) : (
+          <Skeleton height={400} />
+        )}
       </Container>
       <SectionNavbar sections={sections} />
       <Container>

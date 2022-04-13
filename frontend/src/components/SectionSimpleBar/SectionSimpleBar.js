@@ -1,4 +1,3 @@
-import React, { useRef } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Skeleton from '@mui/material/Skeleton'
@@ -7,19 +6,11 @@ import PropTypes from 'prop-types'
 import ExpandableContainer from 'components/ExpandableContainer'
 import SimpleBar from 'components/SimpleBar'
 import { LayoutMetricType } from 'utils/propTypes'
-import { useClientSize } from 'hooks/victory'
 
 const SectionSimpleBar = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
-  const ref = useRef()
-  const defaultContainerWidth = 500
   const defaultContainerHeight = 250
-  const size = useClientSize(ref, defaultContainerWidth, defaultContainerHeight, 0.5)
-
-  if (!layout) {
-    return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
-  }
 
   if (layout.format === 'number') {
     const { min, max } = layout
@@ -37,7 +28,7 @@ const SectionSimpleBar = ({ layout, data }) => {
       data.length > 0 ? data[0][yAxisKey] : 1,
     )
     return (
-      <Box ref={ref}>
+      <Box>
         <ExpandableContainer data={data}>
           {items =>
             items.map((item, index) => (
@@ -57,7 +48,7 @@ const SectionSimpleBar = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Skeleton variant="rectangular" {...size} sx={{ borderRadius: 1 }} />
+    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
   }
 }
 

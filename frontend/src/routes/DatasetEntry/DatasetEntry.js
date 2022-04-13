@@ -2,6 +2,7 @@ import { Box, Typography, ThemeProvider } from '@mui/material'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
+import Skeleton from '@mui/material/Skeleton'
 
 import {
   getDatasetDetailData,
@@ -44,7 +45,7 @@ const DatasetEntry = () => {
   const sectionsLayout = dataset?.detailLayout
   const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
-  const entryName = sectionsData?._atlas_title || ''
+  const entryName = sectionsData?._atlas_title
   const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
 
   useEffect(() => {
@@ -92,12 +93,14 @@ const DatasetEntry = () => {
           contentScrolled: {
             left: (
               <>
-                {sectionsData?._atlas_header_image && (
+                {sectionsData?._atlas_header_image ? (
                   <Box sx={{ width: 64 }}>
                     <StaticMap square areaId={entryId} geoJSON={datasetGeoJSON} />
                   </Box>
+                ) : (
+                  <Skeleton variant="rectangular" width={64} height={64} />
                 )}
-                <Typography>{entryName}</Typography>
+                {entryName ? <Typography>{entryName}</Typography> : <Skeleton variant="text" width={100} />}
               </>
             ),
           },

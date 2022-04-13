@@ -1,5 +1,6 @@
 import psycopg2 as pg
 import requests
+import time
 from django.conf import settings
 from psycopg2 import sql
 from rest_framework import permissions, views, viewsets
@@ -416,6 +417,7 @@ class DetailView(views.APIView):
         dsn = "postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
             **settings.DASHBOARD_DATABASE
         )
+        time.sleep(20)
 
         conn = pg.connect(dsn)
 
