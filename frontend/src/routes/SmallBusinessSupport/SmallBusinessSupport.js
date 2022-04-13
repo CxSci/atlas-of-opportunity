@@ -39,7 +39,7 @@ const SmallBusinessSupport = ({ sectionsData, sectionsLayout, entryId, geoJSON }
         {geoJSON ? (
           <StaticMap height={400} square={false} geoJSON={geoJSON} areaId={entryId} />
         ) : (
-          <Skeleton height={400} />
+          <Skeleton height={400} variant="rectangular" />
         )}
       </Container>
       <SectionNavbar sections={sections} />

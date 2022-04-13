@@ -93,7 +93,7 @@ const DatasetEntry = () => {
           contentScrolled: {
             left: (
               <>
-                {sectionsData?._atlas_header_image ? (
+                {datasetGeoJSON ? (
                   <Box sx={{ width: 64 }}>
                     <StaticMap square areaId={entryId} geoJSON={datasetGeoJSON} />
                   </Box>
