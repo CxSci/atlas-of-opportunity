@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import { Box, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
+
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
+import { getDatasetMapData, datasetMapDataSelector } from 'store/modules/dataset'
 import { MAPBOX_API_KEY } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
@@ -41,7 +44,8 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
   const onMapClickRef = useRef(null)
   const onAllMapMouseMoveRef = useRef(null)
   const [selectedMetric, setSelectedMetric] = useState('')
-  const [data, setData] = useState([])
+  const dispatch = useDispatch()
+  const data = useSelector(datasetMapDataSelector)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [metricConfig, setMetricConfig] = useState(null)
   const [colorScheme, setColorScheme] = useState([])
@@ -50,23 +54,6 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
   const [popupData, setPopupData] = useState(null)
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
-
-  // methods
-  const getData = useCallback(async url => {
-    setData([])
-    if (!url) {
-      return
-    }
-
-    // TODO: use client instance instead
-    try {
-      const res = await fetch(url)
-      const json = await res.json()
-      setData(json)
-    } catch (e) {
-      console.error(e)
-    }
-  }, [])
 
   const initPopup = useCallback(
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
@@ -525,8 +512,8 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
     const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
     setMetricConfig(newMetricConfig)
     setColorScheme(colorScheme)
-    getData(newMetricConfig?.data?.url)
-  }, [config, getData, selectedMetric])
+    dispatch(getDatasetMapData({ url: newMetricConfig?.data?.url }))
+  }, [config, dispatch, selectedMetric])
 
   useEffect(() => {
     showPopupForFeature({ option: selectedFeature, expandPopup: true, fitBounds: true })

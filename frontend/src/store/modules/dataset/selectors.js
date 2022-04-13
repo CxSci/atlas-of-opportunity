@@ -5,6 +5,7 @@ export const datasetListSelector = createDataSelector('datasetList')
 export const datasetSingleSelector = createDataSelector('datasetSingle')
 export const datasetDetailDataSelector = createDataSelector('datasetDetailData')
 export const datasetGeoJSONSelector = createDataSelector('datasetGeoJSON')
+export const datasetMapDataSelector = createDataSelector('datasetMapData')
 
 export const createDataSetSelector = type => fp.compose(fp.find(fp.pathEq('id', type)), datasetListSelector)
 
