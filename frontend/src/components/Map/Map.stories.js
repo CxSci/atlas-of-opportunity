@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+
 import Map from './Map'
+import initTheme from 'utils/theme'
 
 const config = {
   id: 'small-business-support',
@@ -76,7 +79,14 @@ export default {
   argTypes: {},
 }
 
-const Template = args => <Map {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <Map {...args} />
+    </ThemeProvider>
+  )
+}
 
 // TODO: popup not working
 export const Default = Template.bind({})

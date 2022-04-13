@@ -1,14 +1,27 @@
 import React from 'react'
+import { ThemeProvider } from '@mui/material'
+import { Provider } from 'react-redux'
 
+import initTheme from 'utils/theme'
 import PATH from '../../utils/path'
 import DatasetEntry from './DatasetEntry'
+import store from 'store'
 
 export default {
   title: `routes${PATH.DATASET_ENTRY}`,
   component: DatasetEntry,
-  argTypes: {}
+  argTypes: {},
 }
 
-const Template = args => <DatasetEntry {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <DatasetEntry {...args} />
+      </ThemeProvider>
+    </Provider>
+  )
+}
 
 export const Default = Template.bind({})

@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+
 import MetricFilters from './MetricFilters'
+import initTheme from 'utils/theme'
 
 export default {
   title: 'components/MetricFilters',
@@ -7,7 +10,14 @@ export default {
   parameters: { actions: { argTypesRegex: '^on.*' } },
 }
 
-const Template = args => <MetricFilters {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <MetricFilters {...args} />
+    </ThemeProvider>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {

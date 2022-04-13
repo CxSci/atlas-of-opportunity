@@ -13,7 +13,7 @@ export default {
 const Template = args => {
   const { value: initialValue, items } = args
   const [value, setValue] = useState(initialValue)
-  const theme = initTheme(false)
+  const theme = initTheme('light')
   return (
     <ThemeProvider theme={theme}>
       <SimpleCarousel value={value}>

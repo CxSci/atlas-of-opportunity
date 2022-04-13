@@ -1,5 +1,8 @@
 import { Fragment } from 'react'
+import { ThemeProvider } from '@mui/material'
+
 import ExpandableContainer from './ExpandableContainer'
+import initTheme from 'utils/theme'
 
 export default {
   title: 'components/ExpandableContainer',
@@ -7,7 +10,14 @@ export default {
   argTypes: {},
 }
 
-const Template = args => <ExpandableContainer {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <ExpandableContainer {...args} />
+    </ThemeProvider>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {
