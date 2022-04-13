@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+
 import MapPopupContent from './MapPopupContent'
+import initTheme from 'utils/theme'
 
 export default {
   title: 'components/MapPopupContent',
@@ -6,7 +9,14 @@ export default {
   argTypes: {},
 }
 
-const Template = args => <MapPopupContent {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <MapPopupContent {...args} />
+    </ThemeProvider>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {

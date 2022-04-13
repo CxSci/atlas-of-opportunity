@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+
 import Select from './Select'
+import initTheme from 'utils/theme'
 
 export default {
   title: 'components/Select',
@@ -6,7 +9,14 @@ export default {
   argTypes: {},
 }
 
-const Template = args => <Select {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <Select {...args} />
+    </ThemeProvider>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {

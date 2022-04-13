@@ -14,7 +14,7 @@ export default {
 }
 
 const Template = args => {
-  const theme = initTheme(false)
+  const theme = initTheme('light')
   const customScrolledHeight = 80
   const top = customScrolledHeight + theme.components?.SectionNavbar?.height + parseFloat(theme.spacing(2))
   return (

@@ -20,6 +20,5 @@ WithSolidStyle.args = {
   value: 0.5,
   min: 0,
   max: 1,
-  style: 'solid',
   color: 'primary',
 }

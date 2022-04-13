@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+
 import FilterSelect from './FilterSelect'
+import initTheme from 'utils/theme'
 
 export default {
   title: 'components/FilterSelect',
@@ -7,7 +10,14 @@ export default {
   parameters: { actions: { argTypesRegex: '^on.*' } },
 }
 
-const Template = args => <FilterSelect {...args} />
+const Template = args => {
+  const theme = initTheme('light')
+  return (
+    <ThemeProvider theme={theme}>
+      <FilterSelect {...args} />
+    </ThemeProvider>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {
