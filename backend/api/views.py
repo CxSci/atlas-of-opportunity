@@ -478,6 +478,14 @@ class ExploreMetricView(views.APIView):
                         and median_age is not null
                     """,
                 },
+                "visits": {
+                    "query": """
+                        select census_block_group as id, count(visit_count) as data
+                        from safegraph_weekly_visits
+                        join safegraph_pois_to_cbgs using (placekey)
+                        group by census_block_group
+                    """,
+                },
             }
         }
 
@@ -1021,6 +1029,25 @@ class DetailView(views.APIView):
         query = build_melted_select_statement(**config)
         rows = execute_sql(conn, query, params={"pk": pk}, many=True)
         result.update({"population_by_age": rows})
+
+        query = """
+            select coalesce(
+                tag,
+                concat('Other ', coalesce(sub_category, top_category))
+            ) as category, count(visit_count), week_start
+            from safegraph_pois
+                left outer join lateral
+                    unnest(string_to_array(category_tags, ',')) as a(tag)
+                        on true
+                left outer join safegraph_pois_to_cbgs using (placekey)
+                right outer join safegraph_weekly_visits using (placekey)
+            where census_block_group = %(pk)s
+            group by census_block_group, top_category,
+                sub_category, tag, week_start
+            order by category, week_start
+        """
+        rows = execute_sql(conn, query, params={"pk": pk}, many=True)
+        result.update({"safegraph_visits_by_tag": rows})
 
         result["_atlas_title"] = result["geoid"]
         result["_atlas_header_image"] = {

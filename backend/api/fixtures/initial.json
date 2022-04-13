@@ -921,6 +921,58 @@
               "titleKey": "geoid",
               "promoteId": "geoid"
             }
+          },
+          {
+            "id": "visits",
+            "data": {
+              "url": "http://localhost:8000/datasets/new_york/metrics/visits/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Safegraph Visits",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Safegraph Visits",
+                  "domain": [0, 1000, 2000, 3000, 4000]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "ny_boroughs_cbg_land_geoid-czl79f"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.9r0e7kx6",
+              "type": "vector",
+              "titleKey": "geoid",
+              "promoteId": "geoid"
+            }
           }
         ],
         "options": {
@@ -982,6 +1034,16 @@
                 "column": 0
               },
               {
+                "key": "median_age",
+                "type": "text",
+                "title": "Median Age",
+                "column": 1,
+                "format": "number",
+                "numberFormat": {
+                  "maximumFractionDigits": 2
+                }
+              },
+              {
                 "x": {
                   "key": "bracket"
                 },
@@ -992,17 +1054,7 @@
                 "key": "population_by_age",
                 "type": "simple_bar",
                 "title": "Population by Age",
-                "column": 0
-              },
-              {
-                "key": "median_age",
-                "type": "text",
-                "title": "Median Age",
-                "column": 0,
-                "format": "number",
-                "numberFormat": {
-                  "maximumFractionDigits": 2
-                }
+                "column": 1
               }
             ]
           },
@@ -1041,6 +1093,30 @@
                   "style": "currency",
                   "currency": "USD"
                 }
+              }
+            ]
+          },
+          {
+            "title": "Mobility",
+            "metrics": [
+              {
+                "x": {
+                  "key": "week_start",
+                  "title": "Week"
+                },
+                "y": {
+                  "key": "count",
+                  "title": "Visits",
+                  "format": "number"
+                },
+                "z": {
+                  "key": "category",
+                  "title": "Category"
+                },
+                "key": "safegraph_visits_by_tag",
+                "type": "line",
+                "title": "Safegraph Visits",
+                "column": 0
               }
             ]
           }
