@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import ComparisonMenu from '../ComparisonMenu'
 import { setCompareMenuOpen } from '../../store/modules/compare'
 
-function CompareBtn({ comparisonList, removeFromComparison, ...props }) {
+function CompareBtn({
+  comparisonList,
+  removeFromComparison,
+  onHighlightChange = () => null,
+  onSelect = () => null,
+  ...props
+}) {
   const dispatch = useDispatch()
   const compareMenuOpen = useSelector(state => state.compare?.menuOpen)
   const toggleCompareMenuOpen = () => dispatch(setCompareMenuOpen(!compareMenuOpen))
@@ -25,7 +31,12 @@ function CompareBtn({ comparisonList, removeFromComparison, ...props }) {
         </Typography>
       </Button>
 
-      <ComparisonMenu comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
+      <ComparisonMenu
+        comparisonList={comparisonList}
+        removeFromComparison={removeFromComparison}
+        onSelect={onSelect}
+        onHighlightChange={onHighlightChange}
+      />
     </>
   )
 }

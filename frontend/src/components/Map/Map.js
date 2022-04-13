@@ -406,12 +406,19 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
     ({ option, expandPopup = false, fitBounds = false }) => {
       if (!option && hoverPopupRef?.current) {
         hoverPopupRef.current.remove()
+        return
       }
 
       const { bbox: bounds, id: featureId, pole_of_inaccessibility: poleOfInaccessibility = [] } = option || {}
 
       if (!map.current || !bounds?.length) {
         return
+      }
+
+      if (!poleOfInaccessibility?.length) {
+        const lngCenter = (bounds[0] + bounds[2]) / 2
+        const latCenter = (bounds[1] + bounds[3]) / 2
+        poleOfInaccessibility.push(lngCenter, latCenter)
       }
 
       const [popupLng, popupLat] = poleOfInaccessibility
@@ -532,7 +539,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
       <div ref={popupContainerRef}>
-        {popupData && (
+        {popupData?.id && (
           <MapPopupContent
             datasetId={datasetId}
             comparisonList={comparisonList}
