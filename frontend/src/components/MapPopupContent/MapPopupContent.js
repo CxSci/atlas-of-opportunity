@@ -9,6 +9,7 @@ import PATH from 'utils/path'
 import { iconColor } from 'utils/theme'
 import { MAX_COMPARE_COUNT } from 'utils/constants'
 import { setCompareMenuOpen } from '../../store/modules/compare'
+import { getDatasetGeoJSON } from '../../store/modules/dataset'
 
 const StyledTitleLink = styled(Link)({
   display: 'flex',
@@ -37,9 +38,21 @@ function MapPopupContent({
   const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
 
   const handleAddToComparison = useCallback(() => {
-    addToComparison({ id, title, data })
-    openCompareMenuOpen()
-  }, [addToComparison, data, id, openCompareMenuOpen, title])
+    dispatch(
+      getDatasetGeoJSON({
+        datasetId,
+        params: {
+          ids: id,
+          include_neighbors: true,
+          format: 'json',
+        },
+        success: geoJson => {
+          addToComparison({ id, title, bbox: geoJson?.bbox, features: geoJson?.features })
+          openCompareMenuOpen()
+        },
+      }),
+    )
+  }, [addToComparison, datasetId, dispatch, id, openCompareMenuOpen, title])
 
   return (
     <Box

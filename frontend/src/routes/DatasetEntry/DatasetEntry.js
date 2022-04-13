@@ -1,6 +1,6 @@
 import { Box, Typography, ThemeProvider } from '@mui/material'
 import { useCallback, useEffect, useMemo } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import Skeleton from '@mui/material/Skeleton'
 
@@ -37,6 +37,7 @@ const getDatasetEntryComponent = datasetId => {
 
 const DatasetEntry = () => {
   const params = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { datasetId, entryId } = params || {}
   const DatasetEntryComponent = getDatasetEntryComponent(datasetId)
@@ -56,9 +57,28 @@ const DatasetEntry = () => {
   const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
 
   const handleAddToComparison = useCallback(() => {
-    addToComparison({ id: entryId, title: sectionsData?._atlas_title, data: {} })
+    addToComparison({
+      id: entryId,
+      title: sectionsData?._atlas_title,
+      bbox: datasetGeoJSON?.bbox,
+      features: datasetGeoJSON?.features,
+    })
     openCompareMenuOpen()
-  }, [addToComparison, entryId, openCompareMenuOpen, sectionsData?._atlas_title])
+  }, [
+    addToComparison,
+    datasetGeoJSON?.bbox,
+    datasetGeoJSON?.features,
+    entryId,
+    openCompareMenuOpen,
+    sectionsData?._atlas_title,
+  ])
+
+  const onSelectCompareItem = useCallback(
+    item => {
+      navigate(`${datasetRoute}/${item?.id}`)
+    },
+    [datasetRoute, navigate],
+  )
 
   useEffect(() => {
     dispatch(
@@ -88,7 +108,11 @@ const DatasetEntry = () => {
     <>
       <CompareAddBtn onClick={handleAddToComparison} disabled={disableAddToComparison} />
 
-      <CompareBtn comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
+      <CompareBtn
+        comparisonList={comparisonList}
+        removeFromComparison={removeFromComparison}
+        onSelect={onSelectCompareItem}
+      />
     </>
   )
 

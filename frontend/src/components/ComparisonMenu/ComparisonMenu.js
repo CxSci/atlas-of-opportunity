@@ -4,28 +4,23 @@ import { Delete } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCompareMenuOpen } from '../../store/modules/compare'
 import useOutsideClick from '../../hooks/useOutsideClick'
+import StaticMap from '../StaticMap'
 
-// TODO: replace with real <Map mini={true} />
-const MiniMap = () => (
-  <Box
-    width={64}
-    minWidth={64}
-    height={64}
-    border={'1px solid #ccc'}
-    display={'flex'}
-    justifyContent={'center'}
-    alignItems={'center'}>
-    Map
-  </Box>
-)
-
-function ComparisonMenu({ comparisonList, removeFromComparison }) {
+function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChange, onSelect }) {
   const dispatch = useDispatch()
   const containerRef = useRef()
   const compareMenuOpen = useSelector(state => state.compare?.menuOpen)
   const closeCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(false)), [dispatch])
 
   useOutsideClick(containerRef, closeCompareMenuOpen)
+
+  const handleDeleteClick = useCallback(
+    (e, id) => {
+      e.stopPropagation()
+      removeFromComparison(id)
+    },
+    [removeFromComparison],
+  )
 
   if (!compareMenuOpen) {
     return null
@@ -50,15 +45,26 @@ function ComparisonMenu({ comparisonList, removeFromComparison }) {
         <Fragment key={item?.id}>
           <Divider />
 
-          <Box display={'flex'} alignItems={'center'} p={1}>
-            <MiniMap />
+          <Box
+            component={Button}
+            variant={'text'}
+            color={'initial'}
+            display={'flex'}
+            alignItems={'center'}
+            p={1}
+            onClick={() => onSelect(item)}
+            onMouseEnter={() => onHighlightChange(item)}
+            onMouseLeave={() => onHighlightChange(null)}>
+            <Box sx={{ width: 64 }}>
+              <StaticMap square areaId={item?.id} geoJSON={item} />
+            </Box>
 
             <Typography component={'span'} ml={2}>
               {item?.title}
             </Typography>
 
             <IconButton
-              onClick={() => removeFromComparison(item?.id)}
+              onClick={e => handleDeleteClick(e, item?.id)}
               sx={{
                 ml: 'auto',
               }}>

@@ -58,7 +58,12 @@ function Dataset() {
                   onHighlightChange={setHighlightedFeature}
                 />
 
-                <CompareBtn comparisonList={comparisonList} removeFromComparison={removeFromComparison} />
+                <CompareBtn
+                  comparisonList={comparisonList}
+                  removeFromComparison={removeFromComparison}
+                  onSelect={setSelectedFeature}
+                  onHighlightChange={setHighlightedFeature}
+                />
               </>
             ),
           },
