@@ -32,7 +32,15 @@ const mapGlobalStyles = {
   [`.${popupClassName}`]: popupContainerStyles,
 }
 
-function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature, comparisonList, addToComparison }) {
+function Map({
+  config,
+  hidePopup,
+  datasetId,
+  selectedFeature,
+  highlightedFeature,
+  addToComparison,
+  canAddToComparison,
+}) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const hoverPopupRef = useRef(null)
@@ -542,8 +550,8 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         {popupData?.id && (
           <MapPopupContent
             datasetId={datasetId}
-            comparisonList={comparisonList}
             addToComparison={addToComparison}
+            canAddToComparison={canAddToComparison}
             {...popupData}
           />
         )}
