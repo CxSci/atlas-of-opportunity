@@ -10,6 +10,7 @@ const bgHoverLight = '#f2f2f2'
 const darkGrey = '#333333'
 export const iconColor = '#4d4d4d'
 export const headerHeight = '60px'
+export const headerPaddingX = '14px'
 export const scrolledHeaderHeight = '84px'
 
 const LinkBehavior = React.forwardRef((props, ref) => {
@@ -225,6 +226,37 @@ const initTheme = mode => {
         },
       },
 
+      MuiList: {
+        variants: [
+          {
+            props: { variant: 'comparisonMenu' },
+            style: {
+              position: 'absolute',
+              right: headerPaddingX,
+              top: 'calc(100% + 4px)',
+              width: '300px',
+              backgroundColor: '#fff',
+              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+              borderRadius: '10px',
+              paddingTop: 0,
+              paddingBottom: 0,
+            },
+          },
+        ],
+      },
+
+      MuiListItem: {
+        variants: [
+          {
+            props: { variant: 'comparisonMenuItem' },
+            style: {
+              padding: 8,
+              cursor: 'pointer',
+            },
+          },
+        ],
+      },
+
       MuiSelect: {
         styleOverrides: {
           filled: {
@@ -266,19 +298,12 @@ const initTheme = mode => {
       header: {
         height: headerHeight,
         scrolledHeight: scrolledHeaderHeight,
-        paddingX: '14px',
+        paddingX: headerPaddingX,
         paddingY: '10px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
         iconColor: darkMode ? '#ffffff' : iconColor,
         iconHoverColor: darkMode ? '#ffffff' : '#000000',
-      },
-
-      comparisonMenu: {
-        width: '300px',
-        bgColor: '#fff',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
-        borderRadius: '10px',
       },
 
       SectionNavbar: {

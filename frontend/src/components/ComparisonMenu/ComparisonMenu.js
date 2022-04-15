@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useRef } from 'react'
-import { Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Button, Divider, IconButton, List, ListItem, Typography } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCompareMenuOpen } from '../../store/modules/compare'
@@ -27,31 +27,21 @@ function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChang
   }
 
   return (
-    <Box
-      ref={containerRef}
-      component={Stack}
-      position={'absolute'}
-      right={theme => theme.components.header.paddingX}
-      top={'calc(100% + 4px)'}
-      width={theme => theme.components.comparisonMenu.width}
-      bgcolor={theme => theme.components.comparisonMenu.bgColor}
-      boxShadow={theme => theme.components.comparisonMenu.boxShadow}
-      borderRadius={theme => theme.components.comparisonMenu.borderRadius}>
-      <Typography fontSize={14} align={'center'} px={3} py={2.25}>
-        Add up to 4 regions to compare them side-by-side.
-      </Typography>
+    <List ref={containerRef} variant={'comparisonMenu'}>
+      <li>
+        <Typography fontSize={14} align={'center'} px={3} py={2.25}>
+          Add up to 4 regions to compare them side-by-side.
+        </Typography>
+      </li>
 
       {comparisonList.map(item => (
         <Fragment key={item?.id}>
-          <Divider />
+          <li>
+            <Divider />
+          </li>
 
-          <Box
-            component={Button}
-            variant={'text'}
-            color={'initial'}
-            display={'flex'}
-            alignItems={'center'}
-            p={1}
+          <ListItem
+            variant={'comparisonMenuItem'}
             onClick={() => onSelect(item)}
             onMouseEnter={() => onHighlightChange(item)}
             onMouseLeave={() => onHighlightChange(null)}>
@@ -70,13 +60,15 @@ function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChang
               }}>
               <Delete sx={{ color: '#666' }} />
             </IconButton>
-          </Box>
+          </ListItem>
         </Fragment>
       ))}
 
-      <Divider />
+      <li>
+        <Divider />
+      </li>
 
-      <Box px={3} py={2}>
+      <ListItem sx={{ px: 3, py: 2 }}>
         <Button
           variant={'contained'}
           color={'primary'}
@@ -84,8 +76,8 @@ function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChang
           disabled={!comparisonList?.length}>
           View Comparison
         </Button>
-      </Box>
-    </Box>
+      </ListItem>
+    </List>
   )
 }
 
