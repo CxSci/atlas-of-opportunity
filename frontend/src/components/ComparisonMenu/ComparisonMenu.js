@@ -1,16 +1,25 @@
-import React, { Fragment, useCallback, useRef } from 'react'
-import { Box, Button, Divider, IconButton, List, ListItem, Typography } from '@mui/material'
+import React, { Fragment, useCallback, useEffect, useRef } from 'react'
+import { Box, Button, Divider, IconButton, List, ListItem, Skeleton, Typography } from '@mui/material'
 import { Delete } from '@mui/icons-material'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCompareMenuOpen } from '../../store/modules/compare'
-import useOutsideClick from '../../hooks/useOutsideClick'
+import { useDispatch } from 'react-redux'
+import useOutsideClick from 'hooks/useOutsideClick'
 import StaticMap from '../StaticMap'
+import { getDatasetGeoJSON } from 'store/modules/dataset'
 
-function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChange, onSelect }) {
+function ComparisonMenu({
+  comparisonList,
+  removeFromComparison,
+  onHighlightChange,
+  datasetId,
+  onSelect,
+  setGeoJsonMap,
+  geoJsonMap,
+  open,
+  setOpen,
+}) {
   const dispatch = useDispatch()
   const containerRef = useRef()
-  const compareMenuOpen = useSelector(state => state.compare?.menuOpen)
-  const closeCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(false)), [dispatch])
+  const closeCompareMenuOpen = useCallback(() => setOpen(false), [setOpen])
 
   useOutsideClick(containerRef, closeCompareMenuOpen)
 
@@ -22,7 +31,43 @@ function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChang
     [removeFromComparison],
   )
 
-  if (!compareMenuOpen) {
+  useEffect(() => {
+    const itemIdsList = comparisonList.map(item => item?.id)
+    const dataMap = {}
+
+    function fetchGeoJsonRecursively() {
+      const id = itemIdsList.pop()
+      if (!id) {
+        return
+      }
+
+      dispatch(
+        getDatasetGeoJSON({
+          datasetId,
+          noSetToStore: true,
+          params: {
+            ids: id,
+            include_neighbors: true,
+            format: 'json',
+          },
+          success: geoJson => {
+            dataMap[id] = geoJson
+
+            if (!itemIdsList.length) {
+              setGeoJsonMap(dataMap)
+              return
+            }
+
+            fetchGeoJsonRecursively()
+          },
+        }),
+      )
+    }
+
+    fetchGeoJsonRecursively()
+  }, [comparisonList, datasetId, dispatch, setGeoJsonMap])
+
+  if (!open) {
     return null
   }
 
@@ -34,35 +79,43 @@ function ComparisonMenu({ comparisonList, removeFromComparison, onHighlightChang
         </Typography>
       </li>
 
-      {comparisonList.map(item => (
-        <Fragment key={item?.id}>
-          <li>
-            <Divider />
-          </li>
+      {comparisonList.map(item => {
+        const geoJson = geoJsonMap[item?.id]
 
-          <ListItem
-            variant={'comparisonMenuItem'}
-            onClick={() => onSelect(item)}
-            onMouseEnter={() => onHighlightChange(item)}
-            onMouseLeave={() => onHighlightChange(null)}>
-            <Box sx={{ width: 64 }}>
-              <StaticMap square areaId={item?.id} geoJSON={item} />
-            </Box>
+        return (
+          <Fragment key={item?.id}>
+            <li>
+              <Divider />
+            </li>
 
-            <Typography component={'span'} ml={2}>
-              {item?.title}
-            </Typography>
+            <ListItem
+              variant={'comparisonMenuItem'}
+              onClick={() => onSelect(item)}
+              onMouseEnter={() => onHighlightChange(item)}
+              onMouseLeave={() => onHighlightChange(null)}>
+              <Box sx={{ width: 64, minWidth: 64 }}>
+                {geoJson ? (
+                  <StaticMap square areaId={item?.id} geoJSON={geoJson} />
+                ) : (
+                  <Skeleton variant="rectangular" width={64} height={64} />
+                )}
+              </Box>
 
-            <IconButton
-              onClick={e => handleDeleteClick(e, item?.id)}
-              sx={{
-                ml: 'auto',
-              }}>
-              <Delete sx={{ color: '#666' }} />
-            </IconButton>
-          </ListItem>
-        </Fragment>
-      ))}
+              <Typography component={'span'} ml={2}>
+                {item?.title}
+              </Typography>
+
+              <IconButton
+                onClick={e => handleDeleteClick(e, item?.id)}
+                sx={{
+                  ml: 'auto',
+                }}>
+                <Delete sx={{ color: '#666' }} />
+              </IconButton>
+            </ListItem>
+          </Fragment>
+        )
+      })}
 
       <li>
         <Divider />

@@ -23,7 +23,6 @@ import PATH from 'utils/path'
 import SmallBusinessSupport from 'routes/SmallBusinessSupport'
 import initTheme from 'utils/theme'
 import useCompareList from 'hooks/useCompareList'
-import { setCompareMenuOpen } from 'store/modules/compare'
 
 const getDatasetEntryComponent = datasetId => {
   switch (datasetId) {
@@ -40,7 +39,16 @@ const DatasetEntry = () => {
   const dispatch = useDispatch()
   const { datasetId, entryId } = params || {}
   const DatasetEntryComponent = getDatasetEntryComponent(datasetId)
-  const { comparisonList, addToComparison, removeFromComparison, canAddToComparison } = useCompareList(datasetId)
+  const {
+    comparisonList,
+    addToComparison,
+    removeFromComparison,
+    canAddToComparison,
+    setCompareListOpen,
+    setGeoJsonMap,
+    geoJsonMap,
+    compareListOpen,
+  } = useCompareList(datasetId)
 
   const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
@@ -52,24 +60,13 @@ const DatasetEntry = () => {
   const entryName = sectionsData?._atlas_title
   const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
   const disableAddToComparison = !canAddToComparison(entryId)
-  const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
 
   const handleAddToComparison = useCallback(() => {
     addToComparison({
       id: entryId,
       title: sectionsData?._atlas_title,
-      bbox: datasetGeoJSON?.bbox,
-      features: datasetGeoJSON?.features,
     })
-    openCompareMenuOpen()
-  }, [
-    addToComparison,
-    datasetGeoJSON?.bbox,
-    datasetGeoJSON?.features,
-    entryId,
-    openCompareMenuOpen,
-    sectionsData?._atlas_title,
-  ])
+  }, [addToComparison, entryId, sectionsData?._atlas_title])
 
   const onSelectCompareItem = useCallback(
     item => {
@@ -110,6 +107,11 @@ const DatasetEntry = () => {
         comparisonList={comparisonList}
         removeFromComparison={removeFromComparison}
         onSelect={onSelectCompareItem}
+        setCompareListOpen={setCompareListOpen}
+        geoJsonMap={geoJsonMap}
+        setGeoJsonMap={setGeoJsonMap}
+        compareListOpen={compareListOpen}
+        datasetId={datasetId}
       />
     </>
   )
