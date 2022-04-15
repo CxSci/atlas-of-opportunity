@@ -22,7 +22,16 @@ function Dataset() {
   const dataset = useSelector(createDataSetSelector(datasetId))
   const [selectedFeature, setSelectedFeature] = useState(null)
   const [highlightedFeature, setHighlightedFeature] = useState(null)
-  const { comparisonList, addToComparison, removeFromComparison, canAddToComparison } = useCompareList(datasetId)
+  const {
+    comparisonList,
+    addToComparison,
+    removeFromComparison,
+    canAddToComparison,
+    setGeoJsonMap,
+    geoJsonMap,
+    compareListOpen,
+    setCompareListOpen,
+  } = useCompareList(datasetId)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -63,6 +72,11 @@ function Dataset() {
                   removeFromComparison={removeFromComparison}
                   onSelect={setSelectedFeature}
                   onHighlightChange={setHighlightedFeature}
+                  setGeoJsonMap={setGeoJsonMap}
+                  geoJsonMap={geoJsonMap}
+                  compareListOpen={compareListOpen}
+                  setCompareListOpen={setCompareListOpen}
+                  datasetId={datasetId}
                 />
               </>
             ),

@@ -257,6 +257,14 @@ const initTheme = mode => {
         ],
       },
 
+      MuiSkeleton: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgba(80, 80, 80, 0.1)',
+          },
+        },
+      },
+
       MuiSelect: {
         styleOverrides: {
           filled: {

@@ -1,20 +1,21 @@
 import React from 'react'
 import CompareIcon from '../Icons/CompareIcon'
 import { Button, Typography } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
 import ComparisonMenu from '../ComparisonMenu'
-import { setCompareMenuOpen } from '../../store/modules/compare'
 
 function CompareBtn({
   comparisonList,
   removeFromComparison,
+  setGeoJsonMap,
+  geoJsonMap,
   onHighlightChange = () => null,
   onSelect = () => null,
+  compareListOpen,
+  setCompareListOpen,
+  datasetId,
   ...props
 }) {
-  const dispatch = useDispatch()
-  const compareMenuOpen = useSelector(state => state.compare?.menuOpen)
-  const toggleCompareMenuOpen = () => dispatch(setCompareMenuOpen(!compareMenuOpen))
+  const toggleCompareMenuOpen = () => setCompareListOpen(compareListOpen => !compareListOpen)
 
   return (
     <>
@@ -32,10 +33,15 @@ function CompareBtn({
       </Button>
 
       <ComparisonMenu
+        open={compareListOpen}
+        setOpen={setCompareListOpen}
         comparisonList={comparisonList}
         removeFromComparison={removeFromComparison}
         onSelect={onSelect}
         onHighlightChange={onHighlightChange}
+        setGeoJsonMap={setGeoJsonMap}
+        geoJsonMap={geoJsonMap}
+        datasetId={datasetId}
       />
     </>
   )

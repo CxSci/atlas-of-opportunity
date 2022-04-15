@@ -1,14 +1,11 @@
 import React, { useCallback } from 'react'
 import { Box, Button, styled, Typography, Link } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
-import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
 import PATH from 'utils/path'
 import { iconColor } from 'utils/theme'
-import { setCompareMenuOpen } from '../../store/modules/compare'
-import { getDatasetGeoJSON } from '../../store/modules/dataset'
 
 const StyledTitleLink = styled(Link)({
   display: 'flex',
@@ -29,27 +26,11 @@ function MapPopupContent({
   addToComparison,
   canAddToComparison,
 }) {
-  const dispatch = useDispatch()
   const disableAddToComparison = !canAddToComparison(id)
 
-  const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
-
   const handleAddToComparison = useCallback(() => {
-    dispatch(
-      getDatasetGeoJSON({
-        datasetId,
-        params: {
-          ids: id,
-          include_neighbors: true,
-          format: 'json',
-        },
-        success: geoJson => {
-          addToComparison({ id, title, bbox: geoJson?.bbox, features: geoJson?.features })
-          openCompareMenuOpen()
-        },
-      }),
-    )
-  }, [addToComparison, datasetId, dispatch, id, openCompareMenuOpen, title])
+    addToComparison({ id, title })
+  }, [addToComparison, id, title])
 
   return (
     <Box
