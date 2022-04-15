@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import CompareIcon from '../Icons/CompareIcon'
 import { Button, Typography } from '@mui/material'
 import ComparisonMenu from '../ComparisonMenu'
@@ -15,11 +15,13 @@ function CompareBtn({
   datasetId,
   ...props
 }) {
+  const compareBtnRef = useRef()
   const toggleCompareMenuOpen = () => setCompareListOpen(compareListOpen => !compareListOpen)
 
   return (
     <>
       <Button
+        ref={compareBtnRef}
         variant="contained"
         color={'primary'}
         sx={{ color: '#fff', ml: 2 }}
@@ -33,6 +35,7 @@ function CompareBtn({
       </Button>
 
       <ComparisonMenu
+        compareBtnRef={compareBtnRef}
         open={compareListOpen}
         setOpen={setCompareListOpen}
         comparisonList={comparisonList}

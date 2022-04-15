@@ -231,9 +231,6 @@ const initTheme = mode => {
           {
             props: { variant: 'comparisonMenu' },
             style: {
-              position: 'absolute',
-              right: headerPaddingX,
-              top: 'calc(100% + 4px)',
               width: '300px',
               backgroundColor: '#fff',
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
