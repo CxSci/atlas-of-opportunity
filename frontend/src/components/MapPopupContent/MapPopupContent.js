@@ -7,7 +7,6 @@ import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
 import PATH from 'utils/path'
 import { iconColor } from 'utils/theme'
-import { MAX_COMPARE_COUNT } from 'utils/constants'
 import { setCompareMenuOpen } from '../../store/modules/compare'
 import { getDatasetGeoJSON } from '../../store/modules/dataset'
 
@@ -27,13 +26,11 @@ function MapPopupContent({
   colorScheme,
   domain,
   expanded,
-  comparisonList,
   addToComparison,
+  canAddToComparison,
 }) {
   const dispatch = useDispatch()
-
-  const disableAddToComparison =
-    comparisonList?.length >= MAX_COMPARE_COUNT || Boolean(comparisonList.find(item => item?.id === id))
+  const disableAddToComparison = !canAddToComparison(id)
 
   const openCompareMenuOpen = useCallback(() => dispatch(setCompareMenuOpen(true)), [dispatch])
 

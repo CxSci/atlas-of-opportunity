@@ -22,7 +22,7 @@ function Dataset() {
   const dataset = useSelector(createDataSetSelector(datasetId))
   const [selectedFeature, setSelectedFeature] = useState(null)
   const [highlightedFeature, setHighlightedFeature] = useState(null)
-  const { comparisonList, addToComparison, removeFromComparison } = useCompareList(datasetId)
+  const { comparisonList, addToComparison, removeFromComparison, canAddToComparison } = useCompareList(datasetId)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -74,8 +74,8 @@ function Dataset() {
             datasetId={datasetId}
             selectedFeature={selectedFeature}
             highlightedFeature={highlightedFeature}
-            comparisonList={comparisonList}
             addToComparison={addToComparison}
+            canAddToComparison={canAddToComparison}
           />
         </div>
       </Dashboard>
