@@ -37,13 +37,13 @@ const getDatasetGeoJSON = createApiCallSaga({
   allowedParamKeys: ['ids', 'include_neighbors', 'format'],
 })
 
-const getDatasetMapData = createApiCallSaga({
-  type: Types.GET_DATASET_MAP_DATA,
+const getDatasetMetricData = createApiCallSaga({
+  type: Types.GET_DATASET_METRIC_DATA,
   method: 'GET',
   path: function* ({ payload: { url } }) {
     return yield url
   },
-  selectorKey: 'datasetMapData',
+  selectorKey: 'datasetMetricData',
 })
 
 export default function* rootSaga() {
@@ -51,5 +51,5 @@ export default function* rootSaga() {
   yield takeLatest(Types.GET_DATASET_SINGLE, getDatasetSingle)
   yield takeLatest(Types.GET_DATASET_DETAIL_DATA, getDatasetDetailData)
   yield takeLatest(Types.GET_DATASET_GEO_JSON, getDatasetGeoJSON)
-  yield takeLatest(Types.GET_DATASET_MAP_DATA, getDatasetMapData)
+  yield takeLatest(Types.GET_DATASET_METRIC_DATA, getDatasetMetricData)
 }
