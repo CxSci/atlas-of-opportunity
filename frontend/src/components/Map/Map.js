@@ -7,7 +7,7 @@ import { InfoOutlined } from '@mui/icons-material'
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
-import { getDatasetMapData, datasetMapDataSelector } from 'store/modules/dataset'
+import { getDatasetMetricData, datasetMetricDataSelector } from 'store/modules/dataset'
 import { MAPBOX_API_KEY } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
@@ -45,7 +45,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
   const onAllMapMouseMoveRef = useRef(null)
   const [selectedMetric, setSelectedMetric] = useState('')
   const dispatch = useDispatch()
-  const data = useSelector(datasetMapDataSelector)
+  const data = useSelector(datasetMetricDataSelector)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [metricConfig, setMetricConfig] = useState(null)
   const [colorScheme, setColorScheme] = useState([])
@@ -512,7 +512,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
     const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
     setMetricConfig(newMetricConfig)
     setColorScheme(colorScheme)
-    dispatch(getDatasetMapData({ url: newMetricConfig?.data?.url }))
+    dispatch(getDatasetMetricData({ url: newMetricConfig?.data?.url }))
   }, [config, dispatch, selectedMetric])
 
   useEffect(() => {
