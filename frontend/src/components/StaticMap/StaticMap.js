@@ -3,6 +3,7 @@ import { generateSize, getScaleTranslation } from './StaticMap.utils'
 import { geoMercator, geoPath } from 'd3-geo'
 import { useTheme } from '@mui/system'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
 const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
@@ -19,9 +20,10 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
   const ref = useRef(null)
   const [size, setSize] = useState(generateSize(ref, square, mapHeight))
   const { width, height } = size
+
   const location = useMemo(
     () =>
-      geoJSON?.features.filter(function (d) {
+      geoJSON?.features?.filter(function (d) {
         return d.id === areaId
       })[0],
     [geoJSON, areaId],
@@ -48,13 +50,27 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
     return null
   }
 
+  if (!geoJSON?.features) {
+    return (
+      <Box
+        sx={{
+          overflow: 'hidden',
+          background: '#F2F2F2',
+          height: square ? 64 : height,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Typography>No Data</Typography>
+      </Box>
+    )
+  }
   const projection = geoMercator().fitSize([width, height], geoJSON)
   const pathGenerator = geoPath().projection(projection)
   projection.scale(1).translate([0, 0])
   const [s, t] = getScaleTranslation(pathGenerator, location, width, height)
   projection.scale(s).translate(t)
   const shouldRenderMap = width > 0 && height > 0
-
   return (
     <Box
       ref={getRef}
@@ -66,7 +82,7 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
       {shouldRenderMap && (
         <svg width={'100%'} height={'100%'}>
           <g fill={otherBgColor} stroke={otherBorderColor} fillOpacity={1} strokeWidth={strokeWidth}>
-            {geoJSON?.features.map((d, idx) =>
+            {geoJSON?.features?.map((d, idx) =>
               d.id !== areaId ? <path key={'path' + idx} d={pathGenerator(d)} /> : null,
             )}
           </g>

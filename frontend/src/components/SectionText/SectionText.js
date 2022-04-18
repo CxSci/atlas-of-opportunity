@@ -11,16 +11,29 @@ const SectionText = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
   const defaultContainerHeight = 300
+  const dataExists = data => {
+    if (data && data.length) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   if (layout.format === 'number') {
     if (data) {
       return <FieldNumber value={data || 0} numberFormat={layout.numberFormat} />
+    } else if (data === undefined) {
+      return <Typography>No Data</Typography>
     } else {
       return <Skeleton variant="text" />
     }
   }
 
-  if (xAxisKey && yAxisKey && data) {
+  if (data === null) {
+    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+  }
+
+  if (xAxisKey && yAxisKey && dataExists(data)) {
     return (
       <Box>
         <ExpandableContainer data={data} filters={layout.filters}>
@@ -37,8 +50,8 @@ const SectionText = ({ layout, data }) => {
         </ExpandableContainer>
       </Box>
     )
-  } else {
-    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+  } else if (data === undefined || data.length === 0) {
+    return <Typography>No Data</Typography>
   }
 }
 
