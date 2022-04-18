@@ -405,6 +405,10 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
   const showPopupForFeature = useCallback(
     ({ option, expandPopup = false, fitBounds = false }) => {
+      if (!option && hoverPopupRef?.current) {
+        hoverPopupRef.current.remove()
+      }
+
       const { bbox: bounds, id: featureId, pole_of_inaccessibility: poleOfInaccessibility = [] } = option || {}
 
       if (!map.current || !bounds?.length) {

@@ -37,8 +37,13 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
   }, [])
 
   useEffect(() => {
+    if (!inputValue) {
+      onHighlightChange(null)
+      onSelect(null)
+    }
+
     setInputChanged(true)
-  }, [inputValue])
+  }, [inputValue, onHighlightChange, onSelect])
 
   useEffect(() => {
     if (isLoading === false) {
