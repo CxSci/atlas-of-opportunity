@@ -16,12 +16,18 @@ const SectionSimpleRange = ({ layout, data }) => {
   if (typeof layout.max !== 'undefined' && typeof layout.min !== 'undefined') {
     if (data) {
       return <SimpleRange value={data} domain={[layout.min, layout.max]} variant={layout.options.variant} />
+    } else if (data === undefined) {
+      return <Typography>No Data</Typography>
     } else {
       return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
     }
   }
 
-  if (xAxisKey && yAxisKey && data) {
+  if (!data) {
+    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+  }
+
+  if (xAxisKey && yAxisKey && data.length) {
     const filteredData = filterData(data, layout.filters)
     return (
       <Box>
@@ -43,7 +49,7 @@ const SectionSimpleRange = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+    return <Typography>No Data</Typography>
   }
 }
 

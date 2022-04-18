@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import Skeleton from '@mui/material/Skeleton'
+import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
 import LineChart from 'components/LineChart'
@@ -10,7 +11,11 @@ const SectionLine = ({ layout, data }) => {
   const yAxisKey = layout.y?.key
   const defaultContainerHeight = 360
 
-  if (data) {
+  if (!data) {
+    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+  }
+
+  if (data.length) {
     const chartData = data.map(item => ({
       x: item[xAxisKey],
       y: item[yAxisKey],
@@ -21,7 +26,19 @@ const SectionLine = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+    return (
+      <Box
+        sx={{
+          overflow: 'hidden',
+          background: '#F2F2F2',
+          height: defaultContainerHeight,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Typography>No Data</Typography>
+      </Box>
+    )
   }
 }
 

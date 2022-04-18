@@ -17,12 +17,18 @@ const SectionSimpleBar = ({ layout, data }) => {
     if (data) {
       const percentage = (data - min) / (max - min || 1)
       return <SimpleBar value={data} numberFormat={layout.numberFormat} percentage={percentage} />
+    } else if (data === undefined) {
+      return <Typography>No Data</Typography>
     } else {
       return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
     }
   }
 
-  if (xAxisKey && yAxisKey && data) {
+  if (data === null) {
+    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+  }
+
+  if (xAxisKey && yAxisKey && data.length) {
     const maxValue = data.reduce(
       (maxValue, item) => (item[yAxisKey] > maxValue ? item[yAxisKey] : maxValue),
       data.length > 0 ? data[0][yAxisKey] : 1,
@@ -48,7 +54,7 @@ const SectionSimpleBar = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />
+    return <Typography>No Data</Typography>
   }
 }
 
