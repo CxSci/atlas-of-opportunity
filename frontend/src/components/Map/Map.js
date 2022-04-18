@@ -33,6 +33,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
   const hoverPopupRef = useRef(null)
+  const hoveredFeatureIdRef = useRef(null)
   const map = useRef(null)
   const onMouseMoveRef = useRef(null)
   const onMouseLeaveRef = useRef(null)
@@ -71,7 +72,6 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
       const sourceName = `source_${metricConfig?.id || ''}`
       let hoverPopupTimeout = null
-      let hoveredFeatureId = null
       let popupExpanded = null
       const popupOffsetY = 10
 
@@ -94,7 +94,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         }
 
         popupExpanded = true
-        if (hoveredFeatureId === null) {
+        if (hoveredFeatureIdRef.current === null) {
           return
         }
         setPopupData(oldData => ({ ...oldData, expanded: true }))
@@ -111,15 +111,15 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
       function onMouseMove(e) {
         if (e?.features?.length > 0 && !popupExpanded) {
-          if (hoveredFeatureId !== e.features[0].id) {
+          if (hoveredFeatureIdRef.current !== e.features[0].id) {
             popupExpanded = false
             map.current.setFeatureState(
-              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
               { hover: false },
             )
-            hoveredFeatureId = e.features[0].id
+            hoveredFeatureIdRef.current = e.features[0].id
             map.current.setFeatureState(
-              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
+              { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
               { hover: true },
             )
 
@@ -189,11 +189,11 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
 
         if (movedAwayFromPopup) {
           map.current.setFeatureState(
-            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
+            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
             { hover: false },
           )
 
-          hoveredFeatureId = null
+          hoveredFeatureIdRef.current = null
           popupExpanded = false
           setPopupData(oldData => ({ ...oldData, expanded: false }))
           hoverPopup.remove()
@@ -214,16 +214,16 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
           return
         }
 
-        if (hoveredFeatureId !== null) {
+        if (hoveredFeatureIdRef.current !== null) {
           popupExpanded = false
           map.current.setFeatureState(
-            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureId },
+            { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
             { hover: false },
           )
         }
 
         hoverPopup.remove().removeClassName('immobile')
-        hoveredFeatureId = null
+        hoveredFeatureIdRef.current = null
         clearTimeout(hoverPopupTimeout)
       }
       onMouseLeaveRef.current = onMouseLeave
@@ -432,6 +432,10 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         map.current.fitBounds(bounds, { padding: 200 })
       }
 
+      const layer = metricConfig?.layers?.[0]
+      const sourceName = `source_${metricConfig?.id || ''}`
+      const sourceLayer = layer?.sourceLayer
+
       setPopupData({
         id: featureId,
         title,
@@ -442,6 +446,16 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         expanded: Boolean(expandPopup),
       })
 
+      map.current.setFeatureState(
+        { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
+        { hover: false },
+      )
+      hoveredFeatureIdRef.current = featureId
+      map.current.setFeatureState(
+        { source: sourceName, sourceLayer: sourceLayer, id: hoveredFeatureIdRef.current },
+        { hover: true },
+      )
+
       hoverPopupRef.current.setLngLat({ lng: popupLng, lat: popupLat })
       hoverPopupRef.current.setDOMContent(popupContainerRef.current).addTo(map.current)
 
@@ -449,7 +463,7 @@ function Map({ config, hidePopup, datasetId, selectedFeature, highlightedFeature
         hoverPopupRef.current.addClassName('immobile')
       }
     },
-    [colorScheme, data, domain, metricConfig?.title],
+    [colorScheme, data, domain, metricConfig?.id, metricConfig?.layers, metricConfig?.title],
   )
 
   // effects
