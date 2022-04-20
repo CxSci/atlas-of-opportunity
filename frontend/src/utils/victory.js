@@ -1,3 +1,5 @@
+import groupBy from 'lodash/groupBy'
+
 export const getLineChartDomain = data => {
   const max = Math.max(...data.map(item => item.y))
   const min = Math.min(0, Math.min(...data.map(item => item.y)))
@@ -16,3 +18,25 @@ export const formatTickNumber = (value, formatNumber, axis) => {
   }
   return value
 }
+
+export const getStackData = data => {
+  const groupedData = groupBy(data, 'z')
+  const keys = Object.keys(groupedData).sort()
+  return keys.map(key => ({
+    title: key,
+    data: groupedData[key],
+  }))
+}
+
+export const STACK_COLORS = [
+  '#4e79a7',
+  '#f28e2c',
+  '#e15759',
+  '#76b7b2',
+  '#59a14f',
+  '#edc949',
+  '#af7aa1',
+  '#ff9da7',
+  '#9c755f',
+  '#bab0ab',
+]

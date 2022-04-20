@@ -5,6 +5,7 @@ import {
   VictoryChart,
   VictoryLine,
   VictoryScatter,
+  VictoryStack,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from 'victory'
@@ -13,7 +14,7 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber, getLineChartDomain } from 'utils/victory'
+import { formatTickNumber, getLineChartDomain, getStackData, STACK_COLORS } from 'utils/victory'
 import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
@@ -23,6 +24,7 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
   const { formatNumber } = useIntl()
   const theme = useTheme()
   const domain = useMemo(() => getLineChartDomain(data, LINE_CHART_RATIO), [data])
+  const stackData = useMemo(() => getStackData(data), [data])
   const victoryTheme = useVictoryTheme(theme)
   const ref = useRef()
   const size = useClientSize(ref)
@@ -61,9 +63,13 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
             }
           />
         }>
-        <VictoryAxis tickFormat={handleXTickFormat} />
+        <VictoryAxis fixLabelOverlap tickFormat={handleXTickFormat} />
         <VictoryAxis dependentAxis domain={domain} tickFormat={handleYTickFormat} />
-        <VictoryLine data={data} />
+        <VictoryStack colorScale={STACK_COLORS}>
+          {stackData.map(item => (
+            <VictoryLine key={item.title} data={item.data} />
+          ))}
+        </VictoryStack>
         <VictoryScatter data={data} />
       </VictoryChart>
     </Box>

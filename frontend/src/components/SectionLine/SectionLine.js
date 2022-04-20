@@ -9,6 +9,7 @@ import { LayoutMetricType } from 'utils/propTypes'
 const SectionLine = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
+  const zAxisKey = layout.z?.key
   const defaultContainerHeight = 360
 
   if (!data) {
@@ -19,6 +20,7 @@ const SectionLine = ({ layout, data }) => {
     const chartData = data.map(item => ({
       x: item[xAxisKey],
       y: item[yAxisKey],
+      z: item[zAxisKey],
     }))
     return (
       <Box>
