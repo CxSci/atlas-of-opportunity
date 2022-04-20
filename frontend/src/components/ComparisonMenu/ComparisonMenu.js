@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useRef } from 'react'
+import React, { Fragment, useCallback, useEffect } from 'react'
 import {
   Box,
   Button,
@@ -29,7 +29,6 @@ function ComparisonMenu({
   compareBtnRef,
 }) {
   const dispatch = useDispatch()
-  const containerRef = useRef()
   const closeCompareMenuOpen = useCallback(() => setOpen(false), [setOpen])
 
   const handleDeleteClick = useCallback(
@@ -42,38 +41,26 @@ function ComparisonMenu({
 
   useEffect(() => {
     const itemIdsList = comparisonList.map(item => item?.id)
-    const dataMap = {}
 
-    function fetchGeoJsonRecursively() {
-      const id = itemIdsList.pop()
-      if (!id) {
-        return
-      }
-
+    itemIdsList.forEach(id => {
       dispatch(
         getDatasetGeoJSON({
           datasetId,
-          noSetToStore: true,
           params: {
             ids: id,
             include_neighbors: true,
             format: 'json',
           },
           success: geoJson => {
-            dataMap[id] = geoJson
-
-            if (!itemIdsList.length) {
-              setGeoJsonMap(dataMap)
+            if (!geoJson) {
               return
             }
 
-            fetchGeoJsonRecursively()
+            setGeoJsonMap(geoJsonMap => ({ ...geoJsonMap, [id]: geoJson }))
           },
         }),
       )
-    }
-
-    fetchGeoJsonRecursively()
+    })
   }, [comparisonList, datasetId, dispatch, setGeoJsonMap])
 
   return (

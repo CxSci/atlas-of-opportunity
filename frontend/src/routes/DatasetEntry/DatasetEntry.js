@@ -1,5 +1,5 @@
 import { Box, Typography, ThemeProvider } from '@mui/material'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import Skeleton from '@mui/material/Skeleton'
@@ -9,7 +9,6 @@ import {
   getDatasetGeoJSON,
   datasetDetailDataSelector,
   createDataSetSelector,
-  datasetGeoJSONSelector,
 } from 'store/modules/dataset'
 import { setApiData } from 'store/modules/api'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
@@ -52,7 +51,7 @@ const DatasetEntry = () => {
 
   const dataset = useSelector(createDataSetSelector(datasetId))
   const sectionsData = useSelector(datasetDetailDataSelector)
-  const datasetGeoJSON = useSelector(datasetGeoJSONSelector)
+  const [datasetGeoJSON, setDatasetGeoJSON] = useState(null)
 
   const sectionsLayout = dataset?.detailLayout
   const datasetName = dataset?.title || ''
@@ -93,6 +92,9 @@ const DatasetEntry = () => {
           ids: entryId,
           include_neighbors: true,
           format: 'json',
+        },
+        success: geoJson => {
+          setDatasetGeoJSON(geoJson)
         },
       }),
     )
