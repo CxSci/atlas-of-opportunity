@@ -6,14 +6,13 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { ChartAxisType } from 'utils/propTypes'
-import { getStackData, STACK_COLORS, getStackChartDomain } from './StackChart.utils'
+import { getStackData, STACK_COLORS } from './StackChart.utils'
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
 import { formatTickNumber } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const StackChart = ({ data, xAxis, yAxis }) => {
   const theme = useTheme()
-  const domain = useMemo(() => getStackChartDomain(data), [data])
   const victoryTheme = useVictoryTheme(theme)
   const { formatNumber } = useIntl()
 
@@ -56,7 +55,7 @@ const StackChart = ({ data, xAxis, yAxis }) => {
           />
         }>
         <VictoryAxis tickFormat={handleXTickFormat} />
-        <VictoryAxis dependentAxis domain={domain} tickFormat={handleYTickFormat} />
+        <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
         <VictoryStack colorScale={STACK_COLORS}>
           {stackData.map(item => (
             <VictoryArea key={item.title} data={item.data} />
