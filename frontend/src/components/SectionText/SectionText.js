@@ -21,7 +21,7 @@ const SectionText = ({ layout, data }) => {
 
   if (layout.format === 'number') {
     if (data) {
-      return <FieldNumber value={data || 0} numberFormat={layout.numberFormat} />
+      return <FieldNumber value={data} numberFormat={layout.numberFormat} />
     } else if (data === undefined) {
       return <Typography>No Data</Typography>
     } else {
@@ -41,9 +41,12 @@ const SectionText = ({ layout, data }) => {
             items.map((item, index) => (
               <Box key={index}>
                 <Typography variant="fieldLabel">{item[xAxisKey]}</Typography>
-                {layout.y?.format === 'number' && (
-                  <FieldNumber value={item[yAxisKey] || 0} numberFormat={layout.y.numberFormat} gutterBottom />
-                )}
+                {layout.y?.format === 'number' &&
+                  (item[yAxisKey] !== null ? (
+                    <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
+                  ) : (
+                    <Typography>No Data</Typography>
+                  ))}
               </Box>
             ))
           }
