@@ -1,8 +1,10 @@
 export const getDefaultFilterValues = filters => {
   return filters
     ? filters.reduce((values, filter) => {
-        if (filter.control === 'select') {
+        if (filter.default_value) {
           values[filter.key] = filter.default_value
+        } else if (filter.values) {
+          values[filter.key] = filter.values[0]
         }
         return values
       }, {})
