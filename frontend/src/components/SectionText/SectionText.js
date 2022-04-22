@@ -23,7 +23,7 @@ const SectionText = ({ layout, data }) => {
     if (data) {
       return <FieldNumber value={data} numberFormat={layout.numberFormat} />
     } else if (data === undefined) {
-      return <Typography>No Data</Typography>
+      return <Typography variant="fieldValue">No data</Typography>
     } else {
       return <Skeleton variant="text" />
     }
@@ -45,7 +45,9 @@ const SectionText = ({ layout, data }) => {
                   (item[yAxisKey] !== null ? (
                     <FieldNumber value={item[yAxisKey]} numberFormat={layout.y.numberFormat} gutterBottom />
                   ) : (
-                    <Typography>No Data</Typography>
+                    <Typography variant="fieldValue" gutterBottom>
+                      No data
+                    </Typography>
                   ))}
               </Box>
             ))
@@ -54,7 +56,7 @@ const SectionText = ({ layout, data }) => {
       </Box>
     )
   } else if (data === undefined || data.length === 0) {
-    return <Typography>No Data</Typography>
+    return <Typography variant="fieldValue">No data</Typography>
   }
 }
 

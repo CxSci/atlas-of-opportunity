@@ -17,7 +17,7 @@ const SectionSimpleRange = ({ layout, data }) => {
     if (data) {
       return <SimpleRange value={data} domain={[layout.min, layout.max]} variant={layout.options.variant} />
     } else if (data === undefined) {
-      return <Typography>No Data</Typography>
+      return <Typography variant="fieldValue">No data</Typography>
     } else {
       return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
     }
@@ -49,7 +49,7 @@ const SectionSimpleRange = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Typography>No Data</Typography>
+    return <Typography variant="fieldValue">No data</Typography>
   }
 }
 

@@ -18,7 +18,7 @@ const SectionSimpleBar = ({ layout, data }) => {
       const percentage = (data - min) / (max - min || 1)
       return <SimpleBar value={data} numberFormat={layout.numberFormat} percentage={percentage} />
     } else if (data === undefined) {
-      return <Typography>No Data</Typography>
+      return <Typography variant="fieldValue">No data</Typography>
     } else {
       return <Skeleton variant="rectangular" sx={{ borderRadius: 1 }} />
     }
@@ -54,7 +54,7 @@ const SectionSimpleBar = ({ layout, data }) => {
       </Box>
     )
   } else {
-    return <Typography>No Data</Typography>
+    return <Typography variant="fieldValue">No data</Typography>
   }
 }
 
