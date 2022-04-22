@@ -36,7 +36,7 @@ const SectionLine = ({ layout, data }) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Typography>No Data</Typography>
+        <Typography variant="fieldValue">No data</Typography>
       </Box>
     )
   }

@@ -61,7 +61,7 @@ const StaticMap = ({ geoJSON, square, height: mapHeight, areaId }) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Typography>No Data</Typography>
+        <Typography variant="fieldValue">No data</Typography>
       </Box>
     )
   }
