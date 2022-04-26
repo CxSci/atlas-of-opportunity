@@ -1,14 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react'
 import { useTheme } from '@mui/system'
-import {
-  VictoryAxis,
-  VictoryChart,
-  VictoryLine,
-  VictoryScatter,
-  VictoryStack,
-  VictoryTooltip,
-  VictoryVoronoiContainer,
-} from 'victory'
+import { VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
 import { useIntl } from 'react-intl'
 import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
@@ -62,12 +54,13 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
         }>
         <VictoryAxis fixLabelOverlap tickFormat={handleXTickFormat} />
         <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
-        <VictoryStack colorScale={STACK_COLORS}>
-          {stackData.map(item => (
-            <VictoryLine key={item.title} data={item.data} />
-          ))}
-        </VictoryStack>
-        <VictoryScatter data={data} />
+        {stackData.map((item, idx) => (
+          <VictoryLine
+            style={{ data: { stroke: STACK_COLORS[idx % STACK_COLORS.length] } }}
+            key={item.title}
+            data={item.data}
+          />
+        ))}
       </VictoryChart>
     </Box>
   )
