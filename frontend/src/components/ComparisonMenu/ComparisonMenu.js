@@ -75,8 +75,7 @@ function ComparisonMenu({
             offset: [0, 15],
           },
         },
-      ]}
-      disablePortal>
+      ]}>
       <ClickAwayListener onClickAway={closeCompareMenuOpen}>
         <List variant={'comparisonMenu'}>
           <li>
@@ -87,6 +86,7 @@ function ComparisonMenu({
 
           {comparisonList.map(item => {
             const geoJson = geoJsonMap[item?.id]
+            const itemWithBbox = { ...(item || {}), bbox: geoJson?.bbox }
 
             return (
               <Fragment key={item?.id}>
@@ -96,8 +96,8 @@ function ComparisonMenu({
 
                 <ListItem
                   variant={'comparisonMenuItem'}
-                  onClick={() => onSelect(item)}
-                  onMouseEnter={() => onHighlightChange(item)}
+                  onClick={() => onSelect(itemWithBbox)}
+                  onMouseEnter={() => onHighlightChange(itemWithBbox)}
                   onMouseLeave={() => onHighlightChange(null)}>
                   <Box sx={{ width: 64, minWidth: 64 }}>
                     {geoJson ? (
