@@ -57,6 +57,110 @@
             }
           },
           {
+            "id": "mean_aud",
+            "data": {
+              "url": "http://localhost:8000/datasets/small-business-support/metrics/mean_aud/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Mean Income",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.5
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_range",
+                  "scale": "linear",
+                  "title": "GDP Growth Potential",
+                  "domain": [0, 20000, 40000, 60000, 80000, 100000]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "sa2_2016_aust"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.sa_2016_aust",
+              "type": "vector",
+              "titleKey": "SA2_NAME16",
+              "promoteId": "SA2_MAIN16"
+            }
+          },
+          {
+            "id": "median_aud",
+            "data": {
+              "url": "http://localhost:8000/datasets/small-business-support/metrics/median_aud/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Median Income",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.5
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_range",
+                  "scale": "linear",
+                  "title": "Median Income",
+                  "domain": [0, 20000, 40000, 60000, 80000, 100000]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "sa2_2016_aust"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.sa_2016_aust",
+              "type": "vector",
+              "titleKey": "SA2_NAME16",
+              "promoteId": "SA2_MAIN16"
+            }
+          },
+          {
             "id": "population",
             "data": {
               "url": "https://gist.githubusercontent.com/justinanderson/e4f894b5ab6ae5b5ee408c182ac1ff42/raw/088fcd8dfdd503dc7a116149b49b5b0f17129381/population.json",
@@ -105,6 +209,52 @@
               "url": "https://gist.githubusercontent.com/justinanderson/e4f894b5ab6ae5b5ee408c182ac1ff42/raw/088fcd8dfdd503dc7a116149b49b5b0f17129381/points.geojson",
               "type": "geojson"
             },
+            "geometry": {
+              "url": "mapbox://justinanderson.sa_2016_aust",
+              "type": "vector",
+              "titleKey": "SA2_NAME16",
+              "promoteId": "SA2_MAIN16"
+            }
+          },
+          {
+            "id": "quartile",
+            "data": {
+              "url": "http://localhost:8000/datasets/small-business-support/metrics/quartile/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Income Quartile",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": ["#fff5eb", "#fd8d3c", "#7f2704"],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.5
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_range",
+                  "scale": "linear",
+                  "title": "Income Quartile",
+                  "domain": [0, 2.0, 4.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "sa2_2016_aust"
+              }
+            ],
             "geometry": {
               "url": "mapbox://justinanderson.sa_2016_aust",
               "type": "vector",

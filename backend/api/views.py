@@ -390,7 +390,22 @@ class ExploreMetricView(views.APIView):
                     "table": "sa2_info_for_dashboard",
                     "primary_key": "sa2_code",
                     "metric": "income_diversity",
-                }
+                },
+                "mean_aud": {
+                    "table": "sa2_info_for_dashboard",
+                    "primary_key": "sa2_code",
+                    "metric": "mean_aud",
+                },
+                "median_aud": {
+                    "table": "sa2_info_for_dashboard",
+                    "primary_key": "sa2_code",
+                    "metric": "median_aud",
+                },
+                "quartile": {
+                    "table": "sa2_info_for_dashboard",
+                    "primary_key": "sa2_code",
+                    "metric": "quartile",
+                },
             }
         }
 
