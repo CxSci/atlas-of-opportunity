@@ -10,7 +10,7 @@ const SectionStackedArea = ({ layout, data }) => {
   const xAxisKey = layout.x?.key
   const yAxisKey = layout.y?.key
   const zAxisKey = layout.z?.key
-  const defaultContainerHeight = 350
+  const defaultContainerHeight = 400
 
   if (!data) {
     return <Skeleton variant="rectangular" height={defaultContainerHeight} sx={{ borderRadius: 1 }} />

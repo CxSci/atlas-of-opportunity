@@ -35,7 +35,7 @@ const StackChart = ({ data, xAxis, yAxis }) => {
   )
 
   return (
-    <Box ref={ref}>
+    <Box ref={ref} sx={{ height: 400 }}>
       <VictoryChart
         {...size}
         theme={victoryTheme}
