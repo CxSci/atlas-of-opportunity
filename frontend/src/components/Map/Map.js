@@ -411,9 +411,20 @@ function Map({
   }, [])
 
   const showPopupForFeature = useCallback(
-    ({ option, expandPopup = false, fitBounds = false }) => {
+    ({ option, expandPopup = false, fitBounds = false, previousFeatureId }) => {
+      const layer = metricConfig?.layers?.[0]
+      const sourceName = `source_${metricConfig?.id || ''}`
+      const sourceLayer = layer?.sourceLayer
+
       if (!option && hoverPopupRef?.current) {
         hoverPopupRef.current.remove()
+
+        if (previousFeatureId) {
+          map.current.setFeatureState(
+            { source: sourceName, sourceLayer: sourceLayer, id: previousFeatureId },
+            { hover: false },
+          )
+        }
         return
       }
 
@@ -436,10 +447,6 @@ function Map({
       if (fitBounds) {
         map.current.fitBounds(bounds, { padding: 200 })
       }
-
-      const layer = metricConfig?.layers?.[0]
-      const sourceName = `source_${metricConfig?.id || ''}`
-      const sourceLayer = layer?.sourceLayer
 
       setPopupData({
         id: featureId,
@@ -467,6 +474,8 @@ function Map({
       if (expandPopup) {
         hoverPopupRef.current.addClassName('immobile')
       }
+
+      return featureId
     },
     [colorScheme, data, domain, metricConfig?.id, metricConfig?.layers, metricConfig?.title],
   )
@@ -535,10 +544,12 @@ function Map({
 
   useEffect(() => {
     showPopupForFeature({ option: selectedFeature, expandPopup: true, fitBounds: true })
+    return () => showPopupForFeature({ previousFeatureId: selectedFeature?.id })
   }, [selectedFeature, showPopupForFeature])
 
   useEffect(() => {
     showPopupForFeature({ option: highlightedFeature })
+    return () => showPopupForFeature({ previousFeatureId: highlightedFeature?.id })
   }, [highlightedFeature, showPopupForFeature])
 
   return (
