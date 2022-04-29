@@ -11,6 +11,7 @@ import {
   Skeleton,
   Typography,
 } from '@mui/material'
+import { useTheme } from '@mui/system'
 import { Delete } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
 import StaticMap from '../StaticMap'
@@ -29,6 +30,7 @@ function ComparisonMenu({
   compareBtnRef,
 }) {
   const dispatch = useDispatch()
+  const theme = useTheme()
   const closeCompareMenuOpen = useCallback(() => setOpen(false), [setOpen])
 
   const handleDeleteClick = useCallback(
@@ -65,6 +67,7 @@ function ComparisonMenu({
 
   return (
     <Popper
+      style={{ zIndex: theme?.zIndex?.modal }}
       open={open}
       anchorEl={compareBtnRef?.current}
       placement={'bottom-end'}
