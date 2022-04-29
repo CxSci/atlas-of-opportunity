@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useEffect, useCallback, useMemo, useState, useRef } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
@@ -8,20 +8,38 @@ import { NumberFormatType } from 'utils/propTypes'
 import FieldNumber from 'components/FieldNumber'
 
 const SimpleBar = ({ value, percentage, numberFormat }) => {
-  const [node, setNode] = useState(null)
-  const getNode = useCallback(
+  const containerRef = useRef(null)
+  const fieldRef = useRef(null)
+  const [fullWidth, setFullWidth] = useState(containerRef.current?.clientWidth)
+  const fieldWidth = fieldRef.current?.clientWidth
+  const handleContainerResize = useCallback(() => setFullWidth(containerRef.current?.clientWidth), [setFullWidth])
+  const getContainerNode = useCallback(
     node => {
       if (node) {
-        setNode(node)
+        containerRef.current = node
+        handleContainerResize()
       }
     },
-    [setNode],
+    [handleContainerResize],
   )
-  const fullWidth = node?.clientWidth
-  const width = useMemo(() => Math.max(fullWidth * percentage, 8), [fullWidth, percentage])
+  const getFieldNode = useCallback(node => {
+    if (node) {
+      fieldRef.current = node
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('resize', handleContainerResize)
+    return () => window.removeEventListener('resize', handleContainerResize)
+  }, [handleContainerResize])
+
+  const width = useMemo(
+    () => Math.max((fullWidth - fieldWidth - 8) * percentage, 8),
+    [fullWidth, fieldWidth, percentage],
+  )
 
   return (
-    <Box ref={getNode}>
+    <Box ref={getContainerNode}>
       <Grid container spacing={1} alignItems="center" flexWrap="nowrap">
         <Grid item flex={1}>
           <Box sx={{ position: 'relative', width }}>
@@ -31,7 +49,9 @@ const SimpleBar = ({ value, percentage, numberFormat }) => {
               variant="determinate"
               color="secondary"
             />
-            <Box sx={{ position: 'absolute', left: '100%', top: '50%', ml: 1, transform: 'translateY(-50%)' }}>
+            <Box
+              ref={getFieldNode}
+              sx={{ position: 'absolute', left: '100%', top: '50%', ml: 1, transform: 'translateY(-50%)' }}>
               <FieldNumber value={value} numberFormat={numberFormat} />
             </Box>
           </Box>
