@@ -76,14 +76,14 @@ export const useVictoryTheme = theme => {
   )
 }
 
-export const useClientSize = (ref, width = 600, height = 450, ratio = 0.75) => {
-  const [size, setSize] = useState({ width, height })
+export const useClientSize = (ref, width = 600) => {
+  const [size, setSize] = useState({ width, height: 400 })
   const getClientSize = useCallback(() => {
     setSize({
       width: ref.current?.clientWidth || width,
-      height: ref.current?.clientWidth * ratio || height,
+      height: 400,
     })
-  }, [ratio, ref, width, height])
+  }, [ref, width])
   useEffect(() => {
     window.addEventListener('resize', getClientSize)
     getClientSize()
