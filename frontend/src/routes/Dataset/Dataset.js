@@ -88,6 +88,8 @@ function Dataset() {
             datasetId={datasetId}
             selectedFeature={selectedFeature}
             highlightedFeature={highlightedFeature}
+            setSelectedFeature={setSelectedFeature}
+            setHighlightedFeature={setHighlightedFeature}
             addToComparison={addToComparison}
             canAddToComparison={canAddToComparison}
           />
