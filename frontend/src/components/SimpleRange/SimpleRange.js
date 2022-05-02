@@ -12,10 +12,11 @@ function generateGradientString({ colorScheme, domain }) {
     // have three stops.
     colorScheme = ['#F2F758', '#C95F6D', '#081181']
     domain = [0, 0.5, 1]
-  } 
+  }
   const scale = d3ScaleLinear().domain(d3Extent(domain)).range([0, 100]).clamp(true)
   return domain.reduce((str, value, index) => {
-    const color = colorScheme[index]
+    const colorIndex = index > colorScheme?.length - 1 ? colorScheme.length - 1 : index
+    const color = colorScheme[colorIndex]
     return str + `${index > 0 ? ', ' : ''} ${color} ${scale(value)}%`
   }, '')
 }

@@ -40,6 +40,8 @@ function Map({
   highlightedFeature,
   addToComparison,
   canAddToComparison,
+  setSelectedFeature,
+  setHighlightedFeature,
 }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
@@ -57,15 +59,14 @@ function Map({
   const [mapLoaded, setMapLoaded] = useState(false)
   const [metricConfig, setMetricConfig] = useState(null)
   const [colorScheme, setColorScheme] = useState([])
-  const [, setLayerIds] = useState([])
-  const [, setSourceIds] = useState([])
   const [popupData, setPopupData] = useState(null)
+  const sourceIds = useRef([])
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
 
   const initPopup = useCallback(
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
-      const sourceName = `source_${metricConfig?.id || ''}`
+      const sourceName = `source_${metricConfig?.geometry?.promoteId || ''}`
       let hoverPopupTimeout = null
       let popupExpanded = null
       const popupOffsetY = 10
@@ -254,7 +255,7 @@ function Map({
       }
       onMapClickRef.current = onMapMove
     },
-    [metricConfig?.id, metricConfig?.title, data, colorScheme, domain, hidePopup],
+    [metricConfig?.geometry?.promoteId, metricConfig?.title, hidePopup, data, colorScheme, domain],
   )
 
   const updateMap = useCallback(() => {
@@ -263,14 +264,18 @@ function Map({
     }
 
     const layerIds = []
-    const sourceIds = []
 
     const { geometry, layers } = metricConfig || {}
     const mapType = metricConfig?.type
     const titleKey = metricConfig?.geometry?.titleKey
     const foreignKey = 'id'
     const metricKey = 'data'
-    const sourceName = `source_${metricConfig?.id || ''}`
+    const sourceName = `source_${geometry?.promoteId || ''}`
+
+    if (!sourceIds.current.includes(sourceName)) {
+      sourceIds.current.push(sourceName)
+      map.current.addSource(sourceName, geometry)
+    }
 
     layers.forEach(layer => {
       const paint = layer?.paint
@@ -284,9 +289,6 @@ function Map({
       if (mapType !== 'chloropleth') {
         return
       }
-
-      map.current.addSource(sourceName, geometry)
-      sourceIds.push(sourceName)
 
       // TODO: refactor
       const mergeData = data => {
@@ -382,38 +384,32 @@ function Map({
 
         initPopup({ foreignKey, metricKey, titleKey, layerId: fillsId, sourceLayer })
       }
-
-      setLayerIds(layerIds)
-      setSourceIds(sourceIds)
-    })
-  }, [data, initPopup, mapLoaded, metricConfig])
-
-  const cleanMap = useCallback(() => {
-    setLayerIds(layerIds => {
-      layerIds.forEach(id => {
-        const layer = map.current.getLayer(id)
-        if (layer) {
-          map.current.removeLayer(id)
-        }
-      })
-      return []
     })
 
-    setSourceIds(sourceIds => {
-      sourceIds.forEach(id => {
-        const source = map.current.getSource(id)
-        if (source) {
-          map.current.removeSource(id)
-        }
-      })
-      return []
-    })
-  }, [])
+    return { layerIds }
+  }, [data, initPopup, mapLoaded, metricConfig, sourceIds])
+
+  const cleanMap = useCallback(
+    ({ layerIds }) => {
+      setSelectedFeature(null)
+      setHighlightedFeature(null)
+
+      if (layerIds.length) {
+        layerIds.forEach(id => {
+          const layer = map.current.getLayer(id)
+          if (layer) {
+            map.current.removeLayer(id)
+          }
+        })
+      }
+    },
+    [setHighlightedFeature, setSelectedFeature],
+  )
 
   const showPopupForFeature = useCallback(
     ({ option, expandPopup = false, fitBounds = false, previousFeatureId }) => {
       const layer = metricConfig?.layers?.[0]
-      const sourceName = `source_${metricConfig?.id || ''}`
+      const sourceName = `source_${metricConfig?.geometry?.promoteId || ''}`
       const sourceLayer = layer?.sourceLayer
 
       if (!option && hoverPopupRef?.current) {
@@ -477,14 +473,18 @@ function Map({
 
       return featureId
     },
-    [colorScheme, data, domain, metricConfig?.id, metricConfig?.layers, metricConfig?.title],
+    [colorScheme, data, domain, metricConfig?.geometry?.promoteId, metricConfig?.layers, metricConfig?.title],
   )
 
   // effects
   useEffect(() => {
-    updateMap()
+    setSelectedFeature(null)
+    setHighlightedFeature(null)
+  }, [selectedMetric, setSelectedFeature, setHighlightedFeature])
 
-    return () => cleanMap()
+  useEffect(() => {
+    const { layerIds = [], sourceIds = [] } = updateMap() || {}
+    return () => cleanMap({ layerIds, sourceIds })
   }, [cleanMap, updateMap])
 
   useEffect(() => {
@@ -598,7 +598,6 @@ function Map({
         <div>
           <SimpleRange value={Math.max(...domain)} variant={'gradient'} colorScheme={colorScheme} domain={domain} />
 
-          {/* TODO: check if this should be dynamic */}
           <Box
             display={'flex'}
             justifyContent={'space-between'}
