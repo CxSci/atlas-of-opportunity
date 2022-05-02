@@ -66,7 +66,7 @@ function Map({
 
   const initPopup = useCallback(
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
-      const sourceName = `source_${metricConfig?.geometry?.promoteId || ''}`
+      const sourceName = createSourceName(metricConfig?.geometry)
       let hoverPopupTimeout = null
       let popupExpanded = null
       const popupOffsetY = 10
@@ -255,7 +255,7 @@ function Map({
       }
       onMapClickRef.current = onMapMove
     },
-    [metricConfig?.geometry?.promoteId, metricConfig?.title, hidePopup, data, colorScheme, domain],
+    [metricConfig?.geometry, metricConfig?.title, hidePopup, data, colorScheme, domain],
   )
 
   const updateMap = useCallback(() => {
@@ -270,7 +270,7 @@ function Map({
     const titleKey = metricConfig?.geometry?.titleKey
     const foreignKey = 'id'
     const metricKey = 'data'
-    const sourceName = `source_${geometry?.promoteId || ''}`
+    const sourceName = createSourceName(geometry)
 
     if (!sourceIds.current.includes(sourceName)) {
       sourceIds.current.push(sourceName)
@@ -409,7 +409,7 @@ function Map({
   const showPopupForFeature = useCallback(
     ({ option, expandPopup = false, fitBounds = false, previousFeatureId }) => {
       const layer = metricConfig?.layers?.[0]
-      const sourceName = `source_${metricConfig?.geometry?.promoteId || ''}`
+      const sourceName = createSourceName(metricConfig?.geometry)
       const sourceLayer = layer?.sourceLayer
 
       if (!option && hoverPopupRef?.current) {
@@ -473,7 +473,7 @@ function Map({
 
       return featureId
     },
-    [colorScheme, data, domain, metricConfig?.geometry?.promoteId, metricConfig?.layers, metricConfig?.title],
+    [colorScheme, data, domain, metricConfig?.geometry, metricConfig?.layers, metricConfig?.title],
   )
 
   // effects
@@ -644,6 +644,18 @@ function buildColorExpression({ paint, layer, metricKey }) {
     result.push(domain[i], ['to-color', color])
   })
   return result
+}
+
+/**
+ *
+ * @param geometry
+ * @return {string}
+ */
+function createSourceName(geometry) {
+  const urlHash = encodeURIComponent(geometry?.url || '')
+  const promoteId = geometry?.promoteId || ''
+
+  return `source_${urlHash}_${promoteId}`
 }
 
 export default Map
