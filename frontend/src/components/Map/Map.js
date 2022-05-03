@@ -60,7 +60,6 @@ function Map({
   const [metricConfig, setMetricConfig] = useState(null)
   const [colorScheme, setColorScheme] = useState([])
   const [popupData, setPopupData] = useState(null)
-  const sourceIds = useRef([])
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
 
@@ -264,6 +263,7 @@ function Map({
     }
 
     const layerIds = []
+    const sourceIds = []
 
     const { geometry, layers } = metricConfig || {}
     const mapType = metricConfig?.type
@@ -272,8 +272,9 @@ function Map({
     const metricKey = 'data'
     const sourceName = createSourceName(geometry)
 
-    if (!sourceIds.current.includes(sourceName)) {
-      sourceIds.current.push(sourceName)
+    sourceIds.push(sourceName)
+    const source = map.current.getSource(sourceName)
+    if (!source) {
       map.current.addSource(sourceName, geometry)
     }
 
@@ -386,11 +387,11 @@ function Map({
       }
     })
 
-    return { layerIds }
-  }, [data, initPopup, mapLoaded, metricConfig, sourceIds])
+    return { layerIds, sourceIds }
+  }, [data, initPopup, mapLoaded, metricConfig])
 
   const cleanMap = useCallback(
-    ({ layerIds }) => {
+    ({ layerIds, sourceIds }) => {
       setSelectedFeature(null)
       setHighlightedFeature(null)
 
@@ -399,6 +400,15 @@ function Map({
           const layer = map.current.getLayer(id)
           if (layer) {
             map.current.removeLayer(id)
+          }
+        })
+      }
+
+      if (layerIds.length) {
+        sourceIds.forEach(id => {
+          const source = map.current.getSource(id)
+          if (source) {
+            map.current.removeSource(id)
           }
         })
       }
