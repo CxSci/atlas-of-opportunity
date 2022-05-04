@@ -31,6 +31,7 @@ function Header({
 
   return (
     <Box
+      className="header"
       position={'fixed'}
       top={0}
       left={0}
@@ -51,7 +52,7 @@ function Header({
            background-color ${theme.transitions.duration.short}ms`,
       }}>
       <Box display={'flex'} alignItems={'center'} {...leftContainerProps}>
-        <Box component="span" sx={{ mr: 2 }}>
+        <Box component="span" sx={{ mr: 2 }} className="header__action-btn">
           {backRoute ? (
             <NavigateButton aria-label="back" onClick={() => navigate(backRoute)}>
               <ArrowBackIcon {...navigateBtnIconProps} />
@@ -66,7 +67,7 @@ function Header({
         {scrolled && contentScrolled?.left ? contentScrolled.left : content?.left}
       </Box>
 
-      <Box display={'flex'} alignItems={'center'}>
+      <Box display={'flex'} alignItems={'center'} className="header__right-content">
         {scrolled && contentScrolled?.right ? contentScrolled.right : content?.right}
       </Box>
     </Box>

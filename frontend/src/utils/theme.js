@@ -135,8 +135,27 @@ const initTheme = mode => {
             fontSize: '24px',
             color: !darkMode && '#333',
           },
+          ol: {
+            flexWrap: 'nowrap',
+          },
           li: {
+            whiteSpace: 'nowrap',
             fontWeight: 'bold',
+
+            '.header__link': {
+              '.header__link__ellipsis': {
+                display: 'none',
+              },
+
+              '&.header__link--truncated': {
+                '.header__link__text': {
+                  display: 'none',
+                },
+                '.header__link__ellipsis': {
+                  display: 'inline',
+                },
+              },
+            },
           },
         },
       },
