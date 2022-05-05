@@ -11,7 +11,7 @@ function BreadcrumbLink({ linkItem, truncate }) {
       href={linkItem?.path}>
       <span className="header__link__text">{linkItem?.text}</span>
 
-      <span className="header__link__ellipsis">...</span>
+      <span className="header__link__ellipsis">…</span>
     </Link>
   )
 }
