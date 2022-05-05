@@ -156,6 +156,7 @@ const initTheme = mode => {
             height: buttonHeight,
             backgroundColor: `${darkMode ? bgLight : '#f2f2f2'} !important`,
             borderRadius: borderRadiusRound,
+            flexWrap: 'nowrap',
             overflow: 'hidden',
             paddingTop: '0',
             paddingBottom: '0',
@@ -169,6 +170,11 @@ const initTheme = mode => {
               content: 'none',
             },
             color: darkMode ? '#666666' : '#2D2D2D',
+
+            input: {
+              minWidth: '180px !important',
+              width: 'auto !important',
+            },
           },
           inputFocused: {
             backgroundColor: 'transparent',
@@ -315,10 +321,6 @@ const initTheme = mode => {
         height: 40,
         bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 1)',
         borderColor: '#CCCCCC',
-      },
-
-      searchInput: {
-        width: '250px',
       },
 
       sidebar: {

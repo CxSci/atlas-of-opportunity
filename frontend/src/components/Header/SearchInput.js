@@ -79,11 +79,14 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       renderInput={params => (
         <TextField
           {...params}
-          sx={{ width: theme => theme.components.searchInput.width }}
           variant={'filled'}
           onChange={event => setInputValue(event?.target?.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          inputProps={{
+            ...params.inputProps,
+            size: (placeholder || '')?.length.toString(),
+          }}
           InputProps={{
             ...params.InputProps,
             placeholder,
@@ -94,7 +97,9 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
             ),
             endAdornment: (
               <React.Fragment>
-                {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                {isLoading ? (
+                  <CircularProgress color="inherit" size={20} style={{ position: 'absolute', right: 38 }} />
+                ) : null}
 
                 {inputValue && (
                   <IconButton
