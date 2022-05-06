@@ -10,9 +10,9 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
   const [focused, setFocused] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [inputChanged, setInputChanged] = useState(false)
+  const [inputWidth, setInputWidth] = useState(180)
   const options = useSelector(searchListSelector)
   const isLoading = useSelector(isRequestPending('searchList', 'get'))
-
   const open = Boolean(focused && !(inputChanged && !options?.length) && inputValue)
 
   const handleHighlightChange = useCallback(
@@ -51,6 +51,18 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
     }
   }, [isLoading])
 
+  useEffect(() => {
+    const tempNode = document.createElement('span')
+    tempNode.innerText = placeholder || ''
+    document.body.appendChild(tempNode)
+
+    const width = tempNode.offsetWidth
+    const offset = 14
+    setInputWidth(width + offset)
+
+    document.body.removeChild(tempNode)
+  }, [placeholder])
+
   return (
     <Autocomplete
       autoHighlight
@@ -79,14 +91,13 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       renderInput={params => (
         <TextField
           {...params}
+          sx={{
+            input: { width: `${inputWidth}px !important`, paddingRight: inputValue ? '48px !important' : undefined },
+          }}
           variant={'filled'}
           onChange={event => setInputValue(event?.target?.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          inputProps={{
-            ...params.inputProps,
-            size: (placeholder || '')?.length.toString(),
-          }}
           InputProps={{
             ...params.InputProps,
             placeholder,

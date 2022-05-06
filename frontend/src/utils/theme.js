@@ -158,6 +158,7 @@ const initTheme = mode => {
             borderRadius: borderRadiusRound,
             flexWrap: 'nowrap',
             overflow: 'hidden',
+            paddingRight: '12px !important',
             paddingTop: '0',
             paddingBottom: '0',
             '&:hover': {
@@ -172,8 +173,8 @@ const initTheme = mode => {
             color: darkMode ? '#666666' : '#2D2D2D',
 
             input: {
+              boxSizing: 'border-box',
               minWidth: '180px !important',
-              width: 'auto !important',
             },
           },
           inputFocused: {
