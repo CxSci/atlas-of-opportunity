@@ -137,6 +137,7 @@ const initTheme = mode => {
           },
           ol: {
             flexWrap: 'nowrap',
+            paddingRight: '12px',
           },
           li: {
             whiteSpace: 'nowrap',
