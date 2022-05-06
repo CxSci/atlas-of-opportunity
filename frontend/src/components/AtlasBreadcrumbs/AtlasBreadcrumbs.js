@@ -50,9 +50,11 @@ function AtlasBreadcrumbs({ links = [] }) {
       const headerRightContentNode = document.querySelector('.header__right-content')
       const headerActionBtnNode = document.querySelector('.header__action-btn')
       const rightContentWidth = headerRightContentNode?.offsetWidth
-      const actionBtnWidth = headerActionBtnNode?.offsetWidth + 16
+      const actionBtnMarginRight = 16
+      const headerPaddingX = 28
+      const actionBtnWidth = headerActionBtnNode?.offsetWidth + actionBtnMarginRight
 
-      const allocatedBreadcrumbsWidth = windowWidth - rightContentWidth - actionBtnWidth - 40
+      const allocatedBreadcrumbsWidth = windowWidth - rightContentWidth - actionBtnWidth - headerPaddingX
 
       let truncateCount = 0
       links.forEach((item, index) => {
