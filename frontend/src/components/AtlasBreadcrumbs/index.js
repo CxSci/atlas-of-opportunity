@@ -1,1 +1,1 @@
-export { default } from './AtlasBreadcrubs.container'
+export { default } from './AtlasBreadcrumbs'
