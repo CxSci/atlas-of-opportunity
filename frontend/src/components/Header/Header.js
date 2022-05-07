@@ -51,7 +51,7 @@ function Header({
            box-shadow ${theme.transitions.duration.short}ms,
            background-color ${theme.transitions.duration.short}ms`,
       }}>
-      <Box display={'flex'} alignItems={'center'} {...leftContainerProps}>
+      <Box display={'flex'} alignItems={'center'} overflow={'hidden'} flex={'1 1 100%'} {...leftContainerProps}>
         <Box component="span" sx={{ mr: 2 }} className="header__action-btn">
           {backRoute ? (
             <NavigateButton aria-label="back" onClick={() => navigate(backRoute)}>
