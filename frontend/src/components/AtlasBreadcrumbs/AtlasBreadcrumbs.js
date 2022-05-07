@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { Breadcrumbs } from '@mui/material'
 import PATH from '../../utils/path'
 import PropTypes from 'prop-types'
@@ -11,57 +11,70 @@ export const homeBreadcrumbLink = {
   text: 'Atlas of Opportunity',
 }
 
-function AtlasBreadcrumbs({ links = [] }) {
+function AtlasBreadcrumbs({
+  links = [],
+  hidden,
+  truncateCount,
+  setTruncateCount,
+  breadcrumbsWidth,
+  setBreadcrumbsWidth,
+  containerWidth,
+  setContainerWidth,
+  widthsList,
+  setWidthsList,
+}) {
   const containerRef = useRef()
-  const cloneRef = useRef()
-  const [containerWidth, setContainerWidth] = useState(0)
-  const [widthsList, setWidthsList] = useState([])
-  const [truncateCount, setTruncateCount] = useState(0)
   const isEntryLoading = useSelector(isRequestPending('datasetDetailData', 'get'))
   const isDatasetLoading = useSelector(isRequestPending('datasetList', 'get'))
 
+  const otherProps = hidden
+    ? {
+        sx: {
+          visibility: 'hidden',
+          position: 'absolute',
+        },
+        'aria-label': 'none',
+        role: 'none',
+      }
+    : {
+        sx: {
+          width: '100%',
+          overflow: 'hidden',
+        },
+      }
+
   useLayoutEffect(() => {
-    if (cloneRef.current) {
-      document.body.removeChild(cloneRef.current)
+    const containerNode = containerRef?.current
+    const containerWidth = containerNode?.offsetWidth
+
+    if (hidden) {
+      setBreadcrumbsWidth(containerWidth)
+    } else {
+      setContainerWidth(containerWidth)
+      return
     }
 
-    const containerNodeClone = containerRef?.current?.cloneNode?.(true)
-    containerNodeClone.style = ' opacity: 0; max-height: 0'
-    containerNodeClone.childNodes[0].style = 'display: inline-flex'
-    containerNodeClone.querySelectorAll('.header__link--truncated').forEach(link => {
-      link.classList.remove('header__link--truncated')
-    })
-    cloneRef.current = containerNodeClone
-    document.body.appendChild(containerNodeClone)
-
-    const containerWidth = containerNodeClone?.childNodes?.[0]?.offsetWidth
-    setContainerWidth(containerWidth)
-    const childNodes = containerNodeClone?.querySelectorAll?.('li:not(.MuiBreadcrumbs-separator)') || []
+    const childNodes = containerNode?.querySelectorAll?.('li:not(.MuiBreadcrumbs-separator)') || []
     const widthsList = []
-    ;[...childNodes].forEach((node, index) => widthsList.push(node.offsetWidth))
-
+    ;[...childNodes].forEach(node => widthsList.push(node.offsetWidth))
     setWidthsList(widthsList)
-  }, [isEntryLoading, isDatasetLoading])
+  }, [isEntryLoading, isDatasetLoading, hidden, setBreadcrumbsWidth, setContainerWidth, setWidthsList])
 
   useEffect(() => {
-    function handleResize() {
-      let breadcrumbsWidth = containerWidth
-      const windowWidth = window.innerWidth
-      const headerRightContentNode = document.querySelector('.header__right-content')
-      const headerActionBtnNode = document.querySelector('.header__action-btn')
-      const rightContentWidth = headerRightContentNode?.offsetWidth
-      const actionBtnMarginRight = 16
-      const headerPaddingX = 28
-      const actionBtnWidth = headerActionBtnNode?.offsetWidth + actionBtnMarginRight
+    if (hidden) {
+      return
+    }
 
-      const allocatedBreadcrumbsWidth = windowWidth - rightContentWidth - actionBtnWidth - headerPaddingX
+    function handleResize() {
+      let breadcrumbsWidthTemp = breadcrumbsWidth
+      const allocatedBreadcrumbsWidth = containerRef.current?.offsetWidth
 
       let truncateCount = 0
       links.forEach((item, index) => {
-        if (breadcrumbsWidth > allocatedBreadcrumbsWidth) {
+        if (breadcrumbsWidthTemp > allocatedBreadcrumbsWidth) {
           const itemWidth = widthsList[links.length - 1 - index]
           const ellipsisWidth = 22
-          breadcrumbsWidth -= itemWidth - ellipsisWidth
+          breadcrumbsWidthTemp -= itemWidth - ellipsisWidth
           truncateCount++
         }
       })
@@ -73,20 +86,16 @@ function AtlasBreadcrumbs({ links = [] }) {
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [containerWidth, links, widthsList])
-
-  useEffect(() => {
-    return () => {
-      if (cloneRef.current) {
-        document.body.removeChild(cloneRef.current)
-      }
-    }
-  }, [])
+  }, [breadcrumbsWidth, hidden, containerWidth, links, setContainerWidth, setTruncateCount, widthsList])
 
   return (
-    <Breadcrumbs ref={containerRef} aria-label="breadcrumb">
+    <Breadcrumbs ref={containerRef} aria-label="breadcrumb" {...otherProps}>
       {(links || []).map((linkItem, index) => (
-        <BreadcrumbLink key={index} linkItem={linkItem} truncate={index >= links.length - truncateCount} />
+        <BreadcrumbLink
+          key={index}
+          linkItem={linkItem}
+          truncate={hidden ? false : index >= links.length - truncateCount}
+        />
       ))}
     </Breadcrumbs>
   )
@@ -99,6 +108,15 @@ AtlasBreadcrumbs.propTypes = {
       text: PropTypes.any,
     }),
   ),
+  hidden: PropTypes.bool,
+  truncateCount: PropTypes.number,
+  breadcrumbsWidth: PropTypes.number,
+  containerWidth: PropTypes.number,
+  widthsList: PropTypes.arrayOf(PropTypes.number),
+  setWidthsList: PropTypes.func,
+  setTruncateCount: PropTypes.func,
+  setContainerWidth: PropTypes.func,
+  setBreadcrumbsWidth: PropTypes.func,
 }
 
 export default AtlasBreadcrumbs
