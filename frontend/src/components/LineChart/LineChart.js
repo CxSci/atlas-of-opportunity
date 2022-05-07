@@ -11,7 +11,7 @@ import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const LineChart = ({ data, title, xAxis, yAxis }) => {
-  const { formatNumber } = useIntl()
+  const intl = useIntl()
   const theme = useTheme()
   const stackData = useMemo(() => getStackData(data), [data])
   const victoryTheme = useVictoryTheme(theme)
@@ -20,16 +20,16 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
 
   const handleXTickFormat = useCallback(
     t => {
-      return formatTickNumber(t, formatNumber, xAxis)
+      return formatTickNumber(t, xAxis, intl)
     },
-    [formatNumber, xAxis],
+    [intl, xAxis],
   )
 
   const handleYTickFormat = useCallback(
     t => {
-      return formatTickNumber(t, formatNumber, yAxis)
+      return formatTickNumber(t, yAxis, intl)
     },
-    [formatNumber, yAxis],
+    [intl, yAxis],
   )
 
   return (

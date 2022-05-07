@@ -12,9 +12,9 @@ import { formatTickNumber } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const StackChart = ({ data, xAxis, yAxis }) => {
+  const intl = useIntl()
   const theme = useTheme()
   const victoryTheme = useVictoryTheme(theme)
-  const { formatNumber } = useIntl()
 
   const ref = useRef()
   const size = useClientSize(ref)
@@ -22,16 +22,16 @@ const StackChart = ({ data, xAxis, yAxis }) => {
 
   const handleXTickFormat = useCallback(
     t => {
-      return formatTickNumber(t, formatNumber, xAxis)
+      return formatTickNumber(t, xAxis, intl)
     },
-    [formatNumber, xAxis],
+    [intl, xAxis],
   )
 
   const handleYTickFormat = useCallback(
     t => {
-      return formatTickNumber(t, formatNumber, yAxis)
+      return formatTickNumber(t, yAxis, intl)
     },
-    [formatNumber, yAxis],
+    [intl, yAxis],
   )
 
   return (

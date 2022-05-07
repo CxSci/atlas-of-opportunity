@@ -6,7 +6,8 @@ export const getLineChartDomain = data => {
   return [min, max]
 }
 
-export const formatTickNumber = (value, formatNumber, axis) => {
+export const formatTickNumber = (value, axis, intl) => {
+  const { formatNumber, formatDate } = intl
   if (axis.format === 'number') {
     const { minimumFractionDigits, minimumIntegerDigits, minimumSignificantDigits, ...numberFormat } =
       axis.numberFormat || {}
@@ -14,6 +15,10 @@ export const formatTickNumber = (value, formatNumber, axis) => {
       notation: 'compact',
       compactDisplay: 'short',
       ...numberFormat,
+    })
+  } else if (axis.format === 'date') {
+    return formatDate(value, {
+      ...axis.dateFormat,
     })
   }
   return value
