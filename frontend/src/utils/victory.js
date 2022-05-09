@@ -45,3 +45,7 @@ export const STACK_COLORS = [
   '#9c755f',
   '#bab0ab',
 ]
+
+export const angledProperty = {
+  tickLabels: { angle: 45 },
+}

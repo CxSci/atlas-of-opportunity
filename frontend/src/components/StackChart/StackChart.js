@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { ChartAxisType } from 'utils/propTypes'
 import { getStackData, STACK_COLORS } from './StackChart.utils'
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber } from 'utils/victory'
+import { formatTickNumber, angledProperty } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const StackChart = ({ data, xAxis, yAxis }) => {
@@ -54,7 +54,7 @@ const StackChart = ({ data, xAxis, yAxis }) => {
             }
           />
         }>
-        <VictoryAxis tickFormat={handleXTickFormat} />
+        <VictoryAxis tickFormat={handleXTickFormat} style={xAxis.angled && angledProperty} />
         <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
         <VictoryStack colorScale={STACK_COLORS}>
           {stackData.map(item => (

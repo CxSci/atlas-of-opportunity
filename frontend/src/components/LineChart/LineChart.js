@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber, getStackData, STACK_COLORS } from 'utils/victory'
+import { formatTickNumber, getStackData, STACK_COLORS, angledProperty } from 'utils/victory'
 import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
@@ -52,7 +52,7 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
             }
           />
         }>
-        <VictoryAxis fixLabelOverlap tickFormat={handleXTickFormat} />
+        <VictoryAxis fixLabelOverlap tickFormat={handleXTickFormat} style={xAxis.angled && angledProperty} />
         <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
         {stackData.map((item, idx) => (
           <VictoryLine
