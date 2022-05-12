@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types'
 import { useRef } from 'react'
 import { useTheme } from '@mui/system'
 
-const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style, placement, activePoints }) => {
+const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style, placement, activePoints, variant }) => {
   const ref = useRef(null)
   const rect = ref.current?.getBoundingClientRect()
   const theme = useTheme()
@@ -68,7 +68,13 @@ const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style, placem
                 <FormattedNumber value={datum.y} />
               </Typography>
               <Typography variant="fieldLabel">{xAxisLabel}</Typography>
-              <Typography variant="fieldValue">{datum.x}</Typography>
+              <Typography variant="fieldValue">
+                {variant === 'time'
+                  ? datum.x.toISOString().split('T')[0]
+                  : variant === 'time_years'
+                  ? new Date(new Date(datum.x).setFullYear(datum.year)).toISOString().split('T')[0]
+                  : datum.x}
+              </Typography>
             </Box>
           </Box>
         </Portal>
