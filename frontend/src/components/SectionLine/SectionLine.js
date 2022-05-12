@@ -24,7 +24,7 @@ const SectionLine = ({ layout, data }) => {
     }))
     return (
       <Box>
-        <LineChart data={chartData} title={layout.title} xAxis={layout.x} yAxis={layout.y} />
+        <LineChart data={chartData} title={layout.title} xAxis={layout.x} yAxis={layout.y} variant={layout.variant} />
       </Box>
     )
   } else {

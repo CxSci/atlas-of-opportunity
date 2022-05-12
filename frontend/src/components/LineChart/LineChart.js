@@ -10,10 +10,18 @@ import { formatTickNumber, getStackData, STACK_COLORS, angledProperty } from 'ut
 import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
-const LineChart = ({ data, title, xAxis, yAxis }) => {
+const LineChart = ({ data, title, xAxis, yAxis, variant }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const stackData = useMemo(() => getStackData(data), [data])
+  const modifiedDataWithDate = data.map(item => {
+    if (variant === 'time_years') {
+      return { ...item, x: new Date(new Date(item.x).setFullYear(2014)), year: new Date(item.x).getFullYear() }
+    } else if (variant === 'time') {
+      return { ...item, x: new Date(item.x) }
+    }
+    return item
+  })
+  const stackData = useMemo(() => getStackData(modifiedDataWithDate), [modifiedDataWithDate])
   const victoryTheme = useVictoryTheme(theme)
   const ref = useRef()
   const size = useClientSize(ref)
@@ -36,6 +44,7 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
     <Box ref={ref}>
       <VictoryChart
         {...size}
+        scale="time"
         theme={victoryTheme}
         domainPadding={{
           x: [0, 15],
@@ -47,7 +56,9 @@ const LineChart = ({ data, title, xAxis, yAxis }) => {
             labelComponent={
               <VictoryTooltip
                 constrainToVisibleArea
-                flyoutComponent={<ChartFlyOut title={title} xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} />}
+                flyoutComponent={
+                  <ChartFlyOut title={title} xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} variant={variant} />
+                }
               />
             }
           />
