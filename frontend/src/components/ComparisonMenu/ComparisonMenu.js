@@ -71,6 +71,7 @@ function ComparisonMenu({
       open={open}
       anchorEl={compareBtnRef?.current}
       placement={'bottom-end'}
+      popperOptions={{ strategy: 'fixed' }}
       modifiers={[
         {
           name: 'offset',
