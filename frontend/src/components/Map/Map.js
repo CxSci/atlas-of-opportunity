@@ -244,7 +244,7 @@ function Map({
 
       // map click event
       if (onMapClickRef.current) {
-        map.current.off('mouseleave', prevLayerId, onMapClickRef.current)
+        map.current.off('click', prevLayerId, onMapClickRef.current)
         onMapClickRef.current = null
       }
 
@@ -410,8 +410,8 @@ function Map({
           if (layer) {
             map.current.off('mousemove', id, onMouseMoveRef.current)
             map.current.off('mouseleave', id, onMouseLeaveRef.current)
-            map.current.off('mouseleave', id, onMapMoveRef.current)
-            map.current.off('mouseleave', id, onMapClickRef.current)
+            map.current.off('move', id, onMapMoveRef.current)
+            map.current.off('click', id, onMapClickRef.current)
 
             map.current.removeLayer(id)
           }
