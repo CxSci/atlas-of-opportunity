@@ -49,3 +49,9 @@ export const STACK_COLORS = [
 export const angledProperty = {
   tickLabels: { angle: 45 },
 }
+
+export const getSettingYear = (settingYear, dateString) => {
+  const fullYear = new Date(dateString).getFullYear()
+  const UTCFullYear = new Date(dateString).getUTCFullYear()
+  return settingYear + fullYear - UTCFullYear
+}

@@ -7,6 +7,8 @@ import { PropTypes } from 'prop-types'
 import { useRef } from 'react'
 import { useTheme } from '@mui/system'
 
+import { getSettingYear } from 'utils/victory'
+
 const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style, placement, activePoints, variant }) => {
   const ref = useRef(null)
   const rect = ref.current?.getBoundingClientRect()
@@ -72,7 +74,9 @@ const ChartFlyOut = ({ x, y, datum, title, xAxisLabel, yAxisLabel, style, placem
                 {variant === 'time'
                   ? datum.x.toISOString().split('T')[0]
                   : variant === 'time_years'
-                  ? new Date(new Date(datum.x).setFullYear(datum.year)).toISOString().split('T')[0]
+                  ? new Date(new Date(datum.x).setFullYear(getSettingYear(Number(datum.z), datum.x)))
+                      .toISOString()
+                      .split('T')[0]
                   : datum.x}
               </Typography>
             </Box>
