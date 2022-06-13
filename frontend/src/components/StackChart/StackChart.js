@@ -46,7 +46,7 @@ const StackChart = ({ data, xAxis, yAxis, variant }) => {
     <Box ref={ref}>
       <VictoryChart
         {...size}
-        scale="time"
+        {...(['time', 'time_years'].includes(variant) && { scale: { x: 'time', y: 'linear' } })}
         theme={victoryTheme}
         domainPadding={{
           x: [0, 15],

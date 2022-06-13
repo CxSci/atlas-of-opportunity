@@ -129,8 +129,9 @@ WithTimeYearsVariantAndGrouping.args = {
     format: 'date',
     dateFormat: {
       month: 'short',
-      year: '2-digit',
+      day: '2-digit',
     },
+    angled: true,
   },
   yAxis: {
     title: 'Population',
