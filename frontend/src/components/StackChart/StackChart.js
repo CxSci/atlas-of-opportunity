@@ -6,9 +6,9 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { ChartAxisType } from 'utils/propTypes'
-import { getStackData, STACK_COLORS } from './StackChart.utils'
+import { STACK_COLORS } from './StackChart.utils'
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber, angledProperty } from 'utils/victory'
+import { formatTickNumber, angledProperty, tickValues, getStackData } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const StackChart = ({ data, xAxis, yAxis, variant }) => {
@@ -18,15 +18,7 @@ const StackChart = ({ data, xAxis, yAxis, variant }) => {
 
   const ref = useRef()
   const size = useClientSize(ref)
-  const modifiedDataWithDate = data.map(item => {
-    if (variant === 'time_years') {
-      return { ...item, x: new Date(new Date(item.x).setFullYear(2014)), year: new Date(item.x).getFullYear() }
-    } else if (variant === 'time') {
-      return { ...item, x: new Date(item.x) }
-    }
-    return item
-  })
-  const stackData = useMemo(() => getStackData(modifiedDataWithDate), [modifiedDataWithDate])
+  const stackData = useMemo(() => getStackData(data, variant), [data, variant])
 
   const handleXTickFormat = useCallback(
     t => {
@@ -65,7 +57,12 @@ const StackChart = ({ data, xAxis, yAxis, variant }) => {
             }
           />
         }>
-        <VictoryAxis tickFormat={handleXTickFormat} style={xAxis.angled && angledProperty} />
+        <VictoryAxis
+          {...(variant === 'time_years' && { tickValues })}
+          fixLabelOverlap
+          tickFormat={handleXTickFormat}
+          style={xAxis.angled && angledProperty}
+        />
         <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
         <VictoryStack colorScale={STACK_COLORS}>
           {stackData.map(item => (
