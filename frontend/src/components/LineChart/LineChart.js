@@ -6,22 +6,14 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber, getStackData, STACK_COLORS, angledProperty, getSettingYear } from 'utils/victory'
+import { formatTickNumber, getStackData, STACK_COLORS, angledProperty, tickValues } from 'utils/victory'
 import { ChartAxisType } from 'utils/propTypes'
 import ChartFlyOut from 'components/ChartFlyOut'
 
 const LineChart = ({ data, title, xAxis, yAxis, variant }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const modifiedDataWithDate = data.map(item => {
-    if (variant === 'time_years') {
-      return { ...item, x: new Date(new Date(item.x).setFullYear(getSettingYear(2022, item.x))) }
-    } else if (variant === 'time') {
-      return { ...item, x: new Date(item.x) }
-    }
-    return item
-  })
-  const stackData = useMemo(() => getStackData(modifiedDataWithDate), [modifiedDataWithDate])
+  const stackData = useMemo(() => getStackData(data, variant), [data, variant])
   const victoryTheme = useVictoryTheme(theme)
   const ref = useRef()
   const size = useClientSize(ref)
@@ -63,7 +55,7 @@ const LineChart = ({ data, title, xAxis, yAxis, variant }) => {
           />
         }>
         <VictoryAxis
-          {...(variant === 'time_years' && { tickCount: 12 })}
+          {...(variant === 'time_years' && { tickValues })}
           fixLabelOverlap
           tickFormat={handleXTickFormat}
           style={xAxis.angled && angledProperty}
