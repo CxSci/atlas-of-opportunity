@@ -46,7 +46,9 @@ function Home() {
               <Link to={'/explore/occupations/dataset'}>Occupations DATASET_ENTRY</Link>
             </li>
             <li>
-              <Link to={'/explore/small-business-support/comparison'}>Small business COMPARISON</Link>
+              <Link to={'/explore/small-business-support/comparison/405031120+406021140+401011001+404031105'}>
+                Small business COMPARISON
+              </Link>
             </li>
             <li>
               <Link to={PATH.GUIDED_TOOL.replace(':', '1')}>GUIDED_TOOL</Link>

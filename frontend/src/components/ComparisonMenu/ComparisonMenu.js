@@ -14,6 +14,7 @@ import {
 import { useTheme } from '@mui/system'
 import { Delete } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import StaticMap from '../StaticMap'
 import { getDatasetGeoJSON } from 'store/modules/dataset'
 
@@ -31,6 +32,7 @@ function ComparisonMenu({
 }) {
   const dispatch = useDispatch()
   const theme = useTheme()
+  const navigate = useNavigate()
   const closeCompareMenuOpen = useCallback(() => setOpen(false), [setOpen])
 
   const handleDeleteClick = useCallback(
@@ -40,6 +42,24 @@ function ComparisonMenu({
     },
     [removeFromComparison],
   )
+
+  const getComparisonEntryRoutePath = comparisonList => {
+    const entryNumber = comparisonList.length
+    let path = ''
+    comparisonList.forEach((entry, idx) => {
+      if (idx + 1 < entryNumber) {
+        path += `${entry.id}+`
+      } else {
+        path += entry.id
+      }
+    })
+    return path
+  }
+
+  const handleComparison = useCallback(() => {
+    const comparisonEntryRoutePath = getComparisonEntryRoutePath(comparisonList)
+    navigate(`/explore/${datasetId}/comparison/${comparisonEntryRoutePath}`)
+  }, [navigate, comparisonList, datasetId])
 
   useEffect(() => {
     const itemIdsList = comparisonList.map(item => item?.id)
@@ -134,6 +154,7 @@ function ComparisonMenu({
           <ListItem sx={{ px: 3, py: 2 }}>
             <Button
               variant={'contained'}
+              onClick={handleComparison}
               color={'primary'}
               sx={{
                 height: '42px',
