@@ -49,7 +49,7 @@ const getDatasetMetricData = createApiCallSaga({
 export default function* rootSaga() {
   yield takeLatest(Types.GET_DATASET_LIST, getDatasetList)
   yield takeLatest(Types.GET_DATASET_SINGLE, getDatasetSingle)
-  yield takeLatest(Types.GET_DATASET_DETAIL_DATA, getDatasetDetailData)
+  yield takeEvery(Types.GET_DATASET_DETAIL_DATA, getDatasetDetailData)
   yield takeEvery(Types.GET_DATASET_GEO_JSON, getDatasetGeoJSON)
   yield takeLatest(Types.GET_DATASET_METRIC_DATA, getDatasetMetricData)
 }

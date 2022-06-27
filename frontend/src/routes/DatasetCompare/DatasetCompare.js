@@ -1,104 +1,190 @@
-import React from 'react'
+import React, { useEffect, useCallback, useMemo, useState, useRef } from 'react'
 import { useParams } from 'react-router'
-import { useSelector } from 'react-redux'
-import { Box, Grid, Typography } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { Container, Box, Grid, Typography, ThemeProvider } from '@mui/material'
 
-import Dashboard from '../../components/Dashboard'
-import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
-import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
-import PATH from '../../utils/path'
-import { createDataSetSelector } from 'store/modules/dataset'
+import PATH from 'utils/path'
+import Anchor from 'components/Anchor'
+import AtlasBreadcrumbs from 'components/AtlasBreadcrumbs'
+import Dashboard from 'components/Dashboard'
+import SectionNavbar from 'components/SectionNavbar'
+import StaticMap from 'components/StaticMap'
+import Spinner from 'components/Spinner'
+import initTheme from 'utils/theme'
+import { componentMappings } from 'routes/SmallBusinessSupport/SmallBusinessSupport'
+import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
+import { generateSize } from 'components/StaticMap/StaticMap.utils'
+import { createDataSetSelector, getDatasetDetailData, getDatasetGeoJSON } from 'store/modules/dataset'
+import { slugify } from 'utils/helpers'
 
-function DatasetCompare() {
+const DatasetCompare = () => {
+  const ref = useRef(null)
   const params = useParams()
-  const { datasetId } = params || {}
-
+  const dispatch = useDispatch()
+  const { datasetId, comparisonEntryIds } = params || {}
+  const [entriesData, setEntriesData] = useState({})
+  const [entriesGeoJsonMap, setEntriesGeoJsonMap] = useState({})
   const dataset = useSelector(createDataSetSelector(datasetId))
+  const sectionsLayout = dataset?.detailLayout
+  const entryIds = useMemo(() => comparisonEntryIds.split('+'), [comparisonEntryIds])
   const datasetName = dataset?.title || ''
   const datasetRoute = PATH.DATASET.replace(':datasetId', datasetId)
+  const theme = useMemo(() => initTheme(sectionsLayout?.theme), [sectionsLayout?.theme])
+  const [size, setSize] = useState(generateSize(ref, true, 290))
+  const { width } = size
+  const handleResize = useCallback(() => setSize(generateSize(ref, true, 290)), [])
 
-  const compareList = [
-    {
-      id: 'Receptionists',
-      name: 'Receptionists',
+  const getRef = useCallback(
+    node => {
+      if (node) {
+        ref.current = node
+        handleResize()
+      }
     },
-    {
-      id: 'Midwives',
-      name: 'Midwives',
-    },
-    {
-      id: 'Air Conditioning and Refrigeration Mechanics',
-      name: 'Air Conditioning and Refrigeration Mechanics',
-    },
-  ]
-  const compareListWithMinimap = [
-    {
-      id: 'Receptionists',
-      name: 'Receptionists',
-      hasMinimap: true,
-    },
-    {
-      id: 'Midwives',
-      name: 'Midwives',
-      hasMinimap: true,
-    },
-    {
-      id: 'Air Conditioning',
-      name: 'Air Conditioning',
-      hasMinimap: true,
-    },
-    {
-      id: 'Air Conditioning and Refrigeration Mechanics',
-      name: 'Air Conditioning and Refrigeration Mechanics',
-      hasMinimap: true,
-    },
-  ]
+    [handleResize],
+  )
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [handleResize])
+
+  useEffect(() => {
+    entryIds.forEach(id => {
+      dispatch(
+        getDatasetDetailData({
+          datasetId,
+          entryId: id,
+          success: entryData => {
+            if (!entryData) {
+              return
+            }
+            setEntriesData(entriesData => ({ ...entriesData, [id]: entryData }))
+          },
+        }),
+      )
+    })
+  }, [entryIds, datasetId, dispatch, setEntriesData])
+
+  useEffect(() => {
+    entryIds.forEach(id => {
+      dispatch(
+        getDatasetGeoJSON({
+          datasetId,
+          params: {
+            ids: id,
+            include_neighbors: true,
+            format: 'json',
+          },
+          success: geoJson => {
+            if (!geoJson) {
+              return
+            }
+            setEntriesGeoJsonMap(entriesGeoJsonMap => ({ ...entriesGeoJsonMap, [id]: geoJson }))
+          },
+        }),
+      )
+    })
+  }, [entryIds, datasetId, dispatch, setEntriesGeoJsonMap])
+
+  if (!sectionsLayout) {
+    return <Spinner />
+  }
+  const { sections } = sectionsLayout
 
   return (
-    <Dashboard
-      headerConfig={{
-        leftContainerProps: { width: '100%' },
-        customScrolledHeight: '100px',
-        content: {
-          left: (
-            <AtlasBreadcrumbs
-              links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }, { text: 'Comparison' }]}
-            />
-          ),
-        },
-        contentScrolled: {
-          left: (
-            <Grid container spacing={2}>
-              {compareListWithMinimap.map((compareItem, index, array) => {
-                const headerColSize = Math.max(12 / array.length, 3)
-
-                return (
-                  <Grid key={compareItem.id} item xs={headerColSize} sx={{ display: 'flex', alignItems: 'center' }}>
-                    {compareItem?.hasMinimap && (
-                      <Box
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignItems={'center'}
-                        bgcolor={theme => theme.palette.secondary.main}
-                        width={64}
-                        height={64}
-                        fontSize={12}
-                        mr={1.25}
-                        p={0.5}>
-                        Minimap
+    <ThemeProvider theme={theme}>
+      <Dashboard
+        headerConfig={{
+          leftContainerProps: { width: '100%' },
+          customScrolledHeight: '100px',
+          content: {
+            left: (
+              <AtlasBreadcrumbs
+                links={[homeBreadcrumbLink, { text: datasetName, path: datasetRoute }, { text: 'Comparison' }]}
+              />
+            ),
+          },
+          contentScrolled: {
+            left: (
+              <Grid container spacing={2}>
+                {entryIds.map((entryId, index, array) => {
+                  const headerColSize = Math.max(12 / array.length, 3)
+                  return (
+                    <Grid key={entryId} item xs={headerColSize} sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Box sx={{ width: 64, p: 0.5 }}>
+                        <StaticMap square areaId={entryId} geoJSON={entriesGeoJsonMap[entryId]} />
                       </Box>
-                    )}
-
-                    <Typography>{compareItem?.name}</Typography>
+                      <Typography>{entriesData[entryId]?._atlas_title}</Typography>
+                    </Grid>
+                  )
+                })}
+              </Grid>
+            ),
+          },
+        }}>
+        <Box sx={{ mt: 3 }}>
+          <Container>
+            <Grid spacing={2} container>
+              {entryIds.map((entryId, index, array) => {
+                const headerColSize = Math.max(12 / array.length, 3)
+                return (
+                  <Grid ref={getRef} key={entryId} item xs={12} sm={headerColSize}>
+                    <Box sx={{ mb: 3 }}>
+                      <Typography sx={{ fontSize: width / 12 }}>
+                        <strong>{entriesData[entryId]?._atlas_title}</strong>
+                      </Typography>
+                      <StaticMap height={290} areaId={entryId} geoJSON={entriesGeoJsonMap[entryId]} />
+                    </Box>
                   </Grid>
                 )
               })}
             </Grid>
-          ),
-        },
-      }}>
-      <div style={{ height: '120vh' }}>DATASET COMPARE page</div>
-    </Dashboard>
+          </Container>
+          <SectionNavbar sections={sections} />
+          <Container>
+            {sections.map((section, index) => {
+              const sectionId = slugify(section.title)
+              return (
+                <Box key={sectionId}>
+                  <Typography variant="h5" gutterBottom>
+                    <strong>{section.title}</strong>
+                  </Typography>
+                  <Box>
+                    <Grid container spacing={2}>
+                      {entryIds.map((entryId, index, array) => {
+                        const headerColSize = Math.max(12 / array.length, 3)
+                        return (
+                          <Grid key={entryId} item xs={12} sm={headerColSize}>
+                            <div key={index} data-scrollspy={sectionId}>
+                              <Anchor htmlId={sectionId} />
+                              {section.metrics.map((metric, idx) => {
+                                const SectionComponent = componentMappings[metric.type]
+                                return (
+                                  <Box key={idx} sx={{ mb: 3 }}>
+                                    {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
+                                    {SectionComponent && (
+                                      <SectionComponent
+                                        layout={metric}
+                                        data={entriesData[entryId] ? entriesData[entryId][metric.key] : null}
+                                      />
+                                    )}
+                                  </Box>
+                                )
+                              })}
+                            </div>
+                          </Grid>
+                        )
+                      })}
+                    </Grid>
+                  </Box>
+                </Box>
+              )
+            })}
+          </Container>
+        </Box>
+      </Dashboard>
+    </ThemeProvider>
   )
 }
 

@@ -17,7 +17,7 @@ import Spinner from 'components/Spinner'
 import StaticMap from 'components/StaticMap'
 import { slugify } from 'utils/helpers'
 
-const componentMappings = {
+export const componentMappings = {
   text: SectionText,
   simple_bar: SectionSimpleBar,
   simple_range: SectionSimpleRange,
