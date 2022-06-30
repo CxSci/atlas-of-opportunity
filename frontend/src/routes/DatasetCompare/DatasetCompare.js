@@ -130,13 +130,23 @@ const DatasetCompare = () => {
               {entryIds.map((entryId, index, array) => {
                 const headerColSize = Math.max(12 / array.length, 3)
                 return (
+                  <Grid key={entryId} item sm={headerColSize}>
+                    <Typography sx={{ fontSize: width / 10, display: { sm: 'block', xs: 'none' } }}>
+                      <strong>{entriesData[entryId]?._atlas_title}</strong>
+                    </Typography>
+                  </Grid>
+                )
+              })}
+            </Grid>
+            <Grid spacing={2} sx={{ mb: 3 }} container>
+              {entryIds.map((entryId, index, array) => {
+                const headerColSize = Math.max(12 / array.length, 3)
+                return (
                   <Grid ref={getRef} key={entryId} item xs={12} sm={headerColSize}>
-                    <Box sx={{ mb: 3 }}>
-                      <Typography sx={{ fontSize: width / 12 }}>
-                        <strong>{entriesData[entryId]?._atlas_title}</strong>
-                      </Typography>
-                      <StaticMap height={290} areaId={entryId} geoJSON={entriesGeoJsonMap[entryId]} />
-                    </Box>
+                    <Typography sx={{ fontSize: width / 12, display: { sm: 'none' } }}>
+                      <strong>{entriesData[entryId]?._atlas_title}</strong>
+                    </Typography>
+                    <StaticMap height={290} areaId={entryId} geoJSON={entriesGeoJsonMap[entryId]} />
                   </Grid>
                 )
               })}
