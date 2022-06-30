@@ -96,6 +96,7 @@ const DatasetCompare = () => {
     <ThemeProvider theme={theme}>
       <Dashboard
         headerConfig={{
+          backRoute: datasetRoute,
           leftContainerProps: { width: '100%' },
           customScrolledHeight: '100px',
           content: {
