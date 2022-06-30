@@ -147,7 +147,8 @@ const DatasetCompare = () => {
             {sections.map((section, index) => {
               const sectionId = slugify(section.title)
               return (
-                <Box key={sectionId}>
+                <Box key={sectionId} data-scrollspy={sectionId}>
+                  <Anchor htmlId={sectionId} />
                   <Typography variant="h5" gutterBottom>
                     <strong>{section.title}</strong>
                   </Typography>
@@ -157,23 +158,20 @@ const DatasetCompare = () => {
                         const headerColSize = Math.max(12 / array.length, 3)
                         return (
                           <Grid key={entryId} item xs={12} sm={headerColSize}>
-                            <div key={index} data-scrollspy={sectionId}>
-                              <Anchor htmlId={sectionId} />
-                              {section.metrics.map((metric, idx) => {
-                                const SectionComponent = componentMappings[metric.type]
-                                return (
-                                  <Box key={idx} sx={{ mb: 3 }}>
-                                    {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
-                                    {SectionComponent && (
-                                      <SectionComponent
-                                        layout={metric}
-                                        data={entriesData[entryId] ? entriesData[entryId][metric.key] : null}
-                                      />
-                                    )}
-                                  </Box>
-                                )
-                              })}
-                            </div>
+                            {section.metrics.map((metric, idx) => {
+                              const SectionComponent = componentMappings[metric.type]
+                              return (
+                                <Box key={idx} sx={{ mb: 3 }}>
+                                  {metric.title && <Typography variant="sectionTitle">{metric.title}</Typography>}
+                                  {SectionComponent && (
+                                    <SectionComponent
+                                      layout={metric}
+                                      data={entriesData[entryId] ? entriesData[entryId][metric.key] : null}
+                                    />
+                                  )}
+                                </Box>
+                              )
+                            })}
                           </Grid>
                         )
                       })}
