@@ -527,7 +527,7 @@ function Map({
       setMapLoaded(true)
     })
 
-    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
+    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: true, visualizePitch: true }), 'bottom-right')
 
     return () => {
       // There's a known bug with `hash: 'map'` where it updates the location
