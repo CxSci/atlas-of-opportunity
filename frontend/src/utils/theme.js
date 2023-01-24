@@ -138,6 +138,10 @@ const initTheme = mode => {
           ol: {
             flexWrap: 'nowrap',
             paddingRight: '12px',
+            textShadow:
+              darkMode &&
+              '0 0 10px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.5), ' +
+              '0 0 10px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.5)',
           },
           li: {
             whiteSpace: 'nowrap',
@@ -332,10 +336,17 @@ const initTheme = mode => {
         scrolledHeight: scrolledHeaderHeight,
         paddingX: headerPaddingX,
         paddingY: '10px',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
-        bgColor: darkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.9)',
+        boxShadow: darkMode ? 'none' : '0px 2px 4px rgba(0, 0, 0, 0.25)',
+        bgColor: darkMode ? 'rgba(0, 0, 0, 0.0)' : 'rgba(255, 255, 255, 0.9)',
         iconColor: darkMode ? '#ffffff' : iconColor,
         iconHoverColor: darkMode ? '#ffffff' : '#000000',
+      },
+
+      NavigateButton: {
+        filter:
+          darkMode &&
+          'drop-shadow(0 0 2px rgba(0,0,0,0.25)) drop-shadow(0 0 5px rgba(0,0,0,0.5))' +
+          'drop-shadow(0 0 7px rgba(0,0,0,0.75))',
       },
 
       SectionNavbar: {

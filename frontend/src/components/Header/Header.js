@@ -51,18 +51,27 @@ function Header({
            background-color ${theme.transitions.duration.short}ms`,
       }}>
       <Box display={'flex'} alignItems={'center'} overflow={'hidden'} flex={'1 1 100%'} {...leftContainerProps}>
-        <Box component="span" sx={{ mr: 2 }}>
+        <Box component="span">
           {backRoute ? (
-            <NavigateButton aria-label="back" onClick={() => navigate(backRoute)}>
+            <NavigateButton
+              aria-label="back"
+              onClick={() => navigate(backRoute)}
+              sx={{
+                filter: theme => theme.components.NavigateButton.filter,
+              }}>
               <ArrowBackIcon {...navigateBtnIconProps} />
             </NavigateButton>
           ) : (
-            <NavigateButton aria-label="menu" onClick={() => toggleSidebar(true)}>
+            <NavigateButton
+              aria-label="menu"
+              onClick={() => toggleSidebar(true)}
+              sx={{
+                filter: theme => theme.components.NavigateButton.filter,
+              }}>
               <MenuIcon {...navigateBtnIconProps} />
             </NavigateButton>
           )}
         </Box>
-
         {scrolled && contentScrolled?.left ? contentScrolled.left : content?.left}
       </Box>
 
