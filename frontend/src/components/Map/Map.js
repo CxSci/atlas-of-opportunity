@@ -12,6 +12,7 @@ import { MAPBOX_API_KEY } from '../../utils/constants'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
 
+const hoverPopupDelay = 500
 const popupClassName = 'floating-popup'
 const popupContainerStyles = {
   '.mapboxgl-popup-tip': {
@@ -152,7 +153,7 @@ function Map({
           //    outside of it.
 
           clearTimeout(hoverPopupTimeout)
-          hoverPopupTimeout = setTimeout(expandPopup, 700)
+          hoverPopupTimeout = setTimeout(expandPopup, hoverPopupDelay)
         }
       }
       onMouseMoveRef.current = onMouseMove
@@ -233,7 +234,7 @@ function Map({
 
       function onMapMove() {
         clearTimeout(hoverPopupTimeout)
-        hoverPopupTimeout = setTimeout(expandPopup, 700)
+        hoverPopupTimeout = setTimeout(expandPopup, hoverPopupDelay)
       }
       onMapMoveRef.current = onMapMove
 
