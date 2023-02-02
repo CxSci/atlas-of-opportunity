@@ -8,7 +8,7 @@
     "lint": "eslint --ignore-path ../.gitignore --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "@mapbox/mapbox-sdk": "^0.12.1",
+    "@mapbox/mapbox-sdk": "^0.14.0",
     "@popperjs/core": "^2.9.2",
     "@turf/turf": "^6.3.0",
     "downshift": "^6.1.2",
