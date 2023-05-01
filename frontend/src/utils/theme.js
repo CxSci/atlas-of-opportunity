@@ -318,15 +318,6 @@ const initTheme = mode => {
           },
         },
       },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            color: '#000',
-            backgroundColor: '#fff',
-            border: '1px solid #999999',
-          },
-        },
-      },
       MuiMenu: {
         styleOverrides: {
           root: {},
