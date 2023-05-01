@@ -3,6 +3,8 @@ import { addDecorator } from '@storybook/react'
 import { MemoryRouter } from 'react-router'
 import { IntlProvider } from 'react-intl'
 import { ThemeProvider } from '@mui/material'
+import { Provider } from 'react-redux'
+import { store } from 'store'
 
 import initTheme from '../src/utils/theme'
 
@@ -13,19 +15,21 @@ export const parameters = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/
-    }
-  }
+      date: /Date$/,
+    },
+  },
 }
 
 const withProviders = (Story, context) => {
   const theme = initTheme(false)
   return (
-    <IntlProvider locale={navigator.language}>
-      <ThemeProvider theme={theme}>
-        <Story {...context} />
-      </ThemeProvider>
-    </IntlProvider>
+    <Provider store={store}>
+      <IntlProvider locale={navigator.language}>
+        <ThemeProvider theme={theme}>
+          <Story {...context} />
+        </ThemeProvider>
+      </IntlProvider>
+    </Provider>
   )
 }
 
