@@ -1,12 +1,29 @@
 import React from 'react'
 import { Link } from '@mui/material'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 
-import './Home.scss'
-import PATH from '../../utils/path'
-import AppLogo from 'components/AppLogo'
 import Dashboard from '../../components/Dashboard'
 import AtlasBreadcrumbs from '../../components/AtlasBreadcrumbs'
 import { homeBreadcrumbLink } from '../../components/AtlasBreadcrumbs/AtlasBreadcrumbs'
+
+const datasets = [
+  {
+    title: 'New York, NY',
+    id: 'new_york',
+  },
+  {
+    title: 'Rochester, NY',
+    id: 'rochester',
+  },
+  {
+    title: 'South Australia',
+    id: 'small-business-support',
+  },
+]
 
 function Home() {
   return (
@@ -19,49 +36,37 @@ function Home() {
         },
       }}>
       <div className="Home">
-        <header className="Home__header">
-          <AppLogo />
-
-          <p>
-            Edit <code>codebase</code> and save to reload.
-          </p>
-
-          <a className="Home__link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            Learn React
-          </a>
-
-          <p>Temp router links</p>
-
-          <ul style={{ paddingLeft: 0 }}>
-            <li>
-              <Link to={'/explore/small-business-support'}>Small business support</Link>
-            </li>
-            <li>
-              <Link to={'/explore/occupations'}>Occupations</Link>
-            </li>
-            <li>
-              <Link to={'/explore/small-business-support/401011001'}>Small business DATASET_ENTRY</Link>
-            </li>
-            <li>
-              <Link to={'/explore/occupations/dataset'}>Occupations DATASET_ENTRY</Link>
-            </li>
-            <li>
-              <Link to={'/explore/small-business-support/comparison'}>Small business COMPARISON</Link>
-            </li>
-            <li>
-              <Link to={PATH.GUIDED_TOOL.replace(':', '1')}>GUIDED_TOOL</Link>
-            </li>
-            <li>
-              <Link to={PATH.FAQ}>FAQ</Link>
-            </li>
-            <li>
-              <Link to={PATH.RESEARCH}>RESEARCH</Link>
-            </li>
-            <li>
-              <Link to={PATH.CONTRIBUTORS}>CONTRIBUTORS</Link>
-            </li>
-          </ul>
-        </header>
+        <br />
+        <h1 align="center">Atlas of Opportunity</h1>
+        <br />
+        <br />
+        <Container maxWidth="md">
+          <Grid container spacing={2} justifyContent="center">
+            {datasets.map(d => (
+              <Grid item key={d.id} xs={6}>
+                <Link to={`/explore/${d.id}`} underline="none">
+                  <Paper
+                    component={Stack}
+                    direction="column"
+                    justifyContent="center"
+                    elevation={0}
+                    variant="elevation"
+                    style={{}}
+                    align="center"
+                    sx={{
+                      backgroundColor: '#eee',
+                      height: '280px',
+                      '&:hover': {
+                        backgroundColor: '#ddd',
+                      },
+                    }}>
+                    <Typography variant="datasetTitle">{d.title}</Typography>
+                  </Paper>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </div>
     </Dashboard>
   )

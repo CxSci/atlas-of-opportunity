@@ -11,8 +11,8 @@ function Sidebar({ open, handleClose }) {
         width: theme => theme.components.sidebar.width,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: theme => theme.components.sidebar.width
-        }
+          width: theme => theme.components.sidebar.width,
+        },
       }}
       variant="persistent"
       anchor="left"
@@ -36,25 +36,11 @@ function Sidebar({ open, handleClose }) {
       <Divider />
 
       <List>
-        {['Home', 'Explore Regions', 'Explore Occupations', 'Drafts'].map((text, index) => (
+        {['New York, NY', 'Rochester, NY', 'South Australia'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
-
-      <Divider />
-
-      <List>
-        <ListItem button>
-          <ListItemText
-            primary={
-              <>
-                Small Business <br /> Recommendation Tool
-              </>
-            }
-          />
-        </ListItem>
       </List>
 
       <Divider />

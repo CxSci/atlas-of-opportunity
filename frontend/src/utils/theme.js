@@ -69,6 +69,12 @@ const initTheme = mode => {
     },
 
     typography: {
+      datasetTitle: {
+        fontWeight: 700,
+        fontSize: `1.5rem`,
+        lineHeight: 1.2,
+        marginBottom: `0.875rem`,
+      },
       sectionTitle: {
         fontWeight: 700,
         fontSize: `1rem`,
@@ -141,7 +147,7 @@ const initTheme = mode => {
             textShadow:
               darkMode &&
               '0 0 10px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.5), ' +
-              '0 0 10px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.5)',
+                '0 0 10px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.5)',
           },
           li: {
             whiteSpace: 'nowrap',
@@ -237,6 +243,7 @@ const initTheme = mode => {
       MuiTypography: {
         defaultProps: {
           variantMapping: {
+            datasetTitle: 'h2',
             sectionTitle: 'h6',
             fieldValue: 'p',
             fieldLabel: 'p',
@@ -346,7 +353,7 @@ const initTheme = mode => {
         filter:
           darkMode &&
           'drop-shadow(0 0 2px rgba(0,0,0,0.25)) drop-shadow(0 0 5px rgba(0,0,0,0.5))' +
-          'drop-shadow(0 0 7px rgba(0,0,0,0.75))',
+            'drop-shadow(0 0 7px rgba(0,0,0,0.75))',
       },
 
       SectionNavbar: {
