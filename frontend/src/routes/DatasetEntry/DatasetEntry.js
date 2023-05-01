@@ -138,7 +138,11 @@ const DatasetEntry = () => {
                 ) : (
                   <Skeleton variant="rectangular" width={64} height={64} />
                 )}
-                {entryName ? <Typography>{entryName}</Typography> : <Skeleton variant="text" width={100} />}
+                {entryName ? (
+                  <Typography sx={{ ml: 1 }}>&nbsp;{entryName}</Typography>
+                ) : (
+                  <Skeleton variant="text" width={100} sx={{ ml: 1 }} />
+                )}
               </>
             ),
           },
