@@ -13,7 +13,7 @@
           {
             "id": "income_diversity",
             "data": {
-              "url": "http://localhost:8000/datasets/small-business-support/metrics/income_diversity/",
+              "url": "http://localhost:8000/api/datasets/small-business-support/metrics/income_diversity/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -59,7 +59,7 @@
           {
             "id": "mean_aud",
             "data": {
-              "url": "http://localhost:8000/datasets/small-business-support/metrics/mean_aud/",
+              "url": "http://localhost:8000/api/datasets/small-business-support/metrics/mean_aud/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -111,7 +111,7 @@
           {
             "id": "median_aud",
             "data": {
-              "url": "http://localhost:8000/datasets/small-business-support/metrics/median_aud/",
+              "url": "http://localhost:8000/api/datasets/small-business-support/metrics/median_aud/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -219,7 +219,7 @@
           {
             "id": "quartile",
             "data": {
-              "url": "http://localhost:8000/datasets/small-business-support/metrics/quartile/",
+              "url": "http://localhost:8000/api/datasets/small-business-support/metrics/quartile/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -717,7 +717,7 @@
           {
             "id": "median_house_income",
             "data": {
-              "url": "http://localhost:8000/datasets/new_york/metrics/median_house_income/",
+              "url": "http://localhost:8000/api/datasets/new_york/metrics/median_house_income/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -769,7 +769,7 @@
           {
             "id": "per_capita_income",
             "data": {
-              "url": "http://localhost:8000/datasets/new_york/metrics/per_capita_income/",
+              "url": "http://localhost:8000/api/datasets/new_york/metrics/per_capita_income/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -821,7 +821,7 @@
           {
             "id": "agg_household_income",
             "data": {
-              "url": "http://localhost:8000/datasets/new_york/metrics/agg_household_income/",
+              "url": "http://localhost:8000/api/datasets/new_york/metrics/agg_household_income/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -873,7 +873,7 @@
           {
             "id": "median_age",
             "data": {
-              "url": "http://localhost:8000/datasets/new_york/metrics/median_age/",
+              "url": "http://localhost:8000/api/datasets/new_york/metrics/median_age/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -925,7 +925,7 @@
           {
             "id": "visits",
             "data": {
-              "url": "http://localhost:8000/datasets/new_york/metrics/visits/",
+              "url": "http://localhost:8000/api/datasets/new_york/metrics/visits/",
               "type": "json"
             },
             "type": "chloropleth",
@@ -1093,6 +1093,818 @@
                   "style": "currency",
                   "currency": "USD"
                 }
+              }
+            ]
+          },
+          {
+            "title": "Mobility",
+            "metrics": [
+              {
+                "x": {
+                  "key": "week_start",
+                  "title": "Week"
+                },
+                "y": {
+                  "key": "count",
+                  "title": "Visits",
+                  "format": "number"
+                },
+                "z": {
+                  "key": "category",
+                  "title": "Category"
+                },
+                "key": "safegraph_visits_by_tag",
+                "type": "line",
+                "title": "Safegraph Visits",
+                "column": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "api.dataset",
+    "pk": "rochester",
+    "fields": {
+      "title": "Rochester, NY",
+      "description": "",
+      "explore_layout": {
+        "theme": "dark",
+        "type": "map",
+        "searchPlaceholder": "Search by id or suburb",
+        "metrics": [
+          {
+            "id": "median_house_income",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/median_house_income/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Median Household Income",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.2
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Median Household Income",
+                  "domain": [0, 50000, 100000, 150000, 200000]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "num_house_owners_with_mortgage",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/num_house_owners_with_mortgage/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Percent of House Owners with Mortgages",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.2
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Percent of House Owners with Mortgages",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "median_age",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/median_age/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Median Age",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "rgb(35, 23, 27)",
+                        "rgb(38, 188, 225)",
+                        "rgb(149, 251, 81)",
+                        "rgb(255, 130, 29)",
+                        "rgb(144, 12, 0)"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.2
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Median Age",
+                  "domain": [0, 25, 50, 75, 100]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "visits",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/visits/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Safegraph Visits",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#0d0887",
+                        "#7e03a8",
+                        "#cc4778",
+                        "#f89540",
+                        "#f0f921"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Safegraph Visits",
+                  "domain": [0, 1000, 2000, 3000, 4000]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "crime_rate",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/crime_rate/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Crime Rate",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Crime Rate",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "poi_accessibility_gen",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/poi_accessibility_gen/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Access to Services - General",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Access to Services - General",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "poi_accessibility_mtb_branches",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/poi_accessibility_mtb_branches/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Access to Services - M&T Branches",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Access to Services - M&T Branches",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "poi_accessibility_mtb_atms",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/poi_accessibility_mtb_atms/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Access to Services - M&T ATMs",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Access to Services - M&T ATMs",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "poi_accessibility_depository",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/poi_accessibility_depository/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Access to Services - Depository Credit Intermediation",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Access to Services - Depository Credit Intermediation",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          },
+          {
+            "id": "poi_accessibility_grocery",
+            "data": {
+              "url": "http://localhost:8000/api/datasets/rochester/metrics/poi_accessibility_grocery/",
+              "type": "json"
+            },
+            "type": "chloropleth",
+            "title": "Access to Services - Grocery",
+            "layers": [
+              {
+                "paint": {
+                  "hover": {
+                    "outline": {
+                      "width": 2.0,
+                      "opacity": 1.0
+                    }
+                  },
+                  "default": {
+                    "fill": {
+                      "colorScheme": [
+                        "#bfd3e6",
+                        "#9ebcda",
+                        "#8c96c6",
+                        "#8856a7",
+                        "#810f7c"
+                      ],
+                      "fallbackColor": "#555555"
+                    },
+                    "outline": {
+                      "color": "#ffffff",
+                      "width": 1.2,
+                      "opacity": 0.1
+                    }
+                  }
+                },
+                "metric": {
+                  "type": "simple_bar",
+                  "scale": "linear",
+                  "title": "Access to Services - Grocery",
+                  "domain": [0, 0.25, 0.5, 0.75, 1.0]
+                },
+                "beforeId": "poi-label",
+                "sourceLayer": "tl_2019_36_055_bg-13sxh2"
+              }
+            ],
+            "geometry": {
+              "url": "mapbox://justinanderson.06s48euy",
+              "type": "vector",
+              "titleKey": "GEOID",
+              "promoteId": "GEOID"
+            }
+          }
+        ],
+        "options": {
+          "style": "mapbox://styles/justinanderson/ckzrzxt0s000c14k55o20zjbk",
+          "bounds": [
+            [-78.1, 42.89],
+            [-77.27, 43.42]
+          ],
+          "fitBoundsOptions": {
+            "padding": {
+              "top": 70,
+              "left": 70,
+              "right": 70,
+              "bottom": 70
+            }
+          }
+        },
+        "defaultMetric": "median_house_income"
+      },
+      "detail_layout": {
+        "theme": "light",
+        "hasHeaderImage": true,
+        "sections": [
+          {
+            "title": "Demographics",
+            "metrics": [
+              {
+                "key": "total_population",
+                "type": "text",
+                "title": "Total Population",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "x": {
+                  "key": "race"
+                },
+                "y": {
+                  "key": "value",
+                  "format": "number"
+                },
+                "key": "dem_population_by_race",
+                "type": "simple_bar",
+                "title": "Population by Race",
+                "column": 0
+              },
+              {
+                "key": "dem_median_age",
+                "type": "text",
+                "title": "Median Age",
+                "column": 0,
+                "format": "number",
+                "numberFormat": {
+                  "maximumFractionDigits": 2
+                }
+              },
+              {
+                "key": "num_family",
+                "type": "text",
+                "title": "Families",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "x": {
+                  "key": "size"
+                },
+                "y": {
+                  "key": "value",
+                  "format": "number"
+                },
+                "key": "dem_family_size",
+                "type": "simple_bar",
+                "title": "Family Size",
+                "column": 0
+              },
+              {
+                "key": "num_house_units",
+                "type": "text",
+                "title": "Houses",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "key": "house_unit_occupancy_vacant",
+                "type": "text",
+                "title": "Vacant Houses",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "key": "num_house_owners",
+                "type": "text",
+                "title": "House Owners",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "key": "num_house_owners_with_mortgage",
+                "type": "text",
+                "title": "House Owners with Mortgages",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "key": "income",
+                "type": "text",
+                "title": "Median Household Income",
+                "column": 1,
+                "format": "number",
+                "numberFormat": {
+                  "style": "currency",
+                  "currency": "USD"
+                }
+              },
+              {
+                "key": "commute_time",
+                "type": "text",
+                "title": "Aggregate Commute Time in Minutes",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "x": {
+                  "key": "num"
+                },
+                "y": {
+                  "key": "value",
+                  "format": "number"
+                },
+                "key": "dem_num_family_earners",
+                "type": "simple_bar",
+                "title": "Family Earners",
+                "column": 1
+              },
+              {
+                "key": "unemployment",
+                "type": "text",
+                "title": "Unemployment",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "key": "total_vehicles",
+                "type": "text",
+                "title": "Total Vehicles",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "x": {
+                  "key": "num"
+                },
+                "y": {
+                  "key": "value",
+                  "format": "number"
+                },
+                "key": "dem_num_vehicles",
+                "type": "simple_bar",
+                "title": "Number of Vehicles per Family",
+                "column": 1
+              },
+              {
+                "key": "total_computer_internet",
+                "type": "text",
+                "title": "Homes with Computers and Internet",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "key": "has_computer",
+                "type": "text",
+                "title": "Homes with Computers",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "key": "has_no_internet",
+                "type": "text",
+                "title": "Homes with No Internet",
+                "column": 1,
+                "format": "number"
+              },
+              {
+                "key": "has_no_computer",
+                "type": "text",
+                "title": "Homes with No Computer",
+                "column": 1,
+                "format": "number"
+              }
+            ]
+          },
+          {
+            "title": "Crime",
+            "metrics": [
+              {
+                "key": "crime_rate",
+                "type": "text",
+                "title": "Crime Rate per 1000 Residents",
+                "column": 0,
+                "format": "number"
+              },
+              {
+                "key": "crime_rate_pct",
+                "max": 1.0,
+                "min": 0.0,
+                "type": "simple_range",
+                "title": "Relative Crime Rate",
+                "column": 0,
+                "options": {
+                  "variant": "gradient"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Accessibility of Services",
+            "metrics": [
+              {
+                "x": {
+                  "key": "category"
+                },
+                "y": {
+                  "key": "value",
+                  "max": 1,
+                  "min": 0
+                },
+                "key": "poi_accessibility_normalized",
+                "type": "simple_range",
+                "title": "Relative Accessibility",
+                "column": 0,
+                "options": {
+                  "variant": "gradient"
+                }
+              },
+              {
+                "x": {
+                  "key": "category"
+                },
+                "y": {
+                  "key": "value",
+                  "format": "number",
+                  "numberFormat": {
+                    "notation": "scientific",
+                    "maximumFractionDigits": 1
+                  }
+                },
+                "key": "poi_accessibility",
+                "type": "text",
+                "title": "Raw Accessibility Score",
+                "column": 1
               }
             ]
           },
