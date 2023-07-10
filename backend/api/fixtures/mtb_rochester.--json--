@@ -322,7 +322,7 @@
               "promoteId": "GEOID"
             }
           },
-          {
+                    {
             "id": "poi_accessibility_mtb_branches",
             "data": {
               "url": "https://mtb.mit.edu/api/datasets/rochester/metrics/poi_accessibility_mtb_branches/",
@@ -534,7 +534,7 @@
         "options": {
           "style": "mapbox://styles/mohsenbahrami1/cljwymwk701pw01pgeqk383yk",
           "bounds": [
-            [-78.1, 42.89],
+            [-78.10, 42.89],
             [-77.27, 43.42]
           ],
           "fitBoundsOptions": {
@@ -664,7 +664,7 @@
                 "title": "Family Earners",
                 "column": 1
               },
-              {
+                            {
                 "key": "unemployment",
                 "type": "text",
                 "title": "Unemployment",

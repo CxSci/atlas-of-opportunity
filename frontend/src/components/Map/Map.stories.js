@@ -8,7 +8,7 @@ const config = {
   title: 'Small Business Support',
   type: 'map',
   options: {
-    style: 'mapbox://styles/justinanderson/ckzrzxt0s000c14k55o20zjbk',
+    style: 'mapbox://styles/mohsenbahrami1/cljwymwk701pw01pgeqk383yk',
     bounds: [
       [129, -38],
       [141, -26],
@@ -30,7 +30,7 @@ const config = {
       type: 'chloropleth',
       geometry: {
         type: 'vector',
-        url: 'mapbox://justinanderson.sa_2016_aust',
+        url: 'mapbox://mohsenbahrami1.8dv8dl9p',
         promoteId: 'SA2_MAIN16',
         titleKey: 'SA2_NAME16',
       },
@@ -46,7 +46,7 @@ const config = {
             domain: [0, 0.6, 1.2],
             scale: 'linear',
           },
-          sourceLayer: 'sa2_2016_aust',
+          sourceLayer: 'SA_SA2s-9b38tb',
           beforeId: 'poi-label',
           paint: {
             default: {
