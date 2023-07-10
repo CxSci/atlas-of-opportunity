@@ -51,6 +51,7 @@ function Map({
 }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
+  const popupLayerIdRef = useRef(null)
   const hoverPopupRef = useRef(null)
   const hoveredFeatureIdRef = useRef(null)
   const map = useRef(null)
@@ -76,12 +77,16 @@ function Map({
   const innerTheme = initTheme('light')
 
   const initPopup = useCallback(
-    ({ foreignKey, metricKey, titleKey, layerId, sourceLayer }) => {
+    ({ foreignKey, metricKey, titleKey, layerId, sourceLayer, metricConfig, data }) => {
+      if (hoverPopupRef.current) {
+        hoverPopupRef.current.remove()
+      }
+
       const sourceName = createSourceName(metricConfig?.geometry)
       let hoverPopupTimeout = null
       let popupExpanded = null
       const popupOffsetY = 10
-
+      const prevLayerId = popupLayerIdRef.current
       const hoverPopup = new mapboxgl.Popup({
         anchor: 'top',
         closeButton: false,
@@ -110,7 +115,7 @@ function Map({
 
       // mouse move event
       if (onMouseMoveRef.current) {
-        map.current.off('mousemove', layerId, onMouseMoveRef.current)
+        map.current.off('mousemove', prevLayerId, onMouseMoveRef.current)
         onMouseMoveRef.current = null
       }
 
@@ -210,7 +215,7 @@ function Map({
 
       // mouse leave event
       if (onMouseLeaveRef.current) {
-        map.current.off('mouseleave', layerId, onMouseLeaveRef.current)
+        map.current.off('mouseleave', prevLayerId, onMouseLeaveRef.current)
         onMouseLeaveRef.current = null
       }
 
@@ -237,7 +242,7 @@ function Map({
 
       // map move event
       if (onMapMoveRef.current) {
-        map.current.off('mouseleave', layerId, onMapMoveRef.current)
+        map.current.off('move', prevLayerId, onMapMoveRef.current)
         onMapMoveRef.current = null
       }
 
@@ -251,7 +256,7 @@ function Map({
 
       // map click event
       if (onMapClickRef.current) {
-        map.current.off('mouseleave', layerId, onMapClickRef.current)
+        map.current.off('click', prevLayerId, onMapClickRef.current)
         onMapClickRef.current = null
       }
 
@@ -265,8 +270,10 @@ function Map({
         }
       }
       onMapClickRef.current = onMapMove
+
+      popupLayerIdRef.current = layerId
     },
-    [metricConfig?.geometry, metricConfig?.title, hidePopup, data, colorScheme, domain],
+    [hidePopup, colorScheme, domain],
   )
 
   const updateMap = useCallback(() => {
@@ -395,7 +402,7 @@ function Map({
 
         layerIds.push(hoverId)
 
-        initPopup({ foreignKey, metricKey, titleKey, layerId: fillsId, sourceLayer })
+        initPopup({ foreignKey, metricKey, titleKey, layerId: fillsId, sourceLayer, metricConfig, data })
       }
     })
 
@@ -407,16 +414,23 @@ function Map({
       setSelectedFeature(null)
       setHighlightedFeature(null)
 
+      map.current.off('mousemove', onAllMapMouseMoveRef.current)
+
       if (layerIds.length) {
         layerIds.forEach(id => {
           const layer = map.current.getLayer(id)
           if (layer) {
+            map.current.off('mousemove', id, onMouseMoveRef.current)
+            map.current.off('mouseleave', id, onMouseLeaveRef.current)
+            map.current.off('move', id, onMapMoveRef.current)
+            map.current.off('click', id, onMapClickRef.current)
+
             map.current.removeLayer(id)
           }
         })
       }
 
-      if (layerIds.length) {
+      if (sourceIds.length) {
         sourceIds.forEach(id => {
           const source = map.current.getSource(id)
           if (source) {

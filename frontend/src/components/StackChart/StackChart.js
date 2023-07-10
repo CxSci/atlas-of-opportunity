@@ -6,19 +6,19 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 import { ChartAxisType } from 'utils/propTypes'
-import { getStackData, STACK_COLORS } from './StackChart.utils'
+import { STACK_COLORS } from './StackChart.utils'
 import { useVictoryTheme, useClientSize } from 'hooks/victory'
-import { formatTickNumber, angledProperty } from 'utils/victory'
+import { formatTickNumber, angledProperty, tickValues, getStackData } from 'utils/victory'
 import ChartFlyOut from 'components/ChartFlyOut'
 
-const StackChart = ({ data, xAxis, yAxis }) => {
+const StackChart = ({ data, xAxis, yAxis, variant }) => {
   const intl = useIntl()
   const theme = useTheme()
   const victoryTheme = useVictoryTheme(theme)
 
   const ref = useRef()
   const size = useClientSize(ref)
-  const stackData = useMemo(() => getStackData(data), [data])
+  const stackData = useMemo(() => getStackData(data, variant), [data, variant])
 
   const handleXTickFormat = useCallback(
     t => {
@@ -38,6 +38,7 @@ const StackChart = ({ data, xAxis, yAxis }) => {
     <Box ref={ref}>
       <VictoryChart
         {...size}
+        {...(['time', 'time_years'].includes(variant) && { scale: { x: 'time', y: 'linear' } })}
         theme={victoryTheme}
         domainPadding={{
           x: [0, 15],
@@ -49,12 +50,19 @@ const StackChart = ({ data, xAxis, yAxis }) => {
             labelComponent={
               <VictoryTooltip
                 constrainToVisibleArea
-                flyoutComponent={<ChartFlyOut placement="bottom" xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} />}
+                flyoutComponent={
+                  <ChartFlyOut placement="bottom" xAxisLabel={xAxis.title} yAxisLabel={yAxis.title} variant={variant} />
+                }
               />
             }
           />
         }>
-        <VictoryAxis tickFormat={handleXTickFormat} style={xAxis.angled && angledProperty} />
+        <VictoryAxis
+          {...(variant === 'time_years' && { tickValues })}
+          fixLabelOverlap
+          tickFormat={handleXTickFormat}
+          style={xAxis.angled && angledProperty}
+        />
         <VictoryAxis dependentAxis tickFormat={handleYTickFormat} />
         <VictoryStack colorScale={STACK_COLORS}>
           {stackData.map(item => (

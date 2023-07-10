@@ -24,7 +24,7 @@ const SectionStackedArea = ({ layout, data }) => {
     }))
     return (
       <Box>
-        <StackChart data={chartData} title={layout.title} xAxis={layout.x} yAxis={layout.y} />
+        <StackChart data={chartData} title={layout.title} xAxis={layout.x} yAxis={layout.y} variant={layout.variant} />
       </Box>
     )
   } else {
