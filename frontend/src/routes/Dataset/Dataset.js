@@ -14,6 +14,7 @@ import { setApiData } from '../../store/modules/api'
 import { homeBreadcrumbLink } from 'components/AtlasBreadcrumbs/AtlasBreadcrumbs'
 import initTheme from 'utils/theme'
 import useCompareList from 'hooks/useCompareList'
+import useBusinessSimulator from 'hooks/useBusinessSimulator'
 
 function Dataset() {
   const dispatch = useDispatch()
@@ -32,6 +33,20 @@ function Dataset() {
     compareListOpen,
     setCompareListOpen,
   } = useCompareList(datasetId)
+  const {
+    businessLocation,
+    setBusinessLocation,
+    businessCount,
+    setBusinessCount,
+    businessType,
+    setBusinessType,
+    businessTypeTitle,
+    businessSimulatorOpen,
+    openBusinessSimulator,
+    closeBusinessSimulator,
+    simulating,
+    setSimulating,
+  } = useBusinessSimulator(datasetId)
 
   const data = dataset?.exploreLayout
   const DataSetComponent = getDatasetComponent(data?.type)
@@ -92,6 +107,20 @@ function Dataset() {
             setHighlightedFeature={setHighlightedFeature}
             addToComparison={addToComparison}
             canAddToComparison={canAddToComparison}
+            assistantProps={{
+              businessLocation,
+              setBusinessLocation,
+              businessCount,
+              setBusinessCount,
+              businessType,
+              setBusinessType,
+              businessTypeTitle,
+              businessSimulatorOpen,
+              openBusinessSimulator,
+              closeBusinessSimulator,
+              simulating,
+              setSimulating,
+            }}
           />
         </div>
       </Dashboard>

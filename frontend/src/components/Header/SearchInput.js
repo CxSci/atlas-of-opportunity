@@ -1,10 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import debounce from 'lodash/debounce'
-import { Autocomplete, CircularProgress, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import {
+  Autocomplete,
+  CircularProgress,
+  IconButton,
+  InputAdornment,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material'
 import { searchListSelector } from '../../store/modules/search'
 import { isRequestPending } from '../../store/modules/api'
+
+function WhitePaper({ children }) {
+  return (
+    <Paper
+      sx={{
+        bgcolor: 'white',
+      }}>
+      {children}
+    </Paper>
+  )
+}
 
 function SearchInput({ placeholder, onChange = () => null, onSelect = () => null, onHighlightChange }) {
   const [focused, setFocused] = useState(false)
@@ -77,6 +97,7 @@ function SearchInput({ placeholder, onChange = () => null, onSelect = () => null
       onChange={(event, val) => onSelect(val)}
       noOptionsText="No results"
       inputValue={inputValue || ''}
+      PaperComponent={WhitePaper}
       renderOption={(props, option) => (
         <Stack {...props} key={option?.id + option?.subtitle}>
           <Typography fontWeight={500} sx={{ color: '#000' }}>

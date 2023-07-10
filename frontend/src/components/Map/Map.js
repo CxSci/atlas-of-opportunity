@@ -3,15 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import { Box, GlobalStyles, Tooltip } from '@mui/material'
 import { InfoOutlined } from '@mui/icons-material'
+import { ThemeProvider } from '@mui/material'
 
 import SimpleRange from '../SimpleRange'
 import Select from '../Select'
 import MapPopupContent from '../MapPopupContent'
 import { getDatasetMetricData, datasetMetricDataSelector } from 'store/modules/dataset'
+import { businessSimulationSelector } from 'store/modules/assistants'
 import { MAPBOX_API_KEY } from '../../utils/constants'
+import Assistants from '../Assistants'
+import initTheme from '../../utils/theme'
 
 mapboxgl.accessToken = MAPBOX_API_KEY
 
+const hoverPopupDelay = 500
 const popupClassName = 'floating-popup'
 const popupContainerStyles = {
   '.mapboxgl-popup-tip': {
@@ -42,6 +47,7 @@ function Map({
   canAddToComparison,
   setSelectedFeature,
   setHighlightedFeature,
+  assistantProps,
 }) {
   const mapContainerRef = useRef(null)
   const popupContainerRef = useRef(null)
@@ -56,13 +62,19 @@ function Map({
   const onAllMapMouseMoveRef = useRef(null)
   const [selectedMetric, setSelectedMetric] = useState('')
   const dispatch = useDispatch()
-  const data = useSelector(datasetMetricDataSelector)
+  const [data, setData] = useState(null)
+  const datasetMetricData = useSelector(datasetMetricDataSelector)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [metricConfig, setMetricConfig] = useState(null)
   const [colorScheme, setColorScheme] = useState([])
   const [popupData, setPopupData] = useState(null)
+  const simulatedMetricData = useSelector(businessSimulationSelector)
+  const { simulating, businessType, businessTypeTitle } = assistantProps
+  const [simulatedMetricOptions, setSimulatedMetricOptions] = useState([{ id: 'gen', title: 'General' }])
 
   const domain = useMemo(() => metricConfig?.layers?.[0]?.metric?.domain || [], [metricConfig?.layers])
+
+  const innerTheme = initTheme('light')
 
   const initPopup = useCallback(
     ({ foreignKey, metricKey, titleKey, layerId, sourceLayer, metricConfig, data }) => {
@@ -133,7 +145,7 @@ function Map({
             setPopupData({
               id: e.features[0].id,
               title,
-              metricName: metricConfig?.title,
+              metricName: !simulating ? metricConfig?.title : businessTypeTitle(),
               data: row?.[metricKey] ?? 0,
               colorScheme,
               domain,
@@ -157,7 +169,7 @@ function Map({
           //    outside of it.
 
           clearTimeout(hoverPopupTimeout)
-          hoverPopupTimeout = setTimeout(expandPopup, 700)
+          hoverPopupTimeout = setTimeout(expandPopup, hoverPopupDelay)
         }
       }
       onMouseMoveRef.current = onMouseMove
@@ -238,7 +250,7 @@ function Map({
 
       function onMapMove() {
         clearTimeout(hoverPopupTimeout)
-        hoverPopupTimeout = setTimeout(expandPopup, 700)
+        hoverPopupTimeout = setTimeout(expandPopup, hoverPopupDelay)
       }
       onMapMoveRef.current = onMapMove
 
@@ -471,7 +483,7 @@ function Map({
       setPopupData({
         id: featureId,
         title,
-        metricName: metricConfig?.title,
+        metricName: !simulating ? metricConfig?.title : businessTypeTitle(),
         data: row?.data ?? 0,
         colorScheme,
         domain,
@@ -540,7 +552,7 @@ function Map({
       setMapLoaded(true)
     })
 
-    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
+    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: true, visualizePitch: true }), 'bottom-right')
 
     return () => {
       // There's a known bug with `hash: 'map'` where it updates the location
@@ -559,12 +571,31 @@ function Map({
   }, [config])
 
   useEffect(() => {
-    const newMetricConfig = config?.metrics?.find(item => item?.id === selectedMetric) ?? {}
-    const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
-    setMetricConfig(newMetricConfig)
-    setColorScheme(colorScheme)
-    dispatch(getDatasetMetricData({ url: newMetricConfig?.data?.url }))
-  }, [config, dispatch, selectedMetric])
+    if (!simulating) {
+      const newMetricConfig = config?.metrics?.find(item => item?.id === selectedMetric) ?? {}
+      const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
+      setMetricConfig(newMetricConfig)
+      setColorScheme(colorScheme)
+      dispatch(getDatasetMetricData({ url: newMetricConfig?.data?.url }))
+    } else {
+      const newMetricConfig = config?.metrics?.find(item => item?.id === 'poi_accessibility_gen') ?? {}
+      const colorScheme = newMetricConfig?.layers?.[0]?.paint?.default?.fill?.colorScheme ?? []
+      setMetricConfig(newMetricConfig)
+      setColorScheme(colorScheme)
+    }
+  }, [config, dispatch, selectedMetric, simulating])
+
+  useEffect(() => {
+    if (!simulating) {
+      setData(datasetMetricData)
+    } else {
+      setData(simulatedMetricData)
+    }
+  }, [datasetMetricData, simulating, simulatedMetricData])
+
+  useEffect(() => {
+    setSimulatedMetricOptions([{ id: businessType, title: businessTypeTitle() }])
+  }, [setSimulatedMetricOptions, businessType, businessTypeTitle, simulating])
 
   useEffect(() => {
     showPopupForFeature({ option: selectedFeature, expandPopup: true, fitBounds: true })
@@ -577,63 +608,76 @@ function Map({
   }, [highlightedFeature, showPopupForFeature])
 
   return (
-    <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
-      <GlobalStyles styles={mapGlobalStyles} />
+    <ThemeProvider theme={innerTheme}>
+      <Box position={'absolute'} top={0} bottom={0} left={0} right={0}>
+        <GlobalStyles styles={mapGlobalStyles} />
 
-      <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
-      <div ref={popupContainerRef}>
-        {popupData?.id && (
-          <MapPopupContent
-            datasetId={datasetId}
-            addToComparison={addToComparison}
-            canAddToComparison={canAddToComparison}
-            {...popupData}
-          />
-        )}
-      </div>
-
-      <Box
-        position={'absolute'}
-        bottom={38}
-        left={12}
-        bgcolor={'#fff'}
-        p={1.5}
-        borderRadius={1}
-        boxShadow={'0px 2px 4px rgba(0, 0, 0, 0.25)'}
-        width={theme => theme.components.floatingFilter.width}>
-        <Box display={'flex'} alignItems={'center'}>
-          <Select
-            value={selectedMetric}
-            onChange={e => setSelectedMetric(e?.target?.value)}
-            options={config?.metrics}
-            labelId="demo-simple-select-filled-label"
-            label="Growth"
-            menuPlacement={'top'}
-            sx={{ mb: 1 }}
-          />
-
-          <Box component={'span'} ml={1.25}>
-            <Tooltip title="Info tooltip" placement={'top'}>
-              <InfoOutlined sx={{ color: '#B3B3B3' }} />
-            </Tooltip>
-          </Box>
-        </Box>
-
-        <div>
-          <SimpleRange value={Math.max(...domain)} variant={'gradient'} colorScheme={colorScheme} domain={domain} />
-
-          <Box
-            display={'flex'}
-            justifyContent={'space-between'}
-            color={theme => theme.palette.darkGrey.main}
-            fontSize={12}>
-            <span>Low</span>
-            <span>Medium</span>
-            <span>High</span>
-          </Box>
+        <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
+        <div ref={popupContainerRef}>
+          {popupData?.id && (
+            <MapPopupContent
+              datasetId={datasetId}
+              addToComparison={addToComparison}
+              canAddToComparison={canAddToComparison}
+              assistantProps={assistantProps}
+              {...popupData}
+            />
+          )}
         </div>
+
+        <Box
+          position={'absolute'}
+          bottom={38}
+          left={12}
+          bgcolor={'#fff'}
+          p={1.5}
+          borderRadius={1}
+          boxShadow={'0px 2px 4px rgba(0, 0, 0, 0.25)'}
+          width={theme => theme.components.floatingFilter.width}>
+          <Box display={'flex'} alignItems={'center'}>
+            {!simulating ? (
+              <Select
+                value={selectedMetric}
+                onChange={e => setSelectedMetric(e?.target?.value)}
+                options={config?.metrics}
+                label="Growth"
+                menuPlacement={'top'}
+                sx={{ mb: 1 }}
+              />
+            ) : (
+              <Select
+                value={businessType}
+                options={simulatedMetricOptions}
+                label="Simulated"
+                menuPlacement={'top'}
+                sx={{ mb: 1 }}
+              />
+            )}
+
+            <Box component={'span'} ml={1.25}>
+              <Tooltip title="Info tooltip" placement={'top'}>
+                <InfoOutlined sx={{ color: '#B3B3B3' }} />
+              </Tooltip>
+            </Box>
+          </Box>
+
+          <div>
+            <SimpleRange value={Math.max(...domain)} variant={'gradient'} colorScheme={colorScheme} domain={domain} />
+
+            <Box
+              display={'flex'}
+              justifyContent={'space-between'}
+              color={theme => theme.palette.darkGrey.main}
+              fontSize={12}>
+              <span>Low</span>
+              <span>Medium</span>
+              <span>High</span>
+            </Box>
+          </div>
+        </Box>
+        <Assistants position="absolute" top={70} left={12} assistantProps={assistantProps} />
       </Box>
-    </Box>
+    </ThemeProvider>
   )
 }
 

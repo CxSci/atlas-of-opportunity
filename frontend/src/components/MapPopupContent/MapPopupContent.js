@@ -4,6 +4,7 @@ import { ChevronRight } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import SimpleRange from '../SimpleRange'
 import CompareIconPlus from '../Icons/CompareIconPlus'
+import AddBusinessOutlinedIcon from '@mui/icons-material/AddBusinessOutlined'
 import PATH from 'utils/path'
 import { iconColor } from 'utils/theme'
 
@@ -25,12 +26,15 @@ function MapPopupContent({
   expanded,
   addToComparison,
   canAddToComparison,
+  assistantProps,
 }) {
   const disableAddToComparison = !canAddToComparison(id)
 
   const handleAddToComparison = useCallback(() => {
     addToComparison({ id, title })
   }, [addToComparison, id, title])
+
+  const { setBusinessLocation, businessSimulatorOpen, simulating } = assistantProps
 
   return (
     <Box
@@ -67,33 +71,61 @@ function MapPopupContent({
       )}
 
       {expanded && (
-        <Button
-          variant={'text'}
-          sx={{
-            p: 0,
-            color: theme => theme.palette.darkGrey.main,
-            mt: 1,
-            textTransform: 'none',
-            display: 'inline-flex',
-            alignItems: 'center',
-            '&:hover': {
-              backgroundColor: 'transparent',
-            },
-          }}
-          onClick={handleAddToComparison}
-          disabled={disableAddToComparison}>
-          <CompareIconPlus size={22} />
+        <>
+          <Button
+            variant="text"
+            sx={{
+              p: 0,
+              color: theme => theme.palette.darkGrey.main,
+              mt: 1,
+              textTransform: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+            onClick={handleAddToComparison}
+            disabled={disableAddToComparison}>
+            <CompareIconPlus size={24} />
 
-          <Typography component={'span'} fontWeight={500} fontSize={14} sx={{ ml: 1 }}>
-            Add to comparison
-          </Typography>
-        </Button>
+            <Typography component="span" fontWeight={500} fontSize={14} sx={{ ml: 1 }}>
+              Add to comparison
+            </Typography>
+          </Button>
+          {businessSimulatorOpen && (
+            <Button
+              variant="text"
+              sx={{
+                p: 0,
+                color: theme => theme.palette.darkGrey.main,
+                mt: 1,
+                textTransform: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                '&:hover': {
+                  backgroundColor: 'transparent',
+                },
+              }}
+              onClick={() => setBusinessLocation({ datasetId, id, title })}
+              disabled={simulating}>
+              <AddBusinessOutlinedIcon size={24} />
+
+              <Typography component="span" fontWeight={500} fontSize={14} sx={{ ml: 1, textAlign: 'left' }}>
+                Simulate New
+                <br />
+                Business Here
+              </Typography>
+            </Button>
+          )}
+        </>
       )}
     </Box>
   )
 }
 
 MapPopupContent.propTypes = {
+  datasetId: PropTypes.string,
   id: PropTypes.string,
   title: PropTypes.string,
   metricName: PropTypes.string,
@@ -101,6 +133,8 @@ MapPopupContent.propTypes = {
   colorScheme: PropTypes.array,
   domain: PropTypes.array,
   expanded: PropTypes.bool,
+  businessSimulatorOpen: PropTypes.bool,
+  simulating: PropTypes.bool,
 }
 
 MapPopupContent.defaultProps = {

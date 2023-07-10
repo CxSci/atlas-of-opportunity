@@ -73,6 +73,7 @@ function AtlasBreadcrumbs({ links = [] }) {
       <Breadcrumbs
         ref={containerRef}
         aria-label="breadcrumb"
+        pl={2}
         sx={{
           width: '100%',
           overflow: 'hidden',
@@ -89,6 +90,7 @@ function AtlasBreadcrumbs({ links = [] }) {
       <Breadcrumbs
         ref={hiddenContainerRef}
         role="none"
+        pl={2}
         sx={{
           visibility: 'hidden',
           position: 'absolute',
